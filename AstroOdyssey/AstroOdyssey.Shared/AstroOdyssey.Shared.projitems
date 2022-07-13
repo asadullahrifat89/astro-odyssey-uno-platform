@@ -18,6 +18,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Health.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Laser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Meteor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\PowerUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -47,6 +57,75 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_purple.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_yellow.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_A.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_B.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_D.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_E.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_large.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_small.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_squareDetailedLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_squareDetailedSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_squareLarge.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_squareSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\satellite_A.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\satellite_B.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\satellite_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\satellite_D.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_A.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_B.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_D.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_E.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_F.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_G.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_H.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_I.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_J.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_K.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_L.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_sidesA.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_sidesB.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_sidesC.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ship_sidesD.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_A.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_B.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-powerup-6768.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\beam-8-43831.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-matter-10710.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\drone-space-main-9706.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-36210.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-39897.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-sfx-43814.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-down-7103.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\scale-e6-14577.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\shoot02wav-14562.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-trap-18565.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-age-10714.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-chillout-14194.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-trip-114102.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\spellcast-46164.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
