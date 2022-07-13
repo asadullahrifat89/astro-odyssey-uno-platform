@@ -16,6 +16,7 @@ using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Uno.Foundation;
+using System.Threading;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,7 +34,7 @@ namespace AstroOdyssey
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
 
-        private double windowWidth, windowHeight;       
+        private double windowWidth, windowHeight;
 
         private int powerUpCounter = 1500;
         private int powerUpTriggerCounter;
@@ -55,8 +56,6 @@ namespace AstroOdyssey
         private readonly Stack<GameObject> starStack = new Stack<GameObject>();
 
         private bool moveLeft = false, moveRight = false;
-
-        private System.Timers.Timer frameGenerationTimer;
 
         #endregion
 
@@ -126,9 +125,19 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameDuration { get; set; } = 10;
+        private double PlayerX { get; set; }
+
+        private double PlayerWidthHalf { get; set; }
+
+        private int FrameDuration { get; set; } = 14;
 
         private bool IsGameRunning { get; set; }
+
+        private bool IsPointerPressed { get; set; }
+
+        private bool IsKeyboardPressed { get; set; }
+
+        private PeriodicTimer GameTimer { get; set; }
 
         #endregion
 
@@ -155,8 +164,12 @@ namespace AstroOdyssey
         {
             var watch = Stopwatch.StartNew();
 
-            while (IsGameRunning)
+            GameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+
+            while (IsGameRunning && await GameTimer.WaitForNextTickAsync())
             {
+                PlayerX = Player.GetX();
+
                 UpdateGameStats();
 
                 SpawnEnemy();
@@ -187,61 +200,12 @@ namespace AstroOdyssey
 
                 CheckPlayerDeath();
 
-                //KeyboardFocus();
-
                 CalculateFps();
 
                 SetFrameAnalytics();
 
                 FrameStartTime = watch.ElapsedMilliseconds;
-
-                await ElapseFrameDuration();
             }
-
-            //frameGenerationTimer = new System.Timers.Timer(FrameDuration);
-
-            //frameGenerationTimer.Elapsed += (s, e) =>
-            //{
-            //    UpdateGameStats();
-
-            //    SpawnEnemy();
-
-            //    SpawnMeteor();
-
-            //    SpawnHealth();
-
-            //    SpawnPowerUp();
-
-            //    SpawnStar();
-
-            //    SpawnLaser(PowerUpTriggered);
-
-            //    MovePlayer();
-
-            //    UpdateGameView();
-
-            //    UpdateStarView();
-
-            //    ShiftGameLevel();
-
-            //    HideInGameText();
-
-            //    TriggerPowerDown();
-
-            //    PlayerOpacity();
-
-            //    CheckPlayerDeath();
-
-            //    //KeyboardFocus();
-
-            //    CalculateFps();
-
-            //    SetFrameAnalytics();
-
-            //    FrameStartTime = watch.ElapsedMilliseconds;
-            //};
-
-            //frameGenerationTimer.Start();
         }
 
         /// <summary>
@@ -251,18 +215,9 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
-            frameGenerationTimer?.Stop();
-            frameGenerationTimer?.Dispose();
+            GameTimer?.Dispose();
 
             StopSound();
-        }
-
-        /// <summary>
-        /// Brings focus on keyboard so that keyboard events work.
-        /// </summary>
-        private void KeyboardFocus()
-        {
-            GameView.Focus(FocusState.Programmatic);
         }
 
         /// <summary>
@@ -531,15 +486,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Elapses the frame duration.
-        /// </summary>
-        /// <returns></returns>
-        private async Task ElapseFrameDuration()
-        {
-            await Task.Delay(FrameDuration);
-        }
-
-        /// <summary>
         /// Calculates frames per second.
         /// </summary>
         /// <param name="frameStartTime"></param>
@@ -652,6 +598,8 @@ namespace AstroOdyssey
             Player = new Player();
             Player.SetAttributes(PlayerSpeed);
             Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX, gameEnvironment: GameView);
+
+            PlayerWidthHalf = Player.Width / 2;
         }
 
         /// <summary>
@@ -676,28 +624,48 @@ namespace AstroOdyssey
         /// </summary>
         private void MovePlayer()
         {
-            var playerX = Player.GetX();
-            var playerWidthHalf = Player.Width / 2;
-
-            if (moveLeft && playerX > 0)
-                PointerX -= Player.Speed;
-
-            if (moveRight && playerX + Player.Width < windowWidth)
-                PointerX += Player.Speed;
-
-            // move right
-            if (PointerX - playerWidthHalf > playerX + Player.Speed)
+            if (IsPointerPressed)
             {
-                if (playerX + playerWidthHalf < windowWidth)
+                // move right
+                if (PointerX > PlayerX + PlayerWidthHalf + Player.Speed)
                 {
-                    SetPlayerX(playerX + Player.Speed);
+                    if (PlayerX + PlayerWidthHalf < windowWidth)
+                    {
+                        SetPlayerX(PlayerX + Player.Speed);
+                    }
+                }
+
+                // move left
+                if (PointerX < PlayerX + PlayerWidthHalf - Player.Speed)
+                {
+                    SetPlayerX(PlayerX - Player.Speed);
                 }
             }
 
-            // move left
-            if (PointerX - playerWidthHalf < playerX - Player.Speed)
+            if (IsKeyboardPressed)
             {
-                SetPlayerX(playerX - Player.Speed);
+                // move pointer x left
+                if (moveLeft && PlayerX > 0)
+                    PointerX -= Player.Speed;
+
+                // move pointer x right
+                if (moveRight && PlayerX + Player.Width < windowWidth)
+                    PointerX += Player.Speed;
+
+                // move right
+                if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
+                {
+                    if (PlayerX + PlayerWidthHalf < windowWidth)
+                    {
+                        SetPlayerX(PlayerX + Player.Speed);
+                    }
+                }
+
+                // move left
+                if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
+                {
+                    SetPlayerX(PlayerX - Player.Speed);
+                }
             }
         }
 
@@ -1192,24 +1160,32 @@ namespace AstroOdyssey
 
         private void GameCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            IsPointerPressed = true;
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
         }
 
+        private void GameCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            IsPointerPressed = false;
+        }
+
         #endregion
 
-        #region Focus Events
+        #region Movement Events
 
         private void FocusBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
+                IsKeyboardPressed = true;
                 moveLeft = true;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
+                IsKeyboardPressed = true;
                 moveRight = true;
             }
         }
@@ -1218,11 +1194,13 @@ namespace AstroOdyssey
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
+                IsKeyboardPressed = false;
                 moveLeft = false;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
+                IsKeyboardPressed = false;
                 moveRight = false;
             }
         }
@@ -1285,7 +1263,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PlaySound(SoundType soundType)
         {
-            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");            
+            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
         }
 
         /// <summary>
