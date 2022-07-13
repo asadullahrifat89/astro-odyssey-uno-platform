@@ -3,15 +3,28 @@
     splashScreenImage: "Assets/SplashScreen.png",
     splashScreenColor: "transparent",
     displayName: "AstroOdyssey"
-
 }
 
-function playSound(src, volume) {
-    var audio = new Audio(src);
-    audio.volume = volume;
-    audio.play();
+const myAudios = [];
+
+function playSound(src, volume, loop) {
+    var myAudio = new Audio(src);
+    myAudio.volume = volume;
+    myAudio.loop = loop;
+    myAudio.play();
+
+    myAudios.push(myAudio);
 }
 
-function helloWorld(src) {
-    alert(src);
+function stopSounds() {    
+    myAudios.every(pauseSound);
+}
+
+function pauseSound(audio) {
+    audio.pause(); // Stop playing
+    audio.currentTime = 0; // Reset time
+}
+
+function helloWorld(message) {
+    alert(message);
 }

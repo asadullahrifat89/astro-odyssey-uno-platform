@@ -265,12 +265,13 @@ namespace AstroOdyssey
         /// Stops the game.
         /// </summary>
         private void StopGame()
-        {
-            StopBackgroundMusic();
-            IsGameRunning = false;
+        {            
+            IsGameRunning = false;            
 
             frameGenerationTimer?.Stop();
             frameGenerationTimer?.Dispose();
+
+            StopSounds();
         }
 
         /// <summary>
@@ -1326,62 +1327,62 @@ namespace AstroOdyssey
                                 break;
                         }
 
-                        this.ExecuteJavascript($"playSound('{host}',0.4);");
+                        this.ExecuteJavascript($"playSound('{host}', 0.4, true);");
                     }
                     break;
                 case SoundType.LASER_FIRE:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3";
-                        this.ExecuteJavascript($"playSound('{host}',0.4);");
+                        this.ExecuteJavascript($"playSound('{host}', 0.4, false);");
                     }
                     break;
                 case SoundType.LASER_HIT:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/explosion-sfx-43814.mp3";
-                        this.ExecuteJavascript($"playSound('{host}',0.6);");
+                        this.ExecuteJavascript($"playSound('{host}', 0.6, false);");
                     }
                     break;
                 case SoundType.LASER_FIRE_POWERED_UP:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/plasmablaster-37114.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
+                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
                     }
                     break;
                 case SoundType.POWER_UP:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/spellcast-46164.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
+                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
                     }
                     break;
                 case SoundType.POWER_DOWN:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/power-down-7103.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
+                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
                     }
                     break;
                 case SoundType.ENEMY_DESTRUCTION:
                 case SoundType.METEOR_DESTRUCTION:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/explosion-36210.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 0.8);");
+                        this.ExecuteJavascript($"playSound('{host}', 0.8, false);");
                     }
                     break;
                 case SoundType.LEVEL_UP:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/8-bit-powerup-6768.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
+                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                     }
                     break;
                 case SoundType.HEALTH_GAIN:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/scale-e6-14577.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
+                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                     }
                     break;
                 case SoundType.HEALTH_LOSS:
                     {
                         var host = $"{baseUrl}/Assets/Sounds/explosion-39897.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
+                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                     }
                     break;
                 default:
@@ -1390,14 +1391,11 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Stops the background music.
+        /// Stops all sounds.
         /// </summary>
-        private void StopBackgroundMusic()
+        private void StopSounds()
         {
-            //if (backgroundAudio is not null)
-            //{
-            //    AudioService.PauseAudio(backgroundAudio);
-            //}
+            this.ExecuteJavascript("stopSounds();");
         }
 
         #endregion
