@@ -5,22 +5,27 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="Black"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
 
         <!--  This renders the stars  -->
-        <GameEnvironment x:Name="StarView" />
+        <GameEnvironment x:Name="StarView" Background="Transparent" />
 
         <!--  This redenders player, enemies, meteors, healths, and lasers  -->
-        <GameEnvironment
-            x:Name="GameView"
+        <GameEnvironment x:Name="GameView" Background="Transparent" />
+
+        <!--  This is for capturing input  -->
+        <Canvas
+            x:Name="InputCanvas"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             Background="Transparent"
-            KeyDown="FocusBox_KeyDown"
-            KeyUp="FocusBox_KeyUp"
-            PointerPressed="GameCanvas_PointerPressed"
-            PointerReleased="GameCanvas_PointerReleased" />
+            KeyDown="InputCanvas_KeyDown"
+            KeyUp="InputCanvas_KeyUp"
+            PointerPressed="InputCanvas_PointerPressed"
+            PointerReleased="InputCanvas_PointerReleased" />
 
         <!--  This shows current score  -->
         <TextBlock

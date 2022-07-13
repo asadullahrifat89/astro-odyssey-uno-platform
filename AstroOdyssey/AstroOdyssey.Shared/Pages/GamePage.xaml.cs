@@ -133,9 +133,9 @@ namespace AstroOdyssey
 
         private bool IsGameRunning { get; set; }
 
-        private bool IsPointerPressed { get; set; }
+        //private bool IsPointerPressed { get; set; }
 
-        private bool IsKeyboardPressed { get; set; }
+        //private bool IsKeyboardPressed { get; set; }
 
         private PeriodicTimer GameTimer { get; set; }
 
@@ -602,49 +602,73 @@ namespace AstroOdyssey
         /// </summary>
         private void MovePlayer()
         {
-            if (IsPointerPressed)
-            {
-                // move right
-                if (PointerX > PlayerX + PlayerWidthHalf + Player.Speed)
-                {
-                    if (PlayerX + PlayerWidthHalf < windowWidth)
-                    {
-                        SetPlayerX(PlayerX + Player.Speed);
-                    }
-                }
+            var playerX = Player.GetX();
+            var playerWidthHalf = Player.Width / 2;
 
-                // move left
-                if (PointerX < PlayerX + PlayerWidthHalf - Player.Speed)
+            if (moveLeft && playerX > 0)
+                PointerX -= Player.Speed;
+
+            if (moveRight && playerX + Player.Width < windowWidth)
+                PointerX += Player.Speed;
+
+            // move right
+            if (PointerX - playerWidthHalf > playerX + Player.Speed)
+            {
+                if (playerX + playerWidthHalf < windowWidth)
                 {
-                    SetPlayerX(PlayerX - Player.Speed);
+                    SetPlayerX(playerX + Player.Speed);
                 }
             }
 
-            if (IsKeyboardPressed)
+            // move left
+            if (PointerX - playerWidthHalf < playerX - Player.Speed)
             {
-                // move pointer x left
-                if (moveLeft && PlayerX > 0)
-                    PointerX -= Player.Speed;
-
-                // move pointer x right
-                if (moveRight && PlayerX + Player.Width < windowWidth)
-                    PointerX += Player.Speed;
-
-                // move right
-                if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
-                {
-                    if (PlayerX + PlayerWidthHalf < windowWidth)
-                    {
-                        SetPlayerX(PlayerX + Player.Speed);
-                    }
-                }
-
-                // move left
-                if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
-                {
-                    SetPlayerX(PlayerX - Player.Speed);
-                }
+                SetPlayerX(playerX - Player.Speed);
             }
+
+            //if (IsPointerPressed)
+            //{
+            //    // move right
+            //    if (PointerX > PlayerX + PlayerWidthHalf + Player.Speed)
+            //    {
+            //        if (PlayerX + PlayerWidthHalf < windowWidth)
+            //        {
+            //            SetPlayerX(PlayerX + Player.Speed);
+            //        }
+            //    }
+
+            //    // move left
+            //    if (PointerX < PlayerX + PlayerWidthHalf - Player.Speed)
+            //    {
+            //        SetPlayerX(PlayerX - Player.Speed);
+            //    }
+            //}
+
+            //if (IsKeyboardPressed)
+            //{
+            //    // move pointer x left
+            //    if (moveLeft && PlayerX > 0)
+            //        PointerX -= Player.Speed;
+
+            //    // move pointer x right
+            //    if (moveRight && PlayerX + Player.Width < windowWidth)
+            //        PointerX += Player.Speed;
+
+            //    // move right
+            //    if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
+            //    {
+            //        if (PlayerX + PlayerWidthHalf < windowWidth)
+            //        {
+            //            SetPlayerX(PlayerX + Player.Speed);
+            //        }
+            //    }
+
+            //    // move left
+            //    if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
+            //    {
+            //        SetPlayerX(PlayerX - Player.Speed);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -1134,51 +1158,47 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Canvas Events
+        #region Movement Events
 
-        private void GameCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void InputCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            IsPointerPressed = true;
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
         }
 
-        private void GameCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void InputCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            IsPointerPressed = false;
+
         }
 
-        #endregion
 
-        #region Movement Events
-
-        private void FocusBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void InputCanvas_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
-                IsKeyboardPressed = true;
+                //IsKeyboardPressed = true;
                 moveLeft = true;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
-                IsKeyboardPressed = true;
+                //IsKeyboardPressed = true;
                 moveRight = true;
             }
         }
 
-        private void FocusBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        private void InputCanvas_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
-                IsKeyboardPressed = false;
+                //IsKeyboardPressed = false;
                 moveLeft = false;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
-                IsKeyboardPressed = false;
+                //IsKeyboardPressed = false;
                 moveRight = false;
             }
         }

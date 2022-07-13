@@ -112,9 +112,9 @@ namespace AstroOdyssey
                 builder.SetMinimumLevel(LogLevel.Information);
 
                 // Default filters for Uno Platform namespaces
-                //builder.AddFilter("Uno", LogLevel.Warning);
-                //builder.AddFilter("Windows", LogLevel.Warning);
-                //builder.AddFilter("Microsoft", LogLevel.Warning);
+                builder.AddFilter("Uno", LogLevel.Warning);
+                builder.AddFilter("Windows", LogLevel.Warning);
+                builder.AddFilter("Microsoft", LogLevel.Warning);
 
                 // Generic Xaml events
                 //builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug);
@@ -141,7 +141,7 @@ namespace AstroOdyssey
                 //builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
 
                 // Debug JS interop
-                //builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
+                builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
             });
 
             Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;

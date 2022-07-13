@@ -15,10 +15,10 @@
                 x:Name="NavView"
                 IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
                 IsSettingsVisible="True"
-                PaneDisplayMode="Top">
+                PaneDisplayMode="LeftMinimal">
                 <NavigationView.MenuItems>
                     <NavigationViewItem Content="Game" Tag="GameStartPage" />
-                    <!--<NavigationViewItem Content="Game" Tag="GamePage" />-->
+
                 </NavigationView.MenuItems>
                 <NavigationView.PaneFooter>
                     <TextBlock
@@ -27,7 +27,6 @@
                         Text="Player" />
                 </NavigationView.PaneFooter>
                 <ScrollViewer>
-                    <!--  Frame that hosts pages  -->
                     <Frame
                         x:Name="ContentFrame"
                         HorizontalContentAlignment="Stretch"
@@ -36,6 +35,15 @@
                         NavigationFailed="ContentFrame_NavigationFailed" />
                 </ScrollViewer>
             </NavigationView>
+
+            <!--<ScrollViewer>
+                <Frame
+                    x:Name="ContentFrame"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    IsTabStop="True"
+                    NavigationFailed="ContentFrame_NavigationFailed" />
+            </ScrollViewer>-->
         </Grid>
 
     </Grid>
