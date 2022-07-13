@@ -15,11 +15,11 @@
                 x:Name="NavView"
                 IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
                 IsSettingsVisible="True"
-                PaneDisplayMode="LeftMinimal">
-                <NavigationView.MenuItems>
+                PaneDisplayMode="Top">
+                <!--<NavigationView.MenuItems>
                     <NavigationViewItem Content="Game" Tag="GameStartPage" />
 
-                </NavigationView.MenuItems>
+                </NavigationView.MenuItems>-->
                 <NavigationView.PaneFooter>
                     <TextBlock
                         Margin="12,0"
