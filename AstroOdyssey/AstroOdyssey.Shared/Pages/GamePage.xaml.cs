@@ -265,8 +265,8 @@ namespace AstroOdyssey
         /// Stops the game.
         /// </summary>
         private void StopGame()
-        {            
-            IsGameRunning = false;            
+        {
+            IsGameRunning = false;
 
             frameGenerationTimer?.Stop();
             frameGenerationTimer?.Dispose();
@@ -1306,92 +1306,56 @@ namespace AstroOdyssey
             {
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(1, 12);
-
-                        string host = null;
-
-                        switch (musicTrack)
-                        {
-                            case 1: { host = $"{baseUrl}/Assets/Sounds/slow-trap-18565.mp3"; } break;
-                            case 2: { host = $"{baseUrl}/Assets/Sounds/space-chillout-14194.mp3"; } break;
-                            case 3: { host = $"{baseUrl}/Assets/Sounds/cinematic-space-drone-10623.mp3"; } break;
-                            case 4: { host = $"{baseUrl}/Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"; } break;
-                            case 5: { host = $"{baseUrl}/Assets/Sounds/space-age-10714.mp3"; } break;
-                            case 6: { host = $"{baseUrl}/Assets/Sounds/drone-space-main-9706.mp3"; } break;
-                            case 7: { host = $"{baseUrl}/Assets/Sounds/cyberpunk-2099-10701.mp3"; } break;
-                            case 8: { host = $"{baseUrl}/Assets/Sounds/insurrection-10941.mp3"; } break;
-                            case 9: { host = $"{baseUrl}/Assets/Sounds/space-trip-114102.mp3"; } break;
-                            case 10: { host = $"{baseUrl}/Assets/Sounds/dark-matter-10710.mp3"; } break;
-                            case 11: { host = $"{baseUrl}/Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"; } break;
-                            default:
-                                break;
-                        }
-
-                        //this.ExecuteJavascript($"playGameBackgroundSound('{host}', 0.4, true);");
-                        this.ExecuteJavascript($"playGameBackgroundSound('{host}');");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','BACKGROUND_MUSIC');");
                     }
                     break;
                 case SoundType.LASER_FIRE:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 0.4, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE');");
                     }
                     break;
                 case SoundType.LASER_FIRE_POWERED_UP:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/plasmablaster-37114.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE_POWERED_UP');");
                     }
                     break;
                 case SoundType.LASER_HIT:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/explosion-sfx-43814.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 0.6, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_HIT');");
                     }
-                    break;               
+                    break;
                 case SoundType.POWER_UP:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/spellcast-46164.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_UP');");
                     }
                     break;
                 case SoundType.POWER_DOWN:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/power-down-7103.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_DOWN');");
                     }
                     break;
                 case SoundType.ENEMY_DESTRUCTION:
+                    {
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','ENEMY_DESTRUCTION');");
+                    }
+                    break;
                 case SoundType.METEOR_DESTRUCTION:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/explosion-36210.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 0.8, false);");
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','ENEMY_DESTRUCTION');");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','METEOR_DESTRUCTION');");
                     }
                     break;
                 case SoundType.LEVEL_UP:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/8-bit-powerup-6768.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','LEVEL_UP');");
                     }
                     break;
                 case SoundType.HEALTH_GAIN:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/scale-e6-14577.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_GAIN');");
                     }
                     break;
                 case SoundType.HEALTH_LOSS:
                     {
-                        //var host = $"{baseUrl}/Assets/Sounds/explosion-39897.mp3";
-                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
                         this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_LOSS');");
                     }
                     break;

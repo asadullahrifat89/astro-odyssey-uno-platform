@@ -19,38 +19,47 @@ const hgSource = "Assets/Sounds/scale-e6-14577.mp3";
 const hlSource = "Assets/Sounds/explosion-39897.mp3";
 
 const BACKGROUND_MUSIC = new Audio();
-const LASER_FIRE = new Audio(lfSource);
-const LASER_FIRE_POWERED_UP = new Audio(lfpuSource);
-const LASER_HIT = new Audio(lhSource);
-const POWER_UP = new Audio(puSource);
-const POWER_DOWN = new Audio(pdSource);
-const ENEMY_DESTRUCTION = new Audio(edSource);
-const METEOR_DESTRUCTION = new Audio(mdSource);
-const LEVEL_UP = new Audio(luSource);
-const HEALTH_GAIN = new Audio(hgSource);
-const HEALTH_LOSS = new Audio(hlSource);
-
-function playGameBackgroundSound(src) {
-    //var myAudio = new Audio(src);
-    //myAudio.volume = volume;
-    //myAudio.loop = loop;
-    //myAudio.play();
-
-    //myAudios.push(myAudio);
-
-    BACKGROUND_MUSIC.src = src;
-    BACKGROUND_MUSIC.volume = 0.4;
-    BACKGROUND_MUSIC.currentTime = 0;
-    BACKGROUND_MUSIC.loop = true;
-    BACKGROUND_MUSIC.play();
-
-}
+const LASER_FIRE = new Audio();
+const LASER_FIRE_POWERED_UP = new Audio();
+const LASER_HIT = new Audio();
+const POWER_UP = new Audio();
+const POWER_DOWN = new Audio();
+const ENEMY_DESTRUCTION = new Audio();
+const METEOR_DESTRUCTION = new Audio();
+const LEVEL_UP = new Audio();
+const HEALTH_GAIN = new Audio();
+const HEALTH_LOSS = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
+        case "BACKGROUND_MUSIC": {
+
+            let musicTrack = Math.floor((Math.random() * 12));
+            let src = "";
+
+            switch (musicTrack) {
+                case 1: { src = baseUrl.concat("/", "Assets/Sounds/slow-trap-18565.mp3"); } break;
+                case 2: { src = baseUrl.concat("/", "Assets/Sounds/space-chillout-14194.mp3"); } break;
+                case 3: { src = baseUrl.concat("/", "Assets/Sounds/cinematic-space-drone-10623.mp3"); } break;
+                case 4: { src = baseUrl.concat("/", "Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"); } break;
+                case 5: { src = baseUrl.concat("/", "Assets/Sounds/space-age-10714.mp3"); } break;
+                case 6: { src = baseUrl.concat("/", "Assets/Sounds/drone-space-main-9706.mp3"); } break;
+                case 7: { src = baseUrl.concat("/", "Assets/Sounds/cyberpunk-2099-10701.mp3"); } break;
+                case 8: { src = baseUrl.concat("/", "Assets/Sounds/insurrection-10941.mp3"); } break;
+                case 9: { src = baseUrl.concat("/", "Assets/Sounds/space-trip-114102.mp3"); } break;
+                case 10: { src = baseUrl.concat("/", "Assets/Sounds/dark-matter-10710.mp3"); } break;
+                case 11: { src = baseUrl.concat("/", "Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"); } break;
+                default:
+            }
+
+            BACKGROUND_MUSIC.src = src;
+            BACKGROUND_MUSIC.volume = 0.4;
+            BACKGROUND_MUSIC.loop = true;
+            playSound(BACKGROUND_MUSIC);
+        } break;
         case "LASER_FIRE": {
             LASER_FIRE.src = baseUrl.concat("/", lfSource);
-            LASER_FIRE.volume = 0.4;
+            LASER_FIRE.volume = 0.2;
             playSound(LASER_FIRE);
         } break;
         case "LASER_FIRE_POWERED_UP": {
@@ -108,7 +117,7 @@ function stopSounds() {
     pauseSound(BACKGROUND_MUSIC);
 }
 
-function playSound(audio) {    
+function playSound(audio) {
     audio.currentTime = 0; // Reset time
     audio.play();
 }
