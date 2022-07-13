@@ -18,37 +18,10 @@
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<ItemGroup>
-		<Content Include="Assets\Sounds\8-bit-powerup-6768.mp3" />
-		<Content Include="Assets\Sounds\beam-8-43831.mp3" />
-		<Content Include="Assets\Sounds\cinematic-space-drone-10623.mp3" />
-		<Content Include="Assets\Sounds\cyberpunk-2099-10701.mp3" />
-		<Content Include="Assets\Sounds\dark-matter-10710.mp3" />
-		<Content Include="Assets\Sounds\drone-space-main-9706.mp3" />
-		<Content Include="Assets\Sounds\explosion-36210.mp3" />
-		<Content Include="Assets\Sounds\explosion-39897.mp3" />
-		<Content Include="Assets\Sounds\explosion-sfx-43814.mp3" />
-		<Content Include="Assets\Sounds\insurrection-10941.mp3" />
-		<Content Include="Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
-		<Content Include="Assets\Sounds\plasmablaster-37114.mp3" />
-		<Content Include="Assets\Sounds\power-down-7103.mp3" />
-		<Content Include="Assets\Sounds\scale-e6-14577.mp3" />
-		<Content Include="Assets\Sounds\shoot02wav-14562.mp3" />
-		<Content Include="Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
-		<Content Include="Assets\Sounds\slow-trap-18565.mp3" />
-		<Content Include="Assets\Sounds\space-age-10714.mp3" />
-		<Content Include="Assets\Sounds\space-chillout-14194.mp3" />
-		<Content Include="Assets\Sounds\space-trip-114102.mp3" />
-		<Content Include="Assets\Sounds\spellcast-46164.mp3" />
 		<Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Remove="Assets\Sounds\**" />
-	  <Content Remove="Assets\Sounds\**" />
-	  <EmbeddedResource Remove="Assets\Sounds\**" />
-	  <None Remove="Assets\Sounds\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />

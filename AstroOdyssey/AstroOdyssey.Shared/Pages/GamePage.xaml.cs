@@ -1327,62 +1327,72 @@ namespace AstroOdyssey
                                 break;
                         }
 
-                        this.ExecuteJavascript($"playSound('{host}', 0.4, true);");
+                        //this.ExecuteJavascript($"playGameBackgroundSound('{host}', 0.4, true);");
+                        this.ExecuteJavascript($"playGameBackgroundSound('{host}');");
                     }
                     break;
                 case SoundType.LASER_FIRE:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 0.4, false);");
-                    }
-                    break;
-                case SoundType.LASER_HIT:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-sfx-43814.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 0.6, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 0.4, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE');");
                     }
                     break;
                 case SoundType.LASER_FIRE_POWERED_UP:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/plasmablaster-37114.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/plasmablaster-37114.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE_POWERED_UP');");
                     }
                     break;
+                case SoundType.LASER_HIT:
+                    {
+                        //var host = $"{baseUrl}/Assets/Sounds/explosion-sfx-43814.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 0.6, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_HIT');");
+                    }
+                    break;               
                 case SoundType.POWER_UP:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/spellcast-46164.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/spellcast-46164.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_UP');");
                     }
                     break;
                 case SoundType.POWER_DOWN:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/power-down-7103.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/power-down-7103.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_DOWN');");
                     }
                     break;
                 case SoundType.ENEMY_DESTRUCTION:
                 case SoundType.METEOR_DESTRUCTION:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-36210.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 0.8, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/explosion-36210.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 0.8, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','ENEMY_DESTRUCTION');");
                     }
                     break;
                 case SoundType.LEVEL_UP:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/8-bit-powerup-6768.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/8-bit-powerup-6768.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LEVEL_UP');");
                     }
                     break;
                 case SoundType.HEALTH_GAIN:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/scale-e6-14577.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/scale-e6-14577.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_GAIN');");
                     }
                     break;
                 case SoundType.HEALTH_LOSS:
                     {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-39897.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        //var host = $"{baseUrl}/Assets/Sounds/explosion-39897.mp3";
+                        //this.ExecuteJavascript($"playSound('{host}', 1.0, false);");
+                        this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_LOSS');");
                     }
                     break;
                 default:
