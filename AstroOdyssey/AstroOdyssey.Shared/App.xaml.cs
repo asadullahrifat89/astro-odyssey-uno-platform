@@ -13,7 +13,15 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class App : Application
     {
+        #region Fields
+
         private Window _window;
+
+        private static Frame rootFrame;
+
+        #endregion
+
+        #region Ctor
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -28,6 +36,15 @@ namespace AstroOdyssey
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
+        }
+
+        #endregion
+
+        #region Methods
+
+        public static void NavigateToPage(Type page)
+        {
+            rootFrame.Navigate(page);
         }
 
         /// <summary>
@@ -51,7 +68,7 @@ namespace AstroOdyssey
             _window = Microsoft.UI.Xaml.Window.Current;
 #endif
 
-            var rootFrame = _window.Content as Frame;
+            rootFrame = _window.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -179,5 +196,7 @@ namespace AstroOdyssey
 #endif
 #endif
         }
+
+        #endregion
     }
 }

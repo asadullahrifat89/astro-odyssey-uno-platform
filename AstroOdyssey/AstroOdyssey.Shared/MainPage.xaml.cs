@@ -22,9 +22,26 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region Ctor
+
         public MainPage()
         {
             this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods  
+
+        #region Functionality
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.NavigateToPage(typeof(GamePage));
+        }
+
+        #endregion
+
+        #endregion
     }
 }
