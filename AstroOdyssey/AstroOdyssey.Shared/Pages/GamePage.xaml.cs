@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Uno.Foundation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,7 +28,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        //private string baseUrl;
+        private string baseUrl;
 
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
@@ -165,18 +166,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Stops the game.
-        /// </summary>
-        private void StopGame()
-        {
-            StopBackgroundMusic();
-            IsGameRunning = false;
-
-            frameGenerationTimer?.Stop();
-            frameGenerationTimer?.Dispose();
-        }
-
-        /// <summary>
         /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
         /// </summary>
         private void RunGame()
@@ -215,7 +204,7 @@ namespace AstroOdyssey
 
             //    CheckPlayerDeath();
 
-            //    KeyboardFocus();
+            //    //KeyboardFocus();
 
             //    CalculateFps();
 
@@ -267,20 +256,30 @@ namespace AstroOdyssey
                 SetFrameAnalytics();
 
                 FrameStartTime = watch.ElapsedMilliseconds;
-
-                GameView.Focus(FocusState.Unfocused);
             };
 
             frameGenerationTimer.Start();
         }
 
-        ///// <summary>
-        ///// Brings focus on keyboard so that keyboard events work.
-        ///// </summary>
-        //private void KeyboardFocus()
-        //{
-        //    FocusBox.Focus(FocusState.Programmatic);
-        //}
+        /// <summary>
+        /// Stops the game.
+        /// </summary>
+        private void StopGame()
+        {
+            StopBackgroundMusic();
+            IsGameRunning = false;
+
+            frameGenerationTimer?.Stop();
+            frameGenerationTimer?.Dispose();
+        }
+
+        /// <summary>
+        /// Brings focus on keyboard so that keyboard events work.
+        /// </summary>
+        private void KeyboardFocus()
+        {
+            GameView.Focus(FocusState.Programmatic);
+        }
 
         /// <summary>
         /// Updates the game score, player health.
@@ -1001,7 +1000,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PlayLaserSound()
         {
-            //var host = $"{baseUrl}resources/AstroOdyssey/Assets/Sounds/shoot02wav-14562.mp3";
+            var host = $"{baseUrl}Assets/Sounds/shoot02wav-14562.mp3";
 
             //if (laserAudio is null)
             //    laserAudio = OpenSilver.Interop.ExecuteJavaScript(@"
@@ -1013,6 +1012,12 @@ namespace AstroOdyssey
             //    }())", host);
 
             //AudioService.PlayAudio(laserAudio);
+
+            //var js = "(function() {" + " var audio = new Audio(" + host + ");" + "audio.volume = 1.0;" + "audio.play();" + "}())";
+
+            //WebAssemblyRuntime.InvokeJS(js);
+
+            this.ExecuteJavascript($"playSound('{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3',0.4);");
         }
 
         /// <summary>
@@ -1370,7 +1375,7 @@ namespace AstroOdyssey
 
         #region Focus Events
 
-        private void FocusBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void FocusBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
@@ -1383,7 +1388,7 @@ namespace AstroOdyssey
             }
         }
 
-        private void FocusBox_KeyUp(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void FocusBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
@@ -1407,9 +1412,11 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
-            //Window.Current.SizeChanged += Current_SizeChanged;
+            var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
+            Console.WriteLine(indexUrl);
+
             this.SizeChanged += GamePage_SizeChanged;
-            //baseUrl = App.GetBaseUrl();
+            baseUrl = indexUrl;
             StartGame();
         }
 
@@ -1438,7 +1445,7 @@ namespace AstroOdyssey
         {
             this.SizeChanged -= GamePage_SizeChanged;
             StopGame();
-        }       
+        }
 
         #endregion
 
@@ -1490,6 +1497,9 @@ namespace AstroOdyssey
             //}
 
             //AudioService.PlayAudio(backgroundAudio);
+
+            //TODO: call function to play music
+            this.ExecuteJavascript("helloWorld('hello from wasm');");
         }
 
         /// <summary>
@@ -1508,7 +1518,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PlayPowerUpSound()
         {
-            //var host = $"{baseUrl}resources/AstroOdyssey/Assets/Sounds/spellcast-46164.mp3";
+            var host = $"{baseUrl}resources/AstroOdyssey/Assets/Sounds/spellcast-46164.mp3";
 
             //if (powerUpAudio is null)
             //    powerUpAudio = OpenSilver.Interop.ExecuteJavaScript(@"
@@ -1520,6 +1530,10 @@ namespace AstroOdyssey
 
 
             //AudioService.PlayAudio(powerUpAudio);
+
+            //var js = "(function() {"+ " var audio = new Audio(" + host + ");" + "audio.volume = 1.0;" + "audio.play();" + "}())";
+
+            //WebAssemblyRuntime.InvokeJS(js);
         }
 
         /// <summary>

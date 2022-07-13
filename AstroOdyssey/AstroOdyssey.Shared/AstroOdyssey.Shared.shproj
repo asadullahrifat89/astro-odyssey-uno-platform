@@ -19,6 +19,30 @@
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />
+    <_Globbed_Compile Remove="Services\AudioService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <_Globbed_Content Remove="Assets\Sounds\8-bit-powerup-6768.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\beam-8-43831.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\cinematic-space-drone-10623.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\cyberpunk-2099-10701.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\dark-matter-10710.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\drone-space-main-9706.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\explosion-36210.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\explosion-39897.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\explosion-sfx-43814.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\insurrection-10941.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\plasmablaster-37114.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\power-down-7103.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\scale-e6-14577.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\shoot02wav-14562.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\slow-trap-18565.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\space-age-10714.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\space-chillout-14194.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\space-trip-114102.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\spellcast-46164.mp3" />
   </ItemGroup>
   <ItemGroup>
     <_Globbled_Page Remove="Pages\GamePage.xaml" />
