@@ -21,7 +21,11 @@
             KeyUp="FocusBox_KeyUp" />-->
 
         <!--  This renders the stars  -->
-        <GameEnvironment x:Name="StarView" Background="Black" />
+        <GameEnvironment
+            x:Name="StarView"
+            Background="Black"
+            KeyDown="FocusBox_KeyDown"
+            KeyUp="FocusBox_KeyUp" />
 
         <!--  This redenders player, enemies, meteors, healths, and lasers  -->
         <GameEnvironment

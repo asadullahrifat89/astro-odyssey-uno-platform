@@ -267,6 +267,8 @@ namespace AstroOdyssey
                 SetFrameAnalytics();
 
                 FrameStartTime = watch.ElapsedMilliseconds;
+
+                GameView.Focus(FocusState.Unfocused);
             };
 
             frameGenerationTimer.Start();
@@ -277,7 +279,7 @@ namespace AstroOdyssey
         ///// </summary>
         //private void KeyboardFocus()
         //{
-        //    FocusBox.Focus();
+        //    FocusBox.Focus(FocusState.Programmatic);
         //}
 
         /// <summary>
@@ -1420,6 +1422,8 @@ namespace AstroOdyssey
         {
             windowWidth = Window.Current.Bounds.Width;
             windowHeight = Window.Current.Bounds.Height;
+
+            Console.WriteLine($"{windowWidth} x {windowHeight}");
 
             SetViewSizes();
             SetPlayerY();
