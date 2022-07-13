@@ -28,6 +28,21 @@ namespace AstroOdyssey
             Level_8,
         }
 
+        public enum SoundType
+        {
+            BACKGROUND_MUSIC,
+            LASER_FIRE,
+            LASER_HIT,
+            LASER_FIRE_POWERED_UP,
+            ENEMY_DESTRUCTION,
+            METEOR_DESTRUCTION,
+            POWER_UP,
+            POWER_DOWN,
+            LEVEL_UP,
+            HEALTH_GAIN,
+            HEALTH_LOSS,
+        }
+
         /// <summary>
         /// Checks if a two rects intersect.
         /// </summary>
