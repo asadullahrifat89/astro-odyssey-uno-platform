@@ -126,7 +126,7 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameDuration { get; set; } = 14;
+        private int FrameDuration { get; set; } = 10;
 
         private bool IsGameRunning { get; set; }
 
@@ -151,56 +151,11 @@ namespace AstroOdyssey
         /// <summary>
         /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
         /// </summary>
-        private void RunGame()
+        private async void RunGame()
         {
             var watch = Stopwatch.StartNew();
 
-            //while (IsGameRunning)
-            //{
-            //    UpdateGameStats();
-
-            //    SpawnEnemy();
-
-            //    SpawnMeteor();
-
-            //    SpawnHealth();
-
-            //    SpawnPowerUp();
-
-            //    SpawnStar();
-
-            //    SpawnLaser(PowerUpTriggered);
-
-            //    MovePlayer();
-
-            //    UpdateGameView();
-
-            //    UpdateStarView();
-
-            //    ShiftGameLevel();
-
-            //    HideInGameText();
-
-            //    TriggerPowerDown();
-
-            //    PlayerOpacity();
-
-            //    CheckPlayerDeath();
-
-            //    //KeyboardFocus();
-
-            //    CalculateFps();
-
-            //    SetFrameAnalytics();
-
-            //    FrameStartTime = watch.ElapsedMilliseconds;
-
-            //    await ElapseFrameDuration();
-            //}
-
-            frameGenerationTimer = new System.Timers.Timer(FrameDuration);
-
-            frameGenerationTimer.Elapsed += (s, e) =>
+            while (IsGameRunning)
             {
                 UpdateGameStats();
 
@@ -239,9 +194,54 @@ namespace AstroOdyssey
                 SetFrameAnalytics();
 
                 FrameStartTime = watch.ElapsedMilliseconds;
-            };
 
-            frameGenerationTimer.Start();
+                await ElapseFrameDuration();
+            }
+
+            //frameGenerationTimer = new System.Timers.Timer(FrameDuration);
+
+            //frameGenerationTimer.Elapsed += (s, e) =>
+            //{
+            //    UpdateGameStats();
+
+            //    SpawnEnemy();
+
+            //    SpawnMeteor();
+
+            //    SpawnHealth();
+
+            //    SpawnPowerUp();
+
+            //    SpawnStar();
+
+            //    SpawnLaser(PowerUpTriggered);
+
+            //    MovePlayer();
+
+            //    UpdateGameView();
+
+            //    UpdateStarView();
+
+            //    ShiftGameLevel();
+
+            //    HideInGameText();
+
+            //    TriggerPowerDown();
+
+            //    PlayerOpacity();
+
+            //    CheckPlayerDeath();
+
+            //    //KeyboardFocus();
+
+            //    CalculateFps();
+
+            //    SetFrameAnalytics();
+
+            //    FrameStartTime = watch.ElapsedMilliseconds;
+            //};
+
+            //frameGenerationTimer.Start();
         }
 
         /// <summary>

@@ -58,52 +58,62 @@ function playGameSound(baseUrl, soundType) {
             playSound(BACKGROUND_MUSIC);
         } break;
         case "LASER_FIRE": {
-            LASER_FIRE.src = baseUrl.concat("/", lfSource);
+            if (LASER_FIRE.src.length == 0)
+                LASER_FIRE.src = baseUrl.concat("/", lfSource);
             LASER_FIRE.volume = 0.2;
             playSound(LASER_FIRE);
         } break;
         case "LASER_FIRE_POWERED_UP": {
-            LASER_FIRE_POWERED_UP.src = baseUrl.concat("/", lfpuSource);
+            if (LASER_FIRE_POWERED_UP.src.length == 0)
+                LASER_FIRE_POWERED_UP.src = baseUrl.concat("/", lfpuSource);
             LASER_FIRE_POWERED_UP.volume = 1.0;
             playSound(LASER_FIRE_POWERED_UP);
         } break;
         case "LASER_HIT": {
-            LASER_HIT.src = baseUrl.concat("/", lhSource);
+            if (LASER_HIT.src.length == 0)
+                LASER_HIT.src = baseUrl.concat("/", lhSource);
             LASER_HIT.volume = 0.6;
             playSound(LASER_HIT);
         } break;
         case "POWER_UP": {
-            POWER_UP.src = baseUrl.concat("/", puSource);
+            if (POWER_UP.src.length == 0)
+                POWER_UP.src = baseUrl.concat("/", puSource);
             POWER_UP.volume = 1.0;
             playSound(POWER_UP);
         } break;
         case "POWER_DOWN": {
-            POWER_DOWN.src = baseUrl.concat("/", pdSource);
+            if (POWER_DOWN.src.length == 0)
+                POWER_DOWN.src = baseUrl.concat("/", pdSource);
             POWER_DOWN.volume = 1.0;
             playSound(POWER_DOWN);
         } break;
         case "ENEMY_DESTRUCTION": {
-            ENEMY_DESTRUCTION.src = baseUrl.concat("/", edSource);
+            if (ENEMY_DESTRUCTION.src.length == 0)
+                ENEMY_DESTRUCTION.src = baseUrl.concat("/", edSource);
             ENEMY_DESTRUCTION.volume = 0.8;
             playSound(ENEMY_DESTRUCTION);
         } break;
         case "METEOR_DESTRUCTION": {
-            METEOR_DESTRUCTION.src = baseUrl.concat("/", mdSource);
+            if (METEOR_DESTRUCTION.src.length == 0)
+                METEOR_DESTRUCTION.src = baseUrl.concat("/", mdSource);
             METEOR_DESTRUCTION.volume = 0.8;
             playSound(METEOR_DESTRUCTION);
         } break;
         case "LEVEL_UP": {
-            LEVEL_UP.src = baseUrl.concat("/", luSource);
+            if (LEVEL_UP.src.length == 0)
+                LEVEL_UP.src = baseUrl.concat("/", luSource);
             LEVEL_UP.volume = 1.0;
             playSound(LEVEL_UP);
         } break;
         case "HEALTH_GAIN": {
-            HEALTH_GAIN.src = baseUrl.concat("/", hgSource);
+            if (HEALTH_GAIN.src.length == 0)
+                HEALTH_GAIN.src = baseUrl.concat("/", hgSource);
             HEALTH_GAIN.volume = 1.0;
             playSound(HEALTH_GAIN);
         } break;
         case "HEALTH_LOSS": {
-            HEALTH_LOSS.src = baseUrl.concat("/", hlSource);
+            if (HEALTH_LOSS.src.length == 0)
+                HEALTH_LOSS.src = baseUrl.concat("/", hlSource);
             HEALTH_LOSS.volume = 1.0;
             playSound(HEALTH_LOSS);
         } break;
