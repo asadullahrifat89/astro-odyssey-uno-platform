@@ -33,24 +33,7 @@ namespace AstroOdyssey
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
 
-        private double windowWidth, windowHeight;
-
-        //private object backgroundAudio = null;
-
-        //private object enemyDestructionAudio = null;
-        //private object meteorDestructionAudio = null;
-
-        //private object playerHealthLossAudio = null;
-        //private object playerHealthGainAudio = null;
-
-        //private object levelUpAudio = null;
-
-        //private object powerUpAudio = null;
-        //private object powerDownAudio = null;
-
-        //private object laserImpactAudio = null;
-        //private object laserAudio = null;
-        //private object laserPoweredUpModeAudio = null;
+        private double windowWidth, windowHeight;       
 
         private int powerUpCounter = 1500;
         private int powerUpTriggerCounter;
@@ -143,7 +126,7 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameDuration { get; set; } = 13;
+        private int FrameDuration { get; set; } = 14;
 
         private bool IsGameRunning { get; set; }
 
@@ -271,7 +254,7 @@ namespace AstroOdyssey
             frameGenerationTimer?.Stop();
             frameGenerationTimer?.Dispose();
 
-            StopSounds();
+            StopSound();
         }
 
         /// <summary>
@@ -1302,74 +1285,15 @@ namespace AstroOdyssey
         /// </summary>
         private void PlaySound(SoundType soundType)
         {
-            switch (soundType)
-            {
-                case SoundType.BACKGROUND_MUSIC:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','BACKGROUND_MUSIC');");
-                    }
-                    break;
-                case SoundType.LASER_FIRE:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE');");
-                    }
-                    break;
-                case SoundType.LASER_FIRE_POWERED_UP:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_FIRE_POWERED_UP');");
-                    }
-                    break;
-                case SoundType.LASER_HIT:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LASER_HIT');");
-                    }
-                    break;
-                case SoundType.POWER_UP:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_UP');");
-                    }
-                    break;
-                case SoundType.POWER_DOWN:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','POWER_DOWN');");
-                    }
-                    break;
-                case SoundType.ENEMY_DESTRUCTION:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','ENEMY_DESTRUCTION');");
-                    }
-                    break;
-                case SoundType.METEOR_DESTRUCTION:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','METEOR_DESTRUCTION');");
-                    }
-                    break;
-                case SoundType.LEVEL_UP:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','LEVEL_UP');");
-                    }
-                    break;
-                case SoundType.HEALTH_GAIN:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_GAIN');");
-                    }
-                    break;
-                case SoundType.HEALTH_LOSS:
-                    {
-                        this.ExecuteJavascript($"playGameSound('{baseUrl}','HEALTH_LOSS');");
-                    }
-                    break;
-                default:
-                    break;
-            }
+            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");            
         }
 
         /// <summary>
         /// Stops all sounds.
         /// </summary>
-        private void StopSounds()
+        private void StopSound()
         {
-            this.ExecuteJavascript("stopSounds();");
+            this.ExecuteJavascript("stopSound();");
         }
 
         #endregion

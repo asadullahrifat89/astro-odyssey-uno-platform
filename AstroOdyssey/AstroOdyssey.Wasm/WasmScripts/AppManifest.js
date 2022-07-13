@@ -113,7 +113,7 @@ function playGameSound(baseUrl, soundType) {
     }
 }
 
-function stopSounds() {
+function stopSound() {
     pauseSound(BACKGROUND_MUSIC);
 }
 
