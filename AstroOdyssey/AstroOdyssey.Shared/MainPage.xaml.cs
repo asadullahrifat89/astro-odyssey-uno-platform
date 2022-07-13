@@ -35,9 +35,13 @@ namespace AstroOdyssey
 
         #region Functionality
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Navigate to the target page.
+        /// </summary>
+        /// <param name="targetUri"></param>
+        public void Navigate(Type page)
         {
-            App.NavigateToPage(typeof(GamePage));
+            PageContainerFrame.Navigate(page);
         }
 
         #endregion

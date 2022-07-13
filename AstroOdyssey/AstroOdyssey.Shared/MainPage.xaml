@@ -8,32 +8,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid x:Name="RootGrid">
 
-        <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Vertical">
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="70"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="ASTRO ODYSSEY" />
-            <Button
-                x:Name="PlayButton"
-                Width="300"
-                Height="100"
-                Margin="0,100,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                BorderBrush="White"
-                BorderThickness="5"
-                Click="PlayButton_Click"
-                Content="START GAME"
-                FontSize="30" />
-        </StackPanel>
+        <!--  Frame that hosts pages  -->
+        <Frame
+            x:Name="PageContainerFrame"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch" />
 
     </Grid>
 </Page>

@@ -17,7 +17,7 @@ namespace AstroOdyssey
 
         private Window _window;
 
-        private static Frame rootFrame;
+        private static MainPage _mainPage;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace AstroOdyssey
 
         public static void NavigateToPage(Type page)
         {
-            rootFrame.Navigate(page);
+            _mainPage.Navigate(page);
         }
 
         /// <summary>
@@ -54,64 +54,21 @@ namespace AstroOdyssey
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            _window = Window.Current;
+            _mainPage = _window.Content as MainPage;
+
+            if (_mainPage == null)
             {
-                // this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
-
-#if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
-            _window = new Window();
-            _window.Activate();
-#else
-            _window = Microsoft.UI.Xaml.Window.Current;
-#endif
-
-            rootFrame = _window.Content as Frame;
-
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
-                rootFrame.NavigationFailed += OnNavigationFailed;
-
-                if (args.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // TODO: Load state from previously suspended application
-                }
-
-                // Place the frame in the current Window
-                _window.Content = rootFrame;
+                _mainPage = new MainPage();
+                _window.Content = _mainPage;
             }
 
-#if !(NET6_0_OR_GREATER && WINDOWS)
             if (args.UWPLaunchActivatedEventArgs.PrelaunchActivated == false)
-#endif
             {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), args.Arguments);
-                }
-                // Ensure the current window is active
                 _window.Activate();
             }
-        }
 
-        /// <summary>
-        /// Invoked when Navigation to a certain page fails
-        /// </summary>
-        /// <param name="sender">The Frame which failed navigation</param>
-        /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
+            _mainPage.Navigate(typeof(GameStartPage));
         }
 
         /// <summary>
@@ -176,17 +133,17 @@ namespace AstroOdyssey
                 // builder.AddFilter("Windows.Storage", LogLevel.Debug );
 
                 // Binding related messages
-                // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
-                // builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug );
+                builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
+                builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
 
                 // Binder memory references tracking
-                // builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug );
+                builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug);
 
                 // RemoteControl and HotReload related
-                // builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
+                builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
 
                 // Debug JS interop
-                // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
+                builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
             });
 
             Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
@@ -194,6 +151,7 @@ namespace AstroOdyssey
 #if HAS_UNO
             Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
+
 #endif
         }
 
