@@ -6,13 +6,12 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    IsTabStop="False"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
 
         <!--  This renders the stars  -->
-        <GameEnvironment x:Name="StarView" Background="Black" />
+        <GameEnvironment x:Name="StarView" />
 
         <!--  This redenders player, enemies, meteors, healths, and lasers  -->
         <GameEnvironment

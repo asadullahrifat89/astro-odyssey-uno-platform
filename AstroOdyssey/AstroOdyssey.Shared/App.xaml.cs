@@ -67,8 +67,6 @@ namespace AstroOdyssey
             {
                 _window.Activate();
             }
-
-            _mainPage.Navigate(typeof(GameStartPage));
         }
 
         /// <summary>
@@ -114,16 +112,16 @@ namespace AstroOdyssey
                 builder.SetMinimumLevel(LogLevel.Information);
 
                 // Default filters for Uno Platform namespaces
-                builder.AddFilter("Uno", LogLevel.Warning);
-                builder.AddFilter("Windows", LogLevel.Warning);
-                builder.AddFilter("Microsoft", LogLevel.Warning);
+                //builder.AddFilter("Uno", LogLevel.Warning);
+                //builder.AddFilter("Windows", LogLevel.Warning);
+                //builder.AddFilter("Microsoft", LogLevel.Warning);
 
                 // Generic Xaml events
-                // builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug );
-                // builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug );
-                // builder.AddFilter("Microsoft.UI.Xaml.StateTriggerBase", LogLevel.Debug );
-                // builder.AddFilter("Microsoft.UI.Xaml.UIElement", LogLevel.Debug );
-                // builder.AddFilter("Microsoft.UI.Xaml.FrameworkElement", LogLevel.Trace );
+                //builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.StateTriggerBase", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.UIElement", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.FrameworkElement", LogLevel.Trace);
 
                 // Layouter specific messages
                 // builder.AddFilter("Microsoft.UI.Xaml.Controls", LogLevel.Debug );
@@ -133,17 +131,17 @@ namespace AstroOdyssey
                 // builder.AddFilter("Windows.Storage", LogLevel.Debug );
 
                 // Binding related messages
-                builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
-                builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
+                //builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
 
                 // Binder memory references tracking
-                builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug);
+                //builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug);
 
                 // RemoteControl and HotReload related
-                builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
+                //builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
 
                 // Debug JS interop
-                builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
+                //builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
             });
 
             Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;

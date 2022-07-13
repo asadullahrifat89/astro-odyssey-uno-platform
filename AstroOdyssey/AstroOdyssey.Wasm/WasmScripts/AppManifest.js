@@ -5,8 +5,6 @@
     displayName: "AstroOdyssey"
 }
 
-const myAudios = [];
-
 const lfSource = "Assets/Sounds/shoot02wav-14562.mp3";
 const lfpuSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const lhSource = "Assets/Sounds/explosion-sfx-43814.mp3";

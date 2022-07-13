@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjects\PowerUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NavigationSyncHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">

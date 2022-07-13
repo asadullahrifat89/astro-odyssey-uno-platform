@@ -265,28 +265,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the window and canvas size on startup.
-        /// </summary>
-        private void SetWindowSize()
-        {
-            windowWidth = Window.Current.Bounds.Width;
-            windowHeight = Window.Current.Bounds.Height;
-
-            PointerX = windowWidth / 2;
-
-            SetViewSizes();
-        }
-
-        /// <summary>
-        /// Sets the game and star view sizes according to current window size.
-        /// </summary>
-        private void SetViewSizes()
-        {
-            GameView.SetSize(windowHeight, windowWidth);
-            StarView.SetSize(windowHeight, windowWidth);
-        }
-
-        /// <summary>
         /// Updates a frame of game view. Advances game objects in the frame.
         /// </summary>
         private void UpdateGameView()
@@ -1234,13 +1212,35 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
         {
-            windowWidth = Window.Current.Bounds.Width;
-            windowHeight = Window.Current.Bounds.Height;
+            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
 
             Console.WriteLine($"{windowWidth} x {windowHeight}");
 
             SetViewSizes();
             SetPlayerY();
+        }
+
+        /// <summary>
+        /// Sets the window and canvas size on startup.
+        /// </summary>
+        private void SetWindowSize()
+        {
+            windowWidth = Window.Current.Bounds.Width - 10;
+            windowHeight = Window.Current.Bounds.Height - 10;
+
+            PointerX = windowWidth / 2;
+
+            SetViewSizes();
+        }
+
+        /// <summary>
+        /// Sets the game and star view sizes according to current window size.
+        /// </summary>
+        private void SetViewSizes()
+        {
+            GameView.SetSize(windowHeight, windowWidth);
+            StarView.SetSize(windowHeight, windowWidth);
         }
 
         /// <summary>
