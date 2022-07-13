@@ -1000,7 +1000,11 @@ namespace AstroOdyssey
         /// </summary>
         private void PlayLaserSound()
         {
-            var host = $"{baseUrl}Assets/Sounds/shoot02wav-14562.mp3";
+            var uri = new Uri("ms-appx:///Assets/Sounds/shoot02wav-14562.mp3", UriKind.RelativeOrAbsolute);
+
+            var host = uri.ToString(); //$"{baseUrl}Assets/Sounds/shoot02wav-14562.mp3";
+
+            //Console.WriteLine(host);
 
             //if (laserAudio is null)
             //    laserAudio = OpenSilver.Interop.ExecuteJavaScript(@"
@@ -1017,7 +1021,7 @@ namespace AstroOdyssey
 
             //WebAssemblyRuntime.InvokeJS(js);
 
-            this.ExecuteJavascript($"playSound('{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3',0.4);");
+            this.ExecuteJavascript($"playSound('ms-appx:///Assets/Sounds/shoot02wav-14562.mp3',0.4);");
         }
 
         /// <summary>
