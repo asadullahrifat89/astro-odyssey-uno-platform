@@ -5,8 +5,8 @@
     displayName: "AstroOdyssey"
 }
 
-const laserFireSource = "Assets/Sounds/shoot02wav-14562.mp3";
-const laserFirePowerUpSource = "Assets/Sounds/laser-gun-single-shot_M1ZNL3Nd_NWM.mp3";
+const laserFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
+const laserFirePowerUpSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
@@ -75,7 +75,7 @@ function playGameSound(baseUrl, soundType) {
         case "LASER_FIRE_POWERED_UP": {
             if (lfpuAudio.src.length == 0) {
                 lfpuAudio.src = baseUrl.concat("/", laserFirePowerUpSource);
-                lfpuAudio.volume = 0.8;
+                lfpuAudio.volume = 0.4;
             }
             playSound(lfpuAudio);
         } break;

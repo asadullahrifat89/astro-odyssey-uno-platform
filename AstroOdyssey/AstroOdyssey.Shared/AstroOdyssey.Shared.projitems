@@ -144,6 +144,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-sfx-43814.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-blast-descend_Gy7C5dEO_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-gun-single-shot_M1ZNL3Nd_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\low-impactwav-14905.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
