@@ -99,13 +99,13 @@ namespace AstroOdyssey
 
         private int FrameStatUpdateLimit { get; set; } = 5;
 
-        private int LaserSpawnLimit { get; set; } = 18;
+        private int LaserSpawnLimit { get; set; } = 16;
 
         private int PowerUpTriggerLimit { get; set; } = 500;
 
-        private int EnemySpawnLimit { get; set; } = 45;
+        private int EnemySpawnLimit { get; set; } = 50;
 
-        private int MeteorSpawnLimit { get; set; } = 50;
+        private int MeteorSpawnLimit { get; set; } = 55;
 
         private int HealthSpawnLimit { get; set; } = 1000;
 
@@ -824,7 +824,7 @@ namespace AstroOdyssey
 
             newEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
 
-            var left = random.Next(10, (int)windowWidth - 100);
+            var left = random.Next(10, (int)windowWidth - 70);
             var top = 0 - newEnemy.Height;
 
             // when not noob anymore enemy moves sideways
@@ -1153,6 +1153,8 @@ namespace AstroOdyssey
         {
             windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
             windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            PointerX = windowWidth / 2;
 
             Console.WriteLine($"{windowWidth} x {windowHeight}");
 

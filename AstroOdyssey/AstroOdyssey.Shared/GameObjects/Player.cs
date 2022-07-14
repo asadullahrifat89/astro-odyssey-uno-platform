@@ -85,7 +85,7 @@ namespace AstroOdyssey
             {
                 case 1:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_A.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 55;
+                    exhaustHeight = 50;
                     break;
                 case 2:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_B.png", UriKind.RelativeOrAbsolute);
