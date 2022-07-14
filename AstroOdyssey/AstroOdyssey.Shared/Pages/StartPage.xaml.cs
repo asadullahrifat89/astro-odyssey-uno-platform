@@ -33,7 +33,7 @@ namespace AstroOdyssey
         private void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             var view = ApplicationView.GetForCurrentView();
-            view?.ExitFullScreenMode();
+            view?.TryEnterFullScreenMode();
         }
 
         #region Methods  
@@ -42,9 +42,6 @@ namespace AstroOdyssey
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            var view = ApplicationView.GetForCurrentView();
-            view?.TryEnterFullScreenMode();
-
             App.NavigateToPage(typeof(GamePage));
         }
 
