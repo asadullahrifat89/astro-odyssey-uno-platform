@@ -6,14 +6,14 @@
 }
 
 const laserFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
-const laserFirePowerUpSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const laserFirePowerUpSource = "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3";
 const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
-const meteorDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const enemyDestroyedSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const meteorDestroyedSource = "Assets/Sounds/plasmablaster-37114.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
 
@@ -103,14 +103,14 @@ function playGameSound(baseUrl, soundType) {
         case "ENEMY_DESTRUCTION": {
             if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", enemyDestroyedSource);
-                edAudio.volume = 0.4;
+                edAudio.volume = 0.6;
             }
             playSound(edAudio);
         } break;
         case "METEOR_DESTRUCTION": {
             if (mdAudio.src.length == 0) {
                 mdAudio.src = baseUrl.concat("/", meteorDestroyedSource);
-                mdAudio.volume = 0.4;
+                mdAudio.volume = 0.6;
             }
             playSound(mdAudio);
         } break;
