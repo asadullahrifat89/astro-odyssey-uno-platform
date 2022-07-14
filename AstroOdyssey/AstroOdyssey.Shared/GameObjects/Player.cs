@@ -69,7 +69,7 @@ namespace AstroOdyssey
 
         public new Rect GetRect()
         {
-            return new Rect(Canvas.GetLeft(this) + 15, Canvas.GetTop(this) + 50, contentShip.Width, contentShip.Height);
+            return new Rect(x: Canvas.GetLeft(this) + 15, y: Canvas.GetTop(this) + 25, width: contentShip.Width, height: contentShip.Height);
         }
 
         public void SetAttributes(double speed)
@@ -97,23 +97,23 @@ namespace AstroOdyssey
                     break;
                 case 4:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_D.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 60;
+                    exhaustHeight = 50;
                     break;
                 case 5:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_E.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 60;
+                    exhaustHeight = 50;
                     break;
                 case 6:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_F.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 60;
+                    exhaustHeight = 50;
                     break;
                 case 7:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_G.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 60;
+                    exhaustHeight = 50;
                     break;
                 case 8:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_H.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 60;
+                    exhaustHeight = 50;
                     break;
                 case 9:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_I.png", UriKind.RelativeOrAbsolute);

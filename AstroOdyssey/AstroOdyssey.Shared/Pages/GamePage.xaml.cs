@@ -547,16 +547,16 @@ namespace AstroOdyssey
                     break;
                 default:
                     {
-                        EnemySpawnLimit -= 3;
-                        EnemySpeed += 2;
+                        EnemySpawnLimit -= 2;
+                        EnemySpeed += 1;
 
-                        MeteorSpawnLimit -= 3;
-                        MeteorSpeed += 2;
+                        MeteorSpawnLimit -= 2;
+                        MeteorSpeed += 1;
 
                         LaserSpawnLimit -= 1;
 
-                        HealthSpeed += 2;
-                        PowerUpSpeed += 2;
+                        HealthSpeed += 1;
+                        PowerUpSpeed += 1;
 
                         StarSpeed += 0.1d;
                     }

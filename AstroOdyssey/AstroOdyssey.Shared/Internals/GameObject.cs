@@ -11,10 +11,10 @@ namespace AstroOdyssey
 
         public GameObject()
         {
-//#if DEBUG
-//            BorderBrush = new SolidColorBrush(Colors.White);
-//            BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
-//#endif
+#if DEBUG
+            BorderBrush = new SolidColorBrush(Colors.White);
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
+#endif
         }
 
         #endregion

@@ -47,37 +47,37 @@ namespace AstroOdyssey
                     break;
                 case GameLevel.Level_2:
                     {
-                        height = 25; width = 10;
+                        height = 25; width = 7;
                     }
                     break;
                 case GameLevel.Level_3:
                     {
-                        height = 30; width = 15;
+                        height = 30; width = 9;
                     }
                     break;
                 case GameLevel.Level_4:
                     {
-                        height = 35; width = 20;
+                        height = 35; width = 11;
                     }
                     break;
                 case GameLevel.Level_5:
                     {
-                        height = 40; width = 25;
+                        height = 40; width = 13;
                     }
                     break;
                 case GameLevel.Level_6:
                     {
-                        height = 45; width = 30;
+                        height = 45; width = 15;
                     }
                     break;
                 case GameLevel.Level_7:
                     {
-                        height = 50; width = 35;
+                        height = 50; width = 17;
                     }
                     break;
                 case GameLevel.Level_8:
                     {
-                        height = 55; width = 40;
+                        height = 55; width = 19;
                     }
                     break;
                 default:
