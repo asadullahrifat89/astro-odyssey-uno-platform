@@ -42,14 +42,14 @@ namespace AstroOdyssey
                 frame: ContentFrame,
                 pageMap: new Dictionary<string, Type>()
                 {
-                    {"GameStartPage",   typeof(GameStartPage) },
+                    {"GameStartPage",   typeof(StartPage) },
                     //{"GamePage",        typeof(GamePage) },
                 });
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Navigate(typeof(GameStartPage));
+            Navigate(typeof(StartPage));
         }
 
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)

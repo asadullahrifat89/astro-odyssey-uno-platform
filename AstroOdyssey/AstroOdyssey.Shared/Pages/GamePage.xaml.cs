@@ -162,8 +162,9 @@ namespace AstroOdyssey
         /// </summary>
         private async void RunGame()
         {
+#if DEBUG
             var watch = Stopwatch.StartNew();
-
+#endif
             GameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
             while (IsGameRunning && await GameTimer.WaitForNextTickAsync())
@@ -203,8 +204,9 @@ namespace AstroOdyssey
                 CalculateFps();
 
                 SetFrameAnalytics();
-
+#if DEBUG
                 FrameStartTime = watch.ElapsedMilliseconds;
+#endif
             }
         }
 
@@ -453,8 +455,9 @@ namespace AstroOdyssey
 
             if (frameStatUpdateCounter < 0)
             {
-                FPSText.Text = "FPS: " + FpsCount;
 #if DEBUG
+                FPSText.Text = "FPS: " + FpsCount;
+
                 FrameDurationText.Text = "Frame duration: " + FrameDuration + "ms";
                 ObjectsCountText.Text = "Objects count: " + GameView.Children.Count();
 #endif
@@ -469,6 +472,7 @@ namespace AstroOdyssey
         /// <param name="frameStartTime"></param>
         private void CalculateFps()
         {
+#if DEBUG
             // calculate FPS
             if (LastFrameTime + 1000 < FrameStartTime)
             {
@@ -478,6 +482,7 @@ namespace AstroOdyssey
             }
 
             fpsCounter++;
+#endif
         }
 
         #endregion        
