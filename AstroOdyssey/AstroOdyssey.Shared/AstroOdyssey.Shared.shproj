@@ -27,8 +27,11 @@
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Content Remove="Assets\Sounds\8-bit-crash-6_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-powerup-6768.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\8-bit-score-4_NWM.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\audioblocks-retro-game-point-bonus-gold-pick-up-bonus-gold-pick-up_SYkZG7fLRvI_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\beam-8-43831.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\cyberpunk-2099-10701.mp3" />
@@ -40,11 +43,14 @@
     <_Globbed_Content Remove="Assets\Sounds\explosion-sfx-43814.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\game-start-6104.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\insurrection-10941.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\laser-gun-single-shot_M1ZNL3Nd_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\low-impactwav-14905.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\plasmablaster-37114.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\power-down-7103.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\power-up-35839.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\retro-video-game-coin-pickup-38299.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\robotic-punch-shot_M1vDpHE__NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\scale-e6-14577.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\shoot02wav-14562.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />

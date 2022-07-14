@@ -83,7 +83,7 @@ namespace AstroOdyssey
 
         private int LaserSpawnLimit { get; set; } = 16;
 
-        private int PowerUpTriggerLimit { get; set; } = 500;
+        private int PowerUpTriggerLimit { get; set; } = 1000;
 
         private int EnemySpawnLimit { get; set; } = 50;
 
