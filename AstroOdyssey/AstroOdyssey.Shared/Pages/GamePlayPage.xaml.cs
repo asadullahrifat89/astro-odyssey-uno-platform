@@ -31,7 +31,7 @@ namespace AstroOdyssey
         private int laserCounter;
         private int enemyCounter;
         private int meteorCounter;
-        private int enemySpawnCounter;
+        private int rotatedEnemySpawnCounter = 10;
         private int healthCounter;
         private int starCounter;
         private int playerDamagedOpacityCounter;
@@ -98,6 +98,8 @@ namespace AstroOdyssey
         private int PlayerDamagedOpacityLimit { get; set; } = 100;
 
         private int ShowInGameTextLimit { get; set; } = 100;
+
+        private int RotatedEnemySpawnLimit { get; set; } = 10;
 
         private double Score { get; set; } = 0;
 
@@ -808,7 +810,7 @@ namespace AstroOdyssey
             {
                 GenerateEnemy();
 
-                enemySpawnCounter++;
+                rotatedEnemySpawnCounter -= 1;
 
                 enemyCounter = EnemySpawnLimit;
             }
@@ -823,14 +825,14 @@ namespace AstroOdyssey
 
             NewEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
 
-            var left = random.Next(10, (int)windowWidth - 70);
-            var top = 0 - NewEnemy.Height;
+            var left = 0;
+            var top = 0;
 
             // when not noob anymore enemy moves sideways
-            if ((int)GameLevel > 0 && enemySpawnCounter >= 10)
+            if ((int)GameLevel > 0 && rotatedEnemySpawnCounter <= 0)
             {
                 NewEnemy.XDirection = (XDirection)random.Next(1, 3);
-                enemySpawnCounter = 0;
+                rotatedEnemySpawnCounter = RotatedEnemySpawnLimit;
 
                 switch (NewEnemy.XDirection)
                 {
@@ -851,6 +853,13 @@ namespace AstroOdyssey
 #endif
                 top = random.Next(0, (int)GameView.Height / 3);
                 NewEnemy.Rotate();
+
+                RotatedEnemySpawnLimit = random.Next(5, 15);
+            }
+            else
+            {
+                left = random.Next(10, (int)windowWidth - 70);
+                top = 0 - (int)NewEnemy.Height;
             }
 
             NewEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
@@ -948,6 +957,9 @@ namespace AstroOdyssey
 
             NewHealth.SetAttributes(HealthSpeed + random.NextDouble());
             NewHealth.AddToGameEnvironment(top: 0 - NewHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+
+            // change the next health spawn time
+            HealthSpawnLimit = random.Next(1000, 1500);
         }
 
         #endregion
@@ -980,6 +992,9 @@ namespace AstroOdyssey
 
             NewPowerUp.SetAttributes(PowerUpSpeed + random.NextDouble());
             NewPowerUp.AddToGameEnvironment(top: 0 - NewPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+
+            // change the next power up spawn time
+            PowerUpSpawnLimit = random.Next(1500, 2000);
         }
 
         /// <summary>
