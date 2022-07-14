@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -22,25 +23,75 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
-        
+
         public bool IsPoweredUp { get; set; }
 
         #endregion
 
         #region Methods
 
-        public void SetAttributes(double speed, double height = 20, double width = 5, bool isPoweredUp = false)
+        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false)
         {
             Speed = speed;
+           
+            IsPoweredUp = isPoweredUp;
+
+            double height = 0, width = 0;
+
+            switch (gameLevel)
+            {
+                case GameLevel.Level_1:
+                    {
+                        height = 20; width = 5;
+                    }
+                    break;
+                case GameLevel.Level_2:
+                    {
+                        height = 25; width = 10;
+                    }
+                    break;
+                case GameLevel.Level_3:
+                    {
+                        height = 30; width = 15;
+                    }
+                    break;
+                case GameLevel.Level_4:
+                    {
+                        height = 35; width = 20;
+                    }
+                    break;
+                case GameLevel.Level_5:
+                    {
+                        height = 40; width = 25;
+                    }
+                    break;
+                case GameLevel.Level_6:
+                    {
+                        height = 45; width = 30;
+                    }
+                    break;
+                case GameLevel.Level_7:
+                    {
+                        height = 50; width = 35;
+                    }
+                    break;
+                case GameLevel.Level_8:
+                    {
+                        height = 55; width = 40;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
             Height = height;
             Width = width;
-            IsPoweredUp = isPoweredUp;
 
             if (IsPoweredUp)
                 Background = new SolidColorBrush(Colors.Goldenrod);
             else
                 Background = new SolidColorBrush(Colors.White);
-        } 
+        }
 
         #endregion
     }

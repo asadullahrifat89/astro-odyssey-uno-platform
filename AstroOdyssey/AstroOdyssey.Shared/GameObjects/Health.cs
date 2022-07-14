@@ -18,8 +18,8 @@ namespace AstroOdyssey
         public Health()
         {
             Tag = Constants.HEALTH;
-            Height = 100;
-            Width = 100;
+            Height = 70;
+            Width = 70;
             Child = content;
             YDirection = YDirection.DOWN;
         } 

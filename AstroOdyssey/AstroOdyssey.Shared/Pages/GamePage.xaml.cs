@@ -103,9 +103,9 @@ namespace AstroOdyssey
 
         private int PowerUpTriggerLimit { get; set; } = 500;
 
-        private int EnemySpawnLimit { get; set; } = 35;
+        private int EnemySpawnLimit { get; set; } = 45;
 
-        private int MeteorSpawnLimit { get; set; } = 40;
+        private int MeteorSpawnLimit { get; set; } = 50;
 
         private int HealthSpawnLimit { get; set; } = 1000;
 
@@ -129,7 +129,7 @@ namespace AstroOdyssey
 
         private double PlayerWidthHalf { get; set; }
 
-        private int FrameDuration { get; set; } = 14;
+        private int FrameDuration { get; set; } = 15;
 
         private bool IsGameRunning { get; set; }
 
@@ -625,50 +625,6 @@ namespace AstroOdyssey
             {
                 SetPlayerX(playerX - Player.Speed);
             }
-
-            //if (IsPointerPressed)
-            //{
-            //    // move right
-            //    if (PointerX > PlayerX + PlayerWidthHalf + Player.Speed)
-            //    {
-            //        if (PlayerX + PlayerWidthHalf < windowWidth)
-            //        {
-            //            SetPlayerX(PlayerX + Player.Speed);
-            //        }
-            //    }
-
-            //    // move left
-            //    if (PointerX < PlayerX + PlayerWidthHalf - Player.Speed)
-            //    {
-            //        SetPlayerX(PlayerX - Player.Speed);
-            //    }
-            //}
-
-            //if (IsKeyboardPressed)
-            //{
-            //    // move pointer x left
-            //    if (moveLeft && PlayerX > 0)
-            //        PointerX -= Player.Speed;
-
-            //    // move pointer x right
-            //    if (moveRight && PlayerX + Player.Width < windowWidth)
-            //        PointerX += Player.Speed;
-
-            //    // move right
-            //    if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
-            //    {
-            //        if (PlayerX + PlayerWidthHalf < windowWidth)
-            //        {
-            //            SetPlayerX(PlayerX + Player.Speed);
-            //        }
-            //    }
-
-            //    // move left
-            //    if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
-            //    {
-            //        SetPlayerX(PlayerX - Player.Speed);
-            //    }
-            //}
         }
 
         /// <summary>
@@ -715,9 +671,7 @@ namespace AstroOdyssey
             playerDamagedOpacityCounter -= 1;
 
             if (playerDamagedOpacityCounter <= 0)
-            {
                 Player.Opacity = 1;
-            }
         }
 
         /// <summary>
@@ -727,7 +681,6 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Health health)
         {
             Player.GainHealth(health.Health);
-
             PlaySound(SoundType.HEALTH_GAIN);
         }
 
@@ -766,41 +719,7 @@ namespace AstroOdyssey
             {
                 // any object falls within player range
                 if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
-                {
-                    double laserHeight = 0, laserWidth = 0;
-
-                    switch (GameLevel)
-                    {
-                        case GameLevel.Level_1:
-                            { laserHeight = 25; laserWidth = 5; }
-                            break;
-                        case GameLevel.Level_2:
-                            { laserHeight = 30; laserWidth = 10; }
-                            break;
-                        case GameLevel.Level_3:
-                            { laserHeight = 35; laserWidth = 15; }
-                            break;
-                        case GameLevel.Level_4:
-                            { laserHeight = 40; laserWidth = 20; }
-                            break;
-                        case GameLevel.Level_5:
-                            { laserHeight = 45; laserWidth = 25; }
-                            break;
-                        case GameLevel.Level_6:
-                            { laserHeight = 50; laserWidth = 30; }
-                            break;
-                        case GameLevel.Level_7:
-                            { laserHeight = 55; laserWidth = 35; }
-                            break;
-                        case GameLevel.Level_8:
-                            { laserHeight = 60; laserWidth = 40; }
-                            break;
-                        default:
-                            break;
-                    }
-
-                    GenerateLaser(laserHeight: laserHeight, laserWidth: laserWidth, isPoweredUp: isPoweredUp);
-                }
+                    GenerateLaser(isPoweredUp: isPoweredUp);
 
                 laserCounter = LaserSpawnLimit;
             }
@@ -811,13 +730,13 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="laserHeight"></param>
         /// <param name="laserWidth"></param>
-        private void GenerateLaser(double laserHeight, double laserWidth, bool isPoweredUp)
+        private void GenerateLaser(bool isPoweredUp)
         {
             var newLaser = new Laser();
 
-            newLaser.SetAttributes(speed: LaserSpeed, height: laserHeight, width: laserWidth, isPoweredUp: isPoweredUp);
+            newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp);
 
-            newLaser.AddToGameEnvironment(top: Player.GetY() - 20, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
+            newLaser.AddToGameEnvironment(top: Player.GetY() - 10, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
 
             if (newLaser.IsPoweredUp)
                 PlaySound(SoundType.LASER_FIRE_POWERED_UP);

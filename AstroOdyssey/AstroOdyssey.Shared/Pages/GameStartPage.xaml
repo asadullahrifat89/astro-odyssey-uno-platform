@@ -17,12 +17,12 @@
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="70"
+                FontSize="45"
                 FontWeight="Bold"
                 Text="ASTRO ODYSSEY" />
             <Button
                 x:Name="PlayButton"
-                Width="300"
+                Width="200"
                 Height="100"
                 Margin="0,100,0,0"
                 HorizontalAlignment="Center"

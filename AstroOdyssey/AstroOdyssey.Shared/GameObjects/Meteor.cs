@@ -26,8 +26,8 @@ namespace AstroOdyssey
         public Meteor()
         {
             Tag = Constants.METEOR;
-            Height = 100;
-            Width = 100;
+            Height = 70;
+            Width = 70;
 
             IsDestructible = true;
             Child = content;
