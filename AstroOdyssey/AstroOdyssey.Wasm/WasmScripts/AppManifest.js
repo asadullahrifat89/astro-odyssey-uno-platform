@@ -51,7 +51,7 @@ function playGameSound(baseUrl, soundType) {
             }
 
             bgAudio.src = src;
-            bgAudio.volume = 0.4;
+            bgAudio.volume = 0.3;
             bgAudio.loop = true;
             playSound(bgAudio);
         } break;

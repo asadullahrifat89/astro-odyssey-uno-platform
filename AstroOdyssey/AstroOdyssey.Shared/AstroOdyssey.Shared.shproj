@@ -20,6 +20,7 @@
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\GameStartPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\LoginPage.xaml.cs" />
     <_Globbed_Compile Remove="Services\AudioService.cs" />

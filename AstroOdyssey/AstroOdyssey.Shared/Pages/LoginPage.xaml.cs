@@ -20,24 +20,16 @@ namespace AstroOdyssey
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GameStartPage : Page
+    public sealed partial class LoginPage : Page
     {
-        public GameStartPage()
+        public LoginPage()
         {
             this.InitializeComponent();
         }
 
-        #region Methods  
-
-        #region Functionality
-
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            App.NavigateToPage(typeof(LoginPage));
+            App.NavigateToPage(typeof(GamePage));
         }
-
-        #endregion
-
-        #endregion
     }
 }
