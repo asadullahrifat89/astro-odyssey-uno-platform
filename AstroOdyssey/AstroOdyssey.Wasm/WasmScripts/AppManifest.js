@@ -6,13 +6,13 @@
 }
 
 const laserFireSource = "Assets/Sounds/shoot02wav-14562.mp3";
-const laserFirePowerUpSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const laserFirePowerUpSource = "Assets/Sounds/laser-gun-single-shot_M1ZNL3Nd_NWM.mp3";
 const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/explosion-36210.mp3";
+const enemyDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 const meteorDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
@@ -75,7 +75,7 @@ function playGameSound(baseUrl, soundType) {
         case "LASER_FIRE_POWERED_UP": {
             if (lfpuAudio.src.length == 0) {
                 lfpuAudio.src = baseUrl.concat("/", laserFirePowerUpSource);
-                lfpuAudio.volume = 1.0;
+                lfpuAudio.volume = 0.8;
             }
             playSound(lfpuAudio);
         } break;
