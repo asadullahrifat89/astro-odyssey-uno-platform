@@ -18,6 +18,10 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform,
             Height = 100,
             Width = 100,
+
+#if DEBUG
+            //Background = new SolidColorBrush(Colors.White),
+#endif
         };
 
         private Image contentShipBlaze = new Image()
@@ -34,7 +38,7 @@ namespace AstroOdyssey
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Margin = new Microsoft.UI.Xaml.Thickness(0, 20, 0, 0),
+            Margin = new Microsoft.UI.Xaml.Thickness(0, 25, 0, 0),
         };
 
         #endregion
@@ -69,7 +73,7 @@ namespace AstroOdyssey
 
         public new Rect GetRect()
         {
-            return new Rect(x: Canvas.GetLeft(this) + 15, y: Canvas.GetTop(this) + 25, width: contentShip.Width, height: contentShip.Height);
+            return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - 5);
         }
 
         public void SetAttributes(double speed)

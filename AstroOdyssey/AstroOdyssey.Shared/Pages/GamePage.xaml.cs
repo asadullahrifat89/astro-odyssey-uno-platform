@@ -736,7 +736,7 @@ namespace AstroOdyssey
 
             newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp);
 
-            newLaser.AddToGameEnvironment(top: Player.GetY() - 10, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
+            newLaser.AddToGameEnvironment(top: Player.GetY() + 10, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
 
             if (newLaser.IsPoweredUp)
                 PlaySound(SoundType.LASER_FIRE_POWERED_UP);
