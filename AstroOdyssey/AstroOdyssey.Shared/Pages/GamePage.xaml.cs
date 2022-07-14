@@ -129,7 +129,7 @@ namespace AstroOdyssey
 
         private double PlayerWidthHalf { get; set; }
 
-        private int FrameDuration { get; set; } = 15;
+        private int FrameDuration { get; set; } = 16;
 
         private bool IsGameRunning { get; set; }
 

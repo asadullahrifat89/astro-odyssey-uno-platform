@@ -29,6 +29,8 @@ namespace AstroOdyssey
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            //TODO: Call BE to get account
+
             App.Account = new Account() { UserName = UserNameBox.Text, Password = PasswordBox.Password, };
 
             App.SetAccount();

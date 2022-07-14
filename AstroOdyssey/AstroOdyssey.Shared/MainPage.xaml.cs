@@ -25,7 +25,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private NavigationSyncHelper _navigationSyncHelper;
+        private NavigationSyncHelper navigationSyncHelper;
 
         #endregion
 
@@ -37,13 +37,13 @@ namespace AstroOdyssey
 
             this.Loaded += MainPage_Loaded;
 
-            _navigationSyncHelper = new NavigationSyncHelper(
+            navigationSyncHelper = new NavigationSyncHelper(
                 navigationView: NavView,
                 frame: ContentFrame,
                 pageMap: new Dictionary<string, Type>()
                 {
-                    //{"StartPage",   typeof(StartPage) },
-                    //{"GamePage",        typeof(GamePage) },
+                    //{"StartPage", typeof(StartPage) },
+                    //{"GamePage",  typeof(GamePage) },
                 });
 
             DataContext = this;
