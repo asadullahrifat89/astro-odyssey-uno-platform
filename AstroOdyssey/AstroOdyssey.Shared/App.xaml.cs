@@ -63,10 +63,17 @@ namespace AstroOdyssey
         {
             var view = ApplicationView.GetForCurrentView();
 
-            if (value)
-                view?.TryEnterFullScreenMode();
-            else
-                view?.ExitFullScreenMode();
+            if (view is not null)
+            {
+                if (value)
+                {
+                    view.TryEnterFullScreenMode();
+                }
+                else
+                {
+                    view.ExitFullScreenMode();
+                }
+            }
         }
 
         public static void SetScore(string score)

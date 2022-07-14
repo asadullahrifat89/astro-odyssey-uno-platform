@@ -24,7 +24,7 @@ namespace AstroOdyssey
 
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
-            App.EnterFullScreen(false);
+            //App.EnterFullScreen(false);
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

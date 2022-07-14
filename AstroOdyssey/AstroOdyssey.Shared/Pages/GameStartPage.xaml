@@ -19,7 +19,7 @@
                 VerticalAlignment="Center"
                 FontSize="45"
                 FontWeight="Bold"
-                Text="ASTRO ODYSSEY" />
+                Text="Astro Odyssey" />
             <Button
                 x:Name="PlayButton"
                 Width="200"

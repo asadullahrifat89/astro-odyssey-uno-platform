@@ -20,7 +20,7 @@
                 VerticalAlignment="Center"
                 FontSize="45"
                 FontWeight="Bold"
-                Text="GAME OVER" />
+                Text="Game Over" />
 
             <TextBlock
                 x:Name="ScoreText"
