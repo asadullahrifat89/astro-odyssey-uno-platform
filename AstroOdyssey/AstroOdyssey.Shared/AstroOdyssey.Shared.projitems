@@ -145,6 +145,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-down-7103.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\retro-video-game-coin-pickup-38299.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\scale-e6-14577.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\shoot02wav-14562.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />

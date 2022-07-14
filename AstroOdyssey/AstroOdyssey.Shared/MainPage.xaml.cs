@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using static AstroOdyssey.Constants;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -57,6 +58,16 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+       
+        public void PlaySound(string baseUrl, SoundType soundType)
+        {
+            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
+        }
+     
+        public void StopSound()
+        {
+            this.ExecuteJavascript("stopSound();");
+        }
 
         public void SetAccount()
         {

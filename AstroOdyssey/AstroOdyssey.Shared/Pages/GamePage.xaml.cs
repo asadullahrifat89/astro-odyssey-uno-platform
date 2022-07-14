@@ -140,12 +140,12 @@ namespace AstroOdyssey
         /// </summary>
         private void StartGame()
         {
-            PlaySound(SoundType.GAME_START);            
+            App.PlaySound(baseUrl, SoundType.GAME_START);
             SpawnPlayer();
             SpawnStar();
             IsGameRunning = true;
             RunGame();
-            PlaySound(SoundType.BACKGROUND_MUSIC);
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace AstroOdyssey
 
             GameTimer?.Dispose();
 
-            StopSound();
+            App.StopSound();
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace AstroOdyssey
         private void ShowLevelUp()
         {
             ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
-            PlaySound(SoundType.LEVEL_UP);
+            App.PlaySound(baseUrl, SoundType.LEVEL_UP);
         }
 
         /// <summary>
@@ -632,7 +632,7 @@ namespace AstroOdyssey
             {
                 HealthText.Text = "Game Over";
                 StopGame();
-                PlaySound(SoundType.GAME_OVER);
+                App.PlaySound(baseUrl, SoundType.GAME_OVER);
 
                 //TODO: Set Score
                 App.SetScore(ScoreText.Text);
@@ -648,7 +648,7 @@ namespace AstroOdyssey
         {
             Player.LooseHealth();
 
-            PlaySound(SoundType.HEALTH_LOSS);
+            App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
 
             Player.Opacity = 0.4d;
 
@@ -673,7 +673,7 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Health health)
         {
             Player.GainHealth(health.Health);
-            PlaySound(SoundType.HEALTH_GAIN);
+            App.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
@@ -731,9 +731,9 @@ namespace AstroOdyssey
             newLaser.AddToGameEnvironment(top: Player.GetY() + 10, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
 
             if (newLaser.IsPoweredUp)
-                PlaySound(SoundType.LASER_FIRE_POWERED_UP);
+                App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);
             else
-                PlaySound(SoundType.LASER_FIRE);
+                App.PlaySound(baseUrl, SoundType.LASER_FIRE);
         }
 
         /// <summary>
@@ -760,7 +760,7 @@ namespace AstroOdyssey
                     // move the enemy backwards a bit on laser hit
                     gameObject.MoveY(gameObject.Speed * 4 / 2, YDirection.UP);
 
-                    PlaySound(SoundType.LASER_HIT);
+                    //App.PlaySound(SoundType.LASER_HIT);
 
                     if (gameObject.HasNoHealth)
                     {
@@ -839,7 +839,7 @@ namespace AstroOdyssey
 
             PlayerScoreByEnemyDestruction();
 
-            PlaySound(SoundType.ENEMY_DESTRUCTION);
+            App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
         #endregion
@@ -886,7 +886,7 @@ namespace AstroOdyssey
 
             PlayerScoreByMeteorDestruction();
 
-            PlaySound(SoundType.METEOR_DESTRUCTION);
+            App.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
         }
 
         #endregion
@@ -966,7 +966,7 @@ namespace AstroOdyssey
             LaserSpawnLimit -= 1;
             ShowInGameText("POWER UP!");
 
-            PlaySound(SoundType.POWER_UP);
+            App.PlaySound(baseUrl, SoundType.POWER_UP);
             Player.TriggerPowerUp();
         }
 
@@ -988,7 +988,7 @@ namespace AstroOdyssey
                     PowerUpTriggered = false;
                     LaserSpawnLimit += 1;
 
-                    PlaySound(SoundType.POWER_DOWN);
+                    App.PlaySound(baseUrl, SoundType.POWER_DOWN);
                     Player.TriggerPowerDown();
                 }
             }
@@ -1187,27 +1187,7 @@ namespace AstroOdyssey
             StopGame();
         }
 
-        #endregion
-
-        #region Audio Methods
-
-        /// <summary>
-        /// Plays the laser sound efect.
-        /// </summary>
-        private void PlaySound(SoundType soundType)
-        {
-            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
-        }
-
-        /// <summary>
-        /// Stops all sounds.
-        /// </summary>
-        private void StopSound()
-        {
-            this.ExecuteJavascript("stopSound();");
-        }
-
-        #endregion
+        #endregion   
 
         #endregion
     }

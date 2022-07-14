@@ -8,11 +8,15 @@
 const lfSource = "Assets/Sounds/shoot02wav-14562.mp3";
 const lfpuSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const lhSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+
 const puSource = "Assets/Sounds/spellcast-46164.mp3";
 const pdSource = "Assets/Sounds/power-down-7103.mp3";
-const edSource = "Assets/Sounds/8-bit-explosion1wav-14656.mp3";
-const mdSource = "Assets/Sounds/8-bit-explosion1wav-14656.mp3";
+
+const edSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
+const mdSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
+
 const luSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
+
 const hgSource = "Assets/Sounds/scale-e6-14577.mp3";
 const hlSource = "Assets/Sounds/explosion-39897.mp3";
 
@@ -99,14 +103,14 @@ function playGameSound(baseUrl, soundType) {
         case "ENEMY_DESTRUCTION": {
             if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", edSource);
-                edAudio.volume = 0.5;
+                edAudio.volume = 0.4;
             }
             playSound(edAudio);
         } break;
         case "METEOR_DESTRUCTION": {
             if (mdAudio.src.length == 0) {
                 mdAudio.src = baseUrl.concat("/", mdSource);
-                mdAudio.volume = 0.5;
+                mdAudio.volume = 0.4;
             }
             playSound(mdAudio);
         } break;

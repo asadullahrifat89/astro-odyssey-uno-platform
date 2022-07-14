@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using System;
 using Windows.ApplicationModel;
 using Windows.UI.ViewManagement;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -48,6 +49,16 @@ namespace AstroOdyssey
 
         #region Methods
 
+        public static void PlaySound(string baseUrl, SoundType soundType)
+        {
+            _mainPage.PlaySound(baseUrl, soundType);
+        }
+
+        public static void StopSound()
+        {
+            _mainPage.StopSound();
+        }
+
         public static void EnterFullScreen(bool value)
         {
             var view = ApplicationView.GetForCurrentView();
@@ -60,7 +71,7 @@ namespace AstroOdyssey
 
         public static void SetScore(string score)
         {
-           Score = score;
+            Score = score;
         }
 
         public static string GetScore()
@@ -184,7 +195,7 @@ namespace AstroOdyssey
 #endif
         }
 
-     
+
 
         #endregion
     }
