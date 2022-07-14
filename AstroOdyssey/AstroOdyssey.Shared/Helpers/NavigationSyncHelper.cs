@@ -3,36 +3,51 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AstroOdyssey
 {
-    public  class NavigationSyncHelper
+    public class NavigationSyncHelper
     {
-        private Microsoft.UI.Xaml.Controls.NavigationView _navigationView;
+        #region Fields
+
+        private NavigationView _navigationView;
         private Frame _frame;
-        private Microsoft.UI.Xaml.Controls.NavigationViewItem _lastInvokedMenuItem;
+        private NavigationViewItem _lastInvokedMenuItem;
         private Dictionary<string, Type> _pageMap;
+        private List<Type> _noGoBackPageMap;
+        private Dictionary<Type, Type> _reRoutedPageMap;
+
+        #endregion
+
+        #region Ctor
 
         public NavigationSyncHelper(
-            Microsoft.UI.Xaml.Controls.NavigationView navigationView,
-            Frame frame,
-            Dictionary<string, Type> pageMap)
+           NavigationView navigationView,
+           Frame frame,
+           List<Type> noGoBackPageMap,
+           Dictionary<Type, Type> reRoutedPageMap,
+           Dictionary<string, Type> pageMap)
         {
             _frame = frame;
             _navigationView = navigationView;
             _pageMap = pageMap;
+            _noGoBackPageMap = noGoBackPageMap;
+            _reRoutedPageMap = reRoutedPageMap;
 
             _navigationView.ItemInvoked += NavView_ItemInvoked;
             _navigationView.BackRequested += NavView_BackRequested;
             _frame.Navigated += Frame_Navigated;
         }
 
+        #endregion
+
+        #region Methods
+
         private void NavView_ItemInvoked(
-            Microsoft.UI.Xaml.Controls.NavigationView sender,
-            Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
+           NavigationView sender,
+           NavigationViewItemInvokedEventArgs args)
         {
-            var invokedMenuItem = args.InvokedItemContainer as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+            var invokedMenuItem = args.InvokedItemContainer as NavigationViewItem;
 
             if (invokedMenuItem == null || invokedMenuItem == _lastInvokedMenuItem)
             {
@@ -52,19 +67,32 @@ namespace AstroOdyssey
         }
 
         private void NavView_BackRequested(
-            Microsoft.UI.Xaml.Controls.NavigationView sender,
-            Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
+            NavigationView sender,
+            NavigationViewBackRequestedEventArgs args)
         {
             if (_frame.CanGoBack)
             {
+                var backPage = _frame.BackStack.LastOrDefault();
+
+                if (_noGoBackPageMap.Contains(backPage.SourcePageType))
+                    return;
+
+                if (_reRoutedPageMap.ContainsKey(backPage.SourcePageType))
+                {
+                    var reroute = _reRoutedPageMap[backPage.SourcePageType];
+
+                    _frame.Navigate(reroute);
+                    return;
+                }
+
                 _frame.GoBack();
             }
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            var currentSelectedItem = _navigationView.MenuItems
-                .FirstOrDefault(mi => ((Microsoft.UI.Xaml.Controls.NavigationViewItem)mi).IsSelected) as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+            var currentSelectedItem = _navigationView.MenuItems.FirstOrDefault(mi => ((NavigationViewItem)mi).IsSelected) as NavigationViewItem;
+
             if (currentSelectedItem != null)
             {
                 var tag = currentSelectedItem.Tag.ToString();
@@ -82,12 +110,15 @@ namespace AstroOdyssey
             void SetSelectedItem()
             {
                 var tagToFind = _pageMap.FirstOrDefault(entry => entry.Value == e.SourcePageType).Key;
-                if (_navigationView.MenuItems.FirstOrDefault(mi => ((Microsoft.UI.Xaml.Controls.NavigationViewItem)mi).Tag.Equals(tagToFind)) is Microsoft.UI.Xaml.Controls.NavigationViewItem matchedItem)
+
+                if (_navigationView.MenuItems.FirstOrDefault(mi => ((NavigationViewItem)mi).Tag.Equals(tagToFind)) is NavigationViewItem matchedItem)
                 {
                     matchedItem.IsSelected = true;
                     _lastInvokedMenuItem = matchedItem;
                 }
             }
         }
+
+        #endregion
     }
 }

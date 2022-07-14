@@ -58,11 +58,11 @@ namespace AstroOdyssey
                     break;
                 case 4:
                     uri = new Uri("ms-appx:///Assets/Images/enemy_D.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
+                    Health = 2;
                     break;
                 case 5:
                     uri = new Uri("ms-appx:///Assets/Images/enemy_E.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
+                    Health = 2;
                     break;
             }
 

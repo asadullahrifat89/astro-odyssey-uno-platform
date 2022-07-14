@@ -33,11 +33,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml.cs">
-      <DependentUpon>GamePage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
+      <DependentUpon>GameOverPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\StartPage.xaml.cs">
-      <DependentUpon>StartPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GamePlayPage.xaml.cs">
+      <DependentUpon>GamePlayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameStartPage.xaml.cs">
+      <DependentUpon>GameStartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -48,11 +51,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\StartPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GamePlayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameStartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,19 +128,24 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_A.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_B.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-powerup-6768.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\beam-8-43831.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-matter-10710.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dead-8bit-41400.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\drone-space-main-9706.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-36210.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-39897.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-sfx-43814.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\low-impactwav-14905.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-down-7103.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\retro-video-game-coin-pickup-38299.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\scale-e6-14577.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\shoot02wav-14562.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
@@ -142,6 +154,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-chillout-14194.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-trip-114102.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\spellcast-46164.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\videogame-death-sound-43894.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

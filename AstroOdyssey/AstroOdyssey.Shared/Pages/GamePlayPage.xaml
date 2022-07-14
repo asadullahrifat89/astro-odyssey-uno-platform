@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="AstroOdyssey.GamePage"
+    x:Class="AstroOdyssey.GamePlayPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,15 +17,15 @@
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
         <!--  This is for capturing input  -->
-        <Canvas
-            x:Name="InputCanvas"
+        <GameEnvironment
+            x:Name="InputView"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="Transparent"
-            KeyDown="InputCanvas_KeyDown"
-            KeyUp="InputCanvas_KeyUp"
-            PointerPressed="InputCanvas_PointerPressed"
-            PointerReleased="InputCanvas_PointerReleased" />
+            KeyDown="InputView_KeyDown"
+            KeyUp="InputView_KeyUp"
+            PointerPressed="InputView_PointerPressed"
+            PointerReleased="InputView_PointerReleased" />
 
         <!--  This shows current score  -->
         <TextBlock
@@ -48,7 +48,10 @@
             Foreground="White"
             Text="Health:" />
 
-        <StackPanel HorizontalAlignment="Right">
+        <StackPanel
+            Margin="0,25,0,0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
 
             <!--  This shows fps  -->
             <TextBlock

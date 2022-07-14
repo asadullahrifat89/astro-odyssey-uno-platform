@@ -41,6 +41,13 @@ namespace AstroOdyssey
             LEVEL_UP,
             HEALTH_GAIN,
             HEALTH_LOSS,
+            GAME_START,
+            GAME_OVER
+        }
+
+        public static bool IsNullOrBlank(this string value)
+        {
+            return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
         }
 
         /// <summary>

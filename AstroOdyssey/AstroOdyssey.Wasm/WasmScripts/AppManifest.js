@@ -8,13 +8,20 @@
 const lfSource = "Assets/Sounds/shoot02wav-14562.mp3";
 const lfpuSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const lhSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+
 const puSource = "Assets/Sounds/spellcast-46164.mp3";
 const pdSource = "Assets/Sounds/power-down-7103.mp3";
-const edSource = "Assets/Sounds/explosion-36210.mp3";
-const mdSource = "Assets/Sounds/explosion-36210.mp3";
+
+const edSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
+const mdSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
+
 const luSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
+
 const hgSource = "Assets/Sounds/scale-e6-14577.mp3";
 const hlSource = "Assets/Sounds/explosion-39897.mp3";
+
+const gsSource = "Assets/Sounds/game-start-6104.mp3";
+const goSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
 const lfAudio = new Audio();
@@ -27,6 +34,9 @@ const mdAudio = new Audio();
 const luAudio = new Audio();
 const hgAudio = new Audio();
 const hlAudio = new Audio();
+
+const gsAudio = new Audio();
+const goAudio = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
@@ -56,64 +66,88 @@ function playGameSound(baseUrl, soundType) {
             playSound(bgAudio);
         } break;
         case "LASER_FIRE": {
-            if (lfAudio.src.length == 0)
+            if (lfAudio.src.length == 0) {
                 lfAudio.src = baseUrl.concat("/", lfSource);
-            lfAudio.volume = 0.2;
+                lfAudio.volume = 0.2;
+            }
             playSound(lfAudio);
         } break;
         case "LASER_FIRE_POWERED_UP": {
-            if (lfpuAudio.src.length == 0)
+            if (lfpuAudio.src.length == 0) {
                 lfpuAudio.src = baseUrl.concat("/", lfpuSource);
-            lfpuAudio.volume = 1.0;
+                lfpuAudio.volume = 1.0;
+            }
             playSound(lfpuAudio);
         } break;
         case "LASER_HIT": {
-            if (lhAudio.src.length == 0)
+            if (lhAudio.src.length == 0) {
                 lhAudio.src = baseUrl.concat("/", lhSource);
-            lhAudio.volume = 0.6;
+                lhAudio.volume = 0.6;
+            }
             playSound(lhAudio);
         } break;
         case "POWER_UP": {
-            if (puAudio.src.length == 0)
+            if (puAudio.src.length == 0) {
                 puAudio.src = baseUrl.concat("/", puSource);
-            puAudio.volume = 1.0;
+                puAudio.volume = 1.0;
+            }
             playSound(puAudio);
         } break;
         case "POWER_DOWN": {
-            if (pdAudio.src.length == 0)
+            if (pdAudio.src.length == 0) {
                 pdAudio.src = baseUrl.concat("/", pdSource);
-            pdAudio.volume = 1.0;
+                pdAudio.volume = 1.0;
+            }
             playSound(pdAudio);
         } break;
         case "ENEMY_DESTRUCTION": {
-            if (edAudio.src.length == 0)
+            if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", edSource);
-            edAudio.volume = 0.8;
+                edAudio.volume = 0.4;
+            }
             playSound(edAudio);
         } break;
         case "METEOR_DESTRUCTION": {
-            if (mdAudio.src.length == 0)
+            if (mdAudio.src.length == 0) {
                 mdAudio.src = baseUrl.concat("/", mdSource);
-            mdAudio.volume = 0.8;
+                mdAudio.volume = 0.4;
+            }
             playSound(mdAudio);
         } break;
         case "LEVEL_UP": {
-            if (luAudio.src.length == 0)
+            if (luAudio.src.length == 0) {
                 luAudio.src = baseUrl.concat("/", luSource);
-            luAudio.volume = 1.0;
+                luAudio.volume = 1.0;
+            }
             playSound(luAudio);
         } break;
         case "HEALTH_GAIN": {
-            if (hgAudio.src.length == 0)
+            if (hgAudio.src.length == 0) {
                 hgAudio.src = baseUrl.concat("/", hgSource);
-            hgAudio.volume = 1.0;
+                hgAudio.volume = 1.0;
+            }
             playSound(hgAudio);
         } break;
         case "HEALTH_LOSS": {
-            if (hlAudio.src.length == 0)
+            if (hlAudio.src.length == 0) {
                 hlAudio.src = baseUrl.concat("/", hlSource);
-            hlAudio.volume = 1.0;
+                hlAudio.volume = 1.0;
+            }
             playSound(hlAudio);
+        } break;
+        case "GAME_OVER": {
+            if (goAudio.src.length == 0) {
+                goAudio.src = baseUrl.concat("/", goSource);
+                goAudio.volume = 1.0;
+            }
+            playSound(goAudio);
+        } break;
+        case "GAME_START": {
+            if (gsAudio.src.length == 0) {
+                gsAudio.src = baseUrl.concat("/", gsSource);
+                gsAudio.volume = 1.0;
+            }
+            playSound(gsAudio);
         } break;
         default: {
 

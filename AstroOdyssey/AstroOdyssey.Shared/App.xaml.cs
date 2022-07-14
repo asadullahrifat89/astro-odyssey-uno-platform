@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -18,6 +17,8 @@ namespace AstroOdyssey
         private Window _window;
 
         private static MainPage _mainPage;
+
+        public static double Score { get; set; }
 
         #endregion
 
@@ -40,7 +41,55 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public static Account Account { get; set; }
+
+        #endregion
+
         #region Methods
+
+        public static void PlaySound(string baseUrl, SoundType soundType)
+        {
+            _mainPage.PlaySound(baseUrl, soundType);
+        }
+
+        public static void StopSound()
+        {
+            _mainPage.StopSound();
+        }
+
+        public static void EnterFullScreen(bool value)
+        {
+            var view = ApplicationView.GetForCurrentView();
+
+            if (view is not null)
+            {
+                if (value)
+                {
+                    view.TryEnterFullScreenMode();
+                }
+                else
+                {
+                    view.ExitFullScreenMode();
+                }
+            }
+        }
+
+        public static void SetScore(double score)
+        {
+            Score = score;
+        }
+
+        public static double GetScore()
+        {
+            return Score;
+        }
+
+        public static void SetAccount()
+        {
+            _mainPage.SetAccount();
+        }
 
         public static void NavigateToPage(Type page)
         {
@@ -152,6 +201,8 @@ namespace AstroOdyssey
 
 #endif
         }
+
+
 
         #endregion
     }

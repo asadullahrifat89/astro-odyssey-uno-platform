@@ -1,18 +1,9 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using static AstroOdyssey.Constants;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,7 +16,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private NavigationSyncHelper _navigationSyncHelper;
+        private NavigationSyncHelper navigationSyncHelper;
 
         #endregion
 
@@ -37,19 +28,20 @@ namespace AstroOdyssey
 
             this.Loaded += MainPage_Loaded;
 
-            _navigationSyncHelper = new NavigationSyncHelper(
+            navigationSyncHelper = new NavigationSyncHelper(
                 navigationView: NavView,
                 frame: ContentFrame,
-                pageMap: new Dictionary<string, Type>()
+                noGoBackPageMap: new List<Type>() { typeof(GamePlayPage) },
+                pageMap: new Dictionary<string, Type>(),
+                reRoutedPageMap: new Dictionary<Type, Type>()
                 {
-                    //{"StartPage",   typeof(StartPage) },
-                    //{"GamePage",        typeof(GamePage) },
+                    {typeof(GameOverPage), typeof(GameStartPage) },
                 });
 
             DataContext = this;
         }
 
-        #endregion
+        #endregion      
 
         #region Events
 
@@ -66,7 +58,22 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods  
+        #region Methods
+
+        public void PlaySound(string baseUrl, SoundType soundType)
+        {
+            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
+        }
+
+        public void StopSound()
+        {
+            this.ExecuteJavascript("stopSound();");
+        }
+
+        public void SetAccount()
+        {
+            this.AccountUserNameBlock.Text = App.Account.UserName;
+        }
 
         /// <summary>
         /// Navigate to the target page.

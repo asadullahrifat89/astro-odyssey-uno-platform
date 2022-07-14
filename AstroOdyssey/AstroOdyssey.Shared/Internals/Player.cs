@@ -16,12 +16,6 @@ namespace AstroOdyssey
         private Image contentShip = new Image()
         {
             Stretch = Stretch.Uniform,
-            Height = 100,
-            Width = 100,
-
-#if DEBUG
-            //Background = new SolidColorBrush(Colors.White),
-#endif
         };
 
         private Image contentShipBlaze = new Image()
@@ -65,6 +59,10 @@ namespace AstroOdyssey
             content.Children.Add(contentShip);
 
             Child = content;
+
+#if DEBUG
+            //Background = new SolidColorBrush(Colors.White);
+#endif
         }
 
         #endregion
@@ -155,7 +153,7 @@ namespace AstroOdyssey
         {
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            Speed += 2;
+            Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
         }
 
@@ -163,7 +161,7 @@ namespace AstroOdyssey
         {
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            Speed -= 2;
+            Speed -= 1;
             contentShipPowerGauge.Width = 0;
         }
 
