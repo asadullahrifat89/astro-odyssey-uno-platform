@@ -427,7 +427,7 @@ namespace AstroOdyssey
         private bool AddDestroyableGameObject(GameObject gameObject)
         {
             // if game object is out of bounds of game view
-            if (gameObject.GetY() > GameView.Height || gameObject.GetX() > GameView.Width || gameObject.GetX() + gameObject.Width < 10)
+            if (gameObject.GetY() > GameView.Height || gameObject.GetX() > GameView.Width || gameObject.GetX() + gameObject.Width < 0)
             {
                 GameView.AddDestroyableGameObject(gameObject);
 
@@ -839,7 +839,7 @@ namespace AstroOdyssey
                         left = (int)windowWidth;
                         break;
                     case XDirection.RIGHT:
-                        left = -10;
+                        left = 0 - (int)NewEnemy.Width + 10;
                         NewEnemy.Rotation = -50;
                         break;
                     default:
@@ -847,9 +847,9 @@ namespace AstroOdyssey
                 }
 
 #if DEBUG
-                Console.WriteLine("Sideways Eneny XDirection: " + NewEnemy.XDirection + " " + "X: " + left); 
+                Console.WriteLine("Enemy XDirection: " + NewEnemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
 #endif
-                top = random.Next(0, (int)GameView.Height / 2);
+                top = random.Next(0, (int)GameView.Height / 3);
                 NewEnemy.Rotate();
             }
 
@@ -1178,7 +1178,9 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
+#if DEBUG
             Console.WriteLine($"{windowWidth} x {windowHeight}");
+#endif
 
             SetViewSizes();
             SetPlayerY();
