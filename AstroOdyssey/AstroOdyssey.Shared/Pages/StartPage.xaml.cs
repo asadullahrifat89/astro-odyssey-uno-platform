@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,14 @@ namespace AstroOdyssey
         public StartPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += StartPage_Loaded;
+        }
+
+        private void StartPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            var view = ApplicationView.GetForCurrentView();
+            view?.ExitFullScreenMode();
         }
 
         #region Methods  
@@ -33,6 +42,9 @@ namespace AstroOdyssey
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
+            var view = ApplicationView.GetForCurrentView();
+            view?.TryEnterFullScreenMode();
+
             App.NavigateToPage(typeof(GamePage));
         }
 
