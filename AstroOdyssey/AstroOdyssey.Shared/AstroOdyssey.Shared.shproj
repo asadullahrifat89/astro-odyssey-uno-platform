@@ -13,6 +13,7 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\GamePage.xaml" />
     <UpToDateCheckInput Remove="Pages\GameStartPage.xaml" />
+    <UpToDateCheckInput Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <_Globbed_Compile Remove="Constants.cs" />
@@ -20,6 +21,7 @@
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\LoginPage.xaml.cs" />
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,5 +50,6 @@
   <ItemGroup>
     <_Globbled_Page Remove="Pages\GamePage.xaml" />
     <_Globbled_Page Remove="Pages\GameStartPage.xaml" />
+    <_Globbled_Page Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
 </Project>

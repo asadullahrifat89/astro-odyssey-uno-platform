@@ -20,6 +20,14 @@
                 FontSize="45"
                 FontWeight="Bold"
                 Text="ASTRO ODYSSEY" />
+            <TextBox
+                x:Name="EmailBox"
+                Margin="5"
+                Header="Email" />
+            <PasswordBox
+                x:Name="PasswordBox"
+                Margin="5"
+                Header="Password" />
             <Button
                 x:Name="PlayButton"
                 Width="200"
