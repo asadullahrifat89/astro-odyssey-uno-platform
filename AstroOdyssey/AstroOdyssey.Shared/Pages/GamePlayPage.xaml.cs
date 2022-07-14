@@ -116,7 +116,8 @@ namespace AstroOdyssey
         //private bool IsKeyboardPressed { get; set; }
 
         private GameLevel GameLevel { get; set; }
-        private PeriodicTimer GameTimer { get; set; }
+        private PeriodicTimer GameViewTimer { get; set; }
+        private PeriodicTimer StarViewTimer { get; set; }
 
         private Player Player { get; set; }
 
@@ -144,22 +145,27 @@ namespace AstroOdyssey
             SpawnPlayer();
             SpawnStar();
             IsGameRunning = true;
-            RunGame();
+            RunGameView();
+            RunStarView();
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
         /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
         /// </summary>
-        private async void RunGame()
+        private async void RunGameView()
         {
 #if DEBUG
             var watch = Stopwatch.StartNew();
 #endif
-            GameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+            GameViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
-            while (IsGameRunning && await GameTimer.WaitForNextTickAsync())
+            bool frameRenderable = true;
+
+            while (IsGameRunning && await GameViewTimer.WaitForNextTickAsync() && frameRenderable)
             {
+                frameRenderable = false;
+
                 PlayerX = Player.GetX();
 
                 UpdateScore();
@@ -195,9 +201,27 @@ namespace AstroOdyssey
                 CalculateFps();
 
                 SetFrameAnalytics();
+
+                frameRenderable = true;
 #if DEBUG
                 FrameStartTime = watch.ElapsedMilliseconds;
 #endif
+            }
+        }
+
+        private async void RunStarView()
+        {
+            StarViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+
+            bool frameRenderable = true;
+
+            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync() && frameRenderable)
+            {
+                frameRenderable = false;
+
+                UpdateStarView();
+
+                frameRenderable = true;
             }
         }
 
@@ -208,7 +232,8 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
-            GameTimer?.Dispose();
+            GameViewTimer?.Dispose();
+            StarViewTimer?.Dispose();
 
             App.StopSound();
         }
@@ -293,7 +318,19 @@ namespace AstroOdyssey
 
             switch (tag)
             {
-                case Constants.ENEMY:
+                case LASER:
+                    {
+                        var laser = gameObject as Laser;
+
+                        // move laser up                
+                        laser.MoveY();
+
+                        // remove laser if outside game canvas
+                        if (laser.GetY() < 10)
+                            GameView.AddDestroyableGameObject(laser);
+                    }
+                    break;
+                case ENEMY:
                     {
                         var enemy = gameObject as Enemy;
 
@@ -314,10 +351,10 @@ namespace AstroOdyssey
                             return;
 
                         // perform laser collisions
-                        LaserCollision(enemy);
+                        CheckLaserCollision(enemy);
                     }
                     break;
-                case Constants.METEOR:
+                case METEOR:
                     {
                         var meteor = gameObject as Meteor;
 
@@ -338,24 +375,10 @@ namespace AstroOdyssey
                             return;
 
                         // perform laser collisions
-                        LaserCollision(meteor);
+                        CheckLaserCollision(meteor);
                     }
                     break;
-                case Constants.LASER:
-                    {
-                        var laser = gameObject as Laser;
-
-                        // move laser up                
-                        laser.MoveY();
-
-                        // remove laser if outside game canvas
-                        if (laser.GetY() < 10)
-                        {
-                            GameView.AddDestroyableGameObject(laser);
-                        }
-                    }
-                    break;
-                case Constants.HEALTH:
+                case HEALTH:
                     {
                         var health = gameObject as Health;
 
@@ -373,7 +396,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case Constants.POWERUP:
+                case POWERUP:
                     {
                         var powerUp = gameObject as PowerUp;
 
@@ -395,28 +418,6 @@ namespace AstroOdyssey
                     break;
             }
         }
-
-        ///// <summary>
-        ///// Clears destroyable objects from game view.
-        ///// </summary>
-        //private void ClearGameView()
-        //{
-        //    foreach (var destroyable in GameView.GetDestroyableGameObjects())
-        //    {
-        //        GameView.RemoveGameObject(destroyable);
-
-        //        if (destroyable is Enemy enemy)
-        //            enemyRecycled.Add(enemy);
-
-        //        if (destroyable is Meteor meteor)
-        //            meteorRecycled.Add(meteor);
-
-        //        if (destroyable is Health health)
-        //            healthRecycled.Add(health);
-        //    }
-
-        //    GameView.ClearDestroyableGameObjects();
-        //}
 
         /// <summary>
         /// Removes a game object from game view. 
@@ -744,7 +745,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="gameObject"></param>
         /// 
-        private void LaserCollision(GameObject gameObject)
+        private void CheckLaserCollision(GameObject gameObject)
         {
             var lasers = GameView.GetGameObjects<Laser>().Where(laser => laser.GetRect().Intersects(gameObject.GetRect()));
 
@@ -760,8 +761,11 @@ namespace AstroOdyssey
                     else
                         gameObject.LooseHealth();
 
-                    // move the enemy backwards a bit on laser hit
-                    gameObject.MoveY(gameObject.Speed * 4 / 2, YDirection.UP);
+                    // move backwards a bit on laser hit
+                    //gameObject.MoveY(gameObject.Speed * 4 / 2, YDirection.UP);
+
+                    // fade the a bit on laser hit
+                    gameObject.Fade();
 
                     //App.PlaySound(SoundType.LASER_HIT);
 
@@ -769,12 +773,12 @@ namespace AstroOdyssey
                     {
                         switch (gameObject.Tag)
                         {
-                            case Constants.ENEMY:
+                            case ENEMY:
                                 {
                                     DestroyEnemy(gameObject as Enemy);
                                 }
                                 break;
-                            case Constants.METEOR:
+                            case METEOR:
                                 {
                                     DestroyMeteor(gameObject as Meteor);
                                 }
