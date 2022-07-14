@@ -49,7 +49,7 @@ namespace AstroOdyssey
             DataContext = this;
         }
 
-        #endregion
+        #endregion      
 
         #region Events
 
@@ -66,7 +66,12 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods  
+        #region Methods
+
+        public void SetAccount()
+        {
+            this.AccountUserNameBlock.Text = App.Account.UserName;
+        }
 
         /// <summary>
         /// Navigate to the target page.

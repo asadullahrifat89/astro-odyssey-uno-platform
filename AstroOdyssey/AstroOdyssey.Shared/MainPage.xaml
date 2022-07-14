@@ -21,9 +21,9 @@
                 </NavigationView.MenuItems>-->
                 <NavigationView.PaneFooter>
                     <TextBlock
+                        x:Name="AccountUserNameBlock"
                         Margin="12,0"
-                        VerticalAlignment="Center"
-                        Text="Player" />
+                        VerticalAlignment="Center" />
                 </NavigationView.PaneFooter>
                 <ScrollViewer>
                     <Frame

@@ -171,7 +171,7 @@ namespace AstroOdyssey
             {
                 PlayerX = Player.GetX();
 
-                UpdateGameStats();
+                UpdateScore();
 
                 SpawnEnemy();
 
@@ -225,9 +225,9 @@ namespace AstroOdyssey
         /// <summary>
         /// Updates the game score, player health.
         /// </summary>
-        private void UpdateGameStats()
+        private void UpdateScore()
         {
-            ScoreText.Text = "Score: " + Score;
+            ScoreText.Text = Score.ToString("000000");
             HealthText.Text = Player.GetHealthPoints();
         }
 
@@ -451,18 +451,18 @@ namespace AstroOdyssey
         /// </summary>
         private void SetFrameAnalytics()
         {
+#if DEBUG
             frameStatUpdateCounter -= 1;
 
             if (frameStatUpdateCounter < 0)
             {
-#if DEBUG
                 FPSText.Text = "FPS: " + FpsCount;
                 FrameDurationText.Text = "Frame: " + FrameDuration + "ms";
                 ObjectsCountText.Text = "Objects: " + GameView.Children.Count();
-#endif
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
             }
+#endif
         }
 
         /// <summary>

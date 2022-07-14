@@ -29,6 +29,10 @@ namespace AstroOdyssey
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            App.Account = new Account() { UserName = UserNameBox.Text, Password = PasswordBox.Password, };
+
+            App.SetAccount();
+
             App.NavigateToPage(typeof(StartPage));
         }
     }

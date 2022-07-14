@@ -40,7 +40,18 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public static Account Account { get; set; }
+
+        #endregion
+
         #region Methods
+
+        public static void SetAccount() 
+        {
+            _mainPage.SetAccount();
+        }
 
         public static void NavigateToPage(Type page)
         {

@@ -48,7 +48,10 @@
             Foreground="White"
             Text="Health:" />
 
-        <StackPanel HorizontalAlignment="Right">
+        <StackPanel
+            Margin="0,25,0,0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
 
             <!--  This shows fps  -->
             <TextBlock
