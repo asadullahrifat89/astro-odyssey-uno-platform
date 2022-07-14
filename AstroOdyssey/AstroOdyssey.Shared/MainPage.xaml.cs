@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -22,25 +23,59 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        #region Fields
+
+        private NavigationSyncHelper _navigationSyncHelper;
+
+        #endregion
+
         #region Ctor
 
         public MainPage()
         {
             this.InitializeComponent();
+
+            this.Loaded += MainPage_Loaded;
+
+            _navigationSyncHelper = new NavigationSyncHelper(
+                navigationView: NavView,
+                frame: ContentFrame,
+                pageMap: new Dictionary<string, Type>()
+                {
+                    //{"StartPage",   typeof(StartPage) },
+                    //{"GamePage",        typeof(GamePage) },
+                });
+
+            DataContext = this;
+        }
+
+        #endregion
+
+        #region Events
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Navigate(typeof(LoginPage));
+        }
+
+        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            // log errors
+            // show error window
         }
 
         #endregion
 
         #region Methods  
 
-        #region Functionality
-
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Navigate to the target page.
+        /// </summary>
+        /// <param name="targetUri"></param>
+        public void Navigate(Type page)
         {
-            App.NavigateToPage(typeof(GamePage));
+            ContentFrame.Navigate(page);
         }
-
-        #endregion
 
         #endregion
     }

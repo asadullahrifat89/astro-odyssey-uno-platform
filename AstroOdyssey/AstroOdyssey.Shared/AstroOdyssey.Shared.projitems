@@ -19,20 +19,28 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Enemy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Health.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Laser.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Meteor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\PowerUp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Health.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Laser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Meteor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\PowerUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\NavigationSyncHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +49,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\StartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,7 +151,6 @@
       <DependentUpon>%(Filename)</DependentUpon>
     </_Globbed_Compile>
     <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.cs" Exclude="@(Compile);@(_Globbed_Compile)" />
-    <Compile Include="@(_Globbed_Compile)" />
     <_Globbed_PRIResource Include="$(MSBuildThisFileDirectory)**/*.resw" Exclude="@(PRIResource)" />
     <PRIResource Include="@(_Globbed_PRIResource)" />
     <_Globbed_Content Include="$(MSBuildThisFileDirectory)Assets/**/*.*" Exclude="@(Content)" />

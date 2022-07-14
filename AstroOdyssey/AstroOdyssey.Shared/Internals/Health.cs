@@ -5,21 +5,21 @@ using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace AstroOdyssey
 {
-    public class PowerUp : GameObject
+    public class Health : GameObject
     {
         #region Fields
         
-        private Image content = new Image() { Stretch = Stretch.Uniform }; 
+        private Image content = new Image() { Stretch = Stretch.Uniform };
 
         #endregion
 
         #region Ctor
 
-        public PowerUp()
+        public Health()
         {
-            Tag = Constants.POWERUP;
-            Height = 100;
-            Width = 100;
+            Tag = Constants.HEALTH;
+            Height = 70;
+            Width = 70;
             Child = content;
             YDirection = YDirection.DOWN;
         } 
@@ -32,7 +32,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            var uri = new Uri("ms-appx:///Assets/Images/icon_exclamationSmall.png", UriKind.RelativeOrAbsolute);
+            var uri = new Uri("ms-appx:///Assets/Images/icon_plusSmall.png", UriKind.RelativeOrAbsolute);
             Health = 10;
 
             content.Source = new BitmapImage(uri);

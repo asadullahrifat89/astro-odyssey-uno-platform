@@ -56,11 +56,11 @@ namespace AstroOdyssey
             var sourceX = source.X;
             var sourceY = source.Y;
 
-            var sourceWidth = source.Width - 5;
-            var sourceHeight = source.Height - 5;
+            var sourceWidth = source.Width;
+            var sourceHeight = source.Height;
 
-            var targetWidth = target.Width - 5;
-            var targetHeight = target.Height - 5;
+            var targetWidth = target.Width;
+            var targetHeight = target.Height;
 
             if (source.Width >= 0.0
                 && target.Width >= 0.0

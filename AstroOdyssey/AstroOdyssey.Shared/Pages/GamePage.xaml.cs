@@ -16,6 +16,7 @@ using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Uno.Foundation;
+using System.Threading;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,23 +35,6 @@ namespace AstroOdyssey
         private int frameStatUpdateCounter;
 
         private double windowWidth, windowHeight;
-
-        //private object backgroundAudio = null;
-
-        //private object enemyDestructionAudio = null;
-        //private object meteorDestructionAudio = null;
-
-        //private object playerHealthLossAudio = null;
-        //private object playerHealthGainAudio = null;
-
-        //private object levelUpAudio = null;
-
-        //private object powerUpAudio = null;
-        //private object powerDownAudio = null;
-
-        //private object laserImpactAudio = null;
-        //private object laserAudio = null;
-        //private object laserPoweredUpModeAudio = null;
 
         private int powerUpCounter = 1500;
         private int powerUpTriggerCounter;
@@ -72,8 +56,6 @@ namespace AstroOdyssey
         private readonly Stack<GameObject> starStack = new Stack<GameObject>();
 
         private bool moveLeft = false, moveRight = false;
-
-        private System.Timers.Timer frameGenerationTimer;
 
         #endregion
 
@@ -103,9 +85,9 @@ namespace AstroOdyssey
 
         private double LaserSpeed { get; set; } = 18;
 
-        private double EnemySpeed { get; set; } = 3;
+        private double EnemySpeed { get; set; } = 2;
 
-        private double MeteorSpeed { get; set; } = 2;
+        private double MeteorSpeed { get; set; } = 1.5;
 
         private double HealthSpeed { get; set; } = 2;
 
@@ -117,13 +99,13 @@ namespace AstroOdyssey
 
         private int FrameStatUpdateLimit { get; set; } = 5;
 
-        private int LaserSpawnLimit { get; set; } = 18;
+        private int LaserSpawnLimit { get; set; } = 16;
 
         private int PowerUpTriggerLimit { get; set; } = 500;
 
-        private int EnemySpawnLimit { get; set; } = 35;
+        private int EnemySpawnLimit { get; set; } = 50;
 
-        private int MeteorSpawnLimit { get; set; } = 40;
+        private int MeteorSpawnLimit { get; set; } = 55;
 
         private int HealthSpawnLimit { get; set; } = 1000;
 
@@ -143,9 +125,19 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameDuration { get; set; } = 13;
+        private double PlayerX { get; set; }
+
+        private double PlayerWidthHalf { get; set; }
+
+        private int FrameDuration { get; set; } = 15;
 
         private bool IsGameRunning { get; set; }
+
+        //private bool IsPointerPressed { get; set; }
+
+        //private bool IsKeyboardPressed { get; set; }
+
+        private PeriodicTimer GameTimer { get; set; }
 
         #endregion
 
@@ -168,57 +160,17 @@ namespace AstroOdyssey
         /// <summary>
         /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
         /// </summary>
-        private void RunGame()
+        private async void RunGame()
         {
+#if DEBUG
             var watch = Stopwatch.StartNew();
+#endif
+            GameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
-            //while (IsGameRunning)
-            //{
-            //    UpdateGameStats();
-
-            //    SpawnEnemy();
-
-            //    SpawnMeteor();
-
-            //    SpawnHealth();
-
-            //    SpawnPowerUp();
-
-            //    SpawnStar();
-
-            //    SpawnLaser(PowerUpTriggered);
-
-            //    MovePlayer();
-
-            //    UpdateGameView();
-
-            //    UpdateStarView();
-
-            //    ShiftGameLevel();
-
-            //    HideInGameText();
-
-            //    TriggerPowerDown();
-
-            //    PlayerOpacity();
-
-            //    CheckPlayerDeath();
-
-            //    //KeyboardFocus();
-
-            //    CalculateFps();
-
-            //    SetFrameAnalytics();
-
-            //    FrameStartTime = watch.ElapsedMilliseconds;
-
-            //    await ElapseFrameDuration();
-            //}
-
-            frameGenerationTimer = new System.Timers.Timer(FrameDuration);
-
-            frameGenerationTimer.Elapsed += (s, e) =>
+            while (IsGameRunning && await GameTimer.WaitForNextTickAsync())
             {
+                PlayerX = Player.GetX();
+
                 UpdateGameStats();
 
                 SpawnEnemy();
@@ -247,18 +199,15 @@ namespace AstroOdyssey
 
                 PlayerOpacity();
 
-                CheckPlayerDeath();
-
-                //KeyboardFocus();
+                GameOver();
 
                 CalculateFps();
 
                 SetFrameAnalytics();
-
+#if DEBUG
                 FrameStartTime = watch.ElapsedMilliseconds;
-            };
-
-            frameGenerationTimer.Start();
+#endif
+            }
         }
 
         /// <summary>
@@ -266,19 +215,11 @@ namespace AstroOdyssey
         /// </summary>
         private void StopGame()
         {
-            StopBackgroundMusic();
             IsGameRunning = false;
 
-            frameGenerationTimer?.Stop();
-            frameGenerationTimer?.Dispose();
-        }
+            GameTimer?.Dispose();
 
-        /// <summary>
-        /// Brings focus on keyboard so that keyboard events work.
-        /// </summary>
-        private void KeyboardFocus()
-        {
-            GameView.Focus(FocusState.Programmatic);
+            StopSound();
         }
 
         /// <summary>
@@ -323,28 +264,6 @@ namespace AstroOdyssey
                     InGameText.Visibility = Visibility.Collapsed;
                 }
             }
-        }
-
-        /// <summary>
-        /// Sets the window and canvas size on startup.
-        /// </summary>
-        private void SetWindowSize()
-        {
-            windowWidth = Window.Current.Bounds.Width;
-            windowHeight = Window.Current.Bounds.Height;
-
-            PointerX = windowWidth / 2;
-
-            SetViewSizes();
-        }
-
-        /// <summary>
-        /// Sets the game and star view sizes according to current window size.
-        /// </summary>
-        private void SetViewSizes()
-        {
-            GameView.SetSize(windowHeight, windowWidth);
-            StarView.SetSize(windowHeight, windowWidth);
         }
 
         /// <summary>
@@ -536,23 +455,14 @@ namespace AstroOdyssey
 
             if (frameStatUpdateCounter < 0)
             {
-                FPSText.Text = "FPS: " + FpsCount;
 #if DEBUG
-                FrameDurationText.Text = "Frame duration: " + FrameDuration + "ms";
-                ObjectsCountText.Text = "Objects count: " + GameView.Children.Count();
+                FPSText.Text = "FPS: " + FpsCount;
+                FrameDurationText.Text = "Frame: " + FrameDuration + "ms";
+                ObjectsCountText.Text = "Objects: " + GameView.Children.Count();
 #endif
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
             }
-        }
-
-        /// <summary>
-        /// Elapses the frame duration.
-        /// </summary>
-        /// <returns></returns>
-        private async Task ElapseFrameDuration()
-        {
-            await Task.Delay(FrameDuration);
         }
 
         /// <summary>
@@ -561,6 +471,7 @@ namespace AstroOdyssey
         /// <param name="frameStartTime"></param>
         private void CalculateFps()
         {
+#if DEBUG
             // calculate FPS
             if (LastFrameTime + 1000 < FrameStartTime)
             {
@@ -570,6 +481,7 @@ namespace AstroOdyssey
             }
 
             fpsCounter++;
+#endif
         }
 
         #endregion        
@@ -624,14 +536,14 @@ namespace AstroOdyssey
             if (lastGameLevel != GameLevel)
             {
                 ShowLevelUp();
-                AdjustGameEnvironmentToGameLevel();
+                AdjustGameEnvironment();
             }
         }
 
         /// <summary>
         /// Adjusts the game environment according to game level.
         /// </summary>
-        private void AdjustGameEnvironmentToGameLevel()
+        private void AdjustGameEnvironment()
         {
             switch (GameLevel)
             {
@@ -639,16 +551,16 @@ namespace AstroOdyssey
                     break;
                 default:
                     {
-                        EnemySpawnLimit -= 3;
-                        EnemySpeed += 2;
+                        EnemySpawnLimit -= 2;
+                        EnemySpeed += 1;
 
-                        MeteorSpawnLimit -= 3;
-                        MeteorSpeed += 2;
+                        MeteorSpawnLimit -= 2;
+                        MeteorSpeed += 1;
 
                         LaserSpawnLimit -= 1;
 
-                        HealthSpeed += 2;
-                        PowerUpSpeed += 2;
+                        HealthSpeed += 1;
+                        PowerUpSpeed += 1;
 
                         StarSpeed += 0.1d;
                     }
@@ -668,6 +580,8 @@ namespace AstroOdyssey
             Player = new Player();
             Player.SetAttributes(PlayerSpeed);
             Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX, gameEnvironment: GameView);
+
+            PlayerWidthHalf = Player.Width / 2;
         }
 
         /// <summary>
@@ -718,9 +632,9 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Check if player is dead.
+        /// Check if game if over.
         /// </summary>
-        private void CheckPlayerDeath()
+        private void GameOver()
         {
             // game over
             if (Player.HasNoHealth)
@@ -728,14 +642,7 @@ namespace AstroOdyssey
                 HealthText.Text = "Game Over";
                 StopGame();
 
-                //var contentDialogue = new MessageDialogueWindow(title: "GAME OVER", message: "Would you like to play again?", result: (result) =>
-                //{
-                //    if (result)
-                //        App.NavigateToPage("/GamePage");
-                //    else
-                //        App.NavigateToPage("/GameStartPage");
-                //});
-                //contentDialogue.Show();
+                App.NavigateToPage(typeof(StartPage));
             }
         }
 
@@ -761,9 +668,7 @@ namespace AstroOdyssey
             playerDamagedOpacityCounter -= 1;
 
             if (playerDamagedOpacityCounter <= 0)
-            {
                 Player.Opacity = 1;
-            }
         }
 
         /// <summary>
@@ -773,7 +678,6 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Health health)
         {
             Player.GainHealth(health.Health);
-
             PlaySound(SoundType.HEALTH_GAIN);
         }
 
@@ -812,41 +716,7 @@ namespace AstroOdyssey
             {
                 // any object falls within player range
                 if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
-                {
-                    double laserHeight = 0, laserWidth = 0;
-
-                    switch (GameLevel)
-                    {
-                        case GameLevel.Level_1:
-                            { laserHeight = 25; laserWidth = 5; }
-                            break;
-                        case GameLevel.Level_2:
-                            { laserHeight = 30; laserWidth = 10; }
-                            break;
-                        case GameLevel.Level_3:
-                            { laserHeight = 35; laserWidth = 15; }
-                            break;
-                        case GameLevel.Level_4:
-                            { laserHeight = 40; laserWidth = 20; }
-                            break;
-                        case GameLevel.Level_5:
-                            { laserHeight = 45; laserWidth = 25; }
-                            break;
-                        case GameLevel.Level_6:
-                            { laserHeight = 50; laserWidth = 30; }
-                            break;
-                        case GameLevel.Level_7:
-                            { laserHeight = 55; laserWidth = 35; }
-                            break;
-                        case GameLevel.Level_8:
-                            { laserHeight = 60; laserWidth = 40; }
-                            break;
-                        default:
-                            break;
-                    }
-
-                    GenerateLaser(laserHeight: laserHeight, laserWidth: laserWidth, isPoweredUp: isPoweredUp);
-                }
+                    GenerateLaser(isPoweredUp: isPoweredUp);
 
                 laserCounter = LaserSpawnLimit;
             }
@@ -857,13 +727,13 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="laserHeight"></param>
         /// <param name="laserWidth"></param>
-        private void GenerateLaser(double laserHeight, double laserWidth, bool isPoweredUp)
+        private void GenerateLaser(bool isPoweredUp)
         {
             var newLaser = new Laser();
 
-            newLaser.SetAttributes(speed: LaserSpeed, height: laserHeight, width: laserWidth, isPoweredUp: isPoweredUp);
+            newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp);
 
-            newLaser.AddToGameEnvironment(top: Player.GetY() - 20, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
+            newLaser.AddToGameEnvironment(top: Player.GetY() + 10, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
 
             if (newLaser.IsPoweredUp)
                 PlaySound(SoundType.LASER_FIRE_POWERED_UP);
@@ -951,7 +821,7 @@ namespace AstroOdyssey
 
             newEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
 
-            var left = random.Next(10, (int)windowWidth - 100);
+            var left = random.Next(10, (int)windowWidth - 70);
             var top = 0 - newEnemy.Height;
 
             // when not noob anymore enemy moves sideways
@@ -1204,41 +1074,47 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Canvas Events
+        #region Movement Events
 
-        private void GameCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void InputCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
         }
 
-        #endregion
+        private void InputCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
 
-        #region Focus Events
+        }
 
-        private void FocusBox_KeyDown(object sender, KeyRoutedEventArgs e)
+
+        private void InputCanvas_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
+                //IsKeyboardPressed = true;
                 moveLeft = true;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
+                //IsKeyboardPressed = true;
                 moveRight = true;
             }
         }
 
-        private void FocusBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        private void InputCanvas_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
+                //IsKeyboardPressed = false;
                 moveLeft = false;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
+                //IsKeyboardPressed = false;
                 moveRight = false;
             }
         }
@@ -1272,13 +1148,37 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
         {
-            windowWidth = Window.Current.Bounds.Width;
-            windowHeight = Window.Current.Bounds.Height;
+            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            PointerX = windowWidth / 2;
 
             Console.WriteLine($"{windowWidth} x {windowHeight}");
 
             SetViewSizes();
             SetPlayerY();
+        }
+
+        /// <summary>
+        /// Sets the window and canvas size on startup.
+        /// </summary>
+        private void SetWindowSize()
+        {
+            windowWidth = Window.Current.Bounds.Width - 10;
+            windowHeight = Window.Current.Bounds.Height - 10;
+
+            PointerX = windowWidth / 2;
+
+            SetViewSizes();
+        }
+
+        /// <summary>
+        /// Sets the game and star view sizes according to current window size.
+        /// </summary>
+        private void SetViewSizes()
+        {
+            GameView.SetSize(windowHeight, windowWidth);
+            StarView.SetSize(windowHeight, windowWidth);
         }
 
         /// <summary>
@@ -1301,103 +1201,15 @@ namespace AstroOdyssey
         /// </summary>
         private void PlaySound(SoundType soundType)
         {
-            switch (soundType)
-            {
-                case SoundType.BACKGROUND_MUSIC:
-                    {
-                        var musicTrack = random.Next(1, 12);
-
-                        string host = null;
-
-                        switch (musicTrack)
-                        {
-                            case 1: { host = $"{baseUrl}/Assets/Sounds/slow-trap-18565.mp3"; } break;
-                            case 2: { host = $"{baseUrl}/Assets/Sounds/space-chillout-14194.mp3"; } break;
-                            case 3: { host = $"{baseUrl}/Assets/Sounds/cinematic-space-drone-10623.mp3"; } break;
-                            case 4: { host = $"{baseUrl}/Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"; } break;
-                            case 5: { host = $"{baseUrl}/Assets/Sounds/space-age-10714.mp3"; } break;
-                            case 6: { host = $"{baseUrl}/Assets/Sounds/drone-space-main-9706.mp3"; } break;
-                            case 7: { host = $"{baseUrl}/Assets/Sounds/cyberpunk-2099-10701.mp3"; } break;
-                            case 8: { host = $"{baseUrl}/Assets/Sounds/insurrection-10941.mp3"; } break;
-                            case 9: { host = $"{baseUrl}/Assets/Sounds/space-trip-114102.mp3"; } break;
-                            case 10: { host = $"{baseUrl}/Assets/Sounds/dark-matter-10710.mp3"; } break;
-                            case 11: { host = $"{baseUrl}/Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"; } break;
-                            default:
-                                break;
-                        }
-
-                        this.ExecuteJavascript($"playSound('{host}',0.4);");
-                    }
-                    break;
-                case SoundType.LASER_FIRE:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/shoot02wav-14562.mp3";
-                        this.ExecuteJavascript($"playSound('{host}',0.4);");
-                    }
-                    break;
-                case SoundType.LASER_HIT:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-sfx-43814.mp3";
-                        this.ExecuteJavascript($"playSound('{host}',0.6);");
-                    }
-                    break;
-                case SoundType.LASER_FIRE_POWERED_UP:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/plasmablaster-37114.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
-                    }
-                    break;
-                case SoundType.POWER_UP:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/spellcast-46164.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
-                    }
-                    break;
-                case SoundType.POWER_DOWN:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/power-down-7103.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1);");
-                    }
-                    break;
-                case SoundType.ENEMY_DESTRUCTION:
-                case SoundType.METEOR_DESTRUCTION:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-36210.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 0.8);");
-                    }
-                    break;
-                case SoundType.LEVEL_UP:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/8-bit-powerup-6768.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
-                    }
-                    break;
-                case SoundType.HEALTH_GAIN:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/scale-e6-14577.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
-                    }
-                    break;
-                case SoundType.HEALTH_LOSS:
-                    {
-                        var host = $"{baseUrl}/Assets/Sounds/explosion-39897.mp3";
-                        this.ExecuteJavascript($"playSound('{host}', 1.0);");
-                    }
-                    break;
-                default:
-                    break;
-            }
+            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
         }
 
         /// <summary>
-        /// Stops the background music.
+        /// Stops all sounds.
         /// </summary>
-        private void StopBackgroundMusic()
+        private void StopSound()
         {
-            //if (backgroundAudio is not null)
-            //{
-            //    AudioService.PauseAudio(backgroundAudio);
-            //}
+            this.ExecuteJavascript("stopSound();");
         }
 
         #endregion

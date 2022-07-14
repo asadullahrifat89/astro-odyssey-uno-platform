@@ -18,12 +18,16 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform,
             Height = 100,
             Width = 100,
+
+#if DEBUG
+            //Background = new SolidColorBrush(Colors.White),
+#endif
         };
 
         private Image contentShipBlaze = new Image()
         {
             Stretch = Stretch.Uniform,
-            Margin = new Microsoft.UI.Xaml.Thickness(0, 80, 0, 0)
+            Margin = new Microsoft.UI.Xaml.Thickness(0, 50, 0, 0)
         };
 
         private Border contentShipPowerGauge = new Border()
@@ -34,7 +38,7 @@ namespace AstroOdyssey
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Margin = new Microsoft.UI.Xaml.Thickness(0, 20, 0, 0),
+            Margin = new Microsoft.UI.Xaml.Thickness(0, 25, 0, 0),
         };
 
         #endregion
@@ -48,8 +52,8 @@ namespace AstroOdyssey
             Tag = Constants.PLAYER;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Height = 150;
-            Width = 100;
+            Height = 130;
+            Width = 70;
 
             Health = 100;
             HealthSlot = 10;
@@ -69,7 +73,7 @@ namespace AstroOdyssey
 
         public new Rect GetRect()
         {
-            return new Rect(Canvas.GetLeft(this) + 15, Canvas.GetTop(this) + 50, contentShip.Width, contentShip.Height);
+            return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - 5);
         }
 
         public void SetAttributes(double speed)
@@ -79,57 +83,57 @@ namespace AstroOdyssey
             Uri shipUri = null;
             var playerShipType = new Random().Next(1, 13);
 
-            double exhaustHeight = 100;
+            double exhaustHeight = 50;
 
             switch (playerShipType)
             {
                 case 1:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_A.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 100;
+                    exhaustHeight = 50;
                     break;
                 case 2:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_B.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 50;
+                    exhaustHeight = 35;
                     break;
                 case 3:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_C.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 100;
+                    exhaustHeight = 55;
                     break;
                 case 4:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_D.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 100;
+                    exhaustHeight = 50;
                     break;
                 case 5:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_E.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 100;
+                    exhaustHeight = 50;
                     break;
                 case 6:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_F.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 80;
+                    exhaustHeight = 50;
                     break;
                 case 7:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_G.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 80;
+                    exhaustHeight = 50;
                     break;
                 case 8:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_H.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 80;
+                    exhaustHeight = 50;
                     break;
                 case 9:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_I.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 50;
+                    exhaustHeight = 35;
                     break;
                 case 10:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_J.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 100;
+                    exhaustHeight = 35;
                     break;
                 case 11:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_K.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 50;
+                    exhaustHeight = 35;
                     break;
                 case 12:
                     shipUri = new Uri("ms-appx:///Assets/Images/ship_L.png", UriKind.RelativeOrAbsolute);
-                    exhaustHeight = 50;
+                    exhaustHeight = 35;
                     break;
             }
 
