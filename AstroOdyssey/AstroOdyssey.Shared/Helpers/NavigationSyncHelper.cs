@@ -68,13 +68,13 @@ namespace AstroOdyssey
             {
                 var backPage = _frame.BackStack.LastOrDefault();
 
-                if (backPage.SourcePageType == typeof(GamePage))
+                if (backPage.SourcePageType == typeof(GamePlayPage))
                     return;
 
                 // if going back from from game over page which is displayed after a game session, always go to start page
                 if (backPage.SourcePageType == typeof(GameOverPage))
                 {
-                    _frame.Navigate(typeof(StartPage));
+                    _frame.Navigate(typeof(GameStartPage));
                     return;
                 }
 

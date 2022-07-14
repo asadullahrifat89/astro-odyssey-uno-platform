@@ -29,7 +29,7 @@ namespace AstroOdyssey
 
             App.SetAccount();
 
-            App.NavigateToPage(typeof(StartPage));
+            App.NavigateToPage(typeof(GameStartPage));
         }
     }
 }
