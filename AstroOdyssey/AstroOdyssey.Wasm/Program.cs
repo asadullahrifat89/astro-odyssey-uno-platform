@@ -1,7 +1,4 @@
-﻿using Microsoft.UI.Xaml;
-using System;
-
-namespace AstroOdyssey.Wasm
+﻿namespace AstroOdyssey.Wasm
 {
     public class Program
     {

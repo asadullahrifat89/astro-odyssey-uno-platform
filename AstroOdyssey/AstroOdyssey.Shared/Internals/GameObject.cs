@@ -1,7 +1,5 @@
 ﻿using Windows.Foundation;
-using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
 
 namespace AstroOdyssey
 {

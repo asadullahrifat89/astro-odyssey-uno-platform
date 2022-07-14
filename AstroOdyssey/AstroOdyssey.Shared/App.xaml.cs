@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using System;
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
 
 namespace AstroOdyssey
 {
@@ -48,7 +46,17 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void SetAccount() 
+        public static void EnterFullScreen(bool value)
+        {
+            var view = ApplicationView.GetForCurrentView();
+
+            if (value)
+                view?.TryEnterFullScreenMode();
+            else
+                view?.ExitFullScreenMode();
+        }
+
+        public static void SetAccount()
         {
             _mainPage.SetAccount();
         }
