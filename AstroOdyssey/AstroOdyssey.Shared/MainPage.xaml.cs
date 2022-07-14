@@ -31,10 +31,11 @@ namespace AstroOdyssey
             navigationSyncHelper = new NavigationSyncHelper(
                 navigationView: NavView,
                 frame: ContentFrame,
-                pageMap: new Dictionary<string, Type>()
+                noGoBackPageMap: new List<Type>() { typeof(GamePlayPage) },
+                pageMap: new Dictionary<string, Type>(),
+                reRoutedPageMap: new Dictionary<Type, Type>()
                 {
-                    //{"StartPage", typeof(StartPage) },
-                    //{"GamePage",  typeof(GamePage) },
+                    {typeof(GameOverPage), typeof(GameStartPage) },
                 });
 
             DataContext = this;
@@ -58,12 +59,12 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-       
+
         public void PlaySound(string baseUrl, SoundType soundType)
         {
             this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
         }
-     
+
         public void StopSound()
         {
             this.ExecuteJavascript("stopSound();");

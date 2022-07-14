@@ -16,12 +16,6 @@ namespace AstroOdyssey
         private Image contentShip = new Image()
         {
             Stretch = Stretch.Uniform,
-            Height = 100,
-            Width = 100,
-
-#if DEBUG
-            //Background = new SolidColorBrush(Colors.White),
-#endif
         };
 
         private Image contentShipBlaze = new Image()
@@ -55,7 +49,7 @@ namespace AstroOdyssey
             Height = 130;
             Width = 70;
 
-            Health = 100; // TODO: leave it 100 always
+            Health = 100;
             HealthSlot = 10;
 
             // combine power gauge, ship, and blaze
@@ -65,6 +59,10 @@ namespace AstroOdyssey
             content.Children.Add(contentShip);
 
             Child = content;
+
+#if DEBUG
+            //Background = new SolidColorBrush(Colors.White);
+#endif
         }
 
         #endregion

@@ -45,6 +45,11 @@ namespace AstroOdyssey
             GAME_OVER
         }
 
+        public static bool IsNullOrBlank(this string value)
+        {
+            return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
+        }
+
         /// <summary>
         /// Checks if a two rects intersect.
         /// </summary>

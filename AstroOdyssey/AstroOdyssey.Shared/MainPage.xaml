@@ -9,12 +9,12 @@
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
-
         <Grid>
             <NavigationView
                 x:Name="NavView"
                 IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
                 IsSettingsVisible="True"
+                IsTabStop="False"
                 PaneDisplayMode="Top">
                 <!--<NavigationView.MenuItems>
                     <NavigationViewItem Content="Game" Tag="GameStartPage" />
@@ -34,16 +34,6 @@
                         NavigationFailed="ContentFrame_NavigationFailed" />
                 </ScrollViewer>
             </NavigationView>
-
-            <!--<ScrollViewer>
-                <Frame
-                    x:Name="ContentFrame"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    IsTabStop="True"
-                    NavigationFailed="ContentFrame_NavigationFailed" />
-            </ScrollViewer>-->
         </Grid>
-
     </Grid>
 </Page>

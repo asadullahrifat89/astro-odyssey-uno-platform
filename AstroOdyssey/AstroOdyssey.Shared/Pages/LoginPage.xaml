@@ -31,6 +31,7 @@
                 x:Name="PasswordBox"
                 Margin="5"
                 Header="Password"
+                KeyDown="PasswordBox_KeyDown"
                 TextChanged="PasswordBox_TextChanged" />
             <Button
                 x:Name="LoginButton"
@@ -39,7 +40,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 BorderBrush="White"
-                BorderThickness="5"
+                BorderThickness="2"
                 Click="LoginButton_Click"
                 Content="Login"
                 IsEnabled="False" />
