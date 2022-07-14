@@ -9,15 +9,21 @@ namespace AstroOdyssey
 {
     public  class NavigationSyncHelper
     {
-        private Microsoft.UI.Xaml.Controls.NavigationView _navigationView;
+        #region Fields
+        
+        private NavigationView _navigationView;
         private Frame _frame;
-        private Microsoft.UI.Xaml.Controls.NavigationViewItem _lastInvokedMenuItem;
+        private NavigationViewItem _lastInvokedMenuItem;
         private Dictionary<string, Type> _pageMap;
 
+        #endregion
+
+        #region Ctor
+        
         public NavigationSyncHelper(
-            Microsoft.UI.Xaml.Controls.NavigationView navigationView,
-            Frame frame,
-            Dictionary<string, Type> pageMap)
+           NavigationView navigationView,
+           Frame frame,
+           Dictionary<string, Type> pageMap)
         {
             _frame = frame;
             _navigationView = navigationView;
@@ -28,11 +34,15 @@ namespace AstroOdyssey
             _frame.Navigated += Frame_Navigated;
         }
 
+        #endregion
+
+        #region Methods
+        
         private void NavView_ItemInvoked(
-            Microsoft.UI.Xaml.Controls.NavigationView sender,
-            Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
+           NavigationView sender,
+           NavigationViewItemInvokedEventArgs args)
         {
-            var invokedMenuItem = args.InvokedItemContainer as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+            var invokedMenuItem = args.InvokedItemContainer as NavigationViewItem;
 
             if (invokedMenuItem == null || invokedMenuItem == _lastInvokedMenuItem)
             {
@@ -52,8 +62,8 @@ namespace AstroOdyssey
         }
 
         private void NavView_BackRequested(
-            Microsoft.UI.Xaml.Controls.NavigationView sender,
-            Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
+            NavigationView sender,
+            NavigationViewBackRequestedEventArgs args)
         {
             if (_frame.CanGoBack)
             {
@@ -64,7 +74,7 @@ namespace AstroOdyssey
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
             var currentSelectedItem = _navigationView.MenuItems
-                .FirstOrDefault(mi => ((Microsoft.UI.Xaml.Controls.NavigationViewItem)mi).IsSelected) as Microsoft.UI.Xaml.Controls.NavigationViewItem;
+                .FirstOrDefault(mi => ((NavigationViewItem)mi).IsSelected) as NavigationViewItem;
             if (currentSelectedItem != null)
             {
                 var tag = currentSelectedItem.Tag.ToString();
@@ -82,12 +92,14 @@ namespace AstroOdyssey
             void SetSelectedItem()
             {
                 var tagToFind = _pageMap.FirstOrDefault(entry => entry.Value == e.SourcePageType).Key;
-                if (_navigationView.MenuItems.FirstOrDefault(mi => ((Microsoft.UI.Xaml.Controls.NavigationViewItem)mi).Tag.Equals(tagToFind)) is Microsoft.UI.Xaml.Controls.NavigationViewItem matchedItem)
+                if (_navigationView.MenuItems.FirstOrDefault(mi => ((NavigationViewItem)mi).Tag.Equals(tagToFind)) is NavigationViewItem matchedItem)
                 {
                     matchedItem.IsSelected = true;
                     _lastInvokedMenuItem = matchedItem;
                 }
             }
-        }
+        } 
+
+        #endregion
     }
 }
