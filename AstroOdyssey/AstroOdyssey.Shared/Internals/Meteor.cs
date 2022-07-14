@@ -11,14 +11,6 @@ namespace AstroOdyssey
 
         private Image content = new Image() { Stretch = Stretch.Uniform };
 
-        private double rotation = 0;
-
-        private RotateTransform rotateTransform = new RotateTransform()
-        {
-            CenterX = 0.5,
-            CenterY = 0.5,
-        };
-
         #endregion
 
         #region Ctor
@@ -32,19 +24,11 @@ namespace AstroOdyssey
             IsDestructible = true;
             Child = content;
             YDirection = YDirection.DOWN;
-
-            RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);            
-            RenderTransform = rotateTransform;
-        } 
+        }
 
         #endregion
 
         #region Methods
-
-        public void Rotate()
-        {
-            rotateTransform.Angle += rotation;
-        }
 
         public void SetAttributes(double speed)
         {
@@ -52,8 +36,7 @@ namespace AstroOdyssey
             MarkedForFadedRemoval = false;
             Opacity = 1;
 
-            rotation = new Random().NextDouble();
-            rotateTransform.Angle = rotation;
+            Rotation = new Random().NextDouble();
 
             Uri uri = null;
 
@@ -98,7 +81,7 @@ namespace AstroOdyssey
             }
 
             content.Source = new BitmapImage(uri);
-        } 
+        }
 
         #endregion
     }

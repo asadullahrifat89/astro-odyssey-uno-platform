@@ -831,6 +831,26 @@ namespace AstroOdyssey
             {
                 NewEnemy.XDirection = (XDirection)random.Next(1, 3);
                 enemySpawnCounter = 0;
+
+                switch (NewEnemy.XDirection)
+                {
+                    case XDirection.LEFT:
+                        NewEnemy.Rotation = 50;
+                        left = (int)windowWidth;
+                        break;
+                    case XDirection.RIGHT:
+                        left = -10;
+                        NewEnemy.Rotation = -50;
+                        break;
+                    default:
+                        break;
+                }
+
+#if DEBUG
+                Console.WriteLine("Sideways Eneny XDirection: " + NewEnemy.XDirection + " " + "X: " + left); 
+#endif
+                top = random.Next(0, (int)GameView.Height / 2);
+                NewEnemy.Rotate();
             }
 
             NewEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);

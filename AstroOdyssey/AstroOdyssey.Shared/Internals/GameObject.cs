@@ -1,10 +1,19 @@
-﻿using Windows.Foundation;
+﻿using System;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Foundation;
 
 namespace AstroOdyssey
 {
     public class GameObject : Border
     {
+        private RotateTransform rotateTransform = new RotateTransform()
+        {
+            CenterX = 0.5,
+            CenterY = 0.5,
+        };
+
         #region Ctor
 
         public GameObject()
@@ -13,6 +22,9 @@ namespace AstroOdyssey
             //BorderBrush = new SolidColorBrush(Colors.White);
             //BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
 #endif
+
+            RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
+            RenderTransform = rotateTransform;
         }
 
         #endregion
@@ -37,9 +49,16 @@ namespace AstroOdyssey
 
         public bool HasFadedAway => Opacity <= 0;
 
+        public new double Rotation { get; set; } = 0;
+
         #endregion
 
         #region Methods
+
+        public void Rotate()
+        {
+            rotateTransform.Angle += Rotation;
+        }
 
         public void GainHealth()
         {
