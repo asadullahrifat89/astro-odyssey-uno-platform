@@ -5,23 +5,23 @@
     displayName: "AstroOdyssey"
 }
 
-const lfSource = "Assets/Sounds/shoot02wav-14562.mp3";
-const lfpuSource = "Assets/Sounds/plasmablaster-37114.mp3";
-const lhSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const laserFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
+const laserFirePowerUpSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
+const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
-const puSource = "Assets/Sounds/spellcast-46164.mp3";
-const pdSource = "Assets/Sounds/power-down-7103.mp3";
+const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
+const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const edSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
-const mdSource = "Assets/Sounds/retro-video-game-coin-pickup-38299.mp3";
+const enemyDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const meteorDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
-const luSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
+const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
 
-const hgSource = "Assets/Sounds/scale-e6-14577.mp3";
-const hlSource = "Assets/Sounds/explosion-39897.mp3";
+const healthGainSource = "Assets/Sounds/scale-e6-14577.mp3";
+const healthLossSource = "Assets/Sounds/rocket-missile-launcher_MyHKjH4__NWM.mp3";
 
-const gsSource = "Assets/Sounds/game-start-6104.mp3";
-const goSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
+const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
+const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
 const lfAudio = new Audio();
@@ -40,6 +40,13 @@ const goAudio = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
+        case "GAME_START": {
+            if (gsAudio.src.length == 0) {
+                gsAudio.src = baseUrl.concat("/", gameStartSource);
+                gsAudio.volume = 1.0;
+            }
+            playSound(gsAudio);
+        } break;
         case "BACKGROUND_MUSIC": {
 
             let musicTrack = Math.floor((Math.random() * 12));
@@ -67,88 +74,81 @@ function playGameSound(baseUrl, soundType) {
         } break;
         case "LASER_FIRE": {
             if (lfAudio.src.length == 0) {
-                lfAudio.src = baseUrl.concat("/", lfSource);
-                lfAudio.volume = 0.2;
+                lfAudio.src = baseUrl.concat("/", laserFireSource);
+                lfAudio.volume = 0.1;
             }
             playSound(lfAudio);
         } break;
         case "LASER_FIRE_POWERED_UP": {
             if (lfpuAudio.src.length == 0) {
-                lfpuAudio.src = baseUrl.concat("/", lfpuSource);
-                lfpuAudio.volume = 1.0;
+                lfpuAudio.src = baseUrl.concat("/", laserFirePowerUpSource);
+                lfpuAudio.volume = 0.2;
             }
             playSound(lfpuAudio);
         } break;
         case "LASER_HIT": {
             if (lhAudio.src.length == 0) {
-                lhAudio.src = baseUrl.concat("/", lhSource);
+                lhAudio.src = baseUrl.concat("/", laserHitSource);
                 lhAudio.volume = 0.6;
             }
             playSound(lhAudio);
         } break;
         case "POWER_UP": {
             if (puAudio.src.length == 0) {
-                puAudio.src = baseUrl.concat("/", puSource);
+                puAudio.src = baseUrl.concat("/", powerUpSource);
                 puAudio.volume = 1.0;
             }
             playSound(puAudio);
         } break;
         case "POWER_DOWN": {
             if (pdAudio.src.length == 0) {
-                pdAudio.src = baseUrl.concat("/", pdSource);
+                pdAudio.src = baseUrl.concat("/", powerDownSource);
                 pdAudio.volume = 1.0;
             }
             playSound(pdAudio);
         } break;
         case "ENEMY_DESTRUCTION": {
             if (edAudio.src.length == 0) {
-                edAudio.src = baseUrl.concat("/", edSource);
-                edAudio.volume = 0.4;
+                edAudio.src = baseUrl.concat("/", enemyDestroyedSource);
+                edAudio.volume = 0.9;
             }
             playSound(edAudio);
         } break;
         case "METEOR_DESTRUCTION": {
             if (mdAudio.src.length == 0) {
-                mdAudio.src = baseUrl.concat("/", mdSource);
-                mdAudio.volume = 0.4;
+                mdAudio.src = baseUrl.concat("/", meteorDestroyedSource);
+                mdAudio.volume = 0.9;
             }
             playSound(mdAudio);
         } break;
         case "LEVEL_UP": {
             if (luAudio.src.length == 0) {
-                luAudio.src = baseUrl.concat("/", luSource);
+                luAudio.src = baseUrl.concat("/", levelUpSource);
                 luAudio.volume = 1.0;
             }
             playSound(luAudio);
         } break;
         case "HEALTH_GAIN": {
             if (hgAudio.src.length == 0) {
-                hgAudio.src = baseUrl.concat("/", hgSource);
+                hgAudio.src = baseUrl.concat("/", healthGainSource);
                 hgAudio.volume = 1.0;
             }
             playSound(hgAudio);
         } break;
         case "HEALTH_LOSS": {
             if (hlAudio.src.length == 0) {
-                hlAudio.src = baseUrl.concat("/", hlSource);
+                hlAudio.src = baseUrl.concat("/", healthLossSource);
                 hlAudio.volume = 1.0;
             }
             playSound(hlAudio);
         } break;
         case "GAME_OVER": {
             if (goAudio.src.length == 0) {
-                goAudio.src = baseUrl.concat("/", goSource);
+                goAudio.src = baseUrl.concat("/", gameOverSource);
                 goAudio.volume = 1.0;
             }
             playSound(goAudio);
-        } break;
-        case "GAME_START": {
-            if (gsAudio.src.length == 0) {
-                gsAudio.src = baseUrl.concat("/", gsSource);
-                gsAudio.volume = 1.0;
-            }
-            playSound(gsAudio);
-        } break;
+        } break;      
         default: {
 
         }
