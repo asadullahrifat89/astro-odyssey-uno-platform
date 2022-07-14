@@ -18,7 +18,6 @@
                 PaneDisplayMode="Top">
                 <!--<NavigationView.MenuItems>
                     <NavigationViewItem Content="Game" Tag="GameStartPage" />
-
                 </NavigationView.MenuItems>-->
                 <NavigationView.PaneFooter>
                     <TextBlock
