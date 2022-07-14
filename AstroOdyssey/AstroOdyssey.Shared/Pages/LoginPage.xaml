@@ -25,11 +25,13 @@
             <TextBox
                 x:Name="UserNameBox"
                 Margin="5"
-                Header="User name" />
+                Header="User name"
+                TextChanged="UserNameBox_TextChanged" />
             <PasswordBox
                 x:Name="PasswordBox"
                 Margin="5"
-                Header="Password" />
+                Header="Password"
+                TextChanged="PasswordBox_TextChanged" />
             <Button
                 x:Name="LoginButton"
                 Width="100"
@@ -39,7 +41,8 @@
                 BorderBrush="White"
                 BorderThickness="5"
                 Click="LoginButton_Click"
-                Content="Login" />
+                Content="Login"
+                IsEnabled="False" />
         </StackPanel>
 
     </Grid>

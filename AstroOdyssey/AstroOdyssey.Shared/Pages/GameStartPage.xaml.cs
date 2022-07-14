@@ -10,28 +10,28 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class GameStartPage : Page
     {
+        #region Ctor
+        
         public GameStartPage()
         {
             this.InitializeComponent();
 
             this.Loaded += StartPage_Loaded;
-        }
+        } 
+
+        #endregion
+
+        #region Events  
 
         private void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             App.EnterFullScreen(true);
         }
 
-        #region Methods  
-
-        #region Functionality
-
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             App.NavigateToPage(typeof(GamePlayPage));
         }
-
-        #endregion
 
         #endregion
     }

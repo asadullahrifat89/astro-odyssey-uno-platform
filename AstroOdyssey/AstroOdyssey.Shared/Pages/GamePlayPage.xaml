@@ -17,15 +17,15 @@
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
         <!--  This is for capturing input  -->
-        <Canvas
-            x:Name="InputCanvas"
+        <GameEnvironment
+            x:Name="InputView"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="Transparent"
-            KeyDown="InputCanvas_KeyDown"
-            KeyUp="InputCanvas_KeyUp"
-            PointerPressed="InputCanvas_PointerPressed"
-            PointerReleased="InputCanvas_PointerReleased" />
+            KeyDown="InputView_KeyDown"
+            KeyUp="InputView_KeyUp"
+            PointerPressed="InputView_PointerPressed"
+            PointerReleased="InputView_PointerReleased" />
 
         <!--  This shows current score  -->
         <TextBlock

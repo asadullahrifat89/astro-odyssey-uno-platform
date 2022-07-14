@@ -10,11 +10,17 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class LoginPage : Page
     {
+        #region Ctor
+
         public LoginPage()
         {
             this.InitializeComponent();
             this.Loaded += LoginPage_Loaded;
-        }
+        } 
+
+        #endregion
+
+        #region Events
 
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -31,5 +37,26 @@ namespace AstroOdyssey
 
             App.NavigateToPage(typeof(GameStartPage));
         }
+
+        private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableLoginButton();
+        }
+
+        private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableLoginButton();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void EnableLoginButton()
+        {
+            LoginButton.IsEnabled = string.IsNullOrEmpty(UserNameBox.Text) && string.IsNullOrEmpty(PasswordBox.Text) ? false : true;
+        } 
+
+        #endregion
     }
 }

@@ -1071,20 +1071,20 @@ namespace AstroOdyssey
 
         #region Movement Events
 
-        private void InputCanvas_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
         }
 
-        private void InputCanvas_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
 
         }
 
 
-        private void InputCanvas_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
@@ -1099,7 +1099,7 @@ namespace AstroOdyssey
             }
         }
 
-        private void InputCanvas_KeyUp(object sender, KeyRoutedEventArgs e)
+        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Left)
             {
@@ -1174,6 +1174,7 @@ namespace AstroOdyssey
         {
             GameView.SetSize(windowHeight, windowWidth);
             StarView.SetSize(windowHeight, windowWidth);
+            InputView.SetSize(windowHeight, windowWidth);
         }
 
         /// <summary>
