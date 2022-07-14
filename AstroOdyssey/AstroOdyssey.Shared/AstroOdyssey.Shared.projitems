@@ -33,6 +33,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
+      <DependentUpon>GameOverPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -45,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,10 +134,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-matter-10710.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dead-8bit-41400.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\drone-space-main-9706.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-36210.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-39897.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-sfx-43814.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\low-impactwav-14905.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
@@ -144,6 +153,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-chillout-14194.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-trip-114102.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\spellcast-46164.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\videogame-death-sound-43894.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

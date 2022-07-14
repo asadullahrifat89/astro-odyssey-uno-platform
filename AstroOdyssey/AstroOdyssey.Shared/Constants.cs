@@ -41,6 +41,8 @@ namespace AstroOdyssey
             LEVEL_UP,
             HEALTH_GAIN,
             HEALTH_LOSS,
+            GAME_START,
+            GAME_OVER
         }
 
         /// <summary>

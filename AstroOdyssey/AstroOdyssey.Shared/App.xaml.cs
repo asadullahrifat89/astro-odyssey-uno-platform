@@ -17,6 +17,8 @@ namespace AstroOdyssey
 
         private static MainPage _mainPage;
 
+        public static string Score { get; set; }
+
         #endregion
 
         #region Ctor
@@ -54,6 +56,16 @@ namespace AstroOdyssey
                 view?.TryEnterFullScreenMode();
             else
                 view?.ExitFullScreenMode();
+        }
+
+        public static void SetScore(string score)
+        {
+           Score = score;
+        }
+
+        public static string GetScore()
+        {
+            return Score;
         }
 
         public static void SetAccount()
@@ -171,6 +183,8 @@ namespace AstroOdyssey
 
 #endif
         }
+
+     
 
         #endregion
     }

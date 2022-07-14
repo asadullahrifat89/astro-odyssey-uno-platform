@@ -140,11 +140,12 @@ namespace AstroOdyssey
         /// </summary>
         private void StartGame()
         {
-            PlaySound(SoundType.BACKGROUND_MUSIC);
+            PlaySound(SoundType.GAME_START);            
             SpawnPlayer();
             SpawnStar();
             IsGameRunning = true;
             RunGame();
+            PlaySound(SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -631,8 +632,12 @@ namespace AstroOdyssey
             {
                 HealthText.Text = "Game Over";
                 StopGame();
+                PlaySound(SoundType.GAME_OVER);
 
-                App.NavigateToPage(typeof(StartPage));
+                //TODO: Set Score
+                App.SetScore(ScoreText.Text);
+
+                App.NavigateToPage(typeof(GameOverPage));
             }
         }
 
