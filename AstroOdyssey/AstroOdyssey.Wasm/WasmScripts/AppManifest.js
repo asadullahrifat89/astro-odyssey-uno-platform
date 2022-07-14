@@ -6,21 +6,21 @@
 }
 
 const laserFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
-const laserFirePowerUpSource = "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3";
+const laserFirePowerUpSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
 const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/explosion-firework-boom-single_GkGH0sE__NWM.mp3";
-const meteorDestroyedSource = "Assets/Sounds/firework-explode-distant_zJ6kk3VO_NWM.mp3";
+const enemyDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const meteorDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
 
 const healthGainSource = "Assets/Sounds/scale-e6-14577.mp3";
 const healthLossSource = "Assets/Sounds/rocket-missile-launcher_MyHKjH4__NWM.mp3";
 
-const gameStartSource = "Assets/Sounds/game-start-6104.mp3";
+const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
@@ -40,6 +40,13 @@ const goAudio = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
+        case "GAME_START": {
+            if (gsAudio.src.length == 0) {
+                gsAudio.src = baseUrl.concat("/", gameStartSource);
+                gsAudio.volume = 1.0;
+            }
+            playSound(gsAudio);
+        } break;
         case "BACKGROUND_MUSIC": {
 
             let musicTrack = Math.floor((Math.random() * 12));
@@ -141,14 +148,7 @@ function playGameSound(baseUrl, soundType) {
                 goAudio.volume = 1.0;
             }
             playSound(goAudio);
-        } break;
-        case "GAME_START": {
-            if (gsAudio.src.length == 0) {
-                gsAudio.src = baseUrl.concat("/", gameStartSource);
-                gsAudio.volume = 1.0;
-            }
-            playSound(gsAudio);
-        } break;
+        } break;      
         default: {
 
         }
