@@ -12,7 +12,7 @@ const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/swirly-air-deploy_GyxMaH4__NWM.mp3";
+const enemyDestroyedSource = "Assets/Sounds/magnetic-destroy-shot_fkxD6SV__NWM.mp3";
 const meteorDestroyedSource = "Assets/Sounds/swirly-air-deploy_GyxMaH4__NWM.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
