@@ -85,9 +85,9 @@ namespace AstroOdyssey
 
         private double LaserSpeed { get; set; } = 18;
 
-        private double EnemySpeed { get; set; } = 3;
+        private double EnemySpeed { get; set; } = 2;
 
-        private double MeteorSpeed { get; set; } = 2;
+        private double MeteorSpeed { get; set; } = 1.5;
 
         private double HealthSpeed { get; set; } = 2;
 
@@ -199,7 +199,7 @@ namespace AstroOdyssey
 
                 PlayerOpacity();
 
-                CheckPlayerDeath();
+                GameOver();
 
                 CalculateFps();
 
@@ -457,9 +457,8 @@ namespace AstroOdyssey
             {
 #if DEBUG
                 FPSText.Text = "FPS: " + FpsCount;
-
-                FrameDurationText.Text = "Frame duration: " + FrameDuration + "ms";
-                ObjectsCountText.Text = "Objects count: " + GameView.Children.Count();
+                FrameDurationText.Text = "Frame: " + FrameDuration + "ms";
+                ObjectsCountText.Text = "Objects: " + GameView.Children.Count();
 #endif
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
@@ -537,14 +536,14 @@ namespace AstroOdyssey
             if (lastGameLevel != GameLevel)
             {
                 ShowLevelUp();
-                AdjustGameEnvironmentToGameLevel();
+                AdjustGameEnvironment();
             }
         }
 
         /// <summary>
         /// Adjusts the game environment according to game level.
         /// </summary>
-        private void AdjustGameEnvironmentToGameLevel()
+        private void AdjustGameEnvironment()
         {
             switch (GameLevel)
             {
@@ -633,9 +632,9 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Check if player is dead.
+        /// Check if game if over.
         /// </summary>
-        private void CheckPlayerDeath()
+        private void GameOver()
         {
             // game over
             if (Player.HasNoHealth)
@@ -643,14 +642,7 @@ namespace AstroOdyssey
                 HealthText.Text = "Game Over";
                 StopGame();
 
-                //var contentDialogue = new MessageDialogueWindow(title: "GAME OVER", message: "Would you like to play again?", result: (result) =>
-                //{
-                //    if (result)
-                //        App.NavigateToPage("/GamePage");
-                //    else
-                //        App.NavigateToPage("/GameStartPage");
-                //});
-                //contentDialogue.Show();
+                App.NavigateToPage(typeof(StartPage));
             }
         }
 

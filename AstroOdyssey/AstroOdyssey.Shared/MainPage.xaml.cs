@@ -42,14 +42,20 @@ namespace AstroOdyssey
                 frame: ContentFrame,
                 pageMap: new Dictionary<string, Type>()
                 {
-                    {"GameStartPage",   typeof(StartPage) },
+                    //{"StartPage",   typeof(StartPage) },
                     //{"GamePage",        typeof(GamePage) },
                 });
+
+            DataContext = this;
         }
+
+        #endregion
+
+        #region Events
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Navigate(typeof(StartPage));
+            Navigate(typeof(LoginPage));
         }
 
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -62,8 +68,6 @@ namespace AstroOdyssey
 
         #region Methods  
 
-        #region Functionality
-
         /// <summary>
         /// Navigate to the target page.
         /// </summary>
@@ -72,8 +76,6 @@ namespace AstroOdyssey
         {
             ContentFrame.Navigate(page);
         }
-
-        #endregion
 
         #endregion
     }

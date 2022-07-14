@@ -29,7 +29,7 @@ namespace AstroOdyssey
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            App.NavigateToPage(typeof(GamePage));
+            App.NavigateToPage(typeof(StartPage));
         }
     }
 }

@@ -18,6 +18,7 @@
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
+    <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />

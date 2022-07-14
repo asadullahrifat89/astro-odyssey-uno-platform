@@ -19,19 +19,20 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Enemy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Health.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Laser.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Meteor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\PowerUp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameObjects\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Health.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Laser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Meteor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\PowerUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Star.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\NavigationSyncHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
