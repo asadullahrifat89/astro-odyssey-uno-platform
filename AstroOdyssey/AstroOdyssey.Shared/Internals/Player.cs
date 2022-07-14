@@ -55,7 +55,7 @@ namespace AstroOdyssey
             Height = 130;
             Width = 70;
 
-            Health = 100;
+            Health = 10; // TODO: leave it 100 always
             HealthSlot = 10;
 
             // combine power gauge, ship, and blaze

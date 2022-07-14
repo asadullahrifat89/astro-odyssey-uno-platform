@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace AstroOdyssey
 {
-    public  class NavigationSyncHelper
+    public class NavigationSyncHelper
     {
         #region Fields
-        
+
         private NavigationView _navigationView;
         private Frame _frame;
         private NavigationViewItem _lastInvokedMenuItem;
@@ -18,7 +18,7 @@ namespace AstroOdyssey
         #endregion
 
         #region Ctor
-        
+
         public NavigationSyncHelper(
            NavigationView navigationView,
            Frame frame,
@@ -36,7 +36,7 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-        
+
         private void NavView_ItemInvoked(
            NavigationView sender,
            NavigationViewItemInvokedEventArgs args)
@@ -66,14 +66,26 @@ namespace AstroOdyssey
         {
             if (_frame.CanGoBack)
             {
+                var backPage = _frame.BackStack.LastOrDefault();
+
+                if (backPage.SourcePageType == typeof(GamePage))
+                    return;
+
+                // if going back from from game over page which is displayed after a game session, always go to start page
+                if (backPage.SourcePageType == typeof(GameOverPage))
+                {
+                    _frame.Navigate(typeof(StartPage));
+                    return;
+                }
+
                 _frame.GoBack();
             }
         }
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            var currentSelectedItem = _navigationView.MenuItems
-                .FirstOrDefault(mi => ((NavigationViewItem)mi).IsSelected) as NavigationViewItem;
+            var currentSelectedItem = _navigationView.MenuItems.FirstOrDefault(mi => ((NavigationViewItem)mi).IsSelected) as NavigationViewItem;
+
             if (currentSelectedItem != null)
             {
                 var tag = currentSelectedItem.Tag.ToString();
@@ -91,13 +103,14 @@ namespace AstroOdyssey
             void SetSelectedItem()
             {
                 var tagToFind = _pageMap.FirstOrDefault(entry => entry.Value == e.SourcePageType).Key;
+
                 if (_navigationView.MenuItems.FirstOrDefault(mi => ((NavigationViewItem)mi).Tag.Equals(tagToFind)) is NavigationViewItem matchedItem)
                 {
                     matchedItem.IsSelected = true;
                     _lastInvokedMenuItem = matchedItem;
                 }
             }
-        } 
+        }
 
         #endregion
     }
