@@ -29,12 +29,12 @@ namespace AstroOdyssey
             return destroyableGameObjects;
         }
 
-        public void AddGameObject(GameObject gameObject) 
+        public void AddGameObject(GameObject gameObject)
         {
             Children.Add(gameObject);
         }
 
-        public void AddDestroyableGameObject(GameObject destroyable) 
+        public void AddDestroyableGameObject(GameObject destroyable)
         {
             destroyableGameObjects.Add(destroyable);
         }
@@ -42,6 +42,16 @@ namespace AstroOdyssey
         public void RemoveGameObject(GameObject destroyable)
         {
             Children.Remove(destroyable);
+        }
+
+        public void RemoveDestroyableGameObjects()
+        {
+            foreach (var destroyable in destroyableGameObjects)
+            {
+                RemoveGameObject(destroyable);
+            }
+
+            ClearDestroyableGameObjects();
         }
 
         public void ClearDestroyableGameObjects()

@@ -18,7 +18,7 @@ namespace AstroOdyssey
 
         private static MainPage _mainPage;
 
-        public static string Score { get; set; }
+        public static double Score { get; set; }
 
         #endregion
 
@@ -76,12 +76,12 @@ namespace AstroOdyssey
             }
         }
 
-        public static void SetScore(string score)
+        public static void SetScore(double score)
         {
             Score = score;
         }
 
-        public static string GetScore()
+        public static double GetScore()
         {
             return Score;
         }

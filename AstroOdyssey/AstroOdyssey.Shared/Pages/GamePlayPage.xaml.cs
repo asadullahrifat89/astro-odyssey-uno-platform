@@ -39,14 +39,6 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private readonly Stack<GameObject> enemyStack = new Stack<GameObject>();
-        private readonly Stack<GameObject> meteorStack = new Stack<GameObject>();
-        private readonly Stack<GameObject> healthStack = new Stack<GameObject>();
-        private readonly Stack<GameObject> powerUpStack = new Stack<GameObject>();
-        private readonly Stack<GameObject> starStack = new Stack<GameObject>();
-
-        private bool moveLeft = false, moveRight = false;
-
         #endregion
 
         #region Ctor
@@ -107,10 +99,6 @@ namespace AstroOdyssey
 
         private int ShowInGameTextLimit { get; set; } = 100;
 
-        private Player Player { get; set; }
-
-        private GameLevel GameLevel { get; set; }
-
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
@@ -127,7 +115,19 @@ namespace AstroOdyssey
 
         //private bool IsKeyboardPressed { get; set; }
 
+        private GameLevel GameLevel { get; set; }
         private PeriodicTimer GameTimer { get; set; }
+
+        private Player Player { get; set; }
+
+        private Enemy NewEnemy { get; set; }
+        private Meteor NewMeteor { get; set; }
+        private Health NewHealth { get; set; }
+        private PowerUp NewPowerUp { get; set; }
+        private Star NewStar { get; set; }
+
+        private bool MoveLeft { get; set; } = false;
+        private bool MoveRight { get; set; } = false;
 
         #endregion
 
@@ -218,7 +218,7 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateScore()
         {
-            ScoreText.Text = Score.ToString("000000");
+            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")}";
             HealthText.Text = Player.GetHealthPoints();
         }
 
@@ -269,7 +269,7 @@ namespace AstroOdyssey
                 UpdateGameViewObjects(gameObject);
             }
 
-            ClearGameView();
+            GameView.RemoveDestroyableGameObjects();
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace AstroOdyssey
                             return;
 
                         // if enemy or meteor object has gone beyond game view
-                        if (RemoveGameObject(enemy))
+                        if (AddDestroyableGameObject(enemy))
                             return;
 
                         // check if enemy collides with player
@@ -330,7 +330,7 @@ namespace AstroOdyssey
                             return;
 
                         // if enemy or meteor object has gone beyond game view
-                        if (RemoveGameObject(meteor))
+                        if (AddDestroyableGameObject(meteor))
                             return;
 
                         // check if meteor collides with player
@@ -350,7 +350,9 @@ namespace AstroOdyssey
 
                         // remove laser if outside game canvas
                         if (laser.GetY() < 10)
+                        {
                             GameView.AddDestroyableGameObject(laser);
+                        }
                     }
                     break;
                 case Constants.HEALTH:
@@ -394,35 +396,36 @@ namespace AstroOdyssey
             }
         }
 
-        /// <summary>
-        /// Clears destroyable objects from game view.
-        /// </summary>
-        private void ClearGameView()
-        {
-            foreach (var destroyable in GameView.GetDestroyableGameObjects())
-            {
-                if (destroyable is Enemy enemy)
-                    enemyStack.Push(enemy);
+        ///// <summary>
+        ///// Clears destroyable objects from game view.
+        ///// </summary>
+        //private void ClearGameView()
+        //{
+        //    foreach (var destroyable in GameView.GetDestroyableGameObjects())
+        //    {
+        //        GameView.RemoveGameObject(destroyable);
 
-                if (destroyable is Meteor meteor)
-                    meteorStack.Push(meteor);
+        //        if (destroyable is Enemy enemy)
+        //            enemyRecycled.Add(enemy);
 
-                if (destroyable is Health health)
-                    healthStack.Push(health);
+        //        if (destroyable is Meteor meteor)
+        //            meteorRecycled.Add(meteor);
 
-                GameView.RemoveGameObject(destroyable);
-            }
+        //        if (destroyable is Health health)
+        //            healthRecycled.Add(health);
+        //    }
 
-            GameView.ClearDestroyableGameObjects();
-        }
+        //    GameView.ClearDestroyableGameObjects();
+        //}
 
         /// <summary>
         /// Removes a game object from game view. 
         /// </summary>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        private bool RemoveGameObject(GameObject gameObject)
+        private bool AddDestroyableGameObject(GameObject gameObject)
         {
+            // if game object is out of bounds of game view
             if (gameObject.GetY() > GameView.Height || gameObject.GetX() > GameView.Width || gameObject.GetX() + gameObject.Width < 10)
             {
                 GameView.AddDestroyableGameObject(gameObject);
@@ -600,10 +603,10 @@ namespace AstroOdyssey
             var playerX = Player.GetX();
             var playerWidthHalf = Player.Width / 2;
 
-            if (moveLeft && playerX > 0)
+            if (MoveLeft && playerX > 0)
                 PointerX -= Player.Speed;
 
-            if (moveRight && playerX + Player.Width < windowWidth)
+            if (MoveRight && playerX + Player.Width < windowWidth)
                 PointerX += Player.Speed;
 
             // move right
@@ -635,7 +638,7 @@ namespace AstroOdyssey
                 App.PlaySound(baseUrl, SoundType.GAME_OVER);
 
                 //TODO: Set Score
-                App.SetScore(ScoreText.Text);
+                App.SetScore(Score);
 
                 App.NavigateToPage(typeof(GameOverPage));
             }
@@ -812,21 +815,21 @@ namespace AstroOdyssey
         /// </summary>
         private void GenerateEnemy()
         {
-            var newEnemy = enemyStack.Any() ? enemyStack.Pop() as Enemy : new Enemy();
+            NewEnemy = new Enemy();
 
-            newEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
+            NewEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
 
             var left = random.Next(10, (int)windowWidth - 70);
-            var top = 0 - newEnemy.Height;
+            var top = 0 - NewEnemy.Height;
 
             // when not noob anymore enemy moves sideways
             if ((int)GameLevel > 0 && enemySpawnCounter >= 10)
             {
-                newEnemy.XDirection = (XDirection)random.Next(1, 3);
+                NewEnemy.XDirection = (XDirection)random.Next(1, 3);
                 enemySpawnCounter = 0;
             }
 
-            newEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
+            NewEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
         }
 
         /// <summary>
@@ -870,10 +873,10 @@ namespace AstroOdyssey
         /// </summary>
         private void GenerateMeteor()
         {
-            var newMeteor = meteorStack.Any() ? meteorStack.Pop() as Meteor : new Meteor();
+            NewMeteor = new Meteor();
 
-            newMeteor.SetAttributes(MeteorSpeed + random.NextDouble());
-            newMeteor.AddToGameEnvironment(top: 0 - newMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+            NewMeteor.SetAttributes(MeteorSpeed + random.NextDouble());
+            NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
         }
 
         /// <summary>
@@ -917,10 +920,10 @@ namespace AstroOdyssey
         /// </summary>
         private void GenerateHealth()
         {
-            var newHealth = healthStack.Any() ? healthStack.Pop() as Health : new Health();
+            NewHealth = new Health();
 
-            newHealth.SetAttributes(HealthSpeed + random.NextDouble());
-            newHealth.AddToGameEnvironment(top: 0 - newHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+            NewHealth.SetAttributes(HealthSpeed + random.NextDouble());
+            NewHealth.AddToGameEnvironment(top: 0 - NewHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
         }
 
         #endregion
@@ -949,10 +952,10 @@ namespace AstroOdyssey
         /// </summary>
         private void GeneratePowerUp()
         {
-            var newPowerUp = powerUpStack.Any() ? powerUpStack.Pop() as PowerUp : new PowerUp();
+            NewPowerUp = new PowerUp();
 
-            newPowerUp.SetAttributes(PowerUpSpeed + random.NextDouble());
-            newPowerUp.AddToGameEnvironment(top: 0 - newPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+            NewPowerUp.SetAttributes(PowerUpSpeed + random.NextDouble());
+            NewPowerUp.AddToGameEnvironment(top: 0 - NewPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
         }
 
         /// <summary>
@@ -1019,10 +1022,14 @@ namespace AstroOdyssey
         /// </summary>
         private void GenerateStar()
         {
-            var newStar = starStack.Any() ? starStack.Pop() as Star : new Star();
+            NewStar = new Star();
 
-            newStar.SetAttributes(StarSpeed);
-            newStar.AddToGameEnvironment(top: 0 - newStar.Height, left: random.Next(10, (int)windowWidth - 10), gameEnvironment: StarView);
+            NewStar.SetAttributes(StarSpeed);
+
+            var top = 0 - NewStar.Height;
+            var left = random.Next(10, (int)windowWidth - 10);
+
+            NewStar.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
         }
 
         /// <summary>
@@ -1037,7 +1044,7 @@ namespace AstroOdyssey
                 UpdateStarViewObject(star);
             }
 
-            ClearStarView();
+            StarView.RemoveDestroyableGameObjects();
         }
 
         /// <summary>
@@ -1053,19 +1060,18 @@ namespace AstroOdyssey
                 StarView.AddDestroyableGameObject(star);
         }
 
-        /// <summary>
-        /// Clears destroyable stars from the star view.
-        /// </summary>
-        private void ClearStarView()
-        {
-            foreach (var star in StarView.GetDestroyableGameObjects())
-            {
-                StarView.RemoveGameObject(star);
-                starStack.Push(star);
-            }
+        ///// <summary>
+        ///// Clears destroyable stars from the star view.
+        ///// </summary>
+        //private void ClearStarView()
+        //{
+        //    foreach (var star in StarView.GetDestroyableGameObjects())
+        //    {
+        //        StarView.RemoveGameObject(star);               
+        //    }
 
-            StarView.ClearDestroyableGameObjects();
-        }
+        //    StarView.ClearDestroyableGameObjects();
+        //}
 
         #endregion
 
@@ -1089,13 +1095,13 @@ namespace AstroOdyssey
             if (e.Key == Windows.System.VirtualKey.Left)
             {
                 //IsKeyboardPressed = true;
-                moveLeft = true;
+                MoveLeft = true;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
                 //IsKeyboardPressed = true;
-                moveRight = true;
+                MoveRight = true;
             }
         }
 
@@ -1104,13 +1110,13 @@ namespace AstroOdyssey
             if (e.Key == Windows.System.VirtualKey.Left)
             {
                 //IsKeyboardPressed = false;
-                moveLeft = false;
+                MoveLeft = false;
             }
 
             if (e.Key == Windows.System.VirtualKey.Right)
             {
                 //IsKeyboardPressed = false;
-                moveRight = false;
+                MoveRight = false;
             }
         }
 

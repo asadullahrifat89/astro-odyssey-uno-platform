@@ -31,7 +31,6 @@
         <TextBlock
             Name="ScoreText"
             Margin="5"
-            FontFamily="Consolas"
             FontSize="18"
             FontWeight="Bold"
             Foreground="White"

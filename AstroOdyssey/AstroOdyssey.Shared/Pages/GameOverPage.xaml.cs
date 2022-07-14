@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ScoreText.Text = "Your Score: " + Convert.ToInt64(App.GetScore());
+            this.ScoreText.Text = "Your Score: " + App.GetScore();
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

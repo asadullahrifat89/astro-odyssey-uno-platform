@@ -153,7 +153,7 @@ namespace AstroOdyssey
         {
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            Speed += 2;
+            Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
         }
 
@@ -161,7 +161,7 @@ namespace AstroOdyssey
         {
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            Speed -= 2;
+            Speed -= 1;
             contentShipPowerGauge.Width = 0;
         }
 
