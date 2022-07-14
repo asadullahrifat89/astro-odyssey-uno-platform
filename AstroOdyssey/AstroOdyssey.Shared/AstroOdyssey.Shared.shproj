@@ -51,8 +51,10 @@
     <_Globbed_Content Remove="Assets\Sounds\plasmablaster-37114.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\power-down-7103.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\power-up-35839.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\punchy-laser-shot_f11BarNO_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\retro-video-game-coin-pickup-38299.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\robotic-punch-shot_M1vDpHE__NWM.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\rocket-missile-launcher_MyHKjH4__NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\scale-e6-14577.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\shoot02wav-14562.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
@@ -61,6 +63,7 @@
     <_Globbed_Content Remove="Assets\Sounds\space-chillout-14194.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\space-trip-114102.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\spellcast-46164.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\swirly-air-deploy_GyxMaH4__NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
   </ItemGroup>
   <ItemGroup>

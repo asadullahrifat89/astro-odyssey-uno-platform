@@ -12,13 +12,13 @@ const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/plasmablaster-37114.mp3";
-const meteorDestroyedSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const enemyDestroyedSource = "Assets/Sounds/swirly-air-deploy_GyxMaH4__NWM.mp3";
+const meteorDestroyedSource = "Assets/Sounds/swirly-air-deploy_GyxMaH4__NWM.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
 
 const healthGainSource = "Assets/Sounds/scale-e6-14577.mp3";
-const healthLossSource = "Assets/Sounds/explosion-39897.mp3";
+const healthLossSource = "Assets/Sounds/rocket-missile-launcher_MyHKjH4__NWM.mp3";
 
 const gameStartSource = "Assets/Sounds/game-start-6104.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
