@@ -27,7 +27,6 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 BorderBrush="White"
-                BorderThickness="2"
                 Click="PlayButton_Click"
                 Content="Play"
                 FontSize="30" />

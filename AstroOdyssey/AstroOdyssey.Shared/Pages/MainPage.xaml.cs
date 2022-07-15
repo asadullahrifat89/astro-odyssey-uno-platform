@@ -31,11 +31,11 @@ namespace AstroOdyssey
             navigationSyncHelper = new NavigationSyncHelper(
                 navigationView: NavView,
                 frame: ContentFrame,
-                noGoBackPageMap: new List<Type>() { typeof(GamePlayPage) },
                 pageMap: new Dictionary<string, Type>(),
-                reRoutedPageMap: new Dictionary<Type, Type>()
+                goBackNotAllowedToPages: new List<Type>() { typeof(GamePlayPage) },                
+                goBackPageRoutes: new List<(Type IfGoingBackTo, Type RouteTo)>()
                 {
-                    {typeof(GameOverPage), typeof(GameStartPage) },
+                    (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)),
                 });
 
             DataContext = this;

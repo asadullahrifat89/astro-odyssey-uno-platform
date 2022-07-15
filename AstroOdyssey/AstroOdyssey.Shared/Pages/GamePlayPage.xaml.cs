@@ -631,7 +631,10 @@ namespace AstroOdyssey
         private void SpawnPlayer()
         {
             Player = new Player();
-            Player.SetAttributes(speed: PlayerSpeed, scale: GetGameObjectScale());
+
+            var scale = GetGameObjectScale();
+
+            Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
             Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX - 35, gameEnvironment: GameView);
 
             PlayerWidthHalf = Player.Width / 2;
@@ -1108,36 +1111,26 @@ namespace AstroOdyssey
 
         #region Input Events
 
-        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            var currentPoint = e.GetCurrentPoint(GameView);
+        //private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        //{
+        //    var currentPoint = e.GetCurrentPoint(GameView);
 
-            PointerX = currentPoint.Position.X;
+        //    PointerX = currentPoint.Position.X;
 
-            FireLasers = true;
-        }
+        //    FireLasers = true;
+        //}
 
-        private void InputView_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            if (FireLasers)
-            {
-                var currentPoint = e.GetCurrentPoint(GameView);
-
-                PointerX = currentPoint.Position.X;
-            }
-        }
-
-        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FireLasers = false;
-        }
+        //private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        //{
+        //    FireLasers = false;
+        //}
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             switch (e.Key)
             {
-                case Windows.System.VirtualKey.Left: { MoveLeft = true; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = true; } break;
+                case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Up: { FireLasers = true; } break;
                 default:
                     break;
@@ -1154,6 +1147,34 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+        }
+
+        private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            FireLasers = true;
+            MoveLeft = true;
+            MoveRight = false;
+        }
+
+        private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            FireLasers = true;
+            MoveLeft = false;
+            //MoveRight = false;
+        }
+
+        private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            FireLasers = true;
+            MoveRight = true;
+            MoveLeft = false;
+        }
+
+        private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            FireLasers = true;
+            MoveRight = false;
+            //MoveLeft = false;
         }
 
         #endregion
@@ -1218,12 +1239,15 @@ namespace AstroOdyssey
         {
             GameView.SetSize(windowHeight, windowWidth);
             StarView.SetSize(windowHeight, windowWidth);
-            InputView.SetSize(windowHeight, windowWidth);
 
             // resize player size
             if (IsGameRunning)
             {
-                Player.SetAttributes(speed: PlayerSpeed, scale: GetGameObjectScale());
+                MoveLeft = false; MoveRight = false;
+
+                var scale = GetGameObjectScale();
+
+                Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
             }
         }
 

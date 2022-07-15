@@ -14,8 +14,8 @@ namespace AstroOdyssey
         private Frame _frame;
         private NavigationViewItem _lastInvokedMenuItem;
         private Dictionary<string, Type> _pageMap;
-        private List<Type> _noGoBackPageMap;
-        private Dictionary<Type, Type> _reRoutedPageMap;
+        private List<Type> _goBackNotAllowedToPages;
+        private List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
 
         #endregion
 
@@ -24,15 +24,15 @@ namespace AstroOdyssey
         public NavigationSyncHelper(
            NavigationView navigationView,
            Frame frame,
-           List<Type> noGoBackPageMap,
-           Dictionary<Type, Type> reRoutedPageMap,
+           List<Type> goBackNotAllowedToPages,
+           List<(Type IfGoingBackTo, Type RouteTo)> goBackPageRoutes,
            Dictionary<string, Type> pageMap)
         {
             _frame = frame;
             _navigationView = navigationView;
             _pageMap = pageMap;
-            _noGoBackPageMap = noGoBackPageMap;
-            _reRoutedPageMap = reRoutedPageMap;
+            _goBackNotAllowedToPages = goBackNotAllowedToPages;
+            _goBackPageRoutes = goBackPageRoutes;
 
             _navigationView.ItemInvoked += NavView_ItemInvoked;
             _navigationView.BackRequested += NavView_BackRequested;
@@ -74,12 +74,12 @@ namespace AstroOdyssey
             {
                 var backPage = _frame.BackStack.LastOrDefault();
 
-                if (_noGoBackPageMap.Contains(backPage.SourcePageType))
+                if (_goBackNotAllowedToPages.Contains(backPage.SourcePageType))
                     return;
 
-                if (_reRoutedPageMap.ContainsKey(backPage.SourcePageType))
+                if (_goBackPageRoutes.Any(x => x.IfGoingBackTo == backPage.SourcePageType))
                 {
-                    var reroute = _reRoutedPageMap[backPage.SourcePageType];
+                    var reroute = _goBackPageRoutes.FirstOrDefault(x => x.IfGoingBackTo == backPage.SourcePageType).RouteTo;
 
                     _frame.Navigate(reroute);
                     return;
