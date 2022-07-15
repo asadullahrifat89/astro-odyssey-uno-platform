@@ -1026,7 +1026,7 @@ namespace AstroOdyssey
             {
                 powerUpTriggerCounter -= 1;
 
-                var powerGauge = (double)(powerUpTriggerCounter / 100) + 1;
+                var powerGauge = (double)(powerUpTriggerCounter / 100) + 1 * GetGameObjectScale();
 
                 Player.SetPowerGauge(powerGauge);
 
