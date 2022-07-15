@@ -58,10 +58,10 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void RenderScale(double scale = 1)
+        public void SetSize(double size)
         {
-            compositeTransform.ScaleX = scale;
-            compositeTransform.ScaleY = scale;
+            Height = size;
+            Width = size;
         }
 
         public void Rotate()

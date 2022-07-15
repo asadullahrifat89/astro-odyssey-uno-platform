@@ -4,6 +4,9 @@ namespace AstroOdyssey
 {
     public static class Constants
     {
+        public const double DefaultGameObjectSize = 70;
+        public const double DefaultPlayerHeight = 130;
+
         public const string PLAYER = "player";
 
         public const string ENEMY = "enemy";

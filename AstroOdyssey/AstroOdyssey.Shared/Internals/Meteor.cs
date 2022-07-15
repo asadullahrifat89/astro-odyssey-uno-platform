@@ -18,8 +18,8 @@ namespace AstroOdyssey
         public Meteor()
         {
             Tag = Constants.METEOR;
-            Height = 70;
-            Width = 70;
+            Height = Constants.DefaultGameObjectSize;
+            Width = Constants.DefaultGameObjectSize;
 
             IsDestructible = true;
             Child = content;
@@ -82,7 +82,8 @@ namespace AstroOdyssey
 
             content.Source = new BitmapImage(uri);
 
-            RenderScale(scale);
+            Height = Constants.DefaultGameObjectSize * scale;
+            Width = Constants.DefaultGameObjectSize * scale;
         }
 
         #endregion
