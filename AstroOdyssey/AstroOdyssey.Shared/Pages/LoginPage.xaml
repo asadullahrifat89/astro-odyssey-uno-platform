@@ -40,7 +40,6 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 BorderBrush="White"
-                BorderThickness="2"
                 Click="LoginButton_Click"
                 Content="Login"
                 IsEnabled="False" />
