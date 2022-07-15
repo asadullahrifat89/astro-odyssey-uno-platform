@@ -21,7 +21,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <!--<ColumnDefinition />-->
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -36,7 +36,7 @@
                 PointerPressed="LeftInputView_PointerPressed"
                 PointerReleased="LeftInputView_PointerReleased" />
 
-            <Border
+            <!--<Border
                 x:Name="InputView"
                 Grid.Column="1"
                 HorizontalAlignment="Stretch"
@@ -45,11 +45,11 @@
                 KeyDown="InputView_KeyDown"
                 KeyUp="InputView_KeyUp"
                 PointerPressed="InputView_PointerPressed"
-                PointerReleased="InputView_PointerReleased" />
+                PointerReleased="InputView_PointerReleased" />-->
 
             <Border
                 x:Name="RightInputView"
-                Grid.Column="2"
+                Grid.Column="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Background="Transparent"
