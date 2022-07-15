@@ -24,15 +24,15 @@ namespace AstroOdyssey
         public NavigationSyncHelper(
            NavigationView navigationView,
            Frame frame,
-           List<Type> noGoBackPageMap,
-           Dictionary<Type, Type> reRoutedPageMap,
+           List<Type> goingBackPreventedToPages,
+           Dictionary<Type, Type> goingBackRoutedToPages,
            Dictionary<string, Type> pageMap)
         {
             _frame = frame;
             _navigationView = navigationView;
             _pageMap = pageMap;
-            _noGoBackPageMap = noGoBackPageMap;
-            _reRoutedPageMap = reRoutedPageMap;
+            _noGoBackPageMap = goingBackPreventedToPages;
+            _reRoutedPageMap = goingBackRoutedToPages;
 
             _navigationView.ItemInvoked += NavView_ItemInvoked;
             _navigationView.BackRequested += NavView_BackRequested;
