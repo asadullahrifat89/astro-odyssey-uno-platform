@@ -8,10 +8,13 @@ namespace AstroOdyssey
 {
     public class GameObject : Border
     {
-        private RotateTransform rotateTransform = new RotateTransform()
+        private CompositeTransform compositeTransform = new CompositeTransform()
         {
             CenterX = 0.5,
             CenterY = 0.5,
+            Rotation = 0,
+            ScaleX = 1,
+            ScaleY = 1,
         };
 
         #region Ctor
@@ -23,8 +26,8 @@ namespace AstroOdyssey
             //BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
 #endif
 
-            RenderTransformOrigin = new Windows.Foundation.Point(0.5, 0.5);
-            RenderTransform = rotateTransform;
+            RenderTransformOrigin = new Point(0.5, 0.5);
+            RenderTransform = compositeTransform;
         }
 
         #endregion
@@ -55,9 +58,15 @@ namespace AstroOdyssey
 
         #region Methods
 
+        public void SetSize(double size)
+        {
+            Height = size;
+            Width = size;
+        }
+
         public void Rotate()
         {
-            rotateTransform.Angle += Rotation;
+            compositeTransform.Rotation += Rotation;
         }
 
         public void GainHealth()

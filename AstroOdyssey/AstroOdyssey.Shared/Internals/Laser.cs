@@ -30,10 +30,10 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false)
+        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false, double scale = 1)
         {
             Speed = speed;
-           
+
             IsPoweredUp = isPoweredUp;
 
             double height = 0, width = 0;
@@ -84,8 +84,8 @@ namespace AstroOdyssey
                     break;
             }
 
-            Height = height;
-            Width = width;
+            Height = height * scale;
+            Width = width * scale;
 
             if (IsPoweredUp)
                 Background = new SolidColorBrush(Colors.Goldenrod);

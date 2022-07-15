@@ -12,8 +12,8 @@ const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
 
-const enemyDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
-const meteorDestroyedSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const enemyDestroyedSource = "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3";
+const meteorDestroyedSource = "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3";
 
 const levelUpSource = "Assets/Sounds/8-bit-powerup-6768.mp3";
 
@@ -110,21 +110,21 @@ function playGameSound(baseUrl, soundType) {
         case "ENEMY_DESTRUCTION": {
             if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", enemyDestroyedSource);
-                edAudio.volume = 0.9;
+                edAudio.volume = 0.3;
             }
             playSound(edAudio);
         } break;
         case "METEOR_DESTRUCTION": {
             if (mdAudio.src.length == 0) {
                 mdAudio.src = baseUrl.concat("/", meteorDestroyedSource);
-                mdAudio.volume = 0.9;
+                mdAudio.volume = 0.3;
             }
             playSound(mdAudio);
         } break;
         case "LEVEL_UP": {
             if (luAudio.src.length == 0) {
                 luAudio.src = baseUrl.concat("/", levelUpSource);
-                luAudio.volume = 1.0;
+                luAudio.volume = 0.6;
             }
             playSound(luAudio);
         } break;

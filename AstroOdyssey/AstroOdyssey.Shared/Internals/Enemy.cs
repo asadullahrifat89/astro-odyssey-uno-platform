@@ -18,8 +18,8 @@ namespace AstroOdyssey
         public Enemy()
         {
             Tag = Constants.ENEMY;
-            Height = 70;
-            Width = 70;
+            Height = Constants.DefaultGameObjectSize;
+            Width = Constants.DefaultGameObjectSize;
 
             IsDestructible = true;
             Child = content;
@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
             XDirection = XDirection.NONE;
@@ -67,6 +67,9 @@ namespace AstroOdyssey
             }
 
             content.Source = new BitmapImage(uri);
+
+            Height = Constants.DefaultGameObjectSize * scale;
+            Width = Constants.DefaultGameObjectSize * scale;
         } 
 
         #endregion

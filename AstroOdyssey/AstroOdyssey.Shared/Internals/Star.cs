@@ -8,8 +8,8 @@ namespace AstroOdyssey
     public class Star : GameObject
     {
         #region Fields
-        
-        private Image content = new Image() { Stretch = Stretch.Uniform }; 
+
+        private Image content = new Image() { Stretch = Stretch.Uniform };
 
         #endregion
 
@@ -19,19 +19,19 @@ namespace AstroOdyssey
         {
             Tag = Constants.STAR;
             Child = content;
-        } 
+        }
 
         #endregion
 
         #region Methods
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
 
             Uri uri = null;
 
-            var size = 0;
+            double size = 0;
 
             var starType = new Random().Next(1, 5);
 
@@ -55,11 +55,11 @@ namespace AstroOdyssey
                     break;
             }
 
-            Height = size;
-            Width = size;
+            Height = size * scale;
+            Width = size * scale;
 
             content.Source = new BitmapImage(uri);
-        } 
+        }
 
         #endregion
     }

@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -131,6 +132,7 @@ namespace AstroOdyssey
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
+        private bool FireLasers { get; set; } = false;
 
         #endregion
 
@@ -141,14 +143,20 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and laser loops.
         /// </summary>
-        private void StartGame()
+        private async void StartGame()
         {
             App.PlaySound(baseUrl, SoundType.GAME_START);
+
             SpawnPlayer();
-            SpawnStar();
+
             IsGameRunning = true;
-            RunGameView();
+
             RunStarView();
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            RunGameView();
+
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
@@ -170,6 +178,8 @@ namespace AstroOdyssey
 
                 PlayerX = Player.GetX();
 
+                PlayerWidthHalf = Player.Width / 2;
+
                 UpdateScore();
 
                 SpawnEnemy();
@@ -179,8 +189,6 @@ namespace AstroOdyssey
                 SpawnHealth();
 
                 SpawnPowerUp();
-
-                SpawnStar();
 
                 SpawnLaser(PowerUpTriggered);
 
@@ -211,19 +219,18 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Runs stars. Moves the stars.
+        /// </summary>
         private async void RunStarView()
         {
             StarViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
-            bool frameRenderable = true;
-
-            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync() && frameRenderable)
+            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync())
             {
-                frameRenderable = false;
-
                 UpdateStarView();
 
-                frameRenderable = true;
+                SpawnStar();
             }
         }
 
@@ -423,7 +430,10 @@ namespace AstroOdyssey
 
                         // if health object has gone below game view
                         if (health.GetY() > GameView.Height)
+                        {
                             GameView.AddDestroyableGameObject(health);
+                            return;
+                        }
 
                         if (Player.GetRect().Intersects(health.GetRect()))
                         {
@@ -441,7 +451,10 @@ namespace AstroOdyssey
 
                         // if PowerUp object has gone below game view
                         if (powerUp.GetY() > GameView.Height)
+                        {
                             GameView.AddDestroyableGameObject(powerUp);
+                            return;
+                        }
 
                         if (Player.GetRect().Intersects(powerUp.GetRect()))
                         {
@@ -471,6 +484,15 @@ namespace AstroOdyssey
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Gets scaling factor for a game object according to game view width.
+        /// </summary>
+        /// <returns></returns>
+        private double GetGameObjectScale()
+        {
+            return GameView.Width <= 500 ? 0.6 : (GameView.Width <= 700 ? 0.8 : (GameView.Width <= 800 ? 0.9 : 1));
         }
 
         #endregion
@@ -609,8 +631,8 @@ namespace AstroOdyssey
         private void SpawnPlayer()
         {
             Player = new Player();
-            Player.SetAttributes(PlayerSpeed);
-            Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX, gameEnvironment: GameView);
+            Player.SetAttributes(speed: PlayerSpeed, scale: GetGameObjectScale());
+            Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX - 35, gameEnvironment: GameView);
 
             PlayerWidthHalf = Player.Width / 2;
         }
@@ -637,28 +659,25 @@ namespace AstroOdyssey
         /// </summary>
         private void MovePlayer()
         {
-            var playerX = Player.GetX();
-            var playerWidthHalf = Player.Width / 2;
-
-            if (MoveLeft && playerX > 0)
+            if (MoveLeft && PlayerX > 0)
                 PointerX -= Player.Speed;
 
-            if (MoveRight && playerX + Player.Width < windowWidth)
+            if (MoveRight && PlayerX + Player.Width < windowWidth)
                 PointerX += Player.Speed;
 
             // move right
-            if (PointerX - playerWidthHalf > playerX + Player.Speed)
+            if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
             {
-                if (playerX + playerWidthHalf < windowWidth)
+                if (PlayerX + PlayerWidthHalf < windowWidth)
                 {
-                    SetPlayerX(playerX + Player.Speed);
+                    SetPlayerX(PlayerX + Player.Speed);
                 }
             }
 
             // move left
-            if (PointerX - playerWidthHalf < playerX - Player.Speed)
+            if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
             {
-                SetPlayerX(playerX - Player.Speed);
+                SetPlayerX(PlayerX - Player.Speed);
             }
         }
 
@@ -750,8 +769,11 @@ namespace AstroOdyssey
             if (laserCounter <= 0)
             {
                 // any object falls within player range
-                if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
+                if (FireLasers)
+                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
+                {
                     GenerateLaser(isPoweredUp: isPoweredUp);
+                }
 
                 laserCounter = LaserSpawnLimit;
             }
@@ -766,7 +788,7 @@ namespace AstroOdyssey
         {
             var newLaser = new Laser();
 
-            newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp);
+            newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GetGameObjectScale());
 
             newLaser.AddToGameEnvironment(top: Player.GetY() + 5, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
 
@@ -774,57 +796,6 @@ namespace AstroOdyssey
                 App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);
             else
                 App.PlaySound(baseUrl, SoundType.LASER_FIRE);
-        }
-
-        /// <summary>
-        /// Checks and performs laser collision.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        /// 
-        private void CheckLaserCollision(GameObject gameObject)
-        {
-            var lasers = GameView.GetGameObjects<Laser>().Where(laser => laser.GetRect().Intersects(gameObject.GetRect()));
-
-            if (lasers is not null && lasers.Any())
-            {
-                foreach (var laser in lasers)
-                {
-                    GameView.AddDestroyableGameObject(laser);
-
-                    // if laser is powered up then execute over kill
-                    if (laser.IsPoweredUp)
-                        gameObject.LooseHealth(gameObject.HealthSlot * 2);
-                    else
-                        gameObject.LooseHealth();
-
-                    // move backwards a bit on laser hit
-                    //gameObject.MoveY(gameObject.Speed * 4 / 2, YDirection.UP);
-
-                    // fade the a bit on laser hit
-                    gameObject.Fade();
-
-                    //App.PlaySound(SoundType.LASER_HIT);
-
-                    if (gameObject.HasNoHealth)
-                    {
-                        switch (gameObject.Tag)
-                        {
-                            case ENEMY:
-                                {
-                                    DestroyEnemy(gameObject as Enemy);
-                                }
-                                break;
-                            case METEOR:
-                                {
-                                    DestroyMeteor(gameObject as Meteor);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
         }
 
         #endregion
@@ -857,7 +828,7 @@ namespace AstroOdyssey
         {
             NewEnemy = new Enemy();
 
-            NewEnemy.SetAttributes(EnemySpeed + random.Next(0, 4));
+            NewEnemy.SetAttributes(speed: EnemySpeed + random.Next(0, 4), scale: GetGameObjectScale());
 
             var left = 0;
             var top = 0;
@@ -942,7 +913,7 @@ namespace AstroOdyssey
         {
             NewMeteor = new Meteor();
 
-            NewMeteor.SetAttributes(MeteorSpeed + random.NextDouble());
+            NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GetGameObjectScale());
             NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
         }
 
@@ -989,7 +960,7 @@ namespace AstroOdyssey
         {
             NewHealth = new Health();
 
-            NewHealth.SetAttributes(HealthSpeed + random.NextDouble());
+            NewHealth.SetAttributes(speed: HealthSpeed + random.NextDouble(), scale: GetGameObjectScale());
             NewHealth.AddToGameEnvironment(top: 0 - NewHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
 
             // change the next health spawn time
@@ -1024,7 +995,7 @@ namespace AstroOdyssey
         {
             NewPowerUp = new PowerUp();
 
-            NewPowerUp.SetAttributes(PowerUpSpeed + random.NextDouble());
+            NewPowerUp.SetAttributes(speed: PowerUpSpeed + random.NextDouble(), scale: GetGameObjectScale());
             NewPowerUp.AddToGameEnvironment(top: 0 - NewPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
 
             // change the next power up spawn time
@@ -1097,7 +1068,7 @@ namespace AstroOdyssey
         {
             NewStar = new Star();
 
-            NewStar.SetAttributes(StarSpeed);
+            NewStar.SetAttributes(speed: StarSpeed, scale: GetGameObjectScale());
 
             var top = 0 - NewStar.Height;
             var left = random.Next(10, (int)windowWidth - 10);
@@ -1133,63 +1104,55 @@ namespace AstroOdyssey
                 StarView.AddDestroyableGameObject(star);
         }
 
-        ///// <summary>
-        ///// Clears destroyable stars from the star view.
-        ///// </summary>
-        //private void ClearStarView()
-        //{
-        //    foreach (var star in StarView.GetDestroyableGameObjects())
-        //    {
-        //        StarView.RemoveGameObject(star);               
-        //    }
-
-        //    StarView.ClearDestroyableGameObjects();
-        //}
-
         #endregion
 
-        #region Movement Events
+        #region Input Events
 
         private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
+
+            FireLasers = true;
+        }
+
+        private void InputView_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            if (FireLasers)
+            {
+                var currentPoint = e.GetCurrentPoint(GameView);
+
+                PointerX = currentPoint.Position.X;
+            }
         }
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-
+            FireLasers = false;
         }
-
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Left)
+            switch (e.Key)
             {
-                //IsKeyboardPressed = true;
-                MoveLeft = true;
-            }
-
-            if (e.Key == Windows.System.VirtualKey.Right)
-            {
-                //IsKeyboardPressed = true;
-                MoveRight = true;
+                case Windows.System.VirtualKey.Left: { MoveLeft = true; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = true; } break;
+                case Windows.System.VirtualKey.Up: { FireLasers = true; } break;
+                default:
+                    break;
             }
         }
 
         private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Left)
+            switch (e.Key)
             {
-                //IsKeyboardPressed = false;
-                MoveLeft = false;
-            }
-
-            if (e.Key == Windows.System.VirtualKey.Right)
-            {
-                //IsKeyboardPressed = false;
-                MoveRight = false;
+                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
+                case Windows.System.VirtualKey.Up: { FireLasers = false; } break;
+                default:
+                    break;
             }
         }
 
@@ -1256,6 +1219,12 @@ namespace AstroOdyssey
             GameView.SetSize(windowHeight, windowWidth);
             StarView.SetSize(windowHeight, windowWidth);
             InputView.SetSize(windowHeight, windowWidth);
+
+            // resize player size
+            if (IsGameRunning)
+            {
+                Player.SetAttributes(speed: PlayerSpeed, scale: GetGameObjectScale());
+            }
         }
 
         /// <summary>

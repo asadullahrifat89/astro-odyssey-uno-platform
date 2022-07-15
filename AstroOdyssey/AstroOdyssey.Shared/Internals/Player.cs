@@ -46,8 +46,8 @@ namespace AstroOdyssey
             Tag = Constants.PLAYER;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Height = 130;
-            Width = 70;
+            Height = Constants.DefaultPlayerHeight;
+            Width = Constants.DefaultGameObjectSize;
 
             Health = 100;
             HealthSlot = 10;
@@ -74,7 +74,7 @@ namespace AstroOdyssey
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - 5);
         }
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
 
@@ -140,8 +140,12 @@ namespace AstroOdyssey
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            contentShipBlaze.Height = exhaustHeight;
+            contentShipBlaze.Height = exhaustHeight * scale;
             contentShipBlaze.Width = contentShip.Width;
+            contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
+
+            Height = Constants.DefaultPlayerHeight * scale;
+            Width = Constants.DefaultGameObjectSize * scale;
         }
 
         public void SetPowerGauge(double powerGauge)

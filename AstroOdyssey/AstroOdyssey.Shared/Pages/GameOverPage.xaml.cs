@@ -31,6 +31,7 @@ namespace AstroOdyssey
         private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.ScoreText.Text = "Your Score: " + App.GetScore();
+            this.PlayAgainButton.Focus(FocusState.Programmatic);
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

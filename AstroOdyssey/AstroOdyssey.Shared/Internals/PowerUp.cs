@@ -18,8 +18,8 @@ namespace AstroOdyssey
         public PowerUp()
         {
             Tag = Constants.POWERUP;
-            Height = 70;
-            Width = 70;
+            Height = Constants.DefaultGameObjectSize;
+            Width = Constants.DefaultGameObjectSize;
             Child = content;
             YDirection = YDirection.DOWN;
         } 
@@ -28,7 +28,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
 
@@ -36,6 +36,9 @@ namespace AstroOdyssey
             Health = 10;
 
             content.Source = new BitmapImage(uri);
+
+            Height = Constants.DefaultGameObjectSize * scale;
+            Width = Constants.DefaultGameObjectSize * scale;
         } 
 
         #endregion
