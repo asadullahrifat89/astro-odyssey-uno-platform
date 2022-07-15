@@ -45,8 +45,7 @@
             VerticalAlignment="Bottom"
             FontSize="20"
             FontWeight="Bold"
-            Foreground="White"
-            Text="Health:" />
+            Foreground="White" />
 
         <StackPanel
             Margin="0,25,0,0"

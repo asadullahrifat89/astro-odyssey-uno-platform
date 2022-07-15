@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -141,14 +142,20 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and laser loops.
         /// </summary>
-        private void StartGame()
+        private async void StartGame()
         {
             App.PlaySound(baseUrl, SoundType.GAME_START);
+
             SpawnPlayer();
-            SpawnStar();
+
             IsGameRunning = true;
-            RunGameView();
+
             RunStarView();
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            RunGameView();
+
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
@@ -180,8 +187,6 @@ namespace AstroOdyssey
 
                 SpawnPowerUp();
 
-                SpawnStar();
-
                 SpawnLaser(PowerUpTriggered);
 
                 MovePlayer();
@@ -211,19 +216,18 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Runs stars. Moves the stars.
+        /// </summary>
         private async void RunStarView()
         {
             StarViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
-            bool frameRenderable = true;
-
-            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync() && frameRenderable)
+            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync())
             {
-                frameRenderable = false;
-
                 UpdateStarView();
 
-                frameRenderable = true;
+                SpawnStar();
             }
         }
 
@@ -423,7 +427,10 @@ namespace AstroOdyssey
 
                         // if health object has gone below game view
                         if (health.GetY() > GameView.Height)
+                        {
                             GameView.AddDestroyableGameObject(health);
+                            return;
+                        }
 
                         if (Player.GetRect().Intersects(health.GetRect()))
                         {
@@ -441,7 +448,10 @@ namespace AstroOdyssey
 
                         // if PowerUp object has gone below game view
                         if (powerUp.GetY() > GameView.Height)
+                        {
                             GameView.AddDestroyableGameObject(powerUp);
+                            return;
+                        }
 
                         if (Player.GetRect().Intersects(powerUp.GetRect()))
                         {
@@ -610,7 +620,7 @@ namespace AstroOdyssey
         {
             Player = new Player();
             Player.SetAttributes(PlayerSpeed);
-            Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX, gameEnvironment: GameView);
+            Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX - 35, gameEnvironment: GameView);
 
             PlayerWidthHalf = Player.Width / 2;
         }
