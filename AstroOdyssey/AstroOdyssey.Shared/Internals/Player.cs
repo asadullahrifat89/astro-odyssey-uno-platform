@@ -144,13 +144,15 @@ namespace AstroOdyssey
             contentShipBlaze.Width = contentShip.Width;
             contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
+            contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
+
             Height = Constants.DefaultPlayerHeight * scale;
             Width = Constants.DefaultGameObjectSize * scale;
         }
 
         public void SetPowerGauge(double powerGauge)
         {
-            contentShipPowerGauge.Width = powerGauge * 10;
+            contentShipPowerGauge.Width = powerGauge * 3;
         }
 
         public void TriggerPowerUp()

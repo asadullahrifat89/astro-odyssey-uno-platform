@@ -78,7 +78,7 @@ namespace AstroOdyssey
 
         private double StarSpeed { get; set; } = 0.1d;
 
-        private double PlayerSpeed { get; set; } = 15;
+        private double PlayerSpeed { get; set; } = 12;
 
         private int FrameStatUpdateLimit { get; set; } = 5;
 
@@ -1026,7 +1026,7 @@ namespace AstroOdyssey
             {
                 powerUpTriggerCounter -= 1;
 
-                var powerGauge = (double)(powerUpTriggerCounter / 100) + 1;
+                var powerGauge = ((powerUpTriggerCounter / 100) + 1) * GetGameObjectScale();
 
                 Player.SetPowerGauge(powerGauge);
 
