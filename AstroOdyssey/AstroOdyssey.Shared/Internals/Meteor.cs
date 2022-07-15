@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
             MarkedForFadedRemoval = false;
@@ -81,6 +81,8 @@ namespace AstroOdyssey
             }
 
             content.Source = new BitmapImage(uri);
+
+            RenderScale(scale);
         }
 
         #endregion

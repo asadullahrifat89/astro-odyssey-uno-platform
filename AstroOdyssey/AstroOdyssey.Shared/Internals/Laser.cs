@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false)
+        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false, double scale = 1)
         {
             Speed = speed;
            
@@ -91,6 +91,8 @@ namespace AstroOdyssey
                 Background = new SolidColorBrush(Colors.Goldenrod);
             else
                 Background = new SolidColorBrush(Colors.White);
+
+            RenderScale(scale);
         }
 
         #endregion

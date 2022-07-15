@@ -74,7 +74,7 @@ namespace AstroOdyssey
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - 5);
         }
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
 
@@ -142,6 +142,8 @@ namespace AstroOdyssey
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
             contentShipBlaze.Height = exhaustHeight;
             contentShipBlaze.Width = contentShip.Width;
+
+            RenderScale(scale);
         }
 
         public void SetPowerGauge(double powerGauge)

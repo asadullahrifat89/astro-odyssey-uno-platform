@@ -28,7 +28,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed)
+        public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
 
@@ -36,6 +36,7 @@ namespace AstroOdyssey
             Health = 10;
 
             content.Source = new BitmapImage(uri);
+            RenderScale(scale);
         } 
 
         #endregion
