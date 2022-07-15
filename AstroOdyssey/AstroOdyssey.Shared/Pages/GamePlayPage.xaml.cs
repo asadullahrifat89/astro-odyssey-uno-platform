@@ -132,6 +132,7 @@ namespace AstroOdyssey
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
+        private bool FireLasers { get; set; } = false;
 
         #endregion
 
@@ -760,8 +761,11 @@ namespace AstroOdyssey
             if (laserCounter <= 0)
             {
                 // any object falls within player range
-                if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
+                if(FireLasers)
+                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
+                {
                     GenerateLaser(isPoweredUp: isPoweredUp);
+                }
 
                 laserCounter = LaserSpawnLimit;
             }
@@ -1158,48 +1162,53 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Movement Events
+        #region Input Events
 
         private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             var currentPoint = e.GetCurrentPoint(GameView);
 
             PointerX = currentPoint.Position.X;
+
+            FireLasers = true;
+        }
+
+        private void InputView_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            if (FireLasers)
+            {
+                var currentPoint = e.GetCurrentPoint(GameView);
+
+                PointerX = currentPoint.Position.X;
+            }
         }
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-
+            FireLasers = false;
         }
-
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Left)
+            switch (e.Key)
             {
-                //IsKeyboardPressed = true;
-                MoveLeft = true;
-            }
-
-            if (e.Key == Windows.System.VirtualKey.Right)
-            {
-                //IsKeyboardPressed = true;
-                MoveRight = true;
+                case Windows.System.VirtualKey.Left: { MoveLeft = true; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = true; } break;
+                case Windows.System.VirtualKey.Up: { FireLasers = true; } break;
+                default:
+                    break;
             }
         }
 
         private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Left)
+            switch (e.Key)
             {
-                //IsKeyboardPressed = false;
-                MoveLeft = false;
-            }
-
-            if (e.Key == Windows.System.VirtualKey.Right)
-            {
-                //IsKeyboardPressed = false;
-                MoveRight = false;
+                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
+                case Windows.System.VirtualKey.Up: { FireLasers = false; } break;
+                default:
+                    break;
             }
         }
 
