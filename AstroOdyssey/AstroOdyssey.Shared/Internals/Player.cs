@@ -152,7 +152,7 @@ namespace AstroOdyssey
 
         public void SetPowerGauge(double powerGauge)
         {
-            contentShipPowerGauge.Width = powerGauge * 5;
+            contentShipPowerGauge.Width = powerGauge * 3;
         }
 
         public void TriggerPowerUp()
