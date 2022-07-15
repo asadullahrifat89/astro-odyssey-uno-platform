@@ -29,7 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\NavigationSyncHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
@@ -47,7 +47,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
