@@ -492,7 +492,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         private double GetGameObjectScale()
         {
-            return GameView.Width < 500 ? 0.5 : (GameView.Width < 700 ? 0.7 : 1);
+            return GameView.Width <= 500 ? 0.6 : (GameView.Width <= 700 ? 0.8 : (GameView.Width <= 800 ? 0.9 : 1));
         }
 
         #endregion
@@ -1219,6 +1219,12 @@ namespace AstroOdyssey
             GameView.SetSize(windowHeight, windowWidth);
             StarView.SetSize(windowHeight, windowWidth);
             InputView.SetSize(windowHeight, windowWidth);
+
+            // resize player size
+            if (IsGameRunning)
+            {
+                Player.SetAttributes(speed: PlayerSpeed, scale: GetGameObjectScale());
+            }
         }
 
         /// <summary>
