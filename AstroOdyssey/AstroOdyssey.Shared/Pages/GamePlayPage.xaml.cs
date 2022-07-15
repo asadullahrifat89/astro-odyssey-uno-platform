@@ -330,6 +330,46 @@ namespace AstroOdyssey
                         // remove laser if outside game canvas
                         if (laser.GetY() < 10)
                             GameView.AddDestroyableGameObject(laser);
+
+                        var laserBounds = laser.GetRect();
+
+                        // get the destructible objects which intersect with the current laser
+                        var destructibles = GameView.GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.GetRect().Intersects(laserBounds));
+
+                        foreach (var destructible in destructibles)
+                        {
+                            GameView.AddDestroyableGameObject(laser);
+
+                            // if laser is powered up then execute over kill
+                            if (laser.IsPoweredUp)
+                                destructible.LooseHealth(destructible.HealthSlot * 2);
+                            else
+                                destructible.LooseHealth();
+
+                            // fade the a bit on laser hit
+                            destructible.Fade();
+
+                            //App.PlaySound(SoundType.LASER_HIT);
+
+                            if (destructible.HasNoHealth)
+                            {
+                                switch (destructible.Tag)
+                                {
+                                    case ENEMY:
+                                        {
+                                            DestroyEnemy(destructible as Enemy);
+                                        }
+                                        break;
+                                    case METEOR:
+                                        {
+                                            DestroyMeteor(destructible as Meteor);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        }
                     }
                     break;
                 case ENEMY:
@@ -351,9 +391,6 @@ namespace AstroOdyssey
                         // check if enemy collides with player
                         if (PlayerCollision(enemy))
                             return;
-
-                        // perform laser collisions
-                        CheckLaserCollision(enemy);
                     }
                     break;
                 case METEOR:
@@ -375,9 +412,6 @@ namespace AstroOdyssey
                         // check if meteor collides with player
                         if (PlayerCollision(meteor))
                             return;
-
-                        // perform laser collisions
-                        CheckLaserCollision(meteor);
                     }
                     break;
                 case HEALTH:
