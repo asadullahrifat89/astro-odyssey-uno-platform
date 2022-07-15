@@ -66,7 +66,6 @@
             FontSize="18"
             FontWeight="Bold"
             Foreground="White"
-            Text="Score:"
             TextAlignment="Center" />
 
         <!--  This shows player health  -->
