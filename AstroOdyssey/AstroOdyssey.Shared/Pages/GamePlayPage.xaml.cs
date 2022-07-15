@@ -1111,19 +1111,19 @@ namespace AstroOdyssey
 
         #region Input Events
 
-        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            var currentPoint = e.GetCurrentPoint(GameView);
+        //private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        //{
+        //    var currentPoint = e.GetCurrentPoint(GameView);
 
-            PointerX = currentPoint.Position.X;
+        //    PointerX = currentPoint.Position.X;
 
-            FireLasers = true;
-        }
+        //    FireLasers = true;
+        //}
 
-        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FireLasers = false;
-        }
+        //private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        //{
+        //    FireLasers = false;
+        //}
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -1141,8 +1141,8 @@ namespace AstroOdyssey
         {
             switch (e.Key)
             {
-                case Windows.System.VirtualKey.Left: { MoveLeft = false; MoveRight = false; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = false; MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
                 case Windows.System.VirtualKey.Up: { FireLasers = false; } break;
                 default:
                     break;
@@ -1160,7 +1160,7 @@ namespace AstroOdyssey
         {
             FireLasers = true;
             MoveLeft = false;
-            MoveRight = false;
+            //MoveRight = false;
         }
 
         private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -1174,7 +1174,7 @@ namespace AstroOdyssey
         {
             FireLasers = true;
             MoveRight = false;
-            MoveLeft = false;
+            //MoveLeft = false;
         }
 
         #endregion
