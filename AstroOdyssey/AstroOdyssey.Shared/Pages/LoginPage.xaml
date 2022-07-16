@@ -15,7 +15,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
-
+            <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,50"
                 HorizontalAlignment="Center"
@@ -23,7 +23,6 @@
                 FontSize="45"
                 FontWeight="Bold"
                 Text="Astro Odyssey" />
-
             <TextBlock
                 Margin="10"
                 HorizontalAlignment="Center"
@@ -42,6 +41,7 @@
                 Header="Password"
                 KeyDown="PasswordBox_KeyDown"
                 TextChanged="PasswordBox_TextChanged" />
+            <!--  Login button  -->
             <Button
                 x:Name="LoginButton"
                 Width="100"

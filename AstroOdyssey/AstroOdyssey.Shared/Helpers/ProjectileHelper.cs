@@ -105,9 +105,11 @@ namespace AstroOdyssey
         {
             var newProjectile = new Projectile();
 
-            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, scale: gameEnvironment.GetGameObjectScale());
+            var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.AddToGameEnvironment(top: player.GetY() + 5, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, scale: scale);
+
+            newProjectile.AddToGameEnvironment(top: player.GetY() + 5 * scale - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
 
             if (newProjectile.IsPoweredUp)
                 App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);

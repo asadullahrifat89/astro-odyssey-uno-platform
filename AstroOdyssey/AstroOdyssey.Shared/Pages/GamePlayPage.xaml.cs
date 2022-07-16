@@ -113,9 +113,16 @@ namespace AstroOdyssey
 
             SpawnPlayer();
 
-            IsGameRunning = true;
-
             SetPlayerY();
+
+            UpdateScore();
+
+            while (showInGameTextCounter > 0)
+            {
+                HideInGameText();
+            }
+
+            IsGameRunning = true;
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
