@@ -40,6 +40,8 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
+        private readonly StarHelper _starHelper;
+
         #endregion
 
         #region Ctor
@@ -52,6 +54,8 @@ namespace AstroOdyssey
             Unloaded += GamePage_Unloaded;
 
             SetWindowSize();
+
+            _starHelper = new StarHelper(StarView);
         }
 
         #endregion
@@ -486,15 +490,6 @@ namespace AstroOdyssey
             return false;
         }
 
-        /// <summary>
-        /// Gets scaling factor for a game object according to game view width.
-        /// </summary>
-        /// <returns></returns>
-        private double GetGameObjectScale()
-        {
-            return GameView.Width <= 500 ? 0.6 : (GameView.Width <= 700 ? 0.8 : (GameView.Width <= 800 ? 0.9 : 1));
-        }
-
         #endregion
 
         #region Frame Methods      
@@ -632,7 +627,7 @@ namespace AstroOdyssey
         {
             Player = new Player();
 
-            var scale = GetGameObjectScale();
+            var scale = GameView.GetGameObjectScale();
 
             Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
             Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX - 35, gameEnvironment: GameView);
@@ -791,7 +786,7 @@ namespace AstroOdyssey
         {
             var newProjectile = new Projectile();
 
-            newProjectile.SetAttributes(speed: ProjectileSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GetGameObjectScale());
+            newProjectile.SetAttributes(speed: ProjectileSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GameView.GetGameObjectScale());
 
             newProjectile.AddToGameEnvironment(top: Player.GetY() + 5, left: Player.GetX() + Player.Width / 2 - newProjectile.Width / 2, gameEnvironment: GameView);
 
@@ -831,7 +826,7 @@ namespace AstroOdyssey
         {
             NewEnemy = new Enemy();
 
-            NewEnemy.SetAttributes(speed: EnemySpeed + random.Next(0, 4), scale: GetGameObjectScale());
+            NewEnemy.SetAttributes(speed: EnemySpeed + random.Next(0, 4), scale: GameView.GetGameObjectScale());
 
             var left = 0;
             var top = 0;
@@ -916,7 +911,7 @@ namespace AstroOdyssey
         {
             NewMeteor = new Meteor();
 
-            NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GetGameObjectScale());
+            NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
             NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
         }
 
@@ -963,7 +958,7 @@ namespace AstroOdyssey
         {
             NewHealth = new Health();
 
-            NewHealth.SetAttributes(speed: HealthSpeed + random.NextDouble(), scale: GetGameObjectScale());
+            NewHealth.SetAttributes(speed: HealthSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
             NewHealth.AddToGameEnvironment(top: 0 - NewHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
 
             // change the next health spawn time
@@ -998,7 +993,7 @@ namespace AstroOdyssey
         {
             NewPowerUp = new PowerUp();
 
-            NewPowerUp.SetAttributes(speed: PowerUpSpeed + random.NextDouble(), scale: GetGameObjectScale());
+            NewPowerUp.SetAttributes(speed: PowerUpSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
             NewPowerUp.AddToGameEnvironment(top: 0 - NewPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
 
             // change the next power up spawn time
@@ -1029,7 +1024,7 @@ namespace AstroOdyssey
             {
                 powerUpTriggerCounter -= 1;
 
-                var powerGauge = ((powerUpTriggerCounter / 100) + 1) * GetGameObjectScale();
+                var powerGauge = ((powerUpTriggerCounter / 100) + 1) * GameView.GetGameObjectScale();
 
                 Player.SetPowerGauge(powerGauge);
 
@@ -1059,24 +1054,9 @@ namespace AstroOdyssey
             // when counter reaches zero, create an star
             if (starCounter < 0)
             {
-                GenerateStar();
+                _starHelper.GenerateStar(StarSpeed);
                 starCounter = StarSpawnLimit;
             }
-        }
-
-        /// <summary>
-        /// Generates a random star.
-        /// </summary>
-        private void GenerateStar()
-        {
-            NewStar = new Star();
-
-            NewStar.SetAttributes(speed: StarSpeed, scale: GetGameObjectScale());
-
-            var top = 0 - NewStar.Height;
-            var left = random.Next(10, (int)windowWidth - 10);
-
-            NewStar.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
         }
 
         /// <summary>
@@ -1245,7 +1225,7 @@ namespace AstroOdyssey
             {
                 MoveLeft = false; MoveRight = false;
 
-                var scale = GetGameObjectScale();
+                var scale = GameView.GetGameObjectScale();
 
                 Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
             }

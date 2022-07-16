@@ -13,6 +13,15 @@ namespace AstroOdyssey
 
         }
 
+        /// <summary>
+        /// Gets scaling factor for a game object according to game view width.
+        /// </summary>
+        /// <returns></returns>
+        public double GetGameObjectScale()
+        {
+            return Width <= 500 ? 0.6 : (Width <= 700 ? 0.8 : (Width <= 800 ? 0.9 : 1));
+        }
+
         public void SetSize(double height, double width)
         {
             Height = height;
