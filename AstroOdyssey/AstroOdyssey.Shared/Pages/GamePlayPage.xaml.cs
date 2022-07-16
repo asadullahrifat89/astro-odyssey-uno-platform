@@ -32,7 +32,6 @@ namespace AstroOdyssey
         private int projectileCounter;
         private int enemyCounter;
         private int meteorCounter;
-        private int rotatedEnemySpawnCounter = 10;
         private int healthCounter;
         private int starCounter;
         private int playerDamagedOpacityCounter;
@@ -42,6 +41,7 @@ namespace AstroOdyssey
 
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
+        private readonly EnemyHelper _enemyHelper;
 
         #endregion
 
@@ -55,9 +55,11 @@ namespace AstroOdyssey
             Unloaded += GamePage_Unloaded;
 
             SetWindowSize();
+            GetBaseUrl();
 
             _starHelper = new StarHelper(StarView);
-            _meteorHelper = new MeteorHelper(GameView);
+            _meteorHelper = new MeteorHelper(GameView, baseUrl);
+            _enemyHelper = new EnemyHelper(GameView, baseUrl);
         }
 
         #endregion
@@ -106,8 +108,6 @@ namespace AstroOdyssey
 
         private int ShowInGameTextLimit { get; set; } = 100;
 
-        private int RotatedEnemySpawnLimit { get; set; } = 10;
-
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
@@ -130,11 +130,8 @@ namespace AstroOdyssey
 
         private Player Player { get; set; }
 
-        private Enemy NewEnemy { get; set; }
-        private Meteor NewMeteor { get; set; }
         private Health NewHealth { get; set; }
         private PowerUp NewPowerUp { get; set; }
-        private Star NewStar { get; set; }
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
@@ -370,12 +367,14 @@ namespace AstroOdyssey
                                 {
                                     case ENEMY:
                                         {
-                                            DestroyEnemy(destructible as Enemy);
+                                            Score += 2;
+                                            _enemyHelper.DestroyEnemy(destructible as Enemy);
                                         }
                                         break;
                                     case METEOR:
                                         {
-                                            DestroyMeteor(destructible as Meteor);
+                                            Score++;
+                                            _meteorHelper.DestroyMeteor(destructible as Meteor);
                                         }
                                         break;
                                     default:
@@ -492,6 +491,13 @@ namespace AstroOdyssey
             return false;
         }
 
+        private void GetBaseUrl()
+        {
+            var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
+            var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
+            baseUrl = $"{indexUrl}{appPackage}";
+        }
+
         #endregion
 
         #region Frame Methods      
@@ -543,15 +549,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PlayerScoreByEnemyDestruction()
         {
-            Score += 2;
-        }
 
-        /// <summary>
-        /// Increase player score if a meteor was destroyed.
-        /// </summary>
-        private void PlayerScoreByMeteorDestruction()
-        {
-            Score++;
         }
 
         #endregion
@@ -813,74 +811,9 @@ namespace AstroOdyssey
             // when counter reaches zero, create an enemy
             if (enemyCounter < 0)
             {
-                GenerateEnemy();
-
-                rotatedEnemySpawnCounter -= 1;
-
+                _enemyHelper.GenerateEnemy(EnemySpeed, GameLevel);
                 enemyCounter = EnemySpawnLimit;
             }
-        }
-
-        /// <summary>
-        /// Generates a random enemy.
-        /// </summary>
-        private void GenerateEnemy()
-        {
-            NewEnemy = new Enemy();
-
-            NewEnemy.SetAttributes(speed: EnemySpeed + random.Next(0, 4), scale: GameView.GetGameObjectScale());
-
-            var left = 0;
-            var top = 0;
-
-            // when not noob anymore enemy moves sideways
-            if ((int)GameLevel > 0 && rotatedEnemySpawnCounter <= 0)
-            {
-                NewEnemy.XDirection = (XDirection)random.Next(1, 3);
-                rotatedEnemySpawnCounter = RotatedEnemySpawnLimit;
-
-                switch (NewEnemy.XDirection)
-                {
-                    case XDirection.LEFT:
-                        NewEnemy.Rotation = 50;
-                        left = (int)windowWidth;
-                        break;
-                    case XDirection.RIGHT:
-                        left = 0 - (int)NewEnemy.Width + 10;
-                        NewEnemy.Rotation = -50;
-                        break;
-                    default:
-                        break;
-                }
-
-#if DEBUG
-                Console.WriteLine("Enemy XDirection: " + NewEnemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-#endif
-                top = random.Next(0, (int)GameView.Height / 3);
-                NewEnemy.Rotate();
-
-                RotatedEnemySpawnLimit = random.Next(5, 15);
-            }
-            else
-            {
-                left = random.Next(10, (int)windowWidth - 70);
-                top = 0 - (int)NewEnemy.Height;
-            }
-
-            NewEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
-        }
-
-        /// <summary>
-        /// Destroys an enemy. Removes from game environment, increases player score, plays sound effect.
-        /// </summary>
-        /// <param name="meteor"></param>
-        private void DestroyEnemy(Enemy enemy)
-        {
-            enemy.MarkedForFadedRemoval = true;
-
-            PlayerScoreByEnemyDestruction();
-
-            App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
         #endregion
@@ -904,30 +837,6 @@ namespace AstroOdyssey
                     meteorCounter = MeteorSpawnLimit;
                 }
             }
-        }
-
-        ///// <summary>
-        ///// Generates a random meteor.
-        ///// </summary>
-        //private void GenerateMeteor()
-        //{
-        //    NewMeteor = new Meteor();
-
-        //    NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
-        //    NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
-        //}
-
-        /// <summary>
-        /// Destroys a meteor. Removes from game environment, increases player score, plays sound effect.
-        /// </summary>
-        /// <param name="meteor"></param>
-        private void DestroyMeteor(Meteor meteor)
-        {
-            meteor.MarkedForFadedRemoval = true;
-
-            PlayerScoreByMeteorDestruction();
-
-            App.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
         }
 
         #endregion
@@ -1170,14 +1079,10 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
-            var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
-            var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-
             this.SizeChanged += GamePage_SizeChanged;
-            baseUrl = $"{indexUrl}{appPackage}";
-
+#if DEBUG
             Console.WriteLine(baseUrl);
-
+#endif
             StartGame();
         }
 
