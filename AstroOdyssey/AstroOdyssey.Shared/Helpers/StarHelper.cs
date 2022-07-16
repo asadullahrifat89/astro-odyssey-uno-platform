@@ -12,6 +12,7 @@ namespace AstroOdyssey
 
         private int starCounter;
         private int starSpawnLimit = 100;
+        private double starSpeed = 0.1d;
 
         #endregion
 
@@ -27,9 +28,17 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
+        /// Levels up stars.
+        /// </summary>
+        public void LevelUp()
+        {
+            starSpeed += 0.1d;
+        }
+
+        /// <summary>
         /// Spawns random stars in the star view.
         /// </summary>
-        public void SpawnStar(double starSpeed)
+        public void SpawnStar()
         {
             // each frame progress decreases this counter
             starCounter -= 1;
@@ -37,7 +46,7 @@ namespace AstroOdyssey
             // when counter reaches zero, create an star
             if (starCounter < 0)
             {
-                GenerateStar(starSpeed);
+                GenerateStar();
                 starCounter = starSpawnLimit;
             }
         }
@@ -45,7 +54,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Generates a random star.
         /// </summary>
-        public void GenerateStar(double starSpeed)
+        public void GenerateStar()
         {
             var newStar = new Star();
 
@@ -61,7 +70,7 @@ namespace AstroOdyssey
         /// Updates the star objects. Moves the stars.
         /// </summary>
         /// <param name="star"></param>
-        public void UpdateStar(double starSpeed, Star star)
+        public void UpdateStar(Star star)
         {
             // move star down
             star.MoveY(starSpeed);

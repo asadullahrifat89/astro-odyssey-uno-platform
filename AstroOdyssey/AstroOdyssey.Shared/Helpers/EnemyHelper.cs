@@ -18,6 +18,7 @@ namespace AstroOdyssey
 
         private int enemyCounter;
         private int enemySpawnLimit = 50;
+        private double enemySpeed = 2;
 
         #endregion
 
@@ -34,9 +35,18 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
+        /// Levels up enemies.
+        /// </summary>
+        public void LevelUp() 
+        {
+            enemySpawnLimit -= 2;
+            enemySpeed += 1;
+        }
+
+        /// <summary>
         /// Spawns an enemy.
         /// </summary>
-        public void SpawnEnemy(double enemySpeed, GameLevel gameLevel)
+        public void SpawnEnemy(GameLevel gameLevel)
         {
             // each frame progress decreases this counter
             enemyCounter -= 1;
@@ -44,7 +54,7 @@ namespace AstroOdyssey
             // when counter reaches zero, create an enemy
             if (enemyCounter < 0)
             {
-                GenerateEnemy(enemySpeed, gameLevel);
+                GenerateEnemy(gameLevel);
                 enemyCounter = enemySpawnLimit;
             }
         }
@@ -52,7 +62,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Generates a random Enemy.
         /// </summary>
-        public void GenerateEnemy(double enemySpeed, GameLevel gameLevel)
+        public void GenerateEnemy(GameLevel gameLevel)
         {
             var newEnemy = new Enemy();
 

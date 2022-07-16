@@ -16,6 +16,7 @@ namespace AstroOdyssey
         private int meteorCounter;
 
         private int meteorSpawnLimit = 55;
+        private double meteorSpeed = 1.5;
 
         #endregion
 
@@ -32,9 +33,18 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
+        /// Levels up meteors.
+        /// </summary>
+        public void LevelUp()
+        {
+            meteorSpawnLimit -= 2;
+            meteorSpeed += 1;
+        }
+
+        /// <summary>
         /// Spawns a meteor.
         /// </summary>
-        public void SpawnMeteor(double meteorSpeed, GameLevel gameLevel)
+        public void SpawnMeteor(GameLevel gameLevel)
         {
             if ((int)gameLevel > 0)
             {
@@ -44,7 +54,7 @@ namespace AstroOdyssey
                 // when counter reaches zero, create a meteor
                 if (meteorCounter < 0)
                 {
-                    GenerateMeteor(meteorSpeed);
+                    GenerateMeteor();
                     meteorCounter = meteorSpawnLimit;
                 }
             }
@@ -53,7 +63,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Generates a random meteor.
         /// </summary>
-        public void GenerateMeteor(double meteorSpeed)
+        public void GenerateMeteor()
         {
             var NewMeteor = new Meteor();
 

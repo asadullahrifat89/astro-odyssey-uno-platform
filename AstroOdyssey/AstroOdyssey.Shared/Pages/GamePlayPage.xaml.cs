@@ -30,7 +30,6 @@ namespace AstroOdyssey
         private int powerUpTriggerCounter;
         private int projectileCounter;
 
-        private int starCounter;
         private int playerDamagedOpacityCounter;
         private int showInGameTextCounter;
 
@@ -75,16 +74,6 @@ namespace AstroOdyssey
 
         private double ProjectileSpeed { get; set; } = 18;
 
-        private double EnemySpeed { get; set; } = 2;
-
-        private double MeteorSpeed { get; set; } = 1.5;
-
-        private double HealthSpeed { get; set; } = 2;
-
-        private double PowerUpSpeed { get; set; } = 2;
-
-        private double StarSpeed { get; set; } = 0.1d;
-
         private double PlayerSpeed { get; set; } = 12;
 
         private int FrameStatUpdateLimit { get; set; } = 5;
@@ -92,12 +81,6 @@ namespace AstroOdyssey
         private int ProjectileSpawnLimit { get; set; } = 16;
 
         private int PowerUpTriggerLimit { get; set; } = 1000;
-
-        private int EnemySpawnLimit { get; set; } = 50;
-
-        private int MeteorSpawnLimit { get; set; } = 55;
-
-        private int StarSpawnLimit { get; set; } = 100;
 
         private int PlayerDamagedOpacityLimit { get; set; } = 100;
 
@@ -195,13 +178,13 @@ namespace AstroOdyssey
 
                 SetFrameAnalytics();
 
-                _enemyHelper.SpawnEnemy(EnemySpeed, GameLevel);
+                _enemyHelper.SpawnEnemy(GameLevel);
 
-                _meteorHelper.SpawnMeteor(MeteorSpeed, GameLevel);
+                _meteorHelper.SpawnMeteor(GameLevel);
 
-                _healthHelper.SpawnHealth(Player, HealthSpeed);
+                _healthHelper.SpawnHealth(Player);
 
-                _powerUpHelper.SpawnPowerUp(PowerUpSpeed);
+                _powerUpHelper.SpawnPowerUp();
 
                 SpawnProjectile(PowerUpTriggered);
 
@@ -223,7 +206,7 @@ namespace AstroOdyssey
             {
                 UpdateStarView();
 
-                _starHelper.SpawnStar(StarSpeed);
+                _starHelper.SpawnStar();
             }
         }
 
@@ -529,18 +512,17 @@ namespace AstroOdyssey
                     break;
                 default:
                     {
-                        EnemySpawnLimit -= 2;
-                        EnemySpeed += 1;
+                        _enemyHelper.LevelUp();
 
-                        MeteorSpawnLimit -= 2;
-                        MeteorSpeed += 1;
+                        _meteorHelper.LevelUp();
+
+                        _healthHelper.LevelUp();
+
+                        _powerUpHelper.LevelUp();
 
                         ProjectileSpawnLimit -= 1;
 
-                        HealthSpeed += 1;
-                        PowerUpSpeed += 1;
-
-                        StarSpeed += 0.1d;
+                        _starHelper.LevelUp();
                     }
                     break;
             }
@@ -818,7 +800,7 @@ namespace AstroOdyssey
 
             foreach (var star in starObjects)
             {
-                _starHelper.UpdateStar(StarSpeed, star as Star);
+                _starHelper.UpdateStar(star as Star);
             }
 
             StarView.RemoveDestroyableGameObjects();

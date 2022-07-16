@@ -14,6 +14,7 @@ namespace AstroOdyssey
 
         private int powerUpCounter = 1500;
         private int powerUpSpawnLimit = 1500;
+        private double powerUpSpeed = 2;
 
         #endregion
 
@@ -30,9 +31,17 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
+        /// Levels up power ups.
+        /// </summary>
+        public void LevelUp()
+        {
+            powerUpSpeed += 1;
+        }
+
+        /// <summary>
         /// Spawns a PowerUp.
         /// </summary>
-        public void SpawnPowerUp(double powerUpSpeed)
+        public void SpawnPowerUp()
         {
             // each frame progress decreases this counter
             powerUpCounter -= 1;
@@ -40,20 +49,19 @@ namespace AstroOdyssey
             // when counter reaches zero, create a PowerUp
             if (powerUpCounter < 0)
             {
-                GeneratePowerUp(powerUpSpeed);
+                GeneratePowerUp();
                 powerUpCounter = powerUpSpawnLimit;
             }
-
         }
 
         /// <summary>
         /// Generates a random PowerUp.
         /// </summary>
-        public void GeneratePowerUp(double PowerUpSpeed)
+        public void GeneratePowerUp()
         {
             var newPowerUp = new PowerUp();
 
-            newPowerUp.SetAttributes(speed: PowerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
+            newPowerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
             newPowerUp.AddToGameEnvironment(top: 0 - newPowerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             // change the next power up spawn time

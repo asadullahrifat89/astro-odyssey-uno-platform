@@ -14,6 +14,7 @@ namespace AstroOdyssey
 
         private int healthCounter;
         private int healthSpawnLimit = 1000;
+        private double healthSpeed = 2;
 
         #endregion
 
@@ -30,9 +31,17 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
+        /// Levels up healths.
+        /// </summary>
+        public void LevelUp()
+        {
+            healthSpeed += 1;
+        }
+
+        /// <summary>
         /// Spawns a Health.
         /// </summary>
-        public void SpawnHealth(Player player, double healthSpeed)
+        public void SpawnHealth(Player player)
         {
             if (player.Health <= 60)
             {
@@ -42,7 +51,7 @@ namespace AstroOdyssey
                 // when counter reaches zero, create a Health
                 if (healthCounter < 0)
                 {
-                    GenerateHealth(healthSpeed);
+                    GenerateHealth();
                     healthCounter = healthSpawnLimit;
                 }
             }
@@ -51,7 +60,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Generates a random Health.
         /// </summary>
-        public void GenerateHealth(double healthSpeed)
+        public void GenerateHealth()
         {
             var NewHealth = new Health();
 
