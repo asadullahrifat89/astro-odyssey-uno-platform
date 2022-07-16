@@ -17,6 +17,12 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
+        private readonly int DEADSHOT_ROUNDS_LIMIT = 30;
+        private readonly int DEADSHOT_ROUNDS_SPEED = 10;
+
+        private readonly int RAPIDSHOT_ROUNDS_LIMIT = 1;
+        private readonly int RAPIDSHOT_ROUNDS_SPEED = 1;
+
         #endregion
 
         #region Ctor
@@ -42,13 +48,14 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= 1; // fast hit
+                        projectileSpawnLimit -= RAPIDSHOT_ROUNDS_LIMIT; // fast firing rate
+                        projectileSpeed += RAPIDSHOT_ROUNDS_SPEED; // fast projectile
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += 30; // slow but deals 3 times the damage
-                        projectileSpeed -= 10;
+                        projectileSpawnLimit += DEADSHOT_ROUNDS_LIMIT; // slow firing rate
+                        projectileSpeed -= DEADSHOT_ROUNDS_SPEED; // slow projectile
                     }
                     break;
                 default:
@@ -67,13 +74,14 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += 1;
+                        projectileSpawnLimit += RAPIDSHOT_ROUNDS_LIMIT;
+                        projectileSpeed -= RAPIDSHOT_ROUNDS_SPEED;
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= 30;
-                        projectileSpeed += 10;
+                        projectileSpawnLimit -= DEADSHOT_ROUNDS_LIMIT;
+                        projectileSpeed += DEADSHOT_ROUNDS_SPEED;
                     }
                     break;
                 default:
