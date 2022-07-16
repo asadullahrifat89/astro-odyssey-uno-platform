@@ -74,7 +74,7 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
-            if ((int)gameLevel > 0 && rotatedMeteorSpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_2 && rotatedMeteorSpawnCounter <= 0)
             {
                 newMeteor.XDirection = (XDirection)random.Next(1, 3);
                 rotatedMeteorSpawnCounter = rotatedMeteorSpawnLimit;
@@ -82,10 +82,10 @@ namespace AstroOdyssey
                 switch (newMeteor.XDirection)
                 {
                     case XDirection.LEFT:
-                        newMeteor.Rotation = random.NextDouble() + 1 * -1;
+                        newMeteor.Rotation = random.NextDouble() + 1 * -1;                        
                         left = gameEnvironment.Width;
                         break;
-                    case XDirection.RIGHT:                       
+                    case XDirection.RIGHT:
                         newMeteor.Rotation = random.NextDouble() + 1;
                         left = 0 - newMeteor.Width + 10;
                         break;
@@ -93,17 +93,19 @@ namespace AstroOdyssey
                         break;
                 }
 
+                newMeteor.Speed++;
 #if DEBUG
                 Console.WriteLine("Meteor XDirection: " + newMeteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
 #endif
                 top = random.Next(0, (int)gameEnvironment.Height / 3);
                 newMeteor.Rotate();
 
+                // randomize next x flying meteor pop up
                 rotatedMeteorSpawnLimit = random.Next(5, 15);
             }
             else
             {
-                left = random.Next(10, (int)gameEnvironment.Width - 100);
+                left = random.Next(10, (int)gameEnvironment.Width - 70);
                 top = 0 - newMeteor.Height;
             }
 

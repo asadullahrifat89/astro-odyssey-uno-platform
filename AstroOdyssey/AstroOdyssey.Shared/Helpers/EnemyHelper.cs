@@ -71,8 +71,7 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
-            // when not noob anymore enemy moves sideways
-            if ((int)gameLevel > 0 && rotatedEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_1 && rotatedEnemySpawnCounter <= 0)
             {
                 newEnemy.XDirection = (XDirection)random.Next(1, 3);
                 rotatedEnemySpawnCounter = rotatedEnemySpawnLimit;
@@ -96,6 +95,7 @@ namespace AstroOdyssey
                 top = random.Next(0, (int)gameEnvironment.Height / 3);
                 newEnemy.Rotate();
 
+                // randomize next x flying enemy pop up
                 rotatedEnemySpawnLimit = random.Next(5, 15);
             }
             else
