@@ -8,8 +8,10 @@ namespace AstroOdyssey
     public class PowerUp : GameObject
     {
         #region Fields
-        
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform }; 
+
+        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+
+        private readonly Random random = new Random();
 
         #endregion
 
@@ -21,8 +23,16 @@ namespace AstroOdyssey
             Height = Constants.DefaultGameObjectSize;
             Width = Constants.DefaultGameObjectSize;
             Child = content;
+
             YDirection = YDirection.DOWN;
-        } 
+            PowerUpType = PowerUpType.NONE;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public PowerUpType PowerUpType { get; set; }
 
         #endregion
 
@@ -31,6 +41,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
+            PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
 
             var uri = new Uri("ms-appx:///Assets/Images/icon_exclamationSmall.png", UriKind.RelativeOrAbsolute);
             Health = 10;
@@ -39,8 +50,16 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
-        } 
+        }
 
         #endregion
+    }
+
+    public enum PowerUpType
+    {
+        NONE,
+        RAPIDSHOT_ROUNDS,
+        DEADSHOT_ROUNDS,
+        SONICSHOT_ROUNDS, // TODO: Extremely fast shots with long and piercing bullets but slow firing rate
     }
 }

@@ -16,6 +16,57 @@
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
+        <StackPanel
+            Margin="0,5,0,0"
+            HorizontalAlignment="Center"
+            Orientation="Vertical">
+
+            <!--  This shows current score  -->
+            <TextBlock
+                Name="ScoreText"
+                Margin="5"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center" />
+
+            <!--  This shows fps  -->
+            <TextBlock
+                Name="FPSText"
+                Margin="5"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center" />
+
+            <!--  This shows current objects count in game canvas  -->
+            <TextBlock
+                Name="ObjectsCountText"
+                Margin="5"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center" />
+
+        </StackPanel>
+
+        <!--  This shows player health  -->
+        <TextBlock
+            Name="HealthText"
+            Margin="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="White" />
+
+        <!--  This shows level up, power up text when difficulty scales  -->
+        <TextBlock
+            x:Name="InGameText"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="50"
+            FontWeight="Bold"
+            Foreground="White" />
+
         <!--  This is for capturing input  -->
         <Grid>
 
@@ -36,17 +87,6 @@
                 PointerPressed="LeftInputView_PointerPressed"
                 PointerReleased="LeftInputView_PointerReleased" />
 
-            <!--<Border
-                x:Name="InputView"
-                Grid.Column="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="InputView_PointerPressed"
-                PointerReleased="InputView_PointerReleased" />-->
-
             <Border
                 x:Name="RightInputView"
                 Grid.Column="1"
@@ -58,61 +98,6 @@
                 PointerPressed="RightInputView_PointerPressed"
                 PointerReleased="RightInputView_PointerReleased" />
         </Grid>
-
-        <!--  This shows current score  -->
-        <TextBlock
-            Name="ScoreText"
-            Margin="5"
-            FontSize="18"
-            FontWeight="Bold"
-            Foreground="White"
-            TextAlignment="Center" />
-
-        <!--  This shows player health  -->
-        <TextBlock
-            Name="HealthText"
-            Margin="5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
-
-        <StackPanel
-            Margin="0,25,0,0"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-
-            <!--  This shows fps  -->
-            <TextBlock
-                Name="FPSText"
-                Margin="5"
-                FontWeight="Bold"
-                Foreground="White" />
-
-            <!--  This shows frame time  -->
-            <TextBlock
-                Name="FrameDurationText"
-                Margin="5"
-                FontWeight="Bold"
-                Foreground="White" />
-
-            <!--  This shows current objects count in game canvas  -->
-            <TextBlock
-                Name="ObjectsCountText"
-                Margin="5"
-                FontWeight="Bold"
-                Foreground="White" />
-        </StackPanel>
-
-        <!--  This shows level up, power up text when difficulty scales  -->
-        <TextBlock
-            x:Name="InGameText"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="50"
-            FontWeight="Bold"
-            Foreground="White" />
 
     </Grid>
 </Page>

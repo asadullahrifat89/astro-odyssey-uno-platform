@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace AstroOdyssey
 {
@@ -11,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int starCounter;
-        private readonly int starSpawnLimit = 100;
+        private readonly int starSpawnLimit = 250;
         private double starSpeed = 0.1d;
 
         #endregion

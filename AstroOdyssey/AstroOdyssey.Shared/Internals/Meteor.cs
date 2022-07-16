@@ -11,6 +11,8 @@ namespace AstroOdyssey
 
         private readonly Image content = new Image() { Stretch = Stretch.Uniform };
 
+        private readonly Random random = new Random();
+
         #endregion
 
         #region Ctor
@@ -43,13 +45,11 @@ namespace AstroOdyssey
             MarkedForFadedRemoval = false;
             Opacity = 1;
 
-            Rotation = new Random().NextDouble();
+            Rotation = random.NextDouble();
 
             Uri uri = null;
 
-            var rand = new Random();
-
-            var meteorType = rand.Next(1, 9);
+            var meteorType = random.Next(1, 9);
 
             switch (meteorType)
             {
@@ -95,11 +95,11 @@ namespace AstroOdyssey
 
         public void Float()
         {
-            if (!IsFloating && XDirection == XDirection.NONE)
+            if (XDirection == XDirection.NONE)
             {
                 YDirection = YDirection.UP;
-                XDirection = (XDirection)new Random().Next(1, 3);
-                Speed = Speed - 2;
+                XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+                Speed = (Speed / 2); // decrease speed by 50%
 
                 IsFloating = true;
             }

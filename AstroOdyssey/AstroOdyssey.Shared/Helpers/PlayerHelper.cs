@@ -133,7 +133,7 @@ namespace AstroOdyssey
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             gameEnvironment.AddDestroyableGameObject(gameObject);
-                            PowerUp(player);
+                            PowerUp(player, (gameObject as PowerUp).PowerUpType);
 
                             return true;
                         }
@@ -184,12 +184,12 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state on.
         /// </summary>
-        private void PowerUp(Player player)
+        private void PowerUp(Player player, PowerUpType powerUpType)
         {
             powerUpTriggerCounter = powerUpTriggerLimit;
 
             App.PlaySound(baseUrl, SoundType.POWER_UP);
-            player.TriggerPowerUp();
+            player.TriggerPowerUp(powerUpType);
         }
 
         /// <summary>

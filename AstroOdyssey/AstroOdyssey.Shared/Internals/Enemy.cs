@@ -32,6 +32,8 @@ namespace AstroOdyssey
 
         #region Properties
 
+        public bool WillEvadeOnHit { get; set; }
+
         public bool IsEvading { get; set; }
 
         #endregion
@@ -45,10 +47,8 @@ namespace AstroOdyssey
             MarkedForFadedRemoval = false;
             Opacity = 1;
 
-            var rand = new Random();
-
             Uri uri = null;
-            var enemyShipType = rand.Next(1, 6);
+            var enemyShipType = random.Next(1, 6);
 
             switch (enemyShipType)
             {
@@ -82,10 +82,10 @@ namespace AstroOdyssey
 
         public void Evade()
         {
-            if (!IsEvading && XDirection == XDirection.NONE)
+            if (XDirection == XDirection.NONE)
             {
-                XDirection = (XDirection)new Random().Next(1, 3);
-                Speed = Speed - 1;
+                XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+                Speed = (Speed / 2); // decrease speed
 
                 IsEvading = true;
             }
