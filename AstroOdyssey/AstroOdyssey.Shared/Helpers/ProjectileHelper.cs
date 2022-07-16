@@ -40,14 +40,14 @@ namespace AstroOdyssey
             {
                 case PowerUpType.NONE:
                     break;
-                case PowerUpType.DUALSHOT_ROUNDS:
+                case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= 1; // fast dual hit point hitting shots
+                        projectileSpawnLimit -= 1; // fast hit
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += 30; // slow but one shot one kill
+                        projectileSpawnLimit += 30; // slow but deals 3 times the damage
                         projectileSpeed -= 10;
                     }
                     break;
@@ -65,7 +65,7 @@ namespace AstroOdyssey
             {
                 case PowerUpType.NONE:
                     break;
-                case PowerUpType.DUALSHOT_ROUNDS:
+                case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
                         projectileSpawnLimit += 1;
                     }
@@ -152,8 +152,8 @@ namespace AstroOdyssey
                     case PowerUpType.NONE:
                         App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
                         break;
-                    case PowerUpType.DUALSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.DUALSHOT_ROUNDS_FIRE);
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.RAPIDSHOT_ROUNDS_FIRE);
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         App.PlaySound(baseUrl, SoundType.DEADSHOT_ROUNDS_FIRE);

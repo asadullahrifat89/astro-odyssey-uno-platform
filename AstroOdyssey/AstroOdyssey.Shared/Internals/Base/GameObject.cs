@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
         public int Health { get; set; }
 
-        public int HealthSlot { get; set; } = 1;
+        public int HitPoint { get; set; } = 1;
 
         public bool IsDestructible { get; set; }
 
@@ -75,7 +75,7 @@ namespace AstroOdyssey
 
         public void GainHealth()
         {
-            Health += HealthSlot;
+            Health += HitPoint;
         }
 
         public void GainHealth(int health)
@@ -85,7 +85,7 @@ namespace AstroOdyssey
 
         public void LooseHealth()
         {
-            Health -= HealthSlot;
+            Health -= HitPoint;
         }
 
         public void LooseHealth(int health)

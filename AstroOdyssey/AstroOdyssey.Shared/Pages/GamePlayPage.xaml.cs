@@ -226,16 +226,15 @@ namespace AstroOdyssey
                                 {
                                     switch (projectile.PowerUpType)
                                     {
-                                        case PowerUpType.DUALSHOT_ROUNDS:
+                                        case PowerUpType.RAPIDSHOT_ROUNDS:
                                             {
-                                                // loose 2 times health                                                
-                                                destructible.LooseHealth(destructible.HealthSlot * 2);
+                                                destructible.LooseHealth(destructible.HitPoint);
                                             }
                                             break;
                                         case PowerUpType.DEADSHOT_ROUNDS:
                                             {
-                                                // loose 4 times health
-                                                destructible.LooseHealth(destructible.HealthSlot * 4);
+                                                // loose 3 times hit point
+                                                destructible.LooseHealth(destructible.HitPoint * 3);
                                             }
                                             break;
                                         default:

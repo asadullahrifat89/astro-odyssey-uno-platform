@@ -36,7 +36,7 @@ namespace AstroOdyssey
             BACKGROUND_MUSIC,
             ROUNDS_FIRE,
             ROUNDS_HIT,
-            DUALSHOT_ROUNDS_FIRE,
+            RAPIDSHOT_ROUNDS_FIRE,
             DEADSHOT_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,

@@ -52,7 +52,7 @@ namespace AstroOdyssey
             Width = Constants.DefaultGameObjectSize;
 
             Health = 100;
-            HealthSlot = 10;
+            HitPoint = 10;
 
             // combine power gauge, ship, and blaze
             content = new Grid();
@@ -159,7 +159,7 @@ namespace AstroOdyssey
 
             switch (powerUpType)
             {
-                case PowerUpType.DUALSHOT_ROUNDS:
+                case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
                         var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
                         contentShipBlaze.Source = new BitmapImage(exhaustUri);
@@ -188,7 +188,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public string GetHealthPoints()
         {
-            var healthPoints = Health / HealthSlot;
+            var healthPoints = Health / HitPoint;
             var healthIcon = "❤️";
             var health = string.Empty;
 

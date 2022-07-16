@@ -41,7 +41,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
-            PowerUpType = /*PowerUpType.DEADSHOT_ROUNDS;*/ (PowerUpType)random.Next(1, 3);
+            PowerUpType = (PowerUpType)random.Next(1, 3);
 
             var uri = new Uri("ms-appx:///Assets/Images/icon_exclamationSmall.png", UriKind.RelativeOrAbsolute);
             Health = 10;
@@ -58,8 +58,8 @@ namespace AstroOdyssey
     public enum PowerUpType
     {
         NONE,
-        DUALSHOT_ROUNDS,
+        RAPIDSHOT_ROUNDS,
         DEADSHOT_ROUNDS,
-        //SNIPERSHOT_ROUNDS, // TODO: extremely fast shots with long bullets but slow firing rate
+        SONICSHOT_ROUNDS, // TODO: extremely fast shots with long and piercing bullets but slow firing rate
     }
 }

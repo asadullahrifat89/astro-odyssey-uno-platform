@@ -6,7 +6,7 @@
 }
 
 const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
-const dualShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
+const rapidShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
 const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
@@ -27,7 +27,7 @@ const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 const bgAudio = new Audio();
 const rfAudio = new Audio();
 
-const dualsrfAudio = new Audio();
+const rapidsrfAudio = new Audio();
 const deadsrfAudio = new Audio();
 
 const rhAudio = new Audio();
@@ -83,12 +83,12 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(rfAudio);
         } break;
-        case "DUALSHOT_ROUNDS_FIRE": {
-            if (dualsrfAudio.src.length == 0) {
-                dualsrfAudio.src = baseUrl.concat("/", dualShotRoundsFireSource);
-                dualsrfAudio.volume = 0.2;
+        case "RAPIDSHOT_ROUNDS_FIRE": {
+            if (rapidsrfAudio.src.length == 0) {
+                rapidsrfAudio.src = baseUrl.concat("/", rapidShotRoundsFireSource);
+                rapidsrfAudio.volume = 0.2;
             }
-            playSound(dualsrfAudio);
+            playSound(rapidsrfAudio);
         } break;
         case "DEADSHOT_ROUNDS_FIRE": {
             if (deadsrfAudio.src.length == 0) {

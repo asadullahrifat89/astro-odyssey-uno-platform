@@ -47,10 +47,10 @@ namespace AstroOdyssey
             {
                 switch (PowerUpType)
                 {
-                    case AstroOdyssey.PowerUpType.DUALSHOT_ROUNDS:
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
                         height = 10; width = 10; // smaller but faster rounds
                         break;
-                    case AstroOdyssey.PowerUpType.DEADSHOT_ROUNDS:
+                    case PowerUpType.DEADSHOT_ROUNDS:
                         height = 25; width = 25; // larger but slower rounds
                         break;
                     default:
@@ -113,10 +113,10 @@ namespace AstroOdyssey
             {
                 switch (PowerUpType)
                 {
-                    case AstroOdyssey.PowerUpType.DUALSHOT_ROUNDS:
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
                         Background = new SolidColorBrush(Colors.Goldenrod);
                         break;
-                    case AstroOdyssey.PowerUpType.DEADSHOT_ROUNDS:
+                    case PowerUpType.DEADSHOT_ROUNDS:
                         Background = new SolidColorBrush(Colors.Purple);
                         break;
                     default:
