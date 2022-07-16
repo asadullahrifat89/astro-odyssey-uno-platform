@@ -16,59 +16,6 @@
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
-        <!--  This is for capturing input  -->
-        <Grid>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <!--<ColumnDefinition />-->
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Border
-                x:Name="LeftInputView"
-                Grid.Column="0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="LeftInputView_PointerPressed"
-                PointerReleased="LeftInputView_PointerReleased" />
-
-            <!--<Border
-                x:Name="InputView"
-                Grid.Column="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="InputView_PointerPressed"
-                PointerReleased="InputView_PointerReleased" />-->
-
-            <Border
-                x:Name="RightInputView"
-                Grid.Column="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="RightInputView_PointerPressed"
-                PointerReleased="RightInputView_PointerReleased" />
-        </Grid>
-
-        <!--  This shows player health  -->
-        <TextBlock
-            Name="HealthText"
-            Margin="5"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            FontSize="20"
-            FontWeight="Bold"
-            Foreground="White" />
-
         <StackPanel
             Margin="0,5,0,0"
             HorizontalAlignment="Center"
@@ -101,6 +48,16 @@
 
         </StackPanel>
 
+        <!--  This shows player health  -->
+        <TextBlock
+            Name="HealthText"
+            Margin="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="White" />
+
         <!--  This shows level up, power up text when difficulty scales  -->
         <TextBlock
             x:Name="InGameText"
@@ -109,6 +66,38 @@
             FontSize="50"
             FontWeight="Bold"
             Foreground="White" />
+
+        <!--  This is for capturing input  -->
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <!--<ColumnDefinition />-->
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                x:Name="LeftInputView"
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                KeyDown="InputView_KeyDown"
+                KeyUp="InputView_KeyUp"
+                PointerPressed="LeftInputView_PointerPressed"
+                PointerReleased="LeftInputView_PointerReleased" />
+
+            <Border
+                x:Name="RightInputView"
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                KeyDown="InputView_KeyDown"
+                KeyUp="InputView_KeyUp"
+                PointerPressed="RightInputView_PointerPressed"
+                PointerReleased="RightInputView_PointerReleased" />
+        </Grid>
 
     </Grid>
 </Page>

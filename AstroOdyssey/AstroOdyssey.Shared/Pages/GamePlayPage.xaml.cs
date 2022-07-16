@@ -115,6 +115,8 @@ namespace AstroOdyssey
 
             IsGameRunning = true;
 
+            SetPlayerY();
+
             await Task.Delay(TimeSpan.FromSeconds(1));
 
             RunGameView();
@@ -420,6 +422,10 @@ namespace AstroOdyssey
             var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
             var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
             baseUrl = $"{indexUrl}{appPackage}";
+
+#if DEBUG
+            Console.WriteLine(baseUrl);
+#endif
         }
 
         #endregion
@@ -594,76 +600,6 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Input Events
-
-        //private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        //{
-        //    var currentPoint = e.GetCurrentPoint(GameView);
-
-        //    pointerX = currentPoint.Position.X;
-
-        //    FiringProjectiles = true;
-        //}
-
-        //private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        //{
-        //    FiringProjectiles = false;
-        //}
-
-        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
-                default:
-                    break;
-            }
-        }
-
-        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
-                default:
-                    break;
-            }
-        }
-
-        private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveLeft = true;
-            MoveRight = false;
-        }
-
-        private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveLeft = false;
-        }
-
-        private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = true;
-            MoveLeft = false;
-        }
-
-        private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = false;
-        }
-
-        #endregion
-
         #region Window Events
 
         /// <summary>
@@ -674,10 +610,7 @@ namespace AstroOdyssey
         void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
-#if DEBUG
-            Console.WriteLine(baseUrl);
-#endif
-            StartGame();
+            ShowInGameText("TAP TO START");
         }
 
         /// <summary>
@@ -697,7 +630,11 @@ namespace AstroOdyssey
 #endif
 
             SetViewSizes();
-            SetPlayerY();
+
+            if (IsGameRunning)
+            {
+                SetPlayerY();
+            }
         }
 
         /// <summary>
@@ -744,6 +681,71 @@ namespace AstroOdyssey
         }
 
         #endregion   
+
+        #region Input Events       
+
+        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            // TODO: tap and start game
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
+                case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
+                default:
+                    break;
+            }
+        }
+
+        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
+                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
+                case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
+                case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
+                default:
+                    break;
+            }
+        }
+
+        private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            FiringProjectiles = true;
+            MoveLeft = true;
+            MoveRight = false;
+
+            //TODO: Tap to start
+        }
+
+        private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            FiringProjectiles = true;
+            MoveLeft = false;
+
+            if (!IsGameRunning)
+                StartGame();
+        }
+
+        private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            FiringProjectiles = true;
+            MoveRight = true;
+            MoveLeft = false;
+        }
+
+        private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            FiringProjectiles = true;
+            MoveRight = false;
+
+            if (!IsGameRunning)
+                StartGame();
+        }
+
+        #endregion
 
         #endregion
     }

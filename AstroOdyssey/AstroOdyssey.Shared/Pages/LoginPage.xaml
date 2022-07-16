@@ -11,10 +11,19 @@
     <Grid>
 
         <StackPanel
-            Width="300"
+            MaxWidth="315"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
+
+            <TextBlock
+                Margin="10,10,10,50"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="45"
+                FontWeight="Bold"
+                Text="Astro Odyssey" />
+
             <TextBlock
                 Margin="10"
                 HorizontalAlignment="Center"
