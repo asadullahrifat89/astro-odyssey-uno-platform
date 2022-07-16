@@ -113,12 +113,13 @@ namespace AstroOdyssey
         {
             var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
 
-            foreach (var gameObject in gameObjects)
+            if (Parallel.ForEach(gameObjects, gameObject =>
             {
                 UpdateGameViewObjects(gameObject);
+            }).IsCompleted)
+            {
+                GameView.RemoveDestroyableGameObjects();
             }
-
-            GameView.RemoveDestroyableGameObjects();
         }
 
         /// <summary>
@@ -134,7 +135,6 @@ namespace AstroOdyssey
                 if (gameObject.HasFadedAway)
                 {
                     GameView.AddDestroyableGameObject(gameObject);
-                    return;
                 }
             }
 
@@ -164,53 +164,62 @@ namespace AstroOdyssey
                             else
                                 destructible.LooseHealth();
 
-                            if (destructible.HasHealth)
-                            {
-                                // after level 3 enemies will try to evade shots
-                                if (GameLevel > GameLevel.Level_3 && destructible is Enemy hitEnemy)
-                                    hitEnemy.Evade();
-
-                                // meteors float away on impact
-                                if (destructible is Meteor hitMeteor)
-                                    hitMeteor.Float();
-                            }
-
                             // fade the a bit on projectile hit
                             destructible.Fade();
 
                             //App.PlaySound(SoundType.LASER_HIT);
 
-                            if (destructible.HasNoHealth)
+                            switch (destructible.Tag)
                             {
-                                switch (destructible.Tag)
-                                {
-                                    case ENEMY:
-                                        {
-                                            var enemy = destructible as Enemy;
+                                case ENEMY:
+                                    {
+                                        var enemy = destructible as Enemy;
 
+                                        if (destructible.HasNoHealth)
+                                        {
                                             if (enemy.IsOverPowered)
                                                 Score += 4;
                                             else
                                                 Score += 2;
 
                                             _enemyHelper.DestroyEnemy(enemy);
-                                        }
-                                        break;
-                                    case METEOR:
-                                        {
-                                            var meteor = destructible as Meteor;
 
+                                            return;
+                                        }
+
+                                        if (destructible.HasHealth)
+                                        {
+                                            if (enemy.WillEvadeOnHit && !enemy.IsEvading)
+                                                enemy.Evade();
+                                        }
+                                    }
+                                    break;
+                                case METEOR:
+                                    {
+                                        var meteor = destructible as Meteor;
+
+                                        if (destructible.HasNoHealth)
+                                        {
                                             if (meteor.IsOverPowered)
                                                 Score += 2;
                                             else
                                                 Score++;
 
                                             _meteorHelper.DestroyMeteor(meteor);
+
+                                            return;
                                         }
-                                        break;
-                                    default:
-                                        break;
-                                }
+
+                                        if (destructible.HasHealth)
+                                        {
+                                            // meteors float away on impact
+                                            if (!meteor.IsFloating)
+                                                meteor.Float();
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
                         }
                     }
@@ -283,12 +292,10 @@ namespace AstroOdyssey
         {
             var starObjects = StarView.GetGameObjects<GameObject>();
 
-            foreach (var star in starObjects)
+            if (Parallel.ForEach(starObjects, star => { _starHelper.UpdateStar(star as Star); }).IsCompleted)
             {
-                _starHelper.UpdateStar(star as Star);
+                StarView.RemoveDestroyableGameObjects();
             }
-
-            StarView.RemoveDestroyableGameObjects();
         }
 
         #endregion
@@ -463,9 +470,20 @@ namespace AstroOdyssey
 
             if (frameStatUpdateCounter < 0)
             {
+                var enemies = GameView.Children.OfType<Enemy>().Count();
+                var meteors = GameView.Children.OfType<Meteor>().Count();
+                var powerUps = GameView.Children.OfType<PowerUp>().Count();
+                var healths = GameView.Children.OfType<Health>().Count();
+                var projectiles = GameView.Children.OfType<Projectile>().Count();
+
+                var stars = StarView.Children.OfType<Star>().Count();
+
+                var total = GameView.Children.Count() + StarView.Children.Count();
+
+
                 FPSText.Text = "FPS: " + FpsCount;
                 FrameDurationText.Text = "Frame: " + FrameDuration + "ms";
-                ObjectsCountText.Text = "Objects: " + GameView.Children.Count();
+                ObjectsCountText.Text = "Enemies: " + enemies + "  Meteors: " + meteors + "  Power Ups: " + powerUps + "  Healths: " + healths + "  Projectiles: " + projectiles + "  Stars: " + stars + "  Total: " + total;
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
             }

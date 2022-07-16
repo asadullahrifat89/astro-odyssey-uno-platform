@@ -13,11 +13,14 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
-        private int rotatedEnemySpawnCounter = 10;
-        private int rotatedEnemySpawnLimit = 10;
+        private int xFlyingEnemySpawnCounter = 10;
+        private int xFlyingEnemySpawnLimit = 10;
 
         private int overPoweredEnemySpawnCounter = 15;
         private int overPoweredEnemySpawnLimit = 15;
+
+        private int evadingEnemySpawnCounter = 3;
+        private int evadingEnemySpawnLimit = 3;
 
         private int enemyCounter;
         private int enemySpawnLimit = 50;
@@ -74,21 +77,26 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
+            if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
+            {
+                evadingEnemySpawnCounter = evadingEnemySpawnLimit;
+                newEnemy.WillEvadeOnHit = true;
+                evadingEnemySpawnLimit = random.Next(1, 4);
+            }
+
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
                 overPoweredEnemySpawnCounter = overPoweredEnemySpawnLimit;
-
                 newEnemy.OverPower();
-
                 overPoweredEnemySpawnLimit = random.Next(10, 20);
             }
 
             // generate side ways flying enemies after level 2
-            if (gameLevel > GameLevel.Level_2 && rotatedEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_2 && xFlyingEnemySpawnCounter <= 0)
             {
                 newEnemy.XDirection = (XDirection)random.Next(1, 3);
-                rotatedEnemySpawnCounter = rotatedEnemySpawnLimit;
+                xFlyingEnemySpawnCounter = xFlyingEnemySpawnLimit;
 
                 newEnemy.YDirection = (YDirection)random.Next(0, 3);
 
@@ -116,7 +124,7 @@ namespace AstroOdyssey
                 newEnemy.Rotate();
 
                 // randomize next x flying enemy pop up
-                rotatedEnemySpawnLimit = random.Next(5, 15);
+                xFlyingEnemySpawnLimit = random.Next(5, 15);
             }
             else
             {
@@ -126,8 +134,9 @@ namespace AstroOdyssey
 
             newEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
-            rotatedEnemySpawnCounter -= 1;
+            xFlyingEnemySpawnCounter--;
             overPoweredEnemySpawnCounter--;
+            evadingEnemySpawnCounter--;
         }
 
         /// <summary>

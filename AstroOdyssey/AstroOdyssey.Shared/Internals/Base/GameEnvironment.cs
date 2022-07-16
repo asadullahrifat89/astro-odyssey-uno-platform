@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Foundation;
 
@@ -59,19 +60,17 @@ namespace AstroOdyssey
             destroyableGameObjects.Add(destroyable);
         }
 
+        public void RemoveDestroyableGameObjects()
+        {
+            if (Parallel.ForEach(destroyableGameObjects, destroyable => { RemoveGameObject(destroyable); }).IsCompleted)
+            {
+                ClearDestroyableGameObjects();
+            }
+        }
+
         public void RemoveGameObject(GameObject destroyable)
         {
             Children.Remove(destroyable);
-        }
-
-        public void RemoveDestroyableGameObjects()
-        {
-            foreach (var destroyable in destroyableGameObjects)
-            {
-                RemoveGameObject(destroyable);
-            }
-
-            ClearDestroyableGameObjects();
         }
 
         public void ClearDestroyableGameObjects()
@@ -97,7 +96,7 @@ namespace AstroOdyssey
             return false;
         }
 
-        public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds) 
+        public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds)
         {
             return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
         }

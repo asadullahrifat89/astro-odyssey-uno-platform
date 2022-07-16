@@ -35,6 +35,8 @@ namespace AstroOdyssey
             Margin = new Microsoft.UI.Xaml.Thickness(0, 25, 0, 0),
         };
 
+        private readonly Random random = new Random();
+
         #endregion
 
         #region Ctor
@@ -75,7 +77,7 @@ namespace AstroOdyssey
             Speed = speed;
 
             Uri shipUri = null;
-            var playerShipType = new Random().Next(1, 13);
+            var playerShipType = random.Next(1, 13);
 
             double exhaustHeight = 50;
 

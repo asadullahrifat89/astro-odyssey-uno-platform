@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace AstroOdyssey
 {
@@ -11,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int starCounter;
-        private readonly int starSpawnLimit = 100;
+        private readonly int starSpawnLimit = 250;
         private double starSpeed = 0.1d;
 
         #endregion
@@ -40,14 +41,17 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnStar()
         {
-            // each frame progress decreases this counter
-            starCounter -= 1;
-
-            // when counter reaches zero, create an star
-            if (starCounter < 0)
+            if (gameEnvironment.Children.OfType<Star>().Count() < 15)
             {
-                GenerateStar();
-                starCounter = starSpawnLimit;
+                // each frame progress decreases this counter
+                starCounter -= 1;
+
+                // when counter reaches zero, create an star
+                if (starCounter < 0)
+                {
+                    GenerateStar();
+                    starCounter = starSpawnLimit;
+                }
             }
         }
 
