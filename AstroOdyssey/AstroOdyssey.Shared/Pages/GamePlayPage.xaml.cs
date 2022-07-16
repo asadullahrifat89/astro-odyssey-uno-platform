@@ -199,8 +199,6 @@ namespace AstroOdyssey
 
                 UpdateGameView();
 
-                UpdateStarView();
-
                 ShiftGameLevel();
 
                 HideInGameText();
@@ -979,23 +977,10 @@ namespace AstroOdyssey
 
             foreach (var star in starObjects)
             {
-                UpdateStarViewObject(star);
+                _starHelper.UpdateStar(StarSpeed, star as Star);
             }
 
             StarView.RemoveDestroyableGameObjects();
-        }
-
-        /// <summary>
-        /// Updates the star objects. Moves the stars.
-        /// </summary>
-        /// <param name="star"></param>
-        private void UpdateStarViewObject(GameObject star)
-        {
-            // move star down
-            star.MoveY(StarSpeed);
-
-            if (star.GetY() > windowHeight)
-                StarView.AddDestroyableGameObject(star);
         }
 
         #endregion

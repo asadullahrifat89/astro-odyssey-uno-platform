@@ -19,6 +19,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MeteorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Health.cs" />
