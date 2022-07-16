@@ -9,7 +9,9 @@ namespace AstroOdyssey
     {
         #region Fields
         
-        private Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+
+        private readonly Random random = new Random();
 
         #endregion
 
@@ -58,11 +60,11 @@ namespace AstroOdyssey
                     break;
                 case 4:
                     uri = new Uri("ms-appx:///Assets/Images/enemy_D.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    Health = 3;
                     break;
                 case 5:
                     uri = new Uri("ms-appx:///Assets/Images/enemy_E.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    Health = 3;
                     break;
             }
 

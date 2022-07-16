@@ -82,17 +82,18 @@ namespace AstroOdyssey
                 switch (newMeteor.XDirection)
                 {
                     case XDirection.LEFT:
-                        newMeteor.Rotation = random.NextDouble() + 1 * -1;                        
+                        newMeteor.Rotation = (newMeteor.Rotation + 1) * -1;
                         left = gameEnvironment.Width;
                         break;
                     case XDirection.RIGHT:
-                        newMeteor.Rotation = random.NextDouble() + 1;
+                        newMeteor.Rotation = newMeteor.Rotation + 1;
                         left = 0 - newMeteor.Width + 10;
                         break;
                     default:
                         break;
                 }
 
+                // side ways meteors fly at a higher speed
                 newMeteor.Speed++;
 #if DEBUG
                 Console.WriteLine("Meteor XDirection: " + newMeteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);

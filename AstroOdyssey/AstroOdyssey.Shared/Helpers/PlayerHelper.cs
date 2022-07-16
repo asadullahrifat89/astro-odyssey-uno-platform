@@ -11,12 +11,12 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private string baseUrl;
+        private readonly string baseUrl;
 
         private int playerDamagedOpacityCounter;
-        private int playerDamagedOpacityLimit = 100;
+        private readonly int playerDamagedOpacityLimit = 100;
         private int powerUpTriggerCounter;
-        private int powerUpTriggerLimit = 1000;
+        private readonly int powerUpTriggerLimit = 1000;
 
         #endregion
 
