@@ -62,7 +62,10 @@ namespace AstroOdyssey
 
         public void RemoveDestroyableGameObjects()
         {
-            if (Parallel.ForEach(destroyableGameObjects, destroyable => { RemoveGameObject(destroyable); }).IsCompleted)
+            if (Parallel.ForEach(destroyableGameObjects, destroyable =>
+            {
+                RemoveGameObject(destroyable);
+            }).IsCompleted)
             {
                 ClearDestroyableGameObjects();
             }

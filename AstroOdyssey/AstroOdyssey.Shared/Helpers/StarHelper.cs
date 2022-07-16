@@ -41,7 +41,7 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnStar()
         {
-            if (gameEnvironment.Children.OfType<Star>().Count() < 15)
+            if (gameEnvironment.Children.OfType<Star>().Count() < 12)
             {
                 // each frame progress decreases this counter
                 starCounter -= 1;

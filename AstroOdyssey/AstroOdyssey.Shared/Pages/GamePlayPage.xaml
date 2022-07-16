@@ -59,15 +59,6 @@
                 PointerReleased="RightInputView_PointerReleased" />
         </Grid>
 
-        <!--  This shows current score  -->
-        <TextBlock
-            Name="ScoreText"
-            Margin="5"
-            FontSize="18"
-            FontWeight="Bold"
-            Foreground="White"
-            TextAlignment="Center" />
-
         <!--  This shows player health  -->
         <TextBlock
             Name="HealthText"
@@ -79,30 +70,35 @@
             Foreground="White" />
 
         <StackPanel
-            Margin="0,25,0,0"
+            Margin="0,5,0,0"
             HorizontalAlignment="Center"
-            Orientation="Horizontal">
+            Orientation="Vertical">
+
+            <!--  This shows current score  -->
+            <TextBlock
+                Name="ScoreText"
+                Margin="5"
+                FontSize="18"
+                FontWeight="Bold"
+                Foreground="White"
+                TextAlignment="Center" />
 
             <!--  This shows fps  -->
             <TextBlock
                 Name="FPSText"
                 Margin="5"
                 FontWeight="Bold"
-                Foreground="White" />
-
-            <!--  This shows frame time  -->
-            <TextBlock
-                Name="FrameDurationText"
-                Margin="5"
-                FontWeight="Bold"
-                Foreground="White" />
+                Foreground="White"
+                TextAlignment="Center" />
 
             <!--  This shows current objects count in game canvas  -->
             <TextBlock
                 Name="ObjectsCountText"
                 Margin="5"
                 FontWeight="Bold"
-                Foreground="White" />
+                Foreground="White"
+                TextAlignment="Center" />
+
         </StackPanel>
 
         <!--  This shows level up, power up text when difficulty scales  -->
