@@ -218,7 +218,7 @@ namespace AstroOdyssey
             Height = Height * 1.5;
             Width = Width * 1.5;
             Speed--;
-            Health += 2;
+            Health += 3;
 
             IsOverPowered = true;
         }

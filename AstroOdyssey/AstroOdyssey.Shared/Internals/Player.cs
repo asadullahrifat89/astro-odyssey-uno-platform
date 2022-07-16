@@ -42,8 +42,8 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: acquire sides which shoot additional projectile, lost on impact with enemy or meteor
-            //TODO: develop shield which protects damage for a certain number of hits
+            //TODO: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: Develop shield which protects damage for a certain number of hits
 
             Tag = Constants.PLAYER;
 

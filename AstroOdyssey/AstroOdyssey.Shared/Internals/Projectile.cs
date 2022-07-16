@@ -34,8 +34,6 @@ namespace AstroOdyssey
 
         public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false, PowerUpType powerUpType = PowerUpType.NONE, double scale = 1)
         {
-            //TODO: introducr power up type, penetrating projectiles for green color
-
             Speed = speed;
 
             IsPoweredUp = isPoweredUp;

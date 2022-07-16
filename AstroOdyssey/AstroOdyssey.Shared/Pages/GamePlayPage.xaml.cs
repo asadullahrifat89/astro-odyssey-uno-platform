@@ -160,7 +160,6 @@ namespace AstroOdyssey
 
                 _powerUpHelper.SpawnPowerUp();
 
-                //TODO: send power up type
                 _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
 
                 _starHelper.SpawnStar();
@@ -291,7 +290,6 @@ namespace AstroOdyssey
                             // check if power up collides with player
                             if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
                             {
-                                //TODO: send power up type to projectile helper
                                 IsPoweredUp = true;
                                 PowerUpType = powerUp.PowerUpType;
                                 _projectileHelper.PowerUp(PowerUpType);
