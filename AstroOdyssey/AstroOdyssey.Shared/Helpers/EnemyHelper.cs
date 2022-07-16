@@ -75,7 +75,7 @@ namespace AstroOdyssey
             double top = 0;
 
             // generate large but slower and stronger enemies after level 3
-            if (gameLevel > GameLevel.Level_1 && miniBossEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_3 && miniBossEnemySpawnCounter <= 0)
             {
                 miniBossEnemySpawnCounter = miniBossEnemySpawnLimit;
 
@@ -89,7 +89,8 @@ namespace AstroOdyssey
                 miniBossEnemySpawnLimit = random.Next(10, 20);
             }
 
-            if (gameLevel > GameLevel.Level_1 && rotatedEnemySpawnCounter <= 0)
+            // generate side ways flying enemies after level 2
+            if (gameLevel > GameLevel.Level_2 && rotatedEnemySpawnCounter <= 0)
             {
                 newEnemy.XDirection = (XDirection)random.Next(1, 3);
                 rotatedEnemySpawnCounter = rotatedEnemySpawnLimit;
