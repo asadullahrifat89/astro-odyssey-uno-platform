@@ -50,6 +50,8 @@ namespace AstroOdyssey
 
         public bool HasNoHealth => Health <= 0;
 
+        public bool HasHealth => Health > 0;
+
         public bool HasFadedAway => Opacity <= 0;
 
         public new double Rotation { get; set; } = 0;
@@ -131,7 +133,7 @@ namespace AstroOdyssey
 
         public void MoveY()
         {
-            Canvas.SetTop(this, GetY() + (this.Speed * GetYDirectionModifier()));
+            Canvas.SetTop(this, GetY() + (Speed * GetYDirectionModifier()));
         }
 
         public void MoveY(double top)

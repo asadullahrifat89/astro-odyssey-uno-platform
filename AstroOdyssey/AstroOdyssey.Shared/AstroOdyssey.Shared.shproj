@@ -17,8 +17,17 @@
   <ItemGroup>
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
+    <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\HealthHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\MeteorHelper.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\PlayerHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\PowerUpHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\ProjectileHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\StarHelper.cs" />
     <_Globbed_Compile Remove="Models\Account.cs" />
+    <_Globbed_Compile Remove="Models\GameScore.cs" />
+    <_Globbed_Compile Remove="Models\HighScore.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage - Copy.xaml.cs" />

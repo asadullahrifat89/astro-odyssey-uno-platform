@@ -16,7 +16,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private NavigationSyncHelper navigationSyncHelper;
+        private NavigationHelper navigationHelper;
 
         #endregion
 
@@ -24,11 +24,11 @@ namespace AstroOdyssey
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.Loaded += MainPage_Loaded;
+            Loaded += MainPage_Loaded;
 
-            navigationSyncHelper = new NavigationSyncHelper(
+            navigationHelper = new NavigationHelper(
                 navigationView: NavView,
                 frame: ContentFrame,
                 pageMap: new Dictionary<string, Type>(),
@@ -72,7 +72,7 @@ namespace AstroOdyssey
 
         public void SetAccount()
         {
-            this.AccountUserNameBlock.Text = App.Account.UserName;
+            AccountUserNameBlock.Text = App.Account.UserName;
         }
 
         /// <summary>

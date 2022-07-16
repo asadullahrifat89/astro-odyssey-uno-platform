@@ -1,16 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml.Controls;
+using Windows.Foundation;
 
 namespace AstroOdyssey
 {
     public class GameEnvironment : Canvas
     {
+        #region Fields
+
         private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
+
+        #endregion
+
+        #region Ctor
 
         public GameEnvironment()
         {
 
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets scaling factor for a game object according to game view width.
+        /// </summary>
+        /// <returns></returns>
+        public double GetGameObjectScale()
+        {
+            return Width <= 500 ? 0.6 : (Width <= 700 ? 0.8 : (Width <= 800 ? 0.9 : 1));
         }
 
         public void SetSize(double height, double width)
@@ -58,5 +78,30 @@ namespace AstroOdyssey
         {
             destroyableGameObjects.Clear();
         }
+
+        /// <summary>
+        /// Removes a game object from game view if applicable. 
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <returns></returns>
+        public bool CheckAndAddDestroyableGameObject(GameObject gameObject)
+        {
+            // if game object is out of bounds of game view
+            if (gameObject.GetY() > Height || gameObject.GetX() > Width || gameObject.GetX() + gameObject.Width < 0)
+            {
+                AddDestroyableGameObject(gameObject);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds) 
+        {
+            return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
+        }
+
+        #endregion
     }
 }

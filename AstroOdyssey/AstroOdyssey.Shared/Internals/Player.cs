@@ -41,7 +41,8 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: acquire sides which shoot additional laser, lost on impact with enemy or meteor
+            //TODO: acquire sides which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: develop shield which protects damage for a certain number of hits
 
             Tag = Constants.PLAYER;
 
@@ -68,11 +69,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-
-        public new Rect GetRect()
-        {
-            return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - 5);
-        }
 
         public void SetAttributes(double speed, double scale = 1)
         {
@@ -194,7 +190,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        public bool AnyNearbyObjectsOnTheLeft(GameObject gameObject)
+        public bool AnyObjectsOnTheLeftProximity(GameObject gameObject)
         {
             var left = gameObject.GetX();
             var playerX = GetX();
@@ -207,13 +203,19 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="gameObject"></param>
         /// <returns></returns>
-        public bool AnyNearbyObjectsOnTheRight(GameObject gameObject)
+        public bool AnyObjectsOnTheRightProximity(GameObject gameObject)
         {
             var left = gameObject.GetX();
             var playerX = GetX();
 
             return left + gameObject.Width / 2 > playerX && left + gameObject.Width / 2 <= playerX + 250;
         }
+
+        public new Rect GetRect()
+        {
+            return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
+        }
+
 
         #endregion
     }

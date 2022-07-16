@@ -32,10 +32,10 @@ namespace AstroOdyssey
         {
             InitializeLogging();
 
-            this.InitializeComponent();
+            InitializeComponent();
 
 #if HAS_UNO || NETFX_CORE
-            this.Suspending += OnSuspending;
+            Suspending += OnSuspending;
 #endif
         }
 

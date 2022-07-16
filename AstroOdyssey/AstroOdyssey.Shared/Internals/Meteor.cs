@@ -33,6 +33,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
+            XDirection = XDirection.NONE;
             MarkedForFadedRemoval = false;
             Opacity = 1;
 

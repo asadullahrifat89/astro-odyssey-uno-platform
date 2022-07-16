@@ -13,7 +13,7 @@
         <!--  This renders the stars  -->
         <GameEnvironment x:Name="StarView" Background="Transparent" />
 
-        <!--  This redenders player, enemies, meteors, healths, and lasers  -->
+        <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
         <!--  This is for capturing input  -->
