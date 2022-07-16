@@ -42,14 +42,15 @@ namespace AstroOdyssey
         /// Updates the star objects. Moves the stars.
         /// </summary>
         /// <param name="star"></param>
-        public void UpdateStar(double StarSpeed, Star star)
+        public void UpdateStar(double starSpeed, Star star)
         {
             // move star down
-            star.MoveY(StarSpeed);
+            star.MoveY(starSpeed);
 
             if (star.GetY() > gameEnvironment.Height)
                 gameEnvironment.AddDestroyableGameObject(star);
         }
+
         #endregion
     }
 }

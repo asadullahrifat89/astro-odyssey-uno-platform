@@ -386,16 +386,9 @@ namespace AstroOdyssey
                     {
                         var enemy = gameObject as Enemy;
 
-                        // move enemy down
-                        enemy.MoveY();
-                        enemy.MoveX();
+                        _enemyHelper.UpdateEnemy(enemy, out bool destroyed);
 
-                        // if the object is marked for lazy destruction then no need to perform collisions
-                        if (enemy.MarkedForFadedRemoval)
-                            return;
-
-                        // if enemy or meteor object has gone beyond game view
-                        if (AddDestroyableGameObject(enemy))
+                        if (destroyed)
                             return;
 
                         // check if enemy collides with player
@@ -407,16 +400,9 @@ namespace AstroOdyssey
                     {
                         var meteor = gameObject as Meteor;
 
-                        // move meteor down
-                        meteor.Rotate();
-                        meteor.MoveY();
+                        _meteorHelper.UpdateMeteor(meteor, out bool destroyed);
 
-                        // if the object is marked for lazy destruction then no need to perform collisions
-                        if (meteor.MarkedForFadedRemoval)
-                            return;
-
-                        // if enemy or meteor object has gone beyond game view
-                        if (AddDestroyableGameObject(meteor))
+                        if (destroyed)
                             return;
 
                         // check if meteor collides with player

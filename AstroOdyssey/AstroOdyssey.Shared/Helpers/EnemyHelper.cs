@@ -83,11 +83,50 @@ namespace AstroOdyssey
         /// <summary>
         /// Destroys a Enemy. Removes from game environment, increases player score, plays sound effect.
         /// </summary>
-        /// <param name="Enemy"></param>
-        public void DestroyEnemy(Enemy Enemy)
+        /// <param name="enemy"></param>
+        public void DestroyEnemy(Enemy enemy)
         {
-            Enemy.MarkedForFadedRemoval = true;
+            enemy.MarkedForFadedRemoval = true;
             App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
+        }
+
+        /// <summary>
+        /// Updates an enemy. Moves the enemy inside game environment and removes from it when applicable.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateEnemy(Enemy enemy, out bool destroyed)
+        {
+            destroyed = false;
+
+            // move enemy down
+            enemy.MoveY();
+            enemy.MoveX();
+
+            // if the object is marked for lazy destruction then no need to perform collisions
+            if (enemy.MarkedForFadedRemoval)
+                return;
+
+            // if enemy or meteor object has gone beyond game view
+            destroyed = AddDestroyableGameObject(enemy);
+        }
+
+        /// <summary>
+        /// Removes a game object from game view. 
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <returns></returns>
+        private bool AddDestroyableGameObject(GameObject gameObject)
+        {
+            // if game object is out of bounds of game view
+            if (gameObject.GetY() > gameEnvironment.Height || gameObject.GetX() > gameEnvironment.Width || gameObject.GetX() + gameObject.Width < 0)
+            {
+                gameEnvironment.AddDestroyableGameObject(gameObject);
+
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
