@@ -347,14 +347,26 @@ namespace AstroOdyssey
                                 {
                                     case ENEMY:
                                         {
-                                            Score += 2;
-                                            _enemyHelper.DestroyEnemy(destructible as Enemy);
+                                            var enemy = destructible as Enemy;
+
+                                            if (enemy.IsOverPowered)
+                                                Score += 4;
+                                            else
+                                                Score += 2;
+
+                                            _enemyHelper.DestroyEnemy(enemy);
                                         }
                                         break;
                                     case METEOR:
                                         {
-                                            Score++;
-                                            _meteorHelper.DestroyMeteor(destructible as Meteor);
+                                            var meteor = destructible as Meteor;
+
+                                            if (meteor.IsOverPowered)
+                                                Score += 2;
+                                            else
+                                                Score++;
+
+                                            _meteorHelper.DestroyMeteor(meteor);
                                         }
                                         break;
                                     default:

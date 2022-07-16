@@ -8,7 +8,7 @@ namespace AstroOdyssey
     public class Enemy : GameObject
     {
         #region Fields
-        
+
         private readonly Image content = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
@@ -16,7 +16,7 @@ namespace AstroOdyssey
         #endregion
 
         #region Ctor
-        
+
         public Enemy()
         {
             Tag = Constants.ENEMY;
@@ -26,9 +26,9 @@ namespace AstroOdyssey
             IsDestructible = true;
             Child = content;
             YDirection = YDirection.DOWN;
-        } 
+        }
 
-        #endregion
+        #endregion       
 
         #region Methods
 
@@ -72,7 +72,7 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
-        } 
+        }
 
         #endregion
     }

@@ -55,6 +55,8 @@ namespace AstroOdyssey
 
         public new double Rotation { get; set; } = 0;
 
+        public bool IsOverPowered { get; set; } = false;
+
         #endregion
 
         #region Methods
@@ -203,6 +205,16 @@ namespace AstroOdyssey
         public void Fade()
         {
             Opacity -= 0.1d;
+        }
+
+        public void OverPower()
+        {
+            Height = Height * 1.5;
+            Width = Width * 1.5;
+            Speed--;
+            Health += 2;
+
+            IsOverPowered = true;
         }
 
         #endregion
