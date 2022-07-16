@@ -146,9 +146,26 @@ namespace AstroOdyssey
             newProjectile.AddToGameEnvironment(top: player.GetY() + 5 * scale - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
 
             if (newProjectile.IsPoweredUp)
-                App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);
+            {
+                switch (powerUpType)
+                {
+                    case PowerUpType.NONE:
+                        App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.DUALSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.DUALSHOT_ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.DEADSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.DEADSHOT_ROUNDS_FIRE);
+                        break;
+                    default:
+                        break;
+                }
+            }
             else
-                App.PlaySound(baseUrl, SoundType.LASER_FIRE);
+            {
+                App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+            }
         }
 
         #endregion

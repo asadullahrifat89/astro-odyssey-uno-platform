@@ -228,14 +228,14 @@ namespace AstroOdyssey
                                     {
                                         case PowerUpType.DUALSHOT_ROUNDS:
                                             {
-                                                // loose double health                                                
+                                                // loose 2 times health                                                
                                                 destructible.LooseHealth(destructible.HealthSlot * 2);
                                             }
                                             break;
                                         case PowerUpType.DEADSHOT_ROUNDS:
                                             {
-                                                // loose all health
-                                                destructible.LooseHealth(destructible.Health);
+                                                // loose 4 times health
+                                                destructible.LooseHealth(destructible.HealthSlot * 4);
                                             }
                                             break;
                                         default:
@@ -253,7 +253,7 @@ namespace AstroOdyssey
                                 // fade the a bit on projectile hit
                                 destructible.Fade();
 
-                                //App.PlaySound(SoundType.LASER_HIT);
+                                //App.PlaySound(SoundType.ROUNDS_HIT);
 
                                 switch (destructible.Tag)
                                 {

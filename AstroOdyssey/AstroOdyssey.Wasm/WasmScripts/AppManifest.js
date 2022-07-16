@@ -5,9 +5,10 @@
     displayName: "AstroOdyssey"
 }
 
-const laserFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
-const laserFirePowerUpSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
-const laserHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
+const dualShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
+const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
@@ -24,9 +25,12 @@ const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
-const lfAudio = new Audio();
-const lfpuAudio = new Audio();
-const lhAudio = new Audio();
+const rfAudio = new Audio();
+
+const dualsrfAudio = new Audio();
+const deadsrfAudio = new Audio();
+
+const rhAudio = new Audio();
 const puAudio = new Audio();
 const pdAudio = new Audio();
 const edAudio = new Audio();
@@ -72,26 +76,33 @@ function playGameSound(baseUrl, soundType) {
             bgAudio.loop = true;
             playSound(bgAudio);
         } break;
-        case "LASER_FIRE": {
-            if (lfAudio.src.length == 0) {
-                lfAudio.src = baseUrl.concat("/", laserFireSource);
-                lfAudio.volume = 0.1;
+        case "ROUNDS_FIRE": {
+            if (rfAudio.src.length == 0) {
+                rfAudio.src = baseUrl.concat("/", roundsFireSource);
+                rfAudio.volume = 0.1;
             }
-            playSound(lfAudio);
+            playSound(rfAudio);
         } break;
-        case "LASER_FIRE_POWERED_UP": {
-            if (lfpuAudio.src.length == 0) {
-                lfpuAudio.src = baseUrl.concat("/", laserFirePowerUpSource);
-                lfpuAudio.volume = 0.2;
+        case "DUALSHOT_ROUNDS_FIRE": {
+            if (dualsrfAudio.src.length == 0) {
+                dualsrfAudio.src = baseUrl.concat("/", dualShotRoundsFireSource);
+                dualsrfAudio.volume = 0.2;
             }
-            playSound(lfpuAudio);
+            playSound(dualsrfAudio);
         } break;
-        case "LASER_HIT": {
-            if (lhAudio.src.length == 0) {
-                lhAudio.src = baseUrl.concat("/", laserHitSource);
-                lhAudio.volume = 0.6;
+        case "DEADSHOT_ROUNDS_FIRE": {
+            if (deadsrfAudio.src.length == 0) {
+                deadsrfAudio.src = baseUrl.concat("/", deadShotRoundsFireSource);
+                deadsrfAudio.volume = 0.2;
             }
-            playSound(lhAudio);
+            playSound(deadsrfAudio);
+        } break;
+        case "ROUNDS_HIT": {
+            if (rhAudio.src.length == 0) {
+                rhAudio.src = baseUrl.concat("/", roundHitSource);
+                rhAudio.volume = 0.6;
+            }
+            playSound(rhAudio);
         } break;
         case "POWER_UP": {
             if (puAudio.src.length == 0) {

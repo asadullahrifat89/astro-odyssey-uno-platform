@@ -34,9 +34,10 @@ namespace AstroOdyssey
         public enum SoundType
         {
             BACKGROUND_MUSIC,
-            LASER_FIRE,
-            LASER_HIT,
-            LASER_FIRE_POWERED_UP,
+            ROUNDS_FIRE,
+            ROUNDS_HIT,
+            DUALSHOT_ROUNDS_FIRE,
+            DEADSHOT_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
             POWER_UP,
