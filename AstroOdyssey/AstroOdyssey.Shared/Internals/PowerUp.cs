@@ -60,6 +60,6 @@ namespace AstroOdyssey
         NONE,
         DUALSHOT_ROUNDS,
         DEADSHOT_ROUNDS,
-        //SONIC_ROUNDS, // TODO: extremely fast shots but slow firing rate
+        //SONIC_ROUNDS, // TODO: extremely fast shots with long bullets but slow firing rate
     }
 }
