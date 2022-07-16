@@ -15,7 +15,7 @@ namespace AstroOdyssey
         public const string HEALTH = "health";
         public const string POWERUP = "powerup";
 
-        public const string LASER = "laser";
+        public const string PROJECTILE = "projectile";
 
         public const string STAR = "star";
 

@@ -29,7 +29,7 @@ namespace AstroOdyssey
 
         private int powerUpCounter = 1500;
         private int powerUpTriggerCounter;
-        private int laserCounter;
+        private int projectileCounter;
         private int enemyCounter;
         private int meteorCounter;
         private int rotatedEnemySpawnCounter = 10;
@@ -66,7 +66,7 @@ namespace AstroOdyssey
 
         private bool PowerUpTriggered { get; set; }
 
-        private double LaserSpeed { get; set; } = 18;
+        private double ProjectileSpeed { get; set; } = 18;
 
         private double EnemySpeed { get; set; } = 2;
 
@@ -82,7 +82,7 @@ namespace AstroOdyssey
 
         private int FrameStatUpdateLimit { get; set; } = 5;
 
-        private int LaserSpawnLimit { get; set; } = 16;
+        private int ProjectileSpawnLimit { get; set; } = 16;
 
         private int PowerUpTriggerLimit { get; set; } = 1000;
 
@@ -132,7 +132,7 @@ namespace AstroOdyssey
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
-        private bool FireLasers { get; set; } = false;
+        private bool FireProjectiles { get; set; } = false;
 
         #endregion
 
@@ -141,7 +141,7 @@ namespace AstroOdyssey
         #region Game Methods
 
         /// <summary>
-        /// Starts the game. Spawns the player and starts game and laser loops.
+        /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
         private async void StartGame()
         {
@@ -190,7 +190,7 @@ namespace AstroOdyssey
 
                 SpawnPowerUp();
 
-                SpawnLaser(PowerUpTriggered);
+                SpawnProjectile(PowerUpTriggered);
 
                 MovePlayer();
 
@@ -327,33 +327,33 @@ namespace AstroOdyssey
 
             switch (tag)
             {
-                case LASER:
+                case PROJECTILE:
                     {
-                        var laser = gameObject as Laser;
+                        var projectile = gameObject as Projectile;
 
-                        // move laser up                
-                        laser.MoveY();
+                        // move projectile up                
+                        projectile.MoveY();
 
-                        // remove laser if outside game canvas
-                        if (laser.GetY() < 10)
-                            GameView.AddDestroyableGameObject(laser);
+                        // remove projectile if outside game canvas
+                        if (projectile.GetY() < 10)
+                            GameView.AddDestroyableGameObject(projectile);
 
-                        var laserBounds = laser.GetRect();
+                        var projectileBounds = projectile.GetRect();
 
-                        // get the destructible objects which intersect with the current laser
-                        var destructibles = GameView.GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.GetRect().Intersects(laserBounds));
+                        // get the destructible objects which intersect with the current projectile
+                        var destructibles = GameView.GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
 
                         foreach (var destructible in destructibles)
                         {
-                            GameView.AddDestroyableGameObject(laser);
+                            GameView.AddDestroyableGameObject(projectile);
 
-                            // if laser is powered up then execute over kill
-                            if (laser.IsPoweredUp)
+                            // if projectile is powered up then execute over kill
+                            if (projectile.IsPoweredUp)
                                 destructible.LooseHealth(destructible.HealthSlot * 2);
                             else
                                 destructible.LooseHealth();
 
-                            // fade the a bit on laser hit
+                            // fade the a bit on projectile hit
                             destructible.Fade();
 
                             //App.PlaySound(SoundType.LASER_HIT);
@@ -610,7 +610,7 @@ namespace AstroOdyssey
                         MeteorSpawnLimit -= 2;
                         MeteorSpeed += 1;
 
-                        LaserSpawnLimit -= 1;
+                        ProjectileSpawnLimit -= 1;
 
                         HealthSpeed += 1;
                         PowerUpSpeed += 1;
@@ -759,43 +759,43 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Laser Methods        
+        #region Projectile Methods        
 
         /// <summary>
-        /// Spawns a laser.
+        /// Spawns a projectile.
         /// </summary>
-        private void SpawnLaser(bool isPoweredUp)
+        private void SpawnProjectile(bool isPoweredUp)
         {
             // each frame progress decreases this counter
-            laserCounter -= 1;
+            projectileCounter -= 1;
 
-            if (laserCounter <= 0)
+            if (projectileCounter <= 0)
             {
+                if (FireProjectiles)
                 // any object falls within player range
-                if (FireLasers)
-                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyNearbyObjectsOnTheRight(gameObject: x) || Player.AnyNearbyObjectsOnTheLeft(gameObject: x)))
+                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 {
-                    GenerateLaser(isPoweredUp: isPoweredUp);
+                    GenerateProjectile(isPoweredUp: isPoweredUp);
                 }
 
-                laserCounter = LaserSpawnLimit;
+                projectileCounter = ProjectileSpawnLimit;
             }
         }
 
         /// <summary>
-        /// Generates a laser.
+        /// Generates a projectile.
         /// </summary>
-        /// <param name="laserHeight"></param>
-        /// <param name="laserWidth"></param>
-        private void GenerateLaser(bool isPoweredUp)
+        /// <param name="projectileHeight"></param>
+        /// <param name="projectileWidth"></param>
+        private void GenerateProjectile(bool isPoweredUp)
         {
-            var newLaser = new Laser();
+            var newProjectile = new Projectile();
 
-            newLaser.SetAttributes(speed: LaserSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GetGameObjectScale());
+            newProjectile.SetAttributes(speed: ProjectileSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GetGameObjectScale());
 
-            newLaser.AddToGameEnvironment(top: Player.GetY() + 5, left: Player.GetX() + Player.Width / 2 - newLaser.Width / 2, gameEnvironment: GameView);
+            newProjectile.AddToGameEnvironment(top: Player.GetY() + 5, left: Player.GetX() + Player.Width / 2 - newProjectile.Width / 2, gameEnvironment: GameView);
 
-            if (newLaser.IsPoweredUp)
+            if (newProjectile.IsPoweredUp)
                 App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);
             else
                 App.PlaySound(baseUrl, SoundType.LASER_FIRE);
@@ -1013,7 +1013,7 @@ namespace AstroOdyssey
             PowerUpTriggered = true;
             powerUpTriggerCounter = PowerUpTriggerLimit;
 
-            LaserSpawnLimit -= 1;
+            ProjectileSpawnLimit -= 1;
             ShowInGameText("POWER UP!");
 
             App.PlaySound(baseUrl, SoundType.POWER_UP);
@@ -1036,7 +1036,7 @@ namespace AstroOdyssey
                 if (powerUpTriggerCounter <= 0)
                 {
                     PowerUpTriggered = false;
-                    LaserSpawnLimit += 1;
+                    ProjectileSpawnLimit += 1;
 
                     App.PlaySound(baseUrl, SoundType.POWER_DOWN);
                     Player.TriggerPowerDown();
@@ -1117,12 +1117,12 @@ namespace AstroOdyssey
 
         //    PointerX = currentPoint.Position.X;
 
-        //    FireLasers = true;
+        //    FireProjectiles = true;
         //}
 
         //private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         //{
-        //    FireLasers = false;
+        //    FireProjectiles = false;
         //}
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -1131,7 +1131,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { FireLasers = true; } break;
+                case Windows.System.VirtualKey.Up: { FireProjectiles = true; } break;
+                case Windows.System.VirtualKey.Space: { FireProjectiles = true; } break;
                 default:
                     break;
             }
@@ -1143,7 +1144,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { FireLasers = false; } break;
+                case Windows.System.VirtualKey.Up: { FireProjectiles = false; } break;
+                case Windows.System.VirtualKey.Space: { FireProjectiles = false; } break;
                 default:
                     break;
             }
@@ -1151,30 +1153,28 @@ namespace AstroOdyssey
 
         private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FireLasers = true;
+            FireProjectiles = true;
             MoveLeft = true;
             MoveRight = false;
         }
 
         private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FireLasers = true;
+            FireProjectiles = true;
             MoveLeft = false;
-            //MoveRight = false;
         }
 
         private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FireLasers = true;
+            FireProjectiles = true;
             MoveRight = true;
             MoveLeft = false;
         }
 
         private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FireLasers = true;
+            FireProjectiles = true;
             MoveRight = false;
-            //MoveLeft = false;
         }
 
         #endregion

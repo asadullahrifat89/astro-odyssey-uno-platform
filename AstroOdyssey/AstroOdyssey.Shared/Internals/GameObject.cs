@@ -50,6 +50,8 @@ namespace AstroOdyssey
 
         public bool HasNoHealth => Health <= 0;
 
+        public bool HasHealth => Health > 0;
+
         public bool HasFadedAway => Opacity <= 0;
 
         public new double Rotation { get; set; } = 0;
