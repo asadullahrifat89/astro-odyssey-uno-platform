@@ -10,12 +10,12 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private NavigationView _navigationView;
-        private Frame _frame;
+        private readonly NavigationView _navigationView;
+        private readonly Frame _frame;
         private NavigationViewItem _lastInvokedMenuItem;
-        private Dictionary<string, Type> _pageMap;
-        private List<Type> _goBackNotAllowedToPages;
-        private List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
+        private readonly Dictionary<string, Type> _pageMap;
+        private readonly List<Type> _goBackNotAllowedToPages;
+        private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
 
         #endregion
 

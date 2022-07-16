@@ -11,20 +11,20 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private Grid content = new Grid();
+        private readonly Grid content = new Grid();
 
-        private Image contentShip = new Image()
+        private readonly Image contentShip = new Image()
         {
             Stretch = Stretch.Uniform,
         };
 
-        private Image contentShipBlaze = new Image()
+        private readonly Image contentShipBlaze = new Image()
         {
             Stretch = Stretch.Uniform,
             Margin = new Microsoft.UI.Xaml.Thickness(0, 50, 0, 0)
         };
 
-        private Border contentShipPowerGauge = new Border()
+        private readonly Border contentShipPowerGauge = new Border()
         {
             Background = new SolidColorBrush(Colors.Goldenrod),
             Height = 5,

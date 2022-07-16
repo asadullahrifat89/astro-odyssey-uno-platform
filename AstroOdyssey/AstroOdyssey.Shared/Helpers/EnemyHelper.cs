@@ -76,14 +76,20 @@ namespace AstroOdyssey
                 newEnemy.XDirection = (XDirection)random.Next(1, 3);
                 rotatedEnemySpawnCounter = rotatedEnemySpawnLimit;
 
+                newEnemy.YDirection = (YDirection)random.Next(0, 3);
+
+                // enemies can not go up
+                if (newEnemy.YDirection == YDirection.UP)
+                    newEnemy.YDirection = YDirection.DOWN;
+
                 switch (newEnemy.XDirection)
                 {
                     case XDirection.LEFT:
-                        newEnemy.Rotation = 50;
+                        newEnemy.Rotation = newEnemy.YDirection == YDirection.NONE ? 0 : 50;
                         left = gameEnvironment.Width;
                         break;
                     case XDirection.RIGHT:
-                        newEnemy.Rotation = -50;
+                        newEnemy.Rotation = newEnemy.YDirection == YDirection.NONE ? 0 : -50;
                         left = 0 - newEnemy.Width + 10;
                         break;
                     default:

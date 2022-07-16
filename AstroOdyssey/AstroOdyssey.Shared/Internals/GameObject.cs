@@ -8,7 +8,7 @@ namespace AstroOdyssey
 {
     public class GameObject : Border
     {
-        private CompositeTransform compositeTransform = new CompositeTransform()
+        private readonly CompositeTransform compositeTransform = new CompositeTransform()
         {
             CenterX = 0.5,
             CenterY = 0.5,
@@ -25,7 +25,6 @@ namespace AstroOdyssey
             //BorderBrush = new SolidColorBrush(Colors.White);
             //BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
 #endif
-
             RenderTransformOrigin = new Point(0.5, 0.5);
             RenderTransform = compositeTransform;
         }
@@ -44,7 +43,7 @@ namespace AstroOdyssey
 
         public double Speed { get; set; } = 1;
 
-        public YDirection YDirection { get; set; } = YDirection.DOWN;
+        public YDirection YDirection { get; set; } = YDirection.NONE;
 
         public XDirection XDirection { get; set; } = XDirection.NONE;
 
@@ -211,6 +210,7 @@ namespace AstroOdyssey
 
     public enum YDirection
     {
+        NONE,
         UP,
         DOWN,
     }

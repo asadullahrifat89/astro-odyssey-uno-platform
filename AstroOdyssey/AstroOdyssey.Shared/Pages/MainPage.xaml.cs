@@ -16,7 +16,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private NavigationHelper navigationHelper;
+        private readonly NavigationHelper navigationHelper;
 
         #endregion
 

@@ -9,7 +9,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
 
         #endregion
 

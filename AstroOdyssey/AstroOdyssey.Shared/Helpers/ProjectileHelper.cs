@@ -13,9 +13,9 @@ namespace AstroOdyssey
 
         private int projectileCounter;
         private int projectileSpawnLimit = 16;
-        private double projectileSpeed = 18;
+        private readonly double projectileSpeed = 18;
 
-        private string baseUrl;
+        private readonly string baseUrl;
 
         #endregion
 
