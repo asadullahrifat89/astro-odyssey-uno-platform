@@ -16,8 +16,8 @@ namespace AstroOdyssey
         private int rotatedEnemySpawnCounter = 10;
         private int rotatedEnemySpawnLimit = 10;
 
-        private int miniBossEnemySpawnCounter = 15;
-        private int miniBossEnemySpawnLimit = 15;
+        private int overPoweredEnemySpawnCounter = 15;
+        private int overPoweredEnemySpawnLimit = 15;
 
         private int enemyCounter;
         private int enemySpawnLimit = 50;
@@ -75,18 +75,13 @@ namespace AstroOdyssey
             double top = 0;
 
             // generate large but slower and stronger enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && miniBossEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
-                miniBossEnemySpawnCounter = miniBossEnemySpawnLimit;
+                overPoweredEnemySpawnCounter = overPoweredEnemySpawnLimit;
 
-                newEnemy.Height = newEnemy.Height * 1.5;
-                newEnemy.Width = newEnemy.Width * 1.5;
-                newEnemy.Speed--;
-                newEnemy.Health += 2;
+                newEnemy.OverPower();
 
-                newEnemy.IsMiniBoss = true;
-
-                miniBossEnemySpawnLimit = random.Next(10, 20);
+                overPoweredEnemySpawnLimit = random.Next(10, 20);
             }
 
             // generate side ways flying enemies after level 2
@@ -132,7 +127,7 @@ namespace AstroOdyssey
             newEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
             rotatedEnemySpawnCounter -= 1;
-            miniBossEnemySpawnCounter--;
+            overPoweredEnemySpawnCounter--;
         }
 
         /// <summary>

@@ -16,6 +16,9 @@ namespace AstroOdyssey
         private int rotatedMeteorSpawnCounter = 10;
         private int rotatedMeteorSpawnLimit = 10;
 
+        private int overPoweredMeteorSpawnCounter = 15;
+        private int overPoweredMeteorSpawnLimit = 15;
+
         private int meteorCounter;
         private int meteorSpawnLimit = 55;
         private double meteorSpeed = 1.5;
@@ -74,6 +77,16 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
+            // generate large but slower and stronger enemies after level 3
+            if (gameLevel > GameLevel.Level_3 && overPoweredMeteorSpawnCounter <= 0)
+            {
+                overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnLimit;
+
+                newMeteor.OverPower();
+
+                overPoweredMeteorSpawnLimit = random.Next(10, 20);
+            }
+
             // generate side ways flying meteors after level 2
             if (gameLevel > GameLevel.Level_2 && rotatedMeteorSpawnCounter <= 0)
             {
@@ -114,6 +127,7 @@ namespace AstroOdyssey
             newMeteor.AddToGameEnvironment(top: 0 - newMeteor.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             rotatedMeteorSpawnCounter--;
+            overPoweredMeteorSpawnCounter--;
         }
 
         /// <summary>

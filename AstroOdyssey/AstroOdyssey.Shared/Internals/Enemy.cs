@@ -8,7 +8,7 @@ namespace AstroOdyssey
     public class Enemy : GameObject
     {
         #region Fields
-        
+
         private readonly Image content = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
@@ -28,13 +28,7 @@ namespace AstroOdyssey
             YDirection = YDirection.DOWN;
         }
 
-        #endregion
-
-        #region Properties
-
-        public bool IsMiniBoss { get; set; } = false;
-
-        #endregion
+        #endregion       
 
         #region Methods
 
@@ -78,7 +72,7 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
-        } 
+        }
 
         #endregion
     }

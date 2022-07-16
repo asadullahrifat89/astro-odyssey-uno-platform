@@ -349,7 +349,7 @@ namespace AstroOdyssey
                                         {
                                             var enemy = destructible as Enemy;
 
-                                            if (enemy.IsMiniBoss)
+                                            if (enemy.IsOverPowered)
                                                 Score += 4;
                                             else
                                                 Score += 2;
@@ -361,7 +361,10 @@ namespace AstroOdyssey
                                         {
                                             var meteor = destructible as Meteor;
 
-                                            Score++;
+                                            if (meteor.IsOverPowered)
+                                                Score += 2;
+                                            else
+                                                Score++;
 
                                             _meteorHelper.DestroyMeteor(meteor);
                                         }
