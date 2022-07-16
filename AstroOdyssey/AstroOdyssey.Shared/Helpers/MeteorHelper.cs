@@ -13,8 +13,10 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
-        private int meteorCounter;
+        private int rotatedMeteorSpawnCounter = 10;
+        private int rotatedMeteorSpawnLimit = 10;
 
+        private int meteorCounter;
         private int meteorSpawnLimit = 55;
         private double meteorSpeed = 1.5;
 
@@ -54,7 +56,7 @@ namespace AstroOdyssey
                 // when counter reaches zero, create a meteor
                 if (meteorCounter < 0)
                 {
-                    GenerateMeteor();
+                    GenerateMeteor(gameLevel);
                     meteorCounter = meteorSpawnLimit;
                 }
             }
@@ -63,12 +65,51 @@ namespace AstroOdyssey
         /// <summary>
         /// Generates a random meteor.
         /// </summary>
-        public void GenerateMeteor()
+        public void GenerateMeteor(GameLevel gameLevel)
         {
-            var NewMeteor = new Meteor();
+            var newMeteor = new Meteor();
 
-            NewMeteor.SetAttributes(speed: meteorSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
-            NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            newMeteor.SetAttributes(speed: meteorSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
+
+            double left = 0;
+            double top = 0;
+
+            if ((int)gameLevel > 0 && rotatedMeteorSpawnCounter <= 0)
+            {
+                newMeteor.XDirection = (XDirection)random.Next(1, 3);
+                rotatedMeteorSpawnCounter = rotatedMeteorSpawnLimit;
+
+                switch (newMeteor.XDirection)
+                {
+                    case XDirection.LEFT:
+                        newMeteor.Rotation = random.NextDouble() + 1 * -1;
+                        left = gameEnvironment.Width;
+                        break;
+                    case XDirection.RIGHT:                       
+                        newMeteor.Rotation = random.NextDouble() + 1;
+                        left = 0 - newMeteor.Width + 10;
+                        break;
+                    default:
+                        break;
+                }
+
+#if DEBUG
+                Console.WriteLine("Meteor XDirection: " + newMeteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+#endif
+                top = random.Next(0, (int)gameEnvironment.Height / 3);
+                newMeteor.Rotate();
+
+                rotatedMeteorSpawnLimit = random.Next(5, 15);
+            }
+            else
+            {
+                left = random.Next(10, (int)gameEnvironment.Width - 100);
+                top = 0 - newMeteor.Height;
+            }
+
+            newMeteor.AddToGameEnvironment(top: 0 - newMeteor.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+
+            rotatedMeteorSpawnCounter--;
         }
 
         /// <summary>
@@ -93,6 +134,7 @@ namespace AstroOdyssey
             // move meteor down
             meteor.Rotate();
             meteor.MoveY();
+            meteor.MoveX();
 
             // if the object is marked for lazy destruction then no need to perform collisions
             if (meteor.MarkedForFadedRemoval)

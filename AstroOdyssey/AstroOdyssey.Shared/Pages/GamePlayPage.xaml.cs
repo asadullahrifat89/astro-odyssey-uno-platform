@@ -27,7 +27,6 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private int playerDamagedOpacityCounter;
         private int showInGameTextCounter;
 
         private readonly StarHelper _starHelper;

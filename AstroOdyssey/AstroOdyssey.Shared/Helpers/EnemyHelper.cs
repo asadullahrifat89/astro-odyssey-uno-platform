@@ -37,7 +37,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Levels up enemies.
         /// </summary>
-        public void LevelUp() 
+        public void LevelUp()
         {
             enemySpawnLimit -= 2;
             enemySpeed += 1;
@@ -68,8 +68,8 @@ namespace AstroOdyssey
 
             newEnemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
 
-            var left = 0;
-            var top = 0;
+            double left = 0;
+            double top = 0;
 
             // when not noob anymore enemy moves sideways
             if ((int)gameLevel > 0 && rotatedEnemySpawnCounter <= 0)
@@ -81,11 +81,11 @@ namespace AstroOdyssey
                 {
                     case XDirection.LEFT:
                         newEnemy.Rotation = 50;
-                        left = (int)gameEnvironment.Width;
+                        left = gameEnvironment.Width;
                         break;
                     case XDirection.RIGHT:
-                        left = 0 - (int)newEnemy.Width + 10;
                         newEnemy.Rotation = -50;
+                        left = 0 - newEnemy.Width + 10;
                         break;
                     default:
                         break;
@@ -101,7 +101,7 @@ namespace AstroOdyssey
             else
             {
                 left = random.Next(10, (int)gameEnvironment.Width - 70);
-                top = 0 - (int)newEnemy.Height;
+                top = 0 - newEnemy.Height;
             }
 
             newEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
