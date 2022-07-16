@@ -94,10 +94,6 @@ namespace AstroOdyssey
 
         private double PlayerSpeed { get; set; } = 12;
 
-        private double PlayerX { get; set; }
-
-        private double PlayerWidthHalf { get; set; }
-
         private bool MoveLeft { get; set; } = false;
 
         private bool MoveRight { get; set; } = false;
@@ -167,6 +163,17 @@ namespace AstroOdyssey
                                 destructible.LooseHealth(destructible.HealthSlot * 2);
                             else
                                 destructible.LooseHealth();
+
+                            if (destructible.HasHealth)
+                            {
+                                // after level 3 enemies will try to evade shots
+                                if (GameLevel > GameLevel.Level_3 && destructible is Enemy hitEnemy)
+                                    hitEnemy.Evade();
+
+                                // meteors float away on impact
+                                if (destructible is Meteor hitMeteor)
+                                    hitMeteor.Float();
+                            }
 
                             // fade the a bit on projectile hit
                             destructible.Fade();
@@ -328,11 +335,7 @@ namespace AstroOdyssey
 
                 GameOver();
 
-                PlayerX = Player.GetX();
-
-                PlayerWidthHalf = Player.Width / 2;
-
-                MovePlayer();
+                PointerX = _playerHelper.MovePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
 
                 UpdateGameView();
 
@@ -560,8 +563,9 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnPlayer()
         {
-            Player = _playerHelper.SpawnPlayer(PointerX, PlayerSpeed);
-            PlayerWidthHalf = Player.Width / 2;
+            var scale = GameView.GetGameObjectScale();
+
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, playerSpeed: PlayerSpeed * scale);
         }
 
         /// <summary>
@@ -570,42 +574,6 @@ namespace AstroOdyssey
         private void SetPlayerY()
         {
             Player.SetY(windowHeight - Player.Height - 20);
-        }
-
-        /// <summary>
-        /// Sets the x axis position of the player on game canvas.
-        /// </summary>
-        /// <param name="x"></param>
-        private void SetPlayerX(double x)
-        {
-            Player.SetX(x);
-        }
-
-        /// <summary>
-        /// Moves the player to last pointer pressed position by x axis.
-        /// </summary>
-        private void MovePlayer()
-        {
-            if (MoveLeft && PlayerX > 0)
-                PointerX -= Player.Speed;
-
-            if (MoveRight && PlayerX + Player.Width < windowWidth)
-                PointerX += Player.Speed;
-
-            // move right
-            if (PointerX - PlayerWidthHalf > PlayerX + Player.Speed)
-            {
-                if (PlayerX + PlayerWidthHalf < windowWidth)
-                {
-                    SetPlayerX(PlayerX + Player.Speed);
-                }
-            }
-
-            // move left
-            if (PointerX - PlayerWidthHalf < PlayerX - Player.Speed)
-            {
-                SetPlayerX(PlayerX - Player.Speed);
-            }
         }
 
         /// <summary>
@@ -654,7 +622,7 @@ namespace AstroOdyssey
         //{
         //    var currentPoint = e.GetCurrentPoint(GameView);
 
-        //    PointerX = currentPoint.Position.X;
+        //    pointerX = currentPoint.Position.X;
 
         //    FiringProjectiles = true;
         //}

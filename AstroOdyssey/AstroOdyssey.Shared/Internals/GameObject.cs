@@ -132,6 +132,11 @@ namespace AstroOdyssey
             Canvas.SetLeft(this, GetX() + (left * GetXDirectionModifier(xDirection)));
         }
 
+        public void MoveX(XDirection xDirection)
+        {
+            Canvas.SetLeft(this, GetX() + (Speed * GetXDirectionModifier(xDirection)));
+        }
+
         public void MoveY()
         {
             Canvas.SetTop(this, GetY() + (Speed * GetYDirectionModifier()));

@@ -28,7 +28,13 @@ namespace AstroOdyssey
             YDirection = YDirection.DOWN;
         }
 
-        #endregion       
+        #endregion
+
+        #region Properties
+
+        public bool IsEvading { get; set; }
+
+        #endregion
 
         #region Methods
 
@@ -72,6 +78,17 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
+        }
+
+        public void Evade()
+        {
+            if (!IsEvading && XDirection == XDirection.NONE)
+            {
+                XDirection = (XDirection)new Random().Next(1, 3);
+                Speed = Speed - 1;
+
+                IsEvading = true;
+            }
         }
 
         #endregion

@@ -28,6 +28,12 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public bool IsFloating { get; set; }
+
+        #endregion
+
         #region Methods
 
         public void SetAttributes(double speed, double scale = 1)
@@ -85,6 +91,18 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
+        }
+
+        public void Float()
+        {
+            if (!IsFloating && XDirection == XDirection.NONE)
+            {
+                YDirection = YDirection.UP;
+                XDirection = (XDirection)new Random().Next(1, 3);
+                Speed = Speed - 2;
+
+                IsFloating = true;
+            }
         }
 
         #endregion
