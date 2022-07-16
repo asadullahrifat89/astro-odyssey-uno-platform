@@ -26,7 +26,6 @@ namespace AstroOdyssey
 
         private readonly Border contentShipPowerGauge = new Border()
         {
-            Background = new SolidColorBrush(Colors.Goldenrod),
             Height = 5,
             Width = 0,
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
@@ -153,12 +152,26 @@ namespace AstroOdyssey
             contentShipPowerGauge.Width = powerGauge * 3;
         }
 
-        public void TriggerPowerUp()
+        public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
+
+            switch (powerUpType)
+            {
+                case PowerUpType.DUALSHOT_ROUNDS:
+                    {
+                        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
+                        contentShipBlaze.Source = new BitmapImage(exhaustUri);
+                        contentShipPowerGauge.Background = new SolidColorBrush(Colors.Goldenrod);
+                    }
+                    break;
+                case PowerUpType.DEADSHOT_ROUNDS:
+                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.Purple);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void TriggerPowerDown()

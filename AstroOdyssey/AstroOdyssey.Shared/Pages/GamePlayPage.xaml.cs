@@ -72,6 +72,8 @@ namespace AstroOdyssey
 
         private bool IsPoweredUp { get; set; }
 
+        private PowerUpType PowerUpType { get; set; }
+
         private int FrameStatUpdateLimit { get; set; } = 5;
 
         private int ShowInGameTextLimit { get; set; } = 100;
@@ -158,7 +160,8 @@ namespace AstroOdyssey
 
                 _powerUpHelper.SpawnPowerUp();
 
-                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel);
+                //TODO: send power up type
+                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
 
                 _starHelper.SpawnStar();
 
@@ -205,6 +208,7 @@ namespace AstroOdyssey
                         {
                             var projectile = gameObject as Projectile;
 
+                            // move the projectile up and check if projectile has gone beyond the game view
                             _projectileHelper.UpdateProjectile(projectile, out bool destroyed);
 
                             if (destroyed)
@@ -219,9 +223,32 @@ namespace AstroOdyssey
 
                                 // if projectile is powered up then execute over kill
                                 if (projectile.IsPoweredUp)
-                                    destructible.LooseHealth(destructible.HealthSlot * 2);
+                                {
+                                    switch (projectile.PowerUpType)
+                                    {
+                                        case PowerUpType.DUALSHOT_ROUNDS:
+                                            {
+                                                // loose double health                                                
+                                                destructible.LooseHealth(destructible.HealthSlot * 2);
+                                            }
+                                            break;
+                                        case PowerUpType.DEADSHOT_ROUNDS:
+                                            {
+                                                // loose all health
+                                                destructible.LooseHealth(destructible.Health);
+                                            }
+                                            break;
+                                        default:
+                                            {
+                                                destructible.LooseHealth();
+                                            }
+                                            break;
+                                    }
+                                }
                                 else
+                                {
                                     destructible.LooseHealth();
+                                }
 
                                 // fade the a bit on projectile hit
                                 destructible.Fade();
@@ -334,8 +361,10 @@ namespace AstroOdyssey
                             // check if power up collides with player
                             if (_playerHelper.PlayerCollision(Player, powerUp))
                             {
+                                //TODO: send power up type to projectile helper
                                 IsPoweredUp = true;
-                                _projectileHelper.PowerUp();
+                                PowerUpType = powerUp.PowerUpType;
+                                _projectileHelper.PowerUp(PowerUpType);
                             }
                         }
                         break;
@@ -591,8 +620,9 @@ namespace AstroOdyssey
             {
                 if (_playerHelper.PowerDown(Player))
                 {
-                    _projectileHelper.PowerDown();
+                    _projectileHelper.PowerDown(PowerUpType);
                     IsPoweredUp = false;
+                    PowerUpType = PowerUpType.NONE;
                 }
             }
         }
