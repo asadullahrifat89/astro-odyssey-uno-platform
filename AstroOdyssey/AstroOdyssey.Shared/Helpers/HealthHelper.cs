@@ -12,6 +12,7 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
+        private int healthCounter;
         private int healthSpawnLimit = 1000;
 
         #endregion
@@ -27,6 +28,25 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns a Health.
+        /// </summary>
+        public void SpawnHealth(Player player, double healthSpeed)
+        {
+            if (player.Health <= 60)
+            {
+                // each frame progress decreases this counter
+                healthCounter -= 1;
+
+                // when counter reaches zero, create a Health
+                if (healthCounter < 0)
+                {
+                    GenerateHealth(healthSpeed);
+                    healthCounter = healthSpawnLimit;
+                }
+            }
+        }
 
         /// <summary>
         /// Generates a random Health.

@@ -16,6 +16,9 @@ namespace AstroOdyssey
         private int rotatedEnemySpawnCounter = 10;
         private int rotatedEnemySpawnLimit = 10;
 
+        private int enemyCounter;
+        private int enemySpawnLimit = 50;
+
         #endregion
 
         #region Ctor
@@ -29,6 +32,22 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns an enemy.
+        /// </summary>
+        public void SpawnEnemy(double enemySpeed, GameLevel gameLevel)
+        {
+            // each frame progress decreases this counter
+            enemyCounter -= 1;
+
+            // when counter reaches zero, create an enemy
+            if (enemyCounter < 0)
+            {
+                GenerateEnemy(enemySpeed, gameLevel);
+                enemyCounter = enemySpawnLimit;
+            }
+        }
 
         /// <summary>
         /// Generates a random Enemy.

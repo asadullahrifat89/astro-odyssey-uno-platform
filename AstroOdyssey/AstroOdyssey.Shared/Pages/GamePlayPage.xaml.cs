@@ -27,17 +27,12 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private int powerUpCounter = 1500;
         private int powerUpTriggerCounter;
         private int projectileCounter;
-        private int enemyCounter;
-        private int meteorCounter;
-        private int healthCounter;
+
         private int starCounter;
         private int playerDamagedOpacityCounter;
         private int showInGameTextCounter;
-
-        private readonly Random random = new Random();
 
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
@@ -102,10 +97,6 @@ namespace AstroOdyssey
 
         private int MeteorSpawnLimit { get; set; } = 55;
 
-        private int HealthSpawnLimit { get; set; } = 1000;
-
-        private int PowerUpSpawnLimit { get; set; } = 1500;
-
         private int StarSpawnLimit { get; set; } = 100;
 
         private int PlayerDamagedOpacityLimit { get; set; } = 100;
@@ -133,9 +124,6 @@ namespace AstroOdyssey
         private PeriodicTimer StarViewTimer { get; set; }
 
         private Player Player { get; set; }
-
-        private Health NewHealth { get; set; }
-        private PowerUp NewPowerUp { get; set; }
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
@@ -189,16 +177,6 @@ namespace AstroOdyssey
 
                 UpdateScore();
 
-                SpawnEnemy();
-
-                SpawnMeteor();
-
-                SpawnHealth();
-
-                SpawnPowerUp();
-
-                SpawnProjectile(PowerUpTriggered);
-
                 MovePlayer();
 
                 UpdateGameView();
@@ -216,6 +194,16 @@ namespace AstroOdyssey
                 CalculateFps();
 
                 SetFrameAnalytics();
+
+                _enemyHelper.SpawnEnemy(EnemySpeed, GameLevel);
+
+                _meteorHelper.SpawnMeteor(MeteorSpeed, GameLevel);
+
+                _healthHelper.SpawnHealth(Player, HealthSpeed);
+
+                _powerUpHelper.SpawnPowerUp(PowerUpSpeed);
+
+                SpawnProjectile(PowerUpTriggered);
 
                 frameRenderable = true;
 #if DEBUG
@@ -235,7 +223,7 @@ namespace AstroOdyssey
             {
                 UpdateStarView();
 
-                SpawnStar();
+                _starHelper.SpawnStar(StarSpeed);
             }
         }
 
@@ -533,6 +521,8 @@ namespace AstroOdyssey
         /// </summary>
         private void AdjustGameEnvironment()
         {
+            //TODO: inject values in helper classes. each class should have their method called LevelUp
+
             switch (GameLevel)
             {
                 case GameLevel.Level_1:
@@ -624,14 +614,14 @@ namespace AstroOdyssey
         /// </summary>
         private void GameOver()
         {
-            // game over
             if (Player.HasNoHealth)
             {
                 HealthText.Text = "Game Over";
+
                 StopGame();
+
                 App.PlaySound(baseUrl, SoundType.GAME_OVER);
 
-                //TODO: Set Score
                 App.SetScore(Score);
 
                 App.NavigateToPage(typeof(GameOverPage));
@@ -728,7 +718,9 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Projectile Methods        
+        #region Projectile Methods
+
+        // TODO: ProjectileHelper to make
 
         /// <summary>
         /// Spawns a projectile.
@@ -772,90 +764,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Enemy Methods
-
-        /// <summary>
-        /// Spawns an enemy.
-        /// </summary>
-        private void SpawnEnemy()
-        {
-            // each frame progress decreases this counter
-            enemyCounter -= 1;
-
-            // when counter reaches zero, create an enemy
-            if (enemyCounter < 0)
-            {
-                _enemyHelper.GenerateEnemy(EnemySpeed, GameLevel);
-                enemyCounter = EnemySpawnLimit;
-            }
-        }
-
-        #endregion
-
-        #region Meteor Methods
-
-        /// <summary>
-        /// Spawns a meteor.
-        /// </summary>
-        private void SpawnMeteor()
-        {
-            if ((int)GameLevel > 0)
-            {
-                // each frame progress decreases this counter
-                meteorCounter -= 1;
-
-                // when counter reaches zero, create a meteor
-                if (meteorCounter < 0)
-                {
-                    _meteorHelper.GenerateMeteor(MeteorSpeed);
-                    meteorCounter = MeteorSpawnLimit;
-                }
-            }
-        }
-
-        #endregion
-
-        #region Health Methods
-
-        /// <summary>
-        /// Spawns a Health.
-        /// </summary>
-        private void SpawnHealth()
-        {
-            if (Player.Health <= 60)
-            {
-                // each frame progress decreases this counter
-                healthCounter -= 1;
-
-                // when counter reaches zero, create a Health
-                if (healthCounter < 0)
-                {
-                    _healthHelper.GenerateHealth(HealthSpeed);
-                    healthCounter = HealthSpawnLimit;
-                }
-            }
-        }
-
-        #endregion
-
-        #region PowerUp Methods
-
-        /// <summary>
-        /// Spawns a PowerUp.
-        /// </summary>
-        private void SpawnPowerUp()
-        {
-            // each frame progress decreases this counter
-            powerUpCounter -= 1;
-
-            // when counter reaches zero, create a PowerUp
-            if (powerUpCounter < 0)
-            {
-                _powerUpHelper.GeneratePowerUp(PowerUpSpeed);
-                powerUpCounter = PowerUpSpawnLimit;
-            }
-
-        }
+        #region PowerUp Methods      
 
         /// <summary>
         /// Triggers the powered up state.
@@ -898,23 +807,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Star Methods
-
-        /// <summary>
-        /// Spawns random stars in the star view.
-        /// </summary>
-        private void SpawnStar()
-        {
-            // each frame progress decreases this counter
-            starCounter -= 1;
-
-            // when counter reaches zero, create an star
-            if (starCounter < 0)
-            {
-                _starHelper.GenerateStar(StarSpeed);
-                starCounter = StarSpawnLimit;
-            }
-        }
+        #region Star Methods      
 
         /// <summary>
         /// Updates stars on the star canvas.

@@ -10,6 +10,9 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
+        private int starCounter;
+        private int starSpawnLimit = 100;
+
         #endregion
 
         #region Ctor
@@ -22,6 +25,22 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns random stars in the star view.
+        /// </summary>
+        public void SpawnStar(double starSpeed)
+        {
+            // each frame progress decreases this counter
+            starCounter -= 1;
+
+            // when counter reaches zero, create an star
+            if (starCounter < 0)
+            {
+                GenerateStar(starSpeed);
+                starCounter = starSpawnLimit;
+            }
+        }
 
         /// <summary>
         /// Generates a random star.

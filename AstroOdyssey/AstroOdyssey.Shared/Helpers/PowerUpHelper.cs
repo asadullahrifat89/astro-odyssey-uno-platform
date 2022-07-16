@@ -12,6 +12,7 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
+        private int powerUpCounter = 1500;
         private int powerUpSpawnLimit = 1500;
 
         #endregion
@@ -27,6 +28,23 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns a PowerUp.
+        /// </summary>
+        public void SpawnPowerUp(double powerUpSpeed)
+        {
+            // each frame progress decreases this counter
+            powerUpCounter -= 1;
+
+            // when counter reaches zero, create a PowerUp
+            if (powerUpCounter < 0)
+            {
+                GeneratePowerUp(powerUpSpeed);
+                powerUpCounter = powerUpSpawnLimit;
+            }
+
+        }
 
         /// <summary>
         /// Generates a random PowerUp.

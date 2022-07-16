@@ -13,6 +13,10 @@ namespace AstroOdyssey
 
         private readonly string baseUrl;
 
+        private int meteorCounter;
+
+        private int meteorSpawnLimit = 55;
+
         #endregion
 
         #region Ctor
@@ -26,6 +30,25 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns a meteor.
+        /// </summary>
+        public void SpawnMeteor(double meteorSpeed, GameLevel gameLevel)
+        {
+            if ((int)gameLevel > 0)
+            {
+                // each frame progress decreases this counter
+                meteorCounter -= 1;
+
+                // when counter reaches zero, create a meteor
+                if (meteorCounter < 0)
+                {
+                    GenerateMeteor(meteorSpeed);
+                    meteorCounter = meteorSpawnLimit;
+                }
+            }
+        }
 
         /// <summary>
         /// Generates a random meteor.
