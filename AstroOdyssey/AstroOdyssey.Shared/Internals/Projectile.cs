@@ -51,6 +51,9 @@ namespace AstroOdyssey
                     case PowerUpType.DEADSHOT_ROUNDS:
                         height = 25; width = 25; // larger but slower rounds
                         break;
+                    case PowerUpType.SONICSHOT_ROUNDS:
+                        height = 300; width = 25; // larger but slower rounds
+                        break;
                     default:
                         break;
                 }
@@ -116,6 +119,9 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         Background = new SolidColorBrush(Colors.Purple);
+                        break;
+                    case PowerUpType.SONICSHOT_ROUNDS:
+                        Background = new SolidColorBrush(Colors.LightBlue);
                         break;
                     default:
                         break;

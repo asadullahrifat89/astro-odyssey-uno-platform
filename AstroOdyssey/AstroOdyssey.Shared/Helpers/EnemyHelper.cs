@@ -95,10 +95,10 @@ namespace AstroOdyssey
             // generate side ways flying enemies after level 2
             if (gameLevel > GameLevel.Level_2 && xFlyingEnemySpawnCounter <= 0)
             {
-                newEnemy.XDirection = (XDirection)random.Next(1, 3);
+                newEnemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
                 xFlyingEnemySpawnCounter = xFlyingEnemySpawnLimit;
 
-                newEnemy.YDirection = (YDirection)random.Next(0, 3);
+                newEnemy.YDirection = (YDirection)random.Next(0, Enum.GetNames<YDirection>().Length);
 
                 // enemies can not go up
                 if (newEnemy.YDirection == YDirection.UP)

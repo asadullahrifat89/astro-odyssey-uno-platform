@@ -90,7 +90,7 @@ namespace AstroOdyssey
             // generate side ways flying meteors after level 2
             if (gameLevel > GameLevel.Level_2 && rotatedMeteorSpawnCounter <= 0)
             {
-                newMeteor.XDirection = (XDirection)random.Next(1, 3);
+                newMeteor.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
                 rotatedMeteorSpawnCounter = rotatedMeteorSpawnLimit;
 
                 switch (newMeteor.XDirection)

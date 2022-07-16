@@ -169,6 +169,9 @@ namespace AstroOdyssey
                 case PowerUpType.DEADSHOT_ROUNDS:
                     contentShipPowerGauge.Background = new SolidColorBrush(Colors.Purple);
                     break;
+                case PowerUpType.SONICSHOT_ROUNDS:
+                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.LightBlue);
+                    break;
                 default:
                     break;
             }

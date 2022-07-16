@@ -8,6 +8,7 @@
 const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
 const rapidShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
 const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3";
 const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
@@ -29,6 +30,7 @@ const rfAudio = new Audio();
 
 const rapidsrfAudio = new Audio();
 const deadsrfAudio = new Audio();
+const sonicsrfAudio = new Audio();
 
 const rhAudio = new Audio();
 const puAudio = new Audio();
@@ -51,31 +53,6 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(gsAudio);
         } break;
-        case "BACKGROUND_MUSIC": {
-
-            let musicTrack = Math.floor((Math.random() * 12));
-            let src = "";
-
-            switch (musicTrack) {
-                case 1: { src = baseUrl.concat("/", "Assets/Sounds/slow-trap-18565.mp3"); } break;
-                case 2: { src = baseUrl.concat("/", "Assets/Sounds/space-chillout-14194.mp3"); } break;
-                case 3: { src = baseUrl.concat("/", "Assets/Sounds/cinematic-space-drone-10623.mp3"); } break;
-                case 4: { src = baseUrl.concat("/", "Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"); } break;
-                case 5: { src = baseUrl.concat("/", "Assets/Sounds/space-age-10714.mp3"); } break;
-                case 6: { src = baseUrl.concat("/", "Assets/Sounds/drone-space-main-9706.mp3"); } break;
-                case 7: { src = baseUrl.concat("/", "Assets/Sounds/cyberpunk-2099-10701.mp3"); } break;
-                case 8: { src = baseUrl.concat("/", "Assets/Sounds/insurrection-10941.mp3"); } break;
-                case 9: { src = baseUrl.concat("/", "Assets/Sounds/space-trip-114102.mp3"); } break;
-                case 10: { src = baseUrl.concat("/", "Assets/Sounds/dark-matter-10710.mp3"); } break;
-                case 11: { src = baseUrl.concat("/", "Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"); } break;
-                default:
-            }
-
-            bgAudio.src = src;
-            bgAudio.volume = 0.3;
-            bgAudio.loop = true;
-            playSound(bgAudio);
-        } break;
         case "ROUNDS_FIRE": {
             if (rfAudio.src.length == 0) {
                 rfAudio.src = baseUrl.concat("/", roundsFireSource);
@@ -96,6 +73,13 @@ function playGameSound(baseUrl, soundType) {
                 deadsrfAudio.volume = 0.2;
             }
             playSound(deadsrfAudio);
+        } break;
+        case "SONICSHOT_ROUNDS_FIRE": {
+            if (sonicsrfAudio.src.length == 0) {
+                sonicsrfAudio.src = baseUrl.concat("/", sonicShotRoundsFireSource);
+                sonicsrfAudio.volume = 0.2;
+            }
+            playSound(sonicsrfAudio);
         } break;
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {
@@ -159,7 +143,32 @@ function playGameSound(baseUrl, soundType) {
                 goAudio.volume = 1.0;
             }
             playSound(goAudio);
-        } break;      
+        } break;
+        case "BACKGROUND_MUSIC": {
+
+            let musicTrack = Math.floor((Math.random() * 12));
+            let src = "";
+
+            switch (musicTrack) {
+                case 1: { src = baseUrl.concat("/", "Assets/Sounds/slow-trap-18565.mp3"); } break;
+                case 2: { src = baseUrl.concat("/", "Assets/Sounds/space-chillout-14194.mp3"); } break;
+                case 3: { src = baseUrl.concat("/", "Assets/Sounds/cinematic-space-drone-10623.mp3"); } break;
+                case 4: { src = baseUrl.concat("/", "Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"); } break;
+                case 5: { src = baseUrl.concat("/", "Assets/Sounds/space-age-10714.mp3"); } break;
+                case 6: { src = baseUrl.concat("/", "Assets/Sounds/drone-space-main-9706.mp3"); } break;
+                case 7: { src = baseUrl.concat("/", "Assets/Sounds/cyberpunk-2099-10701.mp3"); } break;
+                case 8: { src = baseUrl.concat("/", "Assets/Sounds/insurrection-10941.mp3"); } break;
+                case 9: { src = baseUrl.concat("/", "Assets/Sounds/space-trip-114102.mp3"); } break;
+                case 10: { src = baseUrl.concat("/", "Assets/Sounds/dark-matter-10710.mp3"); } break;
+                case 11: { src = baseUrl.concat("/", "Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"); } break;
+                default:
+            }
+
+            bgAudio.src = src;
+            bgAudio.volume = 0.3;
+            bgAudio.loop = true;
+            playSound(bgAudio);
+        } break;
         default: {
 
         }

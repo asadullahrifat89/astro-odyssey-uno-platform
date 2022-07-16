@@ -38,6 +38,7 @@ namespace AstroOdyssey
             ROUNDS_HIT,
             RAPIDSHOT_ROUNDS_FIRE,
             DEADSHOT_ROUNDS_FIRE,
+            SONICSHOT_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
             POWER_UP,

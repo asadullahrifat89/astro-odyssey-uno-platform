@@ -41,7 +41,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
-            PowerUpType = (PowerUpType)random.Next(1, 3);
+            PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
 
             var uri = new Uri("ms-appx:///Assets/Images/icon_exclamationSmall.png", UriKind.RelativeOrAbsolute);
             Health = 10;
