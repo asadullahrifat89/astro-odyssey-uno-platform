@@ -41,6 +41,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private readonly StarHelper _starHelper;
+        private readonly MeteorHelper _meteorHelper;
 
         #endregion
 
@@ -56,6 +57,7 @@ namespace AstroOdyssey
             SetWindowSize();
 
             _starHelper = new StarHelper(StarView);
+            _meteorHelper = new MeteorHelper(GameView);
         }
 
         #endregion
@@ -898,22 +900,22 @@ namespace AstroOdyssey
                 // when counter reaches zero, create a meteor
                 if (meteorCounter < 0)
                 {
-                    GenerateMeteor();
+                    _meteorHelper.GenerateMeteor(MeteorSpeed);
                     meteorCounter = MeteorSpawnLimit;
                 }
             }
         }
 
-        /// <summary>
-        /// Generates a random meteor.
-        /// </summary>
-        private void GenerateMeteor()
-        {
-            NewMeteor = new Meteor();
+        ///// <summary>
+        ///// Generates a random meteor.
+        ///// </summary>
+        //private void GenerateMeteor()
+        //{
+        //    NewMeteor = new Meteor();
 
-            NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
-            NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
-        }
+        //    NewMeteor.SetAttributes(speed: MeteorSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
+        //    NewMeteor.AddToGameEnvironment(top: 0 - NewMeteor.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
+        //}
 
         /// <summary>
         /// Destroys a meteor. Removes from game environment, increases player score, plays sound effect.
