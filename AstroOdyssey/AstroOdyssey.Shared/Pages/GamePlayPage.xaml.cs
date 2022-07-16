@@ -27,9 +27,6 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private int powerUpTriggerCounter;
-        private int projectileCounter;
-
         private int playerDamagedOpacityCounter;
         private int showInGameTextCounter;
 
@@ -38,6 +35,8 @@ namespace AstroOdyssey
         private readonly EnemyHelper _enemyHelper;
         private readonly HealthHelper _healthHelper;
         private readonly PowerUpHelper _powerUpHelper;
+        private readonly ProjectileHelper _projectileHelper;
+        private readonly PlayerHelper _playerHelper;
 
         #endregion
 
@@ -58,6 +57,8 @@ namespace AstroOdyssey
             _enemyHelper = new EnemyHelper(GameView, baseUrl);
             _healthHelper = new HealthHelper(GameView, baseUrl);
             _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
+            _projectileHelper = new ProjectileHelper(GameView, baseUrl);
+            _playerHelper = new PlayerHelper(GameView, baseUrl);
         }
 
         #endregion
@@ -72,17 +73,9 @@ namespace AstroOdyssey
 
         private bool PowerUpTriggered { get; set; }
 
-        private double ProjectileSpeed { get; set; } = 18;
-
         private double PlayerSpeed { get; set; } = 12;
 
         private int FrameStatUpdateLimit { get; set; } = 5;
-
-        private int ProjectileSpawnLimit { get; set; } = 16;
-
-        private int PowerUpTriggerLimit { get; set; } = 1000;
-
-        private int PlayerDamagedOpacityLimit { get; set; } = 100;
 
         private int ShowInGameTextLimit { get; set; } = 100;
 
@@ -115,6 +108,40 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        #region Views
+
+        /// <summary>
+        /// Updates meteors, enemies, projectiles in the game view. Advances game objects in the frame.
+        /// </summary>
+        private void UpdateGameView()
+        {
+            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
+
+            foreach (var gameObject in gameObjects)
+            {
+                UpdateGameViewObjects(gameObject);
+            }
+
+            GameView.RemoveDestroyableGameObjects();
+        }
+
+        /// <summary>
+        ///  Updates stars in the game view. Advances game objects in the frame.
+        /// </summary>
+        private void UpdateStarView()
+        {
+            var starObjects = StarView.GetGameObjects<GameObject>();
+
+            foreach (var star in starObjects)
+            {
+                _starHelper.UpdateStar(star as Star);
+            }
+
+            StarView.RemoveDestroyableGameObjects();
+        }
+
+        #endregion
 
         #region Game Methods
 
@@ -186,7 +213,7 @@ namespace AstroOdyssey
 
                 _powerUpHelper.SpawnPowerUp();
 
-                SpawnProjectile(PowerUpTriggered);
+                _projectileHelper.SpawnProjectile(PowerUpTriggered, FireProjectiles, Player, GameLevel);
 
                 frameRenderable = true;
 #if DEBUG
@@ -265,21 +292,6 @@ namespace AstroOdyssey
                     InGameText.Visibility = Visibility.Collapsed;
                 }
             }
-        }
-
-        /// <summary>
-        /// Updates a frame of game view. Advances game objects in the frame.
-        /// </summary>
-        private void UpdateGameView()
-        {
-            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
-
-            foreach (var gameObject in gameObjects)
-            {
-                UpdateGameViewObjects(gameObject);
-            }
-
-            GameView.RemoveDestroyableGameObjects();
         }
 
         /// <summary>
@@ -367,7 +379,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if enemy collides with player
-                        PlayerCollision(enemy);
+                        _playerHelper.PlayerCollision(Player, enemy);
                     }
                     break;
                 case METEOR:
@@ -380,7 +392,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if meteor collides with player
-                        PlayerCollision(meteor);
+                        _playerHelper.PlayerCollision(Player, meteor);
                     }
                     break;
                 case HEALTH:
@@ -393,7 +405,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if health collides with player
-                        PlayerCollision(health);
+                        _playerHelper.PlayerCollision(Player, health);
                     }
                     break;
                 case POWERUP:
@@ -406,7 +418,11 @@ namespace AstroOdyssey
                             return;
 
                         // check if power up collides with player
-                        PlayerCollision(powerUp);
+                        if (_playerHelper.PlayerCollision(Player, powerUp))
+                        {
+                            PowerUpTriggered = true;
+                            _projectileHelper.PowerUp();
+                        }   
                     }
                     break;
                 default:
@@ -520,9 +536,9 @@ namespace AstroOdyssey
 
                         _powerUpHelper.LevelUp();
 
-                        ProjectileSpawnLimit -= 1;
-
                         _starHelper.LevelUp();
+
+                        _projectileHelper.LevelUp();
                     }
                     break;
             }
@@ -611,20 +627,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Makes the player loose health.
-        /// </summary>
-        private void PlayerHealthLoss()
-        {
-            Player.LooseHealth();
-
-            App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
-
-            Player.Opacity = 0.4d;
-
-            playerDamagedOpacityCounter = PlayerDamagedOpacityLimit;
-        }
-
-        /// <summary>
         /// Sets the player opacity.
         /// </summary>
         private void PlayerOpacity()
@@ -635,133 +637,9 @@ namespace AstroOdyssey
                 Player.Opacity = 1;
         }
 
-        /// <summary>
-        /// Makes the player gain health.
-        /// </summary>
-        /// <param name="health"></param>
-        private void PlayerHealthGain(Health health)
-        {
-            Player.GainHealth(health.Health);
-            App.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
-        }
-
-        /// <summary>
-        /// Checks and performs player collision.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        /// 
-        /// <returns></returns>
-        private bool PlayerCollision(GameObject gameObject)
-        {
-            var tag = gameObject.Tag;
-
-            switch (tag)
-            {
-                case METEOR:
-                case ENEMY:
-                    {
-                        if (Player.GetRect().Intersects(gameObject.GetRect()))
-                        {
-                            GameView.AddDestroyableGameObject(gameObject);
-                            PlayerHealthLoss();
-
-                            return true;
-                        }
-                    }
-                    break;
-                case HEALTH:
-                    {
-                        if (Player.GetRect().Intersects(gameObject.GetRect()))
-                        {
-                            GameView.AddDestroyableGameObject(gameObject);
-                            PlayerHealthGain(gameObject as Health);
-
-                            return true;
-                        }
-                    }
-                    break;
-                case POWERUP:
-                    {
-                        if (Player.GetRect().Intersects(gameObject.GetRect()))
-                        {
-                            GameView.AddDestroyableGameObject(gameObject);
-                            TriggerPowerUp();
-
-                            return true;
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            return false;
-        }
-
-        #endregion
-
-        #region Projectile Methods
-
-        // TODO: ProjectileHelper to make
-
-        /// <summary>
-        /// Spawns a projectile.
-        /// </summary>
-        private void SpawnProjectile(bool isPoweredUp)
-        {
-            // each frame progress decreases this counter
-            projectileCounter -= 1;
-
-            if (projectileCounter <= 0)
-            {
-                if (FireProjectiles)
-                // any object falls within player range
-                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
-                {
-                    GenerateProjectile(isPoweredUp: isPoweredUp);
-                }
-
-                projectileCounter = ProjectileSpawnLimit;
-            }
-        }
-
-        /// <summary>
-        /// Generates a projectile.
-        /// </summary>
-        /// <param name="projectileHeight"></param>
-        /// <param name="projectileWidth"></param>
-        private void GenerateProjectile(bool isPoweredUp)
-        {
-            var newProjectile = new Projectile();
-
-            newProjectile.SetAttributes(speed: ProjectileSpeed, gameLevel: GameLevel, isPoweredUp: isPoweredUp, scale: GameView.GetGameObjectScale());
-
-            newProjectile.AddToGameEnvironment(top: Player.GetY() + 5, left: Player.GetX() + Player.Width / 2 - newProjectile.Width / 2, gameEnvironment: GameView);
-
-            if (newProjectile.IsPoweredUp)
-                App.PlaySound(baseUrl, SoundType.LASER_FIRE_POWERED_UP);
-            else
-                App.PlaySound(baseUrl, SoundType.LASER_FIRE);
-        }
-
         #endregion
 
         #region PowerUp Methods      
-
-        /// <summary>
-        /// Triggers the powered up state.
-        /// </summary>
-        private void TriggerPowerUp()
-        {
-            PowerUpTriggered = true;
-            powerUpTriggerCounter = PowerUpTriggerLimit;
-
-            ProjectileSpawnLimit -= 1;
-            ShowInGameText("POWER UP!");
-
-            App.PlaySound(baseUrl, SoundType.POWER_UP);
-            Player.TriggerPowerUp();
-        }
 
         /// <summary>
         /// Triggers the powered up state down.
@@ -770,40 +648,14 @@ namespace AstroOdyssey
         {
             if (PowerUpTriggered)
             {
-                powerUpTriggerCounter -= 1;
+                _playerHelper.PowerDown(Player, out bool poweredDown);
 
-                var powerGauge = ((powerUpTriggerCounter / 100) + 1) * GameView.GetGameObjectScale();
-
-                Player.SetPowerGauge(powerGauge);
-
-                if (powerUpTriggerCounter <= 0)
+                if (poweredDown)
                 {
+                    _projectileHelper.PowerDown();
                     PowerUpTriggered = false;
-                    ProjectileSpawnLimit += 1;
-
-                    App.PlaySound(baseUrl, SoundType.POWER_DOWN);
-                    Player.TriggerPowerDown();
                 }
             }
-        }
-
-        #endregion
-
-        #region Star Methods      
-
-        /// <summary>
-        /// Updates stars on the star canvas.
-        /// </summary>
-        private void UpdateStarView()
-        {
-            var starObjects = StarView.GetGameObjects<GameObject>();
-
-            foreach (var star in starObjects)
-            {
-                _starHelper.UpdateStar(star as Star);
-            }
-
-            StarView.RemoveDestroyableGameObjects();
         }
 
         #endregion
