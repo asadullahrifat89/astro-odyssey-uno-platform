@@ -110,7 +110,7 @@ function playGameSound(baseUrl, soundType) {
         case "ENEMY_DESTRUCTION": {
             if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", enemyDestroyedSource);
-                edAudio.volume = 0.3;
+                edAudio.volume = 0.4;
             }
             playSound(edAudio);
         } break;

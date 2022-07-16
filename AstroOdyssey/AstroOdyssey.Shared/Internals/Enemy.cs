@@ -16,7 +16,7 @@ namespace AstroOdyssey
         #endregion
 
         #region Ctor
-        
+
         public Enemy()
         {
             Tag = Constants.ENEMY;
@@ -26,7 +26,13 @@ namespace AstroOdyssey
             IsDestructible = true;
             Child = content;
             YDirection = YDirection.DOWN;
-        } 
+        }
+
+        #endregion
+
+        #region Properties
+
+        public bool IsMiniBoss { get; set; } = false;
 
         #endregion
 
