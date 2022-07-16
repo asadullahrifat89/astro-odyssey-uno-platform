@@ -100,6 +100,17 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Sets the player opacity.
+        /// </summary>
+        public void PlayerOpacity(Player player)
+        {
+            playerDamagedOpacityCounter -= 1;
+
+            if (playerDamagedOpacityCounter <= 0)
+                player.Opacity = 1;
+        }
+
+        /// <summary>
         /// Makes the player gain health.
         /// </summary>
         /// <param name="health"></param>
@@ -123,10 +134,8 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state down.
         /// </summary>
-        public void PowerDown(Player player, out bool poweredDown)
+        public bool PowerDown(Player player)
         {
-            poweredDown = false;
-
             powerUpTriggerCounter -= 1;
 
             var powerGauge = ((powerUpTriggerCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
@@ -137,8 +146,10 @@ namespace AstroOdyssey
             {
                 App.PlaySound(baseUrl, SoundType.POWER_DOWN);
                 player.TriggerPowerDown();
-                poweredDown = true;
+                return true;
             }
+
+            return false;
         }
 
         #endregion

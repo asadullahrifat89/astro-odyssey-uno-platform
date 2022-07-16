@@ -71,7 +71,7 @@ namespace AstroOdyssey
 
         private long FrameStartTime { get; set; }
 
-        private bool PowerUpTriggered { get; set; }
+        private bool IsPoweredUp { get; set; }
 
         private double PlayerSpeed { get; set; } = 12;
 
@@ -103,7 +103,7 @@ namespace AstroOdyssey
 
         private bool MoveLeft { get; set; } = false;
         private bool MoveRight { get; set; } = false;
-        private bool FireProjectiles { get; set; } = false;
+        private bool FiringProjectiles { get; set; } = false;
 
         #endregion
 
@@ -175,17 +175,17 @@ namespace AstroOdyssey
 #endif
             GameViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
 
-            bool frameRenderable = true;
+            bool renderable = true;
 
-            while (IsGameRunning && await GameViewTimer.WaitForNextTickAsync() && frameRenderable)
+            while (IsGameRunning && await GameViewTimer.WaitForNextTickAsync() && renderable)
             {
-                frameRenderable = false;
+                renderable = false;
+
+                GameOver();
 
                 PlayerX = Player.GetX();
 
                 PlayerWidthHalf = Player.Width / 2;
-
-                UpdateScore();
 
                 MovePlayer();
 
@@ -193,17 +193,7 @@ namespace AstroOdyssey
 
                 ShiftGameLevel();
 
-                HideInGameText();
-
-                TriggerPowerDown();
-
-                PlayerOpacity();
-
-                GameOver();
-
-                CalculateFps();
-
-                SetFrameAnalytics();
+                _playerHelper.PlayerOpacity(Player);
 
                 _enemyHelper.SpawnEnemy(GameLevel);
 
@@ -213,9 +203,19 @@ namespace AstroOdyssey
 
                 _powerUpHelper.SpawnPowerUp();
 
-                _projectileHelper.SpawnProjectile(PowerUpTriggered, FireProjectiles, Player, GameLevel);
+                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel);
 
-                frameRenderable = true;
+                TriggerPowerDown();
+
+                UpdateScore();
+
+                HideInGameText();
+
+                CalculateFps();
+
+                SetFrameAnalytics();
+
+                renderable = true;
 #if DEBUG
                 FrameStartTime = watch.ElapsedMilliseconds;
 #endif
@@ -319,17 +319,13 @@ namespace AstroOdyssey
                     {
                         var projectile = gameObject as Projectile;
 
-                        // move projectile up                
-                        projectile.MoveY();
+                        _projectileHelper.UpdateProjectile(projectile, out bool destroyed);
 
-                        // remove projectile if outside game canvas
-                        if (projectile.GetY() < 10)
-                            GameView.AddDestroyableGameObject(projectile);
-
-                        var projectileBounds = projectile.GetRect();
+                        if (destroyed)
+                            return;
 
                         // get the destructible objects which intersect with the current projectile
-                        var destructibles = GameView.GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
+                        var destructibles = GameView.GetDestructibles(projectile.GetRect());
 
                         foreach (var destructible in destructibles)
                         {
@@ -420,9 +416,9 @@ namespace AstroOdyssey
                         // check if power up collides with player
                         if (_playerHelper.PlayerCollision(Player, powerUp))
                         {
-                            PowerUpTriggered = true;
+                            IsPoweredUp = true;
                             _projectileHelper.PowerUp();
-                        }   
+                        }
                     }
                     break;
                 default:
@@ -626,17 +622,6 @@ namespace AstroOdyssey
             }
         }
 
-        /// <summary>
-        /// Sets the player opacity.
-        /// </summary>
-        private void PlayerOpacity()
-        {
-            playerDamagedOpacityCounter -= 1;
-
-            if (playerDamagedOpacityCounter <= 0)
-                Player.Opacity = 1;
-        }
-
         #endregion
 
         #region PowerUp Methods      
@@ -646,14 +631,12 @@ namespace AstroOdyssey
         /// </summary>
         private void TriggerPowerDown()
         {
-            if (PowerUpTriggered)
+            if (IsPoweredUp)
             {
-                _playerHelper.PowerDown(Player, out bool poweredDown);
-
-                if (poweredDown)
+                if (_playerHelper.PowerDown(Player))
                 {
                     _projectileHelper.PowerDown();
-                    PowerUpTriggered = false;
+                    IsPoweredUp = false;
                 }
             }
         }
@@ -668,12 +651,12 @@ namespace AstroOdyssey
 
         //    PointerX = currentPoint.Position.X;
 
-        //    FireProjectiles = true;
+        //    FiringProjectiles = true;
         //}
 
         //private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         //{
-        //    FireProjectiles = false;
+        //    FiringProjectiles = false;
         //}
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -682,8 +665,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { FireProjectiles = true; } break;
-                case Windows.System.VirtualKey.Space: { FireProjectiles = true; } break;
+                case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
+                case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
                 default:
                     break;
             }
@@ -695,8 +678,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { FireProjectiles = false; } break;
-                case Windows.System.VirtualKey.Space: { FireProjectiles = false; } break;
+                case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
+                case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
                 default:
                     break;
             }
@@ -704,27 +687,27 @@ namespace AstroOdyssey
 
         private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FireProjectiles = true;
+            FiringProjectiles = true;
             MoveLeft = true;
             MoveRight = false;
         }
 
         private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FireProjectiles = true;
+            FiringProjectiles = true;
             MoveLeft = false;
         }
 
         private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FireProjectiles = true;
+            FiringProjectiles = true;
             MoveRight = true;
             MoveLeft = false;
         }
 
         private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FireProjectiles = true;
+            FiringProjectiles = true;
             MoveRight = false;
         }
 

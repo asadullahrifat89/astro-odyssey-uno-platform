@@ -58,14 +58,14 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns a projectile.
         /// </summary>
-        public void SpawnProjectile(bool isPoweredUp, bool fireProjectiles, Player player, GameLevel gameLevel)
+        public void SpawnProjectile(bool isPoweredUp, bool firingProjectiles, Player player, GameLevel gameLevel)
         {
             // each frame progress decreases this counter
             projectileCounter -= 1;
 
             if (projectileCounter <= 0)
             {
-                if (fireProjectiles)
+                if (firingProjectiles)
                 // any object falls within player range
                 //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 {
@@ -73,6 +73,26 @@ namespace AstroOdyssey
                 }
 
                 projectileCounter = projectileSpawnLimit;
+            }
+        }
+
+        /// <summary>
+        /// Updates a projectile.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateProjectile(Projectile projectile, out bool destroyed)
+        {
+            destroyed = false;
+
+            // move projectile up                
+            projectile.MoveY();
+
+            // remove projectile if outside game canvas
+            if (projectile.GetY() < 10)
+            {
+                gameEnvironment.AddDestroyableGameObject(projectile);
+                destroyed = true;
             }
         }
 

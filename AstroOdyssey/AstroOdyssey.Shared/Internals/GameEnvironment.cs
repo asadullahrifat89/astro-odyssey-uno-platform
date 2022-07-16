@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml.Controls;
+using Windows.Foundation;
 
 namespace AstroOdyssey
 {
@@ -94,6 +95,11 @@ namespace AstroOdyssey
             }
 
             return false;
+        }
+
+        public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds) 
+        {
+            return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
         }
 
         #endregion
