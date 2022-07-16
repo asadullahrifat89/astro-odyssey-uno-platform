@@ -197,6 +197,7 @@ namespace AstroOdyssey
                     if (gameObject.HasFadedAway)
                     {
                         GameView.AddDestroyableGameObject(gameObject);
+                        return;
                     }
                 }
 
@@ -209,98 +210,28 @@ namespace AstroOdyssey
                             var projectile = gameObject as Projectile;
 
                             // move the projectile up and check if projectile has gone beyond the game view
-                            _projectileHelper.UpdateProjectile(projectile, out bool destroyed);
+                            _projectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
-                            // get the destructible objects which intersect with the current projectile
-                            var destructibles = GameView.GetDestructibles(projectile.GetRect());
+                            _projectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
-                            foreach (var destructible in destructibles)
+                            if (score > 0)
+                                Score += score;
+
+                            if (destroyedObject is not null)
                             {
-                                GameView.AddDestroyableGameObject(projectile);
-
-                                // if projectile is powered up then execute over kill
-                                if (projectile.IsPoweredUp)
-                                {
-                                    switch (projectile.PowerUpType)
-                                    {
-                                        case PowerUpType.RAPIDSHOT_ROUNDS:
-                                            {
-                                                destructible.LooseHealth(destructible.HitPoint);
-                                            }
-                                            break;
-                                        case PowerUpType.DEADSHOT_ROUNDS:
-                                            {
-                                                // loose 3 times hit point
-                                                destructible.LooseHealth(destructible.HitPoint * 3);
-                                            }
-                                            break;
-                                        default:
-                                            {
-                                                destructible.LooseHealth();
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    destructible.LooseHealth();
-                                }
-
-                                // fade the a bit on projectile hit
-                                destructible.Fade();
-
-                                //App.PlaySound(SoundType.ROUNDS_HIT);
-
-                                switch (destructible.Tag)
+                                switch (destroyedObject.Tag)
                                 {
                                     case ENEMY:
                                         {
-                                            var enemy = destructible as Enemy;
-
-                                            if (destructible.HasNoHealth)
-                                            {
-                                                if (enemy.IsOverPowered)
-                                                    Score += 4;
-                                                else
-                                                    Score += 2;
-
-                                                _enemyHelper.DestroyEnemy(enemy);
-
-                                                return;
-                                            }
-
-                                            if (destructible.HasHealth)
-                                            {
-                                                if (enemy.WillEvadeOnHit && !enemy.IsEvading)
-                                                    enemy.Evade();
-                                            }
+                                            _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
                                         }
                                         break;
                                     case METEOR:
                                         {
-                                            var meteor = destructible as Meteor;
-
-                                            if (destructible.HasNoHealth)
-                                            {
-                                                if (meteor.IsOverPowered)
-                                                    Score += 2;
-                                                else
-                                                    Score++;
-
-                                                _meteorHelper.DestroyMeteor(meteor);
-
-                                                return;
-                                            }
-
-                                            if (destructible.HasHealth)
-                                            {
-                                                // meteors float away on impact
-                                                if (!meteor.IsFloating)
-                                                    meteor.Float();
-                                            }
+                                            _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
                                         }
                                         break;
                                     default:
@@ -313,52 +244,52 @@ namespace AstroOdyssey
                         {
                             var enemy = gameObject as Enemy;
 
-                            _enemyHelper.UpdateEnemy(enemy, out bool destroyed);
+                            _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
                             // check if enemy collides with player
-                            _playerHelper.PlayerCollision(Player, enemy);
+                            _playerHelper.PlayerCollision(player: Player, gameObject: enemy);
                         }
                         break;
                     case METEOR:
                         {
                             var meteor = gameObject as Meteor;
 
-                            _meteorHelper.UpdateMeteor(meteor, out bool destroyed);
+                            _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
                             // check if meteor collides with player
-                            _playerHelper.PlayerCollision(Player, meteor);
+                            _playerHelper.PlayerCollision(player: Player, gameObject: meteor);
                         }
                         break;
                     case HEALTH:
                         {
                             var health = gameObject as Health;
 
-                            _healthHelper.UpdateHealth(health, out bool destroyed);
+                            _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
                             // check if health collides with player
-                            _playerHelper.PlayerCollision(Player, health);
+                            _playerHelper.PlayerCollision(player: Player, gameObject: health);
                         }
                         break;
                     case POWERUP:
                         {
                             var powerUp = gameObject as PowerUp;
 
-                            _powerUpHelper.UpdatePowerUp(powerUp, out bool destroyed);
+                            _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
                             // check if power up collides with player
-                            if (_playerHelper.PlayerCollision(Player, powerUp))
+                            if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
                             {
                                 //TODO: send power up type to projectile helper
                                 IsPoweredUp = true;

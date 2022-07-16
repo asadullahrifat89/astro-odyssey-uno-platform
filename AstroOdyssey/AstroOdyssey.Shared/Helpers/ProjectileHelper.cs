@@ -139,6 +139,113 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Collides a projectile with destructible game objects.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="score"></param>
+        /// <param name="destroyedObject"></param>
+        public void CollideProjectile(Projectile projectile, out double score, out GameObject destroyedObject)
+        {
+            score = 0;
+            destroyedObject = null;
+
+            // get the destructible objects which intersect with the current projectile
+            var destructibles = gameEnvironment.GetDestructibles(projectile.GetRect());
+
+            foreach (var destructible in destructibles)
+            {
+                // upon hit with a destructible object remove the projectile
+                gameEnvironment.AddDestroyableGameObject(projectile);
+
+                // if projectile is powered up then execute over kill
+                if (projectile.IsPoweredUp)
+                {
+                    switch (projectile.PowerUpType)
+                    {
+                        case PowerUpType.RAPIDSHOT_ROUNDS:
+                            {
+                                destructible.LooseHealth(destructible.HitPoint);
+                            }
+                            break;
+                        case PowerUpType.DEADSHOT_ROUNDS:
+                            {
+                                // loose 3 times hit point
+                                destructible.LooseHealth(destructible.HitPoint * 3);
+                            }
+                            break;
+                        default:
+                            {
+                                destructible.LooseHealth();
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    destructible.LooseHealth();
+                }
+
+                // fade the a bit on projectile hit
+                destructible.Fade();
+
+                //App.PlaySound(SoundType.ROUNDS_HIT);
+
+                switch (destructible.Tag)
+                {
+                    case ENEMY:
+                        {
+                            var enemy = destructible as Enemy;
+
+                            if (destructible.HasNoHealth)
+                            {
+                                if (enemy.IsOverPowered)
+                                    score += 4;
+                                else
+                                    score += 2;
+
+                                destroyedObject = enemy;
+
+                                return;
+                            }
+
+                            if (destructible.HasHealth)
+                            {
+                                if (enemy.WillEvadeOnHit && !enemy.IsEvading)
+                                    enemy.Evade();
+                            }
+                        }
+                        break;
+                    case METEOR:
+                        {
+                            var meteor = destructible as Meteor;
+
+                            if (destructible.HasNoHealth)
+                            {
+                                if (meteor.IsOverPowered)
+                                    score += 2;
+                                else
+                                    score++;
+
+                                destroyedObject = meteor;
+
+                                return;
+                            }
+
+                            if (destructible.HasHealth)
+                            {
+                                // meteors float away on impact
+                                if (!meteor.IsFloating)
+                                    meteor.Float();
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
         /// Generates a projectile.
         /// </summary>
         /// <param name="projectileHeight"></param>
