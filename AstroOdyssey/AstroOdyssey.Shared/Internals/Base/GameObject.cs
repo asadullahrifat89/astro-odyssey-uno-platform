@@ -222,7 +222,6 @@ namespace AstroOdyssey
 
             IsOverPowered = true;
         }
-
         #endregion
     }
 

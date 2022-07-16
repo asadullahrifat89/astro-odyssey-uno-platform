@@ -28,7 +28,10 @@
                 VerticalAlignment="Center"
                 FontSize="30"
                 FontWeight="Bold"
-                Text="Ready to play?" />
+                Text="Ready to fly into the unknown?" />
+
+            <!--  TODO: select ship  -->
+
             <!--  Play button  -->
             <Button
                 x:Name="PlayButton"

@@ -113,14 +113,11 @@ namespace AstroOdyssey
 
             SpawnPlayer();
 
-            SetPlayerY();
+            SetPlayerY(); // set y position at game start            
 
             UpdateScore();
 
-            while (showInGameTextCounter > 0)
-            {
-                HideInGameText();
-            }
+            InGameText.Text = "";
 
             IsGameRunning = true;
 
@@ -143,8 +140,6 @@ namespace AstroOdyssey
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
-                //TODO: play player animation
-
                 GameOver();
 
                 PointerX = _playerHelper.MovePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
@@ -360,8 +355,6 @@ namespace AstroOdyssey
                 {
                     StarView.RemoveDestroyableGameObjects();
                 }
-
-                //TODO: update the stars
             }
         }
 
@@ -401,7 +394,6 @@ namespace AstroOdyssey
         private void ShowInGameText(string text)
         {
             InGameText.Text = text;
-            InGameText.Visibility = Visibility.Visible;
             showInGameTextCounter = ShowInGameTextLimit;
         }
 
@@ -410,13 +402,13 @@ namespace AstroOdyssey
         /// </summary>
         private void HideInGameText()
         {
-            if (InGameText.Visibility == Visibility.Visible)
+            if (!InGameText.Text.IsNullOrBlank())
             {
                 showInGameTextCounter -= 1;
 
                 if (showInGameTextCounter <= 0)
                 {
-                    InGameText.Visibility = Visibility.Collapsed;
+                    InGameText.Text = "";
                 }
             }
         }
@@ -640,7 +632,7 @@ namespace AstroOdyssey
 
             if (IsGameRunning)
             {
-                SetPlayerY();
+                SetPlayerY(); // windows size changed so reset y position
             }
         }
 
@@ -693,7 +685,6 @@ namespace AstroOdyssey
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            // TODO: tap and start game
             switch (e.Key)
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
@@ -723,8 +714,6 @@ namespace AstroOdyssey
             FiringProjectiles = true;
             MoveLeft = true;
             MoveRight = false;
-
-            //TODO: Tap to start
         }
 
         private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)

@@ -47,7 +47,7 @@ namespace AstroOdyssey
 
             player.SetAttributes(speed: playerSpeed * scale, scale: scale);
 
-            player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);          
 
             return player;
         }
