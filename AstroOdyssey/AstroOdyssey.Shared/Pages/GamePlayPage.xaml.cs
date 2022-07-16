@@ -72,8 +72,6 @@ namespace AstroOdyssey
 
         private bool IsPoweredUp { get; set; }
 
-        private double PlayerSpeed { get; set; } = 12;
-
         private int FrameStatUpdateLimit { get; set; } = 5;
 
         private int ShowInGameTextLimit { get; set; } = 100;
@@ -82,26 +80,28 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private double PlayerX { get; set; }
-
-        private double PlayerWidthHalf { get; set; }
-
         private int FrameDuration { get; set; } = 17;
 
         private bool IsGameRunning { get; set; }
 
-        //private bool IsPointerPressed { get; set; }
-
-        //private bool IsKeyboardPressed { get; set; }
-
         private GameLevel GameLevel { get; set; }
+
         private PeriodicTimer GameViewTimer { get; set; }
+
         private PeriodicTimer StarViewTimer { get; set; }
 
         private Player Player { get; set; }
 
+        private double PlayerSpeed { get; set; } = 12;
+
+        private double PlayerX { get; set; }
+
+        private double PlayerWidthHalf { get; set; }
+
         private bool MoveLeft { get; set; } = false;
+
         private bool MoveRight { get; set; } = false;
+
         private bool FiringProjectiles { get; set; } = false;
 
         #endregion
@@ -123,174 +123,6 @@ namespace AstroOdyssey
             }
 
             GameView.RemoveDestroyableGameObjects();
-        }
-
-        /// <summary>
-        ///  Updates stars in the game view. Advances game objects in the frame.
-        /// </summary>
-        private void UpdateStarView()
-        {
-            var starObjects = StarView.GetGameObjects<GameObject>();
-
-            foreach (var star in starObjects)
-            {
-                _starHelper.UpdateStar(star as Star);
-            }
-
-            StarView.RemoveDestroyableGameObjects();
-        }
-
-        #endregion
-
-        #region Game Methods
-
-        /// <summary>
-        /// Starts the game. Spawns the player and starts game and projectile loops.
-        /// </summary>
-        private async void StartGame()
-        {
-            App.PlaySound(baseUrl, SoundType.GAME_START);
-
-            SpawnPlayer();
-
-            IsGameRunning = true;
-
-            RunStarView();
-
-            await Task.Delay(TimeSpan.FromSeconds(1));
-
-            RunGameView();
-
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
-        }
-
-        /// <summary>
-        /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
-        /// </summary>
-        private async void RunGameView()
-        {
-#if DEBUG
-            var watch = Stopwatch.StartNew();
-#endif
-            GameViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
-
-            bool renderable = true;
-
-            while (IsGameRunning && await GameViewTimer.WaitForNextTickAsync() && renderable)
-            {
-                renderable = false;
-
-                GameOver();
-
-                PlayerX = Player.GetX();
-
-                PlayerWidthHalf = Player.Width / 2;
-
-                MovePlayer();
-
-                UpdateGameView();
-
-                ShiftGameLevel();
-
-                _playerHelper.PlayerOpacity(Player);
-
-                _enemyHelper.SpawnEnemy(GameLevel);
-
-                _meteorHelper.SpawnMeteor(GameLevel);
-
-                _healthHelper.SpawnHealth(Player);
-
-                _powerUpHelper.SpawnPowerUp();
-
-                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel);
-
-                TriggerPowerDown();
-
-                UpdateScore();
-
-                HideInGameText();
-
-                CalculateFps();
-
-                SetFrameAnalytics();
-
-                renderable = true;
-#if DEBUG
-                FrameStartTime = watch.ElapsedMilliseconds;
-#endif
-            }
-        }
-
-        /// <summary>
-        /// Runs stars. Moves the stars.
-        /// </summary>
-        private async void RunStarView()
-        {
-            StarViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
-
-            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync())
-            {
-                UpdateStarView();
-
-                _starHelper.SpawnStar();
-            }
-        }
-
-        /// <summary>
-        /// Stops the game.
-        /// </summary>
-        private void StopGame()
-        {
-            IsGameRunning = false;
-
-            GameViewTimer?.Dispose();
-            StarViewTimer?.Dispose();
-
-            App.StopSound();
-        }
-
-        /// <summary>
-        /// Updates the game score, player health.
-        /// </summary>
-        private void UpdateScore()
-        {
-            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")}";
-            HealthText.Text = Player.GetHealthPoints();
-        }
-
-        /// <summary>
-        /// Shows the level up text in game view.
-        /// </summary>
-        private void ShowLevelUp()
-        {
-            ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
-            App.PlaySound(baseUrl, SoundType.LEVEL_UP);
-        }
-
-        /// <summary>
-        /// Shows the in game text in game view.
-        /// </summary>
-        private void ShowInGameText(string text)
-        {
-            InGameText.Text = text;
-            InGameText.Visibility = Visibility.Visible;
-            showInGameTextCounter = ShowInGameTextLimit;
-        }
-
-        /// <summary>
-        /// Hides the in game text after keeping it visible.
-        /// </summary>
-        private void HideInGameText()
-        {
-            if (InGameText.Visibility == Visibility.Visible)
-            {
-                showInGameTextCounter -= 1;
-
-                if (showInGameTextCounter <= 0)
-                {
-                    InGameText.Visibility = Visibility.Collapsed;
-                }
-            }
         }
 
         /// <summary>
@@ -437,6 +269,176 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        ///  Updates stars in the game view. Advances game objects in the frame.
+        /// </summary>
+        private void UpdateStarView()
+        {
+            var starObjects = StarView.GetGameObjects<GameObject>();
+
+            foreach (var star in starObjects)
+            {
+                _starHelper.UpdateStar(star as Star);
+            }
+
+            StarView.RemoveDestroyableGameObjects();
+        }
+
+        #endregion
+
+        #region Game Methods
+
+        /// <summary>
+        /// Starts the game. Spawns the player and starts game and projectile loops.
+        /// </summary>
+        private async void StartGame()
+        {
+            App.PlaySound(baseUrl, SoundType.GAME_START);
+
+            SpawnPlayer();
+
+            IsGameRunning = true;
+
+            RunStarView();
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            RunGameView();
+
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+        }
+
+        /// <summary>
+        /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
+        /// </summary>
+        private async void RunGameView()
+        {
+#if DEBUG
+            var watch = Stopwatch.StartNew();
+#endif
+            GameViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+
+            bool renderable = true;
+
+            while (IsGameRunning && await GameViewTimer.WaitForNextTickAsync() && renderable)
+            {
+                renderable = false;
+
+                //TODO: play player animation
+
+                GameOver();
+
+                PlayerX = Player.GetX();
+
+                PlayerWidthHalf = Player.Width / 2;
+
+                MovePlayer();
+
+                UpdateGameView();
+
+                ShiftGameLevel();
+
+                _playerHelper.PlayerOpacity(Player);
+
+                _enemyHelper.SpawnEnemy(GameLevel);
+
+                _meteorHelper.SpawnMeteor(GameLevel);
+
+                _healthHelper.SpawnHealth(Player);
+
+                _powerUpHelper.SpawnPowerUp();
+
+                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel);
+
+                TriggerPowerDown();
+
+                UpdateScore();
+
+                HideInGameText();
+
+                CalculateFps();
+
+                SetFrameAnalytics();
+
+                renderable = true;
+#if DEBUG
+                FrameStartTime = watch.ElapsedMilliseconds;
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Runs stars. Moves the stars.
+        /// </summary>
+        private async void RunStarView()
+        {
+            StarViewTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+
+            while (IsGameRunning && await StarViewTimer.WaitForNextTickAsync())
+            {
+                UpdateStarView();
+
+                _starHelper.SpawnStar();
+            }
+        }
+
+        /// <summary>
+        /// Stops the game.
+        /// </summary>
+        private void StopGame()
+        {
+            IsGameRunning = false;
+
+            GameViewTimer?.Dispose();
+            StarViewTimer?.Dispose();
+
+            App.StopSound();
+        }
+
+        /// <summary>
+        /// Updates the game score, player health.
+        /// </summary>
+        private void UpdateScore()
+        {
+            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")}";
+            HealthText.Text = Player.GetHealthPoints();
+        }
+
+        /// <summary>
+        /// Shows the level up text in game view.
+        /// </summary>
+        private void ShowLevelUp()
+        {
+            ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
+            App.PlaySound(baseUrl, SoundType.LEVEL_UP);
+        }
+
+        /// <summary>
+        /// Shows the in game text in game view.
+        /// </summary>
+        private void ShowInGameText(string text)
+        {
+            InGameText.Text = text;
+            InGameText.Visibility = Visibility.Visible;
+            showInGameTextCounter = ShowInGameTextLimit;
+        }
+
+        /// <summary>
+        /// Hides the in game text after keeping it visible.
+        /// </summary>
+        private void HideInGameText()
+        {
+            if (InGameText.Visibility == Visibility.Visible)
+            {
+                showInGameTextCounter -= 1;
+
+                if (showInGameTextCounter <= 0)
+                {
+                    InGameText.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         private void GetBaseUrl()
         {
             var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
@@ -527,8 +529,6 @@ namespace AstroOdyssey
         /// </summary>
         private void AdjustGameEnvironment()
         {
-            //TODO: inject values in helper classes. each class should have their method called LevelUp
-
             switch (GameLevel)
             {
                 case GameLevel.Level_1:
@@ -560,13 +560,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnPlayer()
         {
-            Player = new Player();
-
-            var scale = GameView.GetGameObjectScale();
-
-            Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
-            Player.AddToGameEnvironment(top: windowHeight - Player.Height - 20, left: PointerX - 35, gameEnvironment: GameView);
-
+            Player = _playerHelper.SpawnPlayer(PointerX, PlayerSpeed);
             PlayerWidthHalf = Player.Width / 2;
         }
 

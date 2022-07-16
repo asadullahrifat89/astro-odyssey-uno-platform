@@ -15,6 +15,7 @@ namespace AstroOdyssey
 
         private int playerDamagedOpacityCounter;
         private readonly int playerDamagedOpacityLimit = 100;
+
         private int powerUpTriggerCounter;
         private readonly int powerUpTriggerLimit = 1000;
 
@@ -31,6 +32,23 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Spawns the player.
+        /// </summary>
+        public Player SpawnPlayer(double PointerX, double PlayerSpeed)
+        {
+            //TODO: get player from helper
+
+            var player = new Player();
+
+            var scale = gameEnvironment.GetGameObjectScale();
+
+            player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
+            player.AddToGameEnvironment(top: gameEnvironment.Height - player.Height - 20, left: PointerX - 35, gameEnvironment: gameEnvironment);
+
+            return player;
+        }
 
         /// <summary>
         /// Checks and performs player collision.
