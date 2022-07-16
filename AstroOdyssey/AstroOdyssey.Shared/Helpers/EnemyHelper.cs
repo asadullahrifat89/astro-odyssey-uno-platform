@@ -108,25 +108,7 @@ namespace AstroOdyssey
                 return;
 
             // if enemy or meteor object has gone beyond game view
-            destroyed = AddDestroyableGameObject(enemy);
-        }
-
-        /// <summary>
-        /// Removes a game object from game view. 
-        /// </summary>
-        /// <param name="gameObject"></param>
-        /// <returns></returns>
-        private bool AddDestroyableGameObject(GameObject gameObject)
-        {
-            // if game object is out of bounds of game view
-            if (gameObject.GetY() > gameEnvironment.Height || gameObject.GetX() > gameEnvironment.Width || gameObject.GetX() + gameObject.Width < 0)
-            {
-                gameEnvironment.AddDestroyableGameObject(gameObject);
-
-                return true;
-            }
-
-            return false;
+            destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
         }
 
         #endregion

@@ -133,7 +133,7 @@ namespace AstroOdyssey
 
         public void MoveY()
         {
-            Canvas.SetTop(this, GetY() + (this.Speed * GetYDirectionModifier()));
+            Canvas.SetTop(this, GetY() + (Speed * GetYDirectionModifier()));
         }
 
         public void MoveY(double top)

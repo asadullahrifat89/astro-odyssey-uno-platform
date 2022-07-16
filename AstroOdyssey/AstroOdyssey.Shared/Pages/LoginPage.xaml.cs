@@ -14,8 +14,8 @@ namespace AstroOdyssey
 
         public LoginPage()
         {
-            this.InitializeComponent();
-            this.Loaded += LoginPage_Loaded;
+            InitializeComponent();
+            Loaded += LoginPage_Loaded;
         } 
 
         #endregion

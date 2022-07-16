@@ -42,6 +42,8 @@ namespace AstroOdyssey
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
         private readonly EnemyHelper _enemyHelper;
+        private readonly HealthHelper _healthHelper;
+        private readonly PowerUpHelper _powerUpHelper;
 
         #endregion
 
@@ -60,6 +62,8 @@ namespace AstroOdyssey
             _starHelper = new StarHelper(StarView);
             _meteorHelper = new MeteorHelper(GameView, baseUrl);
             _enemyHelper = new EnemyHelper(GameView, baseUrl);
+            _healthHelper = new HealthHelper(GameView, baseUrl);
+            _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
         }
 
         #endregion
@@ -392,8 +396,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if enemy collides with player
-                        if (PlayerCollision(enemy))
-                            return;
+                        PlayerCollision(enemy);
                     }
                     break;
                 case METEOR:
@@ -406,73 +409,38 @@ namespace AstroOdyssey
                             return;
 
                         // check if meteor collides with player
-                        if (PlayerCollision(meteor))
-                            return;
+                        PlayerCollision(meteor);
                     }
                     break;
                 case HEALTH:
                     {
                         var health = gameObject as Health;
 
-                        // move Health down
-                        health.MoveY();
+                        _healthHelper.UpdateHealth(health, out bool destroyed);
 
-                        // if health object has gone below game view
-                        if (health.GetY() > GameView.Height)
-                        {
-                            GameView.AddDestroyableGameObject(health);
+                        if (destroyed)
                             return;
-                        }
 
-                        if (Player.GetRect().Intersects(health.GetRect()))
-                        {
-                            GameView.AddDestroyableGameObject(health);
-                            PlayerHealthGain(health);
-                        }
+                        // check if health collides with player
+                        PlayerCollision(health);
                     }
                     break;
                 case POWERUP:
                     {
                         var powerUp = gameObject as PowerUp;
 
-                        // move PowerUp down
-                        powerUp.MoveY();
+                        _powerUpHelper.UpdatePowerUp(powerUp, out bool destroyed);
 
-                        // if PowerUp object has gone below game view
-                        if (powerUp.GetY() > GameView.Height)
-                        {
-                            GameView.AddDestroyableGameObject(powerUp);
+                        if (destroyed)
                             return;
-                        }
 
-                        if (Player.GetRect().Intersects(powerUp.GetRect()))
-                        {
-                            GameView.AddDestroyableGameObject(powerUp);
-                            TriggerPowerUp();
-                        }
+                        // check if power up collides with player
+                        PlayerCollision(powerUp);
                     }
                     break;
                 default:
                     break;
             }
-        }
-
-        /// <summary>
-        /// Removes a game object from game view. 
-        /// </summary>
-        /// <param name="gameObject"></param>
-        /// <returns></returns>
-        private bool AddDestroyableGameObject(GameObject gameObject)
-        {
-            // if game object is out of bounds of game view
-            if (gameObject.GetY() > GameView.Height || gameObject.GetX() > GameView.Width || gameObject.GetX() + gameObject.Width < 0)
-            {
-                GameView.AddDestroyableGameObject(gameObject);
-
-                return true;
-            }
-
-            return false;
         }
 
         private void GetBaseUrl()
@@ -522,18 +490,6 @@ namespace AstroOdyssey
 
             fpsCounter++;
 #endif
-        }
-
-        #endregion        
-
-        #region Score Methods
-
-        /// <summary>
-        /// Increase player score if an enemy was destroyed.
-        /// </summary>
-        private void PlayerScoreByEnemyDestruction()
-        {
-
         }
 
         #endregion
@@ -725,12 +681,46 @@ namespace AstroOdyssey
         /// <returns></returns>
         private bool PlayerCollision(GameObject gameObject)
         {
-            if (Player.GetRect().Intersects(gameObject.GetRect()))
-            {
-                GameView.AddDestroyableGameObject(gameObject);
-                PlayerHealthLoss();
+            var tag = gameObject.Tag;
 
-                return true;
+            switch (tag)
+            {
+                case METEOR:
+                case ENEMY:
+                    {
+                        if (Player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            GameView.AddDestroyableGameObject(gameObject);
+                            PlayerHealthLoss();
+
+                            return true;
+                        }
+                    }
+                    break;
+                case HEALTH:
+                    {
+                        if (Player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            GameView.AddDestroyableGameObject(gameObject);
+                            PlayerHealthGain(gameObject as Health);
+
+                            return true;
+                        }
+                    }
+                    break;
+                case POWERUP:
+                    {
+                        if (Player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            GameView.AddDestroyableGameObject(gameObject);
+                            TriggerPowerUp();
+
+                            return true;
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
 
             return false;
@@ -840,24 +830,10 @@ namespace AstroOdyssey
                 // when counter reaches zero, create a Health
                 if (healthCounter < 0)
                 {
-                    GenerateHealth();
+                    _healthHelper.GenerateHealth(HealthSpeed);
                     healthCounter = HealthSpawnLimit;
                 }
             }
-        }
-
-        /// <summary>
-        /// Generates a random Health.
-        /// </summary>
-        private void GenerateHealth()
-        {
-            NewHealth = new Health();
-
-            NewHealth.SetAttributes(speed: HealthSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
-            NewHealth.AddToGameEnvironment(top: 0 - NewHealth.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
-
-            // change the next health spawn time
-            HealthSpawnLimit = random.Next(1000, 1500);
         }
 
         #endregion
@@ -875,24 +851,10 @@ namespace AstroOdyssey
             // when counter reaches zero, create a PowerUp
             if (powerUpCounter < 0)
             {
-                GeneratePowerUp();
+                _powerUpHelper.GeneratePowerUp(PowerUpSpeed);
                 powerUpCounter = PowerUpSpawnLimit;
             }
 
-        }
-
-        /// <summary>
-        /// Generates a random PowerUp.
-        /// </summary>
-        private void GeneratePowerUp()
-        {
-            NewPowerUp = new PowerUp();
-
-            NewPowerUp.SetAttributes(speed: PowerUpSpeed + random.NextDouble(), scale: GameView.GetGameObjectScale());
-            NewPowerUp.AddToGameEnvironment(top: 0 - NewPowerUp.Height, left: random.Next(10, (int)windowWidth - 100), gameEnvironment: GameView);
-
-            // change the next power up spawn time
-            PowerUpSpawnLimit = random.Next(1500, 2000);
         }
 
         /// <summary>
@@ -1050,7 +1012,7 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.SizeChanged += GamePage_SizeChanged;
+            SizeChanged += GamePage_SizeChanged;
 #if DEBUG
             Console.WriteLine(baseUrl);
 #endif
@@ -1116,7 +1078,7 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
-            this.SizeChanged -= GamePage_SizeChanged;
+            SizeChanged -= GamePage_SizeChanged;
             StopGame();
         }
 

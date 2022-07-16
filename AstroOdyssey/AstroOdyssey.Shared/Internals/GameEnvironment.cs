@@ -6,12 +6,22 @@ namespace AstroOdyssey
 {
     public class GameEnvironment : Canvas
     {
+        #region Fields
+
         private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
+
+        #endregion
+
+        #region Ctor
 
         public GameEnvironment()
         {
 
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Gets scaling factor for a game object according to game view width.
@@ -67,5 +77,25 @@ namespace AstroOdyssey
         {
             destroyableGameObjects.Clear();
         }
+
+        /// <summary>
+        /// Removes a game object from game view if applicable. 
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <returns></returns>
+        public bool CheckAndAddDestroyableGameObject(GameObject gameObject)
+        {
+            // if game object is out of bounds of game view
+            if (gameObject.GetY() > Height || gameObject.GetX() > Width || gameObject.GetX() + gameObject.Width < 0)
+            {
+                AddDestroyableGameObject(gameObject);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
     }
 }

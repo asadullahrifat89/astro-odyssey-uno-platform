@@ -24,14 +24,14 @@ namespace AstroOdyssey
     {
         public GameOverPage()
         {
-            this.InitializeComponent();
-            this.Loaded += GameOverPage_Loaded;
+            InitializeComponent();
+            Loaded += GameOverPage_Loaded;
         }
 
         private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ScoreText.Text = "Your Score: " + App.GetScore();
-            this.PlayAgainButton.Focus(FocusState.Programmatic);
+            ScoreText.Text = "Your Score: " + App.GetScore();
+            PlayAgainButton.Focus(FocusState.Programmatic);
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

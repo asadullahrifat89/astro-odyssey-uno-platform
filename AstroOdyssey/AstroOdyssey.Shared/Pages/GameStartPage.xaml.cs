@@ -14,9 +14,9 @@ namespace AstroOdyssey
         
         public GameStartPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.Loaded += StartPage_Loaded;
+            Loaded += StartPage_Loaded;
         } 
 
         #endregion
