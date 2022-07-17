@@ -19,6 +19,7 @@ namespace AstroOdyssey
         private readonly int powerUpTriggerLimit = 1000;
 
         private double playerSpeed = 12;
+        private double playerWidthHalf = 0;
 
         #endregion
 
@@ -50,16 +51,17 @@ namespace AstroOdyssey
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
+            playerWidthHalf = player.Width / 2;
+
             return player;
         }
 
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public double MovePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
+        public double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
         {
             var playerX = player.GetX();
-            var playerWidthHalf = player.Width / 2;
 
             if (moveLeft && playerX > 0)
                 pointerX -= player.Speed;
