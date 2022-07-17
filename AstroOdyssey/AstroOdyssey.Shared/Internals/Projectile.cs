@@ -52,7 +52,7 @@ namespace AstroOdyssey
                         height = 25; width = 25; // larger but slower rounds
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
-                        height = 300; width = 25; // larger but slower rounds
+                        height = 300; width = 25; // larger and longer but slower piercing rounds
                         break;
                     default:
                         break;

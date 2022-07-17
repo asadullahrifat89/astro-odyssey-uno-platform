@@ -47,6 +47,8 @@ namespace AstroOdyssey
         {
             enemySpawnLimit -= 2;
             enemySpeed += 1;
+
+            //TODO: blaster spawn limit decrease and speed increase
         }
 
         /// <summary>
@@ -76,6 +78,8 @@ namespace AstroOdyssey
 
             double left = 0;
             double top = 0;
+
+            //TODO: spawn blaster shooting enemies after level 3
 
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
@@ -165,6 +169,8 @@ namespace AstroOdyssey
             // if the object is marked for lazy destruction then no need to perform collisions
             if (enemy.MarkedForFadedRemoval)
                 return;
+
+            //TODO: Shoot blasters at player after level 3, place a counter and limit
 
             // if enemy or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
