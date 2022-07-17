@@ -335,8 +335,8 @@ namespace AstroOdyssey
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
                             return;
 
-                        // fire projectiles
-                        if (enemy.FiresProjectiles)
+                        // fire projectiles if at a legitimate distance from player
+                        if (enemy.FiresProjectiles && Player.GetY() - enemy.GetY() > 100)
                             _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                     }
                     break;

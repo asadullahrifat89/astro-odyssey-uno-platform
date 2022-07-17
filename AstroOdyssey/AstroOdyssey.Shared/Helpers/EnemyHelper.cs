@@ -25,7 +25,7 @@ namespace AstroOdyssey
         private int firingEnemySpawnLimit = 7;
 
         private int enemyCounter;
-        private int enemySpawnLimit = 50;
+        private int enemySpawnLimit = 48;
         private double enemySpeed = 2;
 
         #endregion
