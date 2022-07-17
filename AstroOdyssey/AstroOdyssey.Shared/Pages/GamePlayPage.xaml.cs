@@ -137,9 +137,9 @@ namespace AstroOdyssey
         {
             var watch = Stopwatch.StartNew();
 
-            //GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameTime));
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameTime));
 
-            while (IsGameRunning/* && await GameFrameTimer.WaitForNextTickAsync()*/)
+            while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
                 frameStartTime = watch.ElapsedMilliseconds;
 
@@ -153,14 +153,14 @@ namespace AstroOdyssey
 #if DEBUG
                 SetAnalytics();
 #endif
-                await Task.Delay(FrameTime);
+                //await Task.Delay(FrameTime);
             }
         }
 
         private void SetFrameInterval()
         {
             FrameDuration = frameEndTime - frameStartTime;
-            FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
+            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
         }
 
         private void CalculateFPS()
