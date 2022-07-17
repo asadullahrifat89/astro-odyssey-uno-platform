@@ -22,6 +22,9 @@ namespace AstroOdyssey
         private int evadingEnemySpawnCounter = 3;
         private int evadingEnemySpawnLimit = 3;
 
+        private int firingEnemySpawnCounter = 3;
+        private int firingEnemySpawnLimit = 3;
+
         private int enemyCounter;
         private int enemySpawnLimit = 50;
         private double enemySpeed = 2;
@@ -69,7 +72,14 @@ namespace AstroOdyssey
             double top = 0;
 
             //TODO: spawn blaster shooting enemies after level 3
+            if (gameLevel > GameLevel.Level_3 && firingEnemySpawnCounter <= 0)
+            {
+                firingEnemySpawnCounter = firingEnemySpawnLimit;
+                newEnemy.FiresProjectiles = true;
+                firingEnemySpawnLimit = random.Next(1, 4);
+            }
 
+            //TODO: spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
                 evadingEnemySpawnCounter = evadingEnemySpawnLimit;
@@ -130,6 +140,7 @@ namespace AstroOdyssey
             xFlyingEnemySpawnCounter--;
             overPoweredEnemySpawnCounter--;
             evadingEnemySpawnCounter--;
+            firingEnemySpawnCounter--;
         }
 
         /// <summary>
@@ -157,11 +168,9 @@ namespace AstroOdyssey
 
             // if the object is marked for lazy destruction then no need to perform collisions
             if (enemy.MarkedForFadedRemoval)
-                return;
+                return;            
 
-            //TODO: Shoot blasters at player after level 3, place a counter and limit
-
-            // if enemy or meteor object has gone beyond game view
+            // if object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
         }
 

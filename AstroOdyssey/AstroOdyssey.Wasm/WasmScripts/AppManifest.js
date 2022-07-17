@@ -53,28 +53,28 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(gsAudio);
         } break;
-        case "ROUNDS_FIRE": {
+        case "PLAYER_ROUNDS_FIRE": {
             if (rfAudio.src.length == 0) {
                 rfAudio.src = baseUrl.concat("/", roundsFireSource);
                 rfAudio.volume = 0.1;
             }
             playSound(rfAudio);
         } break;
-        case "RAPIDSHOT_ROUNDS_FIRE": {
+        case "PLAYER_RAPIDSHOT_ROUNDS_FIRE": {
             if (rapidsrfAudio.src.length == 0) {
                 rapidsrfAudio.src = baseUrl.concat("/", rapidShotRoundsFireSource);
                 rapidsrfAudio.volume = 0.2;
             }
             playSound(rapidsrfAudio);
         } break;
-        case "DEADSHOT_ROUNDS_FIRE": {
+        case "PLAYER_DEADSHOT_ROUNDS_FIRE": {
             if (deadsrfAudio.src.length == 0) {
                 deadsrfAudio.src = baseUrl.concat("/", deadShotRoundsFireSource);
                 deadsrfAudio.volume = 0.2;
             }
             playSound(deadsrfAudio);
         } break;
-        case "SONICSHOT_ROUNDS_FIRE": {
+        case "PLAYER_SONICSHOT_ROUNDS_FIRE": {
             if (sonicsrfAudio.src.length == 0) {
                 sonicsrfAudio.src = baseUrl.concat("/", sonicShotRoundsFireSource);
                 sonicsrfAudio.volume = 0.2;

@@ -20,10 +20,12 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HealthHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MeteorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />

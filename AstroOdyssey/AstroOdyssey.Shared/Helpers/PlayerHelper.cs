@@ -107,6 +107,7 @@ namespace AstroOdyssey
             {
                 case METEOR:
                 case ENEMY:
+                case ENEMY_PROJECTILE:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {

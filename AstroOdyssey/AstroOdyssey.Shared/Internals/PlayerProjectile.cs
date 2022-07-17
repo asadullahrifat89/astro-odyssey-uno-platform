@@ -5,6 +5,7 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
+
     public class PlayerProjectile : GameObject
     {
         #region Ctor
@@ -61,7 +62,7 @@ namespace AstroOdyssey
                         {
                             height = 300; width = 25; // larger and longer but slower piercing rounds
                             Background = new SolidColorBrush(Colors.LightBlue);
-                        }                        
+                        }
                         break;
                     default:
                         Background = new SolidColorBrush(Colors.White);

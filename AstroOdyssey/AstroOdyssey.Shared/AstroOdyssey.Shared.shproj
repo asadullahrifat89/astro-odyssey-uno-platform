@@ -18,6 +18,7 @@
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\EnemyProjectileHelper.cs" />
     <_Globbed_Compile Remove="Helpers\HealthHelper.cs" />
     <_Globbed_Compile Remove="Helpers\MeteorHelper.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
@@ -25,6 +26,7 @@
     <_Globbed_Compile Remove="Helpers\PowerUpHelper.cs" />
     <_Globbed_Compile Remove="Helpers\ProjectileHelper.cs" />
     <_Globbed_Compile Remove="Helpers\StarHelper.cs" />
+    <_Globbed_Compile Remove="Internals\EnemyProjectile.cs" />
     <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Models\GameScore.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />

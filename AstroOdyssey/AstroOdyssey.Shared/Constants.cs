@@ -16,6 +16,7 @@ namespace AstroOdyssey
         public const string POWERUP = "powerup";
 
         public const string PLAYER_PROJECTILE = "player_projectile";
+        public const string ENEMY_PROJECTILE = "enemy_projectile";
 
         public const string STAR = "star";
 
@@ -34,13 +35,14 @@ namespace AstroOdyssey
         public enum SoundType
         {
             BACKGROUND_MUSIC,
-            ROUNDS_FIRE,
-            ROUNDS_HIT,
-            RAPIDSHOT_ROUNDS_FIRE,
-            DEADSHOT_ROUNDS_FIRE,
-            SONICSHOT_ROUNDS_FIRE,
+            PLAYER_ROUNDS_FIRE,            
+            PLAYER_RAPIDSHOT_ROUNDS_FIRE,
+            PLAYER_DEADSHOT_ROUNDS_FIRE,
+            PLAYER_SONICSHOT_ROUNDS_FIRE,
+            ENEMY_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
+            ROUNDS_HIT,
             POWER_UP,
             POWER_DOWN,
             LEVEL_UP,

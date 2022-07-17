@@ -36,6 +36,8 @@ namespace AstroOdyssey
 
         public bool IsEvading { get; set; }
 
+        public bool FiresProjectiles { get; set; }
+
         #endregion
 
         #region Methods

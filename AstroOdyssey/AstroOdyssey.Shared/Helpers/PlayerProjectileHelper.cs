@@ -51,7 +51,7 @@ namespace AstroOdyssey
             if (projectileCounter <= 0)
             {
                 if (firingProjectiles)
-                // any object falls within player range
+                //// any object falls within player range
                 //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 {
                     GenerateProjectile(isPoweredUp: isPoweredUp, player, gameLevel, powerUpType);
@@ -81,16 +81,16 @@ namespace AstroOdyssey
                 switch (powerUpType)
                 {
                     case PowerUpType.NONE:
-                        App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+                        App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
                         break;
                     case PowerUpType.RAPIDSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.RAPIDSHOT_ROUNDS_FIRE);
+                        App.PlaySound(baseUrl, SoundType.PLAYER_RAPIDSHOT_ROUNDS_FIRE);
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.DEADSHOT_ROUNDS_FIRE);
+                        App.PlaySound(baseUrl, SoundType.PLAYER_DEADSHOT_ROUNDS_FIRE);
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.SONICSHOT_ROUNDS_FIRE);
+                        App.PlaySound(baseUrl, SoundType.PLAYER_SONICSHOT_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -98,7 +98,7 @@ namespace AstroOdyssey
             }
             else
             {
-                App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+                App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
             }
         }
 

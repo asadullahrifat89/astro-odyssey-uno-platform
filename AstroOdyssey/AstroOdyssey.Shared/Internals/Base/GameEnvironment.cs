@@ -99,6 +99,11 @@ namespace AstroOdyssey
             return false;
         }
 
+        /// <summary>
+        /// Get destructible objects that have health and intersects with the projectile.
+        /// </summary>
+        /// <param name="projectileBounds"></param>
+        /// <returns></returns>
         public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds)
         {
             return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));

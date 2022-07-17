@@ -36,6 +36,7 @@ namespace AstroOdyssey
         private readonly PowerUpHelper _powerUpHelper;
         private readonly PlayerHelper _playerHelper;
         private readonly PlayerProjectileHelper _playerProjectileHelper;
+        private readonly EnemyProjectileHelper _enemyProjectileHelper;
 
         #endregion
 
@@ -58,6 +59,7 @@ namespace AstroOdyssey
             _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
             _playerHelper = new PlayerHelper(GameView, baseUrl);
             _playerProjectileHelper = new PlayerProjectileHelper(GameView, baseUrl);
+            _enemyProjectileHelper = new EnemyProjectileHelper(GameView, baseUrl);
         }
 
         #endregion
@@ -82,7 +84,7 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameDuration { get; set; } = 18;
+        private int FrameInterval { get; set; } = 18;
 
         private bool IsGameRunning { get; set; }
 
@@ -138,7 +140,7 @@ namespace AstroOdyssey
 #if DEBUG
             var watch = Stopwatch.StartNew();
 #endif
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameInterval));
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
@@ -152,19 +154,9 @@ namespace AstroOdyssey
 
                 _playerHelper.PlayerOpacity(Player);
 
-                _enemyHelper.SpawnEnemy(GameLevel);
+                SpawnGameObjects();
 
-                _meteorHelper.SpawnMeteor(GameLevel);
-
-                _healthHelper.SpawnHealth(Player);
-
-                _powerUpHelper.SpawnPowerUp();
-
-                _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
-
-                _starHelper.SpawnStar();
-
-                TriggerPowerDown();
+                UpdatePowerDown();
 
                 UpdateScore();
 
@@ -177,6 +169,24 @@ namespace AstroOdyssey
                 FrameStartTime = watch.ElapsedMilliseconds;
 #endif
             }
+        }
+
+        /// <summary>
+        /// Spawns game objects.
+        /// </summary>
+        private void SpawnGameObjects()
+        {
+            _enemyHelper.SpawnEnemy(GameLevel);
+
+            _meteorHelper.SpawnMeteor(GameLevel);
+
+            _healthHelper.SpawnHealth(Player);
+
+            _powerUpHelper.SpawnPowerUp();
+
+            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
+
+            _starHelper.SpawnStar();
         }
 
         /// <summary>
@@ -238,6 +248,19 @@ namespace AstroOdyssey
                             }
                         }
                         break;
+                    case ENEMY_PROJECTILE:
+                        {
+                            var projectile = gameObject as EnemyProjectile;
+
+                            _enemyProjectileHelper.UpdateProjectile(projectile, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            // check if enemy projectile collides with player
+                            _playerHelper.PlayerCollision(player: Player, gameObject: projectile);
+                        }
+                        break;
                     case ENEMY:
                         {
                             var enemy = gameObject as Enemy;
@@ -245,10 +268,16 @@ namespace AstroOdyssey
                             _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
 
                             if (destroyed)
-                                return;
+                                return;                            
 
                             // check if enemy collides with player
-                            _playerHelper.PlayerCollision(player: Player, gameObject: enemy);
+                            if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
+                                return;
+
+                            if (enemy.FiresProjectiles)
+                            {
+                                //TODO: fire projectiles at player, use EnemyProjectileHelpers function.
+                            }
                         }
                         break;
                     case METEOR:
@@ -406,7 +435,7 @@ namespace AstroOdyssey
 
                 var total = GameView.Children.Count() + StarView.Children.Count();
 
-                FPSText.Text = "FPS: " + FpsCount + " @ Frame Time: " + FrameDuration + " ms ";
+                FPSText.Text = "FPS: " + FpsCount + " @ Frame Time: " + FrameInterval + " ms ";
                 ObjectsCountText.Text = "Enemies: " + enemies + "  Meteors: " + meteors + "  Power Ups: " + powerUps + "  Healths: " + healths + "  Projectiles: " + projectiles + "  Stars: " + stars + "  Total: " + total;
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
@@ -539,9 +568,9 @@ namespace AstroOdyssey
         #region PowerUp Methods      
 
         /// <summary>
-        /// Triggers the powered up state down.
+        /// Updates the power up state.
         /// </summary>
-        private void TriggerPowerDown()
+        private void UpdatePowerDown()
         {
             if (IsPoweredUp)
             {
