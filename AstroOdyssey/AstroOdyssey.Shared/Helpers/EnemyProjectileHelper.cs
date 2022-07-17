@@ -47,6 +47,11 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Spawns a projectile.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="gameLevel"></param>
         public void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
         {
             // each frame progress decreases this counter
@@ -60,6 +65,11 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Generates a projectile.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="gameLevel"></param>
         private void GenerateProjectile(Enemy enemy, GameLevel gameLevel)
         {
             var newProjectile = new EnemyProjectile();

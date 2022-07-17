@@ -42,6 +42,11 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns a projectile.
         /// </summary>
+        /// <param name="isPoweredUp"></param>
+        /// <param name="firingProjectiles"></param>
+        /// <param name="player"></param>
+        /// <param name="gameLevel"></param>
+        /// <param name="powerUpType"></param>
         public void SpawnProjectile(bool isPoweredUp, bool firingProjectiles, Player player, GameLevel gameLevel, PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
