@@ -430,14 +430,15 @@ namespace AstroOdyssey
                 var meteors = GameView.Children.OfType<Meteor>().Count();
                 var powerUps = GameView.Children.OfType<PowerUp>().Count();
                 var healths = GameView.Children.OfType<Health>().Count();
-                var projectiles = GameView.Children.OfType<PlayerProjectile>().Count();
+                var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
+                var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
                 var stars = StarView.Children.OfType<Star>().Count();
 
-                var total = GameView.Children.Count() + StarView.Children.Count();
+                var total = GameView.Children.Count + StarView.Children.Count;
 
                 FPSText.Text = "FPS: " + FpsCount + " @ Frame Time: " + FrameInterval + " ms ";
-                ObjectsCountText.Text = "Enemies: " + enemies + "  Meteors: " + meteors + "  Power Ups: " + powerUps + "  Healths: " + healths + "  Projectiles: " + projectiles + "  Stars: " + stars + "  Total: " + total;
+                ObjectsCountText.Text = "Enemies: " + enemies + "  Meteors: " + meteors + "  Power Ups: " + powerUps + "  Healths: " + healths + "  Player Projectiles: " + playerProjectiles + "  Enemy Projectiles: " + enemyProjectiles + "  Stars: " + stars + "\nTotal: " + total;
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
             }
