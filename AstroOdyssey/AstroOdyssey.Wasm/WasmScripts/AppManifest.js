@@ -7,7 +7,7 @@
 
 const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
 const rapidShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
-const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const deadShotRoundsFireSource = "Assets/Sounds/beam-8-43831.mp3";
 const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3";
 
 const enemyRoundsFireSource = "Assets/Sounds/laser-descend_GJPs9OE__NWM.mp3";

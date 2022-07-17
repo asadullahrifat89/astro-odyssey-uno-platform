@@ -22,7 +22,7 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        const float FRAME_CAP_MS = 1000.0f / 56.0f;
+        const float FRAME_CAP_MS = 1000.0f / 55.0f;
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
 
@@ -553,6 +553,10 @@ namespace AstroOdyssey
         {
             var scale = GameView.GetGameObjectScale();
 
+#if DEBUG
+            Console.WriteLine($"Render Scale: {scale}"); 
+#endif
+
             Player = _playerHelper.SpawnPlayer(pointerX: PointerX, playerSpeed: PlayerSpeed * scale);
         }
 
@@ -651,6 +655,10 @@ namespace AstroOdyssey
                 var scale = GameView.GetGameObjectScale();
 
                 Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
+
+#if DEBUG
+                Console.WriteLine($"Render Scale: {scale}");
+#endif
             }
         }
 
