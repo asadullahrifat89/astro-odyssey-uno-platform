@@ -31,14 +31,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up healths.
-        /// </summary>
-        public void LevelUp()
-        {
-            healthSpeed += 1;
-        }
-
-        /// <summary>
         /// Spawns a Health.
         /// </summary>
         public void SpawnHealth(Player player)
@@ -85,6 +77,14 @@ namespace AstroOdyssey
 
             // if health or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(health);
+        }
+
+        /// <summary>
+        /// Levels up healths.
+        /// </summary>
+        public void LevelUp()
+        {
+            healthSpeed += 1;
         }
 
         #endregion

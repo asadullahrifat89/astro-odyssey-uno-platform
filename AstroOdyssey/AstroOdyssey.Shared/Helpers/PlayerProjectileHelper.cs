@@ -38,79 +38,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods
-
-        /// <summary>
-        /// Triggers the powered up state.
-        /// </summary>
-        public void PowerUp(PowerUpType powerUpType)
-        {
-            switch (powerUpType)
-            {
-                case PowerUpType.NONE:
-                    break;
-                case PowerUpType.RAPIDSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
-                        projectileSpeed += RAPIDSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
-                    }
-                    break;
-                case PowerUpType.DEADSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
-                        projectileSpeed -= DEADSHOT_ROUNDS_SPEED_DECREASE; // slow projectile
-                    }
-                    break;
-                case PowerUpType.SONICSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
-                        projectileSpeed += SONICSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Triggers the powered up state down.
-        /// </summary>
-        public void PowerDown(PowerUpType powerUpType)
-        {
-            switch (powerUpType)
-            {
-                case PowerUpType.NONE:
-                    break;
-                case PowerUpType.RAPIDSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
-                        projectileSpeed -= RAPIDSHOT_ROUNDS_SPEED_INCREASE;
-                    }
-                    break;
-                case PowerUpType.DEADSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
-                        projectileSpeed += DEADSHOT_ROUNDS_SPEED_DECREASE;
-                    }
-                    break;
-                case PowerUpType.SONICSHOT_ROUNDS:
-                    {
-                        projectileSpawnLimit -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
-                        projectileSpeed -= SONICSHOT_ROUNDS_SPEED_INCREASE;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Levels up projectiles.
-        /// </summary>
-        public void LevelUp()
-        {
-            projectileSpawnLimit -= 1;
-        }
+        #region Methods       
 
         /// <summary>
         /// Spawns a projectile.
@@ -130,6 +58,47 @@ namespace AstroOdyssey
                 }
 
                 projectileCounter = projectileSpawnLimit;
+            }
+        }
+
+        /// <summary>
+        /// Generates a projectile.
+        /// </summary>
+        /// <param name="projectileHeight"></param>
+        /// <param name="projectileWidth"></param>
+        public void GenerateProjectile(bool isPoweredUp, Player player, GameLevel gameLevel, PowerUpType powerUpType)
+        {
+            var newProjectile = new PlayerProjectile();
+
+            var scale = gameEnvironment.GetGameObjectScale();
+
+            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
+
+            newProjectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+
+            if (newProjectile.IsPoweredUp)
+            {
+                switch (powerUpType)
+                {
+                    case PowerUpType.NONE:
+                        App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.RAPIDSHOT_ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.DEADSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.DEADSHOT_ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.SONICSHOT_ROUNDS:
+                        App.PlaySound(baseUrl, SoundType.SONICSHOT_ROUNDS_FIRE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
             }
         }
 
@@ -272,46 +241,76 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Generates a projectile.
+        /// Triggers the powered up state.
         /// </summary>
-        /// <param name="projectileHeight"></param>
-        /// <param name="projectileWidth"></param>
-        public void GenerateProjectile(bool isPoweredUp, Player player, GameLevel gameLevel, PowerUpType powerUpType)
+        public void PowerUp(PowerUpType powerUpType)
         {
-            var newProjectile = new PlayerProjectile();
-
-            var scale = gameEnvironment.GetGameObjectScale();
-
-            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
-
-            newProjectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
-
-            if (newProjectile.IsPoweredUp)
+            switch (powerUpType)
             {
-                switch (powerUpType)
-                {
-                    case PowerUpType.NONE:
-                        App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
-                        break;
-                    case PowerUpType.RAPIDSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.RAPIDSHOT_ROUNDS_FIRE);
-                        break;
-                    case PowerUpType.DEADSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.DEADSHOT_ROUNDS_FIRE);
-                        break;
-                    case PowerUpType.SONICSHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.SONICSHOT_ROUNDS_FIRE);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                App.PlaySound(baseUrl, SoundType.ROUNDS_FIRE);
+                case PowerUpType.NONE:
+                    break;
+                case PowerUpType.RAPIDSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
+                        projectileSpeed += RAPIDSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
+                    }
+                    break;
+                case PowerUpType.DEADSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpeed -= DEADSHOT_ROUNDS_SPEED_DECREASE; // slow projectile
+                    }
+                    break;
+                case PowerUpType.SONICSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpeed += SONICSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
+        /// <summary>
+        /// Triggers the powered up state down.
+        /// </summary>
+        public void PowerDown(PowerUpType powerUpType)
+        {
+            switch (powerUpType)
+            {
+                case PowerUpType.NONE:
+                    break;
+                case PowerUpType.RAPIDSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
+                        projectileSpeed -= RAPIDSHOT_ROUNDS_SPEED_INCREASE;
+                    }
+                    break;
+                case PowerUpType.DEADSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpeed += DEADSHOT_ROUNDS_SPEED_DECREASE;
+                    }
+                    break;
+                case PowerUpType.SONICSHOT_ROUNDS:
+                    {
+                        projectileSpawnLimit -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpeed -= SONICSHOT_ROUNDS_SPEED_INCREASE;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Levels up projectiles.
+        /// </summary>
+        public void LevelUp()
+        {
+            projectileSpawnLimit -= 1;
+        }
         #endregion
     }
 }

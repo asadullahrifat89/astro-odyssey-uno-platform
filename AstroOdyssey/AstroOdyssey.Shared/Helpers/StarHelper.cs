@@ -29,14 +29,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up stars.
-        /// </summary>
-        public void LevelUp()
-        {
-            starSpeed += 0.1d;
-        }
-
-        /// <summary>
         /// Spawns random stars in the star view.
         /// </summary>
         public void SpawnStar()
@@ -78,6 +70,14 @@ namespace AstroOdyssey
 
             if (star.GetY() > gameEnvironment.Height)
                 gameEnvironment.AddDestroyableGameObject(star);
+        }
+
+        /// <summary>
+        /// Levels up stars.
+        /// </summary>
+        public void LevelUp()
+        {
+            starSpeed += 0.1d;
         }
 
         #endregion

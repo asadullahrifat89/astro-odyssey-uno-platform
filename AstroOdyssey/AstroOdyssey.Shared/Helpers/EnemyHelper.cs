@@ -41,17 +41,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up enemies.
-        /// </summary>
-        public void LevelUp()
-        {
-            enemySpawnLimit -= 2;
-            enemySpeed += 1;
-
-            //TODO: blaster spawn limit decrease and speed increase
-        }
-
-        /// <summary>
         /// Spawns an enemy.
         /// </summary>
         public void SpawnEnemy(GameLevel gameLevel)
@@ -174,6 +163,17 @@ namespace AstroOdyssey
 
             // if enemy or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
+        }
+
+        /// <summary>
+        /// Levels up enemies.
+        /// </summary>
+        public void LevelUp()
+        {
+            enemySpawnLimit -= 2;
+            enemySpeed += 1;
+
+            //TODO: blaster spawn limit decrease and speed increase
         }
 
         #endregion

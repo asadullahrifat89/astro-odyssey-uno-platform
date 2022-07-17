@@ -9,6 +9,8 @@ namespace AstroOdyssey
 {
     public class GameObject : Border
     {
+        #region Fields
+
         private readonly CompositeTransform compositeTransform = new CompositeTransform()
         {
             CenterX = 0.5,
@@ -16,7 +18,9 @@ namespace AstroOdyssey
             Rotation = 0,
             ScaleX = 1,
             ScaleY = 1,
-        };
+        }; 
+
+        #endregion
 
         #region Ctor
 
@@ -222,6 +226,7 @@ namespace AstroOdyssey
 
             IsOverPowered = true;
         }
+
         #endregion
     }
 

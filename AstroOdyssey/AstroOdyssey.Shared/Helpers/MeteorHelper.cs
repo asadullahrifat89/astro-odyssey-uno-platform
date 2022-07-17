@@ -38,15 +38,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up meteors.
-        /// </summary>
-        public void LevelUp()
-        {
-            meteorSpawnLimit -= 2;
-            meteorSpeed += 1;
-        }
-
-        /// <summary>
         /// Spawns a meteor.
         /// </summary>
         public void SpawnMeteor(GameLevel gameLevel)
@@ -160,6 +151,15 @@ namespace AstroOdyssey
 
             // if meteor or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
+        }
+
+        /// <summary>
+        /// Levels up meteors.
+        /// </summary>
+        public void LevelUp()
+        {
+            meteorSpawnLimit -= 2;
+            meteorSpeed += 1;
         }
 
         #endregion

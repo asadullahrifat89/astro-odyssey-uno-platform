@@ -31,14 +31,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up power ups.
-        /// </summary>
-        public void LevelUp()
-        {
-            powerUpSpeed += 1;
-        }
-
-        /// <summary>
         /// Spawns a PowerUp.
         /// </summary>
         public void SpawnPowerUp()
@@ -82,6 +74,14 @@ namespace AstroOdyssey
 
             // if powerUp or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+        }
+
+        /// <summary>
+        /// Levels up power ups.
+        /// </summary>
+        public void LevelUp()
+        {
+            powerUpSpeed += 1;
         }
 
         #endregion
