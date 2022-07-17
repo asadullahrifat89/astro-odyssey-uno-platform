@@ -8,10 +8,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int rotatedMeteorSpawnCounter = 10;
         private int rotatedMeteorSpawnLimit = 10;
@@ -36,15 +35,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Levels up meteors.
-        /// </summary>
-        public void LevelUp()
-        {
-            meteorSpawnLimit -= 2;
-            meteorSpeed += 1;
-        }
 
         /// <summary>
         /// Spawns a meteor.
@@ -136,7 +126,7 @@ namespace AstroOdyssey
         /// <param name="meteor"></param>
         public void DestroyMeteor(Meteor meteor)
         {
-            meteor.MarkedForFadedRemoval = true;
+            meteor.IsMarkedForFadedRemoval = true;
             App.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
         }
 
@@ -155,11 +145,20 @@ namespace AstroOdyssey
             meteor.MoveX();
 
             // if the object is marked for lazy destruction then no need to perform collisions
-            if (meteor.MarkedForFadedRemoval)
+            if (meteor.IsMarkedForFadedRemoval)
                 return;
 
             // if meteor or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
+        }
+
+        /// <summary>
+        /// Levels up meteors.
+        /// </summary>
+        public void LevelUp()
+        {
+            meteorSpawnLimit -= 2;
+            meteorSpeed += 1;
         }
 
         #endregion

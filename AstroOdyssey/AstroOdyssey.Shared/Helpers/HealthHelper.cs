@@ -7,10 +7,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int healthCounter;
         private int healthSpawnLimit = 1000;
@@ -29,14 +28,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Levels up healths.
-        /// </summary>
-        public void LevelUp()
-        {
-            healthSpeed += 1;
-        }
 
         /// <summary>
         /// Spawns a Health.
@@ -85,6 +76,14 @@ namespace AstroOdyssey
 
             // if health or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(health);
+        }
+
+        /// <summary>
+        /// Levels up healths.
+        /// </summary>
+        public void LevelUp()
+        {
+            healthSpeed += 1;
         }
 
         #endregion

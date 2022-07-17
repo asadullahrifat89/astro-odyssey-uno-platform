@@ -57,8 +57,6 @@ namespace AstroOdyssey
 
         private void Login()
         {
-            //TODO: Call BE to get account
-
             App.Account = new Account() { UserName = UserNameBox.Text, Password = PasswordBox.Password, };
 
             App.SetAccount();

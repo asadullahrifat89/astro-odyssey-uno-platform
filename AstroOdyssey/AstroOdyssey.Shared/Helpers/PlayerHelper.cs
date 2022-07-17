@@ -8,13 +8,12 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
-        private readonly string baseUrl;
-
         private int playerDamagedOpacityCounter;
-        private readonly int playerDamagedOpacityLimit = 100;
+        private readonly int playerDamagedOpacityLimit = 120;
 
         private int powerUpTriggerCounter;
         private readonly int powerUpTriggerLimit = 1000;
@@ -107,8 +106,10 @@ namespace AstroOdyssey
             {
                 case METEOR:
                 case ENEMY:
+                case ENEMY_PROJECTILE:
                     {
-                        if (player.GetRect().Intersects(gameObject.GetRect()))
+                        // only loose health if player is now in physical state
+                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             gameEnvironment.AddDestroyableGameObject(gameObject);
                             PlayerHealthLoss(player);
@@ -155,20 +156,29 @@ namespace AstroOdyssey
 
             App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
 
+            // enter ethereal state, prevent taking damage for a few milliseconds
             player.Opacity = 0.4d;
+
+            player.IsInEtherealState = true;
 
             playerDamagedOpacityCounter = playerDamagedOpacityLimit;
         }
 
         /// <summary>
-        /// Sets the player opacity.
+        /// Handles the opacity of the player upon taking damage.
         /// </summary>
-        public void PlayerOpacity(Player player)
+        public void HandleDamageRecovery(Player player)
         {
-            playerDamagedOpacityCounter -= 1;
+            if (player.IsInEtherealState)
+            {
+                playerDamagedOpacityCounter -= 1;
 
-            if (playerDamagedOpacityCounter <= 0)
-                player.Opacity = 1;
+                if (playerDamagedOpacityCounter <= 0)
+                {
+                    player.Opacity = 1;
+                    player.IsInEtherealState = false;
+                }
+            }
         }
 
         /// <summary>

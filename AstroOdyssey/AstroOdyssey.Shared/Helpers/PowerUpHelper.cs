@@ -7,10 +7,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int powerUpCounter = 1500;
         private int powerUpSpawnLimit = 1500;
@@ -29,14 +28,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Levels up power ups.
-        /// </summary>
-        public void LevelUp()
-        {
-            powerUpSpeed += 1;
-        }
 
         /// <summary>
         /// Spawns a PowerUp.
@@ -82,6 +73,14 @@ namespace AstroOdyssey
 
             // if powerUp or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+        }
+
+        /// <summary>
+        /// Levels up power ups.
+        /// </summary>
+        public void LevelUp()
+        {
+            powerUpSpeed += 1;
         }
 
         #endregion

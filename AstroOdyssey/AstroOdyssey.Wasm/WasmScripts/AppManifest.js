@@ -7,8 +7,11 @@
 
 const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
 const rapidShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
-const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
+const deadShotRoundsFireSource = "Assets/Sounds/magnetic-destroy-shot_fkxD6SV__NWM.mp3";
 const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3";
+
+const enemyRoundsFireSource = "Assets/Sounds/laser-descend_GJPs9OE__NWM.mp3";
+
 const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
@@ -27,6 +30,7 @@ const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
 const rfAudio = new Audio();
+const erfAudio = new Audio();
 
 const rapidsrfAudio = new Audio();
 const deadsrfAudio = new Audio();
@@ -53,33 +57,40 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(gsAudio);
         } break;
-        case "ROUNDS_FIRE": {
+        case "PLAYER_ROUNDS_FIRE": {
             if (rfAudio.src.length == 0) {
                 rfAudio.src = baseUrl.concat("/", roundsFireSource);
                 rfAudio.volume = 0.1;
             }
             playSound(rfAudio);
         } break;
-        case "RAPIDSHOT_ROUNDS_FIRE": {
+        case "PLAYER_RAPIDSHOT_ROUNDS_FIRE": {
             if (rapidsrfAudio.src.length == 0) {
                 rapidsrfAudio.src = baseUrl.concat("/", rapidShotRoundsFireSource);
                 rapidsrfAudio.volume = 0.2;
             }
             playSound(rapidsrfAudio);
         } break;
-        case "DEADSHOT_ROUNDS_FIRE": {
+        case "PLAYER_DEADSHOT_ROUNDS_FIRE": {
             if (deadsrfAudio.src.length == 0) {
                 deadsrfAudio.src = baseUrl.concat("/", deadShotRoundsFireSource);
                 deadsrfAudio.volume = 0.2;
             }
             playSound(deadsrfAudio);
         } break;
-        case "SONICSHOT_ROUNDS_FIRE": {
+        case "PLAYER_SONICSHOT_ROUNDS_FIRE": {
             if (sonicsrfAudio.src.length == 0) {
                 sonicsrfAudio.src = baseUrl.concat("/", sonicShotRoundsFireSource);
                 sonicsrfAudio.volume = 0.2;
             }
             playSound(sonicsrfAudio);
+        } break;
+        case "ENEMY_ROUNDS_FIRE": {
+            if (erfAudio.src.length == 0) {
+                erfAudio.src = baseUrl.concat("/", enemyRoundsFireSource);
+                erfAudio.volume = 0.1;
+            }
+            playSound(erfAudio);
         } break;
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {

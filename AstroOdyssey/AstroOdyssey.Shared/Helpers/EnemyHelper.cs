@@ -8,10 +8,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int xFlyingEnemySpawnCounter = 10;
         private int xFlyingEnemySpawnLimit = 10;
@@ -21,6 +20,9 @@ namespace AstroOdyssey
 
         private int evadingEnemySpawnCounter = 3;
         private int evadingEnemySpawnLimit = 3;
+
+        private int firingEnemySpawnCounter = 7;
+        private int firingEnemySpawnLimit = 7;
 
         private int enemyCounter;
         private int enemySpawnLimit = 50;
@@ -39,15 +41,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Levels up enemies.
-        /// </summary>
-        public void LevelUp()
-        {
-            enemySpawnLimit -= 2;
-            enemySpeed += 1;
-        }
 
         /// <summary>
         /// Spawns an enemy.
@@ -77,6 +70,15 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
+            //TODO: spawn blaster shooting enemies after level 2
+            if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
+            {
+                firingEnemySpawnCounter = firingEnemySpawnLimit;
+                newEnemy.FiresProjectiles = true;
+                firingEnemySpawnLimit = random.Next(1, 8);
+            }
+
+            // spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
                 evadingEnemySpawnCounter = evadingEnemySpawnLimit;
@@ -137,6 +139,7 @@ namespace AstroOdyssey
             xFlyingEnemySpawnCounter--;
             overPoweredEnemySpawnCounter--;
             evadingEnemySpawnCounter--;
+            firingEnemySpawnCounter--;
         }
 
         /// <summary>
@@ -145,7 +148,7 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         public void DestroyEnemy(Enemy enemy)
         {
-            enemy.MarkedForFadedRemoval = true;
+            enemy.IsMarkedForFadedRemoval = true;
             App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
@@ -163,11 +166,20 @@ namespace AstroOdyssey
             enemy.MoveX();
 
             // if the object is marked for lazy destruction then no need to perform collisions
-            if (enemy.MarkedForFadedRemoval)
+            if (enemy.IsMarkedForFadedRemoval)
                 return;
 
-            // if enemy or meteor object has gone beyond game view
+            // if object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
+        }
+
+        /// <summary>
+        /// Levels up enemies.
+        /// </summary>
+        public void LevelUp()
+        {
+            enemySpawnLimit -= 2;
+            enemySpeed += 1;
         }
 
         #endregion

@@ -36,6 +36,8 @@ namespace AstroOdyssey
 
         public bool IsEvading { get; set; }
 
+        public bool FiresProjectiles { get; set; }
+
         #endregion
 
         #region Methods
@@ -44,7 +46,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
             XDirection = XDirection.NONE;
-            MarkedForFadedRemoval = false;
+            IsMarkedForFadedRemoval = false;
             Opacity = 1;
 
             Uri uri = null;
