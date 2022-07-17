@@ -161,9 +161,9 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the player opacity.
+        /// Handles the opacity of the player upon taking damage.
         /// </summary>
-        public void PlayerOpacity(Player player)
+        public void HandleDamageOpacity(Player player)
         {
             playerDamagedOpacityCounter -= 1;
 

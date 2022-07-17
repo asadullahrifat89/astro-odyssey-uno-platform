@@ -152,15 +152,15 @@ namespace AstroOdyssey
 
                 ShiftGameLevel();
 
-                _playerHelper.PlayerOpacity(Player);
+                _playerHelper.HandleDamageOpacity(Player);
 
                 SpawnGameObjects();
 
-                UpdatePowerDown();
+                HandlePowerDown();
 
                 UpdateScore();
 
-                HideInGameText();
+                HandleInGameTextHiding();
 #if DEBUG
                 CalculateFps();
 
@@ -384,9 +384,9 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Hides the in game text after keeping it visible.
+        /// Hides the in game text after keeping it visible for a few frames.
         /// </summary>
-        private void HideInGameText()
+        private void HandleInGameTextHiding()
         {
             if (!InGameText.Text.IsNullOrBlank())
             {
@@ -572,9 +572,9 @@ namespace AstroOdyssey
         #region PowerUp Methods      
 
         /// <summary>
-        /// Updates the power up state.
+        /// Handles debuffing the power up effect.
         /// </summary>
-        private void UpdatePowerDown()
+        private void HandlePowerDown()
         {
             if (IsPoweredUp)
             {
@@ -617,7 +617,6 @@ namespace AstroOdyssey
 #if DEBUG
             Console.WriteLine($"{windowWidth} x {windowHeight}");
 #endif
-
             SetViewSizes();
 
             if (IsGameRunning)
