@@ -66,7 +66,7 @@ namespace AstroOdyssey
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale);
+            newProjectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
 
             newProjectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + newProjectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
 

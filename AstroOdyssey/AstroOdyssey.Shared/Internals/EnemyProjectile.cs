@@ -24,7 +24,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, GameLevel gameLevel, double scale = 1)
+        public void SetAttributes(double speed, GameLevel gameLevel, double scale = 1, bool isOverPowered = false)
         {
             Speed = speed;
 
@@ -78,8 +78,8 @@ namespace AstroOdyssey
 
             Background = new SolidColorBrush(Colors.White); // TODO: fix the enemy projectile color
 
-            Height = height * scale;
-            Width = width * scale;
+            Height = height * scale * (isOverPowered ? 1.5 : 1);
+            Width = width * scale * (isOverPowered ? 1.5 : 1);
         }
 
         #endregion
