@@ -42,25 +42,27 @@ namespace AstroOdyssey
 
         public int HitPoint { get; set; } = 1;
 
-        public bool IsDestructible { get; set; }
-
-        public bool MarkedForFadedRemoval { get; set; }
-
         public double Speed { get; set; } = 1;
+
+        public new double Rotation { get; set; } = 0;
 
         public YDirection YDirection { get; set; } = YDirection.NONE;
 
-        public XDirection XDirection { get; set; } = XDirection.NONE;
+        public XDirection XDirection { get; set; } = XDirection.NONE;       
 
         public bool HasNoHealth => Health <= 0;
 
         public bool HasHealth => Health > 0;
 
-        public bool HasFadedAway => Opacity <= 0;
-
-        public new double Rotation { get; set; } = 0;
+        public bool HasFadedAway => Opacity <= 0;        
 
         public bool IsOverPowered { get; set; } = false;
+
+        public bool IsDestructible { get; set; }
+
+        public bool IsMarkedForFadedRemoval { get; set; }
+
+        public bool IsToBeRemoved { get; set; }
 
         #endregion
 

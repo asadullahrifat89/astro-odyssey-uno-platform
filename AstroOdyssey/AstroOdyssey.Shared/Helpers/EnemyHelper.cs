@@ -148,7 +148,7 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         public void DestroyEnemy(Enemy enemy)
         {
-            enemy.MarkedForFadedRemoval = true;
+            enemy.IsMarkedForFadedRemoval = true;
             App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
@@ -166,7 +166,7 @@ namespace AstroOdyssey
             enemy.MoveX();
 
             // if the object is marked for lazy destruction then no need to perform collisions
-            if (enemy.MarkedForFadedRemoval)
+            if (enemy.IsMarkedForFadedRemoval)
                 return;
 
             // if object has gone beyond game view

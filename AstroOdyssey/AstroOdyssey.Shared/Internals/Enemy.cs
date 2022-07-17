@@ -46,7 +46,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
             XDirection = XDirection.NONE;
-            MarkedForFadedRemoval = false;
+            IsMarkedForFadedRemoval = false;
             Opacity = 1;
 
             Uri uri = null;

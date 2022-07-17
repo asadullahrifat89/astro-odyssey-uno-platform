@@ -13,6 +13,7 @@ namespace AstroOdyssey
 
         private readonly Grid content = new Grid();
 
+
         private readonly Image contentShip = new Image()
         {
             Stretch = Stretch.Uniform,
@@ -69,6 +70,12 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public bool IsInEtherealState { get; set; }
+
+        #endregion
+
         #region Methods
 
         public void SetAttributes(double speed, double scale = 1)
@@ -83,11 +90,11 @@ namespace AstroOdyssey
             switch (playerShipType)
             {
                 case 1:
-                    shipUri = new Uri("ms-appx:///Assets/Images/ship_A.png", UriKind.RelativeOrAbsolute);
+                    shipUri = new Uri("ms-appx:///Assets/Images/satellite_B.png", UriKind.RelativeOrAbsolute);
                     exhaustHeight = 50;
                     break;
                 case 2:
-                    shipUri = new Uri("ms-appx:///Assets/Images/ship_B.png", UriKind.RelativeOrAbsolute);
+                    shipUri = new Uri("ms-appx:///Assets/Images/satellite_C.png", UriKind.RelativeOrAbsolute);
                     exhaustHeight = 35;
                     break;
                 case 3:
