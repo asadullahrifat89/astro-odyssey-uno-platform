@@ -36,7 +36,8 @@
                 Margin="5"
                 FontWeight="Bold"
                 Foreground="White"
-                TextAlignment="Center" />
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
 
             <!--  This shows current objects count in game canvas  -->
             <TextBlock

@@ -22,7 +22,7 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        const float FRAME_CAP_MS = 1000.0f / 40.0f;
+        const float FRAME_CAP_MS = 1000.0f / 55.0f;
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
 
@@ -87,7 +87,7 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameInverval { get; set; } = 18;
+        private int FrameTime { get; set; } = 19;
 
         private long FrameDuration { get; set; }
 
@@ -144,7 +144,7 @@ namespace AstroOdyssey
         {
             var watch = Stopwatch.StartNew();
 
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameInverval));
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameTime));
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
@@ -166,7 +166,7 @@ namespace AstroOdyssey
         private void SetFrameInterval()
         {
             FrameDuration = FrameEndTime - FrameStartTime;
-            FrameInverval = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 1);
+            FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 1);
         }
 
         private void CalculateFPS()
@@ -467,7 +467,7 @@ namespace AstroOdyssey
 
                 var total = GameView.Children.Count + StarView.Children.Count;
 
-                FPSText.Text = "{ FPS: " + FpsCount + ", Frame: { Interval: " + FrameInverval + ", Duration: " + (int)FrameDuration + ",  Start Time: " + FrameStartTime + ",  End Time: " + FrameEndTime + " }}";
+                FPSText.Text = "{ FPS: " + FpsCount + ", Frame: { Time: " + FrameTime + ", Duration: " + (int)FrameDuration + ",  Start Time: " + FrameStartTime + ",  End Time: " + FrameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;

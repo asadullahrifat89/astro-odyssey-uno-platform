@@ -70,6 +70,7 @@ namespace AstroOdyssey
 
         public static void EnterFullScreen(bool value)
         {
+#if !DEBUG
             var view = ApplicationView.GetForCurrentView();
 
             if (view is not null)
@@ -83,6 +84,7 @@ namespace AstroOdyssey
                     view.ExitFullScreenMode();
                 }
             }
+#endif
         }
 
         public static void SetScore(double score)

@@ -62,8 +62,6 @@ namespace AstroOdyssey
 
         public bool IsMarkedForFadedRemoval { get; set; }
 
-        public bool IsToBeRemoved { get; set; }
-
         #endregion
 
         #region Methods
