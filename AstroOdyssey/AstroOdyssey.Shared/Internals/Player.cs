@@ -4,6 +4,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -93,7 +94,7 @@ namespace AstroOdyssey
             {
                 case 1:
                     shipUri = new Uri("ms-appx:///Assets/Images/satellite_B.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    ExhaustHeight = 35;
                     break;
                 case 2:
                     shipUri = new Uri("ms-appx:///Assets/Images/satellite_C.png", UriKind.RelativeOrAbsolute);
@@ -178,24 +179,28 @@ namespace AstroOdyssey
             Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
 
-            switch (powerUpType)
-            {
-                case PowerUpType.RAPIDSHOT_ROUNDS:
-                    {
-                        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-                        contentShipBlaze.Source = new BitmapImage(exhaustUri);
-                        contentShipPowerGauge.Background = new SolidColorBrush(Colors.Goldenrod);
-                    }
-                    break;
-                case PowerUpType.DEADSHOT_ROUNDS:
-                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.Purple);
-                    break;
-                case PowerUpType.SONICSHOT_ROUNDS:
-                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.LightBlue);
-                    break;
-                default:
-                    break;
-            }
+            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
+            contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            contentShipPowerGauge.Background = Colors.Gold;
+
+            //switch (powerUpType)
+            //{
+            //case PowerUpType.RAPIDSHOT_ROUNDS:
+            //    {
+            //        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
+            //        contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            //        contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+            //    }
+            //    break;
+            //case PowerUpType.DEADSHOT_ROUNDS:
+            //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+            //    break;
+            //case PowerUpType.SONICSHOT_ROUNDS:
+            //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+            //    break;
+            //default:
+            //    break;
+            //}
         }
 
         public void TriggerPowerDown()

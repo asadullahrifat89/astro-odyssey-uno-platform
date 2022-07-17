@@ -1,4 +1,10 @@
-﻿using Windows.Foundation;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Media;
+using System;
+using System.Globalization;
+using Windows.Foundation;
+using Windows.UI;
 
 namespace AstroOdyssey
 {
@@ -20,6 +26,8 @@ namespace AstroOdyssey
 
         public const string STAR = "star";
 
+        //public static Color SPECIAL_ROUNDS_COLOR = Colors.White; //Windows.UI.ColorHelper.FromArgb(255, 232, 18, 36);
+
         public enum GameLevel
         {
             Level_1,
@@ -35,7 +43,7 @@ namespace AstroOdyssey
         public enum SoundType
         {
             BACKGROUND_MUSIC,
-            PLAYER_ROUNDS_FIRE,            
+            PLAYER_ROUNDS_FIRE,
             PLAYER_RAPIDSHOT_ROUNDS_FIRE,
             PLAYER_DEADSHOT_ROUNDS_FIRE,
             PLAYER_SONICSHOT_ROUNDS_FIRE,

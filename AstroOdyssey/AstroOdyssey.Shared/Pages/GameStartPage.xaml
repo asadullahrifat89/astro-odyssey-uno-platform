@@ -26,9 +26,9 @@
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="30"
+                FontSize="25"
                 FontWeight="Bold"
-                Text="Ready to fly?" />
+                Text="Are you ready?" />
 
             <!--  TODO: select ship  -->
 
@@ -41,7 +41,7 @@
                 VerticalAlignment="Center"
                 BorderBrush="White"
                 Click="PlayButton_Click"
-                Content="Play"
+                Content="Yes"
                 FontSize="30" />
         </StackPanel>
 

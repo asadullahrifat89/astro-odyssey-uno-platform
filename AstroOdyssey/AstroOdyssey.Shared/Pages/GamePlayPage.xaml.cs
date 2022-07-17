@@ -22,7 +22,7 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        const float FRAME_CAP_MS = 1000.0f / 52.0f;
+        const float FRAME_CAP_MS = 1000.0f / 50.0f;
         private int fpsCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
