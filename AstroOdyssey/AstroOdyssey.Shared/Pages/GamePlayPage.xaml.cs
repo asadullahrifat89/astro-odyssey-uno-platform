@@ -60,7 +60,7 @@ namespace AstroOdyssey
             SetWindowSize();
             GetBaseUrl();
 
-            _starHelper = new StarHelper(StarView);
+            _starHelper = new StarHelper(GameView);
             _meteorHelper = new MeteorHelper(GameView, baseUrl);
             _enemyHelper = new EnemyHelper(GameView, baseUrl);
             _healthHelper = new HealthHelper(GameView, baseUrl);
@@ -149,7 +149,7 @@ namespace AstroOdyssey
 
                 frameEndTime = watch.ElapsedMilliseconds;
 
-                SetFrameInterval();
+                SetFrameTime();
 #if DEBUG
                 SetAnalytics();
 #endif
@@ -157,12 +157,18 @@ namespace AstroOdyssey
             }
         }
 
-        private void SetFrameInterval()
+        /// <summary>
+        /// Sets the frame time.
+        /// </summary>
+        private void SetFrameTime()
         {
             FrameDuration = frameEndTime - frameStartTime;
             //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
         }
 
+        /// <summary>
+        /// Calculates the frames per second.
+        /// </summary>
         private void CalculateFPS()
         {
             // calculate FPS
@@ -176,27 +182,33 @@ namespace AstroOdyssey
             fpsCounter++;
         }
 
+        /// <summary>
+        /// Updates a frame in the game.
+        /// </summary>
         private void UpdateFrame()
         {
             GameOver();
 
             UpdatePlayer();
 
-            UpdateObjects();
+            UpdateGameObjects();
 
             SetGameLevel();
 
             SpawnGameObjects();
 
-            HandlePowerDown();
+            HandlePlayerPowerDown();
 
             UpdateScore();
 
-            HandleInGameTextHiding();
+            HandleInGameText();
 
             _playerHelper.HandleDamageRecovery(Player);
         }
 
+        /// <summary>
+        /// Updates the player. Moves the player if required.
+        /// </summary>
         private void UpdatePlayer()
         {
             if (MoveLeft || MoveRight)
@@ -225,7 +237,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Updates meteors, enemies, projectiles in the game view. Advances game objects in the frame.
         /// </summary>
-        private void UpdateObjects()
+        private void UpdateGameObjects()
         {
             var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
 
@@ -243,34 +255,20 @@ namespace AstroOdyssey
                     }
                 }
 
-                UpdateObjectInGameView(gameObject);
+                UpdateGameObject(gameObject);
 
             }).IsCompleted)
             {
                 // clean removable objects from game view
                 GameView.RemoveDestroyableGameObjects();
-
-                var starObjects = StarView.GetGameObjects<GameObject>();
-
-                // update star view objects
-                if (Parallel.ForEach(starObjects, star =>
-                {
-                    UpdateObjectInStarView(star);
-
-                }).IsCompleted)
-                {
-                    // clean removable objects from star view
-                    StarView.RemoveDestroyableGameObjects();
-                }
             }
         }
 
-        private void UpdateObjectInStarView(GameObject star)
-        {
-            _starHelper.UpdateStar(star as Star);
-        }
-
-        private void UpdateObjectInGameView(GameObject gameObject)
+        /// <summary>
+        /// Updates a game object.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateGameObject(GameObject gameObject)
         {
             var tag = gameObject.Tag;
 
@@ -386,6 +384,13 @@ namespace AstroOdyssey
                         }
                     }
                     break;
+                case STAR:
+                    {
+                        var star = gameObject as Star;
+
+                        _starHelper.UpdateStar(star: star, destroyed: out bool destroyed);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -396,17 +401,17 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnGameObjects()
         {
-            _enemyHelper.SpawnEnemy(GameLevel);
+            _starHelper.SpawnStar();
 
             _meteorHelper.SpawnMeteor(GameLevel);
+
+            _enemyHelper.SpawnEnemy(GameLevel);
 
             _healthHelper.SpawnHealth(Player);
 
             _powerUpHelper.SpawnPowerUp();
 
             _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
-
-            _starHelper.SpawnStar();
         }
 
         /// <summary>
@@ -471,9 +476,9 @@ namespace AstroOdyssey
                 var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
                 var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
-                var stars = StarView.Children.OfType<Star>().Count();
+                var stars = GameView.Children.OfType<Star>().Count();
 
-                var total = GameView.Children.Count + StarView.Children.Count;
+                var total = GameView.Children.Count;
 
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + FrameTime + ", Duration: " + (int)FrameDuration + ",  Start Time: " + frameStartTime + ",  End Time: " + frameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
@@ -494,7 +499,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Hides the in game text after keeping it visible for a few frames.
         /// </summary>
-        private void HandleInGameTextHiding()
+        private void HandleInGameText()
         {
             if (!InGameText.Text.IsNullOrBlank())
             {
@@ -605,7 +610,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Handles debuffing the power up effect.
         /// </summary>
-        private void HandlePowerDown()
+        private void HandlePlayerPowerDown()
         {
             if (IsPoweredUp)
             {
@@ -675,7 +680,6 @@ namespace AstroOdyssey
         private void SetViewSizes()
         {
             GameView.SetSize(windowHeight, windowWidth);
-            StarView.SetSize(windowHeight, windowWidth);
 
             // resize player size
             if (IsGameRunning)
