@@ -87,7 +87,9 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameInterval { get; set; } = 18;
+        private int FrameInverval { get; set; } = 18;
+
+        private long FrameDuration { get; set; }
 
         private bool IsGameRunning { get; set; }
 
@@ -142,7 +144,7 @@ namespace AstroOdyssey
         {
             var watch = Stopwatch.StartNew();
 
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameInterval));
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameInverval));
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
@@ -163,8 +165,8 @@ namespace AstroOdyssey
 
         private void SetFrameInterval()
         {
-            var frameTime = FrameEndTime - FrameStartTime;
-            FrameInterval = Math.Max((int)(FRAME_CAP_MS - frameTime), 1);
+            FrameDuration = FrameEndTime - FrameStartTime;
+            FrameInverval = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 1);
         }
 
         private void CalculateFPS()
@@ -227,152 +229,157 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateGameObjects()
         {
-            // cleanup destroyed game objects
-            GameView.RemoveDestroyableGameObjects();
+            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
 
-            var starObjects = StarView.GetGameObjects<GameObject>();
-
-            if (Parallel.ForEach(starObjects, star =>
+            // update game view objects
+            if (Parallel.ForEach(gameObjects, gameObject =>
             {
-                _starHelper.UpdateStar(star as Star);
-            }).IsCompleted)
-            {
-                StarView.RemoveDestroyableGameObjects();
-
-                // update game objects
-                var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
-
-                Parallel.ForEach(gameObjects, gameObject =>
+                if (gameObject.IsMarkedForFadedRemoval)
                 {
-                    if (gameObject.IsMarkedForFadedRemoval)
-                    {
-                        gameObject.Fade();
+                    gameObject.Fade();
 
-                        if (gameObject.HasFadedAway)
+                    if (gameObject.HasFadedAway)
+                    {
+                        GameView.AddDestroyableGameObject(gameObject);
+                        return;
+                    }
+                }
+
+                var tag = gameObject.Tag;
+
+                switch (tag)
+                {
+                    case PLAYER_PROJECTILE:
                         {
-                            GameView.AddDestroyableGameObject(gameObject);
-                            return;
+                            var projectile = gameObject as PlayerProjectile;
+
+                            // move the projectile up and check if projectile has gone beyond the game view
+                            _playerProjectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            _playerProjectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+
+                            if (score > 0)
+                                Score += score;
+
+                            if (destroyedObject is not null)
+                            {
+                                switch (destroyedObject.Tag)
+                                {
+                                    case ENEMY:
+                                        {
+                                            _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
+                                        }
+                                        break;
+                                    case METEOR:
+                                        {
+                                            _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
                         }
-                    }
+                        break;
+                    case ENEMY_PROJECTILE:
+                        {
+                            var projectile = gameObject as EnemyProjectile;
 
-                    var tag = gameObject.Tag;
+                            _enemyProjectileHelper.UpdateProjectile(projectile, destroyed: out bool destroyed);
 
-                    switch (tag)
-                    {
-                        case PLAYER_PROJECTILE:
+                            if (destroyed)
+                                return;
+
+                            // check if enemy projectile collides with player
+                            _playerHelper.PlayerCollision(player: Player, gameObject: projectile);
+                        }
+                        break;
+                    case ENEMY:
+                        {
+                            var enemy = gameObject as Enemy;
+
+                            _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            // check if enemy collides with player
+                            if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
+                                return;
+
+                            // fire projectiles
+                            if (enemy.FiresProjectiles)
+                                _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+                        }
+                        break;
+                    case METEOR:
+                        {
+                            var meteor = gameObject as Meteor;
+
+                            _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            // check if meteor collides with player
+                            _playerHelper.PlayerCollision(player: Player, gameObject: meteor);
+                        }
+                        break;
+                    case HEALTH:
+                        {
+                            var health = gameObject as Health;
+
+                            _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            // check if health collides with player
+                            _playerHelper.PlayerCollision(player: Player, gameObject: health);
+                        }
+                        break;
+                    case POWERUP:
+                        {
+                            var powerUp = gameObject as PowerUp;
+
+                            _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
+
+                            if (destroyed)
+                                return;
+
+                            // check if power up collides with player
+                            if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
                             {
-                                var projectile = gameObject as PlayerProjectile;
-
-                                // move the projectile up and check if projectile has gone beyond the game view
-                                _playerProjectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
-
-                                if (destroyed)
-                                    return;
-
-                                _playerProjectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
-
-                                if (score > 0)
-                                    Score += score;
-
-                                if (destroyedObject is not null)
-                                {
-                                    switch (destroyedObject.Tag)
-                                    {
-                                        case ENEMY:
-                                            {
-                                                _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
-                                            }
-                                            break;
-                                        case METEOR:
-                                            {
-                                                _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
-                                            }
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
+                                IsPoweredUp = true;
+                                PowerUpType = powerUp.PowerUpType;
+                                _playerProjectileHelper.PowerUp(PowerUpType);
                             }
-                            break;
-                        case ENEMY_PROJECTILE:
-                            {
-                                var projectile = gameObject as EnemyProjectile;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            })
+                .IsCompleted)
+            {
+                // clean removable objects from game view
+                GameView.RemoveDestroyableGameObjects();
 
-                                _enemyProjectileHelper.UpdateProjectile(projectile, destroyed: out bool destroyed);
+                var starObjects = StarView.GetGameObjects<GameObject>();
 
-                                if (destroyed)
-                                    return;
-
-                                // check if enemy projectile collides with player
-                                _playerHelper.PlayerCollision(player: Player, gameObject: projectile);
-                            }
-                            break;
-                        case ENEMY:
-                            {
-                                var enemy = gameObject as Enemy;
-
-                                _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
-
-                                if (destroyed)
-                                    return;
-
-                                // check if enemy collides with player
-                                if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
-                                    return;
-
-                                // fire projectiles
-                                if (enemy.FiresProjectiles)
-                                    _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
-                            }
-                            break;
-                        case METEOR:
-                            {
-                                var meteor = gameObject as Meteor;
-
-                                _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
-
-                                if (destroyed)
-                                    return;
-
-                                // check if meteor collides with player
-                                _playerHelper.PlayerCollision(player: Player, gameObject: meteor);
-                            }
-                            break;
-                        case HEALTH:
-                            {
-                                var health = gameObject as Health;
-
-                                _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
-
-                                if (destroyed)
-                                    return;
-
-                                // check if health collides with player
-                                _playerHelper.PlayerCollision(player: Player, gameObject: health);
-                            }
-                            break;
-                        case POWERUP:
-                            {
-                                var powerUp = gameObject as PowerUp;
-
-                                _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
-
-                                if (destroyed)
-                                    return;
-
-                                // check if power up collides with player
-                                if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
-                                {
-                                    IsPoweredUp = true;
-                                    PowerUpType = powerUp.PowerUpType;
-                                    _playerProjectileHelper.PowerUp(PowerUpType);
-                                }
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                });
+                // update star view objects
+                if (Parallel.ForEach(starObjects, star =>
+                {
+                    _starHelper.UpdateStar(star as Star);
+                })
+                    .IsCompleted)
+                {
+                    // clean removable objects from star view
+                    StarView.RemoveDestroyableGameObjects();
+                }
             }
         }
 
@@ -460,7 +467,7 @@ namespace AstroOdyssey
 
                 var total = GameView.Children.Count + StarView.Children.Count;
 
-                FPSText.Text = "{ FPS: " + FpsCount + ", Frame: { Interval: " + FrameInterval + " ms" + ",  Start Time: " + FrameStartTime + ",  End Time: " + FrameEndTime + " }}";
+                FPSText.Text = "{ FPS: " + FpsCount + ", Frame: { Interval: " + FrameInverval + ", Duration: " + (int)FrameDuration + ",  Start Time: " + FrameStartTime + ",  End Time: " + FrameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
                 frameStatUpdateCounter = FrameStatUpdateLimit;
