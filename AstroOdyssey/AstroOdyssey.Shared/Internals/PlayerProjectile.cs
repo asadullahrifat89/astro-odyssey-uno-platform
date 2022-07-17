@@ -47,7 +47,7 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
-                            height = 12; width = 12; // smaller but faster rounds
+                            height = 20; width = 10; // smaller but faster rounds
                             Background = new SolidColorBrush(Colors.Goldenrod);
                         }
                         break;
