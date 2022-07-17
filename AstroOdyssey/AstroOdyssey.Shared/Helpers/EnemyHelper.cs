@@ -8,10 +8,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int xFlyingEnemySpawnCounter = 10;
         private int xFlyingEnemySpawnLimit = 10;
@@ -168,7 +167,7 @@ namespace AstroOdyssey
 
             // if the object is marked for lazy destruction then no need to perform collisions
             if (enemy.MarkedForFadedRemoval)
-                return;            
+                return;
 
             // if object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);

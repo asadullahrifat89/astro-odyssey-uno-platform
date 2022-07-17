@@ -9,6 +9,9 @@ const roundsFireSource = "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3";
 const rapidShotRoundsFireSource = "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3";
 const deadShotRoundsFireSource = "Assets/Sounds/plasmablaster-37114.mp3";
 const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3";
+
+const enemyRoundsFireSource = "Assets/Sounds/beam-8-43831.mp3";
+
 const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
@@ -27,6 +30,7 @@ const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bgAudio = new Audio();
 const rfAudio = new Audio();
+const erfAudio = new Audio();
 
 const rapidsrfAudio = new Audio();
 const deadsrfAudio = new Audio();
@@ -80,6 +84,13 @@ function playGameSound(baseUrl, soundType) {
                 sonicsrfAudio.volume = 0.2;
             }
             playSound(sonicsrfAudio);
+        } break;
+        case "ENEMY_ROUNDS_FIRE": {
+            if (erfAudio.src.length == 0) {
+                erfAudio.src = baseUrl.concat("/", enemyRoundsFireSource);
+                erfAudio.volume = 0.1;
+            }
+            playSound(erfAudio);
         } break;
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {

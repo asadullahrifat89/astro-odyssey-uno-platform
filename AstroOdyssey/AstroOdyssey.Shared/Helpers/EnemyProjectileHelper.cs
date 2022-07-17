@@ -1,11 +1,18 @@
-﻿namespace AstroOdyssey
+﻿using System;
+using static AstroOdyssey.Constants;
+
+namespace AstroOdyssey
 {
-    public class EnemyProjectileHelper 
+    public class EnemyProjectileHelper
     {
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
         private readonly string baseUrl;
+
+        private int projectileCounter;
+        private int projectileSpawnLimit = 50;
+        //private double projectileSpeed = 5;
 
         #endregion
 
@@ -39,6 +46,32 @@
                 gameEnvironment.AddDestroyableGameObject(projectile);
                 destroyed = true;
             }
+        }
+
+        public void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
+        {
+            // each frame progress decreases this counter
+            projectileCounter -= 1;
+
+            if (projectileCounter <= 0)
+            {
+                GenerateProjectile(enemy, gameLevel);
+
+                projectileCounter = projectileSpawnLimit;
+            }
+        }
+
+        private void GenerateProjectile(Enemy enemy, GameLevel gameLevel)
+        {
+            var newProjectile = new EnemyProjectile();
+
+            var scale = gameEnvironment.GetGameObjectScale();
+
+            newProjectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale);
+
+            newProjectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + newProjectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+
+            App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         #endregion

@@ -8,10 +8,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-
-        private readonly Random random = new Random();
-
         private readonly string baseUrl;
+
+        private readonly Random random = new Random();        
 
         private int playerDamagedOpacityCounter;
         private readonly int playerDamagedOpacityLimit = 100;

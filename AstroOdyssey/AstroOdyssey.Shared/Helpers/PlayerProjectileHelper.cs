@@ -8,14 +8,13 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
         private int projectileCounter;
         private int projectileSpawnLimit = 16;
-        private double projectileSpeed = 18;
-
-        private readonly string baseUrl;
+        private double projectileSpeed = 18;        
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
         private readonly int RAPIDSHOT_ROUNDS_SPEED_INCREASE = 1;
@@ -54,7 +53,7 @@ namespace AstroOdyssey
                 //// any object falls within player range
                 //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 {
-                    GenerateProjectile(isPoweredUp: isPoweredUp, player, gameLevel, powerUpType);
+                    GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
                 }
 
                 projectileCounter = projectileSpawnLimit;
@@ -311,6 +310,7 @@ namespace AstroOdyssey
         {
             projectileSpawnLimit -= 1;
         }
+
         #endregion
     }
 }

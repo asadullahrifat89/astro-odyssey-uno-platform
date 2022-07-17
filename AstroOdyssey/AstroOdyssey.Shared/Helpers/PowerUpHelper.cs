@@ -7,10 +7,9 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
-
-        private readonly string baseUrl;
 
         private int powerUpCounter = 1500;
         private int powerUpSpawnLimit = 1500;
