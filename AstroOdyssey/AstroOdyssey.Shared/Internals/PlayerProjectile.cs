@@ -5,7 +5,6 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-
     public class PlayerProjectile : GameObject
     {
         #region Ctor
@@ -48,7 +47,7 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
-                            height = 10; width = 10; // smaller but faster rounds
+                            height = 12; width = 12; // smaller but faster rounds
                             Background = new SolidColorBrush(Colors.Goldenrod);
                         }
                         break;

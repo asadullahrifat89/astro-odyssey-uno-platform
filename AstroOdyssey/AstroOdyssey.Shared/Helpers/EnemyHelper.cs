@@ -21,8 +21,8 @@ namespace AstroOdyssey
         private int evadingEnemySpawnCounter = 3;
         private int evadingEnemySpawnLimit = 3;
 
-        private int firingEnemySpawnCounter = 6;
-        private int firingEnemySpawnLimit = 6;
+        private int firingEnemySpawnCounter = 7;
+        private int firingEnemySpawnLimit = 7;
 
         private int enemyCounter;
         private int enemySpawnLimit = 50;
@@ -75,7 +75,7 @@ namespace AstroOdyssey
             {
                 firingEnemySpawnCounter = firingEnemySpawnLimit;
                 newEnemy.FiresProjectiles = true;
-                firingEnemySpawnLimit = random.Next(1, 7);
+                firingEnemySpawnLimit = random.Next(1, 8);
             }
 
             // spawn evading enemies after level 3

@@ -11,8 +11,7 @@ namespace AstroOdyssey
         private readonly string baseUrl;
 
         private int projectileCounter;
-        private int projectileSpawnLimit = 50;
-        //private double projectileSpeed = 5;
+        private int projectileSpawnLimit = 60;
 
         #endregion
 
@@ -74,7 +73,13 @@ namespace AstroOdyssey
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
-        //TODO: LevelUp() -> blaster spawn limit decrease and speed increase
+        /// <summary>
+        /// Levels up projectiles.
+        /// </summary>
+        public void LevelUp()
+        {
+            projectileSpawnLimit -= 1;
+        }
 
         #endregion
     }

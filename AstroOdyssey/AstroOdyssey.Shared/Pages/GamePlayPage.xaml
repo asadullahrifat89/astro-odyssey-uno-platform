@@ -44,7 +44,8 @@
                 Margin="5"
                 FontWeight="Bold"
                 Foreground="White"
-                TextAlignment="Center" />
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
 
         </StackPanel>
 

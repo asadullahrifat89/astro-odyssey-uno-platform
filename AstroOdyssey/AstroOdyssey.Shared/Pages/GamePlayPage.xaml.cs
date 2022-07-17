@@ -268,7 +268,7 @@ namespace AstroOdyssey
                             _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
 
                             if (destroyed)
-                                return;                            
+                                return;
 
                             // check if enemy collides with player
                             if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
@@ -518,6 +518,8 @@ namespace AstroOdyssey
                         _starHelper.LevelUp();
 
                         _playerProjectileHelper.LevelUp();
+
+                        _enemyProjectileHelper.LevelUp();
                     }
                     break;
             }
