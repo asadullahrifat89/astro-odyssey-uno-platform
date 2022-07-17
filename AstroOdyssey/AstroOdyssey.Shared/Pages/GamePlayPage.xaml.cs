@@ -138,9 +138,8 @@ namespace AstroOdyssey
         /// </summary>
         private async void RunGameView()
         {
-#if DEBUG
             var watch = Stopwatch.StartNew();
-#endif
+
             GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameInterval));
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
