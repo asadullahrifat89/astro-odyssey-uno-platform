@@ -74,10 +74,8 @@ namespace AstroOdyssey
             var targetWidth = target.Width;
             var targetHeight = target.Height;
 
-            if (source.Width >= 0.0
-                && target.Width >= 0.0
-                && targetX <= sourceX + sourceWidth
-                && targetX + targetWidth >= sourceX
+            if (source.Width >= 0.0 && target.Width >= 0.0
+                && targetX <= sourceX + sourceWidth && targetX + targetWidth >= sourceX
                 && targetY <= sourceY + sourceHeight)
             {
                 return targetY + targetHeight >= sourceY;

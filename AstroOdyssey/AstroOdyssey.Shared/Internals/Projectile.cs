@@ -46,15 +46,25 @@ namespace AstroOdyssey
                 switch (PowerUpType)
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
-                        height = 10; width = 10; // smaller but faster rounds
+                        {
+                            height = 10; width = 10; // smaller but faster rounds
+                            Background = new SolidColorBrush(Colors.Goldenrod);
+                        }
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
-                        height = 25; width = 25; // larger but slower rounds
+                        {
+                            height = 25; width = 25; // larger but slower rounds
+                            Background = new SolidColorBrush(Colors.Purple);
+                        }
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
-                        height = 300; width = 25; // larger and longer but slower piercing rounds
+                        {
+                            height = 300; width = 25; // larger and longer but slower piercing rounds
+                            Background = new SolidColorBrush(Colors.LightBlue);
+                        }                        
                         break;
                     default:
+                        Background = new SolidColorBrush(Colors.White);
                         break;
                 }
             }
@@ -105,32 +115,12 @@ namespace AstroOdyssey
                     default:
                         break;
                 }
+
+                Background = new SolidColorBrush(Colors.White);
             }
 
             Height = height * scale;
             Width = width * scale;
-
-            if (IsPoweredUp)
-            {
-                switch (PowerUpType)
-                {
-                    case PowerUpType.RAPIDSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.Goldenrod);
-                        break;
-                    case PowerUpType.DEADSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.Purple);
-                        break;
-                    case PowerUpType.SONICSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.LightBlue);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                Background = new SolidColorBrush(Colors.White);
-            }
         }
 
         #endregion
