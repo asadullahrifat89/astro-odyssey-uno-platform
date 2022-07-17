@@ -22,6 +22,7 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
+        const float FRAME_CAP_MS = 1000.0f / 56.0f;
         private int fpsCounter = 0;
         private int frameStatUpdateCounter;
 
@@ -144,6 +145,8 @@ namespace AstroOdyssey
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
+                FrameStartTime = watch.ElapsedMilliseconds;
+
                 GameOver();
 
                 PointerX = _playerHelper.MovePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
@@ -152,8 +155,6 @@ namespace AstroOdyssey
 
                 ShiftGameLevel();
 
-                _playerHelper.HandleDamageOpacity(Player);
-
                 SpawnGameObjects();
 
                 HandlePowerDown();
@@ -161,32 +162,36 @@ namespace AstroOdyssey
                 UpdateScore();
 
                 HandleInGameTextHiding();
-#if DEBUG
+
+                _playerHelper.HandleDamageOpacity(Player);
+
                 CalculateFps();
 
+                var frameTime = watch.ElapsedMilliseconds - FrameStartTime;
+                FrameInterval = Math.Max((int)(FRAME_CAP_MS - frameTime), 1);
+#if DEBUG
                 SetAnalytics();
-
-                FrameStartTime = watch.ElapsedMilliseconds;
 #endif
             }
         }
 
         /// <summary>
-        /// Spawns game objects.
+        /// Check if game if over.
         /// </summary>
-        private void SpawnGameObjects()
+        private void GameOver()
         {
-            _enemyHelper.SpawnEnemy(GameLevel);
+            if (Player.HasNoHealth)
+            {
+                HealthText.Text = "Game Over";
 
-            _meteorHelper.SpawnMeteor(GameLevel);
+                StopGame();
 
-            _healthHelper.SpawnHealth(Player);
+                App.PlaySound(baseUrl, SoundType.GAME_OVER);
 
-            _powerUpHelper.SpawnPowerUp();
+                App.SetScore(Score);
 
-            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
-
-            _starHelper.SpawnStar();
+                App.NavigateToPage(typeof(GameOverPage));
+            }
         }
 
         /// <summary>
@@ -274,11 +279,9 @@ namespace AstroOdyssey
                             if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
                                 return;
 
+                            // fire projectiles
                             if (enemy.FiresProjectiles)
-                            {
-                                // fire projectiles
                                 _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
-                            }
                         }
                         break;
                     case METEOR:
@@ -345,6 +348,24 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Spawns game objects.
+        /// </summary>
+        private void SpawnGameObjects()
+        {
+            _enemyHelper.SpawnEnemy(GameLevel);
+
+            _meteorHelper.SpawnMeteor(GameLevel);
+
+            _healthHelper.SpawnHealth(Player);
+
+            _powerUpHelper.SpawnPowerUp();
+
+            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
+
+            _starHelper.SpawnStar();
+        }
+
+        /// <summary>
         /// Stops the game.
         /// </summary>
         private void StopGame()
@@ -375,31 +396,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Shows the in game text in game view.
-        /// </summary>
-        private void ShowInGameText(string text)
-        {
-            InGameText.Text = text;
-            showInGameTextCounter = ShowInGameTextLimit;
-        }
-
-        /// <summary>
-        /// Hides the in game text after keeping it visible for a few frames.
-        /// </summary>
-        private void HandleInGameTextHiding()
-        {
-            if (!InGameText.Text.IsNullOrBlank())
-            {
-                showInGameTextCounter -= 1;
-
-                if (showInGameTextCounter <= 0)
-                {
-                    InGameText.Text = "";
-                }
-            }
-        }
-
-        /// <summary>
         /// Get base url for the app.
         /// </summary>
         private void GetBaseUrl()
@@ -413,9 +409,22 @@ namespace AstroOdyssey
 #endif
         }
 
-        #endregion
+        /// <summary>
+        /// Calculates frames per second.
+        /// </summary>
+        /// <param name="frameStartTime"></param>
+        private void CalculateFps()
+        {
+            // calculate FPS
+            if (LastFrameTime + 1000 < FrameStartTime)
+            {
+                FpsCount = fpsCounter;
+                fpsCounter = 0;
+                LastFrameTime = FrameStartTime;
+            }
 
-        #region Frame Methods      
+            fpsCounter++;
+        }
 
         /// <summary>
         /// Sets analytics of fps, frame time and objects currently in view.
@@ -445,20 +454,28 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Calculates frames per second.
+        /// Shows the in game text in game view.
         /// </summary>
-        /// <param name="frameStartTime"></param>
-        private void CalculateFps()
+        private void ShowInGameText(string text)
         {
-            // calculate FPS
-            if (LastFrameTime + 1000 < FrameStartTime)
-            {
-                FpsCount = fpsCounter;
-                fpsCounter = 0;
-                LastFrameTime = FrameStartTime;
-            }
+            InGameText.Text = text;
+            showInGameTextCounter = ShowInGameTextLimit;
+        }
 
-            fpsCounter++;
+        /// <summary>
+        /// Hides the in game text after keeping it visible for a few frames.
+        /// </summary>
+        private void HandleInGameTextHiding()
+        {
+            if (!InGameText.Text.IsNullOrBlank())
+            {
+                showInGameTextCounter -= 1;
+
+                if (showInGameTextCounter <= 0)
+                {
+                    InGameText.Text = "";
+                }
+            }
         }
 
         #endregion
@@ -546,25 +563,6 @@ namespace AstroOdyssey
         private void SetPlayerY()
         {
             Player.SetY(windowHeight - Player.Height - 20);
-        }
-
-        /// <summary>
-        /// Check if game if over.
-        /// </summary>
-        private void GameOver()
-        {
-            if (Player.HasNoHealth)
-            {
-                HealthText.Text = "Game Over";
-
-                StopGame();
-
-                App.PlaySound(baseUrl, SoundType.GAME_OVER);
-
-                App.SetScore(Score);
-
-                App.NavigateToPage(typeof(GameOverPage));
-            }
         }
 
         #endregion
