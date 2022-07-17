@@ -74,6 +74,8 @@ namespace AstroOdyssey
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
+        //TODO: LevelUp() -> blaster spawn limit decrease and speed increase
+
         #endregion
     }
 }

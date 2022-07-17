@@ -276,7 +276,7 @@ namespace AstroOdyssey
 
                             if (enemy.FiresProjectiles)
                             {
-                                //TODO: fire projectiles at player, use EnemyProjectileHelpers function.
+                                // fire projectiles
                                 _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                             }
                         }
