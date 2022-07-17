@@ -5,13 +5,13 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class Projectile : GameObject
+    public class PlayerProjectile : GameObject
     {
         #region Ctor
 
-        public Projectile()
+        public PlayerProjectile()
         {
-            Tag = PROJECTILE;
+            Tag = PLAYER_PROJECTILE;
 
             Height = 20;
             Width = 5;

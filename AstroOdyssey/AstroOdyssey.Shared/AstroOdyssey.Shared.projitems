@@ -24,13 +24,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MeteorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ProjectileHelper.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Health.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameScore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\HighScore.cs" />
-    <Compile Include="..\AstroOdyssey.Shared\Internals\Projectile.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Internals\PlayerProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Meteor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\PowerUp.cs" />

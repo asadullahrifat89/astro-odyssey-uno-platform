@@ -54,7 +54,8 @@
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\Projectile.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\PlayerProjectile.cs" />
 	  <_Globbed_Compile Remove="HighScore.cs" />
 	</ItemGroup>
 </Project>

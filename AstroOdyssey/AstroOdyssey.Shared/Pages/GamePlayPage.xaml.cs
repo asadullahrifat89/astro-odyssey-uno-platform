@@ -34,8 +34,8 @@ namespace AstroOdyssey
         private readonly EnemyHelper _enemyHelper;
         private readonly HealthHelper _healthHelper;
         private readonly PowerUpHelper _powerUpHelper;
-        private readonly ProjectileHelper _projectileHelper;
         private readonly PlayerHelper _playerHelper;
+        private readonly PlayerProjectileHelper _playerProjectileHelper;
 
         #endregion
 
@@ -56,8 +56,8 @@ namespace AstroOdyssey
             _enemyHelper = new EnemyHelper(GameView, baseUrl);
             _healthHelper = new HealthHelper(GameView, baseUrl);
             _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
-            _projectileHelper = new ProjectileHelper(GameView, baseUrl);
             _playerHelper = new PlayerHelper(GameView, baseUrl);
+            _playerProjectileHelper = new PlayerProjectileHelper(GameView, baseUrl);
         }
 
         #endregion
@@ -160,7 +160,7 @@ namespace AstroOdyssey
 
                 _powerUpHelper.SpawnPowerUp();
 
-                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
+                _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
 
                 _starHelper.SpawnStar();
 
@@ -169,7 +169,6 @@ namespace AstroOdyssey
                 UpdateScore();
 
                 HideInGameText();
-
 #if DEBUG
                 CalculateFps();
 
@@ -204,17 +203,17 @@ namespace AstroOdyssey
 
                 switch (tag)
                 {
-                    case PROJECTILE:
+                    case PLAYER_PROJECTILE:
                         {
-                            var projectile = gameObject as Projectile;
+                            var projectile = gameObject as PlayerProjectile;
 
                             // move the projectile up and check if projectile has gone beyond the game view
-                            _projectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+                            _playerProjectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
 
                             if (destroyed)
                                 return;
 
-                            _projectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+                            _playerProjectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                             if (score > 0)
                                 Score += score;
@@ -292,7 +291,7 @@ namespace AstroOdyssey
                             {
                                 IsPoweredUp = true;
                                 PowerUpType = powerUp.PowerUpType;
-                                _projectileHelper.PowerUp(PowerUpType);
+                                _playerProjectileHelper.PowerUp(PowerUpType);
                             }
                         }
                         break;
@@ -401,7 +400,7 @@ namespace AstroOdyssey
                 var meteors = GameView.Children.OfType<Meteor>().Count();
                 var powerUps = GameView.Children.OfType<PowerUp>().Count();
                 var healths = GameView.Children.OfType<Health>().Count();
-                var projectiles = GameView.Children.OfType<Projectile>().Count();
+                var projectiles = GameView.Children.OfType<PlayerProjectile>().Count();
 
                 var stars = StarView.Children.OfType<Star>().Count();
 
@@ -488,7 +487,7 @@ namespace AstroOdyssey
 
                         _starHelper.LevelUp();
 
-                        _projectileHelper.LevelUp();
+                        _playerProjectileHelper.LevelUp();
                     }
                     break;
             }
@@ -548,7 +547,7 @@ namespace AstroOdyssey
             {
                 if (_playerHelper.PowerDown(Player))
                 {
-                    _projectileHelper.PowerDown(PowerUpType);
+                    _playerProjectileHelper.PowerDown(PowerUpType);
                     IsPoweredUp = false;
                     PowerUpType = PowerUpType.NONE;
                 }
