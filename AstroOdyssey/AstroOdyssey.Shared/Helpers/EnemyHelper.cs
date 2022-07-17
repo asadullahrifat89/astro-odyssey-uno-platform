@@ -178,7 +178,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            enemySpawnLimit -= 2;
+            enemySpawnLimit -= 3;
             enemySpeed += 1;
         }
 

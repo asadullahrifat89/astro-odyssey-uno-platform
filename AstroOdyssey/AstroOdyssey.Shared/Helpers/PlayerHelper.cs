@@ -18,6 +18,8 @@ namespace AstroOdyssey
         private int powerUpTriggerCounter;
         private readonly int powerUpTriggerLimit = 1000;
 
+        private double playerSpeed = 12;
+
         #endregion
 
         #region Ctor
@@ -35,7 +37,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns the player.
         /// </summary>
-        public Player SpawnPlayer(double pointerX, double playerSpeed)
+        public Player SpawnPlayer(double pointerX)
         {
             var player = new Player();
 
