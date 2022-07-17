@@ -31,7 +31,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public double GetGameObjectScale()
         {
-            return Width <= 500 ? 0.6 : (Width <= 700 ? 0.8 : (Width <= 800 ? 0.9 : 1));
+            return Width <= 500 ? 0.85 : (Width <= 700 ? 0.90 : (Width <= 900 ? 0.95 : 1));
         }
 
         public void SetSize(double height, double width)

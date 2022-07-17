@@ -612,7 +612,7 @@ namespace AstroOdyssey
             PointerX = windowWidth / 2;
 
 #if DEBUG
-            Console.WriteLine($"{windowWidth} x {windowHeight}");
+            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
             SetViewSizes();
 
