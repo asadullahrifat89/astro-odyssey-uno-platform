@@ -18,7 +18,7 @@ namespace AstroOdyssey
             Rotation = 0,
             ScaleX = 1,
             ScaleY = 1,
-        }; 
+        };
 
         #endregion
 
@@ -48,13 +48,13 @@ namespace AstroOdyssey
 
         public YDirection YDirection { get; set; } = YDirection.NONE;
 
-        public XDirection XDirection { get; set; } = XDirection.NONE;       
+        public XDirection XDirection { get; set; } = XDirection.NONE;
 
         public bool HasNoHealth => Health <= 0;
 
         public bool HasHealth => Health > 0;
 
-        public bool HasFadedAway => Opacity <= 0;        
+        public bool HasFadedAway => Opacity <= 0;
 
         public bool IsOverPowered { get; set; } = false;
 
