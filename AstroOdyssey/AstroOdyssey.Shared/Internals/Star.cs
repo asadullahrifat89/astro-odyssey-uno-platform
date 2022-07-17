@@ -11,6 +11,8 @@ namespace AstroOdyssey
 
         private readonly Image content = new Image() { Stretch = Stretch.Uniform };
 
+        private readonly Random random = new Random();
+
         #endregion
 
         #region Ctor
@@ -34,7 +36,7 @@ namespace AstroOdyssey
 
             double size = 0;
 
-            var starType = new Random().Next(1, 5);
+            var starType = random.Next(1, 5);
 
             switch (starType)
             {

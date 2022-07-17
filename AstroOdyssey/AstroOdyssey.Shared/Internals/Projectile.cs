@@ -26,71 +26,111 @@ namespace AstroOdyssey
 
         public bool IsPoweredUp { get; set; }
 
+        public PowerUpType PowerUpType { get; set; }
+
         #endregion
 
         #region Methods
 
-        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false, double scale = 1)
+        public void SetAttributes(double speed, GameLevel gameLevel, bool isPoweredUp = false, PowerUpType powerUpType = PowerUpType.NONE, double scale = 1)
         {
             Speed = speed;
 
             IsPoweredUp = isPoweredUp;
+            PowerUpType = powerUpType;
 
             double height = 0, width = 0;
 
-            switch (gameLevel)
+            if (isPoweredUp)
             {
-                case GameLevel.Level_1:
-                    {
-                        height = 20; width = 5;
-                    }
-                    break;
-                case GameLevel.Level_2:
-                    {
-                        height = 25; width = 7;
-                    }
-                    break;
-                case GameLevel.Level_3:
-                    {
-                        height = 30; width = 9;
-                    }
-                    break;
-                case GameLevel.Level_4:
-                    {
-                        height = 35; width = 11;
-                    }
-                    break;
-                case GameLevel.Level_5:
-                    {
-                        height = 40; width = 13;
-                    }
-                    break;
-                case GameLevel.Level_6:
-                    {
-                        height = 45; width = 15;
-                    }
-                    break;
-                case GameLevel.Level_7:
-                    {
-                        height = 50; width = 17;
-                    }
-                    break;
-                case GameLevel.Level_8:
-                    {
-                        height = 55; width = 19;
-                    }
-                    break;
-                default:
-                    break;
+                switch (PowerUpType)
+                {
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
+                        height = 10; width = 10; // smaller but faster rounds
+                        break;
+                    case PowerUpType.DEADSHOT_ROUNDS:
+                        height = 25; width = 25; // larger but slower rounds
+                        break;
+                    case PowerUpType.SONICSHOT_ROUNDS:
+                        height = 300; width = 25; // larger but slower rounds
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (gameLevel)
+                {
+                    case GameLevel.Level_1:
+                        {
+                            height = 20; width = 5;
+                        }
+                        break;
+                    case GameLevel.Level_2:
+                        {
+                            height = 25; width = 6;
+                        }
+                        break;
+                    case GameLevel.Level_3:
+                        {
+                            height = 30; width = 7;
+                        }
+                        break;
+                    case GameLevel.Level_4:
+                        {
+                            height = 35; width = 8;
+                        }
+                        break;
+                    case GameLevel.Level_5:
+                        {
+                            height = 35; width = 9;
+                        }
+                        break;
+                    case GameLevel.Level_6:
+                        {
+                            height = 35; width = 10;
+                        }
+                        break;
+                    case GameLevel.Level_7:
+                        {
+                            height = 35; width = 11;
+                        }
+                        break;
+                    case GameLevel.Level_8:
+                        {
+                            height = 35; width = 12;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
 
             Height = height * scale;
             Width = width * scale;
 
             if (IsPoweredUp)
-                Background = new SolidColorBrush(Colors.Goldenrod);
+            {
+                switch (PowerUpType)
+                {
+                    case PowerUpType.RAPIDSHOT_ROUNDS:
+                        Background = new SolidColorBrush(Colors.Goldenrod);
+                        break;
+                    case PowerUpType.DEADSHOT_ROUNDS:
+                        Background = new SolidColorBrush(Colors.Purple);
+                        break;
+                    case PowerUpType.SONICSHOT_ROUNDS:
+                        Background = new SolidColorBrush(Colors.LightBlue);
+                        break;
+                    default:
+                        break;
+                }
+            }
             else
+            {
                 Background = new SolidColorBrush(Colors.White);
+            }
         }
 
         #endregion

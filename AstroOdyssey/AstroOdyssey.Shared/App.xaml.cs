@@ -37,6 +37,15 @@ namespace AstroOdyssey
 #if HAS_UNO || NETFX_CORE
             Suspending += OnSuspending;
 #endif
+            UnhandledException += App_UnhandledException;
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+#if DEBUG
+            Console.WriteLine(e.Message);
+#endif
+            e.Handled = true;
         }
 
         #endregion
@@ -165,6 +174,7 @@ namespace AstroOdyssey
                 builder.AddFilter("Windows", LogLevel.Warning);
                 builder.AddFilter("Microsoft", LogLevel.Warning);
 
+#if DEBUG
                 // Generic Xaml events
                 //builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug);
                 //builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug);
@@ -177,20 +187,21 @@ namespace AstroOdyssey
                 // builder.AddFilter("Microsoft.UI.Xaml.Controls.Layouter", LogLevel.Debug );
                 // builder.AddFilter("Microsoft.UI.Xaml.Controls.Panel", LogLevel.Debug );
 
-                // builder.AddFilter("Windows.Storage", LogLevel.Debug );
+                builder.AddFilter("Windows.Storage", LogLevel.Debug);
 
                 // Binding related messages
                 //builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
                 //builder.AddFilter("Microsoft.UI.Xaml.Data", LogLevel.Debug);
 
                 // Binder memory references tracking
-                //builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug);
+                builder.AddFilter("Uno.UI.DataBinding.BinderReferenceHolder", LogLevel.Debug);
 
                 // RemoteControl and HotReload related
-                //builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
+                builder.AddFilter("Uno.UI.RemoteControl", LogLevel.Information);
 
                 // Debug JS interop
                 builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
+#endif
             });
 
             Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;

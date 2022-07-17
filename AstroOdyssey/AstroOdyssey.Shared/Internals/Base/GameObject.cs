@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -35,7 +36,7 @@ namespace AstroOdyssey
 
         public int Health { get; set; }
 
-        public int HealthSlot { get; set; } = 1;
+        public int HitPoint { get; set; } = 1;
 
         public bool IsDestructible { get; set; }
 
@@ -55,6 +56,8 @@ namespace AstroOdyssey
 
         public new double Rotation { get; set; } = 0;
 
+        public bool IsOverPowered { get; set; } = false;
+
         #endregion
 
         #region Methods
@@ -72,7 +75,7 @@ namespace AstroOdyssey
 
         public void GainHealth()
         {
-            Health += HealthSlot;
+            Health += HitPoint;
         }
 
         public void GainHealth(int health)
@@ -82,7 +85,7 @@ namespace AstroOdyssey
 
         public void LooseHealth()
         {
-            Health -= HealthSlot;
+            Health -= HitPoint;
         }
 
         public void LooseHealth(int health)
@@ -128,6 +131,11 @@ namespace AstroOdyssey
         public void MoveX(double left, XDirection xDirection)
         {
             Canvas.SetLeft(this, GetX() + (left * GetXDirectionModifier(xDirection)));
+        }
+
+        public void MoveX(XDirection xDirection)
+        {
+            Canvas.SetLeft(this, GetX() + (Speed * GetXDirectionModifier(xDirection)));
         }
 
         public void MoveY()
@@ -205,6 +213,15 @@ namespace AstroOdyssey
             Opacity -= 0.1d;
         }
 
+        public void OverPower()
+        {
+            Height = Height * 1.5;
+            Width = Width * 1.5;
+            Speed--;
+            Health += 3;
+
+            IsOverPowered = true;
+        }
         #endregion
     }
 

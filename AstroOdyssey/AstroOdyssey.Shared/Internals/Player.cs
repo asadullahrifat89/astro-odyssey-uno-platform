@@ -26,7 +26,6 @@ namespace AstroOdyssey
 
         private readonly Border contentShipPowerGauge = new Border()
         {
-            Background = new SolidColorBrush(Colors.Goldenrod),
             Height = 5,
             Width = 0,
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
@@ -35,14 +34,16 @@ namespace AstroOdyssey
             Margin = new Microsoft.UI.Xaml.Thickness(0, 25, 0, 0),
         };
 
+        private readonly Random random = new Random();
+
         #endregion
 
         #region Ctor
 
         public Player()
         {
-            //TODO: acquire sides which shoot additional projectile, lost on impact with enemy or meteor
-            //TODO: develop shield which protects damage for a certain number of hits
+            //TODO: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: Develop shield which protects damage for a certain number of hits
 
             Tag = Constants.PLAYER;
 
@@ -51,7 +52,7 @@ namespace AstroOdyssey
             Width = Constants.DefaultGameObjectSize;
 
             Health = 100;
-            HealthSlot = 10;
+            HitPoint = 10;
 
             // combine power gauge, ship, and blaze
             content = new Grid();
@@ -75,7 +76,7 @@ namespace AstroOdyssey
             Speed = speed;
 
             Uri shipUri = null;
-            var playerShipType = new Random().Next(1, 13);
+            var playerShipType = random.Next(1, 13);
 
             double exhaustHeight = 50;
 
@@ -151,12 +152,29 @@ namespace AstroOdyssey
             contentShipPowerGauge.Width = powerGauge * 3;
         }
 
-        public void TriggerPowerUp()
+        public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
+
+            switch (powerUpType)
+            {
+                case PowerUpType.RAPIDSHOT_ROUNDS:
+                    {
+                        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
+                        contentShipBlaze.Source = new BitmapImage(exhaustUri);
+                        contentShipPowerGauge.Background = new SolidColorBrush(Colors.Goldenrod);
+                    }
+                    break;
+                case PowerUpType.DEADSHOT_ROUNDS:
+                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.Purple);
+                    break;
+                case PowerUpType.SONICSHOT_ROUNDS:
+                    contentShipPowerGauge.Background = new SolidColorBrush(Colors.LightBlue);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void TriggerPowerDown()
@@ -173,7 +191,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public string GetHealthPoints()
         {
-            var healthPoints = Health / HealthSlot;
+            var healthPoints = Health / HitPoint;
             var healthIcon = "❤️";
             var health = string.Empty;
 

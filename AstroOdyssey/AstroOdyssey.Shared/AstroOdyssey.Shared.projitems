@@ -36,8 +36,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Internals\PowerUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Star.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\GameEnvironment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Base\GameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Base\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -197,5 +197,8 @@
     <ApplicationDefinition Update="$(MSBuildThisFileDirectory)**/*.xaml" XamlRuntime="WinUI" />
     <!-- Make sure XAML files force reevaluation of up-to-date checks -->
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Internals\Base\" />
   </ItemGroup>
 </Project>
