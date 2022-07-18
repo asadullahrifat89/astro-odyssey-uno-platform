@@ -15,6 +15,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
+
             <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,50"
@@ -22,12 +23,14 @@
                 FontWeight="Bold"
                 Text="Astro Odyssey"
                 TextAlignment="Center" />
+
             <TextBlock
                 Margin="10,10,10,50"
                 FontSize="25"
                 FontWeight="Bold"
                 Text="Login"
                 TextAlignment="Center" />
+
             <TextBox
                 x:Name="UserNameBox"
                 Margin="5"
@@ -35,6 +38,7 @@
                 FontWeight="SemiBold"
                 Header="Username"
                 TextChanged="UserNameBox_TextChanged" />
+
             <PasswordBox
                 x:Name="PasswordBox"
                 Margin="5"
@@ -42,6 +46,7 @@
                 Header="Password"
                 KeyDown="PasswordBox_KeyDown"
                 TextChanged="PasswordBox_TextChanged" />
+
             <!--  Login button  -->
             <Button
                 x:Name="LoginButton"
@@ -54,6 +59,8 @@
                 CornerRadius="50"
                 FontWeight="SemiBold"
                 IsEnabled="False" />
+
+            <TextBlock Margin="10,20,10,10" Text="No account yet?" />
         </StackPanel>
 
     </Grid>

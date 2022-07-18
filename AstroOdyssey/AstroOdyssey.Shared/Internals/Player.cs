@@ -54,7 +54,7 @@ namespace AstroOdyssey
             Width = Constants.DefaultGameObjectSize;
 
             Health = 100;
-            HitPoint = 10;
+            HitPoint = 100; //TODO: leave it 1000
 
             // combine power gauge, ship, and blaze
             content = new Grid();

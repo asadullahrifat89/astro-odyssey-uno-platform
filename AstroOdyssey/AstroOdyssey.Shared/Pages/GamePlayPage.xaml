@@ -74,7 +74,6 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <!--<ColumnDefinition />-->
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 

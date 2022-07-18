@@ -9,11 +9,13 @@
     mc:Ignorable="d">
 
     <Grid>
+
         <StackPanel
             MaxWidth="315"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
+
             <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,50"
@@ -22,6 +24,7 @@
                 FontSize="45"
                 FontWeight="Bold"
                 Text="Astro Odyssey" />
+
             <TextBlock
                 Margin="10"
                 HorizontalAlignment="Center"
@@ -45,6 +48,9 @@
                 Content="Play"
                 CornerRadius="50"
                 FontWeight="SemiBold" />
+
         </StackPanel>
+
     </Grid>
+
 </Page>

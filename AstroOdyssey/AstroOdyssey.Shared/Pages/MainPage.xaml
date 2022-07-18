@@ -15,16 +15,20 @@
             IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
             IsSettingsVisible="False"
             IsTabStop="False"
-            PaneDisplayMode="Top">
+            PaneDisplayMode="LeftMinimal">
+
             <!--<NavigationView.MenuItems>
                     <NavigationViewItem Content="Game" Tag="GameStartPage" />
                 </NavigationView.MenuItems>-->
+
             <NavigationView.PaneFooter>
                 <TextBlock
                     x:Name="AccountUserNameBlock"
-                    Margin="12,0"
-                    VerticalAlignment="Center" />
+                    Margin="10,0"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold" />
             </NavigationView.PaneFooter>
+
             <ScrollViewer>
                 <Frame
                     x:Name="ContentFrame"
@@ -33,6 +37,7 @@
                     IsTabStop="True"
                     NavigationFailed="ContentFrame_NavigationFailed" />
             </ScrollViewer>
+
         </NavigationView>
 
     </Grid>
