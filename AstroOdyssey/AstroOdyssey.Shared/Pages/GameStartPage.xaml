@@ -9,8 +9,8 @@
     mc:Ignorable="d">
 
     <Grid>
-
         <StackPanel
+            MaxWidth="315"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
@@ -27,23 +27,24 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="25"
-                FontWeight="Bold"
-                Text="Are you ready?" />
+                FontWeight="SemiBold"
+                Text="A flight though stars, meteors, and ships."
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
 
             <!--  TODO: select ship  -->
 
             <!--  Play button  -->
             <Button
                 x:Name="PlayButton"
-                Width="200"
+                Height="40"
                 Margin="0,50,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
                 BorderBrush="White"
                 Click="PlayButton_Click"
-                Content="Yes"
-                FontSize="30" />
+                Content="Play"
+                CornerRadius="50"
+                FontWeight="SemiBold" />
         </StackPanel>
-
     </Grid>
 </Page>

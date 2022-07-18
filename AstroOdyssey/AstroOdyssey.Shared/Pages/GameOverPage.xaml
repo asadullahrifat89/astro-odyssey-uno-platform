@@ -38,6 +38,7 @@
                 BorderBrush="White"
                 Click="PlayAgainButton_Click"
                 Content="Play Again"
+                CornerRadius="50"
                 FontSize="30" />
         </StackPanel>
 
