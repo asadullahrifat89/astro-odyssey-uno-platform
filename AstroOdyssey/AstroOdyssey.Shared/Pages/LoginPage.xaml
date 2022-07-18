@@ -60,7 +60,21 @@
                 FontWeight="SemiBold"
                 IsEnabled="False" />
 
-            <TextBlock Margin="10,20,10,10" Text="No account yet?" />
+            <Button
+                x:Name="RegisterButton"
+                Grid.Column="1"
+                Height="40"
+                Margin="5,15,5,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="White"
+                BorderThickness="0"
+                Click="RegisterButton_Click"
+                Content="No account yet?"
+                CornerRadius="50"
+                FontWeight="SemiBold" />
+
         </StackPanel>
 
     </Grid>
