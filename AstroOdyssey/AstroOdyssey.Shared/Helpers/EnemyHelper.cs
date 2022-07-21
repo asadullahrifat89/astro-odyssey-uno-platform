@@ -25,8 +25,8 @@ namespace AstroOdyssey
         private int firingEnemySpawnCounter = 7;
         private int firingEnemySpawnLimit = 7;
 
-        private int followingEnemySpawnLimit = 10;
-        private int followingEnemySpawnCounter = 10;
+        private int targetingEnemySpawnLimit = 10;
+        private int targetingEnemySpawnCounter = 10;
 
         private int hoveringEnemySpawnLimit = 12;
         private int hoveringEnemySpawnCounter = 12;
@@ -145,6 +145,13 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
+            xFlyingEnemySpawnCounter--;
+            overPoweredEnemySpawnCounter--;
+            evadingEnemySpawnCounter--;
+            firingEnemySpawnCounter--;
+            targetingEnemySpawnCounter--;
+            hoveringEnemySpawnCounter--;
+
             // spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
@@ -152,13 +159,13 @@ namespace AstroOdyssey
             }
 
             // spawn following enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && followingEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_3 && targetingEnemySpawnCounter <= 0)
             {
                 SetPlayerTargetingEnemy(enemy);
             }
 
             // spawn following enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && followingEnemySpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_3 && hoveringEnemySpawnCounter <= 0)
             {
                 SetHoveringEnemy(enemy);
             }
@@ -196,12 +203,6 @@ namespace AstroOdyssey
             }
 
             enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
-
-            xFlyingEnemySpawnCounter--;
-            overPoweredEnemySpawnCounter--;
-            evadingEnemySpawnCounter--;
-            firingEnemySpawnCounter--;
-            followingEnemySpawnCounter--;
         }
 
         private void SetHoveringEnemy(Enemy enemy)
@@ -232,9 +233,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetPlayerTargetingEnemy(Enemy enemy)
         {
-            followingEnemySpawnCounter = followingEnemySpawnLimit;
+            targetingEnemySpawnCounter = targetingEnemySpawnLimit;
             enemy.IsPlayerTargeting = true;
-            followingEnemySpawnLimit = random.Next(7, 12);
+            targetingEnemySpawnLimit = random.Next(7, 12);
 
             // following enemies do not evade on hit
             enemy.IsEvading = false;

@@ -64,6 +64,9 @@ namespace AstroOdyssey
 
             meteor.SetAttributes(speed: meteorSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
 
+            rotatedMeteorSpawnCounter--;
+            overPoweredMeteorSpawnCounter--;
+
             double left = 0;
             double top = 0;
 
@@ -85,9 +88,6 @@ namespace AstroOdyssey
             }
 
             meteor.AddToGameEnvironment(top: 0 - meteor.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
-
-            rotatedMeteorSpawnCounter--;
-            overPoweredMeteorSpawnCounter--;
         }
 
         /// <summary>
