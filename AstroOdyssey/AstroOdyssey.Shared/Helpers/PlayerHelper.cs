@@ -63,6 +63,7 @@ namespace AstroOdyssey
         {
             var playerX = player.GetX();
 
+            // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
                 pointerX -= player.Speed;
 
@@ -74,14 +75,14 @@ namespace AstroOdyssey
             {
                 if (playerX + playerWidthHalf < gameEnvironment.Width)
                 {
-                    SetPlayerX(player, playerX + player.Speed);
+                    SetPlayerX(player: player, left: playerX + player.Speed);
                 }
             }
 
             // move left
             if (pointerX - playerWidthHalf < playerX - player.Speed)
             {
-                SetPlayerX(player, playerX - player.Speed);
+                SetPlayerX(player: player, left: playerX - player.Speed);
             }
 
             return pointerX;
@@ -90,10 +91,10 @@ namespace AstroOdyssey
         /// <summary>
         /// Sets the x axis position of the player on game canvas.
         /// </summary>
-        /// <param name="x"></param>
-        private void SetPlayerX(Player player, double x)
+        /// <param name="left"></param>
+        private void SetPlayerX(Player player, double left)
         {
-            player.SetX(x);
+            player.SetX(left);
         }
 
         /// <summary>

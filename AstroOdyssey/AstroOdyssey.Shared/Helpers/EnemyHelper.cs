@@ -24,6 +24,9 @@ namespace AstroOdyssey
         private int firingEnemySpawnCounter = 7;
         private int firingEnemySpawnLimit = 7;
 
+        private int followingEnemySpawnLimit = 10;
+        private int followingEnemySpawnCounter = 10;
+
         private int enemyCounter;
         private int enemySpawnLimit = 48;
         private double enemySpeed = 2;
@@ -69,6 +72,14 @@ namespace AstroOdyssey
 
             double left = 0;
             double top = 0;
+
+            // spawn following enemies after level 2
+            if (gameLevel > GameLevel.Level_2 && followingEnemySpawnCounter <= 0)
+            {
+                followingEnemySpawnCounter = followingEnemySpawnLimit;
+                newEnemy.FollowsPlayer = true;
+                followingEnemySpawnLimit = random.Next(7, 12);
+            }
 
             // spawn blaster shooting enemies after level 2
             if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
@@ -140,6 +151,7 @@ namespace AstroOdyssey
             overPoweredEnemySpawnCounter--;
             evadingEnemySpawnCounter--;
             firingEnemySpawnCounter--;
+            followingEnemySpawnCounter--;
         }
 
         /// <summary>
@@ -157,7 +169,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="enemy"></param>
         /// <param name="destroyed"></param>
-        public void UpdateEnemy(Enemy enemy, out bool destroyed)
+        public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
         {
             //TODO: take player coordinates and follow the the player position
 
@@ -165,6 +177,31 @@ namespace AstroOdyssey
 
             // move enemy down
             enemy.MoveY();
+
+            if (enemy.FollowsPlayer)
+            {
+                var enemyX = enemy.GetX();
+
+                var enemyWidthHalf = enemy.Width / 2;
+
+                // move right
+                if (pointerX - enemyWidthHalf > enemyX + enemy.Speed)
+                {
+                    if (enemyX + enemyWidthHalf < gameEnvironment.Width)
+                    {
+                        //SetEnemyX(enemy: enemy, left: enemyX + enemy.Speed);
+                        enemy.XDirection = XDirection.RIGHT;
+                    }
+                }
+
+                // move left
+                if (pointerX - enemyWidthHalf < enemyX - enemy.Speed)
+                {
+                    //SetEnemyX(enemy: enemy, left: enemyX - enemy.Speed);
+                    enemy.XDirection = XDirection.LEFT;
+                }
+            }
+
             enemy.MoveX();
 
             // if the object is marked for lazy destruction then no need to perform collisions
@@ -173,6 +210,11 @@ namespace AstroOdyssey
 
             // if object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
+        }
+
+        private void SetEnemyX(Enemy enemy, double left)
+        {
+            enemy.SetX(left);
         }
 
         /// <summary>

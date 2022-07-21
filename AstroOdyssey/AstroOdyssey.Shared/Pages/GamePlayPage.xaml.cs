@@ -329,7 +329,7 @@ namespace AstroOdyssey
                     {
                         var enemy = gameObject as Enemy;
 
-                        _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
+                        _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
