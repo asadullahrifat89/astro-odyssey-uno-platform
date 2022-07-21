@@ -66,35 +66,37 @@ namespace AstroOdyssey
 
             SetProjectileFiringEnemy(enemy);
 
-            switch (random.Next(0, 2))
-            {
-                case 0:
-                    {
-                        if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsPlayerTargeting))
-                        {
-                            SetHoveringEnemy(enemy);
-                        }
-                        else
-                        {
-                            SetPlayerTargetingEnemy(enemy);
-                        }
-                    }
-                    break;
-                case 1:
-                    {
-                        if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsHovering))
-                        {
-                            SetPlayerTargetingEnemy(enemy);
-                        }
-                        else
-                        {
-                            SetHoveringEnemy(enemy);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
+            SetHoveringEnemy(enemy);
+
+            //switch (random.Next(0, 2))
+            //{
+            //    case 0:
+            //        {
+            //            if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsPlayerTargeting))
+            //            {
+            //                SetHoveringEnemy(enemy);
+            //            }
+            //            else
+            //            {
+            //                SetPlayerTargetingEnemy(enemy);
+            //            }
+            //        }
+            //        break;
+            //    case 1:
+            //        {
+            //            if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsHovering))
+            //            {
+            //                SetPlayerTargetingEnemy(enemy);
+            //            }
+            //            else
+            //            {
+            //                SetHoveringEnemy(enemy);
+            //            }
+            //        }
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             double left = random.Next(10, (int)gameEnvironment.Width - 70);
             double top = 0 - enemy.Height;
