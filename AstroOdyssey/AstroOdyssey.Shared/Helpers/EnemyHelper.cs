@@ -114,6 +114,7 @@ namespace AstroOdyssey
         public void DisengageBossEnemy()
         {
             gameEnvironment.IsBossEngaged = false;
+            App.StopSound();
             App.PlaySound(baseUrl, SoundType.BOSS_DESTRUCTION);
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }

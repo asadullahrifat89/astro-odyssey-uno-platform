@@ -188,7 +188,7 @@ function playGameSound(baseUrl, soundType) {
         case "BOSS_DESTRUCTION": {
             if (bdAudio.src.length == 0) {
                 bdAudio.src = baseUrl.concat("/", bossDestroyedSource);
-                bdAudio.volume = 1.0;                
+                bdAudio.volume = 1.0;
                 setAudioAttributes(bdAudio);
             }
             playSound(bdAudio);
@@ -217,6 +217,9 @@ function playGameSound(baseUrl, soundType) {
             bgAudio.volume = 0.3;
             setAudioAttributes(bgAudio);
 
+            bgAudio.onerror = function () {
+                playGameSound(baseUrl, soundType);
+            };
             bgAudio.onended = function () {
                 playGameSound(baseUrl, soundType);
             };
