@@ -18,6 +18,9 @@ namespace AstroOdyssey
         private int powerUpTriggerCounter;
         private readonly int powerUpTriggerLimit = 1000;
 
+        private double playerSpeed = 12;
+        private double playerWidthHalf = 0;
+
         #endregion
 
         #region Ctor
@@ -35,7 +38,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns the player.
         /// </summary>
-        public Player SpawnPlayer(double pointerX, double playerSpeed)
+        public Player SpawnPlayer(double pointerX)
         {
             var player = new Player();
 
@@ -48,17 +51,19 @@ namespace AstroOdyssey
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
+            playerWidthHalf = player.Width / 2;
+
             return player;
         }
 
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public double MovePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
+        public double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
         {
             var playerX = player.GetX();
-            var playerWidthHalf = player.Width / 2;
 
+            // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
                 pointerX -= player.Speed;
 
@@ -70,14 +75,14 @@ namespace AstroOdyssey
             {
                 if (playerX + playerWidthHalf < gameEnvironment.Width)
                 {
-                    SetPlayerX(player, playerX + player.Speed);
+                    SetPlayerX(player: player, left: playerX + player.Speed);
                 }
             }
 
             // move left
             if (pointerX - playerWidthHalf < playerX - player.Speed)
             {
-                SetPlayerX(player, playerX - player.Speed);
+                SetPlayerX(player: player, left: playerX - player.Speed);
             }
 
             return pointerX;
@@ -86,10 +91,10 @@ namespace AstroOdyssey
         /// <summary>
         /// Sets the x axis position of the player on game canvas.
         /// </summary>
-        /// <param name="x"></param>
-        private void SetPlayerX(Player player, double x)
+        /// <param name="left"></param>
+        private void SetPlayerX(Player player, double left)
         {
-            player.SetX(x);
+            player.SetX(left);
         }
 
         /// <summary>

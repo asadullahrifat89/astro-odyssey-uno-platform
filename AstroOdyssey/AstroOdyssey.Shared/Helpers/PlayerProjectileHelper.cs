@@ -14,7 +14,7 @@ namespace AstroOdyssey
 
         private int projectileCounter;
         private int projectileSpawnLimit = 16;
-        private double projectileSpeed = 18;        
+        private double projectileSpeed = 18;
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
         private readonly int RAPIDSHOT_ROUNDS_SPEED_INCREASE = 1;
@@ -197,7 +197,9 @@ namespace AstroOdyssey
 
                             if (destructible.HasNoHealth)
                             {
-                                if (enemy.IsOverPowered)
+                                if (enemy.TargetsPlayer)
+                                    score += 3;
+                                else if (enemy.IsOverPowered)
                                     score += 4;
                                 else
                                     score += 2;
@@ -209,7 +211,7 @@ namespace AstroOdyssey
 
                             if (destructible.HasHealth)
                             {
-                                if (enemy.WillEvadeOnHit && !enemy.IsEvading)
+                                if (enemy.EvadesOnHit && !enemy.IsEvading)
                                     enemy.Evade();
                             }
                         }

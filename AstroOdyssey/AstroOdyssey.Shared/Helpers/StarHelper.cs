@@ -63,13 +63,18 @@ namespace AstroOdyssey
         /// Updates the star objects. Moves the stars.
         /// </summary>
         /// <param name="star"></param>
-        public void UpdateStar(Star star)
+        public void UpdateStar(Star star, out bool destroyed)
         {
+            destroyed = false;
+
             // move star down
             star.MoveY(starSpeed);
 
             if (star.GetY() > gameEnvironment.Height)
+            {
                 gameEnvironment.AddDestroyableGameObject(star);
+                destroyed = true;
+            }
         }
 
         /// <summary>

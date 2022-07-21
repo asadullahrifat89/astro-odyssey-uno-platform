@@ -24,8 +24,11 @@ namespace AstroOdyssey
         private int firingEnemySpawnCounter = 7;
         private int firingEnemySpawnLimit = 7;
 
+        private int followingEnemySpawnLimit = 10;
+        private int followingEnemySpawnCounter = 10;
+
         private int enemyCounter;
-        private int enemySpawnLimit = 50;
+        private int enemySpawnLimit = 48;
         private double enemySpeed = 2;
 
         #endregion
@@ -70,63 +73,34 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
-            //TODO: spawn blaster shooting enemies after level 2
-            if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
-            {
-                firingEnemySpawnCounter = firingEnemySpawnLimit;
-                newEnemy.FiresProjectiles = true;
-                firingEnemySpawnLimit = random.Next(1, 8);
-            }
-
             // spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
-                evadingEnemySpawnCounter = evadingEnemySpawnLimit;
-                newEnemy.WillEvadeOnHit = true;
-                evadingEnemySpawnLimit = random.Next(1, 4);
+                GenerateEvadingEnemy(newEnemy);
+            }
+
+            // spawn following enemies after level 3
+            if (gameLevel > GameLevel.Level_3 && followingEnemySpawnCounter <= 0)
+            {
+                GeneratePlayerTargetingEnemy(newEnemy);
             }
 
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
-                overPoweredEnemySpawnCounter = overPoweredEnemySpawnLimit;
-                newEnemy.OverPower();
-                overPoweredEnemySpawnLimit = random.Next(10, 20);
+                GenerateOverPoweredEnemy(newEnemy);
+            }
+
+            // spawn blaster shooting enemies after level 2
+            if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
+            {
+                GenerateProjectileFiringEnemy(newEnemy);
             }
 
             // generate side ways flying enemies after level 2
             if (gameLevel > GameLevel.Level_2 && xFlyingEnemySpawnCounter <= 0)
             {
-                newEnemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                xFlyingEnemySpawnCounter = xFlyingEnemySpawnLimit;
-
-                newEnemy.YDirection = (YDirection)random.Next(0, Enum.GetNames<YDirection>().Length);
-
-                // enemies can not go up
-                if (newEnemy.YDirection == YDirection.UP)
-                    newEnemy.YDirection = YDirection.DOWN;
-
-                switch (newEnemy.XDirection)
-                {
-                    case XDirection.LEFT:
-                        newEnemy.Rotation = newEnemy.YDirection == YDirection.NONE ? 0 : 50;
-                        left = gameEnvironment.Width;
-                        break;
-                    case XDirection.RIGHT:
-                        newEnemy.Rotation = newEnemy.YDirection == YDirection.NONE ? 0 : -50;
-                        left = 0 - newEnemy.Width + 10;
-                        break;
-                    default:
-                        break;
-                }
-#if DEBUG
-                Console.WriteLine("Enemy XDirection: " + newEnemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-#endif
-                top = random.Next(0, (int)gameEnvironment.Height / 3);
-                newEnemy.Rotate();
-
-                // randomize next x flying enemy pop up
-                xFlyingEnemySpawnLimit = random.Next(5, 15);
+                GenerateSideWaysMovingEnemy(newEnemy, ref left, ref top);
             }
             else
             {
@@ -140,6 +114,98 @@ namespace AstroOdyssey
             overPoweredEnemySpawnCounter--;
             evadingEnemySpawnCounter--;
             firingEnemySpawnCounter--;
+            followingEnemySpawnCounter--;
+        }
+
+        /// <summary>
+        /// Generates an enemy that evades player fire.
+        /// </summary>
+        /// <param name="enemy"></param>
+        private void GenerateEvadingEnemy(Enemy enemy)
+        {
+            evadingEnemySpawnCounter = evadingEnemySpawnLimit;
+            enemy.EvadesOnHit = true;
+            evadingEnemySpawnLimit = random.Next(1, 4);
+        }
+
+        /// <summary>
+        /// Generates an enemy that targets player.
+        /// </summary>
+        /// <param name="enemy"></param>
+        private void GeneratePlayerTargetingEnemy(Enemy enemy)
+        {
+            followingEnemySpawnCounter = followingEnemySpawnLimit;
+            enemy.TargetsPlayer = true;
+            followingEnemySpawnLimit = random.Next(7, 12);
+
+            // following enemies do not evade on hit
+            enemy.EvadesOnHit = false;
+        }
+
+        /// <summary>
+        /// Generates an enemy that fires projectiles.
+        /// </summary>
+        /// <param name="enemy"></param>
+        private void GenerateProjectileFiringEnemy(Enemy enemy)
+        {
+            firingEnemySpawnCounter = firingEnemySpawnLimit;
+            enemy.FiresProjectiles = true;
+            firingEnemySpawnLimit = random.Next(1, 8);
+        }
+
+        /// <summary>
+        /// Generates an enemy that is overpowered. Bigger and stronger but slower enemies.
+        /// </summary>
+        /// <param name="enemy"></param>
+        private void GenerateOverPoweredEnemy(Enemy enemy)
+        {
+            overPoweredEnemySpawnCounter = overPoweredEnemySpawnLimit;
+            enemy.OverPower();
+            overPoweredEnemySpawnLimit = random.Next(10, 20);
+        }
+
+        /// <summary>
+        /// Generates an enemy that moves sideways from one direction.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="left"></param>
+        /// <param name="top"></param>
+        private void GenerateSideWaysMovingEnemy(Enemy enemy, ref double left, ref double top)
+        {
+            enemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+            xFlyingEnemySpawnCounter = xFlyingEnemySpawnLimit;
+
+            enemy.YDirection = (YDirection)random.Next(0, Enum.GetNames<YDirection>().Length);
+
+            // enemies can not go up
+            if (enemy.YDirection == YDirection.UP)
+                enemy.YDirection = YDirection.DOWN;
+
+            switch (enemy.XDirection)
+            {
+                case XDirection.LEFT:
+                    enemy.Rotation = enemy.YDirection == YDirection.NONE ? 0 : 50;
+                    left = gameEnvironment.Width;
+                    break;
+                case XDirection.RIGHT:
+                    enemy.Rotation = enemy.YDirection == YDirection.NONE ? 0 : -50;
+                    left = 0 - enemy.Width + 10;
+                    break;
+                default:
+                    break;
+            }
+#if DEBUG
+            Console.WriteLine("Enemy XDirection: " + enemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+#endif
+            top = random.Next(0, (int)gameEnvironment.Height / 3);
+            enemy.Rotate();
+
+            // sideways flying enemies do not follow player or evade on hit
+            enemy.TargetsPlayer = false;
+            enemy.EvadesOnHit = false;
+
+            // randomize next x flying enemy pop up
+            xFlyingEnemySpawnLimit = random.Next(5, 15);
         }
 
         /// <summary>
@@ -157,13 +223,40 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="enemy"></param>
         /// <param name="destroyed"></param>
-        public void UpdateEnemy(Enemy enemy, out bool destroyed)
+        public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
         {
+            //TODO: take player coordinates and follow the the player position
+
             destroyed = false;
 
             // move enemy down
             enemy.MoveY();
-            enemy.MoveX();
+
+            if (enemy.TargetsPlayer)
+            {
+                var enemyX = enemy.GetX();
+
+                var enemyWidthHalf = enemy.Width / 2;
+
+                // move right
+                if (pointerX - enemyWidthHalf > enemyX + enemy.Speed)
+                {
+                    if (enemyX + enemyWidthHalf < gameEnvironment.Width)
+                    {
+                        SetEnemyX(enemy: enemy, left: enemyX + enemy.Speed);
+                    }
+                }
+
+                // move left
+                if (pointerX - enemyWidthHalf < enemyX - enemy.Speed)
+                {
+                    SetEnemyX(enemy: enemy, left: enemyX - enemy.Speed);
+                }
+            }
+            else
+            {
+                enemy.MoveX();
+            }
 
             // if the object is marked for lazy destruction then no need to perform collisions
             if (enemy.IsMarkedForFadedRemoval)
@@ -174,11 +267,21 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Sets X axis position of an enemy.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="left"></param>
+        private void SetEnemyX(Enemy enemy, double left)
+        {
+            enemy.SetX(left);
+        }
+
+        /// <summary>
         /// Levels up enemies.
         /// </summary>
         public void LevelUp()
         {
-            enemySpawnLimit -= 2;
+            enemySpawnLimit -= 3;
             enemySpeed += 1;
         }
 

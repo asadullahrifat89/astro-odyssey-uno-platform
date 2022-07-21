@@ -48,25 +48,27 @@ namespace AstroOdyssey
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
                             height = 20; width = 10; // smaller but faster rounds
-                            Background = new SolidColorBrush(Colors.Goldenrod);
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
                         }
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         {
                             height = 25; width = 25; // larger but slower rounds
-                            Background = new SolidColorBrush(Colors.Purple);
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
                         }
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
                         {
-                            height = 300; width = 25; // larger and longer but slower piercing rounds
-                            Background = new SolidColorBrush(Colors.LightBlue);
+                            height = 300; width = 20; // larger and longer and faster piercing rounds
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
                         }
                         break;
                     default:
-                        Background = new SolidColorBrush(Colors.White);
+                        //Background = new SolidColorBrush(Colors.White);
                         break;
                 }
+
+                Background = new SolidColorBrush(Colors.White);
             }
             else
             {

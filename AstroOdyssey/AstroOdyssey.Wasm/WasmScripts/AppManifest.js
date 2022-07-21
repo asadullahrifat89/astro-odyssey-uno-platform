@@ -54,6 +54,7 @@ function playGameSound(baseUrl, soundType) {
             if (gsAudio.src.length == 0) {
                 gsAudio.src = baseUrl.concat("/", gameStartSource);
                 gsAudio.volume = 1.0;
+                setAudioAttributes(gsAudio);
             }
             playSound(gsAudio);
         } break;
@@ -61,6 +62,7 @@ function playGameSound(baseUrl, soundType) {
             if (rfAudio.src.length == 0) {
                 rfAudio.src = baseUrl.concat("/", roundsFireSource);
                 rfAudio.volume = 0.1;
+                setAudioAttributes(rfAudio);
             }
             playSound(rfAudio);
         } break;
@@ -68,6 +70,7 @@ function playGameSound(baseUrl, soundType) {
             if (rapidsrfAudio.src.length == 0) {
                 rapidsrfAudio.src = baseUrl.concat("/", rapidShotRoundsFireSource);
                 rapidsrfAudio.volume = 0.2;
+                setAudioAttributes(rapidsrfAudio);
             }
             playSound(rapidsrfAudio);
         } break;
@@ -75,6 +78,7 @@ function playGameSound(baseUrl, soundType) {
             if (deadsrfAudio.src.length == 0) {
                 deadsrfAudio.src = baseUrl.concat("/", deadShotRoundsFireSource);
                 deadsrfAudio.volume = 0.2;
+                setAudioAttributes(deadsrfAudio);
             }
             playSound(deadsrfAudio);
         } break;
@@ -82,6 +86,7 @@ function playGameSound(baseUrl, soundType) {
             if (sonicsrfAudio.src.length == 0) {
                 sonicsrfAudio.src = baseUrl.concat("/", sonicShotRoundsFireSource);
                 sonicsrfAudio.volume = 0.2;
+                setAudioAttributes(sonicsrfAudio);
             }
             playSound(sonicsrfAudio);
         } break;
@@ -89,6 +94,7 @@ function playGameSound(baseUrl, soundType) {
             if (erfAudio.src.length == 0) {
                 erfAudio.src = baseUrl.concat("/", enemyRoundsFireSource);
                 erfAudio.volume = 0.1;
+                setAudioAttributes(erfAudio);
             }
             playSound(erfAudio);
         } break;
@@ -96,6 +102,7 @@ function playGameSound(baseUrl, soundType) {
             if (rhAudio.src.length == 0) {
                 rhAudio.src = baseUrl.concat("/", roundHitSource);
                 rhAudio.volume = 0.6;
+                setAudioAttributes(rhAudio);
             }
             playSound(rhAudio);
         } break;
@@ -103,6 +110,7 @@ function playGameSound(baseUrl, soundType) {
             if (puAudio.src.length == 0) {
                 puAudio.src = baseUrl.concat("/", powerUpSource);
                 puAudio.volume = 1.0;
+                setAudioAttributes(puAudio);
             }
             playSound(puAudio);
         } break;
@@ -110,6 +118,7 @@ function playGameSound(baseUrl, soundType) {
             if (pdAudio.src.length == 0) {
                 pdAudio.src = baseUrl.concat("/", powerDownSource);
                 pdAudio.volume = 1.0;
+                setAudioAttributes(pdAudio);
             }
             playSound(pdAudio);
         } break;
@@ -117,6 +126,7 @@ function playGameSound(baseUrl, soundType) {
             if (edAudio.src.length == 0) {
                 edAudio.src = baseUrl.concat("/", enemyDestroyedSource);
                 edAudio.volume = 0.4;
+                setAudioAttributes(edAudio);
             }
             playSound(edAudio);
         } break;
@@ -124,6 +134,7 @@ function playGameSound(baseUrl, soundType) {
             if (mdAudio.src.length == 0) {
                 mdAudio.src = baseUrl.concat("/", meteorDestroyedSource);
                 mdAudio.volume = 0.3;
+                setAudioAttributes(mdAudio);
             }
             playSound(mdAudio);
         } break;
@@ -131,6 +142,7 @@ function playGameSound(baseUrl, soundType) {
             if (luAudio.src.length == 0) {
                 luAudio.src = baseUrl.concat("/", levelUpSource);
                 luAudio.volume = 0.6;
+                setAudioAttributes(luAudio);
             }
             playSound(luAudio);
         } break;
@@ -138,6 +150,7 @@ function playGameSound(baseUrl, soundType) {
             if (hgAudio.src.length == 0) {
                 hgAudio.src = baseUrl.concat("/", healthGainSource);
                 hgAudio.volume = 1.0;
+                setAudioAttributes(hgAudio);
             }
             playSound(hgAudio);
         } break;
@@ -145,6 +158,7 @@ function playGameSound(baseUrl, soundType) {
             if (hlAudio.src.length == 0) {
                 hlAudio.src = baseUrl.concat("/", healthLossSource);
                 hlAudio.volume = 1.0;
+                setAudioAttributes(hlAudio);
             }
             playSound(hlAudio);
         } break;
@@ -152,6 +166,7 @@ function playGameSound(baseUrl, soundType) {
             if (goAudio.src.length == 0) {
                 goAudio.src = baseUrl.concat("/", gameOverSource);
                 goAudio.volume = 1.0;
+                setAudioAttributes(goAudio);
             }
             playSound(goAudio);
         } break;
@@ -177,13 +192,23 @@ function playGameSound(baseUrl, soundType) {
 
             bgAudio.src = src;
             bgAudio.volume = 0.3;
-            bgAudio.loop = true;
+            setAudioAttributes(bgAudio);
+
+            bgAudio.onended = function () {
+                playGameSound(baseUrl, soundType);
+            };
+            
             playSound(bgAudio);
         } break;
         default: {
 
         }
     }
+}
+
+function setAudioAttributes(audio) {
+    audio.style.display = "none";
+    audio.setAttribute("controls", "none");
 }
 
 function stopSound() {
