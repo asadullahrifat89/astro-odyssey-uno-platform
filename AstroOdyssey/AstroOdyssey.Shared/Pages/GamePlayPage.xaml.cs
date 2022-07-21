@@ -23,19 +23,19 @@ namespace AstroOdyssey
         private string baseUrl;
 
         const float FRAME_CAP_MS = 1000.0f / 50.0f;
-        private int fpsCounter = 0;
+        private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
         private long frameStartTime;
         private long frameEndTime;
-        private int frameStatUpdateCounter;
+        private int frameStatUpdateSpawnCounter;
 
-        private int frameStatUpdateLimit = 5;
-        private int showInGameTextLimit = 100;
+        private int frameStatUpdateFrequency = 5;
+        private int showInGameTextFrequency = 110;
 
         private double windowWidth, windowHeight;
 
-        private int showInGameTextCounter;
+        private int showInGameTextSpawnCounter;
 
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
@@ -174,12 +174,12 @@ namespace AstroOdyssey
             // calculate FPS
             if (lastFPSTime + 1000 < frameStartTime)
             {
-                fpsCount = fpsCounter;
-                fpsCounter = 0;
+                fpsCount = fpsSpawnCounter;
+                fpsSpawnCounter = 0;
                 lastFPSTime = frameStartTime;
             }
 
-            fpsCounter++;
+            fpsSpawnCounter++;
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
             {
-                if (gameObject.IsMarkedForFadedRemoval)
+                if (gameObject.IsMarkedForFadedDestruction)
                 {
                     gameObject.Fade();
 
@@ -287,7 +287,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        _playerProjectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+                        _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                         if (score > 0)
                             Score += score;
@@ -298,7 +298,15 @@ namespace AstroOdyssey
                             {
                                 case ENEMY:
                                     {
-                                        _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
+                                        var enemy = destroyedObject as Enemy;
+
+                                        _enemyHelper.DestroyEnemy(enemy);
+
+                                        if (enemy.IsBoss)
+                                        {
+                                            ShowInGameText("BOSS CLEARED");
+                                            _enemyHelper.DisengageBossEnemy();
+                                        }
                                     }
                                     break;
                                 case METEOR:
@@ -339,7 +347,7 @@ namespace AstroOdyssey
                             return;
 
                         // fire projectiles if at a legitimate distance from player
-                        if (enemy.FiresProjectiles && Player.GetY() - enemy.GetY() > 100)
+                        if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
                             _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                     }
                     break;
@@ -468,9 +476,9 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
-            frameStatUpdateCounter -= 1;
+            frameStatUpdateSpawnCounter -= 1;
 
-            if (frameStatUpdateCounter < 0)
+            if (frameStatUpdateSpawnCounter < 0)
             {
                 var enemies = GameView.Children.OfType<Enemy>().Count();
                 var meteors = GameView.Children.OfType<Meteor>().Count();
@@ -486,7 +494,7 @@ namespace AstroOdyssey
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + FrameTime + ", Duration: " + (int)FrameDuration + ",  Start Time: " + frameStartTime + ",  End Time: " + frameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateCounter = frameStatUpdateLimit;
+                frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
             }
         }
 
@@ -496,7 +504,7 @@ namespace AstroOdyssey
         private void ShowInGameText(string text)
         {
             InGameText.Text = text;
-            showInGameTextCounter = showInGameTextLimit;
+            showInGameTextSpawnCounter = showInGameTextFrequency;
         }
 
         /// <summary>
@@ -506,9 +514,9 @@ namespace AstroOdyssey
         {
             if (!InGameText.Text.IsNullOrBlank())
             {
-                showInGameTextCounter -= 1;
+                showInGameTextSpawnCounter -= 1;
 
-                if (showInGameTextCounter <= 0)
+                if (showInGameTextSpawnCounter <= 0)
                 {
                     InGameText.Text = "";
                 }
@@ -528,20 +536,24 @@ namespace AstroOdyssey
 
             if (Score > 0)
                 GameLevel = GameLevel.Level_1;
-            if (Score > 25)
-                GameLevel = GameLevel.Level_2;
             if (Score > 50)
-                GameLevel = GameLevel.Level_3;
+                GameLevel = GameLevel.Level_2;
             if (Score > 100)
-                GameLevel = GameLevel.Level_4;
+                GameLevel = GameLevel.Level_3;
             if (Score > 200)
-                GameLevel = GameLevel.Level_5;
+                GameLevel = GameLevel.Level_4;
             if (Score > 400)
+                GameLevel = GameLevel.Level_5;
+            if (Score > 600)
                 GameLevel = GameLevel.Level_6;
             if (Score > 800)
                 GameLevel = GameLevel.Level_7;
-            if (Score > 1600)
+            if (Score > 1000)
                 GameLevel = GameLevel.Level_8;
+            if (Score > 1200)
+                GameLevel = GameLevel.Level_9;
+            if (Score > 1400)
+                GameLevel = GameLevel.Level_10;
 
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)
@@ -564,6 +576,12 @@ namespace AstroOdyssey
                     {
                         _enemyHelper.LevelUp();
 
+                        if (GameLevel > GameLevel.Level_2)
+                        {
+                            ShowInGameText("BOSS INCOMING");
+                            _enemyHelper.EngageBossEnemy(GameLevel);
+                        }
+
                         _meteorHelper.LevelUp();
 
                         _healthHelper.LevelUp();
@@ -573,8 +591,6 @@ namespace AstroOdyssey
                         _starHelper.LevelUp();
 
                         _playerProjectileHelper.LevelUp();
-
-                        _enemyProjectileHelper.LevelUp();
                     }
                     break;
             }

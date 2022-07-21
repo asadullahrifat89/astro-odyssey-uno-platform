@@ -11,8 +11,8 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int starCounter;
-        private readonly int starSpawnLimit = 250;
+        private int starSpawnCounter;
+        private readonly int starSpawnFrequency = 250;
         private double starSpeed = 0.1d;
 
         #endregion
@@ -34,13 +34,13 @@ namespace AstroOdyssey
         public void SpawnStar()
         {
             // each frame progress decreases this counter
-            starCounter -= 1;
+            starSpawnCounter -= 1;
 
             // when counter reaches zero, create an star
-            if (starCounter < 0)
+            if (starSpawnCounter < 0)
             {
                 GenerateStar();
-                starCounter = starSpawnLimit;
+                starSpawnCounter = starSpawnFrequency;
             }
         }
 
@@ -49,14 +49,14 @@ namespace AstroOdyssey
         /// </summary>
         public void GenerateStar()
         {
-            var newStar = new Star();
+            var star = new Star();
 
-            newStar.SetAttributes(speed: starSpeed, scale: gameEnvironment.GetGameObjectScale());
+            star.SetAttributes(speed: starSpeed, scale: gameEnvironment.GetGameObjectScale());
 
-            var top = 0 - newStar.Height;
+            var top = 0 - star.Height;
             var left = random.Next(10, (int)gameEnvironment.Width - 10);
 
-            newStar.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            star.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
         }
 
         /// <summary>

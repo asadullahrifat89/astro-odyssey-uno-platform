@@ -47,14 +47,14 @@ namespace AstroOdyssey
             //TODO: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
             //TODO: Develop shield which protects damage for a certain number of hits
 
-            Tag = Constants.PLAYER;
+            Tag = PLAYER;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Height = Constants.DefaultPlayerHeight;
-            Width = Constants.DefaultGameObjectSize;
+            Height = DefaultPlayerHeight;
+            Width = DefaultGameObjectSize;
 
             Health = 100;
-            HitPoint = 10; //TODO: leave it 1
+            HitPoint = 10; //TODO: HitPoint is always 10
 
             // combine power gauge, ship, and blaze
             content = new Grid();
@@ -154,8 +154,8 @@ namespace AstroOdyssey
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
-            Height = Constants.DefaultPlayerHeight * scale;
-            Width = Constants.DefaultGameObjectSize * scale;
+            Height = DefaultPlayerHeight * scale;
+            Width = DefaultGameObjectSize * scale;
         }
 
         public void ReAdjustScale(double scale)
@@ -165,8 +165,8 @@ namespace AstroOdyssey
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
-            Height = Constants.DefaultPlayerHeight * scale;
-            Width = Constants.DefaultGameObjectSize * scale;
+            Height = DefaultPlayerHeight * scale;
+            Width = DefaultGameObjectSize * scale;
         }
 
         public void SetPowerGauge(double powerGauge)

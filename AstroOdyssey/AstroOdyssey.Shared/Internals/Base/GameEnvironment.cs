@@ -23,6 +23,12 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public bool IsBossEngaged { get; set; }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -77,6 +83,9 @@ namespace AstroOdyssey
             Children.Remove(destroyable);
         }
 
+        /// <summary>
+        /// Clears destroyable objects collection.
+        /// </summary>
         public void ClearDestroyableGameObjects()
         {
             destroyableGameObjects.Clear();

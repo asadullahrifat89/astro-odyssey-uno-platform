@@ -28,6 +28,9 @@ const healthLossSource = "Assets/Sounds/rocket-missile-launcher_MyHKjH4__NWM.mp3
 const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
+const bossAppearanceSource = "Assets/Sounds/dark-sitar-7546.mp3";
+const bossDestroyedSource = "Assets/Sounds/halloween-impact-05-93808.mp3";
+
 const bgAudio = new Audio();
 const rfAudio = new Audio();
 const erfAudio = new Audio();
@@ -47,6 +50,9 @@ const hlAudio = new Audio();
 
 const gsAudio = new Audio();
 const goAudio = new Audio();
+
+const baAudio = new Audio();
+const bdAudio = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
@@ -170,6 +176,23 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(goAudio);
         } break;
+        case "BOSS_APPEARANCE": {
+            if (baAudio.src.length == 0) {
+                baAudio.src = baseUrl.concat("/", bossAppearanceSource);
+                baAudio.volume = 1.0;
+                baAudio.loop = true;
+                setAudioAttributes(baAudio);
+            }
+            playSound(baAudio);
+        } break;
+        case "BOSS_DESTRUCTION": {
+            if (bdAudio.src.length == 0) {
+                bdAudio.src = baseUrl.concat("/", bossDestroyedSource);
+                bdAudio.volume = 1.0;
+                setAudioAttributes(bdAudio);
+            }
+            playSound(bdAudio);
+        } break;
         case "BACKGROUND_MUSIC": {
 
             let musicTrack = Math.floor((Math.random() * 12));
@@ -194,10 +217,13 @@ function playGameSound(baseUrl, soundType) {
             bgAudio.volume = 0.3;
             setAudioAttributes(bgAudio);
 
+            bgAudio.onerror = function () {
+                playGameSound(baseUrl, soundType);
+            };
             bgAudio.onended = function () {
                 playGameSound(baseUrl, soundType);
             };
-            
+
             playSound(bgAudio);
         } break;
         default: {
@@ -213,6 +239,7 @@ function setAudioAttributes(audio) {
 
 function stopSound() {
     pauseSound(bgAudio);
+    pauseSound(baAudio);
 }
 
 function playSound(audio) {

@@ -12,15 +12,15 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int projectileCounter;
-        private int projectileSpawnLimit = 16;
+        private int projectileSpawnCounter;
+        private int projectileSpawnFrequency = 16;
         private double projectileSpeed = 18;
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
         private readonly int RAPIDSHOT_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int DEADSHOT_ROUNDS_LIMIT_INCREASE = 30;
-        private readonly int DEADSHOT_ROUNDS_SPEED_DECREASE = 10;
+        private readonly int DEADSHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DEADSHOT_ROUNDS_SPEED_DECREASE = 5;
 
         private readonly int SONICSHOT_ROUNDS_LIMIT_INCREASE = 25;
         private readonly int SONICSHOT_ROUNDS_SPEED_INCREASE = 25;
@@ -50,9 +50,9 @@ namespace AstroOdyssey
         public void SpawnProjectile(bool isPoweredUp, bool firingProjectiles, Player player, GameLevel gameLevel, PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
-            projectileCounter -= 1;
+            projectileSpawnCounter -= 1;
 
-            if (projectileCounter <= 0)
+            if (projectileSpawnCounter <= 0)
             {
                 if (firingProjectiles)
                 //// any object falls within player range
@@ -61,7 +61,7 @@ namespace AstroOdyssey
                     GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
                 }
 
-                projectileCounter = projectileSpawnLimit;
+                projectileSpawnCounter = projectileSpawnFrequency;
             }
         }
 
@@ -72,15 +72,15 @@ namespace AstroOdyssey
         /// <param name="projectileWidth"></param>
         public void GenerateProjectile(bool isPoweredUp, Player player, GameLevel gameLevel, PowerUpType powerUpType)
         {
-            var newProjectile = new PlayerProjectile();
+            var projectile = new PlayerProjectile();
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
+            projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
-            newProjectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - projectile.Height / 2, left: player.GetX() + player.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
 
-            if (newProjectile.IsPoweredUp)
+            if (projectile.IsPoweredUp)
             {
                 switch (powerUpType)
                 {
@@ -132,7 +132,7 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CollideProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
+        public void CollidePlayerProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
         {
             score = 0;
             destroyedObject = null;
@@ -184,9 +184,6 @@ namespace AstroOdyssey
                     destructible.LooseHealth();
                 }
 
-                // fade the a bit on projectile hit
-                destructible.Fade();
-
                 //App.PlaySound(SoundType.ROUNDS_HIT);
 
                 switch (destructible.Tag)
@@ -195,14 +192,28 @@ namespace AstroOdyssey
                         {
                             var enemy = destructible as Enemy;
 
+                            if (enemy.IsBoss)
+                            {
+                                if (enemy.Health <= 3)
+                                    enemy.Fade();
+                            }
+                            else
+                            {
+                                // fade the a bit on projectile hit
+                                enemy.Fade();
+                            }
+
+                            // bosses cause a score penalty as long as not destroyed
                             if (destructible.HasNoHealth)
                             {
-                                if (enemy.TargetsPlayer)
-                                    score += 3;
+                                if (enemy.IsPlayerTargeting)
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 3;
                                 else if (enemy.IsOverPowered)
-                                    score += 4;
+                                    score += gameEnvironment.IsBossEngaged ? 2 : 4;
+                                else if (enemy.IsBoss)
+                                    score += 6;
                                 else
-                                    score += 2;
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 2;
 
                                 destroyedObject = enemy;
 
@@ -211,7 +222,7 @@ namespace AstroOdyssey
 
                             if (destructible.HasHealth)
                             {
-                                if (enemy.EvadesOnHit && !enemy.IsEvading)
+                                if (enemy.IsEvading && !enemy.IsEvadingTriggered)
                                     enemy.Evade();
                             }
                         }
@@ -220,10 +231,13 @@ namespace AstroOdyssey
                         {
                             var meteor = destructible as Meteor;
 
+                            // fade the a bit on projectile hit
+                            meteor.Fade();
+
                             if (destructible.HasNoHealth)
                             {
                                 if (meteor.IsOverPowered)
-                                    score += 2;
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 2;
                                 else
                                     score++;
 
@@ -257,19 +271,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
+                        projectileSpawnFrequency -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
                         projectileSpeed += RAPIDSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnFrequency += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
                         projectileSpeed -= DEADSHOT_ROUNDS_SPEED_DECREASE; // slow projectile
                     }
                     break;
                 case PowerUpType.SONICSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnFrequency += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
                         projectileSpeed += SONICSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
@@ -289,19 +303,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
+                        projectileSpawnFrequency += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
                         projectileSpeed -= RAPIDSHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnFrequency -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
                         projectileSpeed += DEADSHOT_ROUNDS_SPEED_DECREASE;
                     }
                     break;
                 case PowerUpType.SONICSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnFrequency -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
                         projectileSpeed -= SONICSHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
@@ -315,7 +329,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            projectileSpawnLimit -= 1;
+            projectileSpawnFrequency -= 1;
         }
 
         #endregion

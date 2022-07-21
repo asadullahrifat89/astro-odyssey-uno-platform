@@ -38,6 +38,8 @@ namespace AstroOdyssey
             Level_6,
             Level_7,
             Level_8,
+            Level_9,
+            Level_10,
         }
 
         public enum SoundType
@@ -50,6 +52,8 @@ namespace AstroOdyssey
             ENEMY_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
+            BOSS_APPEARANCE,
+            BOSS_DESTRUCTION,
             ROUNDS_HIT,
             POWER_UP,
             POWER_DOWN,

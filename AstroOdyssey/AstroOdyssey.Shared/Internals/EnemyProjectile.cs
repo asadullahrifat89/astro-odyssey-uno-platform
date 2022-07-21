@@ -76,7 +76,7 @@ namespace AstroOdyssey
                     break;
             }
 
-            Background = new SolidColorBrush(Colors.White); // TODO: fix the enemy projectile color
+            Background = new SolidColorBrush(Colors.White);
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
             Width = width * scale * (isOverPowered ? 1.5 : 1);

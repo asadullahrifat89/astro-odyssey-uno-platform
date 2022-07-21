@@ -10,8 +10,7 @@ namespace AstroOdyssey
         private readonly GameEnvironment gameEnvironment;
         private readonly string baseUrl;
 
-        private int projectileCounter;
-        private int projectileSpawnLimit = 60;
+        private Random random = new Random();
 
         #endregion
 
@@ -28,26 +27,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Updates a projectile.
-        /// </summary>
-        /// <param name="projectile"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
-        {
-            destroyed = false;
-
-            // move projectile down                
-            projectile.MoveY();
-
-            // remove projectile if outside game canvas
-            if (projectile.GetY() > gameEnvironment.Height)
-            {
-                gameEnvironment.AddDestroyableGameObject(projectile);
-                destroyed = true;
-            }
-        }
-
-        /// <summary>
         /// Spawns a projectile.
         /// </summary>
         /// <param name="enemy"></param>
@@ -55,13 +34,14 @@ namespace AstroOdyssey
         public void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
         {
             // each frame progress decreases this counter
-            projectileCounter -= 1;
+            enemy.ProjectileSpawnCounter -= 1;
 
-            if (projectileCounter <= 0)
+            if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                projectileCounter = projectileSpawnLimit;
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnFrequency;
+                enemy.ProjectileSpawnFrequency = random.Next(30, 60);
             }
         }
 
@@ -72,23 +52,52 @@ namespace AstroOdyssey
         /// <param name="gameLevel"></param>
         private void GenerateProjectile(Enemy enemy, GameLevel gameLevel)
         {
-            var newProjectile = new EnemyProjectile();
+            var projectile = new EnemyProjectile();
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
+            // boss fires a little faster than usual enemies
+            projectile.SetAttributes(speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
 
-            newProjectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + newProjectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+            if (enemy.IsBoss)
+            {
+                //TODO: star blast shot across screen
+
+                enemy.SideWaysProjectileSpawnCounter--;
+
+                if (enemy.SideWaysProjectileSpawnCounter <= 0)
+                {
+                    projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+
+                    enemy.SideWaysProjectileSpawnCounter = enemy.SideWaysProjectileSpawnFrequency;
+                    enemy.SideWaysProjectileSpawnFrequency = random.Next(4, 7);
+                }
+            }
+
+            projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
 
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         /// <summary>
-        /// Levels up projectiles.
+        /// Updates a projectile.
         /// </summary>
-        public void LevelUp()
+        /// <param name="projectile"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
         {
-            projectileSpawnLimit -= 1;
+            destroyed = false;
+
+            // move projectile down                
+            projectile.MoveY();
+            projectile.MoveX();
+
+            // remove projectile if outside game canvas
+            if (projectile.GetY() > gameEnvironment.Height)
+            {
+                gameEnvironment.AddDestroyableGameObject(projectile);
+                destroyed = true;
+            }
         }
 
         #endregion
