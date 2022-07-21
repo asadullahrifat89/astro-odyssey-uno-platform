@@ -29,7 +29,7 @@ const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bossAppearanceSource = "Assets/Sounds/dark-sitar-7546.mp3";
-const bossDestroyedSource = "Assets/Sounds/explosion-36210.mp3";
+const bossDestroyedSource = "Assets/Sounds/halloween-impact-05-93808.mp3";
 
 const bgAudio = new Audio();
 const rfAudio = new Audio();

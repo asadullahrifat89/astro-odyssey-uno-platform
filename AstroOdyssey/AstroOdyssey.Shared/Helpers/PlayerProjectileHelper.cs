@@ -203,16 +203,17 @@ namespace AstroOdyssey
                                 enemy.Fade();
                             }
 
+                            // bosses cause a score penalty as long as not destroyed
                             if (destructible.HasNoHealth)
                             {
                                 if (enemy.IsPlayerTargeting)
-                                    score += 3;
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 3;
                                 else if (enemy.IsOverPowered)
-                                    score += 4;
+                                    score += gameEnvironment.IsBossEngaged ? 2 : 4;
                                 else if (enemy.IsBoss)
                                     score += 6;
                                 else
-                                    score += 2;
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 2;
 
                                 destroyedObject = enemy;
 
@@ -236,7 +237,7 @@ namespace AstroOdyssey
                             if (destructible.HasNoHealth)
                             {
                                 if (meteor.IsOverPowered)
-                                    score += 2;
+                                    score += gameEnvironment.IsBossEngaged ? 1 : 2;
                                 else
                                     score++;
 
