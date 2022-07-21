@@ -31,8 +31,6 @@ namespace AstroOdyssey
         private int enemySpawnLimit = 48;
         private double enemySpeed = 2;
 
-        private bool bossEngaged;
-
         #endregion
 
         #region Ctor
@@ -47,9 +45,37 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SwpanBoss() 
+        public void EngageBoss()
         {
-        
+            var enemy = new Enemy();
+
+            enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
+
+            enemy.IsBoss = true;
+
+            double left = 0;
+            double top = 0;
+
+            SetPlayerTargetingEnemy(enemy);
+
+            enemy.OverPower();
+            enemy.Health = 100;
+
+            SetProjectileFiringEnemy(enemy);
+
+            left = random.Next(10, (int)gameEnvironment.Width - 70);
+            top = 0 - enemy.Height;
+
+            enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+
+            gameEnvironment.IsBossEngaged = true;
+            App.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
+        }
+
+        public void DisengageBoss()
+        {
+            gameEnvironment.IsBossEngaged = false;
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -57,14 +83,17 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnEnemy(GameLevel gameLevel)
         {
-            // each frame progress decreases this counter
-            enemyCounter -= 1;
-
-            // when counter reaches zero, create an enemy
-            if (enemyCounter < 0)
+            if (!gameEnvironment.IsBossEngaged)
             {
-                GenerateEnemy(gameLevel);
-                enemyCounter = enemySpawnLimit;
+                // each frame progress decreases this counter
+                enemyCounter -= 1;
+
+                // when counter reaches zero, create an enemy
+                if (enemyCounter < 0)
+                {
+                    GenerateEnemy(gameLevel);
+                    enemyCounter = enemySpawnLimit;
+                }
             }
         }
 
@@ -83,31 +112,31 @@ namespace AstroOdyssey
             // spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
-                GenerateEvadingEnemy(enemy);
+                SetEvadingEnemy(enemy);
             }
 
             // spawn following enemies after level 3
             if (gameLevel > GameLevel.Level_3 && followingEnemySpawnCounter <= 0)
             {
-                GeneratePlayerTargetingEnemy(enemy);
+                SetPlayerTargetingEnemy(enemy);
             }
 
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
-                GenerateOverPoweredEnemy(enemy);
+                SetOverPoweredEnemy(enemy);
             }
 
             // spawn blaster shooting enemies after level 2
             if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
             {
-                GenerateProjectileFiringEnemy(enemy);
+                SetProjectileFiringEnemy(enemy);
             }
 
             // generate side ways flying enemies after level 2
             if (gameLevel > GameLevel.Level_2 && xFlyingEnemySpawnCounter <= 0)
             {
-                GenerateSideWaysMovingEnemy(enemy, ref left, ref top);
+                SetSideWaysMovingEnemy(enemy, ref left, ref top);
             }
             else
             {
@@ -128,7 +157,7 @@ namespace AstroOdyssey
         /// Generates an enemy that evades player fire.
         /// </summary>
         /// <param name="enemy"></param>
-        private void GenerateEvadingEnemy(Enemy enemy)
+        private void SetEvadingEnemy(Enemy enemy)
         {
             evadingEnemySpawnCounter = evadingEnemySpawnLimit;
             enemy.EvadesOnHit = true;
@@ -139,7 +168,7 @@ namespace AstroOdyssey
         /// Generates an enemy that targets player.
         /// </summary>
         /// <param name="enemy"></param>
-        private void GeneratePlayerTargetingEnemy(Enemy enemy)
+        private void SetPlayerTargetingEnemy(Enemy enemy)
         {
             followingEnemySpawnCounter = followingEnemySpawnLimit;
             enemy.TargetsPlayer = true;
@@ -153,7 +182,7 @@ namespace AstroOdyssey
         /// Generates an enemy that fires projectiles.
         /// </summary>
         /// <param name="enemy"></param>
-        private void GenerateProjectileFiringEnemy(Enemy enemy)
+        private void SetProjectileFiringEnemy(Enemy enemy)
         {
             firingEnemySpawnCounter = firingEnemySpawnLimit;
             enemy.FiresProjectiles = true;
@@ -164,7 +193,7 @@ namespace AstroOdyssey
         /// Generates an enemy that is overpowered. Bigger and stronger but slower enemies.
         /// </summary>
         /// <param name="enemy"></param>
-        private void GenerateOverPoweredEnemy(Enemy enemy)
+        private void SetOverPoweredEnemy(Enemy enemy)
         {
             overPoweredEnemySpawnCounter = overPoweredEnemySpawnLimit;
             enemy.OverPower();
@@ -177,7 +206,7 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         /// <param name="left"></param>
         /// <param name="top"></param>
-        private void GenerateSideWaysMovingEnemy(Enemy enemy, ref double left, ref double top)
+        private void SetSideWaysMovingEnemy(Enemy enemy, ref double left, ref double top)
         {
             enemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
             xFlyingEnemySpawnCounter = xFlyingEnemySpawnLimit;
@@ -234,8 +263,19 @@ namespace AstroOdyssey
         {
             destroyed = false;
 
-            // move enemy down
-            enemy.MoveY();
+            if (enemy.IsBoss)
+            {
+                // move boss down upto a certain point
+                if (enemy.GetY() <= gameEnvironment.Height / 4)
+                {
+                    enemy.MoveY();
+                }
+            }
+            else
+            {
+                // move enemy down
+                enemy.MoveY();
+            }
 
             if (enemy.TargetsPlayer)
             {

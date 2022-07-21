@@ -184,9 +184,6 @@ namespace AstroOdyssey
                     destructible.LooseHealth();
                 }
 
-                // fade the a bit on projectile hit
-                destructible.Fade();
-
                 //App.PlaySound(SoundType.ROUNDS_HIT);
 
                 switch (destructible.Tag)
@@ -194,6 +191,17 @@ namespace AstroOdyssey
                     case ENEMY:
                         {
                             var enemy = destructible as Enemy;
+
+                            if (enemy.IsBoss)
+                            {
+                                if (enemy.Health <= 3)
+                                    enemy.Fade();
+                            }
+                            else
+                            {
+                                // fade the a bit on projectile hit
+                                enemy.Fade();
+                            }
 
                             if (destructible.HasNoHealth)
                             {
@@ -219,6 +227,9 @@ namespace AstroOdyssey
                     case METEOR:
                         {
                             var meteor = destructible as Meteor;
+
+                            // fade the a bit on projectile hit
+                            meteor.Fade();
 
                             if (destructible.HasNoHealth)
                             {

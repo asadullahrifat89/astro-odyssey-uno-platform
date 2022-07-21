@@ -332,7 +332,12 @@ namespace AstroOdyssey
                         _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
 
                         if (destroyed)
+                        {
+                            if (enemy.IsBoss)
+                                _enemyHelper.DisengageBoss();
+
                             return;
+                        }
 
                         // check if enemy collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
@@ -563,6 +568,11 @@ namespace AstroOdyssey
                 default:
                     {
                         _enemyHelper.LevelUp();
+
+                        if (GameLevel > GameLevel.Level_2)
+                        {
+                            _enemyHelper.EngageBoss();
+                        }
 
                         _meteorHelper.LevelUp();
 
