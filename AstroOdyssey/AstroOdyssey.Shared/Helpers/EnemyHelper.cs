@@ -70,7 +70,7 @@ namespace AstroOdyssey
             double left = 0;
             double top = 0;
 
-            //TODO: spawn blaster shooting enemies after level 2
+            // spawn blaster shooting enemies after level 2
             if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
             {
                 firingEnemySpawnCounter = firingEnemySpawnLimit;
@@ -82,7 +82,7 @@ namespace AstroOdyssey
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
                 evadingEnemySpawnCounter = evadingEnemySpawnLimit;
-                newEnemy.WillEvadeOnHit = true;
+                newEnemy.EvadesOnHit = true;
                 evadingEnemySpawnLimit = random.Next(1, 4);
             }
 
@@ -159,6 +159,8 @@ namespace AstroOdyssey
         /// <param name="destroyed"></param>
         public void UpdateEnemy(Enemy enemy, out bool destroyed)
         {
+            //TODO: take player coordinates and follow the the player position
+
             destroyed = false;
 
             // move enemy down

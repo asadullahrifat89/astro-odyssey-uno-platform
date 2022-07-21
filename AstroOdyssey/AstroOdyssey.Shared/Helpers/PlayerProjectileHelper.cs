@@ -209,7 +209,7 @@ namespace AstroOdyssey
 
                             if (destructible.HasHealth)
                             {
-                                if (enemy.WillEvadeOnHit && !enemy.IsEvading)
+                                if (enemy.EvadesOnHit && !enemy.IsEvading)
                                     enemy.Evade();
                             }
                         }

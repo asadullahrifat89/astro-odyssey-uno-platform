@@ -32,11 +32,13 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public bool WillEvadeOnHit { get; set; }
-
-        public bool IsEvading { get; set; }
+        public bool FollowsPlayer { get; set; }
 
         public bool FiresProjectiles { get; set; }
+
+        public bool EvadesOnHit { get; set; }
+
+        public bool IsEvading { get; set; }
 
         #endregion
 

@@ -189,30 +189,17 @@ namespace AstroOdyssey
         {
             GameOver();
 
-            UpdatePlayer();
-
             UpdateGameObjects();
 
             SetGameLevel();
 
             SpawnGameObjects();
 
-            HandlePlayerPowerDown();
-
             UpdateScore();
 
             HandleInGameText();
 
             _playerHelper.HandleDamageRecovery(Player);
-        }
-
-        /// <summary>
-        /// Updates the player. Moves the player if required.
-        /// </summary>
-        private void UpdatePlayer()
-        {
-            if (MoveLeft || MoveRight)
-                PointerX = _playerHelper.UpdatePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
         }
 
         /// <summary>
@@ -239,7 +226,7 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateGameObjects()
         {
-            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
+            var gameObjects = GameView.GetGameObjects<GameObject>();
 
             // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
@@ -274,6 +261,22 @@ namespace AstroOdyssey
 
             switch (tag)
             {
+                case PLAYER:
+                    {
+                        if (MoveLeft || MoveRight)
+                            PointerX = _playerHelper.UpdatePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
+
+                        if (IsPoweredUp)
+                        {
+                            if (_playerHelper.PowerDown(Player))
+                            {
+                                _playerProjectileHelper.PowerDown(PowerUpType);
+                                IsPoweredUp = false;
+                                PowerUpType = PowerUpType.NONE;
+                            }
+                        }
+                    }
+                    break;
                 case PLAYER_PROJECTILE:
                     {
                         var projectile = gameObject as PlayerProjectile;
@@ -603,27 +606,7 @@ namespace AstroOdyssey
             Player.SetY(windowHeight - Player.Height - 20);
         }
 
-        #endregion
-
-        #region PowerUp Methods      
-
-        /// <summary>
-        /// Handles debuffing the power up effect.
-        /// </summary>
-        private void HandlePlayerPowerDown()
-        {
-            if (IsPoweredUp)
-            {
-                if (_playerHelper.PowerDown(Player))
-                {
-                    _playerProjectileHelper.PowerDown(PowerUpType);
-                    IsPoweredUp = false;
-                    PowerUpType = PowerUpType.NONE;
-                }
-            }
-        }
-
-        #endregion
+        #endregion      
 
         #region Window Events
 
