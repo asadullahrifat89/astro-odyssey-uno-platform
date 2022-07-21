@@ -53,6 +53,7 @@ namespace AstroOdyssey
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
             BOSS_APPEARANCE,
+            BOSS_DESTRUCTION,
             ROUNDS_HIT,
             POWER_UP,
             POWER_DOWN,

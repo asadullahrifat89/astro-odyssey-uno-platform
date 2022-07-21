@@ -29,6 +29,7 @@ const gameStartSource = "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3";
 const gameOverSource = "Assets/Sounds/videogame-death-sound-43894.mp3";
 
 const bossAppearanceSource = "Assets/Sounds/dark-sitar-7546.mp3";
+const bossDestroyedSource = "Assets/Sounds/explosion-36210.mp3";
 
 const bgAudio = new Audio();
 const rfAudio = new Audio();
@@ -51,6 +52,7 @@ const gsAudio = new Audio();
 const goAudio = new Audio();
 
 const baAudio = new Audio();
+const bdAudio = new Audio();
 
 function playGameSound(baseUrl, soundType) {
     switch (soundType) {
@@ -182,6 +184,14 @@ function playGameSound(baseUrl, soundType) {
                 setAudioAttributes(baAudio);
             }
             playSound(baAudio);
+        } break;
+        case "BOSS_DESTRUCTION": {
+            if (bdAudio.src.length == 0) {
+                bdAudio.src = baseUrl.concat("/", bossDestroyedSource);
+                bdAudio.volume = 1.0;                
+                setAudioAttributes(bdAudio);
+            }
+            playSound(bdAudio);
         } break;
         case "BACKGROUND_MUSIC": {
 
