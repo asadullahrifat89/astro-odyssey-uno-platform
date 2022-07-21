@@ -13,6 +13,9 @@ namespace AstroOdyssey
         private int projectileCounter;
         private int projectileSpawnLimit = 60;
 
+        private int sideWaysProjectileCounter;
+        private int sideWaysProjectileSpawnLimit = 4;
+
         private Random random = new Random();
 
         #endregion
@@ -43,8 +46,6 @@ namespace AstroOdyssey
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                //TODO: boss projectile generation that moves side ways
-
                 projectileCounter = projectileSpawnLimit;
                 projectileSpawnLimit = random.Next(30, 60);
             }
@@ -64,6 +65,17 @@ namespace AstroOdyssey
             projectile.SetAttributes(speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
 
             projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
+
+            if (enemy.IsBoss)
+            {
+                sideWaysProjectileCounter--;
+
+                if (sideWaysProjectileCounter <= 0)
+                    projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+
+                sideWaysProjectileCounter = sideWaysProjectileSpawnLimit;
+                sideWaysProjectileSpawnLimit = random.Next(2, 5);
+            }
 
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }

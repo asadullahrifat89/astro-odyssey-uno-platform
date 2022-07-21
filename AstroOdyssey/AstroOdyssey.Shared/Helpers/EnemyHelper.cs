@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -48,7 +49,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void EngageBoss(GameLevel gameLevel)
+        public void EngageBossEnemy(GameLevel gameLevel)
         {
             var enemy = new Enemy();
 
@@ -69,12 +70,26 @@ namespace AstroOdyssey
             {
                 case 0:
                     {
-                        SetPlayerTargetingEnemy(enemy);
+                        if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsPlayerTargeting))
+                        {
+                            SetHoveringEnemy(enemy);
+                        }
+                        else
+                        {
+                            SetPlayerTargetingEnemy(enemy);
+                        }
                     }
                     break;
                 case 1:
                     {
-                        SetHoveringEnemy(enemy);
+                        if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsHovering))
+                        {
+                            SetPlayerTargetingEnemy(enemy);
+                        }
+                        else
+                        {
+                            SetHoveringEnemy(enemy);
+                        }
                     }
                     break;
                 default:
@@ -94,7 +109,7 @@ namespace AstroOdyssey
             App.StopSound();
         }
 
-        public void DisengageBoss()
+        public void DisengageBossEnemy()
         {
             gameEnvironment.IsBossEngaged = false;
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);

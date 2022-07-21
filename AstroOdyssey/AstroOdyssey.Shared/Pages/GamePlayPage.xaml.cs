@@ -305,7 +305,7 @@ namespace AstroOdyssey
                                         if (enemy.IsBoss)
                                         {
                                             ShowInGameText("BOSS CLEARED");
-                                            _enemyHelper.DisengageBoss();
+                                            _enemyHelper.DisengageBossEnemy();
                                         }
                                     }
                                     break;
@@ -536,20 +536,24 @@ namespace AstroOdyssey
 
             if (Score > 0)
                 GameLevel = GameLevel.Level_1;
-            if (Score > 25)
-                GameLevel = GameLevel.Level_2;
             if (Score > 50)
-                GameLevel = GameLevel.Level_3;
+                GameLevel = GameLevel.Level_2;
             if (Score > 100)
-                GameLevel = GameLevel.Level_4;
+                GameLevel = GameLevel.Level_3;
             if (Score > 200)
-                GameLevel = GameLevel.Level_5;
+                GameLevel = GameLevel.Level_4;
             if (Score > 400)
+                GameLevel = GameLevel.Level_5;
+            if (Score > 600)
                 GameLevel = GameLevel.Level_6;
             if (Score > 800)
                 GameLevel = GameLevel.Level_7;
-            if (Score > 1600)
+            if (Score > 1000)
                 GameLevel = GameLevel.Level_8;
+            if (Score > 1200)
+                GameLevel = GameLevel.Level_9;
+            if (Score > 1400)
+                GameLevel = GameLevel.Level_10;
 
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)
@@ -575,7 +579,7 @@ namespace AstroOdyssey
                         if (GameLevel > GameLevel.Level_2)
                         {
                             ShowInGameText("BOSS INCOMING");
-                            _enemyHelper.EngageBoss(GameLevel);
+                            _enemyHelper.EngageBossEnemy(GameLevel);
                         }
 
                         _meteorHelper.LevelUp();
