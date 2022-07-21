@@ -32,7 +32,7 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public bool FollowsPlayer { get; set; }
+        public bool TargetsPlayer { get; set; }
 
         public bool FiresProjectiles { get; set; }
 

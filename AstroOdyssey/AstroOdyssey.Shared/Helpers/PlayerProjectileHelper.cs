@@ -197,7 +197,7 @@ namespace AstroOdyssey
 
                             if (destructible.HasNoHealth)
                             {
-                                if (enemy.FollowsPlayer)
+                                if (enemy.TargetsPlayer)
                                     score += 3;
                                 else if (enemy.IsOverPowered)
                                     score += 4;

@@ -70,43 +70,13 @@ namespace AstroOdyssey
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredMeteorSpawnCounter <= 0)
             {
-                overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnLimit;
-
-                newMeteor.OverPower();
-
-                overPoweredMeteorSpawnLimit = random.Next(10, 20);
+                GenerateOverPoweredMeteor(newMeteor);
             }
 
             // generate side ways flying meteors after level 2
             if (gameLevel > GameLevel.Level_2 && rotatedMeteorSpawnCounter <= 0)
             {
-                newMeteor.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                rotatedMeteorSpawnCounter = rotatedMeteorSpawnLimit;
-
-                switch (newMeteor.XDirection)
-                {
-                    case XDirection.LEFT:
-                        newMeteor.Rotation = (newMeteor.Rotation + 1) * -1;
-                        left = gameEnvironment.Width;
-                        break;
-                    case XDirection.RIGHT:
-                        newMeteor.Rotation = newMeteor.Rotation + 1;
-                        left = 0 - newMeteor.Width + 10;
-                        break;
-                    default:
-                        break;
-                }
-
-                // side ways meteors fly at a higher speed
-                newMeteor.Speed++;
-#if DEBUG
-                Console.WriteLine("Meteor XDirection: " + newMeteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-#endif
-                top = random.Next(0, (int)gameEnvironment.Height / 3);
-                newMeteor.Rotate();
-
-                // randomize next x flying meteor pop up
-                rotatedMeteorSpawnLimit = random.Next(5, 15);
+                GenerateSideWaysMovingMeteor(newMeteor, ref left, ref top);
             }
             else
             {
@@ -118,6 +88,54 @@ namespace AstroOdyssey
 
             rotatedMeteorSpawnCounter--;
             overPoweredMeteorSpawnCounter--;
+        }
+
+        /// <summary>
+        /// Generates a meteor that is overpowered. Slower but stronger and bigger meteors.
+        /// </summary>
+        /// <param name="meteor"></param>
+        private void GenerateOverPoweredMeteor(Meteor meteor)
+        {
+            overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnLimit;
+            meteor.OverPower();
+            overPoweredMeteorSpawnLimit = random.Next(10, 20);
+        }
+
+        /// <summary>
+        ///  Generates a meteor that moves sideways from one direction.
+        /// </summary>
+        /// <param name="meteor"></param>
+        /// <param name="left"></param>
+        /// <param name="top"></param>
+        private void GenerateSideWaysMovingMeteor(Meteor meteor, ref double left, ref double top)
+        {
+            meteor.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+            rotatedMeteorSpawnCounter = rotatedMeteorSpawnLimit;
+
+            switch (meteor.XDirection)
+            {
+                case XDirection.LEFT:
+                    meteor.Rotation = (meteor.Rotation + 1) * -1;
+                    left = gameEnvironment.Width;
+                    break;
+                case XDirection.RIGHT:
+                    meteor.Rotation = meteor.Rotation + 1;
+                    left = 0 - meteor.Width + 10;
+                    break;
+                default:
+                    break;
+            }
+
+            // side ways meteors fly at a higher speed
+            meteor.Speed++;
+#if DEBUG
+            Console.WriteLine("Meteor XDirection: " + meteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+#endif
+            top = random.Next(0, (int)gameEnvironment.Height / 3);
+            meteor.Rotate();
+
+            // randomize next x flying meteor pop up
+            rotatedMeteorSpawnLimit = random.Next(5, 15);
         }
 
         /// <summary>
