@@ -231,7 +231,7 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
             {
-                if (gameObject.IsMarkedForFadedRemoval)
+                if (gameObject.IsMarkedForFadedDestruction)
                 {
                     gameObject.Fade();
 

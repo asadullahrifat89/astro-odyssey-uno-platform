@@ -192,12 +192,10 @@ namespace AstroOdyssey
                 left = random.Next(10, (int)gameEnvironment.Width - 70);
 
                 if (enemy.IsHovering)
-                {
                     enemy.XDirection = XDirection.LEFT;
 
-                    if (left <= 100)
-                        enemy.XDirection = XDirection.RIGHT;
-                }
+                //if (left <= 100)
+                //    enemy.XDirection = XDirection.RIGHT;
 
                 top = 0 - enemy.Height;
             }
@@ -211,7 +209,7 @@ namespace AstroOdyssey
             enemy.IsHovering = true;
             hoveringEnemySpawnLimit = random.Next(9, 13);
 
-            // following enemies do not evade on hit
+            // hovering enemies do not evade or target player
             enemy.IsEvading = false;
             enemy.IsPlayerTargeting = false;
         }
@@ -237,7 +235,7 @@ namespace AstroOdyssey
             enemy.IsPlayerTargeting = true;
             targetingEnemySpawnLimit = random.Next(7, 12);
 
-            // following enemies do not evade on hit
+            // player targeting enemies do not evade on hit
             enemy.IsEvading = false;
         }
 
@@ -314,7 +312,7 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         public void DestroyEnemy(Enemy enemy)
         {
-            enemy.IsMarkedForFadedRemoval = true;
+            enemy.IsMarkedForFadedDestruction = true;
             App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
@@ -330,7 +328,7 @@ namespace AstroOdyssey
             if (enemy.IsBoss)
             {
                 // move boss down upto a certain point
-                if (enemy.GetY() <= gameEnvironment.Height / 4)
+                if (enemy.GetY() + enemy.Width / 2 <= gameEnvironment.Height / 4)
                 {
                     enemy.MoveY();
                 }
@@ -371,8 +369,8 @@ namespace AstroOdyssey
                     enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
             }
 
-            // if the object is marked for lazy destruction then no need to perform collisions
-            if (enemy.IsMarkedForFadedRemoval)
+            // if the object is marked for lazy destruction then do not destroy immidiately
+            if (enemy.IsMarkedForFadedDestruction)
                 return;
 
             // if object has gone beyond game view

@@ -60,7 +60,7 @@ namespace AstroOdyssey
 
         public bool IsDestructible { get; set; }
 
-        public bool IsMarkedForFadedRemoval { get; set; }
+        public bool IsMarkedForFadedDestruction { get; set; }
 
         #endregion
 

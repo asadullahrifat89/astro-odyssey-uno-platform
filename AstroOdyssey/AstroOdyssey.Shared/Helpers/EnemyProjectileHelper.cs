@@ -14,7 +14,7 @@ namespace AstroOdyssey
         private int projectileSpawnLimit = 60;
 
         private int sideWaysProjectileCounter;
-        private int sideWaysProjectileSpawnLimit = 4;
+        private int sideWaysProjectileSpawnLimit = 5;
 
         private Random random = new Random();
 
@@ -73,7 +73,7 @@ namespace AstroOdyssey
                     projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
 
                 sideWaysProjectileCounter = sideWaysProjectileSpawnLimit;
-                sideWaysProjectileSpawnLimit = random.Next(0, 5);
+                sideWaysProjectileSpawnLimit = random.Next(5, 7);
             }
 
             projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);

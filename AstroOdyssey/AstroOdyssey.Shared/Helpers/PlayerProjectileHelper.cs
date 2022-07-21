@@ -19,8 +19,8 @@ namespace AstroOdyssey
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
         private readonly int RAPIDSHOT_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int DEADSHOT_ROUNDS_LIMIT_INCREASE = 30;
-        private readonly int DEADSHOT_ROUNDS_SPEED_DECREASE = 10;
+        private readonly int DEADSHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DEADSHOT_ROUNDS_SPEED_DECREASE = 5;
 
         private readonly int SONICSHOT_ROUNDS_LIMIT_INCREASE = 25;
         private readonly int SONICSHOT_ROUNDS_SPEED_INCREASE = 25;

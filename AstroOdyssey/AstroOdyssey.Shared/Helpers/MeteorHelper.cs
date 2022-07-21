@@ -144,7 +144,7 @@ namespace AstroOdyssey
         /// <param name="meteor"></param>
         public void DestroyMeteor(Meteor meteor)
         {
-            meteor.IsMarkedForFadedRemoval = true;
+            meteor.IsMarkedForFadedDestruction = true;
             App.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
         }
 
@@ -155,15 +155,15 @@ namespace AstroOdyssey
         /// <param name="destroyed"></param>
         public void UpdateMeteor(Meteor meteor, out bool destroyed)
         {
-            destroyed = false;
+            destroyed = false;          
 
             // move meteor down
             meteor.Rotate();
             meteor.MoveY();
             meteor.MoveX();
 
-            // if the object is marked for lazy destruction then no need to perform collisions
-            if (meteor.IsMarkedForFadedRemoval)
+            // if the object is marked for lazy destruction then do not destroy immidiately
+            if (meteor.IsMarkedForFadedDestruction)
                 return;
 
             // if meteor or meteor object has gone beyond game view
