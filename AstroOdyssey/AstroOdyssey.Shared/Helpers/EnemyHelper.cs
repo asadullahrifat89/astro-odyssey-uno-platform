@@ -225,8 +225,6 @@ namespace AstroOdyssey
         /// <param name="destroyed"></param>
         public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
         {
-            //TODO: take player coordinates and follow the the player position
-
             destroyed = false;
 
             // move enemy down
