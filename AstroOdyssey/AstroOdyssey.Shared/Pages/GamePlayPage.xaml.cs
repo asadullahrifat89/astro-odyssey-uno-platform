@@ -30,8 +30,8 @@ namespace AstroOdyssey
         private long frameEndTime;
         private int frameStatUpdateCounter;
 
-        private int frameStatUpdateLimit = 5;
-        private int showInGameTextLimit = 100;
+        private int frameStatUpdateFrequency = 5;
+        private int showInGameTextFrequency = 100;
 
         private double windowWidth, windowHeight;
 
@@ -494,7 +494,7 @@ namespace AstroOdyssey
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + FrameTime + ", Duration: " + (int)FrameDuration + ",  Start Time: " + frameStartTime + ",  End Time: " + frameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateCounter = frameStatUpdateLimit;
+                frameStatUpdateCounter = frameStatUpdateFrequency;
             }
         }
 
@@ -504,7 +504,7 @@ namespace AstroOdyssey
         private void ShowInGameText(string text)
         {
             InGameText.Text = text;
-            showInGameTextCounter = showInGameTextLimit;
+            showInGameTextCounter = showInGameTextFrequency;
         }
 
         /// <summary>
@@ -592,7 +592,7 @@ namespace AstroOdyssey
 
                         _playerProjectileHelper.LevelUp();
 
-                        _enemyProjectileHelper.LevelUp();
+                        //_enemyProjectileHelper.LevelUp();
                     }
                     break;
             }

@@ -12,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int healthCounter;
-        private int healthSpawnLimit = 1000;
+        private int healthSpawnFrequency = 1000;
         private double healthSpeed = 2;
 
         #endregion
@@ -43,7 +43,7 @@ namespace AstroOdyssey
                 if (healthCounter < 0)
                 {
                     GenerateHealth();
-                    healthCounter = healthSpawnLimit;
+                    healthCounter = healthSpawnFrequency;
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace AstroOdyssey
             health.AddToGameEnvironment(top: 0 - health.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             // change the next health spawn time
-            healthSpawnLimit = random.Next(1000, 1500);
+            healthSpawnFrequency = random.Next(1000, 1500);
         }
 
         /// <summary>

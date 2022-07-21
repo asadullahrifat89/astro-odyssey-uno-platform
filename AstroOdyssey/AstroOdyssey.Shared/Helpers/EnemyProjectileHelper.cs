@@ -10,11 +10,11 @@ namespace AstroOdyssey
         private readonly GameEnvironment gameEnvironment;
         private readonly string baseUrl;
 
-        private int projectileCounter;
-        private int projectileSpawnLimit = 60;
+        //private int ProjectileCounter;
+        //private int ProjectileSpawnFrequency = 60;
 
-        private int sideWaysProjectileCounter;
-        private int sideWaysProjectileSpawnLimit = 5;
+        //private int SideWaysProjectileCounter;
+        //private int SideWaysProjectileSpawnFrequency = 5;
 
         private Random random = new Random();
 
@@ -40,14 +40,14 @@ namespace AstroOdyssey
         public void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
         {
             // each frame progress decreases this counter
-            projectileCounter -= 1;
+            enemy.ProjectileCounter -= 1;
 
-            if (projectileCounter <= 0)
+            if (enemy.ProjectileCounter <= 0)
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                projectileCounter = projectileSpawnLimit;
-                projectileSpawnLimit = random.Next(30, 60);
+                enemy.ProjectileCounter = enemy.ProjectileSpawnFrequency;
+                enemy.ProjectileSpawnFrequency = random.Next(30, 60);
             }
         }
 
@@ -67,13 +67,13 @@ namespace AstroOdyssey
 
             if (enemy.IsBoss)
             {
-                sideWaysProjectileCounter--;
+                enemy.SideWaysProjectileCounter--;
 
-                if (sideWaysProjectileCounter <= 0)
+                if (enemy.SideWaysProjectileCounter <= 0)
                     projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
 
-                sideWaysProjectileCounter = sideWaysProjectileSpawnLimit;
-                sideWaysProjectileSpawnLimit = random.Next(5, 7);
+                enemy.SideWaysProjectileCounter = enemy.SideWaysProjectileSpawnFrequency;
+                enemy.SideWaysProjectileSpawnFrequency = random.Next(5, 7);
             }
 
             projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
@@ -102,13 +102,13 @@ namespace AstroOdyssey
             }
         }
 
-        /// <summary>
-        /// Levels up projectiles.
-        /// </summary>
-        public void LevelUp()
-        {
-            projectileSpawnLimit -= 1;
-        }
+        ///// <summary>
+        ///// Levels up projectiles.
+        ///// </summary>
+        //public void LevelUp()
+        //{
+        //    ProjectileSpawnFrequency -= 1;
+        //}
 
         #endregion
     }

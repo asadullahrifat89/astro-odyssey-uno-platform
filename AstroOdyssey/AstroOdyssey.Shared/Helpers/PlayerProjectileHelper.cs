@@ -13,7 +13,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int projectileCounter;
-        private int projectileSpawnLimit = 16;
+        private int projectileSpawnFrequency = 16;
         private double projectileSpeed = 18;
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
@@ -61,7 +61,7 @@ namespace AstroOdyssey
                     GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
                 }
 
-                projectileCounter = projectileSpawnLimit;
+                projectileCounter = projectileSpawnFrequency;
             }
         }
 
@@ -270,19 +270,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
+                        projectileSpawnFrequency -= RAPIDSHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
                         projectileSpeed += RAPIDSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnFrequency += DEADSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
                         projectileSpeed -= DEADSHOT_ROUNDS_SPEED_DECREASE; // slow projectile
                     }
                     break;
                 case PowerUpType.SONICSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnFrequency += SONICSHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
                         projectileSpeed += SONICSHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
@@ -302,19 +302,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPIDSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
+                        projectileSpawnFrequency += RAPIDSHOT_ROUNDS_LIMIT_DECREASE;
                         projectileSpeed -= RAPIDSHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.DEADSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnFrequency -= DEADSHOT_ROUNDS_LIMIT_INCREASE;
                         projectileSpeed += DEADSHOT_ROUNDS_SPEED_DECREASE;
                     }
                     break;
                 case PowerUpType.SONICSHOT_ROUNDS:
                     {
-                        projectileSpawnLimit -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnFrequency -= SONICSHOT_ROUNDS_LIMIT_INCREASE;
                         projectileSpeed -= SONICSHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
@@ -328,7 +328,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            projectileSpawnLimit -= 1;
+            projectileSpawnFrequency -= 1;
         }
 
         #endregion
