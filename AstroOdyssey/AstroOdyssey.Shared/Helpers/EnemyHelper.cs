@@ -98,7 +98,7 @@ namespace AstroOdyssey
             //        break;
             //}
 
-            double left = random.Next(10, (int)gameEnvironment.Width - 70);
+            double left = random.Next(200, (int)gameEnvironment.Width - 200);
             double top = 0 - enemy.Height;
 
             if (enemy.IsHovering)
@@ -191,13 +191,15 @@ namespace AstroOdyssey
             }
             else
             {
-                left = random.Next(10, (int)gameEnvironment.Width - 70);
-
                 if (enemy.IsHovering)
+                {
+                    left = random.Next(200, (int)gameEnvironment.Width - 200);
                     enemy.XDirection = XDirection.LEFT;
-
-                //if (left <= 100)
-                //    enemy.XDirection = XDirection.RIGHT;
+                }
+                else
+                {
+                    left = random.Next(10, (int)gameEnvironment.Width - (int)enemy.Width);
+                }
 
                 top = 0 - enemy.Height;
             }

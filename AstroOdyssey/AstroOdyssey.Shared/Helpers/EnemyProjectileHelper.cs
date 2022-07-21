@@ -61,13 +61,17 @@ namespace AstroOdyssey
 
             if (enemy.IsBoss)
             {
+                //TODO: star blast shot across screen
+
                 enemy.SideWaysProjectileSpawnCounter--;
 
                 if (enemy.SideWaysProjectileSpawnCounter <= 0)
+                {
                     projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
 
-                enemy.SideWaysProjectileSpawnCounter = enemy.SideWaysProjectileSpawnFrequency;
-                enemy.SideWaysProjectileSpawnFrequency = random.Next(5, 7);
+                    enemy.SideWaysProjectileSpawnCounter = enemy.SideWaysProjectileSpawnFrequency;
+                    enemy.SideWaysProjectileSpawnFrequency = random.Next(4, 7);
+                }
             }
 
             projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);

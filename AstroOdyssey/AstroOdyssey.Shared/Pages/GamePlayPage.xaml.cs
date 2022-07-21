@@ -31,7 +31,7 @@ namespace AstroOdyssey
         private int frameStatUpdateSpawnCounter;
 
         private int frameStatUpdateFrequency = 5;
-        private int showInGameTextFrequency = 100;
+        private int showInGameTextFrequency = 110;
 
         private double windowWidth, windowHeight;
 
@@ -591,8 +591,6 @@ namespace AstroOdyssey
                         _starHelper.LevelUp();
 
                         _playerProjectileHelper.LevelUp();
-
-                        //_enemyProjectileHelper.LevelUp();
                     }
                     break;
             }
