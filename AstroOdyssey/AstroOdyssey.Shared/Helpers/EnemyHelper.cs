@@ -31,6 +31,8 @@ namespace AstroOdyssey
         private int enemySpawnLimit = 48;
         private double enemySpeed = 2;
 
+        private bool bossEngaged;
+
         #endregion
 
         #region Ctor
@@ -44,6 +46,11 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        public void SwpanBoss() 
+        {
+        
+        }
 
         /// <summary>
         /// Spawns an enemy.
@@ -66,9 +73,9 @@ namespace AstroOdyssey
         /// </summary>
         public void GenerateEnemy(GameLevel gameLevel)
         {
-            var newEnemy = new Enemy();
+            var enemy = new Enemy();
 
-            newEnemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
+            enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
 
             double left = 0;
             double top = 0;
@@ -76,39 +83,39 @@ namespace AstroOdyssey
             // spawn evading enemies after level 3
             if (gameLevel > GameLevel.Level_3 && evadingEnemySpawnCounter <= 0)
             {
-                GenerateEvadingEnemy(newEnemy);
+                GenerateEvadingEnemy(enemy);
             }
 
             // spawn following enemies after level 3
             if (gameLevel > GameLevel.Level_3 && followingEnemySpawnCounter <= 0)
             {
-                GeneratePlayerTargetingEnemy(newEnemy);
+                GeneratePlayerTargetingEnemy(enemy);
             }
 
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
-                GenerateOverPoweredEnemy(newEnemy);
+                GenerateOverPoweredEnemy(enemy);
             }
 
             // spawn blaster shooting enemies after level 2
             if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
             {
-                GenerateProjectileFiringEnemy(newEnemy);
+                GenerateProjectileFiringEnemy(enemy);
             }
 
             // generate side ways flying enemies after level 2
             if (gameLevel > GameLevel.Level_2 && xFlyingEnemySpawnCounter <= 0)
             {
-                GenerateSideWaysMovingEnemy(newEnemy, ref left, ref top);
+                GenerateSideWaysMovingEnemy(enemy, ref left, ref top);
             }
             else
             {
                 left = random.Next(10, (int)gameEnvironment.Width - 70);
-                top = 0 - newEnemy.Height;
+                top = 0 - enemy.Height;
             }
 
-            newEnemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
             xFlyingEnemySpawnCounter--;
             overPoweredEnemySpawnCounter--;

@@ -50,10 +50,10 @@ namespace AstroOdyssey
         /// </summary>
         public void GeneratePowerUp()
         {
-            var newPowerUp = new PowerUp();
+            var powerUp = new PowerUp();
 
-            newPowerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
-            newPowerUp.AddToGameEnvironment(top: 0 - newPowerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            powerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
+            powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             // change the next power up spawn time
             powerUpSpawnLimit = random.Next(1500, 2000);

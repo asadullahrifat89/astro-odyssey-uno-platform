@@ -72,15 +72,15 @@ namespace AstroOdyssey
         /// <param name="projectileWidth"></param>
         public void GenerateProjectile(bool isPoweredUp, Player player, GameLevel gameLevel, PowerUpType powerUpType)
         {
-            var newProjectile = new PlayerProjectile();
+            var projectile = new PlayerProjectile();
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
+            projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
-            newProjectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - newProjectile.Height / 2, left: player.GetX() + player.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - projectile.Height / 2, left: player.GetX() + player.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
 
-            if (newProjectile.IsPoweredUp)
+            if (projectile.IsPoweredUp)
             {
                 switch (powerUpType)
                 {

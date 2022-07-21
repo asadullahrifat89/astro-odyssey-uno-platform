@@ -49,14 +49,14 @@ namespace AstroOdyssey
         /// </summary>
         public void GenerateStar()
         {
-            var newStar = new Star();
+            var star = new Star();
 
-            newStar.SetAttributes(speed: starSpeed, scale: gameEnvironment.GetGameObjectScale());
+            star.SetAttributes(speed: starSpeed, scale: gameEnvironment.GetGameObjectScale());
 
-            var top = 0 - newStar.Height;
+            var top = 0 - star.Height;
             var left = random.Next(10, (int)gameEnvironment.Width - 10);
 
-            newStar.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            star.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
         }
 
         /// <summary>

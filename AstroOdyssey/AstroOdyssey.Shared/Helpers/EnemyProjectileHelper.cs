@@ -28,26 +28,6 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Updates a projectile.
-        /// </summary>
-        /// <param name="projectile"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
-        {
-            destroyed = false;
-
-            // move projectile down                
-            projectile.MoveY();
-
-            // remove projectile if outside game canvas
-            if (projectile.GetY() > gameEnvironment.Height)
-            {
-                gameEnvironment.AddDestroyableGameObject(projectile);
-                destroyed = true;
-            }
-        }
-
-        /// <summary>
         /// Spawns a projectile.
         /// </summary>
         /// <param name="enemy"></param>
@@ -72,15 +52,35 @@ namespace AstroOdyssey
         /// <param name="gameLevel"></param>
         private void GenerateProjectile(Enemy enemy, GameLevel gameLevel)
         {
-            var newProjectile = new EnemyProjectile();
+            var projectile = new EnemyProjectile();
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            newProjectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
+            projectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
 
-            newProjectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + newProjectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - newProjectile.Width / 2, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
 
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
+        }
+
+        /// <summary>
+        /// Updates a projectile.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
+        {
+            destroyed = false;
+
+            // move projectile down                
+            projectile.MoveY();
+
+            // remove projectile if outside game canvas
+            if (projectile.GetY() > gameEnvironment.Height)
+            {
+                gameEnvironment.AddDestroyableGameObject(projectile);
+                destroyed = true;
+            }
         }
 
         /// <summary>
