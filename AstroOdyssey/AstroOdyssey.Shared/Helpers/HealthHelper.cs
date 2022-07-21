@@ -11,7 +11,7 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int healthCounter;
+        private int healthSpawnCounter;
         private int healthSpawnFrequency = 1000;
         private double healthSpeed = 2;
 
@@ -37,13 +37,13 @@ namespace AstroOdyssey
             if (player.Health <= 60)
             {
                 // each frame progress decreases this counter
-                healthCounter -= 1;
+                healthSpawnCounter -= 1;
 
                 // when counter reaches zero, create a Health
-                if (healthCounter < 0)
+                if (healthSpawnCounter < 0)
                 {
                     GenerateHealth();
-                    healthCounter = healthSpawnFrequency;
+                    healthSpawnCounter = healthSpawnFrequency;
                 }
             }
         }

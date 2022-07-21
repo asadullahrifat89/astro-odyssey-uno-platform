@@ -18,7 +18,7 @@ namespace AstroOdyssey
         private int overPoweredMeteorSpawnCounter = 15;
         private int overPoweredMeteorSpawnFrequency = 15;
 
-        private int meteorCounter;
+        private int meteorSpawnCounter;
         private int meteorSpawnFrequency = 55;
         private double meteorSpeed = 1.5;
 
@@ -44,13 +44,13 @@ namespace AstroOdyssey
             if ((int)gameLevel > 0)
             {
                 // each frame progress decreases this counter
-                meteorCounter -= 1;
+                meteorSpawnCounter -= 1;
 
                 // when counter reaches zero, create a meteor
-                if (meteorCounter < 0)
+                if (meteorSpawnCounter < 0)
                 {
                     GenerateMeteor(gameLevel);
-                    meteorCounter = meteorSpawnFrequency;
+                    meteorSpawnCounter = meteorSpawnFrequency;
                 }
             }
         }

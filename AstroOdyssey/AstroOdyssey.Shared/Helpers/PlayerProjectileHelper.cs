@@ -12,7 +12,7 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int projectileCounter;
+        private int projectileSpawnCounter;
         private int projectileSpawnFrequency = 16;
         private double projectileSpeed = 18;
 
@@ -50,9 +50,9 @@ namespace AstroOdyssey
         public void SpawnProjectile(bool isPoweredUp, bool firingProjectiles, Player player, GameLevel gameLevel, PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
-            projectileCounter -= 1;
+            projectileSpawnCounter -= 1;
 
-            if (projectileCounter <= 0)
+            if (projectileSpawnCounter <= 0)
             {
                 if (firingProjectiles)
                 //// any object falls within player range
@@ -61,7 +61,7 @@ namespace AstroOdyssey
                     GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
                 }
 
-                projectileCounter = projectileSpawnFrequency;
+                projectileSpawnCounter = projectileSpawnFrequency;
             }
         }
 

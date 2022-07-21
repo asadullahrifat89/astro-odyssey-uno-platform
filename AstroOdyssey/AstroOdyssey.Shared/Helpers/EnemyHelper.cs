@@ -31,7 +31,7 @@ namespace AstroOdyssey
         private int hoveringEnemySpawnFrequency = 12;
         private int hoveringEnemySpawnCounter = 12;
 
-        private int enemyCounter;
+        private int enemySpawnCounter;
         private int enemySpawnFrequency = 48;
         private double enemySpeed = 2;
 
@@ -123,13 +123,13 @@ namespace AstroOdyssey
         public void SpawnEnemy(GameLevel gameLevel)
         {
             // each frame progress decreases this counter
-            enemyCounter -= 1;
+            enemySpawnCounter -= 1;
 
             // when counter reaches zero, create an enemy
-            if (enemyCounter < 0)
+            if (enemySpawnCounter < 0)
             {
                 GenerateEnemy(gameLevel);
-                enemyCounter = enemySpawnFrequency;
+                enemySpawnCounter = enemySpawnFrequency;
             }
         }
 

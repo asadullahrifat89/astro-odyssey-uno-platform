@@ -10,12 +10,6 @@ namespace AstroOdyssey
         private readonly GameEnvironment gameEnvironment;
         private readonly string baseUrl;
 
-        //private int ProjectileCounter;
-        //private int ProjectileSpawnFrequency = 60;
-
-        //private int SideWaysProjectileCounter;
-        //private int SideWaysProjectileSpawnFrequency = 5;
-
         private Random random = new Random();
 
         #endregion
@@ -40,13 +34,13 @@ namespace AstroOdyssey
         public void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
         {
             // each frame progress decreases this counter
-            enemy.ProjectileCounter -= 1;
+            enemy.ProjectileSpawnCounter -= 1;
 
-            if (enemy.ProjectileCounter <= 0)
+            if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                enemy.ProjectileCounter = enemy.ProjectileSpawnFrequency;
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnFrequency;
                 enemy.ProjectileSpawnFrequency = random.Next(30, 60);
             }
         }
@@ -67,12 +61,12 @@ namespace AstroOdyssey
 
             if (enemy.IsBoss)
             {
-                enemy.SideWaysProjectileCounter--;
+                enemy.SideWaysProjectileSpawnCounter--;
 
-                if (enemy.SideWaysProjectileCounter <= 0)
+                if (enemy.SideWaysProjectileSpawnCounter <= 0)
                     projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
 
-                enemy.SideWaysProjectileCounter = enemy.SideWaysProjectileSpawnFrequency;
+                enemy.SideWaysProjectileSpawnCounter = enemy.SideWaysProjectileSpawnFrequency;
                 enemy.SideWaysProjectileSpawnFrequency = random.Next(5, 7);
             }
 
@@ -101,14 +95,6 @@ namespace AstroOdyssey
                 destroyed = true;
             }
         }
-
-        ///// <summary>
-        ///// Levels up projectiles.
-        ///// </summary>
-        //public void LevelUp()
-        //{
-        //    ProjectileSpawnFrequency -= 1;
-        //}
 
         #endregion
     }

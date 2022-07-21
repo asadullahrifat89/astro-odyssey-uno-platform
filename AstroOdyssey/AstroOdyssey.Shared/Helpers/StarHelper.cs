@@ -11,7 +11,7 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int starCounter;
+        private int starSpawnCounter;
         private readonly int starSpawnFrequency = 250;
         private double starSpeed = 0.1d;
 
@@ -34,13 +34,13 @@ namespace AstroOdyssey
         public void SpawnStar()
         {
             // each frame progress decreases this counter
-            starCounter -= 1;
+            starSpawnCounter -= 1;
 
             // when counter reaches zero, create an star
-            if (starCounter < 0)
+            if (starSpawnCounter < 0)
             {
                 GenerateStar();
-                starCounter = starSpawnFrequency;
+                starSpawnCounter = starSpawnFrequency;
             }
         }
 

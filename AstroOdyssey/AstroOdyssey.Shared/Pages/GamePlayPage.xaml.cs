@@ -23,19 +23,19 @@ namespace AstroOdyssey
         private string baseUrl;
 
         const float FRAME_CAP_MS = 1000.0f / 50.0f;
-        private int fpsCounter = 0;
+        private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
         private long frameStartTime;
         private long frameEndTime;
-        private int frameStatUpdateCounter;
+        private int frameStatUpdateSpawnCounter;
 
         private int frameStatUpdateFrequency = 5;
         private int showInGameTextFrequency = 100;
 
         private double windowWidth, windowHeight;
 
-        private int showInGameTextCounter;
+        private int showInGameTextSpawnCounter;
 
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
@@ -174,12 +174,12 @@ namespace AstroOdyssey
             // calculate FPS
             if (lastFPSTime + 1000 < frameStartTime)
             {
-                fpsCount = fpsCounter;
-                fpsCounter = 0;
+                fpsCount = fpsSpawnCounter;
+                fpsSpawnCounter = 0;
                 lastFPSTime = frameStartTime;
             }
 
-            fpsCounter++;
+            fpsSpawnCounter++;
         }
 
         /// <summary>
@@ -476,9 +476,9 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
-            frameStatUpdateCounter -= 1;
+            frameStatUpdateSpawnCounter -= 1;
 
-            if (frameStatUpdateCounter < 0)
+            if (frameStatUpdateSpawnCounter < 0)
             {
                 var enemies = GameView.Children.OfType<Enemy>().Count();
                 var meteors = GameView.Children.OfType<Meteor>().Count();
@@ -494,7 +494,7 @@ namespace AstroOdyssey
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + FrameTime + ", Duration: " + (int)FrameDuration + ",  Start Time: " + frameStartTime + ",  End Time: " + frameEndTime + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateCounter = frameStatUpdateFrequency;
+                frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
             }
         }
 
@@ -504,7 +504,7 @@ namespace AstroOdyssey
         private void ShowInGameText(string text)
         {
             InGameText.Text = text;
-            showInGameTextCounter = showInGameTextFrequency;
+            showInGameTextSpawnCounter = showInGameTextFrequency;
         }
 
         /// <summary>
@@ -514,9 +514,9 @@ namespace AstroOdyssey
         {
             if (!InGameText.Text.IsNullOrBlank())
             {
-                showInGameTextCounter -= 1;
+                showInGameTextSpawnCounter -= 1;
 
-                if (showInGameTextCounter <= 0)
+                if (showInGameTextSpawnCounter <= 0)
                 {
                     InGameText.Text = "";
                 }

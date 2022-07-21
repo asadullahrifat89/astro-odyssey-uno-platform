@@ -12,10 +12,10 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int playerDamagedOpacityCounter;
+        private int playerDamagedOpacitySpawnCounter;
         private readonly int playerDamagedOpacityFrequency = 120;
 
-        private int powerUpTriggerCounter;
+        private int powerUpTriggerSpawnCounter;
         private readonly int powerUpTriggerFrequency = 1000;
 
         private double playerSpeed = 12;
@@ -166,7 +166,7 @@ namespace AstroOdyssey
 
             player.IsInEtherealState = true;
 
-            playerDamagedOpacityCounter = playerDamagedOpacityFrequency;
+            playerDamagedOpacitySpawnCounter = playerDamagedOpacityFrequency;
         }
 
         /// <summary>
@@ -176,9 +176,9 @@ namespace AstroOdyssey
         {
             if (player.IsInEtherealState)
             {
-                playerDamagedOpacityCounter -= 1;
+                playerDamagedOpacitySpawnCounter -= 1;
 
-                if (playerDamagedOpacityCounter <= 0)
+                if (playerDamagedOpacitySpawnCounter <= 0)
                 {
                     player.Opacity = 1;
                     player.IsInEtherealState = false;
@@ -201,7 +201,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            powerUpTriggerCounter = powerUpTriggerFrequency;
+            powerUpTriggerSpawnCounter = powerUpTriggerFrequency;
 
             App.PlaySound(baseUrl, SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
@@ -212,13 +212,13 @@ namespace AstroOdyssey
         /// </summary>
         public bool PowerDown(Player player)
         {
-            powerUpTriggerCounter -= 1;
+            powerUpTriggerSpawnCounter -= 1;
 
-            var powerGauge = ((powerUpTriggerCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
+            var powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
 
             player.SetPowerGauge(powerGauge);
 
-            if (powerUpTriggerCounter <= 0)
+            if (powerUpTriggerSpawnCounter <= 0)
             {
                 App.PlaySound(baseUrl, SoundType.POWER_DOWN);
                 player.TriggerPowerDown();

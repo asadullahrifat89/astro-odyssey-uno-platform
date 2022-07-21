@@ -11,7 +11,7 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int powerUpCounter = 1500;
+        private int powerUpSpawnCounter = 1500;
         private int powerUpSpawnFrequency = 1500;
         private double powerUpSpeed = 2;
 
@@ -35,13 +35,13 @@ namespace AstroOdyssey
         public void SpawnPowerUp()
         {
             // each frame progress decreases this counter
-            powerUpCounter -= 1;
+            powerUpSpawnCounter -= 1;
 
             // when counter reaches zero, create a PowerUp
-            if (powerUpCounter < 0)
+            if (powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                powerUpCounter = powerUpSpawnFrequency;
+                powerUpSpawnCounter = powerUpSpawnFrequency;
             }
         }
 
