@@ -89,7 +89,7 @@ namespace AstroOdyssey
             if (XDirection == XDirection.NONE)
             {
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = (Speed / 2); // decrease speed
+                Speed = Speed / 2; // decrease speed
 
                 IsEvading = true;
             }
