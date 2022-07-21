@@ -85,16 +85,16 @@ namespace AstroOdyssey
                 GeneratePlayerTargetingEnemy(newEnemy);
             }
 
-            // spawn blaster shooting enemies after level 2
-            if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
-            {
-                GenerateProjectileFiringEnemy(newEnemy);
-            }
-
             // generate large but slower and stronger enemies after level 3
             if (gameLevel > GameLevel.Level_3 && overPoweredEnemySpawnCounter <= 0)
             {
                 GenerateOverPoweredEnemy(newEnemy);
+            }
+
+            // spawn blaster shooting enemies after level 2
+            if (gameLevel > GameLevel.Level_2 && firingEnemySpawnCounter <= 0)
+            {
+                GenerateProjectileFiringEnemy(newEnemy);
             }
 
             // generate side ways flying enemies after level 2
