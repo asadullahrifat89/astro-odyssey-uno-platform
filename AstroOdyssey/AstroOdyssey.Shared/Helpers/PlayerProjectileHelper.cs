@@ -132,7 +132,7 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CollideProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
+        public void CollidePlayerProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
         {
             score = 0;
             destroyedObject = null;
@@ -205,10 +205,12 @@ namespace AstroOdyssey
 
                             if (destructible.HasNoHealth)
                             {
-                                if (enemy.TargetsPlayer)
+                                if (enemy.IsPlayerTargeting)
                                     score += 3;
                                 else if (enemy.IsOverPowered)
                                     score += 4;
+                                else if (enemy.IsBoss)
+                                    score += 6;
                                 else
                                     score += 2;
 
@@ -219,7 +221,7 @@ namespace AstroOdyssey
 
                             if (destructible.HasHealth)
                             {
-                                if (enemy.EvadesOnHit && !enemy.IsEvading)
+                                if (enemy.IsEvading && !enemy.IsEvadingTriggered)
                                     enemy.Evade();
                             }
                         }

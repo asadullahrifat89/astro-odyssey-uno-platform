@@ -178,6 +178,7 @@ function playGameSound(baseUrl, soundType) {
             if (baAudio.src.length == 0) {
                 baAudio.src = baseUrl.concat("/", bossAppearanceSource);
                 baAudio.volume = 1.0;
+                baAudio.loop = true;
                 setAudioAttributes(baAudio);
             }
             playSound(baAudio);
@@ -209,7 +210,7 @@ function playGameSound(baseUrl, soundType) {
             bgAudio.onended = function () {
                 playGameSound(baseUrl, soundType);
             };
-            
+
             playSound(bgAudio);
         } break;
         default: {
@@ -225,6 +226,7 @@ function setAudioAttributes(audio) {
 
 function stopSound() {
     pauseSound(bgAudio);
+    pauseSound(baAudio);
 }
 
 function playSound(audio) {

@@ -41,19 +41,16 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnMeteor(GameLevel gameLevel)
         {
-            if (!gameEnvironment.IsBossEngaged)
+            if ((int)gameLevel > 0)
             {
-                if ((int)gameLevel > 0)
-                {
-                    // each frame progress decreases this counter
-                    meteorCounter -= 1;
+                // each frame progress decreases this counter
+                meteorCounter -= 1;
 
-                    // when counter reaches zero, create a meteor
-                    if (meteorCounter < 0)
-                    {
-                        GenerateMeteor(gameLevel);
-                        meteorCounter = meteorSpawnLimit;
-                    }
+                // when counter reaches zero, create a meteor
+                if (meteorCounter < 0)
+                {
+                    GenerateMeteor(gameLevel);
+                    meteorCounter = meteorSpawnLimit;
                 }
             }
         }

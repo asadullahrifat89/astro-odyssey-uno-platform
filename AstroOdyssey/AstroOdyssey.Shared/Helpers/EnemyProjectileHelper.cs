@@ -13,6 +13,8 @@ namespace AstroOdyssey
         private int projectileCounter;
         private int projectileSpawnLimit = 60;
 
+        private Random random = new Random();
+
         #endregion
 
         #region Ctor
@@ -41,7 +43,10 @@ namespace AstroOdyssey
             {
                 GenerateProjectile(enemy, gameLevel);
 
+                //TODO: boss projectile generation that moves side ways
+
                 projectileCounter = projectileSpawnLimit;
+                projectileSpawnLimit = random.Next(30, 60);
             }
         }
 
@@ -56,7 +61,7 @@ namespace AstroOdyssey
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            projectile.SetAttributes(speed: enemy.Speed * 2 / 1.5, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
+            projectile.SetAttributes(speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
 
             projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
 
@@ -74,6 +79,7 @@ namespace AstroOdyssey
 
             // move projectile down                
             projectile.MoveY();
+            projectile.MoveX();
 
             // remove projectile if outside game canvas
             if (projectile.GetY() > gameEnvironment.Height)

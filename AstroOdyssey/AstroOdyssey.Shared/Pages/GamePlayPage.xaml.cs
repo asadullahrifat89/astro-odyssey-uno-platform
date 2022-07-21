@@ -287,7 +287,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        _playerProjectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+                        _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                         if (score > 0)
                             Score += score;
@@ -298,7 +298,15 @@ namespace AstroOdyssey
                             {
                                 case ENEMY:
                                     {
-                                        _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
+                                        var enemy = destroyedObject as Enemy;
+
+                                        _enemyHelper.DestroyEnemy(enemy);
+
+                                        if (enemy.IsBoss)
+                                        {
+                                            ShowInGameText("BOSS CLEARED");
+                                            _enemyHelper.DisengageBoss();
+                                        }
                                     }
                                     break;
                                 case METEOR:
@@ -332,19 +340,14 @@ namespace AstroOdyssey
                         _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
 
                         if (destroyed)
-                        {
-                            if (enemy.IsBoss)
-                                _enemyHelper.DisengageBoss();
-
                             return;
-                        }
 
                         // check if enemy collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
                             return;
 
                         // fire projectiles if at a legitimate distance from player
-                        if (enemy.FiresProjectiles && Player.GetY() - enemy.GetY() > 100)
+                        if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
                             _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                     }
                     break;
@@ -571,7 +574,8 @@ namespace AstroOdyssey
 
                         if (GameLevel > GameLevel.Level_2)
                         {
-                            _enemyHelper.EngageBoss();
+                            ShowInGameText("BOSS INCOMING");
+                            _enemyHelper.EngageBoss(GameLevel);
                         }
 
                         _meteorHelper.LevelUp();
