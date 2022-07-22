@@ -75,31 +75,31 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Properties        
+        #region Properties
 
-        private bool IsPoweredUp { get; set; }
-
-        private PowerUpType PowerUpType { get; set; }
-
-        private Enemy Boss { get; set; }
+        private PeriodicTimer GameFrameTimer { get; set; }
 
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
 
-        private bool IsGameRunning { get; set; }
+        private Player Player { get; set; }
+
+        private Enemy Boss { get; set; }
 
         private GameLevel GameLevel { get; set; }
 
-        private PeriodicTimer GameFrameTimer { get; set; }
+        private PowerUpType PowerUpType { get; set; }
 
-        private Player Player { get; set; }
+        private bool IsGameRunning { get; set; }
 
         private bool MoveLeft { get; set; } = false;
 
         private bool MoveRight { get; set; } = false;
 
         private bool FiringProjectiles { get; set; } = false;
+
+        private bool IsPoweredUp { get; set; }
 
         #endregion
 
@@ -590,6 +590,9 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Sets the boss health bar.
+        /// </summary>
         private void SetBossHealthBar()
         {
             BossHealthBar.Width = Boss.Health / 1.5;
