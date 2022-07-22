@@ -67,7 +67,8 @@
             VerticalAlignment="Bottom"
             FontSize="20"
             FontWeight="Bold"
-            Foreground="White" />
+            Foreground="White"
+            TextAlignment="Center" />
 
         <!--  This shows level up, power up text when difficulty scales  -->
         <TextBlock

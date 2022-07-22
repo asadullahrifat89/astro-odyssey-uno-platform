@@ -672,29 +672,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// When the window size is changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
-        {
-            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
-            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
-
-            PointerX = windowWidth / 2;
-
-#if DEBUG
-            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
-#endif
-            SetViewSizes();
-
-            if (IsGameRunning)
-            {
-                SetPlayerY(); // windows size changed so reset y position
-            }
-        }
-
-        /// <summary>
         /// Sets the window and canvas size on startup.
         /// </summary>
         private void SetWindowSize()
@@ -708,6 +685,21 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// When the window size is changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
+        {
+            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+#if DEBUG
+            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
+#endif
+            SetViewSizes();
+        }
+
+        /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
         private void SetViewSizes()
@@ -717,12 +709,15 @@ namespace AstroOdyssey
             // resize player size
             if (IsGameRunning)
             {
-                MoveLeft = false; MoveRight = false;
+                PointerX = windowWidth / 2;
+
+                Player.SetX(PointerX);
+
+                SetPlayerY(); // windows size changed so reset y position
 
                 var scale = GameView.GetGameObjectScale();
 
                 Player.ReAdjustScale(scale: scale);
-
 #if DEBUG
                 Console.WriteLine($"Render Scale: {scale}");
 #endif
