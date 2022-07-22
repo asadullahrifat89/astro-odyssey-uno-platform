@@ -19,8 +19,7 @@ namespace AstroOdyssey
         private readonly int powerUpTriggerFrequency = 1000;
 
         private double playerSpeed = 12;
-        private double playerWidthHalf = 0;
-
+        
         #endregion
 
         #region Ctor
@@ -51,8 +50,6 @@ namespace AstroOdyssey
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
-            playerWidthHalf = player.Width / 2;
-
             return player;
         }
 
@@ -71,16 +68,16 @@ namespace AstroOdyssey
                 pointerX += player.Speed;
 
             // move right
-            if (pointerX - playerWidthHalf > playerX + player.Speed)
+            if (pointerX - player.HalfWidth > playerX + player.Speed)
             {
-                if (playerX + playerWidthHalf < gameEnvironment.Width)
+                if (playerX + player.HalfWidth < gameEnvironment.Width)
                 {
                     SetPlayerX(player: player, left: playerX + player.Speed);
                 }
             }
 
             // move left
-            if (pointerX - playerWidthHalf < playerX - player.Speed)
+            if (pointerX - player.HalfWidth < playerX - player.Speed)
             {
                 SetPlayerX(player: player, left: playerX - player.Speed);
             }

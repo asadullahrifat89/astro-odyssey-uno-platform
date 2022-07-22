@@ -66,7 +66,7 @@ namespace AstroOdyssey
 
 #if DEBUG
             //Background = new SolidColorBrush(Colors.White);
-#endif
+#endif      
         }
 
         #endregion
@@ -156,6 +156,8 @@ namespace AstroOdyssey
 
             Height = DefaultPlayerHeight * scale;
             Width = DefaultGameObjectSize * scale;
+
+            HalfWidth = Width / 2;
         }
 
         public void ReAdjustScale(double scale)
@@ -239,7 +241,7 @@ namespace AstroOdyssey
             var left = gameObject.GetX();
             var playerX = GetX();
 
-            return left + gameObject.Width / 2 < playerX && left + gameObject.Width / 2 > playerX - 250;
+            return left + gameObject.HalfWidth < playerX && left + gameObject.HalfWidth > playerX - 250;
         }
 
         /// <summary>
@@ -252,7 +254,7 @@ namespace AstroOdyssey
             var left = gameObject.GetX();
             var playerX = GetX();
 
-            return left + gameObject.Width / 2 > playerX && left + gameObject.Width / 2 <= playerX + 250;
+            return left + gameObject.HalfWidth > playerX && left + gameObject.HalfWidth <= playerX + 250;
         }
 
         public new Rect GetRect()

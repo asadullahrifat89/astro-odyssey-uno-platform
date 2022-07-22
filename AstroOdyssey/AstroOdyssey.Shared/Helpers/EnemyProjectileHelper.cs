@@ -74,7 +74,7 @@ namespace AstroOdyssey
                 }
             }
 
-            projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(top: enemy.GetY() + enemy.Height - (5 * scale) + projectile.Height / 2, left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth, gameEnvironment: gameEnvironment);
 
             App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }

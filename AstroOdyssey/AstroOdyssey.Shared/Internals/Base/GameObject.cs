@@ -62,6 +62,8 @@ namespace AstroOdyssey
 
         public bool IsMarkedForFadedDestruction { get; set; }
 
+        public double HalfWidth { get; set; }
+
         #endregion
 
         #region Methods

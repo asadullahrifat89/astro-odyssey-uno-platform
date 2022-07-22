@@ -104,7 +104,7 @@ namespace AstroOdyssey
             //}
 
             // appear in the middle of the screen
-            double left = gameEnvironment.Width / 2 + enemy.Width / 2;
+            double left = gameEnvironment.HalfWidth + enemy.HalfWidth;
             double top = 0 - enemy.Height;
 
             if (enemy.IsHovering)
@@ -206,7 +206,7 @@ namespace AstroOdyssey
                 if (enemy.IsHovering)
                 {
                     // appear in the middle of the screen
-                    left = gameEnvironment.Width / 2 + enemy.Width / 2;
+                    left = gameEnvironment.HalfWidth + enemy.HalfWidth;
                     enemy.XDirection = XDirection.LEFT;
                 }
                 else
@@ -349,7 +349,7 @@ namespace AstroOdyssey
             if (enemy.IsBoss)
             {
                 // move boss down upto a certain point
-                if (enemy.GetY() + enemy.Width / 2 <= gameEnvironment.Height / 4)
+                if (enemy.GetY() + enemy.HalfWidth <= gameEnvironment.Height / 4)
                 {
                     enemy.MoveY();
                 }
@@ -364,7 +364,7 @@ namespace AstroOdyssey
             {
                 var enemyX = enemy.GetX();
 
-                var enemyWidthHalf = enemy.Width / 2;
+                var enemyWidthHalf = enemy.HalfWidth;
 
                 // move right
                 if (pointerX - enemyWidthHalf > enemyX + enemy.Speed)
@@ -388,7 +388,7 @@ namespace AstroOdyssey
                 if (enemy.IsHovering)
                 {
                     // change direction of x axis movement
-                    if (enemy.GetX() + enemy.Width / 2 >= gameEnvironment.Width - 50 || enemy.GetX() + enemy.Width / 2 <= 50)
+                    if (enemy.GetX() + enemy.HalfWidth >= gameEnvironment.Width - 50 || enemy.GetX() + enemy.HalfWidth <= 50)
                         enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
                 }
             }

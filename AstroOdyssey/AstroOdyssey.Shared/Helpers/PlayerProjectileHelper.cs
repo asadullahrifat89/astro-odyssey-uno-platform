@@ -78,7 +78,7 @@ namespace AstroOdyssey
 
             projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
-            projectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - projectile.Height / 2, left: player.GetX() + player.Width / 2 - projectile.Width / 2, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - projectile.Height / 2, left: player.GetX() + player.HalfWidth - projectile.HalfWidth, gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
             {

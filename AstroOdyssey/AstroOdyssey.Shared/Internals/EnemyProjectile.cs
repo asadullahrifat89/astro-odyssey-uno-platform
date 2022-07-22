@@ -80,6 +80,8 @@ namespace AstroOdyssey
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
             Width = width * scale * (isOverPowered ? 1.5 : 1);
+
+            HalfWidth = Width / 2;
         }
 
         #endregion

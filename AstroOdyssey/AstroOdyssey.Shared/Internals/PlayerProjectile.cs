@@ -123,6 +123,8 @@ namespace AstroOdyssey
 
             Height = height * scale;
             Width = width * scale;
+
+            HalfWidth = Width / 2;
         }
 
         #endregion
