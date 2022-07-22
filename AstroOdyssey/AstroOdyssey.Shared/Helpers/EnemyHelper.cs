@@ -49,7 +49,11 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void EngageBossEnemy(GameLevel gameLevel)
+        /// <summary>
+        /// Engages a boss.
+        /// </summary>
+        /// <param name="gameLevel"></param>
+        public Enemy EngageBossEnemy(GameLevel gameLevel)
         {
             //TODO: bosses must have health bars
 
@@ -112,8 +116,13 @@ namespace AstroOdyssey
 
             App.StopSound();
             App.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
+
+            return enemy;
         }
 
+        /// <summary>
+        /// Disengages a boss.
+        /// </summary>
         public void DisengageBossEnemy()
         {
             gameEnvironment.IsBossEngaged = false;
@@ -211,6 +220,10 @@ namespace AstroOdyssey
             enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
         }
 
+        /// <summary>
+        /// Generates an enemy that hovers across the screen.
+        /// </summary>
+        /// <param name="enemy"></param>
         private void SetHoveringEnemy(Enemy enemy)
         {
             hoveringEnemySpawnCounter = hoveringEnemySpawnFrequency;

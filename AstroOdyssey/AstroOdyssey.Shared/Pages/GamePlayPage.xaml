@@ -48,11 +48,20 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <Border
+                Name="BossHealthBar"
+                Width="0"
+                Height="10"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Background="Purple"
+                CornerRadius="50" />
+
         </StackPanel>
 
         <!--  This shows player health  -->
         <TextBlock
-            Name="HealthText"
+            Name="PlayerHealthBar"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"

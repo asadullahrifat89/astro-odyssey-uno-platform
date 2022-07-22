@@ -78,6 +78,8 @@ namespace AstroOdyssey
 
         private PowerUpType PowerUpType { get; set; }
 
+        private Enemy Boss { get; set; }
+
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
@@ -115,7 +117,9 @@ namespace AstroOdyssey
 
             SpawnPlayer();
 
-            SetPlayerY(); // set y position at game start            
+            SetPlayerY(); // set y position at game start
+
+            SetPlayerHealthBar(); // set player health bar at game start
 
             UpdateScore();
 
@@ -209,7 +213,7 @@ namespace AstroOdyssey
         {
             if (Player.HasNoHealth)
             {
-                HealthText.Text = "Game Over";
+                PlayerHealthBar.Text = "Game Over";
 
                 StopGame();
 
@@ -289,6 +293,11 @@ namespace AstroOdyssey
 
                         _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
+                        if (GameView.IsBossEngaged)
+                        {
+                            SetBossHealthBar();
+                        }
+
                         if (score > 0)
                             Score += score;
 
@@ -306,6 +315,9 @@ namespace AstroOdyssey
                                         {
                                             ShowInGameText($"BOSS CLEARED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
                                             _enemyHelper.DisengageBossEnemy();
+
+                                            BossHealthBar.Width = 0;
+                                            Boss = null;
                                         }
                                     }
                                     break;
@@ -330,7 +342,10 @@ namespace AstroOdyssey
                             return;
 
                         // check if enemy projectile collides with player
-                        _playerHelper.PlayerCollision(player: Player, gameObject: projectile);
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: projectile))
+                        {
+                            SetPlayerHealthBar();
+                        }
                     }
                     break;
                 case ENEMY:
@@ -344,7 +359,10 @@ namespace AstroOdyssey
 
                         // check if enemy collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
+                        {
+                            SetPlayerHealthBar();
                             return;
+                        }
 
                         // fire projectiles if at a legitimate distance from player
                         if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
@@ -361,7 +379,10 @@ namespace AstroOdyssey
                             return;
 
                         // check if meteor collides with player
-                        _playerHelper.PlayerCollision(player: Player, gameObject: meteor);
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: meteor))
+                        {
+                            SetPlayerHealthBar();
+                        }
                     }
                     break;
                 case HEALTH:
@@ -374,7 +395,10 @@ namespace AstroOdyssey
                             return;
 
                         // check if health collides with player
-                        _playerHelper.PlayerCollision(player: Player, gameObject: health);
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
+                        {
+                            SetPlayerHealthBar();
+                        }
                     }
                     break;
                 case POWERUP:
@@ -445,7 +469,6 @@ namespace AstroOdyssey
             var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
 
             ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")} - {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "")}{timeSpan.Seconds}s";
-            HealthText.Text = Player.GetHealthPoints();
         }
 
         /// <summary>
@@ -555,7 +578,8 @@ namespace AstroOdyssey
                 if (GameLevel > GameLevel.Level_2)
                 {
                     ShowInGameText("BOSS INCOMING");
-                    _enemyHelper.EngageBossEnemy(GameLevel);
+                    Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+                    SetBossHealthBar();
                 }
                 else
                 {
@@ -563,6 +587,11 @@ namespace AstroOdyssey
                     App.PlaySound(baseUrl, SoundType.LEVEL_UP);
                 }
             }
+        }
+
+        private void SetBossHealthBar()
+        {
+            BossHealthBar.Width = Boss.Health / 1.5;
         }
 
         /// <summary>
@@ -616,6 +645,14 @@ namespace AstroOdyssey
         private void SetPlayerY()
         {
             Player.SetY(windowHeight - Player.Height - 20);
+        }
+
+        /// <summary>
+        /// Sets player health bar.
+        /// </summary>
+        private void SetPlayerHealthBar()
+        {
+            PlayerHealthBar.Text = Player.GetHealthPoints();
         }
 
         #endregion      

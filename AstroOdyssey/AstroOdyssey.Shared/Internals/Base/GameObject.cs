@@ -38,7 +38,7 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public int Health { get; set; }
+        public int Health { get; set; } = 1;
 
         public int HitPoint { get; set; } = 1;
 
