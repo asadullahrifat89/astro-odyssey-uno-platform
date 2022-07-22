@@ -304,7 +304,7 @@ namespace AstroOdyssey
 
                                         if (enemy.IsBoss)
                                         {
-                                            ShowInGameText("BOSS CLEARED");
+                                            ShowInGameText($"BOSS CLEARED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
                                             _enemyHelper.DisengageBossEnemy();
                                         }
                                     }
@@ -449,15 +449,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Shows the level up text in game view.
-        /// </summary>
-        private void ShowLevelUpInGame()
-        {
-            ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
-            App.PlaySound(baseUrl, SoundType.LEVEL_UP);
-        }
-
-        /// <summary>
         /// Get base url for the app.
         /// </summary>
         private void GetBaseUrl()
@@ -558,8 +549,19 @@ namespace AstroOdyssey
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)
             {
-                ShowLevelUpInGame();
                 LevelUpObjects();
+
+                //TODO: Bosses apprear after level 2
+                if (GameLevel > GameLevel.Level_2)
+                {
+                    ShowInGameText("BOSS INCOMING");
+                    _enemyHelper.EngageBossEnemy(GameLevel);
+                }
+                else
+                {
+                    ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
+                    App.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                }
             }
         }
 
@@ -575,12 +577,6 @@ namespace AstroOdyssey
                 default:
                     {
                         _enemyHelper.LevelUp();
-
-                        if (GameLevel > GameLevel.Level_2)
-                        {
-                            ShowInGameText("BOSS INCOMING");
-                            _enemyHelper.EngageBossEnemy(GameLevel);
-                        }
 
                         _meteorHelper.LevelUp();
 

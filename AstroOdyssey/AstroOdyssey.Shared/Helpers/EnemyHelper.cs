@@ -51,6 +51,8 @@ namespace AstroOdyssey
 
         public void EngageBossEnemy(GameLevel gameLevel)
         {
+            //TODO: bosses must have health bars
+
             var enemy = new Enemy();
 
             enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
@@ -65,7 +67,6 @@ namespace AstroOdyssey
             enemy.Health = 50 * (int)gameLevel;
 
             SetProjectileFiringEnemy(enemy);
-
             SetHoveringEnemy(enemy);
 
             //switch (random.Next(0, 2))
@@ -98,7 +99,7 @@ namespace AstroOdyssey
             //        break;
             //}
 
-            double left = random.Next(200, (int)gameEnvironment.Width - 200);
+            double left = gameEnvironment.Width / 2 + enemy.Width / 2;// random.Next(50, (int)gameEnvironment.Width - 50);
             double top = 0 - enemy.Height;
 
             if (enemy.IsHovering)
@@ -107,6 +108,7 @@ namespace AstroOdyssey
             enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
             gameEnvironment.IsBossEngaged = true;
+
             App.StopSound();
             App.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
         }
@@ -193,7 +195,7 @@ namespace AstroOdyssey
             {
                 if (enemy.IsHovering)
                 {
-                    left = random.Next(200, (int)gameEnvironment.Width - 200);
+                    left = gameEnvironment.Width / 2 + enemy.Width / 2; //random.Next(50, (int)gameEnvironment.Width - 50);
                     enemy.XDirection = XDirection.LEFT;
                 }
                 else
@@ -368,9 +370,12 @@ namespace AstroOdyssey
             {
                 enemy.MoveX();
 
-                // change direction of x axis movement
-                if (enemy.IsHovering && (enemy.GetX() + enemy.Width / 2 >= gameEnvironment.Width - 200 || enemy.GetX() + enemy.Width / 2 <= 200))
-                    enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
+                if (enemy.IsHovering)
+                {
+                    // change direction of x axis movement
+                    if (enemy.GetX() + enemy.Width / 2 >= gameEnvironment.Width - 50 || enemy.GetX() + enemy.Width / 2 <= 50)
+                        enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
+                }
             }
 
             // if the object is marked for lazy destruction then do not destroy immidiately

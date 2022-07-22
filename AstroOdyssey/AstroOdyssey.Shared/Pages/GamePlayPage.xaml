@@ -67,7 +67,9 @@
             VerticalAlignment="Center"
             FontSize="50"
             FontWeight="Bold"
-            Foreground="White" />
+            Foreground="White"
+            TextAlignment="Center"
+            TextWrapping="WrapWholeWords" />
 
         <!--  This is for capturing input  -->
         <Grid>
