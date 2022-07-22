@@ -63,14 +63,14 @@ namespace AstroOdyssey
             {
                 //TODO: star blast shot across screen
 
-                enemy.SideWaysProjectileSpawnCounter--;
+                enemy.OverPoweredProjectileSpawnCounter--;
 
-                if (enemy.SideWaysProjectileSpawnCounter <= 0)
+                if (enemy.OverPoweredProjectileSpawnCounter <= 0)
                 {
-                    projectile.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
+                    projectile.OverPower();                    
 
-                    enemy.SideWaysProjectileSpawnCounter = enemy.SideWaysProjectileSpawnFrequency;
-                    enemy.SideWaysProjectileSpawnFrequency = random.Next(4, 7);
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnFrequency;
+                    enemy.OverPoweredProjectileSpawnFrequency = random.Next(4, 7);
                 }
             }
 

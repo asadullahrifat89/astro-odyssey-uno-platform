@@ -58,10 +58,12 @@ namespace AstroOdyssey
                     break;
             }
 
+            content.Source = new BitmapImage(uri);
+
             Height = size * scale;
             Width = size * scale;
 
-            content.Source = new BitmapImage(uri);
+            HalfWidth = Width / 2;
         }
 
         #endregion

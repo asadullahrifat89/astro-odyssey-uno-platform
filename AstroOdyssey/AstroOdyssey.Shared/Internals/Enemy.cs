@@ -16,8 +16,8 @@ namespace AstroOdyssey
         public int ProjectileSpawnCounter;
         public int ProjectileSpawnFrequency = 60;
 
-        public int SideWaysProjectileSpawnCounter;
-        public int SideWaysProjectileSpawnFrequency = 5;
+        public int OverPoweredProjectileSpawnCounter;
+        public int OverPoweredProjectileSpawnFrequency = 5;
 
         #endregion
 

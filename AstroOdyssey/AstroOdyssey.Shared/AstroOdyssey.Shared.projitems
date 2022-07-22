@@ -91,6 +91,7 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Baren.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_purple.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_yellow.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_A.png" />
@@ -98,12 +99,14 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_C.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_D.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_E.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Ice.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusSmall.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Lava.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_large.png" />
@@ -139,6 +142,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_A.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_B.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_C.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Terran.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-powerup-6768.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-score-4_NWM.mp3" />
