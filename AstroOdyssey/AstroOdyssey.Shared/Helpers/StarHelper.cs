@@ -12,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int starSpawnCounter;
-        private readonly int starSpawnFrequency = 250;
+        private readonly int starSpawnFrequency = 220;
         private double starSpeed = 0.1d;
 
         #endregion

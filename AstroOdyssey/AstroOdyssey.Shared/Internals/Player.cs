@@ -22,8 +22,7 @@ namespace AstroOdyssey
 
         private readonly Image contentShipBlaze = new Image()
         {
-            Stretch = Stretch.Uniform,
-            Margin = new Microsoft.UI.Xaml.Thickness(0, 50, 0, 0)
+            Stretch = Stretch.Uniform
         };
 
         private readonly Border contentShipPowerGauge = new Border()
@@ -33,7 +32,16 @@ namespace AstroOdyssey
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Margin = new Microsoft.UI.Xaml.Thickness(0, 25, 0, 0),
+            Background = new SolidColorBrush(Colors.Goldenrod),
+        };
+
+        private readonly Border contentShipHealthBar = new Border()
+        {
+            Height = 10,
+            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
+            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+            Background = new SolidColorBrush(Colors.Goldenrod),
         };
 
         private readonly Random random = new Random();
@@ -61,6 +69,7 @@ namespace AstroOdyssey
             content.Children.Add(contentShipPowerGauge);
             content.Children.Add(contentShipBlaze);
             content.Children.Add(contentShip);
+            content.Children.Add(contentShipHealthBar);
 
             Child = content;
 
@@ -154,6 +163,9 @@ namespace AstroOdyssey
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
+            contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 80 * scale, 0, 0);
+            contentShipHealthBar.Width = Health / 1.70;
+
             Height = DefaultPlayerHeight * scale;
             Width = DefaultGameObjectSize * scale;
 
@@ -183,7 +195,7 @@ namespace AstroOdyssey
 
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            contentShipPowerGauge.Background = Colors.Gold;
+            //contentShipPowerGauge.Background = Colors.Red;
 
             //switch (powerUpType)
             //{
@@ -213,23 +225,23 @@ namespace AstroOdyssey
             contentShipPowerGauge.Width = 0;
         }
 
-        /// <summary>
-        /// Gets the player health points.
-        /// </summary>
-        /// <returns></returns>
-        public string GetHealthPoints()
-        {
-            var healthPoints = Health / HitPoint;
-            var healthIcon = "❤️";
-            var health = string.Empty;
+        ///// <summary>
+        ///// Gets the player health points.
+        ///// </summary>
+        ///// <returns></returns>
+        //public string GetHealthPoints()
+        //{
+        //    var healthPoints = Health / HitPoint;
+        //    var healthIcon = "❤️";
+        //    var health = string.Empty;
 
-            for (int i = 0; i < healthPoints; i++)
-            {
-                health += healthIcon;
-            }
+        //    for (int i = 0; i < healthPoints; i++)
+        //    {
+        //        health += healthIcon;
+        //    }
 
-            return health;
-        }
+        //    return health;
+        //}
 
         /// <summary>
         /// Checks if there is any game object within the left side range of the player.
@@ -262,6 +274,17 @@ namespace AstroOdyssey
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
         }
 
+        public new void LooseHealth()
+        {
+            Health -= HitPoint;
+            contentShipHealthBar.Width = Health / 1.70;
+        }
+
+        public new void GainHealth()
+        {
+            Health += HitPoint;
+            contentShipHealthBar.Width = Health / 1.70;
+        }
 
         #endregion
     }

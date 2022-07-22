@@ -34,49 +34,49 @@ namespace AstroOdyssey
             {
                 case GameLevel.Level_1:
                     {
-                        height = 10; width = 11;
+                        height = 10; width = 10;
                     }
                     break;
                 case GameLevel.Level_2:
                     {
-                        height = 11; width = 12;
+                        height = 11; width = 11;
                     }
                     break;
                 case GameLevel.Level_3:
                     {
-                        height = 12; width = 13;
+                        height = 12; width = 12;
                     }
                     break;
                 case GameLevel.Level_4:
                     {
-                        height = 13; width = 14;
+                        height = 13; width = 13;
                     }
                     break;
                 case GameLevel.Level_5:
                     {
-                        height = 14; width = 15;
+                        height = 14; width = 14;
                     }
                     break;
                 case GameLevel.Level_6:
                     {
-                        height = 15; width = 16;
+                        height = 15; width = 15;
                     }
                     break;
                 case GameLevel.Level_7:
                     {
-                        height = 16; width = 17;
+                        height = 16; width = 16;
                     }
                     break;
                 case GameLevel.Level_8:
                     {
-                        height = 17; width = 18;
+                        height = 17; width = 17;
                     }
                     break;
                 default:
                     break;
             }
 
-            Background = new SolidColorBrush(Colors.White);
+            Background = new SolidColorBrush(Colors.Red);
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
             Width = width * scale * (isOverPowered ? 1.5 : 1);

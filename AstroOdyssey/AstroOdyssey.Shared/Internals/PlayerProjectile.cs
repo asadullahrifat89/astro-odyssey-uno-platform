@@ -47,7 +47,7 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
-                            height = 20; width = 10; // smaller but faster rounds
+                            height = 25; width = 15; // smaller but faster rounds
                             //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
                         }
                         break;
@@ -68,7 +68,7 @@ namespace AstroOdyssey
                         break;
                 }
 
-                Background = new SolidColorBrush(Colors.White);
+                Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -118,7 +118,7 @@ namespace AstroOdyssey
                         break;
                 }
 
-                Background = new SolidColorBrush(Colors.White);
+                Background = new SolidColorBrush(Colors.Red);
             }
 
             Height = height * scale;

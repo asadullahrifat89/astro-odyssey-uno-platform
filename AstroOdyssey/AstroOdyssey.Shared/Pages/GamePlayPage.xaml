@@ -51,24 +51,35 @@
             <Border
                 Name="BossHealthBar"
                 Width="0"
-                Height="10"
+                Height="15"
                 Margin="5"
                 HorizontalAlignment="Center"
-                Background="Purple"
+                Background="Red"
                 CornerRadius="50" />
 
         </StackPanel>
 
         <!--  This shows player health  -->
-        <TextBlock
+        <!--<TextBlock
             Name="PlayerHealthBar"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             FontSize="20"
             FontWeight="Bold"
-            Foreground="White"
-            TextAlignment="Center" />
+            Foreground="Red"
+            TextAlignment="Center" />-->
+
+        <!--  This shows player health  -->
+        <!--<Border
+            Name="PlayerHealthBar"
+            Width="0"
+            Height="15"
+            Margin="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Background="Red"
+            CornerRadius="50" />-->
 
         <!--  This shows level up, power up text when difficulty scales  -->
         <TextBlock

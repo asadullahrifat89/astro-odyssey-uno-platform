@@ -118,7 +118,7 @@ namespace AstroOdyssey
 
             SetPlayerY(); // set y position at game start
 
-            SetPlayerHealthBar(); // set player health bar at game start
+            //SetPlayerHealthBar(); // set player health bar at game start
 
             UpdateScore();
 
@@ -210,7 +210,7 @@ namespace AstroOdyssey
         {
             if (Player.HasNoHealth)
             {
-                PlayerHealthBar.Text = "Game Over";
+                //PlayerHealthBar.Width = 0;
 
                 StopGame();
 
@@ -344,7 +344,7 @@ namespace AstroOdyssey
                         // check if enemy projectile collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: projectile))
                         {
-                            SetPlayerHealthBar();
+                            //SetPlayerHealthBar();
                         }
                     }
                     break;
@@ -360,7 +360,7 @@ namespace AstroOdyssey
                         // check if enemy collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
                         {
-                            SetPlayerHealthBar();
+                            //SetPlayerHealthBar();
                             return;
                         }
 
@@ -381,7 +381,7 @@ namespace AstroOdyssey
                         // check if meteor collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: meteor))
                         {
-                            SetPlayerHealthBar();
+                            //SetPlayerHealthBar();
                         }
                     }
                     break;
@@ -397,7 +397,7 @@ namespace AstroOdyssey
                         // check if health collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
                         {
-                            SetPlayerHealthBar();
+                            //SetPlayerHealthBar();
                         }
                     }
                     break;
@@ -645,16 +645,16 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            Player.SetY(windowHeight - Player.Height - 20);
+            Player.SetY(windowHeight - Player.Height - 10);
         }
 
-        /// <summary>
-        /// Sets player health bar.
-        /// </summary>
-        private void SetPlayerHealthBar()
-        {
-            PlayerHealthBar.Text = Player.GetHealthPoints();
-        }
+        ///// <summary>
+        ///// Sets player health bar.
+        ///// </summary>
+        //private void SetPlayerHealthBar()
+        //{
+        //    PlayerHealthBar.Width = Player.Health;
+        //}
 
         #endregion      
 
