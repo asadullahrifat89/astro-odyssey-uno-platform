@@ -645,7 +645,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            Player.SetY(windowHeight - Player.Height - 10);
+            Player.SetY(windowHeight - Player.Height - 25);
         }
 
         ///// <summary>

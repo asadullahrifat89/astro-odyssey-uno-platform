@@ -37,11 +37,11 @@ namespace AstroOdyssey
 
         private readonly Border contentShipHealthBar = new Border()
         {
-            Height = 10,
+            Height = 5,
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Background = new SolidColorBrush(Colors.Goldenrod),
+            Background = new SolidColorBrush(Colors.Red),
         };
 
         private readonly Random random = new Random();
@@ -163,7 +163,7 @@ namespace AstroOdyssey
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
-            contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 80 * scale, 0, 0);
+            contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
             contentShipHealthBar.Width = Health / 1.70;
 
             Height = DefaultPlayerHeight * scale;
