@@ -748,8 +748,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
+                //case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
+                //case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
                 default:
                     break;
             }
@@ -768,36 +768,44 @@ namespace AstroOdyssey
             }
         }
 
-        private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FiringProjectiles = true;
-            MoveLeft = true;
-            MoveRight = false;
+            var point = e.GetCurrentPoint(GameView);
+
+            if (point.Position.X < windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveLeft = true;
+                MoveRight = false;
+            }
+            else if (point.Position.X > windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveRight = true;
+                MoveLeft = false;
+            }
         }
 
-        private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FiringProjectiles = true;
-            MoveLeft = false;
+            var point = e.GetCurrentPoint(GameView);
 
-            if (!IsGameRunning)
-                StartGame();
-        }
+            if (point.Position.X < windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveLeft = false;
 
-        private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = true;
-            MoveLeft = false;
-        }
+                if (!IsGameRunning)
+                    StartGame();
+            }
+            else if (point.Position.X > windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveRight = false;
 
-        private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = false;
-
-            if (!IsGameRunning)
-                StartGame();
+                if (!IsGameRunning)
+                    StartGame();
+            }
         }
 
         #endregion
