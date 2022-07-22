@@ -35,14 +35,14 @@ namespace AstroOdyssey
             Background = new SolidColorBrush(Colors.Goldenrod),
         };
 
-        private readonly Border contentShipHealthBar = new Border()
-        {
-            Height = 5,
-            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
-            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
-            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Background = new SolidColorBrush(Colors.Red),
-        };
+        //private readonly Border contentShipHealthBar = new Border()
+        //{
+        //    Height = 5,
+        //    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
+        //    VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
+        //    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+        //    Background = new SolidColorBrush(Colors.Red),
+        //};
 
         private readonly Random random = new Random();
 
@@ -69,7 +69,7 @@ namespace AstroOdyssey
             content.Children.Add(contentShipPowerGauge);
             content.Children.Add(contentShipBlaze);
             content.Children.Add(contentShip);
-            content.Children.Add(contentShipHealthBar);
+            //content.Children.Add(contentShipHealthBar);
 
             Child = content;
 
@@ -163,8 +163,8 @@ namespace AstroOdyssey
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
-            contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
-            contentShipHealthBar.Width = Health / 1.70;
+            //contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
+            //contentShipHealthBar.Width = Health / 1.70;
 
             Height = DefaultPlayerHeight * scale;
             Width = DefaultGameObjectSize * scale;
@@ -274,17 +274,17 @@ namespace AstroOdyssey
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
         }
 
-        public new void LooseHealth()
-        {
-            Health -= HitPoint;
-            contentShipHealthBar.Width = Health / 1.70;
-        }
+        //public new void LooseHealth()
+        //{
+        //    Health -= HitPoint;
+        //    contentShipHealthBar.Width = Health / 1.70;
+        //}
 
-        public new void GainHealth()
-        {
-            Health += HitPoint;
-            contentShipHealthBar.Width = Health / 1.70;
-        }
+        //public new void GainHealth()
+        //{
+        //    Health += HitPoint;
+        //    contentShipHealthBar.Width = Health / 1.70;
+        //}
 
         #endregion
     }
