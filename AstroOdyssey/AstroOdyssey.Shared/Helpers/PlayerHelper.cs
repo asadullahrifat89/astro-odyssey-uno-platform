@@ -19,7 +19,7 @@ namespace AstroOdyssey
         private readonly int powerUpTriggerFrequency = 1000;
 
         private double playerSpeed = 12;
-        
+
         #endregion
 
         #region Ctor
@@ -37,7 +37,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns the player.
         /// </summary>
-        public Player SpawnPlayer(double pointerX)
+        public Player SpawnPlayer(double pointerX, GameObject ship)
         {
             var player = new Player();
 
@@ -46,7 +46,7 @@ namespace AstroOdyssey
             var left = pointerX - 35;
             var top = gameEnvironment.Height - player.Height - 20;
 
-            player.SetAttributes(speed: playerSpeed * scale, scale: scale);
+            player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 

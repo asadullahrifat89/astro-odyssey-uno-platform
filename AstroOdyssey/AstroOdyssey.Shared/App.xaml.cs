@@ -20,6 +20,8 @@ namespace AstroOdyssey
 
         public static double Score { get; set; }
 
+        public static GameObject Ship { get; set; }
+
         #endregion
 
         #region Ctor

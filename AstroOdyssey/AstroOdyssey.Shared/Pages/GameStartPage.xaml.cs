@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            App.NavigateToPage(typeof(GamePlayPage));
+            App.NavigateToPage(typeof(ChooseShipPage));
         }
 
         #endregion

@@ -646,7 +646,7 @@ namespace AstroOdyssey
             Console.WriteLine($"Render Scale: {scale}");
 #endif
 
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX);
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
         }
 
         /// <summary>
