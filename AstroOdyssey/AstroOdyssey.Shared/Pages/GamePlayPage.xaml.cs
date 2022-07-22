@@ -758,8 +758,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
+                //case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
+                //case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
                 default:
                     break;
             }
