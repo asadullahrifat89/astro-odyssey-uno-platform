@@ -675,16 +675,14 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the window and canvas size on startup.
+        /// When the window is unloaded, we remove the event Current_SizeChanged.
         /// </summary>
-        private void SetWindowSize()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
-            windowWidth = Window.Current.Bounds.Width - 10;
-            windowHeight = Window.Current.Bounds.Height - 10;
-
-            PointerX = windowWidth / 2;
-
-            SetViewSizes();
+            SizeChanged -= GamePage_SizeChanged;
+            StopGame();
         }
 
         /// <summary>
@@ -699,6 +697,41 @@ namespace AstroOdyssey
 #if DEBUG
             Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
+            SetViewSizes();
+        }
+
+        //private void Accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
+        //{
+        //    if (args.Reading.AccelerationX == windowWidth / 2)
+        //    {
+        //        FiringProjectiles = true;
+        //        MoveLeft = false;
+        //        MoveRight = false;
+        //    }
+        //    else if (args.Reading.AccelerationX < windowWidth / 2)
+        //    {
+        //        FiringProjectiles = true;
+        //        MoveLeft = true;
+        //        MoveRight = false;
+        //    }
+        //    else if (args.Reading.AccelerationX > windowWidth / 2)
+        //    {
+        //        FiringProjectiles = true;
+        //        MoveRight = true;
+        //        MoveLeft = false;
+        //    }
+        //}
+
+        /// <summary>
+        /// Sets the window and canvas size on startup.
+        /// </summary>
+        private void SetWindowSize()
+        {
+            windowWidth = Window.Current.Bounds.Width - 10;
+            windowHeight = Window.Current.Bounds.Height - 10;
+
+            PointerX = windowWidth / 2;
+
             SetViewSizes();
         }
 
@@ -725,17 +758,6 @@ namespace AstroOdyssey
                 Console.WriteLine($"Render Scale: {scale}");
 #endif
             }
-        }
-
-        /// <summary>
-        /// When the window is unloaded, we remove the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void GamePage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            SizeChanged -= GamePage_SizeChanged;
-            StopGame();
         }
 
         #endregion   
