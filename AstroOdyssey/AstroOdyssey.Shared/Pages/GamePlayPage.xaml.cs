@@ -84,7 +84,7 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
-        private int FrameTime { get; set; } = 19;
+        private int FrameTime { get; set; } = 18;
 
         private long FrameDuration { get; set; }
 
@@ -518,7 +518,6 @@ namespace AstroOdyssey
         private void ShowInGameText(string text)
         {
             InGameText.Text = text;
-            showInGameTextSpawnCounter = showInGameTextFrequency;
         }
 
         /// <summary>
@@ -533,6 +532,7 @@ namespace AstroOdyssey
                 if (showInGameTextSpawnCounter <= 0)
                 {
                     InGameText.Text = "";
+                    showInGameTextSpawnCounter = showInGameTextFrequency;
                 }
             }
         }

@@ -107,7 +107,7 @@ function playGameSound(baseUrl, soundType) {
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {
                 rhAudio.src = baseUrl.concat("/", roundHitSource);
-                rhAudio.volume = 0.2;
+                rhAudio.volume = 0.1;
                 setAudioAttributes(rhAudio);
             }
             playSound(rhAudio);
