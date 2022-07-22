@@ -194,8 +194,6 @@ namespace AstroOdyssey
 
             UpdateGameObjects();
 
-            SetGameLevel();
-
             SpawnGameObjects();
 
             UpdateScore();
@@ -298,7 +296,10 @@ namespace AstroOdyssey
                         }
 
                         if (score > 0)
+                        {
                             Score += score;
+                            SetGameLevel(); // check game level on score change
+                        }
 
                         if (destroyedObject is not null)
                         {
@@ -497,6 +498,7 @@ namespace AstroOdyssey
                 var meteors = GameView.Children.OfType<Meteor>().Count();
                 var powerUps = GameView.Children.OfType<PowerUp>().Count();
                 var healths = GameView.Children.OfType<Health>().Count();
+
                 var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
                 var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
@@ -504,7 +506,7 @@ namespace AstroOdyssey
 
                 var total = GameView.Children.Count;
 
-                FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + ",  Start Time: " + frameStartTime + ",  End Time: " + frameEndTime + " }}";
+                FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
                 frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
