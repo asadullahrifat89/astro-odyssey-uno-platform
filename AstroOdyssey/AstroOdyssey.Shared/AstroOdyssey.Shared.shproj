@@ -18,6 +18,7 @@
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\EnemyProjectileHelper.cs" />
     <_Globbed_Compile Remove="Helpers\HealthHelper.cs" />
     <_Globbed_Compile Remove="Helpers\MeteorHelper.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
@@ -25,6 +26,7 @@
     <_Globbed_Compile Remove="Helpers\PowerUpHelper.cs" />
     <_Globbed_Compile Remove="Helpers\ProjectileHelper.cs" />
     <_Globbed_Compile Remove="Helpers\StarHelper.cs" />
+    <_Globbed_Compile Remove="Internals\EnemyProjectile.cs" />
     <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Models\GameScore.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />
@@ -54,6 +56,7 @@
     <_Globbed_Content Remove="Assets\Sounds\explosion-sfx-43814.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\firework-explode-distant_zJ6kk3VO_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\game-start-6104.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\halloween-impact-05-93808.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\insurrection-10941.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\laser-blast-descend_Gy7C5dEO_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\laser-descend_GJPs9OE__NWM.mp3" />

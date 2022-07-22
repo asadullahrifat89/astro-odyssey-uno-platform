@@ -5,13 +5,13 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class Projectile : GameObject
+    public class PlayerProjectile : GameObject
     {
         #region Ctor
 
-        public Projectile()
+        public PlayerProjectile()
         {
-            Tag = PROJECTILE;
+            Tag = PLAYER_PROJECTILE;
 
             Height = 20;
             Width = 5;
@@ -46,17 +46,29 @@ namespace AstroOdyssey
                 switch (PowerUpType)
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
-                        height = 10; width = 10; // smaller but faster rounds
+                        {
+                            height = 25; width = 15; // smaller but faster rounds
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                        }
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
-                        height = 25; width = 25; // larger but slower rounds
+                        {
+                            height = 25; width = 25; // larger but slower rounds
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                        }
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
-                        height = 300; width = 25; // larger but slower rounds
+                        {
+                            height = 300; width = 20; // larger and longer and faster piercing rounds
+                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                        }
                         break;
                     default:
+                        //Background = new SolidColorBrush(Colors.White);
                         break;
                 }
+
+                Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -64,73 +76,55 @@ namespace AstroOdyssey
                 {
                     case GameLevel.Level_1:
                         {
-                            height = 20; width = 5;
+                            height = 20; width = 6;
                         }
                         break;
                     case GameLevel.Level_2:
                         {
-                            height = 25; width = 6;
+                            height = 25; width = 7;
                         }
                         break;
                     case GameLevel.Level_3:
                         {
-                            height = 30; width = 7;
+                            height = 30; width = 8;
                         }
                         break;
                     case GameLevel.Level_4:
                         {
-                            height = 35; width = 8;
+                            height = 35; width = 9;
                         }
                         break;
                     case GameLevel.Level_5:
                         {
-                            height = 35; width = 9;
+                            height = 35; width = 10;
                         }
                         break;
                     case GameLevel.Level_6:
                         {
-                            height = 35; width = 10;
+                            height = 35; width = 11;
                         }
                         break;
                     case GameLevel.Level_7:
                         {
-                            height = 35; width = 11;
+                            height = 35; width = 12;
                         }
                         break;
                     case GameLevel.Level_8:
                         {
-                            height = 35; width = 12;
+                            height = 35; width = 13;
                         }
                         break;
                     default:
                         break;
                 }
+
+                Background = new SolidColorBrush(Colors.Red);
             }
 
             Height = height * scale;
             Width = width * scale;
 
-            if (IsPoweredUp)
-            {
-                switch (PowerUpType)
-                {
-                    case PowerUpType.RAPIDSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.Goldenrod);
-                        break;
-                    case PowerUpType.DEADSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.Purple);
-                        break;
-                    case PowerUpType.SONICSHOT_ROUNDS:
-                        Background = new SolidColorBrush(Colors.LightBlue);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                Background = new SolidColorBrush(Colors.White);
-            }
+            HalfWidth = Width / 2;
         }
 
         #endregion

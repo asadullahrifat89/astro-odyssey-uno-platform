@@ -42,7 +42,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
             XDirection = XDirection.NONE;
-            MarkedForFadedRemoval = false;
+            IsMarkedForFadedDestruction = false;
             Opacity = 1;
 
             Rotation = random.NextDouble();
@@ -91,6 +91,8 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
+
+            HalfWidth = Width / 2;
         }
 
         public void Float()

@@ -13,6 +13,12 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
+        public int ProjectileSpawnCounter;
+        public int ProjectileSpawnFrequency = 60;
+
+        public int OverPoweredProjectileSpawnCounter;
+        public int OverPoweredProjectileSpawnFrequency = 5;
+
         #endregion
 
         #region Ctor
@@ -32,9 +38,17 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public bool WillEvadeOnHit { get; set; }
+        public bool IsBoss { get; set; }
+
+        public bool IsPlayerTargeting { get; set; }
+
+        public bool IsProjectileFiring { get; set; }
+
+        public bool IsHovering { get; set; }
 
         public bool IsEvading { get; set; }
+
+        public bool IsEvadingTriggered { get; set; }
 
         #endregion
 
@@ -44,7 +58,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
             XDirection = XDirection.NONE;
-            MarkedForFadedRemoval = false;
+            IsMarkedForFadedDestruction = false;
             Opacity = 1;
 
             Uri uri = null;
@@ -78,6 +92,8 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
+
+            HalfWidth = Width / 2;
         }
 
         public void Evade()
@@ -85,9 +101,9 @@ namespace AstroOdyssey
             if (XDirection == XDirection.NONE)
             {
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = (Speed / 2); // decrease speed
+                Speed = Speed / 2; // decrease speed
 
-                IsEvading = true;
+                IsEvadingTriggered = true;
             }
         }
 

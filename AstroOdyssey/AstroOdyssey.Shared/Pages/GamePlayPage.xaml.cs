@@ -22,20 +22,32 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        private int fpsCounter = 0;
-        private int frameStatUpdateCounter;
+        const float FRAME_CAP_MS = 1000.0f / 50.0f;
+        private int fpsSpawnCounter = 0;
+        private int fpsCount = 0;
+        private float lastFPSTime = 0;
+        private long frameStartTime;
+        private long frameEndTime;
+        private int frameStatUpdateSpawnCounter;
+
+        private int frameStatUpdateFrequency = 5;
+
+        private int showInGameTextSpawnCounter = 110;
+        private int showInGameTextFrequency = 110;
+
+        private int frameTime = 19;
+        private long frameDuration;
 
         private double windowWidth, windowHeight;
-
-        private int showInGameTextCounter;
 
         private readonly StarHelper _starHelper;
         private readonly MeteorHelper _meteorHelper;
         private readonly EnemyHelper _enemyHelper;
         private readonly HealthHelper _healthHelper;
         private readonly PowerUpHelper _powerUpHelper;
-        private readonly ProjectileHelper _projectileHelper;
         private readonly PlayerHelper _playerHelper;
+        private readonly PlayerProjectileHelper _playerProjectileHelper;
+        private readonly EnemyProjectileHelper _enemyProjectileHelper;
 
         #endregion
 
@@ -51,38 +63,29 @@ namespace AstroOdyssey
             SetWindowSize();
             GetBaseUrl();
 
-            _starHelper = new StarHelper(StarView);
+            _starHelper = new StarHelper(GameView);
             _meteorHelper = new MeteorHelper(GameView, baseUrl);
             _enemyHelper = new EnemyHelper(GameView, baseUrl);
             _healthHelper = new HealthHelper(GameView, baseUrl);
             _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
-            _projectileHelper = new ProjectileHelper(GameView, baseUrl);
             _playerHelper = new PlayerHelper(GameView, baseUrl);
+            _playerProjectileHelper = new PlayerProjectileHelper(GameView, baseUrl);
+            _enemyProjectileHelper = new EnemyProjectileHelper(GameView, baseUrl);
         }
 
         #endregion
 
-        #region Properties
-
-        private int FpsCount { get; set; } = 0;
-
-        private float LastFrameTime { get; set; } = 0;
-
-        private long FrameStartTime { get; set; }
+        #region Properties        
 
         private bool IsPoweredUp { get; set; }
 
         private PowerUpType PowerUpType { get; set; }
 
-        private int FrameStatUpdateLimit { get; set; } = 5;
-
-        private int ShowInGameTextLimit { get; set; } = 100;
+        private Enemy Boss { get; set; }
 
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
-
-        private int FrameDuration { get; set; } = 18;
 
         private bool IsGameRunning { get; set; }
 
@@ -91,8 +94,6 @@ namespace AstroOdyssey
         private PeriodicTimer GameFrameTimer { get; set; }
 
         private Player Player { get; set; }
-
-        private double PlayerSpeed { get; set; } = 12;
 
         private bool MoveLeft { get; set; } = false;
 
@@ -115,7 +116,9 @@ namespace AstroOdyssey
 
             SpawnPlayer();
 
-            SetPlayerY(); // set y position at game start            
+            SetPlayerY(); // set y position at game start
+
+            SetPlayerHealthBar(); // set player health bar at game start
 
             UpdateScore();
 
@@ -125,7 +128,7 @@ namespace AstroOdyssey
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            RunGameView();
+            RunGame();
 
             App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
@@ -133,50 +136,89 @@ namespace AstroOdyssey
         /// <summary>
         /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
         /// </summary>
-        private async void RunGameView()
+        private async void RunGame()
         {
-#if DEBUG
             var watch = Stopwatch.StartNew();
-#endif
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(FrameDuration));
+
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(frameTime));
 
             while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
             {
-                GameOver();
+                frameStartTime = watch.ElapsedMilliseconds;
 
-                PointerX = _playerHelper.MovePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
+                UpdateFrame();
 
-                UpdateGameObjects();
+                CalculateFPS();
 
-                ShiftGameLevel();
+                frameEndTime = watch.ElapsedMilliseconds;
 
-                _playerHelper.PlayerOpacity(Player);
-
-                _enemyHelper.SpawnEnemy(GameLevel);
-
-                _meteorHelper.SpawnMeteor(GameLevel);
-
-                _healthHelper.SpawnHealth(Player);
-
-                _powerUpHelper.SpawnPowerUp();
-
-                _projectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
-
-                _starHelper.SpawnStar();
-
-                TriggerPowerDown();
-
-                UpdateScore();
-
-                HideInGameText();
-
+                SetFrameTime();
 #if DEBUG
-                CalculateFps();
-
                 SetAnalytics();
-
-                FrameStartTime = watch.ElapsedMilliseconds;
 #endif
+                //await Task.Delay(FrameTime);
+            }
+        }
+
+        /// <summary>
+        /// Sets the frame time.
+        /// </summary>
+        private void SetFrameTime()
+        {
+            frameDuration = frameEndTime - frameStartTime;
+            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
+        }
+
+        /// <summary>
+        /// Calculates the frames per second.
+        /// </summary>
+        private void CalculateFPS()
+        {
+            // calculate FPS
+            if (lastFPSTime + 1000 < frameStartTime)
+            {
+                fpsCount = fpsSpawnCounter;
+                fpsSpawnCounter = 0;
+                lastFPSTime = frameStartTime;
+            }
+
+            fpsSpawnCounter++;
+        }
+
+        /// <summary>
+        /// Updates a frame in the game.
+        /// </summary>
+        private void UpdateFrame()
+        {
+            GameOver();
+
+            UpdateGameObjects();
+
+            SpawnGameObjects();
+
+            UpdateScore();
+
+            HandleInGameText();
+
+            _playerHelper.HandleDamageRecovery(Player);
+        }
+
+        /// <summary>
+        /// Check if game if over.
+        /// </summary>
+        private void GameOver()
+        {
+            if (Player.HasNoHealth)
+            {
+                PlayerHealthBar.Width = 0;
+
+                StopGame();
+
+                App.PlaySound(baseUrl, SoundType.GAME_OVER);
+
+                App.SetScore(Score);
+
+                App.NavigateToPage(typeof(GameOverPage));
             }
         }
 
@@ -185,11 +227,12 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateGameObjects()
         {
-            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x is not AstroOdyssey.Player);
+            var gameObjects = GameView.GetGameObjects<GameObject>();
 
+            // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
             {
-                if (gameObject.MarkedForFadedRemoval)
+                if (gameObject.IsMarkedForFadedDestruction)
                 {
                     gameObject.Fade();
 
@@ -200,119 +243,210 @@ namespace AstroOdyssey
                     }
                 }
 
-                var tag = gameObject.Tag;
+                UpdateGameObject(gameObject);
 
-                switch (tag)
-                {
-                    case PROJECTILE:
-                        {
-                            var projectile = gameObject as Projectile;
-
-                            // move the projectile up and check if projectile has gone beyond the game view
-                            _projectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
-
-                            if (destroyed)
-                                return;
-
-                            _projectileHelper.CollideProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
-
-                            if (score > 0)
-                                Score += score;
-
-                            if (destroyedObject is not null)
-                            {
-                                switch (destroyedObject.Tag)
-                                {
-                                    case ENEMY:
-                                        {
-                                            _enemyHelper.DestroyEnemy(destroyedObject as Enemy);
-                                        }
-                                        break;
-                                    case METEOR:
-                                        {
-                                            _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
-                                        }
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
-                        break;
-                    case ENEMY:
-                        {
-                            var enemy = gameObject as Enemy;
-
-                            _enemyHelper.UpdateEnemy(enemy: enemy, destroyed: out bool destroyed);
-
-                            if (destroyed)
-                                return;
-
-                            // check if enemy collides with player
-                            _playerHelper.PlayerCollision(player: Player, gameObject: enemy);
-                        }
-                        break;
-                    case METEOR:
-                        {
-                            var meteor = gameObject as Meteor;
-
-                            _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
-
-                            if (destroyed)
-                                return;
-
-                            // check if meteor collides with player
-                            _playerHelper.PlayerCollision(player: Player, gameObject: meteor);
-                        }
-                        break;
-                    case HEALTH:
-                        {
-                            var health = gameObject as Health;
-
-                            _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
-
-                            if (destroyed)
-                                return;
-
-                            // check if health collides with player
-                            _playerHelper.PlayerCollision(player: Player, gameObject: health);
-                        }
-                        break;
-                    case POWERUP:
-                        {
-                            var powerUp = gameObject as PowerUp;
-
-                            _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
-
-                            if (destroyed)
-                                return;
-
-                            // check if power up collides with player
-                            if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
-                            {
-                                IsPoweredUp = true;
-                                PowerUpType = powerUp.PowerUpType;
-                                _projectileHelper.PowerUp(PowerUpType);
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
             }).IsCompleted)
             {
+                // clean removable objects from game view
                 GameView.RemoveDestroyableGameObjects();
-
-                var starObjects = StarView.GetGameObjects<GameObject>();
-
-                if (Parallel.ForEach(starObjects, star =>
-                {
-                    _starHelper.UpdateStar(star as Star);
-                }).IsCompleted)
-                {
-                    StarView.RemoveDestroyableGameObjects();
-                }
             }
+        }
+
+        /// <summary>
+        /// Updates a game object.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateGameObject(GameObject gameObject)
+        {
+            var tag = gameObject.Tag;
+
+            switch (tag)
+            {
+                case PLAYER:
+                    {
+                        if (MoveLeft || MoveRight)
+                            PointerX = _playerHelper.UpdatePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
+
+                        if (IsPoweredUp)
+                        {
+                            if (_playerHelper.PowerDown(Player))
+                            {
+                                _playerProjectileHelper.PowerDown(PowerUpType);
+                                IsPoweredUp = false;
+                                PowerUpType = PowerUpType.NONE;
+                            }
+                        }
+                    }
+                    break;
+                case PLAYER_PROJECTILE:
+                    {
+                        var projectile = gameObject as PlayerProjectile;
+
+                        // move the projectile up and check if projectile has gone beyond the game view
+                        _playerProjectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+
+                        if (GameView.IsBossEngaged)
+                        {
+                            SetBossHealthBar(); // set boss health bar on projectile hit
+                        }
+
+                        if (score > 0)
+                        {
+                            Score += score;
+                            SetGameLevel(); // check game level on score change
+                        }
+
+                        if (destroyedObject is not null)
+                        {
+                            switch (destroyedObject.Tag)
+                            {
+                                case ENEMY:
+                                    {
+                                        var enemy = destroyedObject as Enemy;
+
+                                        _enemyHelper.DestroyEnemy(enemy);
+
+                                        if (enemy.IsBoss)
+                                        {
+                                            ShowInGameText($"BOSS CLEARED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
+                                            _enemyHelper.DisengageBossEnemy();
+
+                                            BossHealthBar.Width = 0;
+                                            Boss = null;
+                                        }
+                                    }
+                                    break;
+                                case METEOR:
+                                    {
+                                        _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    break;
+                case ENEMY_PROJECTILE:
+                    {
+                        var projectile = gameObject as EnemyProjectile;
+
+                        _enemyProjectileHelper.UpdateProjectile(projectile, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        // check if enemy projectile collides with player
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: projectile))
+                        {
+                            SetPlayerHealthBar();
+                        }
+                    }
+                    break;
+                case ENEMY:
+                    {
+                        var enemy = gameObject as Enemy;
+
+                        _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        // check if enemy collides with player
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
+                        {
+                            SetPlayerHealthBar();
+                            return;
+                        }
+
+                        // fire projectiles if at a legitimate distance from player
+                        if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
+                            _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+                    }
+                    break;
+                case METEOR:
+                    {
+                        var meteor = gameObject as Meteor;
+
+                        _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        // check if meteor collides with player
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: meteor))
+                        {
+                            SetPlayerHealthBar();
+                        }
+                    }
+                    break;
+                case HEALTH:
+                    {
+                        var health = gameObject as Health;
+
+                        _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        // check if health collides with player
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
+                        {
+                            SetPlayerHealthBar();
+                        }
+                    }
+                    break;
+                case POWERUP:
+                    {
+                        var powerUp = gameObject as PowerUp;
+
+                        _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        // check if power up collides with player
+                        if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
+                        {
+                            IsPoweredUp = true;
+                            PowerUpType = powerUp.PowerUpType;
+                            _playerProjectileHelper.PowerUp(PowerUpType);
+                        }
+                    }
+                    break;
+                case STAR:
+                    {
+                        var star = gameObject as Star;
+
+                        _starHelper.UpdateStar(star: star, destroyed: out bool destroyed);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Spawns game objects.
+        /// </summary>
+        private void SpawnGameObjects()
+        {
+            _starHelper.SpawnStar();
+
+            _meteorHelper.SpawnMeteor(GameLevel);
+
+            _enemyHelper.SpawnEnemy(GameLevel);
+
+            _healthHelper.SpawnHealth(Player);
+
+            _powerUpHelper.SpawnPowerUp();
+
+            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
         }
 
         /// <summary>
@@ -332,42 +466,9 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateScore()
         {
-            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")}";
-            HealthText.Text = Player.GetHealthPoints();
-        }
+            var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
 
-        /// <summary>
-        /// Shows the level up text in game view.
-        /// </summary>
-        private void ShowLevelUp()
-        {
-            ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
-            App.PlaySound(baseUrl, SoundType.LEVEL_UP);
-        }
-
-        /// <summary>
-        /// Shows the in game text in game view.
-        /// </summary>
-        private void ShowInGameText(string text)
-        {
-            InGameText.Text = text;
-            showInGameTextCounter = ShowInGameTextLimit;
-        }
-
-        /// <summary>
-        /// Hides the in game text after keeping it visible.
-        /// </summary>
-        private void HideInGameText()
-        {
-            if (!InGameText.Text.IsNullOrBlank())
-            {
-                showInGameTextCounter -= 1;
-
-                if (showInGameTextCounter <= 0)
-                {
-                    InGameText.Text = "";
-                }
-            }
+            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")} - {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "")}{timeSpan.Seconds}s";
         }
 
         /// <summary>
@@ -384,51 +485,57 @@ namespace AstroOdyssey
 #endif
         }
 
-        #endregion
-
-        #region Frame Methods      
-
         /// <summary>
         /// Sets analytics of fps, frame time and objects currently in view.
         /// </summary>
         private void SetAnalytics()
         {
-            frameStatUpdateCounter -= 1;
+            frameStatUpdateSpawnCounter -= 1;
 
-            if (frameStatUpdateCounter < 0)
+            if (frameStatUpdateSpawnCounter < 0)
             {
                 var enemies = GameView.Children.OfType<Enemy>().Count();
                 var meteors = GameView.Children.OfType<Meteor>().Count();
                 var powerUps = GameView.Children.OfType<PowerUp>().Count();
                 var healths = GameView.Children.OfType<Health>().Count();
-                var projectiles = GameView.Children.OfType<Projectile>().Count();
 
-                var stars = StarView.Children.OfType<Star>().Count();
+                var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
+                var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
-                var total = GameView.Children.Count() + StarView.Children.Count();
+                var stars = GameView.Children.OfType<Star>().Count();
 
-                FPSText.Text = "FPS: " + FpsCount + " @ Frame Time: " + FrameDuration + " ms ";
-                ObjectsCountText.Text = "Enemies: " + enemies + "  Meteors: " + meteors + "  Power Ups: " + powerUps + "  Healths: " + healths + "  Projectiles: " + projectiles + "  Stars: " + stars + "  Total: " + total;
+                var total = GameView.Children.Count;
 
-                frameStatUpdateCounter = FrameStatUpdateLimit;
+                FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
+                ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
+
+                frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
             }
         }
 
         /// <summary>
-        /// Calculates frames per second.
+        /// Shows the in game text in game view.
         /// </summary>
-        /// <param name="frameStartTime"></param>
-        private void CalculateFps()
+        private void ShowInGameText(string text)
         {
-            // calculate FPS
-            if (LastFrameTime + 1000 < FrameStartTime)
-            {
-                FpsCount = fpsCounter;
-                fpsCounter = 0;
-                LastFrameTime = FrameStartTime;
-            }
+            InGameText.Text = text;
+        }
 
-            fpsCounter++;
+        /// <summary>
+        /// Hides the in game text after keeping it visible for a few frames.
+        /// </summary>
+        private void HandleInGameText()
+        {
+            if (!InGameText.Text.IsNullOrBlank())
+            {
+                showInGameTextSpawnCounter -= 1;
+
+                if (showInGameTextSpawnCounter <= 0)
+                {
+                    InGameText.Text = null;
+                    showInGameTextSpawnCounter = showInGameTextFrequency;
+                }
+            }
         }
 
         #endregion
@@ -436,41 +543,62 @@ namespace AstroOdyssey
         #region Difficulty Methods
 
         /// <summary>
-        /// Shifts the game level according to score; 
+        /// Sets the game level according to score; 
         /// </summary>
-        private void ShiftGameLevel()
+        private void SetGameLevel()
         {
             var lastGameLevel = GameLevel;
 
             if (Score > 0)
                 GameLevel = GameLevel.Level_1;
-            if (Score > 25)
-                GameLevel = GameLevel.Level_2;
             if (Score > 50)
-                GameLevel = GameLevel.Level_3;
+                GameLevel = GameLevel.Level_2;
             if (Score > 100)
-                GameLevel = GameLevel.Level_4;
+                GameLevel = GameLevel.Level_3;
             if (Score > 200)
-                GameLevel = GameLevel.Level_5;
+                GameLevel = GameLevel.Level_4;
             if (Score > 400)
+                GameLevel = GameLevel.Level_5;
+            if (Score > 600)
                 GameLevel = GameLevel.Level_6;
             if (Score > 800)
                 GameLevel = GameLevel.Level_7;
-            if (Score > 1600)
+            if (Score > 1000)
                 GameLevel = GameLevel.Level_8;
+            if (Score > 1200)
+                GameLevel = GameLevel.Level_9;
+            if (Score > 1400)
+                GameLevel = GameLevel.Level_10;
 
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)
             {
-                ShowLevelUp();
-                AdjustGameEnvironment();
+                LevelUpObjects();
+
+                //TODO: Bosses apprear after level 2
+                if (GameLevel > GameLevel.Level_2)
+                {
+                    ShowInGameText("BOSS INCOMING");
+                    Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+                    SetBossHealthBar(); // set boss health on boss appearance
+                }
+                else
+                {
+                    ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
+                    App.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                }
             }
         }
 
+        private void SetBossHealthBar()
+        {
+            BossHealthBar.Width = Boss.Health / 1.5;
+        }
+
         /// <summary>
-        /// Adjusts the game environment according to game level.
+        /// Performs level up of all game view objects.
         /// </summary>
-        private void AdjustGameEnvironment()
+        private void LevelUpObjects()
         {
             switch (GameLevel)
             {
@@ -488,7 +616,7 @@ namespace AstroOdyssey
 
                         _starHelper.LevelUp();
 
-                        _projectileHelper.LevelUp();
+                        _playerProjectileHelper.LevelUp();
                     }
                     break;
             }
@@ -505,7 +633,11 @@ namespace AstroOdyssey
         {
             var scale = GameView.GetGameObjectScale();
 
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, playerSpeed: PlayerSpeed * scale);
+#if DEBUG
+            Console.WriteLine($"Render Scale: {scale}");
+#endif
+
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX);
         }
 
         /// <summary>
@@ -517,45 +649,14 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Check if game if over.
+        /// Sets player health bar.
         /// </summary>
-        private void GameOver()
+        private void SetPlayerHealthBar()
         {
-            if (Player.HasNoHealth)
-            {
-                HealthText.Text = "Game Over";
-
-                StopGame();
-
-                App.PlaySound(baseUrl, SoundType.GAME_OVER);
-
-                App.SetScore(Score);
-
-                App.NavigateToPage(typeof(GameOverPage));
-            }
+            PlayerHealthBar.Width = Player.Health;
         }
 
-        #endregion
-
-        #region PowerUp Methods      
-
-        /// <summary>
-        /// Triggers the powered up state down.
-        /// </summary>
-        private void TriggerPowerDown()
-        {
-            if (IsPoweredUp)
-            {
-                if (_playerHelper.PowerDown(Player))
-                {
-                    _projectileHelper.PowerDown(PowerUpType);
-                    IsPoweredUp = false;
-                    PowerUpType = PowerUpType.NONE;
-                }
-            }
-        }
-
-        #endregion
+        #endregion      
 
         #region Window Events
 
@@ -568,30 +669,6 @@ namespace AstroOdyssey
         {
             SizeChanged += GamePage_SizeChanged;
             ShowInGameText("TAP TO START");
-        }
-
-        /// <summary>
-        /// When the window size is changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
-        {
-            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
-            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
-
-            PointerX = windowWidth / 2;
-
-#if DEBUG
-            Console.WriteLine($"{windowWidth} x {windowHeight}");
-#endif
-
-            SetViewSizes();
-
-            if (IsGameRunning)
-            {
-                SetPlayerY(); // windows size changed so reset y position
-            }
         }
 
         /// <summary>
@@ -608,21 +685,42 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// When the window size is changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
+        {
+            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+#if DEBUG
+            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
+#endif
+            SetViewSizes();
+        }
+
+        /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
         private void SetViewSizes()
         {
             GameView.SetSize(windowHeight, windowWidth);
-            StarView.SetSize(windowHeight, windowWidth);
 
             // resize player size
             if (IsGameRunning)
             {
-                MoveLeft = false; MoveRight = false;
+                PointerX = windowWidth / 2;
+
+                Player.SetX(PointerX);
+
+                SetPlayerY(); // windows size changed so reset y position
 
                 var scale = GameView.GetGameObjectScale();
 
-                Player.SetAttributes(speed: PlayerSpeed * scale, scale: scale);
+                Player.ReAdjustScale(scale: scale);
+#if DEBUG
+                Console.WriteLine($"Render Scale: {scale}");
+#endif
             }
         }
 
@@ -660,8 +758,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
+                //case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
+                //case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
                 default:
                     break;
             }

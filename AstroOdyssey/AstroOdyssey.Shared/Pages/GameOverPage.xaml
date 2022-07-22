@@ -11,34 +11,34 @@
     <Grid>
 
         <StackPanel
+            MaxWidth="315"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
 
             <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 FontSize="45"
                 FontWeight="Bold"
-                Text="Game Over" />
+                Text="Game Over"
+                TextAlignment="Center" />
 
             <TextBlock
                 x:Name="ScoreText"
                 Margin="60"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="35"
-                FontWeight="Bold" />
+                FontSize="30"
+                FontWeight="Bold"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
 
             <Button
                 x:Name="PlayAgainButton"
-                Width="200"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                Height="40"
+                Margin="5,20,5,5"
+                HorizontalAlignment="Stretch"
                 BorderBrush="White"
                 Click="PlayAgainButton_Click"
                 Content="Play Again"
-                FontSize="30" />
+                CornerRadius="50" />
         </StackPanel>
 
     </Grid>

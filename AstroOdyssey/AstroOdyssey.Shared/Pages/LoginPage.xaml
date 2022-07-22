@@ -15,43 +15,66 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
+
             <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,50"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
                 FontSize="45"
                 FontWeight="Bold"
-                Text="Astro Odyssey" />
+                Text="Astro Odyssey"
+                TextAlignment="Center" />
+
             <TextBlock
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="35"
+                Margin="10,10,10,50"
+                FontSize="25"
                 FontWeight="Bold"
-                Text="Login" />
+                Text="Login"
+                TextAlignment="Center" />
+
             <TextBox
                 x:Name="UserNameBox"
                 Margin="5"
-                Header="User name"
+                CornerRadius="50"
+                FontWeight="SemiBold"
+                Header="Username"
                 TextChanged="UserNameBox_TextChanged" />
+
             <PasswordBox
                 x:Name="PasswordBox"
                 Margin="5"
+                CornerRadius="50"
                 Header="Password"
                 KeyDown="PasswordBox_KeyDown"
                 TextChanged="PasswordBox_TextChanged" />
+
             <!--  Login button  -->
             <Button
                 x:Name="LoginButton"
-                Width="100"
+                Height="40"
                 Margin="5,20,5,5"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                HorizontalAlignment="Stretch"
                 BorderBrush="White"
                 Click="LoginButton_Click"
                 Content="Login"
+                CornerRadius="50"
+                FontWeight="SemiBold"
                 IsEnabled="False" />
+
+            <Button
+                x:Name="RegisterButton"
+                Grid.Column="1"
+                Height="40"
+                Margin="5,15,5,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="White"
+                BorderThickness="0"
+                Click="RegisterButton_Click"
+                Content="No account yet?"
+                CornerRadius="50"
+                FontWeight="SemiBold" />
+
         </StackPanel>
 
     </Grid>

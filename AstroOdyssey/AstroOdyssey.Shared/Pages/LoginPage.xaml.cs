@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -16,7 +17,7 @@ namespace AstroOdyssey
         {
             InitializeComponent();
             Loaded += LoginPage_Loaded;
-        } 
+        }
 
         #endregion
 
@@ -31,9 +32,9 @@ namespace AstroOdyssey
         {
             if (LoginButton.IsEnabled)
             {
-                Login(); 
+                Login();
             }
-        }      
+        }
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -57,8 +58,6 @@ namespace AstroOdyssey
 
         private void Login()
         {
-            //TODO: Call BE to get account
-
             App.Account = new Account() { UserName = UserNameBox.Text, Password = PasswordBox.Password, };
 
             App.SetAccount();
@@ -71,6 +70,11 @@ namespace AstroOdyssey
             LoginButton.IsEnabled = UserNameBox.Text.IsNullOrBlank() || PasswordBox.Text.IsNullOrBlank() ? false : true;
         }
 
-        #endregion     
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

@@ -7,13 +7,12 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
-        private readonly string baseUrl;
-
-        private int powerUpCounter = 1500;
-        private int powerUpSpawnLimit = 1500;
+        private int powerUpSpawnCounter = 1500;
+        private int powerUpSpawnFrequency = 1500;
         private double powerUpSpeed = 2;
 
         #endregion
@@ -31,26 +30,19 @@ namespace AstroOdyssey
         #region Methods
 
         /// <summary>
-        /// Levels up power ups.
-        /// </summary>
-        public void LevelUp()
-        {
-            powerUpSpeed += 1;
-        }
-
-        /// <summary>
         /// Spawns a PowerUp.
         /// </summary>
         public void SpawnPowerUp()
         {
             // each frame progress decreases this counter
-            powerUpCounter -= 1;
+            powerUpSpawnCounter -= 1;
 
             // when counter reaches zero, create a PowerUp
-            if (powerUpCounter < 0)
+            if (powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                powerUpCounter = powerUpSpawnLimit;
+                powerUpSpawnCounter = powerUpSpawnFrequency;
+                powerUpSpawnFrequency = random.Next(1400, 1501);
             }
         }
 
@@ -59,13 +51,13 @@ namespace AstroOdyssey
         /// </summary>
         public void GeneratePowerUp()
         {
-            var newPowerUp = new PowerUp();
+            var powerUp = new PowerUp();
 
-            newPowerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
-            newPowerUp.AddToGameEnvironment(top: 0 - newPowerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            powerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
+            powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             // change the next power up spawn time
-            powerUpSpawnLimit = random.Next(1500, 2000);
+            powerUpSpawnFrequency = random.Next(1500, 2000);
         }
 
         /// <summary>
@@ -82,6 +74,14 @@ namespace AstroOdyssey
 
             // if powerUp or meteor object has gone beyond game view
             destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+        }
+
+        /// <summary>
+        /// Levels up power ups.
+        /// </summary>
+        public void LevelUp()
+        {
+            powerUpSpeed += 1;
         }
 
         #endregion

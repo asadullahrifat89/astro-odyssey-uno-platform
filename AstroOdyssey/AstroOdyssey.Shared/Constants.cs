@@ -1,4 +1,10 @@
-﻿using Windows.Foundation;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml.Markup;
+using Microsoft.UI.Xaml.Media;
+using System;
+using System.Globalization;
+using Windows.Foundation;
+using Windows.UI;
 
 namespace AstroOdyssey
 {
@@ -15,9 +21,12 @@ namespace AstroOdyssey
         public const string HEALTH = "health";
         public const string POWERUP = "powerup";
 
-        public const string PROJECTILE = "projectile";
+        public const string PLAYER_PROJECTILE = "player_projectile";
+        public const string ENEMY_PROJECTILE = "enemy_projectile";
 
         public const string STAR = "star";
+
+        //public static Color SPECIAL_ROUNDS_COLOR = Colors.White; //Windows.UI.ColorHelper.FromArgb(255, 232, 18, 36);
 
         public enum GameLevel
         {
@@ -29,18 +38,23 @@ namespace AstroOdyssey
             Level_6,
             Level_7,
             Level_8,
+            Level_9,
+            Level_10,
         }
 
         public enum SoundType
         {
             BACKGROUND_MUSIC,
-            ROUNDS_FIRE,
-            ROUNDS_HIT,
-            RAPIDSHOT_ROUNDS_FIRE,
-            DEADSHOT_ROUNDS_FIRE,
-            SONICSHOT_ROUNDS_FIRE,
+            PLAYER_ROUNDS_FIRE,
+            PLAYER_RAPIDSHOT_ROUNDS_FIRE,
+            PLAYER_DEADSHOT_ROUNDS_FIRE,
+            PLAYER_SONICSHOT_ROUNDS_FIRE,
+            ENEMY_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,
+            BOSS_APPEARANCE,
+            BOSS_DESTRUCTION,
+            ROUNDS_HIT,
             POWER_UP,
             POWER_DOWN,
             LEVEL_UP,
@@ -74,10 +88,8 @@ namespace AstroOdyssey
             var targetWidth = target.Width;
             var targetHeight = target.Height;
 
-            if (source.Width >= 0.0
-                && target.Width >= 0.0
-                && targetX <= sourceX + sourceWidth
-                && targetX + targetWidth >= sourceX
+            if (source.Width >= 0.0 && target.Width >= 0.0
+                && targetX <= sourceX + sourceWidth && targetX + targetWidth >= sourceX
                 && targetY <= sourceY + sourceHeight)
             {
                 return targetY + targetHeight >= sourceY;

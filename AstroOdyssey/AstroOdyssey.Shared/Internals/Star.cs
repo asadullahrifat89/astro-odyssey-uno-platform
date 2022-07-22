@@ -42,7 +42,7 @@ namespace AstroOdyssey
             {
                 case 1:
                     uri = new Uri("ms-appx:///Assets/Images/star_large.png", UriKind.RelativeOrAbsolute);
-                    size = 25;
+                    size = 20;
                     break;
                 case 2:
                     uri = new Uri("ms-appx:///Assets/Images/star_medium.png", UriKind.RelativeOrAbsolute);
@@ -50,18 +50,20 @@ namespace AstroOdyssey
                     break;
                 case 3:
                     uri = new Uri("ms-appx:///Assets/Images/star_small.png", UriKind.RelativeOrAbsolute);
-                    size = 15;
+                    size = 20;
                     break;
                 case 4:
                     uri = new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute);
-                    size = 10;
+                    size = 20;
                     break;
             }
+
+            content.Source = new BitmapImage(uri);
 
             Height = size * scale;
             Width = size * scale;
 
-            content.Source = new BitmapImage(uri);
+            HalfWidth = Width / 2;
         }
 
         #endregion

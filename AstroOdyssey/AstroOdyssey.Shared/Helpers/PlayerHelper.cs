@@ -8,17 +8,18 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
+        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
-        private readonly string baseUrl;
+        private int playerDamagedOpacitySpawnCounter;
+        private readonly int playerDamagedOpacityFrequency = 120;
 
-        private int playerDamagedOpacityCounter;
-        private readonly int playerDamagedOpacityLimit = 100;
+        private int powerUpTriggerSpawnCounter;
+        private readonly int powerUpTriggerFrequency = 1000;
 
-        private int powerUpTriggerCounter;
-        private readonly int powerUpTriggerLimit = 1000;
-
+        private double playerSpeed = 12;
+        
         #endregion
 
         #region Ctor
@@ -36,7 +37,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns the player.
         /// </summary>
-        public Player SpawnPlayer(double pointerX, double playerSpeed)
+        public Player SpawnPlayer(double pointerX)
         {
             var player = new Player();
 
@@ -55,11 +56,11 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public double MovePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
+        public double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
         {
             var playerX = player.GetX();
-            var playerWidthHalf = player.Width / 2;
 
+            // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
                 pointerX -= player.Speed;
 
@@ -67,18 +68,18 @@ namespace AstroOdyssey
                 pointerX += player.Speed;
 
             // move right
-            if (pointerX - playerWidthHalf > playerX + player.Speed)
+            if (pointerX - player.HalfWidth > playerX + player.Speed)
             {
-                if (playerX + playerWidthHalf < gameEnvironment.Width)
+                if (playerX + player.HalfWidth < gameEnvironment.Width)
                 {
-                    SetPlayerX(player, playerX + player.Speed);
+                    SetPlayerX(player: player, left: playerX + player.Speed);
                 }
             }
 
             // move left
-            if (pointerX - playerWidthHalf < playerX - player.Speed)
+            if (pointerX - player.HalfWidth < playerX - player.Speed)
             {
-                SetPlayerX(player, playerX - player.Speed);
+                SetPlayerX(player: player, left: playerX - player.Speed);
             }
 
             return pointerX;
@@ -87,10 +88,10 @@ namespace AstroOdyssey
         /// <summary>
         /// Sets the x axis position of the player on game canvas.
         /// </summary>
-        /// <param name="x"></param>
-        private void SetPlayerX(Player player, double x)
+        /// <param name="left"></param>
+        private void SetPlayerX(Player player, double left)
         {
-            player.SetX(x);
+            player.SetX(left);
         }
 
         /// <summary>
@@ -107,8 +108,10 @@ namespace AstroOdyssey
             {
                 case METEOR:
                 case ENEMY:
+                case ENEMY_PROJECTILE:
                     {
-                        if (player.GetRect().Intersects(gameObject.GetRect()))
+                        // only loose health if player is now in physical state
+                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             gameEnvironment.AddDestroyableGameObject(gameObject);
                             PlayerHealthLoss(player);
@@ -155,20 +158,29 @@ namespace AstroOdyssey
 
             App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
 
+            // enter ethereal state, prevent taking damage for a few milliseconds
             player.Opacity = 0.4d;
 
-            playerDamagedOpacityCounter = playerDamagedOpacityLimit;
+            player.IsInEtherealState = true;
+
+            playerDamagedOpacitySpawnCounter = playerDamagedOpacityFrequency;
         }
 
         /// <summary>
-        /// Sets the player opacity.
+        /// Handles the opacity of the player upon taking damage.
         /// </summary>
-        public void PlayerOpacity(Player player)
+        public void HandleDamageRecovery(Player player)
         {
-            playerDamagedOpacityCounter -= 1;
+            if (player.IsInEtherealState)
+            {
+                playerDamagedOpacitySpawnCounter -= 1;
 
-            if (playerDamagedOpacityCounter <= 0)
-                player.Opacity = 1;
+                if (playerDamagedOpacitySpawnCounter <= 0)
+                {
+                    player.Opacity = 1;
+                    player.IsInEtherealState = false;
+                }
+            }
         }
 
         /// <summary>
@@ -186,7 +198,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            powerUpTriggerCounter = powerUpTriggerLimit;
+            powerUpTriggerSpawnCounter = powerUpTriggerFrequency;
 
             App.PlaySound(baseUrl, SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
@@ -197,13 +209,13 @@ namespace AstroOdyssey
         /// </summary>
         public bool PowerDown(Player player)
         {
-            powerUpTriggerCounter -= 1;
+            powerUpTriggerSpawnCounter -= 1;
 
-            var powerGauge = ((powerUpTriggerCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
+            var powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
 
             player.SetPowerGauge(powerGauge);
 
-            if (powerUpTriggerCounter <= 0)
+            if (powerUpTriggerSpawnCounter <= 0)
             {
                 App.PlaySound(baseUrl, SoundType.POWER_DOWN);
                 player.TriggerPowerDown();

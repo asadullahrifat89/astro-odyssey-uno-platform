@@ -39,6 +39,8 @@ namespace AstroOdyssey
 
             Height = Constants.DefaultGameObjectSize * scale;
             Width = Constants.DefaultGameObjectSize * scale;
+
+            HalfWidth = Width / 2;
         } 
 
         #endregion

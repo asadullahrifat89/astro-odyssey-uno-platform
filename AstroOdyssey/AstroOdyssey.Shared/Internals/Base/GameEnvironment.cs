@@ -23,6 +23,14 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public bool IsBossEngaged { get; set; }
+
+        public double HalfWidth => Width > 0 && double.IsFinite(Width) ? Width / 2 : 0;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -31,7 +39,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public double GetGameObjectScale()
         {
-            return Width <= 500 ? 0.6 : (Width <= 700 ? 0.8 : (Width <= 800 ? 0.9 : 1));
+            return Width >= 1000 ? 1 : (Width <= 300 ? 0.75 : (Width <= 500 ? 0.80 : (Width <= 700 ? 0.75 : (Width <= 900 ? 0.90 : 1))));
         }
 
         public void SetSize(double height, double width)
@@ -65,6 +73,7 @@ namespace AstroOdyssey
             if (Parallel.ForEach(destroyableGameObjects, destroyable =>
             {
                 RemoveGameObject(destroyable);
+
             }).IsCompleted)
             {
                 ClearDestroyableGameObjects();
@@ -76,6 +85,9 @@ namespace AstroOdyssey
             Children.Remove(destroyable);
         }
 
+        /// <summary>
+        /// Clears destroyable objects collection.
+        /// </summary>
         public void ClearDestroyableGameObjects()
         {
             destroyableGameObjects.Clear();
@@ -99,6 +111,11 @@ namespace AstroOdyssey
             return false;
         }
 
+        /// <summary>
+        /// Get destructible objects that have health and intersects with the projectile.
+        /// </summary>
+        /// <param name="projectileBounds"></param>
+        /// <returns></returns>
         public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds)
         {
             return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
