@@ -10,9 +10,6 @@
 
     <Grid x:Name="RootGrid">
 
-        <!--  This renders the stars  -->
-        <!--<GameEnvironment x:Name="StarView" Background="Transparent" />-->
-
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
@@ -93,35 +90,16 @@
             TextWrapping="WrapWholeWords" />
 
         <!--  This is for capturing input  -->
-        <Grid>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Border
-                x:Name="LeftInputView"
-                Grid.Column="0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="LeftInputView_PointerPressed"
-                PointerReleased="LeftInputView_PointerReleased" />
-
-            <Border
-                x:Name="RightInputView"
-                Grid.Column="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Transparent"
-                KeyDown="InputView_KeyDown"
-                KeyUp="InputView_KeyUp"
-                PointerPressed="RightInputView_PointerPressed"
-                PointerReleased="RightInputView_PointerReleased" />
-        </Grid>
+        <Border
+            x:Name="InputView"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Transparent"
+            KeyDown="InputView_KeyDown"
+            KeyUp="InputView_KeyUp"
+            PointerPressed="InputView_PointerPressed"
+            PointerReleased="InputView_PointerReleased" />
 
     </Grid>
 </Page>

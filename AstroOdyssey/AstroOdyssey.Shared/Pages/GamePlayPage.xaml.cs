@@ -35,8 +35,8 @@ namespace AstroOdyssey
         private int showInGameTextSpawnCounter = 110;
         private int showInGameTextFrequency = 110;
 
-        private int frameTime = 19;
-        private long frameDuration;
+        private double frameTime = 19;
+        private double frameDuration;
 
         private double windowWidth, windowHeight;
 
@@ -60,7 +60,13 @@ namespace AstroOdyssey
             Loaded += GamePage_Loaded;
             Unloaded += GamePage_Unloaded;
 
-            SetWindowSize();
+            windowWidth = Window.Current.Bounds.Width - 10;
+            windowHeight = Window.Current.Bounds.Height - 10;
+
+            PointerX = windowWidth / 2;
+
+            AdjustView();
+
             GetBaseUrl();
 
             _starHelper = new StarHelper(GameView);
@@ -75,31 +81,31 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Properties        
+        #region Properties
 
-        private bool IsPoweredUp { get; set; }
-
-        private PowerUpType PowerUpType { get; set; }
-
-        private Enemy Boss { get; set; }
+        private PeriodicTimer GameFrameTimer { get; set; }
 
         private double Score { get; set; } = 0;
 
         private double PointerX { get; set; }
 
-        private bool IsGameRunning { get; set; }
+        private Player Player { get; set; }
+
+        private Enemy Boss { get; set; }
 
         private GameLevel GameLevel { get; set; }
 
-        private PeriodicTimer GameFrameTimer { get; set; }
+        private PowerUpType PowerUpType { get; set; }
 
-        private Player Player { get; set; }
+        private bool IsGameRunning { get; set; }
 
         private bool MoveLeft { get; set; } = false;
 
         private bool MoveRight { get; set; } = false;
 
         private bool FiringProjectiles { get; set; } = false;
+
+        private bool IsPoweredUp { get; set; }
 
         #endregion
 
@@ -590,6 +596,9 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Sets the boss health bar.
+        /// </summary>
         private void SetBossHealthBar()
         {
             BossHealthBar.Width = Boss.Health / 1.5;
@@ -672,16 +681,14 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the window and canvas size on startup.
+        /// When the window is unloaded, we remove the event Current_SizeChanged.
         /// </summary>
-        private void SetWindowSize()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
-            windowWidth = Window.Current.Bounds.Width - 10;
-            windowHeight = Window.Current.Bounds.Height - 10;
-
-            PointerX = windowWidth / 2;
-
-            SetViewSizes();
+            SizeChanged -= GamePage_SizeChanged;
+            StopGame();
         }
 
         /// <summary>
@@ -696,15 +703,17 @@ namespace AstroOdyssey
 #if DEBUG
             Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
-            SetViewSizes();
+            AdjustView();
         }
 
         /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
-        private void SetViewSizes()
+        private void AdjustView()
         {
             GameView.SetSize(windowHeight, windowWidth);
+
+            frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
             // resize player size
             if (IsGameRunning)
@@ -713,26 +722,14 @@ namespace AstroOdyssey
 
                 Player.SetX(PointerX);
 
-                SetPlayerY(); // windows size changed so reset y position
+                SetPlayerY(); // windows size changed so reset y position               
 
                 var scale = GameView.GetGameObjectScale();
-
                 Player.ReAdjustScale(scale: scale);
 #if DEBUG
                 Console.WriteLine($"Render Scale: {scale}");
 #endif
             }
-        }
-
-        /// <summary>
-        /// When the window is unloaded, we remove the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void GamePage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            SizeChanged -= GamePage_SizeChanged;
-            StopGame();
         }
 
         #endregion   
@@ -745,8 +742,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
-                case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
+                //case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
+                //case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
                 default:
                     break;
             }
@@ -765,36 +762,44 @@ namespace AstroOdyssey
             }
         }
 
-        private void LeftInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            FiringProjectiles = true;
-            MoveLeft = true;
-            MoveRight = false;
+            var point = e.GetCurrentPoint(GameView);
+
+            if (point.Position.X < windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveLeft = true;
+                MoveRight = false;
+            }
+            else if (point.Position.X > windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveRight = true;
+                MoveLeft = false;
+            }
         }
 
-        private void LeftInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            FiringProjectiles = true;
-            MoveLeft = false;
+            var point = e.GetCurrentPoint(GameView);
 
-            if (!IsGameRunning)
-                StartGame();
-        }
+            if (point.Position.X < windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveLeft = false;
 
-        private void RightInputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = true;
-            MoveLeft = false;
-        }
+                if (!IsGameRunning)
+                    StartGame();
+            }
+            else if (point.Position.X > windowWidth / 2)
+            {
+                FiringProjectiles = true;
+                MoveRight = false;
 
-        private void RightInputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            FiringProjectiles = true;
-            MoveRight = false;
-
-            if (!IsGameRunning)
-                StartGame();
+                if (!IsGameRunning)
+                    StartGame();
+            }
         }
 
         #endregion

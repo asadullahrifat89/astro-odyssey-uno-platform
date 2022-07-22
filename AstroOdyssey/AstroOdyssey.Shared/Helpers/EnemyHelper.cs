@@ -73,36 +73,6 @@ namespace AstroOdyssey
             SetProjectileFiringEnemy(enemy);
             SetHoveringEnemy(enemy);
 
-            //switch (random.Next(0, 2))
-            //{
-            //    case 0:
-            //        {
-            //            if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsPlayerTargeting))
-            //            {
-            //                SetHoveringEnemy(enemy);
-            //            }
-            //            else
-            //            {
-            //                SetPlayerTargetingEnemy(enemy);
-            //            }
-            //        }
-            //        break;
-            //    case 1:
-            //        {
-            //            if (gameEnvironment.Children.OfType<Enemy>().Any(x => x.IsBoss && x.IsHovering))
-            //            {
-            //                SetPlayerTargetingEnemy(enemy);
-            //            }
-            //            else
-            //            {
-            //                SetHoveringEnemy(enemy);
-            //            }
-            //        }
-            //        break;
-            //    default:
-            //        break;
-            //}
-
             // appear in the middle of the screen
             double left = gameEnvironment.HalfWidth + enemy.HalfWidth;
             double top = 0 - enemy.Height;
