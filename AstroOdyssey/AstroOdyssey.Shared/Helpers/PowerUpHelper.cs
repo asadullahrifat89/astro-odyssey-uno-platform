@@ -42,6 +42,7 @@ namespace AstroOdyssey
             {
                 GeneratePowerUp();
                 powerUpSpawnCounter = powerUpSpawnFrequency;
+                powerUpSpawnFrequency = random.Next(1400, 1501);
             }
         }
 

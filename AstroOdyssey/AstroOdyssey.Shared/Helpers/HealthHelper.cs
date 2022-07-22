@@ -44,6 +44,7 @@ namespace AstroOdyssey
                 {
                     GenerateHealth();
                     healthSpawnCounter = healthSpawnFrequency;
+                    healthSpawnFrequency = random.Next(900, 1001);
                 }
             }
         }
