@@ -35,8 +35,8 @@ namespace AstroOdyssey
         private int showInGameTextSpawnCounter = 110;
         private int showInGameTextFrequency = 110;
 
-        private int frameTime = 19;
-        private long frameDuration;
+        private double frameTime = 19;
+        private double frameDuration;
 
         private double windowWidth, windowHeight;
 
@@ -60,7 +60,13 @@ namespace AstroOdyssey
             Loaded += GamePage_Loaded;
             Unloaded += GamePage_Unloaded;
 
-            SetWindowSize();
+            windowWidth = Window.Current.Bounds.Width - 10;
+            windowHeight = Window.Current.Bounds.Height - 10;
+
+            PointerX = windowWidth / 2;
+
+            SetViewSizes();
+
             GetBaseUrl();
 
             _starHelper = new StarHelper(GameView);
@@ -700,47 +706,14 @@ namespace AstroOdyssey
             SetViewSizes();
         }
 
-        //private void Accelerometer_ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
-        //{
-        //    if (args.Reading.AccelerationX == windowWidth / 2)
-        //    {
-        //        FiringProjectiles = true;
-        //        MoveLeft = false;
-        //        MoveRight = false;
-        //    }
-        //    else if (args.Reading.AccelerationX < windowWidth / 2)
-        //    {
-        //        FiringProjectiles = true;
-        //        MoveLeft = true;
-        //        MoveRight = false;
-        //    }
-        //    else if (args.Reading.AccelerationX > windowWidth / 2)
-        //    {
-        //        FiringProjectiles = true;
-        //        MoveRight = true;
-        //        MoveLeft = false;
-        //    }
-        //}
-
-        /// <summary>
-        /// Sets the window and canvas size on startup.
-        /// </summary>
-        private void SetWindowSize()
-        {
-            windowWidth = Window.Current.Bounds.Width - 10;
-            windowHeight = Window.Current.Bounds.Height - 10;
-
-            PointerX = windowWidth / 2;
-
-            SetViewSizes();
-        }
-
         /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
         private void SetViewSizes()
         {
             GameView.SetSize(windowHeight, windowWidth);
+
+            frameTime = 19 + (windowWidth <= 500 ? 2 : 0); // run a little slower on phones
 
             // resize player size
             if (IsGameRunning)
@@ -749,10 +722,9 @@ namespace AstroOdyssey
 
                 Player.SetX(PointerX);
 
-                SetPlayerY(); // windows size changed so reset y position
+                SetPlayerY(); // windows size changed so reset y position               
 
                 var scale = GameView.GetGameObjectScale();
-
                 Player.ReAdjustScale(scale: scale);
 #if DEBUG
                 Console.WriteLine($"Render Scale: {scale}");
