@@ -294,7 +294,7 @@ namespace AstroOdyssey
 
                         if (GameView.IsBossEngaged)
                         {
-                            SetBossHealthBar();
+                            SetBossHealthBar(); // set boss health bar on projectile hit
                         }
 
                         if (score > 0)
@@ -578,7 +578,7 @@ namespace AstroOdyssey
                 {
                     ShowInGameText("BOSS INCOMING");
                     Boss = _enemyHelper.EngageBossEnemy(GameLevel);
-                    SetBossHealthBar();
+                    SetBossHealthBar(); // set boss health on boss appearance
                 }
                 else
                 {

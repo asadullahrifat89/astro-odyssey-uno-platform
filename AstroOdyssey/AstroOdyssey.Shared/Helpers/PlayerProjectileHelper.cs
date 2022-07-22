@@ -151,6 +151,7 @@ namespace AstroOdyssey
                             {
                                 // upon hit with a destructible object remove the projectile
                                 gameEnvironment.AddDestroyableGameObject(projectile);
+
                                 destructible.LooseHealth(destructible.HitPoint);
                             }
                             break;
@@ -158,6 +159,7 @@ namespace AstroOdyssey
                             {
                                 // upon hit with a destructible object remove the projectile
                                 gameEnvironment.AddDestroyableGameObject(projectile);
+
                                 // loose 3 times hit point
                                 destructible.LooseHealth(destructible.HitPoint * 3);
                             }
@@ -172,6 +174,7 @@ namespace AstroOdyssey
                             {
                                 // upon hit with a destructible object remove the projectile
                                 gameEnvironment.AddDestroyableGameObject(projectile);
+
                                 destructible.LooseHealth();
                             }
                             break;
