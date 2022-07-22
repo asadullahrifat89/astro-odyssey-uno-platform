@@ -86,7 +86,7 @@
             x:Name="InGameText"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="50"
+            FontSize="45"
             FontWeight="Bold"
             Foreground="White"
             TextAlignment="Center"
