@@ -65,7 +65,7 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
-            SetViewSizes();
+            AdjustView();
 
             GetBaseUrl();
 
@@ -703,13 +703,13 @@ namespace AstroOdyssey
 #if DEBUG
             Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
-            SetViewSizes();
+            AdjustView();
         }
 
         /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
-        private void SetViewSizes()
+        private void AdjustView()
         {
             GameView.SetSize(windowHeight, windowWidth);
 
