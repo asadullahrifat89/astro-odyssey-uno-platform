@@ -713,7 +713,7 @@ namespace AstroOdyssey
         {
             GameView.SetSize(windowHeight, windowWidth);
 
-            frameTime = 19 + (windowWidth <= 500 ? 2 : 0); // run a little slower on phones
+            frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
             // resize player size
             if (IsGameRunning)
