@@ -47,28 +47,22 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
-                            height = 25; width = 15; // smaller but faster rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 30; width = 10; // smaller but faster rounds                            
                         }
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         {
-                            height = 25; width = 25; // larger but slower rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 25; width = 25; // larger but slower rounds                            
                         }
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
                         {
-                            height = 300; width = 20; // larger and longer and faster piercing rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 300; width = 20; // larger and longer and faster piercing rounds                            
                         }
                         break;
                     default:
-                        //Background = new SolidColorBrush(Colors.White);
                         break;
                 }
-
-                Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -76,49 +70,70 @@ namespace AstroOdyssey
                 {
                     case GameLevel.Level_1:
                         {
-                            height = 20; width = 6;
+                            height = 20; width = 10;
                         }
                         break;
                     case GameLevel.Level_2:
                         {
-                            height = 25; width = 7;
+                            height = 25; width = 11;
                         }
                         break;
                     case GameLevel.Level_3:
                         {
-                            height = 30; width = 8;
+                            height = 30; width = 12;
                         }
                         break;
                     case GameLevel.Level_4:
                         {
-                            height = 35; width = 9;
+                            height = 35; width = 13;
                         }
                         break;
                     case GameLevel.Level_5:
                         {
-                            height = 35; width = 10;
+                            height = 35; width = 14;
                         }
                         break;
                     case GameLevel.Level_6:
                         {
-                            height = 35; width = 11;
+                            height = 35; width = 15;
                         }
                         break;
                     case GameLevel.Level_7:
                         {
-                            height = 35; width = 12;
+                            height = 35; width = 16;
                         }
                         break;
                     case GameLevel.Level_8:
                         {
-                            height = 35; width = 13;
+                            height = 35; width = 17;
+                        }
+                        break;
+                    case GameLevel.Level_9:
+                        {
+                            height = 35; width = 18;
+                        }
+                        break;
+                    case GameLevel.Level_10:
+                        {
+                            height = 35; width = 19;
                         }
                         break;
                     default:
                         break;
                 }
+            }
 
-                Background = new SolidColorBrush(Colors.Red);
+            Background = new SolidColorBrush(Colors.Red);
+
+            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+
+            if (PowerUpType == PowerUpType.DEADSHOT_ROUNDS)
+            {
+                BorderThickness = new Thickness(3); 
+            }
+            else
+            {
+                BorderThickness = new Thickness(2, 3, 2, 3);
             }
 
             Height = height * scale;

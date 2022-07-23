@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
-            App.NavigateToPage(typeof(GamePlayPage));
+            App.NavigateToPage(typeof(ChooseShipPage));
         }
     }
 }

@@ -25,6 +25,8 @@ namespace AstroOdyssey
         private readonly int SONICSHOT_ROUNDS_LIMIT_INCREASE = 25;
         private readonly int SONICSHOT_ROUNDS_SPEED_INCREASE = 25;
 
+        private int xSide = 10;
+
         #endregion
 
         #region Ctor
@@ -78,7 +80,10 @@ namespace AstroOdyssey
 
             projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
-            projectile.AddToGameEnvironment(top: player.GetY() + (5 * scale) - projectile.Height / 2, left: player.GetX() + player.HalfWidth - projectile.HalfWidth, gameEnvironment: gameEnvironment);
+            projectile.AddToGameEnvironment(
+                top: player.GetY() + (35 * scale) - projectile.Height / 2,
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType != PowerUpType.RAPIDSHOT_ROUNDS ? 0 : xSide * scale),
+                gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
             {
@@ -89,6 +94,7 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         App.PlaySound(baseUrl, SoundType.PLAYER_RAPIDSHOT_ROUNDS_FIRE);
+                        xSide = xSide * -1;
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         App.PlaySound(baseUrl, SoundType.PLAYER_DEADSHOT_ROUNDS_FIRE);
@@ -103,6 +109,7 @@ namespace AstroOdyssey
             else
             {
                 App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
+                xSide = xSide * -1;
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="AstroOdyssey.GameStartPage"
+    x:Class="AstroOdyssey.ChooseShipPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -31,26 +31,31 @@
                 VerticalAlignment="Center"
                 FontSize="25"
                 FontWeight="SemiBold"
-                Text="A flight though stars, meteors, and ships."
+                Text="Select your ship"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-            <!--  TODO: select ship  -->
+            <GridView
+                Name="ShipsList"
+                Height="220"
+                Margin="0,50,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                SelectionChanged="ShipsList_SelectionChanged" />
 
-            <!--  Play button  -->
+            <!--  Choose button  -->
             <Button
-                x:Name="PlayButton"
+                x:Name="ChooseButton"
                 Height="40"
                 Margin="0,50,0,0"
                 HorizontalAlignment="Stretch"
                 BorderBrush="White"
-                Click="PlayButton_Click"
-                Content="Play"
+                Click="ChooseButton_Click"
+                Content="Select"
                 CornerRadius="50"
                 FontWeight="SemiBold" />
 
         </StackPanel>
 
     </Grid>
-
 </Page>

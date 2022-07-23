@@ -26,6 +26,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml.cs">
+      <DependentUpon>ChooseShipPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
@@ -58,6 +61,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,7 +197,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </_Globbled_Page>
-    <Page Include="@(_Globbled_Page)" />
     <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.xaml.cs" Exclude="@(Compile)">
       <DependentUpon>%(Filename)</DependentUpon>
     </_Globbed_Compile>
@@ -207,5 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Internals\Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
 </Project>

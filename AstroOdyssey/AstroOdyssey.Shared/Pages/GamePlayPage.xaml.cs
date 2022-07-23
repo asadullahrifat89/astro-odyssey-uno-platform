@@ -89,6 +89,8 @@ namespace AstroOdyssey
 
         private double PointerX { get; set; }
 
+        private double PointerY { get; set; }
+
         private Player Player { get; set; }
 
         private Enemy Boss { get; set; }
@@ -102,6 +104,10 @@ namespace AstroOdyssey
         private bool MoveLeft { get; set; } = false;
 
         private bool MoveRight { get; set; } = false;
+
+        private bool MoveUp { get; set; } = false;
+
+        private bool MoveDown { get; set; } = false;
 
         private bool FiringProjectiles { get; set; } = false;
 
@@ -270,8 +276,20 @@ namespace AstroOdyssey
             {
                 case PLAYER:
                     {
-                        if (MoveLeft || MoveRight)
-                            PointerX = _playerHelper.UpdatePlayer(player: Player, pointerX: PointerX, moveLeft: MoveLeft, moveRight: MoveRight);
+                        if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
+                        {
+                            var pointer = _playerHelper.UpdatePlayer(
+                                player: Player,
+                                pointerX: PointerX,
+                                pointerY: PointerY,
+                                moveLeft: MoveLeft,
+                                moveRight: MoveRight/*,*/
+                                //moveUp: MoveUp,
+                                /*moveDown: MoveDown*/);
+
+                            PointerX = pointer.PointerX;
+                            PointerY = pointer.PointerY;
+                        }
 
                         if (IsPoweredUp)
                         {
@@ -646,7 +664,7 @@ namespace AstroOdyssey
             Console.WriteLine($"Render Scale: {scale}");
 #endif
 
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX);
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
         }
 
         /// <summary>
@@ -654,7 +672,9 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            Player.SetY(windowHeight - Player.Height - 20);
+            PointerY = windowHeight - Player.Height - 20;
+
+            Player.SetY(PointerY);
         }
 
         /// <summary>
@@ -742,8 +762,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                //case Windows.System.VirtualKey.Up: { FiringProjectiles = true; } break;
-                //case Windows.System.VirtualKey.Space: { FiringProjectiles = true; } break;
+                //case Windows.System.VirtualKey.Up: { MoveUp = true; MoveDown = false; } break;
+                //case Windows.System.VirtualKey.Down: { MoveDown = true; MoveUp = false; } break;
                 default:
                     break;
             }
@@ -755,8 +775,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                //case Windows.System.VirtualKey.Up: { FiringProjectiles = false; } break;
-                //case Windows.System.VirtualKey.Space: { FiringProjectiles = false; } break;
+                //case Windows.System.VirtualKey.Up: { MoveUp = false; } break;
+                //case Windows.System.VirtualKey.Down: { MoveDown = false; } break;
                 default:
                     break;
             }
@@ -764,41 +784,70 @@ namespace AstroOdyssey
 
         private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            var point = e.GetCurrentPoint(GameView);
+            if (IsGameRunning)
+            {
+                var point = e.GetCurrentPoint(GameView);
 
-            if (point.Position.X < windowWidth / 2)
-            {
-                FiringProjectiles = true;
-                MoveLeft = true;
-                MoveRight = false;
-            }
-            else if (point.Position.X > windowWidth / 2)
-            {
-                FiringProjectiles = true;
-                MoveRight = true;
-                MoveLeft = false;
+                // move left
+                if (point.Position.X < windowWidth / 2)
+                {
+                    MoveLeft = true;
+                    MoveRight = false;
+                } // move right
+                else if (point.Position.X > windowWidth / 2)
+                {
+                    MoveRight = true;
+                    MoveLeft = false;
+                }
+
+                //// move up
+                //if (point.Position.Y < windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveUp = true;
+                //    MoveDown = false;
+                //} // move down
+                //else if (point.Position.Y > windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveDown = true;
+                //    MoveUp = false;
+                //}
             }
         }
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            var point = e.GetCurrentPoint(GameView);
-
-            if (point.Position.X < windowWidth / 2)
+            if (IsGameRunning)
             {
-                FiringProjectiles = true;
-                MoveLeft = false;
+                var point = e.GetCurrentPoint(GameView);
 
-                if (!IsGameRunning)
-                    StartGame();
+                // move left
+                if (point.Position.X < windowWidth / 2)
+                {
+                    MoveLeft = false;
+                } // move right
+                else if (point.Position.X > windowWidth / 2)
+                {
+                    MoveRight = false;
+                }
+
+                //// move up
+                //if (point.Position.Y < windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveUp = false;
+                //} // move down
+                //else if (point.Position.Y > windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveDown = false;
+                //}
             }
-            else if (point.Position.X > windowWidth / 2)
+            else
             {
+                StartGame();
                 FiringProjectiles = true;
-                MoveRight = false;
-
-                if (!IsGameRunning)
-                    StartGame();
             }
         }
 

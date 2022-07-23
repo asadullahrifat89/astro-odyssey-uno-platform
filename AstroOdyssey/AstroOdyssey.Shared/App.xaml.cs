@@ -20,6 +20,8 @@ namespace AstroOdyssey
 
         public static double Score { get; set; }
 
+        public static GameObject Ship { get; set; }
+
         #endregion
 
         #region Ctor
@@ -167,7 +169,6 @@ namespace AstroOdyssey
 #else
                 builder.AddConsole();
 #endif
-
                 // Exclude logs below this level
                 builder.SetMinimumLevel(LogLevel.Information);
 
@@ -176,7 +177,7 @@ namespace AstroOdyssey
                 builder.AddFilter("Windows", LogLevel.Warning);
                 builder.AddFilter("Microsoft", LogLevel.Warning);
 
-#if DEBUG
+
                 // Generic Xaml events
                 //builder.AddFilter("Microsoft.UI.Xaml", LogLevel.Debug);
                 //builder.AddFilter("Microsoft.UI.Xaml.VisualStateGroup", LogLevel.Debug);
@@ -203,7 +204,6 @@ namespace AstroOdyssey
 
                 // Debug JS interop
                 builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug);
-#endif
             });
 
             Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
