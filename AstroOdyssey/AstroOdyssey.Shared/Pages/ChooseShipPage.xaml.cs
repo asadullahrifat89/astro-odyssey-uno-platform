@@ -34,10 +34,11 @@ namespace AstroOdyssey
 
         private async void ChooseShipPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Delay(500);
 
             if (this.ShipsList.Items.Count == 0)
             {
+                await Task.Delay(200);
+
                 Uri shipUri = null;
 
                 for (int i = 1; i <= 12; i++)
@@ -102,8 +103,11 @@ namespace AstroOdyssey
 
         private void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
-            App.Ship = selectedShip;
-            App.NavigateToPage(typeof(GamePlayPage));
+            if (selectedShip is not null)
+            {
+                App.Ship = selectedShip;
+                App.NavigateToPage(typeof(GamePlayPage));
+            }
         }
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

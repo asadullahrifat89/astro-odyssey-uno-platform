@@ -47,28 +47,22 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPIDSHOT_ROUNDS:
                         {
-                            height = 25; width = 15; // smaller but faster rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 20; width = 10; // smaller but faster rounds                            
                         }
                         break;
                     case PowerUpType.DEADSHOT_ROUNDS:
                         {
-                            height = 25; width = 25; // larger but slower rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 25; width = 25; // larger but slower rounds                            
                         }
                         break;
                     case PowerUpType.SONICSHOT_ROUNDS:
                         {
-                            height = 300; width = 20; // larger and longer and faster piercing rounds
-                            //Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
+                            height = 300; width = 20; // larger and longer and faster piercing rounds                            
                         }
                         break;
                     default:
-                        //Background = new SolidColorBrush(Colors.White);
                         break;
                 }
-
-                Background = new SolidColorBrush(Colors.Red);
             }
             else
             {
@@ -114,12 +108,22 @@ namespace AstroOdyssey
                             height = 35; width = 13;
                         }
                         break;
+                    case GameLevel.Level_9:
+                        {
+                            height = 35; width = 14;
+                        }
+                        break;
+                    case GameLevel.Level_10:
+                        {
+                            height = 35; width = 15;
+                        }
+                        break;
                     default:
                         break;
                 }
-
-                Background = new SolidColorBrush(Colors.Red);
             }
+
+            Background = new SolidColorBrush(Colors.Red);
 
             Height = height * scale;
             Width = width * scale;
