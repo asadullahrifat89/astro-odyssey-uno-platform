@@ -56,33 +56,65 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
+        public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight, bool moveUp, bool moveDown)
         {
             var playerX = player.GetX();
+            var playerY = player.GetY();
+
+            var playerSpeed = player.Speed /*/ 2*/;
 
             // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
-                pointerX -= player.Speed;
+            {
+                pointerX -= playerSpeed;
+            }
 
             if (moveRight && playerX + player.Width < gameEnvironment.Width)
-                pointerX += player.Speed;
+            {
+                pointerX += playerSpeed;
+            }
+
+            if (moveUp && playerY > player.Height)
+            {
+                pointerY -= playerSpeed;
+            }
+
+            if (moveDown && playerY < gameEnvironment.Height - player.Height)
+            {
+                pointerY += playerSpeed;
+            }
 
             // move right
-            if (pointerX - player.HalfWidth > playerX + player.Speed)
+            if (pointerX - player.HalfWidth > playerX + playerSpeed)
             {
                 if (playerX + player.HalfWidth < gameEnvironment.Width)
                 {
-                    SetPlayerX(player: player, left: playerX + player.Speed);
+                    SetPlayerX(player: player, left: playerX + playerSpeed);
                 }
             }
 
             // move left
-            if (pointerX - player.HalfWidth < playerX - player.Speed)
+            if (pointerX - player.HalfWidth < playerX - playerSpeed)
             {
-                SetPlayerX(player: player, left: playerX - player.Speed);
+                SetPlayerX(player: player, left: playerX - playerSpeed);
             }
 
-            return pointerX;
+            // move up
+            if (pointerY - player.Height / 2 < playerY - playerSpeed)
+            {
+                SetPlayerY(player: player, top: playerY - playerSpeed);
+            }
+
+            // move down
+            if (pointerY - player.Height / 2 > playerY + playerSpeed)
+            {
+                if (playerY + player.Height / 2 < gameEnvironment.Height)
+                {
+                    SetPlayerY(player: player, top: playerY + playerSpeed);
+                }
+            }
+
+            return (pointerX, pointerY);
         }
 
         /// <summary>
@@ -92,6 +124,16 @@ namespace AstroOdyssey
         private void SetPlayerX(Player player, double left)
         {
             player.SetX(left);
+        }
+
+        /// <summary>
+        /// Sets the y axis position of the player on game canvas.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="top"></param>
+        private void SetPlayerY(Player player, double top)
+        {
+            player.SetY(top);
         }
 
         /// <summary>
@@ -113,7 +155,11 @@ namespace AstroOdyssey
                         // only loose health if player is now in physical state
                         if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameEnvironment.AddDestroyableGameObject(gameObject);
+                            if (gameObject is not Enemy enemy || !enemy.IsBoss)
+                            {
+                                gameEnvironment.AddDestroyableGameObject(gameObject);
+                            }
+
                             PlayerHealthLoss(player);
 
                             return true;
