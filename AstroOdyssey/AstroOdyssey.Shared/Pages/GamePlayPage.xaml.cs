@@ -65,7 +65,7 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
-            AdjustView();
+            AdjustView(); // at constructor
 
             GetBaseUrl();
 
@@ -715,10 +715,12 @@ namespace AstroOdyssey
         {
             windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
             windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            AdjustView(); // at view size change
+
 #if DEBUG
             Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
-            AdjustView();
         }
 
         /// <summary>
@@ -742,7 +744,7 @@ namespace AstroOdyssey
                 var scale = GameView.GetGameObjectScale();
                 Player.ReAdjustScale(scale: scale);
 #if DEBUG
-                Console.WriteLine($"Render Scale: {scale}");
+                Console.WriteLine($"View Scale: {scale}");
 #endif
             }
         }

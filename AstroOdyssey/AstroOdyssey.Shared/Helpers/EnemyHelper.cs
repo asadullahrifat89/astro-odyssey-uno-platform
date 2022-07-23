@@ -282,9 +282,9 @@ namespace AstroOdyssey
                 default:
                     break;
             }
-#if DEBUG
-            Console.WriteLine("Enemy XDirection: " + enemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-#endif
+//#if DEBUG
+//            Console.WriteLine("Enemy XDirection: " + enemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+//#endif
             top = random.Next(0, (int)gameEnvironment.Height / 3);
             enemy.Rotate();
 
