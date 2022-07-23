@@ -30,15 +30,20 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <!--  Play again button  -->
             <Button
                 x:Name="PlayAgainButton"
                 Height="40"
                 Margin="5,20,5,5"
                 HorizontalAlignment="Stretch"
-                BorderBrush="White"
+                Background="Red"
+                BorderBrush="DarkRed"
+                BorderThickness="3"
                 Click="PlayAgainButton_Click"
                 Content="Play Again"
-                CornerRadius="50" />
+                CornerRadius="50"
+                FontWeight="SemiBold"
+                Foreground="White" />
         </StackPanel>
 
     </Grid>

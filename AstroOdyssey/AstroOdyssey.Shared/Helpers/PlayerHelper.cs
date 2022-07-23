@@ -41,12 +41,12 @@ namespace AstroOdyssey
         {
             var player = new Player();
 
-            var scale = gameEnvironment.GetGameObjectScale();
-
-            var left = pointerX - 35;
-            var top = gameEnvironment.Height - player.Height - 20;
+            var scale = gameEnvironment.GetGameObjectScale();          
 
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
+
+            var left = pointerX - player.HalfWidth;
+            var top = gameEnvironment.Height - player.Height - 20;
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 

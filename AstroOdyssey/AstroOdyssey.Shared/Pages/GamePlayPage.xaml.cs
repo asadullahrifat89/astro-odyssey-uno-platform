@@ -65,7 +65,7 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
-            AdjustView();
+            AdjustView(); // at constructor
 
             GetBaseUrl();
 
@@ -83,7 +83,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        private PeriodicTimer GameFrameTimer { get; set; }
+        private DispatcherTimer GameFrameTimer { get; set; }
+
+        private Stopwatch Stopwatch { get; set; }
 
         private double Score { get; set; } = 0;
 
@@ -140,36 +142,29 @@ namespace AstroOdyssey
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            RunGame();
+            Stopwatch = Stopwatch.StartNew();
 
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
-        }
+            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
 
-        /// <summary>
-        /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
-        /// </summary>
-        private async void RunGame()
-        {
-            var watch = Stopwatch.StartNew();
-
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(frameTime));
-
-            while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
+            GameFrameTimer.Tick += (s, e) =>
             {
-                frameStartTime = watch.ElapsedMilliseconds;
+                frameStartTime = Stopwatch.ElapsedMilliseconds;
 
                 UpdateFrame();
 
                 CalculateFPS();
 
-                frameEndTime = watch.ElapsedMilliseconds;
+                frameEndTime = Stopwatch.ElapsedMilliseconds;
 
                 SetFrameTime();
 #if DEBUG
                 SetAnalytics();
 #endif
-                //await Task.Delay(FrameTime);
-            }
+            };
+
+            GameFrameTimer.Start();
+
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -480,7 +475,7 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
-            GameFrameTimer?.Dispose();
+            GameFrameTimer.Stop();
 
             App.StopSound();
         }
@@ -720,10 +715,12 @@ namespace AstroOdyssey
         {
             windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
             windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            AdjustView(); // at view size change
+
 #if DEBUG
             Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
 #endif
-            AdjustView();
         }
 
         /// <summary>
@@ -740,14 +737,14 @@ namespace AstroOdyssey
             {
                 PointerX = windowWidth / 2;
 
-                Player.SetX(PointerX);
+                Player.SetX(PointerX - Player.HalfWidth);
 
                 SetPlayerY(); // windows size changed so reset y position               
 
                 var scale = GameView.GetGameObjectScale();
                 Player.ReAdjustScale(scale: scale);
 #if DEBUG
-                Console.WriteLine($"Render Scale: {scale}");
+                Console.WriteLine($"View Scale: {scale}");
 #endif
             }
         }

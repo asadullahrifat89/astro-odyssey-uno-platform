@@ -26,8 +26,8 @@ namespace AstroOdyssey
         public Enemy()
         {
             Tag = Constants.ENEMY;
-            Height = Constants.DefaultGameObjectSize;
-            Width = Constants.DefaultGameObjectSize;
+            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             IsDestructible = true;
             Child = content;
@@ -90,8 +90,8 @@ namespace AstroOdyssey
 
             content.Source = new BitmapImage(uri);
 
-            Height = Constants.DefaultGameObjectSize * scale;
-            Width = Constants.DefaultGameObjectSize * scale;
+            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
         }

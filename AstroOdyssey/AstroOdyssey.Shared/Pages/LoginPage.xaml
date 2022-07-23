@@ -53,13 +53,17 @@
                 Height="40"
                 Margin="5,20,5,5"
                 HorizontalAlignment="Stretch"
-                BorderBrush="White"
+                Background="Red"
+                BorderBrush="DarkRed"
+                BorderThickness="3"
                 Click="LoginButton_Click"
                 Content="Login"
                 CornerRadius="50"
                 FontWeight="SemiBold"
+                Foreground="White"
                 IsEnabled="False" />
 
+            <!--  Register Button  -->
             <Button
                 x:Name="RegisterButton"
                 Grid.Column="1"

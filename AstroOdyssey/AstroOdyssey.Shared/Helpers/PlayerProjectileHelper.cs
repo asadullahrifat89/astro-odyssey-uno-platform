@@ -13,7 +13,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int projectileSpawnCounter;
-        private int projectileSpawnFrequency = 15;
+        private int projectileSpawnFrequency = 14;
         private double projectileSpeed = 18;
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
@@ -81,7 +81,7 @@ namespace AstroOdyssey
             projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
             projectile.AddToGameEnvironment(
-                top: player.GetY() + (35 * scale) - projectile.Height / 2,
+                top: player.GetY() - projectile.Height / 2,
                 left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType != PowerUpType.RAPIDSHOT_ROUNDS ? 0 : xSide * scale),
                 gameEnvironment: gameEnvironment);
 
