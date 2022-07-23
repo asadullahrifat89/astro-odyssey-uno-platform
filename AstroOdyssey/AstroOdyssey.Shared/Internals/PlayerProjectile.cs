@@ -70,52 +70,52 @@ namespace AstroOdyssey
                 {
                     case GameLevel.Level_1:
                         {
-                            height = 20; width = 8;
+                            height = 20; width = 10;
                         }
                         break;
                     case GameLevel.Level_2:
                         {
-                            height = 25; width = 9;
+                            height = 25; width = 11;
                         }
                         break;
                     case GameLevel.Level_3:
                         {
-                            height = 30; width = 10;
+                            height = 30; width = 12;
                         }
                         break;
                     case GameLevel.Level_4:
                         {
-                            height = 35; width = 11;
+                            height = 35; width = 13;
                         }
                         break;
                     case GameLevel.Level_5:
                         {
-                            height = 35; width = 12;
+                            height = 35; width = 14;
                         }
                         break;
                     case GameLevel.Level_6:
                         {
-                            height = 35; width = 13;
+                            height = 35; width = 15;
                         }
                         break;
                     case GameLevel.Level_7:
                         {
-                            height = 35; width = 14;
+                            height = 35; width = 16;
                         }
                         break;
                     case GameLevel.Level_8:
                         {
-                            height = 35; width = 15;
+                            height = 35; width = 17;
                         }
                         break;
                     case GameLevel.Level_9:
                         {
-                            height = 35; width = 16;
+                            height = 35; width = 18;
                         }
                         break;
                     case GameLevel.Level_10:
                         {
-                            height = 35; width = 17;
+                            height = 35; width = 19;
                         }
                         break;
                     default:
