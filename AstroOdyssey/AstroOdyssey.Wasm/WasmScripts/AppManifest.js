@@ -12,7 +12,8 @@ const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.
 
 const enemyRoundsFireSource = "Assets/Sounds/laser-descend_GJPs9OE__NWM.mp3";
 
-const roundHitSource = "Assets/Sounds/explosion-sfx-43814.mp3";
+const roundHitSource = "Assets/Sounds/explosion-firework-boom-single_GkGH0sE__NWM.mp3";
+const roundHit2Source = "Assets/Sounds/firework-explode-distant_zJ6kk3VO_NWM.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
@@ -40,6 +41,8 @@ const deadsrfAudio = new Audio();
 const sonicsrfAudio = new Audio();
 
 const rhAudio = new Audio();
+const rh2Audio = new Audio();
+
 const puAudio = new Audio();
 const pdAudio = new Audio();
 const edAudio = new Audio();
@@ -107,10 +110,24 @@ function playGameSound(baseUrl, soundType) {
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {
                 rhAudio.src = baseUrl.concat("/", roundHitSource);
-                rhAudio.volume = 0.1;
+                rhAudio.volume = 0.4;
                 setAudioAttributes(rhAudio);
             }
             playSound(rhAudio);
+
+            //if (rh2Audio.src.length == 0) {
+            //    rh2Audio.src = baseUrl.concat("/", roundHit2Source);
+            //    rh2Audio.volume = 0.4;
+            //    setAudioAttributes(rh2Audio);
+            //}
+
+            //let musicTrack = Math.floor((Math.random() * 3));
+
+            //switch (musicTrack) {
+            //    case 1: { playSound(rhAudio); } break;
+            //    default: { playSound(rh2Audio); }
+            //}
+
         } break;
         case "POWER_UP": {
             if (puAudio.src.length == 0) {
@@ -210,7 +227,7 @@ function playGameSound(baseUrl, soundType) {
                 case 9: { src = baseUrl.concat("/", "Assets/Sounds/space-trip-114102.mp3"); } break;
                 case 10: { src = baseUrl.concat("/", "Assets/Sounds/dark-matter-10710.mp3"); } break;
                 case 11: { src = baseUrl.concat("/", "Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"); } break;
-                default:
+                default: { }
             }
 
             bgAudio.src = src;
