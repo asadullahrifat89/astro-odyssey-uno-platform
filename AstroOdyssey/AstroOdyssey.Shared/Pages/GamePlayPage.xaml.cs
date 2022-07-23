@@ -276,16 +276,16 @@ namespace AstroOdyssey
             {
                 case PLAYER:
                     {
-                        if (MoveLeft || MoveRight || MoveUp || MoveDown)
+                        if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
                         {
                             var pointer = _playerHelper.UpdatePlayer(
                                 player: Player,
                                 pointerX: PointerX,
                                 pointerY: PointerY,
                                 moveLeft: MoveLeft,
-                                moveRight: MoveRight,
-                                moveUp: MoveUp,
-                                moveDown: MoveDown);
+                                moveRight: MoveRight/*,*/
+                                //moveUp: MoveUp,
+                                /*moveDown: MoveDown*/);
 
                             PointerX = pointer.PointerX;
                             PointerY = pointer.PointerY;
@@ -762,8 +762,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Up: { MoveUp = true; MoveDown = false; } break;
-                case Windows.System.VirtualKey.Down: { MoveDown = true; MoveUp = false; } break;
+                //case Windows.System.VirtualKey.Up: { MoveUp = true; MoveDown = false; } break;
+                //case Windows.System.VirtualKey.Down: { MoveDown = true; MoveUp = false; } break;
                 default:
                     break;
             }
@@ -775,8 +775,8 @@ namespace AstroOdyssey
             {
                 case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
                 case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                case Windows.System.VirtualKey.Up: { MoveUp = false; } break;
-                case Windows.System.VirtualKey.Down: { MoveDown = false; } break;
+                //case Windows.System.VirtualKey.Up: { MoveUp = false; } break;
+                //case Windows.System.VirtualKey.Down: { MoveDown = false; } break;
                 default:
                     break;
             }
@@ -784,64 +784,71 @@ namespace AstroOdyssey
 
         private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            var point = e.GetCurrentPoint(GameView);
+            if (IsGameRunning)
+            {
+                var point = e.GetCurrentPoint(GameView);
 
-            if (point.Position.X < windowWidth / 2)
-            {
-                FiringProjectiles = true;
-                MoveLeft = true;
-                MoveRight = false;
-            }
-            else if (point.Position.X > windowWidth / 2)
-            {
-                FiringProjectiles = true;
-                MoveRight = true;
-                MoveLeft = false;
-            }
+                // move left
+                if (point.Position.X < windowWidth / 2)
+                {
+                    MoveLeft = true;
+                    MoveRight = false;
+                } // move right
+                else if (point.Position.X > windowWidth / 2)
+                {
+                    MoveRight = true;
+                    MoveLeft = false;
+                }
 
-            if (point.Position.Y < windowHeight / 2)
-            {
-                FiringProjectiles = true;
-                MoveUp = true;
-                MoveDown = false;
-            }
-            else if (point.Position.Y > windowHeight / 2)
-            {
-                FiringProjectiles = true;
-                MoveDown = true;
-                MoveUp = false;
+                //// move up
+                //if (point.Position.Y < windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveUp = true;
+                //    MoveDown = false;
+                //} // move down
+                //else if (point.Position.Y > windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveDown = true;
+                //    MoveUp = false;
+                //}
             }
         }
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            var point = e.GetCurrentPoint(GameView);
-
-            if (point.Position.X < windowWidth / 2)
+            if (IsGameRunning)
             {
-                FiringProjectiles = true;
-                MoveLeft = false;
-            }
-            else if (point.Position.X > windowWidth / 2)
-            {
-                FiringProjectiles = true;
-                MoveRight = false;
+                var point = e.GetCurrentPoint(GameView);
 
-            }
+                // move left
+                if (point.Position.X < windowWidth / 2)
+                {
+                    MoveLeft = false;
+                } // move right
+                else if (point.Position.X > windowWidth / 2)
+                {
+                    MoveRight = false;
+                }
 
-            if (point.Position.Y < windowHeight / 2)
-            {
-                FiringProjectiles = true;
-                MoveUp = false;
+                //// move up
+                //if (point.Position.Y < windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveUp = false;
+                //} // move down
+                //else if (point.Position.Y > windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveDown = false;
+                //}
             }
-            else if (point.Position.Y > windowHeight / 2)
+            else
             {
-                FiringProjectiles = true;
-                MoveDown = false;
-            }
-
-            if (!IsGameRunning)
                 StartGame();
+                FiringProjectiles = true;
+            }
         }
 
         #endregion

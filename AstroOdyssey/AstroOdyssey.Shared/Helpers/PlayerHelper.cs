@@ -56,7 +56,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight, bool moveUp, bool moveDown)
+        public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
         {
             var playerX = player.GetX();
             var playerY = player.GetY();
@@ -74,15 +74,15 @@ namespace AstroOdyssey
                 pointerX += playerSpeed;
             }
 
-            if (moveUp && playerY > player.Height)
-            {
-                pointerY -= playerSpeed;
-            }
+            //if (moveUp && playerY > player.Height)
+            //{
+            //    pointerY -= playerSpeed;
+            //}
 
-            if (moveDown && playerY < gameEnvironment.Height - player.Height)
-            {
-                pointerY += playerSpeed;
-            }
+            //if (moveDown && playerY < gameEnvironment.Height - player.Height)
+            //{
+            //    pointerY += playerSpeed;
+            //}
 
             // move right
             if (pointerX - player.HalfWidth > playerX + playerSpeed)
@@ -99,20 +99,20 @@ namespace AstroOdyssey
                 SetPlayerX(player: player, left: playerX - playerSpeed);
             }
 
-            // move up
-            if (pointerY - player.Height / 2 < playerY - playerSpeed)
-            {
-                SetPlayerY(player: player, top: playerY - playerSpeed);
-            }
+            //// move up
+            //if (pointerY - player.Height / 2 < playerY - playerSpeed)
+            //{
+            //    SetPlayerY(player: player, top: playerY - playerSpeed);
+            //}
 
-            // move down
-            if (pointerY - player.Height / 2 > playerY + playerSpeed)
-            {
-                if (playerY + player.Height / 2 < gameEnvironment.Height)
-                {
-                    SetPlayerY(player: player, top: playerY + playerSpeed);
-                }
-            }
+            //// move down
+            //if (pointerY - player.Height / 2 > playerY + playerSpeed)
+            //{
+            //    if (playerY + player.Height / 2 < gameEnvironment.Height)
+            //    {
+            //        SetPlayerY(player: player, top: playerY + playerSpeed);
+            //    }
+            //}
 
             return (pointerX, pointerY);
         }
