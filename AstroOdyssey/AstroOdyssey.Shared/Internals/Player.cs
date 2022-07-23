@@ -20,10 +20,10 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform,
         };
 
-        private readonly Image contentShipBlaze = new Image()
-        {
-            Stretch = Stretch.Uniform
-        };
+        //private readonly Image contentShipBlaze = new Image()
+        //{
+        //    Stretch = Stretch.Uniform
+        //};
 
         private readonly Border contentShipPowerGauge = new Border()
         {
@@ -58,8 +58,8 @@ namespace AstroOdyssey
             Tag = PLAYER;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Height = DefaultPlayerHeight;
-            Width = DefaultGameObjectSize;
+            Height = PLAYER_HEIGHT;
+            Width = DESTRUCTIBLE_OBJECT_SIZE;
 
             Health = 100;
             HitPoint = 10; //TODO: HitPoint is always 10
@@ -67,7 +67,7 @@ namespace AstroOdyssey
             // combine power gauge, ship, and blaze
             content = new Grid();
             content.Children.Add(contentShipPowerGauge);
-            content.Children.Add(contentShipBlaze);
+            //content.Children.Add(contentShipBlaze);
             content.Children.Add(contentShip);
             //content.Children.Add(contentShipHealthBar);
 
@@ -155,32 +155,32 @@ namespace AstroOdyssey
 
             var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            contentShipBlaze.Width = contentShip.Width;
+            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            //contentShipBlaze.Width = contentShip.Width;
 
-            contentShipBlaze.Height = ExhaustHeight * scale;
-            contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
+            //contentShipBlaze.Height = ExhaustHeight * scale;
+            //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
-            contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
+            contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 5 * scale, 0, 0);
 
             //contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
             //contentShipHealthBar.Width = Health / 1.70;
 
-            Height = DefaultPlayerHeight * scale;
-            Width = DefaultGameObjectSize * scale;
+            Height = PLAYER_HEIGHT * scale;
+            Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
         }
 
         public void ReAdjustScale(double scale)
         {
-            contentShipBlaze.Height = ExhaustHeight * scale;
-            contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
+            //contentShipBlaze.Height = ExhaustHeight * scale;
+            //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
             contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
-            Height = DefaultPlayerHeight * scale;
-            Width = DefaultGameObjectSize * scale;
+            Height = PLAYER_HEIGHT * scale;
+            Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
         }
 
         public void SetPowerGauge(double powerGauge)
@@ -193,8 +193,8 @@ namespace AstroOdyssey
             Speed += 1;
             contentShipPowerGauge.Width = Width / 2;
 
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
+            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             //contentShipPowerGauge.Background = Colors.Red;
 
             //switch (powerUpType)
@@ -219,8 +219,8 @@ namespace AstroOdyssey
 
         public void TriggerPowerDown()
         {
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
+            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed -= 1;
             contentShipPowerGauge.Width = 0;
         }
