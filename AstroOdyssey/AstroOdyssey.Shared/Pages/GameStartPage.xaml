@@ -35,19 +35,20 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-            <!--  TODO: select ship  -->
-
             <!--  Play button  -->
             <Button
                 x:Name="PlayButton"
                 Height="40"
                 Margin="0,50,0,0"
                 HorizontalAlignment="Stretch"
-                BorderBrush="White"
+                Background="Red"
+                BorderBrush="DarkRed"
+                BorderThickness="3"
                 Click="PlayButton_Click"
                 Content="Play"
                 CornerRadius="50"
-                FontWeight="SemiBold" />
+                FontWeight="SemiBold"
+                Foreground="White" />
 
         </StackPanel>
 

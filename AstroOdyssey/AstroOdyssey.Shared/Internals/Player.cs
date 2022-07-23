@@ -28,7 +28,7 @@ namespace AstroOdyssey
         private readonly Border contentShipPowerGauge = new Border()
         {
             Height = 5,
-            Width = 0,
+            Width = 0, // TODO: leave it to 0
             CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
             VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
             HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
@@ -65,10 +65,10 @@ namespace AstroOdyssey
             HitPoint = 10; //TODO: HitPoint is always 10
 
             // combine power gauge, ship, and blaze
-            content = new Grid();
-            content.Children.Add(contentShipPowerGauge);
+            content = new Grid();            
             //content.Children.Add(contentShipBlaze);
             content.Children.Add(contentShip);
+            content.Children.Add(contentShipPowerGauge);
             //content.Children.Add(contentShipHealthBar);
 
             Child = content;
@@ -84,7 +84,7 @@ namespace AstroOdyssey
 
         public bool IsInEtherealState { get; set; }
 
-        public double ExhaustHeight { get; set; } = 50;
+        //public double ExhaustHeight { get; set; } = 50;
 
         #endregion
 
@@ -97,63 +97,63 @@ namespace AstroOdyssey
             Uri shipUri = null;
             //var playerShipType = random.Next(1, 13);
 
-            ExhaustHeight = 50;
+            //ExhaustHeight = 50;
 
             switch ((int)ship.Tag)
             {
                 case 1:
                     shipUri = new Uri("ms-appx:///Assets/Images/satellite_B.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
                 case 2:
                     shipUri = new Uri("ms-appx:///Assets/Images/satellite_C.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
                 case 3:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_C.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 55;
+                    //ExhaustHeight = 55;
                     break;
                 case 4:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_D.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    //ExhaustHeight = 50;
                     break;
                 case 5:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_E.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    //ExhaustHeight = 50;
                     break;
                 case 6:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_F.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    //ExhaustHeight = 50;
                     break;
                 case 7:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_G.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    //ExhaustHeight = 50;
                     break;
                 case 8:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_H.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 50;
+                    //ExhaustHeight = 50;
                     break;
                 case 9:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_I.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
                 case 10:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_J.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
                 case 11:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_K.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
                 case 12:
                     shipUri = new Uri("ms-appx:/Assets/Images/ship_L.png", UriKind.RelativeOrAbsolute);
-                    ExhaustHeight = 35;
+                    //ExhaustHeight = 35;
                     break;
             }
 
             contentShip.Source = new BitmapImage(shipUri);
 
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
+            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             //contentShipBlaze.Width = contentShip.Width;
@@ -161,7 +161,7 @@ namespace AstroOdyssey
             //contentShipBlaze.Height = ExhaustHeight * scale;
             //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
-            contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 5 * scale, 0, 0);
+            //contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 5 * scale, 0, 0);
 
             //contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
             //contentShipHealthBar.Width = Health / 1.70;
@@ -177,7 +177,7 @@ namespace AstroOdyssey
             //contentShipBlaze.Height = ExhaustHeight * scale;
             //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
-            contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
+            //contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
 
             Height = PLAYER_HEIGHT * scale;
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;

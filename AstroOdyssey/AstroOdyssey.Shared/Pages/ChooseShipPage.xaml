@@ -49,11 +49,14 @@
                 Height="40"
                 Margin="0,50,0,0"
                 HorizontalAlignment="Stretch"
-                BorderBrush="White"
+                Background="Red"
+                BorderBrush="DarkRed"
+                BorderThickness="3"
                 Click="ChooseButton_Click"
                 Content="Select"
                 CornerRadius="50"
-                FontWeight="SemiBold" />
+                FontWeight="SemiBold"
+                Foreground="White" />
 
         </StackPanel>
 

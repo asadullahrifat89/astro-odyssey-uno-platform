@@ -36,6 +36,8 @@ namespace AstroOdyssey
 
             InitializeComponent();
 
+            Uno.UI.ApplicationHelper.RequestedCustomTheme = "Dark";
+
 #if HAS_UNO || NETFX_CORE
             Suspending += OnSuspending;
 #endif
