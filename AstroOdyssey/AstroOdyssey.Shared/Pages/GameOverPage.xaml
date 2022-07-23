@@ -37,8 +37,7 @@
                 HorizontalAlignment="Stretch"
                 BorderBrush="White"
                 Click="PlayAgainButton_Click"
-                Content="Play Again"
-                CornerRadius="50" />
+                Content="Play Again" />
         </StackPanel>
 
     </Grid>

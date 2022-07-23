@@ -46,7 +46,6 @@
                 BorderBrush="White"
                 Click="PlayButton_Click"
                 Content="Play"
-                CornerRadius="50"
                 FontWeight="SemiBold" />
 
         </StackPanel>
