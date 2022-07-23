@@ -83,7 +83,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        private PeriodicTimer GameFrameTimer { get; set; }
+        private DispatcherTimer GameFrameTimer { get; set; }
+
+        private Stopwatch Stopwatch { get; set; }
 
         private double Score { get; set; } = 0;
 
@@ -140,36 +142,29 @@ namespace AstroOdyssey
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            RunGame();
+            Stopwatch = Stopwatch.StartNew();
 
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
-        }
+            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
 
-        /// <summary>
-        /// Runs game. Updates stats, gets player bounds, spawns enemies and meteors, moves the player, updates the frame, scales difficulty, checks player health, calculates fps and frame time.
-        /// </summary>
-        private async void RunGame()
-        {
-            var watch = Stopwatch.StartNew();
-
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(frameTime));
-
-            while (IsGameRunning && await GameFrameTimer.WaitForNextTickAsync())
+            GameFrameTimer.Tick += (s, e) =>
             {
-                frameStartTime = watch.ElapsedMilliseconds;
+                frameStartTime = Stopwatch.ElapsedMilliseconds;
 
                 UpdateFrame();
 
                 CalculateFPS();
 
-                frameEndTime = watch.ElapsedMilliseconds;
+                frameEndTime = Stopwatch.ElapsedMilliseconds;
 
                 SetFrameTime();
 #if DEBUG
                 SetAnalytics();
 #endif
-                //await Task.Delay(FrameTime);
-            }
+            };
+
+            GameFrameTimer.Start();
+
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -480,7 +475,7 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
-            GameFrameTimer?.Dispose();
+            GameFrameTimer.Stop();
 
             App.StopSound();
         }
