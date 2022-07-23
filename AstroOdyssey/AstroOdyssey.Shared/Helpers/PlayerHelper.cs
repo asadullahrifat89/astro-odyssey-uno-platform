@@ -59,7 +59,7 @@ namespace AstroOdyssey
         public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
         {
             var playerX = player.GetX();
-            var playerY = player.GetY();
+            //var playerY = player.GetY();
 
             var playerSpeed = player.Speed /*/ 2*/;
 
@@ -182,7 +182,7 @@ namespace AstroOdyssey
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             gameEnvironment.AddDestroyableGameObject(gameObject);
-                            PowerUp(player, (gameObject as PowerUp).PowerUpType);
+                            PowerUp(player: player, powerUpType: (gameObject as PowerUp).PowerUpType);
 
                             return true;
                         }

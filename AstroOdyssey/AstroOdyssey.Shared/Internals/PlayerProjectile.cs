@@ -126,7 +126,15 @@ namespace AstroOdyssey
             Background = new SolidColorBrush(Colors.Red);
 
             BorderBrush = new SolidColorBrush(Colors.DarkRed);
-            BorderThickness = new Thickness(2, 3, 2, 3);
+
+            if (PowerUpType == PowerUpType.DEADSHOT_ROUNDS)
+            {
+                BorderThickness = new Thickness(3); 
+            }
+            else
+            {
+                BorderThickness = new Thickness(2, 3, 2, 3);
+            }
 
             Height = height * scale;
             Width = width * scale;
