@@ -737,7 +737,7 @@ namespace AstroOdyssey
             {
                 PointerX = windowWidth / 2;
 
-                Player.SetX(PointerX);
+                Player.SetX(PointerX - Player.HalfWidth);
 
                 SetPlayerY(); // windows size changed so reset y position               
 

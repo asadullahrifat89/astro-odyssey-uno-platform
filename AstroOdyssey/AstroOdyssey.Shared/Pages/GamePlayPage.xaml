@@ -22,7 +22,7 @@
             <TextBlock
                 Name="ScoreText"
                 Margin="5"
-                FontSize="18"
+                FontSize="22"
                 FontWeight="Bold"
                 Foreground="White"
                 TextAlignment="Center" />

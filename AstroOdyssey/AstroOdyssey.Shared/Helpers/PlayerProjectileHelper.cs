@@ -13,7 +13,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int projectileSpawnCounter;
-        private int projectileSpawnFrequency = 15;
+        private int projectileSpawnFrequency = 14;
         private double projectileSpeed = 18;
 
         private readonly int RAPIDSHOT_ROUNDS_LIMIT_DECREASE = 2;
