@@ -45,10 +45,11 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <!--  This shows the health bar of boss  -->
             <Border
                 Name="BossHealthBar"
                 Width="0"
-                Height="10"
+                Height="15"
                 Margin="5"
                 HorizontalAlignment="Center"
                 Background="Red"
@@ -58,11 +59,11 @@
 
         </StackPanel>
 
-        <!--  This shows player health  -->
+        <!--  This shows the player health bar  -->
         <Border
             Name="PlayerHealthBar"
             Width="0"
-            Height="10"
+            Height="15"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
