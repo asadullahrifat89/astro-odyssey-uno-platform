@@ -52,6 +52,7 @@
                 BorderBrush="White"
                 Click="ChooseButton_Click"
                 Content="Select"
+                CornerRadius="50"
                 FontWeight="SemiBold" />
 
         </StackPanel>

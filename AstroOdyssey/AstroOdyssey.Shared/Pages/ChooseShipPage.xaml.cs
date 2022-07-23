@@ -34,14 +34,10 @@ namespace AstroOdyssey
 
         private async void ChooseShipPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (selectedShip is null)
-                ChooseButton.IsEnabled = false;
 
             if (this.ShipsList.Items.Count == 0)
             {
                 await Task.Delay(200);
-
-                var ships = new List<GameObject>();
 
                 Uri shipUri = null;
 
@@ -100,10 +96,8 @@ namespace AstroOdyssey
                         Width = 100
                     };
 
-                    ships.Add(ship);
+                    this.ShipsList.Items.Add(ship);
                 }
-
-                this.ShipsList.ItemsSource = ships;
             }
         }
 
@@ -119,9 +113,6 @@ namespace AstroOdyssey
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedShip = ShipsList.SelectedItem as GameObject;
-
-            if (selectedShip is not null)
-                ChooseButton.IsEnabled = true;
         }
     }
 }

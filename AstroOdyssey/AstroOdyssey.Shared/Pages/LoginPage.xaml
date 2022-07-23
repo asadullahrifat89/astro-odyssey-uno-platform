@@ -34,6 +34,7 @@
             <TextBox
                 x:Name="UserNameBox"
                 Margin="5"
+                CornerRadius="50"
                 FontWeight="SemiBold"
                 Header="Username"
                 TextChanged="UserNameBox_TextChanged" />
@@ -41,6 +42,7 @@
             <PasswordBox
                 x:Name="PasswordBox"
                 Margin="5"
+                CornerRadius="50"
                 Header="Password"
                 KeyDown="PasswordBox_KeyDown"
                 TextChanged="PasswordBox_TextChanged" />
@@ -54,10 +56,10 @@
                 BorderBrush="White"
                 Click="LoginButton_Click"
                 Content="Login"
+                CornerRadius="50"
                 FontWeight="SemiBold"
                 IsEnabled="False" />
 
-            <!--  Register button  -->
             <Button
                 x:Name="RegisterButton"
                 Grid.Column="1"
@@ -70,6 +72,7 @@
                 BorderThickness="0"
                 Click="RegisterButton_Click"
                 Content="No account yet?"
+                CornerRadius="50"
                 FontWeight="SemiBold" />
 
         </StackPanel>
