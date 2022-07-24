@@ -36,16 +36,16 @@
                 Margin="5"
                 CornerRadius="50"
                 FontWeight="SemiBold"
-                Header="Username"
+                Header="Set your username"
                 TextChanged="UserNameBox_TextChanged" />
 
-            <PasswordBox
+            <!--<PasswordBox
                 x:Name="PasswordBox"
                 Margin="5"
                 CornerRadius="50"
                 Header="Password"
                 KeyDown="PasswordBox_KeyDown"
-                TextChanged="PasswordBox_TextChanged" />
+                TextChanged="PasswordBox_TextChanged" />-->
 
             <!--  Login button  -->
             <Button

@@ -58,7 +58,7 @@ namespace AstroOdyssey
 
         private void Login()
         {
-            App.Account = new Account() { UserName = UserNameBox.Text, Password = PasswordBox.Password, };
+            App.Account = new Account() { UserName = UserNameBox.Text, /*Password = PasswordBox.Password,*/ };
 
             App.SetAccount();
 
@@ -67,7 +67,7 @@ namespace AstroOdyssey
 
         private void EnableLoginButton()
         {
-            LoginButton.IsEnabled = UserNameBox.Text.IsNullOrBlank() || PasswordBox.Text.IsNullOrBlank() ? false : true;
+            LoginButton.IsEnabled = UserNameBox.Text.IsNullOrBlank() /*|| PasswordBox.Text.IsNullOrBlank()*/ ? false : true;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
