@@ -1,4 +1,4 @@
-name: master build
+name: master
 on:
   pull_request:
     branches: [ master ]
