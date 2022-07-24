@@ -31,11 +31,11 @@
                 VerticalAlignment="Center"
                 FontSize="25"
                 FontWeight="SemiBold"
-                Text="A flight though stars, meteors, and ships."
+                Text="Set a high score."
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-            <!--  Play button  -->
+            <!--  Arcade mode button  -->
             <Button
                 x:Name="PlayButton"
                 Height="40"
@@ -45,7 +45,7 @@
                 BorderBrush="DarkRed"
                 BorderThickness="3"
                 Click="PlayButton_Click"
-                Content="Play"
+                Content="Arcade Mode"
                 CornerRadius="50"
                 FontWeight="SemiBold"
                 Foreground="White" />

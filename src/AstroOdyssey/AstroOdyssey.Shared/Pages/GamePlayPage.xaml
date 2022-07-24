@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="using:System"
     Background="Black"
     mc:Ignorable="d">
 
@@ -14,11 +15,11 @@
         <GameEnvironment x:Name="GameView" />
 
         <StackPanel
-            Margin="0,25,0,0"
+            Margin="5"
             HorizontalAlignment="Center"
             Orientation="Vertical">
 
-            <!--  This shows current score  -->
+            <!--  This shows current score, level and game time  -->
             <TextBlock
                 Name="ScoreText"
                 Margin="5"
@@ -26,6 +27,52 @@
                 FontWeight="Bold"
                 Foreground="White"
                 TextAlignment="Center" />
+
+            <!--  This shows the health bar of boss  -->
+            <StackPanel
+                Name="BossHealthBarPanel"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Visibility="Collapsed">
+
+                <TextBlock
+                    Name="BossHealthBarText"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="BOSS"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <Border
+                    Name="BossHealthBar"
+                    Width="0"
+                    Height="15"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Red"
+                    BorderBrush="DarkRed"
+                    BorderThickness="3"
+                    CornerRadius="50" />
+
+                <TextBlock
+                    Name="BossHealthBarCount"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="{x:Bind Path=BossHealthBar.Width.ToString('0'), Mode=OneWay}"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+            </StackPanel>
 
             <!--  This shows fps  -->
             <TextBlock
@@ -44,18 +91,6 @@
                 Foreground="White"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
-
-            <!--  This shows the health bar of boss  -->
-            <Border
-                Name="BossHealthBar"
-                Width="0"
-                Height="15"
-                Margin="5"
-                HorizontalAlignment="Center"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                CornerRadius="50" />
 
         </StackPanel>
 
@@ -96,17 +131,48 @@
         </Grid>
 
         <!--  This shows the player health bar  -->
-        <Border
-            Name="PlayerHealthBar"
-            Width="0"
-            Height="15"
+        <StackPanel
+            Name="PlayerHealthBarPanel"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
-            Background="Red"
-            BorderBrush="DarkRed"
-            BorderThickness="3"
-            CornerRadius="50" />
+            Orientation="Horizontal"
+            Visibility="Collapsed">
+
+            <TextBlock
+                Margin="5"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="HEALTH"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
+
+            <Border
+                Name="PlayerHealthBar"
+                Width="0"
+                Height="15"
+                Margin="5"
+                VerticalAlignment="Center"
+                Background="Red"
+                BorderBrush="DarkRed"
+                BorderThickness="3"
+                CornerRadius="50" />
+
+            <TextBlock
+                Name="PlayerHealthBarCount"
+                Margin="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="{x:Bind Path=PlayerHealthBar.Width.ToString('0'), Mode=OneWay}"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
+
+        </StackPanel>
 
         <!--  This shows in game texts  -->
         <TextBlock

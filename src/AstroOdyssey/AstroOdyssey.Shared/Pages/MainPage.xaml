@@ -7,7 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="Black"
     mc:Ignorable="d">
+
     <!--  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"  -->
+
     <Grid x:Name="RootGrid">
 
         <NavigationView
@@ -22,11 +24,14 @@
                 </NavigationView.MenuItems>-->
 
             <NavigationView.PaneFooter>
-                <TextBlock
-                    x:Name="AccountUserNameBlock"
-                    Margin="10,0"
-                    VerticalAlignment="Center"
-                    FontWeight="SemiBold" />
+                <StackPanel Orientation="Horizontal">
+                    <PersonPicture x:Name="AccountPersonPicture" Margin="5" />
+                    <TextBlock
+                        x:Name="AccountUserNameBlock"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        FontWeight="SemiBold" />
+                </StackPanel>
             </NavigationView.PaneFooter>
 
             <ScrollViewer>

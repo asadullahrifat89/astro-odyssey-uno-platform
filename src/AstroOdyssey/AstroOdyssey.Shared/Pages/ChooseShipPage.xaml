@@ -31,7 +31,7 @@
                 VerticalAlignment="Center"
                 FontSize="25"
                 FontWeight="SemiBold"
-                Text="Select your ship"
+                Text="Select your ship."
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
