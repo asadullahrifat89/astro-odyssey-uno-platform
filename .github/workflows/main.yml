@@ -4,7 +4,7 @@ on:
     branches: [ master ]
   push:
     branches: [ master ]   
-  workflow_dispatch:  # Allows workflow to be ran via a button
+  #workflow_dispatch:  # Allows workflow to be ran via a button
 jobs:
   build:
     runs-on: ubuntu-latest
