@@ -222,16 +222,12 @@ namespace AstroOdyssey
                         MoveRight = false;
                     }
                     break;
-                case Windows.System.VirtualKey.Enter:
+                case Windows.System.VirtualKey.Escape:
                     {
                         if (IsGamePaused)
-                        {
                             ResumeGame();
-                        }
                         else
-                        {
                             PauseGame();
-                        }
                     }
                     break;
                 default:
@@ -409,7 +405,7 @@ namespace AstroOdyssey
             GameFrameTimer.Stop();
 
             App.StopSound();
-        }       
+        }
 
         /// <summary>
         /// Renders a frame in the game.
