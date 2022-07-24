@@ -1,4 +1,4 @@
-name: AstroOdyssey App
+name: master
 on:
   pull_request:
     branches: [ master ]
