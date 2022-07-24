@@ -14,7 +14,7 @@
         <GameEnvironment x:Name="GameView" />
 
         <StackPanel
-            Margin="0,25,0,0"
+            Margin="0,20,0,0"
             HorizontalAlignment="Center"
             Orientation="Vertical">
 
