@@ -4,7 +4,7 @@ This is to demostrate that 2D games can be developed using these tech stacks.
 
 The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platform/
 
-![master](https://github.com/asadullahrifat89/Astro-Odyssey-Uno-Platform/actions/workflows/main.yml/badge.svg)
+
 
 ## Game flow:
 * Login -> Play -> Select Ship -> Start -> Game Over -> Play -> ...
