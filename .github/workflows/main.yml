@@ -26,7 +26,7 @@ jobs:
     - name: Build 
       run: dotnet build ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj --no-restore -f $framework -c $config
     - name: Publish Artifacts
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v3
       #if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran      
       with:
         name: pages
