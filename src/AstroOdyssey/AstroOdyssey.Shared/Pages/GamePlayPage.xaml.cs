@@ -83,41 +83,220 @@ namespace AstroOdyssey
 
         #region Properties
 
-        private DispatcherTimer GameFrameTimer { get; set; }
+        public DispatcherTimer GameFrameTimer { get; set; }
 
-        private Stopwatch Stopwatch { get; set; }
+        public Stopwatch Stopwatch { get; set; }
 
-        private double Score { get; set; } = 0;
+        public double Score { get; set; } = 0;
 
-        private double PointerX { get; set; }
+        public double PointerX { get; set; }
 
-        private double PointerY { get; set; }
+        public double PointerY { get; set; }
 
-        private Player Player { get; set; }
+        public Player Player { get; set; }
 
-        private Enemy Boss { get; set; }
+        public Enemy Boss { get; set; }
 
-        private GameLevel GameLevel { get; set; }
+        public GameLevel GameLevel { get; set; }
 
-        private PowerUpType PowerUpType { get; set; }
+        public PowerUpType PowerUpType { get; set; }
 
-        private bool IsGameRunning { get; set; }
+        public bool IsGameRunning { get; set; }
 
-        private bool MoveLeft { get; set; } = false;
-
-        private bool MoveRight { get; set; } = false;
-
-        private bool MoveUp { get; set; } = false;
-
-        private bool MoveDown { get; set; } = false;
+        public bool IsGamePaused { get; set; }
 
         private bool FiringProjectiles { get; set; } = false;
 
         private bool IsPoweredUp { get; set; }
 
+        private bool _moveLeft;
+        public bool MoveLeft
+        {
+            get { return _moveLeft; }
+            set
+            {
+                _moveLeft = value;
+
+                MoveLeftFeed.Visibility = _moveLeft ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        private bool _moveRight;
+        public bool MoveRight
+        {
+            get { return _moveRight; }
+            set
+            {
+                _moveRight = value;
+
+                MoveRightFeed.Visibility = _moveRight ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        //private bool MoveUp { get; set; } = false;
+
+        //private bool MoveDown { get; set; } = false;
+
         #endregion
 
         #region Methods
+
+        #region Window Events
+
+        /// <summary>
+        /// When the window is loaded, we add the event Current_SizeChanged.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void GamePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SizeChanged += GamePage_SizeChanged;
+            ShowInGameText("TAP TO START");
+            InputView.Focus(FocusState.Programmatic);
+        }
+
+        /// <summary>
+        /// When the window is unloaded, we remove the event Current_SizeChanged.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void GamePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SizeChanged -= GamePage_SizeChanged;
+            StopGame();
+        }
+
+        /// <summary>
+        /// When the window size is changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
+        {
+            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            AdjustView(); // at view size change
+
+#if DEBUG
+            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
+#endif
+        }
+
+        #endregion   
+
+        #region Input Events       
+
+        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left:
+                    {
+                        MoveLeft = true;
+                        MoveRight = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Right:
+                    {
+                        MoveRight = true;
+                        MoveLeft = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left:
+                    {
+                        MoveLeft = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Right:
+                    {
+                        MoveRight = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Escape:
+                    {
+                        if (IsGamePaused)
+                            ResumeGame();
+                        else
+                            PauseGame();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsGameRunning)
+            {
+                var point = e.GetCurrentPoint(GameView);
+
+                // move left
+                if (point.Position.X < windowWidth / 2)
+                {
+                    MoveLeft = true;
+                    MoveRight = false;
+                } // move right
+                else if (point.Position.X > windowWidth / 2)
+                {
+                    MoveRight = true;
+                    MoveLeft = false;
+                }
+
+                //// move up
+                //if (point.Position.Y < windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveUp = true;
+                //    MoveDown = false;
+                //} // move down
+                //else if (point.Position.Y > windowHeight / 2)
+                //{
+                //    FiringProjectiles = true;
+                //    MoveDown = true;
+                //    MoveUp = false;
+                //}
+            }
+        }
+
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsGameRunning)
+            {
+                if (IsGamePaused)
+                {
+                    ResumeGame();
+                }
+
+                if (MoveLeft)
+                {
+                    MoveLeft = false;
+                }
+
+                if (MoveRight)
+                {
+                    MoveRight = false;
+                }
+            }
+            else
+            {
+                InputView.Focus(FocusState.Programmatic);
+                StartGame();
+                FiringProjectiles = true;
+            }
+        }
+
+        #endregion
 
         #region Game Methods
 
@@ -126,6 +305,12 @@ namespace AstroOdyssey
         /// </summary>
         private async void StartGame()
         {
+
+#if !DEBUG
+            FPSText.Visibility = Visibility.Collapsed;
+            ObjectsCountText.Visibility = Visibility.Collapsed;
+#endif
+
             App.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
@@ -142,6 +327,8 @@ namespace AstroOdyssey
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
+            SetStars();
+
             Stopwatch = Stopwatch.StartNew();
 
             GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
@@ -150,13 +337,13 @@ namespace AstroOdyssey
             {
                 frameStartTime = Stopwatch.ElapsedMilliseconds;
 
-                UpdateFrame();
+                RenderGameFrame();
 
                 CalculateFPS();
 
                 frameEndTime = Stopwatch.ElapsedMilliseconds;
 
-                SetFrameTime();
+                GetFrameDuration();
 #if DEBUG
                 SetAnalytics();
 #endif
@@ -168,34 +355,90 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the frame time.
+        /// Add stars to game environemnt randomly.
         /// </summary>
-        private void SetFrameTime()
+        private void SetStars()
         {
-            frameDuration = frameEndTime - frameStartTime;
-            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
-        }
+            Random random = new Random();
 
-        /// <summary>
-        /// Calculates the frames per second.
-        /// </summary>
-        private void CalculateFPS()
-        {
-            // calculate FPS
-            if (lastFPSTime + 1000 < frameStartTime)
+            for (int i = 0; i < 20; i++)
             {
-                fpsCount = fpsSpawnCounter;
-                fpsSpawnCounter = 0;
-                lastFPSTime = frameStartTime;
-            }
+                var star = new Star();
 
-            fpsSpawnCounter++;
+                star.SetAttributes(speed: 0.1d, scale: GameView.GetGameObjectScale());
+
+                var top = random.Next(10, (int)GameView.Height - 10);
+                var left = random.Next(10, (int)GameView.Width - 10);
+
+                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
+            }
         }
 
         /// <summary>
-        /// Updates a frame in the game.
+        /// Stops the game.
         /// </summary>
-        private void UpdateFrame()
+        private void StopGame()
+        {
+            IsGameRunning = false;
+
+            GameFrameTimer.Stop();
+
+            App.StopSound();
+        }
+
+        /// <summary>
+        /// Sets the game and star view sizes according to current window size.
+        /// </summary>
+        private void AdjustView()
+        {
+            GameView.SetSize(windowHeight, windowWidth);
+
+            frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
+
+            // resize player size
+            if (IsGameRunning)
+            {
+                PointerX = windowWidth / 2;
+
+                Player.SetX(PointerX - Player.HalfWidth);
+
+                SetPlayerY(); // windows size changed so reset y position               
+
+                var scale = GameView.GetGameObjectScale();
+                Player.ReAdjustScale(scale: scale);
+#if DEBUG
+                Console.WriteLine($"View Scale: {scale}");
+#endif
+            }
+        }
+
+        /// <summary>
+        /// Pauses the game.
+        /// </summary>
+        private void PauseGame()
+        {
+            GameFrameTimer?.Stop();
+            ShowInGameText("PAUSED");
+            FiringProjectiles = false;
+            IsGamePaused = true;
+        }
+
+        /// <summary>
+        /// Resumes the game.
+        /// </summary>
+        private void ResumeGame()
+        {
+            InputView.Focus(FocusState.Programmatic);
+            InGameText.Text = "";
+            GameFrameTimer?.Start();
+            FiringProjectiles = true;
+            IsGamePaused = false;
+        }
+
+        /// <summary>
+        /// Renders a frame in the game.
+        /// </summary>
+        private void RenderGameFrame()
         {
             GameOver();
 
@@ -207,26 +450,7 @@ namespace AstroOdyssey
 
             HandleInGameText();
 
-            _playerHelper.HandleDamageRecovery(Player);
-        }
-
-        /// <summary>
-        /// Check if game if over.
-        /// </summary>
-        private void GameOver()
-        {
-            if (Player.HasNoHealth)
-            {
-                PlayerHealthBar.Width = 0;
-
-                StopGame();
-
-                App.PlaySound(baseUrl, SoundType.GAME_OVER);
-
-                App.SetScore(Score);
-
-                App.NavigateToPage(typeof(GameOverPage));
-            }
+            HandleDamageRecovery();
         }
 
         /// <summary>
@@ -469,25 +693,13 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Stops the game.
-        /// </summary>
-        private void StopGame()
-        {
-            IsGameRunning = false;
-
-            GameFrameTimer.Stop();
-
-            App.StopSound();
-        }
-
-        /// <summary>
         /// Updates the game score, player health.
         /// </summary>
         private void UpdateScore()
         {
             var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
 
-            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")} - {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "")}{timeSpan.Seconds}s";
+            ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         }
 
         /// <summary>
@@ -555,6 +767,98 @@ namespace AstroOdyssey
                     showInGameTextSpawnCounter = showInGameTextFrequency;
                 }
             }
+        }
+
+        /// <summary>
+        /// Check if game if over.
+        /// </summary>
+        private void GameOver()
+        {
+            if (Player.HasNoHealth)
+            {
+                PlayerHealthBar.Width = 0;
+
+                StopGame();
+
+                App.PlaySound(baseUrl, SoundType.GAME_OVER);
+
+                App.SetScore(Score);
+
+                App.NavigateToPage(typeof(GameOverPage));
+            }
+        }
+
+        #endregion
+
+        #region Frame Methods
+
+        /// <summary>
+        /// Sets the frame time.
+        /// </summary>
+        private void GetFrameDuration()
+        {
+            frameDuration = frameEndTime - frameStartTime;
+            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
+        }
+
+        /// <summary>
+        /// Calculates the frames per second.
+        /// </summary>
+        private void CalculateFPS()
+        {
+            // calculate FPS
+            if (lastFPSTime + 1000 < frameStartTime)
+            {
+                fpsCount = fpsSpawnCounter;
+                fpsSpawnCounter = 0;
+                lastFPSTime = frameStartTime;
+            }
+
+            fpsSpawnCounter++;
+        }
+
+        #endregion
+
+        #region Player Methods
+
+        /// <summary>
+        /// Spawns the player.
+        /// </summary>
+        private void SpawnPlayer()
+        {
+            var scale = GameView.GetGameObjectScale();
+
+#if DEBUG
+            Console.WriteLine($"Render Scale: {scale}");
+#endif
+
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
+        }
+
+        /// <summary>
+        /// Sets the y axis position of the player on game canvas.
+        /// </summary>
+        private void SetPlayerY()
+        {
+            PointerY = windowHeight - Player.Height - 20;
+
+            Player.SetY(PointerY);
+        }
+
+        /// <summary>
+        /// Sets player health bar.
+        /// </summary>
+        private void SetPlayerHealthBar()
+        {
+            PlayerHealthBar.Width = Player.Health;
+        }
+
+        /// <summary>
+        /// Handles damage recovery of the player after getting hit.
+        /// </summary>
+        private void HandleDamageRecovery()
+        {
+            _playerHelper.HandleDamageRecovery(Player);
         }
 
         #endregion
@@ -641,210 +945,6 @@ namespace AstroOdyssey
                         _playerProjectileHelper.LevelUp();
                     }
                     break;
-            }
-        }
-
-        #endregion
-
-        #region Player Methods
-
-        /// <summary>
-        /// Spawns the player.
-        /// </summary>
-        private void SpawnPlayer()
-        {
-            var scale = GameView.GetGameObjectScale();
-
-#if DEBUG
-            Console.WriteLine($"Render Scale: {scale}");
-#endif
-
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
-        }
-
-        /// <summary>
-        /// Sets the y axis position of the player on game canvas.
-        /// </summary>
-        private void SetPlayerY()
-        {
-            PointerY = windowHeight - Player.Height - 20;
-
-            Player.SetY(PointerY);
-        }
-
-        /// <summary>
-        /// Sets player health bar.
-        /// </summary>
-        private void SetPlayerHealthBar()
-        {
-            PlayerHealthBar.Width = Player.Health;
-        }
-
-        #endregion      
-
-        #region Window Events
-
-        /// <summary>
-        /// When the window is loaded, we add the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void GamePage_Loaded(object sender, RoutedEventArgs e)
-        {
-            SizeChanged += GamePage_SizeChanged;
-            ShowInGameText("TAP TO START");
-        }
-
-        /// <summary>
-        /// When the window is unloaded, we remove the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void GamePage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            SizeChanged -= GamePage_SizeChanged;
-            StopGame();
-        }
-
-        /// <summary>
-        /// When the window size is changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
-        {
-            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
-            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
-
-            AdjustView(); // at view size change
-
-#if DEBUG
-            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
-#endif
-        }
-
-        /// <summary>
-        /// Sets the game and star view sizes according to current window size.
-        /// </summary>
-        private void AdjustView()
-        {
-            GameView.SetSize(windowHeight, windowWidth);
-
-            frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
-
-            // resize player size
-            if (IsGameRunning)
-            {
-                PointerX = windowWidth / 2;
-
-                Player.SetX(PointerX - Player.HalfWidth);
-
-                SetPlayerY(); // windows size changed so reset y position               
-
-                var scale = GameView.GetGameObjectScale();
-                Player.ReAdjustScale(scale: scale);
-#if DEBUG
-                Console.WriteLine($"View Scale: {scale}");
-#endif
-            }
-        }
-
-        #endregion   
-
-        #region Input Events       
-
-        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left: { MoveLeft = true; MoveRight = false; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = true; MoveLeft = false; } break;
-                //case Windows.System.VirtualKey.Up: { MoveUp = true; MoveDown = false; } break;
-                //case Windows.System.VirtualKey.Down: { MoveDown = true; MoveUp = false; } break;
-                default:
-                    break;
-            }
-        }
-
-        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left: { MoveLeft = false; } break;
-                case Windows.System.VirtualKey.Right: { MoveRight = false; } break;
-                //case Windows.System.VirtualKey.Up: { MoveUp = false; } break;
-                //case Windows.System.VirtualKey.Down: { MoveDown = false; } break;
-                default:
-                    break;
-            }
-        }
-
-        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            if (IsGameRunning)
-            {
-                var point = e.GetCurrentPoint(GameView);
-
-                // move left
-                if (point.Position.X < windowWidth / 2)
-                {
-                    MoveLeft = true;
-                    MoveRight = false;
-                } // move right
-                else if (point.Position.X > windowWidth / 2)
-                {
-                    MoveRight = true;
-                    MoveLeft = false;
-                }
-
-                //// move up
-                //if (point.Position.Y < windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveUp = true;
-                //    MoveDown = false;
-                //} // move down
-                //else if (point.Position.Y > windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveDown = true;
-                //    MoveUp = false;
-                //}
-            }
-        }
-
-        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            if (IsGameRunning)
-            {
-                var point = e.GetCurrentPoint(GameView);
-
-                // move left
-                if (point.Position.X < windowWidth / 2)
-                {
-                    MoveLeft = false;
-                } // move right
-                else if (point.Position.X > windowWidth / 2)
-                {
-                    MoveRight = false;
-                }
-
-                //// move up
-                //if (point.Position.Y < windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveUp = false;
-                //} // move down
-                //else if (point.Position.Y > windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveDown = false;
-                //}
-            }
-            else
-            {
-                StartGame();
-                FiringProjectiles = true;
             }
         }
 
