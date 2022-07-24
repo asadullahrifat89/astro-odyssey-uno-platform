@@ -14,7 +14,7 @@
         <GameEnvironment x:Name="GameView" />
 
         <StackPanel
-            Margin="0,5,0,0"
+            Margin="0,25,0,0"
             HorizontalAlignment="Center"
             Orientation="Vertical">
 
@@ -22,7 +22,7 @@
             <TextBlock
                 Name="ScoreText"
                 Margin="5"
-                FontSize="22"
+                FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
                 TextAlignment="Center" />
@@ -59,7 +59,7 @@
 
         </StackPanel>
 
-        <!--  This shows feedback of moving left and right  -->
+        <!--  This shows moving left and right indicators  -->
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
 
             <Grid.ColumnDefinitions>

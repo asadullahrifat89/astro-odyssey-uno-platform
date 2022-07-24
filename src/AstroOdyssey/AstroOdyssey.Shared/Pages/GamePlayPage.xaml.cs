@@ -305,6 +305,12 @@ namespace AstroOdyssey
         /// </summary>
         private async void StartGame()
         {
+
+#if !DEBUG
+            FPSText.Visibility = Visibility.Collapsed;
+            ObjectsCountText.Visibility = Visibility.Collapsed;
+#endif
+
             App.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
@@ -693,7 +699,7 @@ namespace AstroOdyssey
         {
             var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
 
-            ScoreText.Text = $"{Score} - {GameLevel.ToString().Replace("_", " ")} - {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h " : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m " : "")}{timeSpan.Seconds}s";
+            ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         }
 
         /// <summary>
