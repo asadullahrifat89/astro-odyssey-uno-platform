@@ -30,7 +30,7 @@ jobs:
       #if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran      
       with:
         name: pages
-        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/
+        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
   deploy:
     needs: build 
     runs-on: ubuntu-latest
@@ -41,12 +41,12 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pages
-        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/        
+        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2
       with:
         target_branch: gh-pages
-        build_dir: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/
+        build_dir: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
         jekyll: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
