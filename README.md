@@ -13,6 +13,7 @@ The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platfo
 ### Game environment:
 * Player earns scores for hitting enemies and meteors.
 * Player looses health if collides with enemies or meteors.
+* Game over if player health reaches zero.
 * Game levels increase at certain scores and difficulty scales.
 * PhysX effects for projectile impact.
 * A parallax space background filled with stars.
