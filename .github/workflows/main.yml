@@ -1,42 +1,49 @@
-name: Deploy to GitHub Pages
-
-# Run workflow on every push to the master branch
+name: AstroOdyssey App
 on:
+  pull_request:
+    branches: [ main ]
   push:
-    branches: [ master ]
+    branches: [ main ]   
+  workflow_dispatch:  # Allows workflow to be ran via a button
 jobs:
-  deploy-to-github-pages:
-    # use ubuntu-latest image to run steps on
+  build:
     runs-on: ubuntu-latest
+    name: Build
+    env:
+      config: 'Release'
+      framework: 'netstandard2.0'
     steps:
-    
-    # uses GitHub's checkout action to checkout code form the master branch
-    - uses: actions/checkout@v3
-    
-    # sets up .NET Core SDK 6.0
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v2
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-        include-prerelease: true
-        
-    # publishes Blazor project to the release-folder
-    - name: Publish .NET Core Project
-      run: dotnet publish ./src/AstroOdyssey/AstroOdyssey.Wasm -c Release -o release --nologo
-    # Changes the base tag in index.html from ‘/’ to AstroOdyssey to match the GitHub Pages repository subdirectory
-    - name: Change base-tag in index.html from / to AstroOdyssey
-      run: sed -i ‘s/<base href=”\/” \/>/<base href=”\/AstroOdyssey\/” \/>/g’ release/wwwroot/index.html
-    # Copy index.html to 404.html to serve the same file when a file is not found
-    - name: copy index.html to 404.html
-      run: cp release/wwwroot/index.html release/wwwroot/404.html
-    # Add the .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
-    - name: Add .nojekyll file
-      run: touch release/wwwroot/.nojekyll
-    - name: Commit wwwroot to GitHub pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+        dotnet-version: 5.0.x
+    - name: Restore Dependencies
+      run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
+    - name: Build 
+      run: dotnet build ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj --no-restore -f $framework -c $config
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v1.0.0
+      if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran
       with:
+        name: pages
+        path: ./AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/        
+  deploy:
+    needs: build 
+    runs-on: ubuntu-latest
+    name: Deploy
+    if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: pages
+        path: dist        
+    - name: Deploy to GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: ./dist/
+        jekyll: false
+      env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: release/wwwroot
-
-    
