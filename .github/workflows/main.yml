@@ -11,7 +11,7 @@ jobs:
     name: Build
     env:
       config: 'Release'
-      framework: 'net6.0'
+      framework: 'netstandard2.0'
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -19,6 +19,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
         include-prerelease: true
+    - name: Workload Install
+      run: dotnet workload install macos
     - name: Restore Dependencies
       run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
     - name: Build 
