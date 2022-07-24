@@ -46,9 +46,9 @@ namespace AstroOdyssey
         {
             BACKGROUND_MUSIC,
             PLAYER_ROUNDS_FIRE,
-            PLAYER_RAPIDSHOT_ROUNDS_FIRE,
-            PLAYER_DEADSHOT_ROUNDS_FIRE,
-            PLAYER_SONICSHOT_ROUNDS_FIRE,
+            PLAYER_RAPID_SHOT_ROUNDS_FIRE,
+            PLAYER_DEAD_SHOT_ROUNDS_FIRE,
+            PLAYER_DOOM_SHOT_ROUNDS_FIRE,
             ENEMY_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,

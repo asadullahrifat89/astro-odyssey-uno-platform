@@ -517,6 +517,7 @@ namespace AstroOdyssey
                                 _playerProjectileHelper.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
+                                ShowInGameText("POWER DOWN");
                             }
                         }
                     }
@@ -641,6 +642,7 @@ namespace AstroOdyssey
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
+                            ShowInGameText("HEALTH PICKUP");
                         }
                     }
                     break;
@@ -658,6 +660,7 @@ namespace AstroOdyssey
                         {
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
+                            ShowInGameText(PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
                             _playerProjectileHelper.PowerUp(PowerUpType);
                         }
                     }
