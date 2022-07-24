@@ -301,6 +301,86 @@ namespace AstroOdyssey
         #region Game Methods
 
         /// <summary>
+        /// Starts the game. Spawns the player and starts game and projectile loops.
+        /// </summary>
+        private async void StartGame()
+        {
+            App.PlaySound(baseUrl, SoundType.GAME_START);
+
+            SpawnPlayer();
+
+            SetPlayerY(); // set y position at game start
+
+            SetPlayerHealthBar(); // set player health bar at game start
+
+            UpdateScore();
+
+            InGameText.Text = "";
+
+            IsGameRunning = true;
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
+
+            SetStars();
+
+            Stopwatch = Stopwatch.StartNew();
+
+            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
+
+            GameFrameTimer.Tick += (s, e) =>
+            {
+                frameStartTime = Stopwatch.ElapsedMilliseconds;
+
+                RenderGameFrame();
+
+                CalculateFPS();
+
+                frameEndTime = Stopwatch.ElapsedMilliseconds;
+
+                GetFrameDuration();
+#if DEBUG
+                SetAnalytics();
+#endif
+            };
+
+            GameFrameTimer.Start();
+
+            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+        }
+
+        /// <summary>
+        /// Add stars to game environemnt randomly.
+        /// </summary>
+        private void SetStars()
+        {
+            Random random = new Random();
+
+            for (int i = 0; i < 20; i++)
+            {
+                var star = new Star();
+
+                star.SetAttributes(speed: 0.1d, scale: GameView.GetGameObjectScale());
+
+                var top = random.Next(10, (int)GameView.Height - 10);
+                var left = random.Next(10, (int)GameView.Width - 10);
+
+                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
+            }
+        }
+
+        /// <summary>
+        /// Stops the game.
+        /// </summary>
+        private void StopGame()
+        {
+            IsGameRunning = false;
+
+            GameFrameTimer.Stop();
+
+            App.StopSound();
+        }
+
+        /// <summary>
         /// Sets the game and star view sizes according to current window size.
         /// </summary>
         private void AdjustView()
@@ -347,64 +427,6 @@ namespace AstroOdyssey
             GameFrameTimer?.Start();
             FiringProjectiles = true;
             IsGamePaused = false;
-        }
-
-        /// <summary>
-        /// Starts the game. Spawns the player and starts game and projectile loops.
-        /// </summary>
-        private async void StartGame()
-        {
-            App.PlaySound(baseUrl, SoundType.GAME_START);
-
-            SpawnPlayer();
-
-            SetPlayerY(); // set y position at game start
-
-            SetPlayerHealthBar(); // set player health bar at game start
-
-            UpdateScore();
-
-            InGameText.Text = "";
-
-            IsGameRunning = true;
-
-            await Task.Delay(TimeSpan.FromSeconds(1));
-
-            Stopwatch = Stopwatch.StartNew();
-
-            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
-
-            GameFrameTimer.Tick += (s, e) =>
-            {
-                frameStartTime = Stopwatch.ElapsedMilliseconds;
-
-                RenderGameFrame();
-
-                CalculateFPS();
-
-                frameEndTime = Stopwatch.ElapsedMilliseconds;
-
-                GetFrameDuration();
-#if DEBUG
-                SetAnalytics();
-#endif
-            };
-
-            GameFrameTimer.Start();
-
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
-        }
-
-        /// <summary>
-        /// Stops the game.
-        /// </summary>
-        private void StopGame()
-        {
-            IsGameRunning = false;
-
-            GameFrameTimer.Stop();
-
-            App.StopSound();
         }
 
         /// <summary>
