@@ -108,12 +108,12 @@
             BorderThickness="3"
             CornerRadius="50" />
 
-        <!--  This shows level up, power up text when difficulty scales  -->
+        <!--  This shows in game texts  -->
         <TextBlock
             x:Name="InGameText"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontSize="45"
+            FontSize="40"
             FontWeight="Bold"
             Foreground="White"
             TextAlignment="Center"

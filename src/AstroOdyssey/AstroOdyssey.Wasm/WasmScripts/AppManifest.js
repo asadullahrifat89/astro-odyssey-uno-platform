@@ -75,7 +75,7 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(rfAudio);
         } break;
-        case "PLAYER_RAPIDSHOT_ROUNDS_FIRE": {
+        case "PLAYER_RAPID_SHOT_ROUNDS_FIRE": {
             if (rapidsrfAudio.src.length == 0) {
                 rapidsrfAudio.src = baseUrl.concat("/", rapidShotRoundsFireSource);
                 rapidsrfAudio.volume = 0.2;
@@ -83,7 +83,7 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(rapidsrfAudio);
         } break;
-        case "PLAYER_DEADSHOT_ROUNDS_FIRE": {
+        case "PLAYER_DEAD_SHOT_ROUNDS_FIRE": {
             if (deadsrfAudio.src.length == 0) {
                 deadsrfAudio.src = baseUrl.concat("/", deadShotRoundsFireSource);
                 deadsrfAudio.volume = 0.2;
@@ -91,7 +91,7 @@ function playGameSound(baseUrl, soundType) {
             }
             playSound(deadsrfAudio);
         } break;
-        case "PLAYER_SONICSHOT_ROUNDS_FIRE": {
+        case "PLAYER_DOOM_SHOT_ROUNDS_FIRE": {
             if (sonicsrfAudio.src.length == 0) {
                 sonicsrfAudio.src = baseUrl.concat("/", sonicShotRoundsFireSource);
                 sonicsrfAudio.volume = 0.2;
