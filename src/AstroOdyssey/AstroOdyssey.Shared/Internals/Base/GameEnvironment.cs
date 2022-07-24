@@ -18,7 +18,7 @@ namespace AstroOdyssey
 
         public GameEnvironment()
         {
-
+            CanDrag = false;            
         }
 
         #endregion

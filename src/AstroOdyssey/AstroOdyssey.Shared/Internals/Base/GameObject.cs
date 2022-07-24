@@ -32,6 +32,8 @@ namespace AstroOdyssey
 #endif
             RenderTransformOrigin = new Point(0.5, 0.5);
             RenderTransform = compositeTransform;
+
+            CanDrag = false;
         }
 
         #endregion
