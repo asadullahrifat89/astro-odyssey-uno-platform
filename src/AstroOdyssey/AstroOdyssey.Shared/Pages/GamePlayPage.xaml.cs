@@ -382,7 +382,7 @@ namespace AstroOdyssey
             {
                 frameStartTime = Stopwatch.ElapsedMilliseconds;
 
-                UpdateFrame();
+                RenderGameFrame();
 
                 CalculateFPS();
 
@@ -412,9 +412,9 @@ namespace AstroOdyssey
         }       
 
         /// <summary>
-        /// Updates a frame in the game.
+        /// Renders a frame in the game.
         /// </summary>
-        private void UpdateFrame()
+        private void RenderGameFrame()
         {
             GameOver();
 
