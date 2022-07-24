@@ -1,9 +1,9 @@
 name: AstroOdyssey App
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   push:
-    branches: [ main ]   
+    branches: [ master ]   
   workflow_dispatch:  # Allows workflow to be ran via a button
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Restore Dependencies
       run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
     - name: Build 
