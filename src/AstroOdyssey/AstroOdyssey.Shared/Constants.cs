@@ -64,9 +64,35 @@ namespace AstroOdyssey
             GAME_OVER
         }
 
+        /// <summary>
+        /// Checks if the provided string is null or empty or white space.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static bool IsNullOrBlank(this string value)
         {
             return string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);
+        }
+
+        /// <summary>
+        /// Get initials from a given name.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetInitials(string name)
+        {
+            // StringSplitOptions.RemoveEmptyEntries excludes empty spaces returned by the Split method
+
+            string[] nameSplit = name.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+
+            string initials = "";
+
+            foreach (string item in nameSplit)
+            {
+                initials += item.Substring(0, 1).ToUpper();
+            }
+
+            return initials;
         }
 
         /// <summary>

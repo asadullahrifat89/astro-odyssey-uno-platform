@@ -327,6 +327,8 @@ namespace AstroOdyssey
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
+            PlayerHealthBarPanel.Visibility = Visibility.Visible;
+
             SetStars();
 
             Stopwatch = Stopwatch.StartNew();
@@ -562,6 +564,7 @@ namespace AstroOdyssey
 
                                             BossHealthBar.Width = 0;
                                             Boss = null;
+                                            BossHealthBarPanel.Visibility = Visibility.Collapsed;
                                         }
                                     }
                                     break;
@@ -907,6 +910,7 @@ namespace AstroOdyssey
                     ShowInGameText("BOSS INCOMING");
                     Boss = _enemyHelper.EngageBossEnemy(GameLevel);
                     SetBossHealthBar(); // set boss health on boss appearance
+                    BossHealthBarPanel.Visibility = Visibility.Visible; // set boss health on boss appearance
                 }
                 else
                 {
@@ -921,7 +925,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Width = Boss.Health / 1.5;
+            BossHealthBar.Width = Boss.Health / 1.5;            
         }
 
         /// <summary>

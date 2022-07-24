@@ -32,7 +32,7 @@ namespace AstroOdyssey
                 navigationView: NavView,
                 frame: ContentFrame,
                 pageMap: new Dictionary<string, Type>(),
-                goBackNotAllowedToPages: new List<Type>() { typeof(GamePlayPage) },                
+                goBackNotAllowedToPages: new List<Type>() { typeof(GamePlayPage) },
                 goBackPageRoutes: new List<(Type IfGoingBackTo, Type RouteTo)>()
                 {
                     (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)),
@@ -73,6 +73,7 @@ namespace AstroOdyssey
         public void SetAccount()
         {
             AccountUserNameBlock.Text = App.Account.UserName;
+            AccountPersonPicture.Initials = GetInitials(App.Account.UserName);
         }
 
         /// <summary>
