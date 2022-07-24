@@ -18,6 +18,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
+        include-prerelease: true
     - name: Restore Dependencies
       run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
     - name: Build 
