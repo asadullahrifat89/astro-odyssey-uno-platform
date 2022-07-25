@@ -37,7 +37,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns the player.
         /// </summary>
-        public Player SpawnPlayer(double pointerX, GameObject ship)
+        public Player SpawnPlayer(double pointerX, Ship ship)
         {
             var player = new Player();
 

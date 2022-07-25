@@ -31,6 +31,7 @@
     <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Models\GameScore.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />
+    <_Globbed_Compile Remove="Models\Ship.cs" />
     <_Globbed_Compile Remove="Pages\ChooseShipPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />

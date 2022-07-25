@@ -18,7 +18,7 @@
 
             <!--  Game title  -->
             <TextBlock
-                Margin="10,10,10,50"
+                Margin="10,10,10,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="45"

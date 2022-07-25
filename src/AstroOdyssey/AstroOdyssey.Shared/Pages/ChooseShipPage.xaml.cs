@@ -24,7 +24,7 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class ChooseShipPage : Page
     {
-        private GameObject selectedShip;
+        private Ship selectedShip;
 
         public ChooseShipPage()
         {
@@ -32,72 +32,82 @@ namespace AstroOdyssey
             this.Loaded += ChooseShipPage_Loaded;
         }
 
-        private async void ChooseShipPage_Loaded(object sender, RoutedEventArgs e)
+        private void ChooseShipPage_Loaded(object sender, RoutedEventArgs e)
         {
+            selectedShip = null;
+            App.Ship = null;
+            ChooseButton.IsEnabled = false;
 
             if (this.ShipsList.Items.Count == 0)
             {
-                await Task.Delay(200);
+                var ships = new List<Ship>();
 
-                Uri shipUri = null;
+                string shipUri = null;
+                string name = null;
 
                 for (int i = 1; i <= 12; i++)
                 {
                     switch (i)
                     {
                         case 1:
-                            shipUri = new Uri("ms-appx:///Assets/Images/satellite_B.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/satellite_B.png";
+                            name = "Antimony";
                             break;
                         case 2:
-                            shipUri = new Uri("ms-appx:///Assets/Images/satellite_C.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/satellite_C.png";
+                            name = "Bismuth";
                             break;
                         case 3:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_C.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_C.png";
+                            name = "Cadmium";
                             break;
                         case 4:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_D.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_D.png";
+                            name = "Krypton";
                             break;
                         case 5:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_E.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_E.png";
+                            name = "Radon";
                             break;
                         case 6:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_F.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_F.png";
+                            name = "Cobalt";
                             break;
                         case 7:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_G.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_G.png";
+                            name = "Radium";
                             break;
                         case 8:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_H.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_H.png";
+                            name = "Barium";
                             break;
                         case 9:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_I.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_I.png";
+                            name = "Neon";
                             break;
                         case 10:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_J.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_J.png";
+                            name = "Xenon";
                             break;
                         case 11:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_K.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_K.png";
+                            name = "Argon";
                             break;
                         case 12:
-                            shipUri = new Uri("ms-appx:///Assets/Images/ship_L.png", UriKind.RelativeOrAbsolute);
+                            shipUri = "ms-appx:///Assets/Images/ship_L.png";
+                            name = "Helium";
                             break;
                     }
 
-                    GameObject ship = new GameObject()
+                    ships.Add(new Ship()
                     {
-                        Child = new Image()
-                        {
-                            Stretch = Stretch.Uniform,
-                            Source = new BitmapImage(shipUri),
-                        },
-                        CornerRadius = new CornerRadius(10),
-                        Tag = i,
-                        Height = 100,
-                        Width = 100
-                    };
-
-                    this.ShipsList.Items.Add(ship);
+                        Id = i.ToString(),
+                        Name = name,
+                        ImageUrl = shipUri
+                    });
                 }
+
+                this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
             }
         }
 
@@ -112,7 +122,8 @@ namespace AstroOdyssey
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedShip = ShipsList.SelectedItem as GameObject;
+            selectedShip = ShipsList.SelectedItem as Ship;
+            ChooseButton.IsEnabled = true;
         }
     }
 }
