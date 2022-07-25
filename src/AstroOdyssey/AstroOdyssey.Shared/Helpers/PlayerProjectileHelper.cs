@@ -55,16 +55,23 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
 
+            if (player.BorderThickness.Top != 0)
+            {
+                player.BorderThickness = new Microsoft.UI.Xaml.Thickness(0, player.BorderThickness.Top - 1, 0, 0);
+            }
+
             if (projectileSpawnCounter <= 0)
             {
-                if (firingProjectiles)
+                //if (firingProjectiles)
                 //// any object falls within player range
                 //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
-                {
-                    GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
-                }
+                //{
+                GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
+                //}
 
                 projectileSpawnCounter = projectileSpawnDelay;
+
+                player.BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 0);
             }
         }
 

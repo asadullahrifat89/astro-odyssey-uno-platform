@@ -858,7 +858,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = windowHeight - Player.Height - 20;
+            PointerY = windowHeight - Player.Height - 25;
 
             Player.SetY(PointerY);
         }
