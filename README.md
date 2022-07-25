@@ -43,7 +43,7 @@ The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platfo
 * Random power ups that last for a certain period of time. A power up gauge is displayed. 3 types of power ups are implemented:
   * Rapid shot: if picked up increases firing frequency with faster, smaller projectiles.
   * Dead shot: if picked up decreases firing frequency but with deadlier larger projectiles.
-  * Sonic shot: if picked up decreases firing frequency but with the most devastating, longer, larger and fast projectiles.
+  * Doom shot: if picked up decreases firing frequency but with the most devastating, longer, larger and fast projectiles.
 
 #### Pickups:
 * Health pickups, if picked up restores 10 health points.
