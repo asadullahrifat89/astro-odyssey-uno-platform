@@ -316,7 +316,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
-        private void StartGame()
+        private async void StartGame()
         {
 
 #if !DEBUG
@@ -338,7 +338,9 @@ namespace AstroOdyssey
 
             IsGameRunning = true;
 
-            //await Task.Delay(TimeSpan.FromSeconds(1));
+            //TODO: show player entrace animation            
+
+            await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
 
@@ -478,9 +480,11 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
             {
+                // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
                 {
                     gameObject.Fade();
+                    gameObject.Explode();
 
                     if (gameObject.HasFadedAway)
                     {

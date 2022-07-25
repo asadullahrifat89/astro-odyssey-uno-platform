@@ -82,7 +82,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            starSpawnDelay -= 5;
+            starSpawnDelay -= 10;
             starSpeed += 0.1d;
         }
 
