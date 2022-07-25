@@ -95,8 +95,6 @@ namespace AstroOdyssey
 
         public Player Player { get; set; }
 
-        public Enemy Boss { get; set; }
-
         public GameLevel GameLevel { get; set; }
 
         public PowerUpType PowerUpType { get; set; }
@@ -133,9 +131,24 @@ namespace AstroOdyssey
             }
         }
 
-        //private bool MoveUp { get; set; } = false;
+        private Enemy _boss;
+        public Enemy Boss
+        {
+            get { return _boss; }
+            set
+            {
+                _boss = value;
 
-        //private bool MoveDown { get; set; } = false;
+                if (_boss is null)
+                {
+                    BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    BossHealthBarPanel.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
         #endregion
 
@@ -303,7 +316,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
-        private async void StartGame()
+        private void StartGame()
         {
 
 #if !DEBUG
@@ -325,7 +338,7 @@ namespace AstroOdyssey
 
             IsGameRunning = true;
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            //await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
 
@@ -559,12 +572,7 @@ namespace AstroOdyssey
 
                                         if (enemy.IsBoss)
                                         {
-                                            ShowInGameText($"BOSS CLEARED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
-                                            _enemyHelper.DisengageBossEnemy();
-
-                                            BossHealthBar.Width = 0;
-                                            Boss = null;
-                                            BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                                            DisengageBoss();
                                         }
                                     }
                                     break;
@@ -869,6 +877,38 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Boss Methods
+
+        /// <summary>
+        /// Engages a boss.
+        /// </summary>
+        private void EngageBoss()
+        {
+            ShowInGameText("BOSS INCOMING");
+            Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+            SetBossHealthBar(); // set boss health on boss appearance            
+        }
+
+        /// <summary>
+        /// Disengages a boss.
+        /// </summary>
+        private void DisengageBoss()
+        {
+            ShowInGameText($"BOSS DEFEATED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
+            _enemyHelper.DisengageBossEnemy();
+            Boss = null;
+        }
+
+        /// <summary>
+        /// Sets the boss health bar.
+        /// </summary>
+        private void SetBossHealthBar()
+        {
+            BossHealthBar.Width = Boss.Health / 1.5;
+        }
+
+        #endregion
+
         #region Difficulty Methods
 
         /// <summary>
@@ -907,10 +947,7 @@ namespace AstroOdyssey
                 // bosses apprear after level 2
                 if (GameLevel > GameLevel.Level_2)
                 {
-                    ShowInGameText("BOSS INCOMING");
-                    Boss = _enemyHelper.EngageBossEnemy(GameLevel);
-                    SetBossHealthBar(); // set boss health on boss appearance
-                    BossHealthBarPanel.Visibility = Visibility.Visible; // set boss health on boss appearance
+                    EngageBoss();
                 }
                 else
                 {
@@ -918,14 +955,6 @@ namespace AstroOdyssey
                     App.PlaySound(baseUrl, SoundType.LEVEL_UP);
                 }
             }
-        }
-
-        /// <summary>
-        /// Sets the boss health bar.
-        /// </summary>
-        private void SetBossHealthBar()
-        {
-            BossHealthBar.Width = Boss.Health / 1.5;
         }
 
         /// <summary>

@@ -13,7 +13,6 @@ const sonicShotRoundsFireSource = "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.
 const enemyRoundsFireSource = "Assets/Sounds/laser-descend_GJPs9OE__NWM.mp3";
 
 const roundHitSource = "Assets/Sounds/explosion-firework-boom-single_GkGH0sE__NWM.mp3";
-const roundHit2Source = "Assets/Sounds/firework-explode-distant_zJ6kk3VO_NWM.mp3";
 
 const powerUpSource = "Assets/Sounds/spellcast-46164.mp3";
 const powerDownSource = "Assets/Sounds/power-down-7103.mp3";
@@ -110,24 +109,10 @@ function playGameSound(baseUrl, soundType) {
         case "ROUNDS_HIT": {
             if (rhAudio.src.length == 0) {
                 rhAudio.src = baseUrl.concat("/", roundHitSource);
-                rhAudio.volume = 0.4;
+                rhAudio.volume = 0.3;
                 setAudioAttributes(rhAudio);
             }
             playSound(rhAudio);
-
-            //if (rh2Audio.src.length == 0) {
-            //    rh2Audio.src = baseUrl.concat("/", roundHit2Source);
-            //    rh2Audio.volume = 0.4;
-            //    setAudioAttributes(rh2Audio);
-            //}
-
-            //let musicTrack = Math.floor((Math.random() * 3));
-
-            //switch (musicTrack) {
-            //    case 1: { playSound(rhAudio); } break;
-            //    default: { playSound(rh2Audio); }
-            //}
-
         } break;
         case "POWER_UP": {
             if (puAudio.src.length == 0) {
