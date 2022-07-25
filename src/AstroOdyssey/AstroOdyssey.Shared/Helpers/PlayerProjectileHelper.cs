@@ -26,7 +26,7 @@ namespace AstroOdyssey
         private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
-        private int xSide = 10;
+        private int xSide = 15;
 
         #endregion
 
@@ -83,7 +83,7 @@ namespace AstroOdyssey
 
             projectile.AddToGameEnvironment(
                 top: player.GetY() - projectile.Height,
-                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType != PowerUpType.RAPID_SHOT_ROUNDS ? 0 : xSide * scale),
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.RAPID_SHOT_ROUNDS ? xSide * scale : 0),
                 gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
@@ -110,7 +110,7 @@ namespace AstroOdyssey
             else
             {
                 App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
-                xSide = xSide * -1;
+                //xSide = xSide * -1;
             }
         }
 
