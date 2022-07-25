@@ -12,10 +12,10 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Grid content = new Grid();
+        private readonly Grid body = new Grid();
 
 
-        private readonly Image contentShip = new Image()
+        private readonly Image ship = new Image()
         {
             Stretch = Stretch.Uniform,
         };
@@ -25,7 +25,7 @@ namespace AstroOdyssey
         //    Stretch = Stretch.Uniform
         //};
 
-        private readonly Border contentShipPowerGauge = new Border()
+        private readonly Border powerGauge = new Border()
         {
             Height = 5,
             Width = 0, // TODO: leave it to 0
@@ -58,7 +58,6 @@ namespace AstroOdyssey
 
             Tag = PLAYER;
 
-            Background = new SolidColorBrush(Colors.Transparent);
             Height = PLAYER_HEIGHT;
             Width = DESTRUCTIBLE_OBJECT_SIZE;
 
@@ -66,14 +65,17 @@ namespace AstroOdyssey
             HitPoint = 10; //TODO: HitPoint is always 10
 
             // combine power gauge, ship, and blaze
-            content = new Grid();
+            body = new Grid();
             //content.Children.Add(contentShipBlaze);
-            content.Children.Add(contentShip);
-            content.Children.Add(contentShipPowerGauge);
-            //content.Children.Add(contentShipHealthBar);
+            body.Children.Add(ship);
+            body.Children.Add(powerGauge);
+            //content.Children.Add(contentShipHealthBar);           
 
-            Child = content;
+            Child = body;
 
+            Background = new SolidColorBrush(Colors.Transparent);
+            BorderBrush = new SolidColorBrush(Colors.Transparent);
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
 #if DEBUG
             //Background = new SolidColorBrush(Colors.White);
 #endif      
@@ -95,7 +97,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            contentShip.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            this.ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
 
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
@@ -129,13 +131,13 @@ namespace AstroOdyssey
 
         public void SetPowerGauge(double powerGauge)
         {
-            contentShipPowerGauge.Width = powerGauge * 3;
+            this.powerGauge.Width = powerGauge * 3;
         }
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
             Speed += 1;
-            contentShipPowerGauge.Width = Width / 2;
+            powerGauge.Width = Width / 2;
 
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
@@ -161,31 +163,13 @@ namespace AstroOdyssey
             //}
         }
 
-        public void TriggerPowerDown()
+        public void PowerUpCoolDown()
         {
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed -= 1;
-            contentShipPowerGauge.Width = 0;
+            powerGauge.Width = 0;
         }
-
-        ///// <summary>
-        ///// Gets the player health points.
-        ///// </summary>
-        ///// <returns></returns>
-        //public string GetHealthPoints()
-        //{
-        //    var healthPoints = Health / HitPoint;
-        //    var healthIcon = "❤️";
-        //    var health = string.Empty;
-
-        //    for (int i = 0; i < healthPoints; i++)
-        //    {
-        //        health += healthIcon;
-        //    }
-
-        //    return health;
-        //}
 
         /// <summary>
         /// Checks if there is any game object within the left side range of the player.
@@ -216,6 +200,19 @@ namespace AstroOdyssey
         public new Rect GetRect()
         {
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
+        }
+
+        public void SetRecoilEffect()
+        {
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 4, right: 0, bottom: 0);
+        }
+
+        public void CoolDownRecoilEffect() 
+        {
+            if (BorderThickness.Top != 0)
+            {
+                BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: BorderThickness.Top - 1, right: 0, bottom: 0);
+            }
         }
 
         #endregion

@@ -47,12 +47,12 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPID_SHOT_ROUNDS:
                         {
-                            height = 30; width = 10; // smaller but faster rounds                            
+                            height = 35; width = 10; // medium and faster rounds                            
                         }
                         break;
                     case PowerUpType.DEAD_SHOT_ROUNDS:
                         {
-                            height = 25; width = 25; // larger but slower rounds                            
+                            height = 25; width = 25; // larger and slower rounds                            
                         }
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
@@ -124,7 +124,6 @@ namespace AstroOdyssey
             }
 
             Background = new SolidColorBrush(Colors.Red);
-
             BorderBrush = new SolidColorBrush(Colors.DarkRed);
 
             if (PowerUpType == PowerUpType.DEAD_SHOT_ROUNDS)

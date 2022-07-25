@@ -215,7 +215,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Handles the opacity of the player upon taking damage.
         /// </summary>
-        public void HandleDamageRecovery(Player player)
+        public void DamageRecoveryCoolDown(Player player)
         {
             if (player.IsInEtherealState)
             {
@@ -253,7 +253,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public bool PowerDown(Player player)
+        public bool PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
@@ -264,7 +264,7 @@ namespace AstroOdyssey
             if (powerUpTriggerSpawnCounter <= 0)
             {
                 App.PlaySound(baseUrl, SoundType.POWER_DOWN);
-                player.TriggerPowerDown();
+                player.PowerUpCoolDown();
                 return true;
             }
 

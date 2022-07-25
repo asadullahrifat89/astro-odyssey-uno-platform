@@ -36,12 +36,16 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             enemy.ProjectileSpawnCounter -= 1;
 
+            //enemy.CoolDownRecoilEffect();
+
             if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy, gameLevel);
 
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
                 enemy.ProjectileSpawnDelay = random.Next(25, 60);
+
+                //enemy.SetRecoilEffect();
             }
         }
 
@@ -67,7 +71,7 @@ namespace AstroOdyssey
 
                 if (enemy.OverPoweredProjectileSpawnCounter <= 0)
                 {
-                    projectile.OverPower();                    
+                    projectile.OverPower();
 
                     enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
                     enemy.OverPoweredProjectileSpawnDelay = random.Next(4, 7);

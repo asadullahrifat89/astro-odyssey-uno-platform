@@ -26,7 +26,7 @@ namespace AstroOdyssey
         private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
-        private int xSide = 10;
+        private int xSide = 15;
 
         #endregion
 
@@ -55,16 +55,20 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
 
+            player.CoolDownRecoilEffect();
+
             if (projectileSpawnCounter <= 0)
             {
-                if (firingProjectiles)
+                //if (firingProjectiles)
                 //// any object falls within player range
                 //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
-                {
-                    GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
-                }
+                //{
+                GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
+                //}
 
                 projectileSpawnCounter = projectileSpawnDelay;
+
+                player.SetRecoilEffect();
             }
         }
 
@@ -82,8 +86,8 @@ namespace AstroOdyssey
             projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
 
             projectile.AddToGameEnvironment(
-                top: player.GetY() - projectile.Height / 2,
-                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType != PowerUpType.RAPID_SHOT_ROUNDS ? 0 : xSide * scale),
+                top: player.GetY() - projectile.Height,
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.RAPID_SHOT_ROUNDS ? xSide * scale : 0),
                 gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
@@ -110,7 +114,7 @@ namespace AstroOdyssey
             else
             {
                 App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
-                xSide = xSide * -1;
+                //xSide = xSide * -1;
             }
         }
 
@@ -214,6 +218,8 @@ namespace AstroOdyssey
                                 enemy.Fade();
                             }
 
+                            enemy.SetProjectileImpactEffect();
+
                             // bosses cause a score penalty as long as not destroyed
                             if (destructible.HasNoHealth)
                             {
@@ -244,6 +250,8 @@ namespace AstroOdyssey
 
                             // fade the a bit on projectile hit
                             meteor.Fade();
+
+                            meteor.SetProjectileImpactEffect();
 
                             if (destructible.HasNoHealth)
                             {
