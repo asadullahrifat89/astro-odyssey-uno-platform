@@ -14,10 +14,10 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         public int ProjectileSpawnCounter;
-        public int ProjectileSpawnFrequency = 60;
+        public int ProjectileSpawnDelay = 60;
 
         public int OverPoweredProjectileSpawnCounter;
-        public int OverPoweredProjectileSpawnFrequency = 5;
+        public int OverPoweredProjectileSpawnDelay = 5;
 
         #endregion
 

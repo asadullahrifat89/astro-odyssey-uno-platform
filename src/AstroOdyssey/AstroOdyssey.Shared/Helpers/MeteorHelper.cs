@@ -13,13 +13,13 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int rotatedMeteorSpawnCounter = 10;
-        private int rotatedMeteorSpawnFrequency = 10;
+        private int rotatedMeteorSpawnDelay = 10;
 
         private int overPoweredMeteorSpawnCounter = 15;
-        private int overPoweredMeteorSpawnFrequency = 15;
+        private int overPoweredMeteorSpawnDelay = 15;
 
         private int meteorSpawnCounter;
-        private int meteorSpawnFrequency = 55;
+        private int meteorSpawnDelay = 55;
         private double meteorSpeed = 1.5;
 
         #endregion
@@ -50,7 +50,7 @@ namespace AstroOdyssey
                 if (meteorSpawnCounter < 0)
                 {
                     GenerateMeteor(gameLevel);
-                    meteorSpawnCounter = meteorSpawnFrequency;
+                    meteorSpawnCounter = meteorSpawnDelay;
                 }
             }
         }
@@ -96,9 +96,9 @@ namespace AstroOdyssey
         /// <param name="meteor"></param>
         private void SetOverPoweredMeteor(Meteor meteor)
         {
-            overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnFrequency;
+            overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnDelay;
             meteor.OverPower();
-            overPoweredMeteorSpawnFrequency = random.Next(10, 20);
+            overPoweredMeteorSpawnDelay = random.Next(10, 20);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace AstroOdyssey
         private void SetSideWaysMovingMeteor(Meteor meteor, ref double left, ref double top)
         {
             meteor.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-            rotatedMeteorSpawnCounter = rotatedMeteorSpawnFrequency;
+            rotatedMeteorSpawnCounter = rotatedMeteorSpawnDelay;
 
             switch (meteor.XDirection)
             {
@@ -135,7 +135,7 @@ namespace AstroOdyssey
             meteor.Rotate();
 
             // randomize next x flying meteor pop up
-            rotatedMeteorSpawnFrequency = random.Next(5, 15);
+            rotatedMeteorSpawnDelay = random.Next(5, 15);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            //meteorSpawnFrequency -= 1;
+            meteorSpawnDelay -= 4;
             meteorSpeed += 1;
         }
 

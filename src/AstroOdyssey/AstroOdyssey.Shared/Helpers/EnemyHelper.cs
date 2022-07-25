@@ -14,25 +14,25 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int xFlyingEnemySpawnCounter = 10;
-        private int xFlyingEnemySpawnFrequency = 10;
+        private int xFlyingEnemySpawnDelay = 10;
 
         private int overPoweredEnemySpawnCounter = 15;
-        private int overPoweredEnemySpawnFrequency = 15;
+        private int overPoweredEnemySpawnDelay = 15;
 
         private int evadingEnemySpawnCounter = 3;
-        private int evadingEnemySpawnFrequency = 3;
+        private int evadingEnemySpawnDelay = 3;
 
         private int firingEnemySpawnCounter = 7;
-        private int firingEnemySpawnFrequency = 7;
+        private int firingEnemySpawnDelay = 7;
 
-        private int targetingEnemySpawnFrequency = 10;
+        private int targetingEnemySpawnDelay = 10;
         private int targetingEnemySpawnCounter = 10;
 
-        private int hoveringEnemySpawnFrequency = 12;
+        private int hoveringEnemySpawnDelay = 12;
         private int hoveringEnemySpawnCounter = 12;
 
         private int enemySpawnCounter;
-        private int enemySpawnFrequency = 48;
+        private int enemySpawnDelay = 48;
         private double enemySpeed = 2;
 
         #endregion
@@ -113,7 +113,7 @@ namespace AstroOdyssey
             if (enemySpawnCounter < 0)
             {
                 GenerateEnemy(gameLevel);
-                enemySpawnCounter = enemySpawnFrequency;
+                enemySpawnCounter = enemySpawnDelay;
             }
         }
 
@@ -196,9 +196,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetHoveringEnemy(Enemy enemy)
         {
-            hoveringEnemySpawnCounter = hoveringEnemySpawnFrequency;
+            hoveringEnemySpawnCounter = hoveringEnemySpawnDelay;
             enemy.IsHovering = true;
-            hoveringEnemySpawnFrequency = random.Next(9, 13);
+            hoveringEnemySpawnDelay = random.Next(9, 13);
 
             // hovering enemies do not evade or target player
             enemy.IsEvading = false;
@@ -211,9 +211,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetEvadingEnemy(Enemy enemy)
         {
-            evadingEnemySpawnCounter = evadingEnemySpawnFrequency;
+            evadingEnemySpawnCounter = evadingEnemySpawnDelay;
             enemy.IsEvading = true;
-            evadingEnemySpawnFrequency = random.Next(1, 4);
+            evadingEnemySpawnDelay = random.Next(1, 4);
         }
 
         /// <summary>
@@ -222,9 +222,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetPlayerTargetingEnemy(Enemy enemy)
         {
-            targetingEnemySpawnCounter = targetingEnemySpawnFrequency;
+            targetingEnemySpawnCounter = targetingEnemySpawnDelay;
             enemy.IsPlayerTargeting = true;
-            targetingEnemySpawnFrequency = random.Next(7, 12);
+            targetingEnemySpawnDelay = random.Next(7, 12);
 
             // player targeting enemies do not evade on hit
             enemy.IsEvading = false;
@@ -236,9 +236,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetProjectileFiringEnemy(Enemy enemy)
         {
-            firingEnemySpawnCounter = firingEnemySpawnFrequency;
+            firingEnemySpawnCounter = firingEnemySpawnDelay;
             enemy.IsProjectileFiring = true;
-            firingEnemySpawnFrequency = random.Next(1, 8);
+            firingEnemySpawnDelay = random.Next(1, 8);
         }
 
         /// <summary>
@@ -247,9 +247,9 @@ namespace AstroOdyssey
         /// <param name="enemy"></param>
         private void SetOverPoweredEnemy(Enemy enemy)
         {
-            overPoweredEnemySpawnCounter = overPoweredEnemySpawnFrequency;
+            overPoweredEnemySpawnCounter = overPoweredEnemySpawnDelay;
             enemy.OverPower();
-            overPoweredEnemySpawnFrequency = random.Next(10, 20);
+            overPoweredEnemySpawnDelay = random.Next(10, 20);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace AstroOdyssey
         private void SetSideWaysMovingEnemy(Enemy enemy, ref double left, ref double top)
         {
             enemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-            xFlyingEnemySpawnCounter = xFlyingEnemySpawnFrequency;
+            xFlyingEnemySpawnCounter = xFlyingEnemySpawnDelay;
 
             enemy.YDirection = (YDirection)random.Next(0, Enum.GetNames<YDirection>().Length);
 
@@ -294,7 +294,7 @@ namespace AstroOdyssey
             enemy.IsHovering = false;
 
             // randomize next x flying enemy pop up
-            xFlyingEnemySpawnFrequency = random.Next(5, 15);
+            xFlyingEnemySpawnDelay = random.Next(5, 15);
         }
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            //enemySpawnFrequency -= 1;
+            enemySpawnDelay -= 5;
             enemySpeed += 1;
         }
 
