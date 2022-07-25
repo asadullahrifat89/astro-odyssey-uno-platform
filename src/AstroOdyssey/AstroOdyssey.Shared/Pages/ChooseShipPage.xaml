@@ -69,7 +69,7 @@
                 BorderBrush="DarkRed"
                 BorderThickness="3"
                 Click="ChooseButton_Click"
-                Content="Select"
+                Content="Go"
                 CornerRadius="50"
                 FontWeight="SemiBold"
                 Foreground="White" />

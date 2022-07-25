@@ -28,7 +28,7 @@
                 Margin="10,10,10,50"
                 FontSize="25"
                 FontWeight="Bold"
-                Text="Login"
+                Text="Login to begin"
                 TextAlignment="Center" />
 
             <TextBox
@@ -36,7 +36,7 @@
                 Margin="5"
                 CornerRadius="50"
                 FontWeight="SemiBold"
-                Header="Set your username"
+                Header="Set a username"
                 TextChanged="UserNameBox_TextChanged" />
 
             <!--<PasswordBox
@@ -78,6 +78,16 @@
                 Content="No account yet?"
                 CornerRadius="50"
                 FontWeight="SemiBold" />
+
+            <TextBlock
+                Margin="10,20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                FontWeight="SemiBold"
+                Text="This is a beta test. Account creation will be available soon."
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
 
         </StackPanel>
 
