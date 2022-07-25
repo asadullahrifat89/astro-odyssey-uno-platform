@@ -1,7 +1,5 @@
 name: master
-on:
-  pull_request:
-    branches: [ master ]
+on: 
   push:
     branches: [ master ]   
   #workflow_dispatch:  # Allows workflow to be ran via a button
