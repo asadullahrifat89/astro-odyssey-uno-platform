@@ -17,13 +17,13 @@ namespace AstroOdyssey
         private int projectileSpawnDelay = 14;
         private double projectileSpeed = 18;
 
-        private readonly int RAPID_SHOT_ROUNDS_LIMIT_DECREASE = 2;
+        private readonly int RAPID_SHOT_ROUNDS_DELAY_DECREASE = 2;
         private readonly int RAPID_SHOT_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int DEAD_SHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DEAD_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DEAD_SHOT_ROUNDS_SPEED_DECREASE = 5;
 
-        private readonly int DOOM_SHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
         private int xSide = 10;
@@ -168,8 +168,8 @@ namespace AstroOdyssey
                                 // upon hit with a destructible object remove the projectile
                                 gameEnvironment.AddDestroyableGameObject(projectile);
 
-                                // loose 3 times hit point
-                                destructible.LooseHealth(destructible.HitPoint * 3);
+                                // loose 5 times hit point
+                                destructible.LooseHealth(destructible.HitPoint * 5);
                             }
                             break;
                         case PowerUpType.DOOM_SHOT_ROUNDS:
@@ -282,19 +282,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPID_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay -= RAPID_SHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
+                        projectileSpawnDelay -= RAPID_SHOT_ROUNDS_DELAY_DECREASE; // fast firing rate
                         projectileSpeed += RAPID_SHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.DEAD_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay += DEAD_SHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnDelay += DEAD_SHOT_ROUNDS_DELAY_INCREASE; // slow firing rate
                         projectileSpeed -= DEAD_SHOT_ROUNDS_SPEED_DECREASE; // slow projectile
                     }
                     break;
                 case PowerUpType.DOOM_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay += DOOM_SHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnDelay += DOOM_SHOT_ROUNDS_DELAY_INCREASE; // slow firing rate
                         projectileSpeed += DOOM_SHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
@@ -314,19 +314,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPID_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay += RAPID_SHOT_ROUNDS_LIMIT_DECREASE;
+                        projectileSpawnDelay += RAPID_SHOT_ROUNDS_DELAY_DECREASE;
                         projectileSpeed -= RAPID_SHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.DEAD_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay -= DEAD_SHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnDelay -= DEAD_SHOT_ROUNDS_DELAY_INCREASE;
                         projectileSpeed += DEAD_SHOT_ROUNDS_SPEED_DECREASE;
                     }
                     break;
                 case PowerUpType.DOOM_SHOT_ROUNDS:
                     {
-                        projectileSpawnDelay -= DOOM_SHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnDelay -= DOOM_SHOT_ROUNDS_DELAY_INCREASE;
                         projectileSpeed -= DOOM_SHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;

@@ -221,6 +221,12 @@ namespace AstroOdyssey
             Opacity -= 0.1d;
         }
 
+        public void Explode()
+        {
+            compositeTransform.ScaleX += 0.3d;
+            compositeTransform.ScaleY += 0.3d;
+        }
+
         public void OverPower()
         {
             Height = Height * 1.5;
