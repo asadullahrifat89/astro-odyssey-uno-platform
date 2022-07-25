@@ -13,10 +13,10 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int playerDamagedOpacitySpawnCounter;
-        private readonly int playerDamagedOpacityFrequency = 120;
+        private readonly int playerDamagedOpacityDelay = 120;
 
         private int powerUpTriggerSpawnCounter;
-        private readonly int powerUpTriggerFrequency = 1000;
+        private readonly int powerUpTriggerDelay = 1000;
 
         private double playerSpeed = 12;
 
@@ -209,7 +209,7 @@ namespace AstroOdyssey
 
             player.IsInEtherealState = true;
 
-            playerDamagedOpacitySpawnCounter = playerDamagedOpacityFrequency;
+            playerDamagedOpacitySpawnCounter = playerDamagedOpacityDelay;
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            powerUpTriggerSpawnCounter = powerUpTriggerFrequency;
+            powerUpTriggerSpawnCounter = powerUpTriggerDelay;
 
             App.PlaySound(baseUrl, SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);

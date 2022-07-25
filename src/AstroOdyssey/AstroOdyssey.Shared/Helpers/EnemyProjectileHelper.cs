@@ -40,8 +40,8 @@ namespace AstroOdyssey
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnFrequency;
-                enemy.ProjectileSpawnFrequency = random.Next(30, 60);
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
+                enemy.ProjectileSpawnDelay = random.Next(25, 60);
             }
         }
 
@@ -69,8 +69,8 @@ namespace AstroOdyssey
                 {
                     projectile.OverPower();                    
 
-                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnFrequency;
-                    enemy.OverPoweredProjectileSpawnFrequency = random.Next(4, 7);
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                    enemy.OverPoweredProjectileSpawnDelay = random.Next(4, 7);
                 }
             }
 

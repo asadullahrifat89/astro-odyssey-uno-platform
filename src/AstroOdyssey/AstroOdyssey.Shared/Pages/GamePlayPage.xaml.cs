@@ -30,10 +30,10 @@ namespace AstroOdyssey
         private long frameEndTime;
         private int frameStatUpdateSpawnCounter;
 
-        private int frameStatUpdateFrequency = 5;
+        private int frameStatUpdateDelay = 5;
 
         private int showInGameTextSpawnCounter = 110;
-        private int showInGameTextFrequency = 110;
+        private int showInGameTextDelay = 110;
 
         private double frameTime = 19;
         private double frameDuration;
@@ -746,7 +746,7 @@ namespace AstroOdyssey
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
+                frameStatUpdateSpawnCounter = frameStatUpdateDelay;
             }
         }
 
@@ -770,7 +770,7 @@ namespace AstroOdyssey
                 if (showInGameTextSpawnCounter <= 0)
                 {
                     InGameText.Text = null;
-                    showInGameTextSpawnCounter = showInGameTextFrequency;
+                    showInGameTextSpawnCounter = showInGameTextDelay;
                 }
             }
         }
@@ -904,7 +904,7 @@ namespace AstroOdyssey
             {
                 LevelUpObjects();
 
-                //TODO: Bosses apprear after level 2
+                // bosses apprear after level 2
                 if (GameLevel > GameLevel.Level_2)
                 {
                     ShowInGameText("BOSS INCOMING");
@@ -914,7 +914,7 @@ namespace AstroOdyssey
                 }
                 else
                 {
-                    ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
+                    ShowInGameText("METEORS INCOMING");
                     App.PlaySound(baseUrl, SoundType.LEVEL_UP);
                 }
             }
@@ -925,7 +925,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Width = Boss.Health / 1.5;            
+            BossHealthBar.Width = Boss.Health / 1.5;
         }
 
         /// <summary>
