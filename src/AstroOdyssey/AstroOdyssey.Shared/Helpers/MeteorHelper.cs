@@ -175,7 +175,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            meteorSpawnFrequency -= 1;
+            //meteorSpawnFrequency -= 1;
             meteorSpeed += 1;
         }
 
