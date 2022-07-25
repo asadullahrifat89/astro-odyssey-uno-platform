@@ -124,7 +124,6 @@ namespace AstroOdyssey
             }
 
             Background = new SolidColorBrush(Colors.Red);
-
             BorderBrush = new SolidColorBrush(Colors.DarkRed);
 
             if (PowerUpType == PowerUpType.DEAD_SHOT_ROUNDS)
