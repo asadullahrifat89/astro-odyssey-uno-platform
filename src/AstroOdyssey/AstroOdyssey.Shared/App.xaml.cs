@@ -20,7 +20,7 @@ namespace AstroOdyssey
 
         public static double Score { get; set; }
 
-        public static GameObject Ship { get; set; }
+        public static Ship Ship { get; set; }
 
         #endregion
 

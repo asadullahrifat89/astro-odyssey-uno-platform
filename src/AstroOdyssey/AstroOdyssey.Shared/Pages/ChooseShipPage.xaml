@@ -18,7 +18,7 @@
 
             <!--  Game title  -->
             <TextBlock
-                Margin="10,10,10,50"
+                Margin="10,10,10,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="45"
@@ -31,7 +31,7 @@
                 VerticalAlignment="Center"
                 FontSize="25"
                 FontWeight="SemiBold"
-                Text="Select your ship."
+                Text="Select your spacecraft"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
@@ -41,7 +41,23 @@
                 Margin="0,50,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                SelectionChanged="ShipsList_SelectionChanged" />
+                SelectionChanged="ShipsList_SelectionChanged">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Image
+                                Width="100"
+                                Height="100"
+                                Source="{Binding Path=ImageUrl, Mode=OneWay}" />
+                            <TextBlock
+                                Margin="0,0,0,2"
+                                FontWeight="SemiBold"
+                                Text="{Binding Path=Name, Mode=OneWay}"
+                                TextAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
 
             <!--  Choose button  -->
             <Button

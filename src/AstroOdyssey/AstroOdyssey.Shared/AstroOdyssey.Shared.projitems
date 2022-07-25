@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Ship.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml.cs">
       <DependentUpon>ChooseShipPage.xaml</DependentUpon>
     </Compile>

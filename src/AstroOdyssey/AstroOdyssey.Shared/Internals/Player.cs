@@ -66,7 +66,7 @@ namespace AstroOdyssey
             HitPoint = 10; //TODO: HitPoint is always 10
 
             // combine power gauge, ship, and blaze
-            content = new Grid();            
+            content = new Grid();
             //content.Children.Add(contentShipBlaze);
             content.Children.Add(contentShip);
             content.Children.Add(contentShipPowerGauge);
@@ -91,68 +91,11 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, GameObject ship, double scale = 1)
+        public void SetAttributes(double speed, Ship ship, double scale = 1)
         {
             Speed = speed;
 
-            Uri shipUri = null;
-            //var playerShipType = random.Next(1, 13);
-
-            //ExhaustHeight = 50;
-
-            switch ((int)ship.Tag)
-            {
-                case 1:
-                    shipUri = new Uri("ms-appx:///Assets/Images/satellite_B.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-                case 2:
-                    shipUri = new Uri("ms-appx:///Assets/Images/satellite_C.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-                case 3:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_C.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 55;
-                    break;
-                case 4:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_D.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 50;
-                    break;
-                case 5:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_E.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 50;
-                    break;
-                case 6:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_F.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 50;
-                    break;
-                case 7:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_G.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 50;
-                    break;
-                case 8:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_H.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 50;
-                    break;
-                case 9:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_I.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-                case 10:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_J.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-                case 11:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_K.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-                case 12:
-                    shipUri = new Uri("ms-appx:/Assets/Images/ship_L.png", UriKind.RelativeOrAbsolute);
-                    //ExhaustHeight = 35;
-                    break;
-            }
-
-            contentShip.Source = new BitmapImage(shipUri);
+            contentShip.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
 
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
@@ -274,18 +217,6 @@ namespace AstroOdyssey
         {
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
         }
-
-        //public new void LooseHealth()
-        //{
-        //    Health -= HitPoint;
-        //    contentShipHealthBar.Width = Health / 1.70;
-        //}
-
-        //public new void GainHealth()
-        //{
-        //    Health += HitPoint;
-        //    contentShipHealthBar.Width = Health / 1.70;
-        //}
 
         #endregion
     }
