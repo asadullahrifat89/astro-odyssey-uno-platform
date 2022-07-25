@@ -67,7 +67,7 @@ namespace AstroOdyssey
 
         private void EnableLoginButton()
         {
-            LoginButton.IsEnabled = UserNameBox.Text.IsNullOrBlank() /*|| PasswordBox.Text.IsNullOrBlank()*/ ? false : true;
+            LoginButton.IsEnabled = !UserNameBox.Text.IsNullOrBlank() /* && !PasswordBox.Text.IsNullOrBlank()*/;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
