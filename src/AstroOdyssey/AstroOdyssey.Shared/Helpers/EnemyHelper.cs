@@ -316,6 +316,8 @@ namespace AstroOdyssey
         {
             destroyed = false;
 
+            enemy.CoolDownProjectileImpactEffect();
+
             if (enemy.IsBoss)
             {
                 // move boss down upto a certain point

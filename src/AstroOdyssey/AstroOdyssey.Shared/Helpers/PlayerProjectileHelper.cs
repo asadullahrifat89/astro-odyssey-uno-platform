@@ -55,10 +55,7 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
 
-            if (player.BorderThickness.Top != 0)
-            {
-                player.BorderThickness = new Microsoft.UI.Xaml.Thickness(0, player.BorderThickness.Top - 1, 0, 0);
-            }
+            player.CoolDownRecoilEffect();
 
             if (projectileSpawnCounter <= 0)
             {
@@ -71,7 +68,7 @@ namespace AstroOdyssey
 
                 projectileSpawnCounter = projectileSpawnDelay;
 
-                player.BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 5, 0, 0);
+                player.SetRecoilEffect();
             }
         }
 
@@ -221,6 +218,8 @@ namespace AstroOdyssey
                                 enemy.Fade();
                             }
 
+                            enemy.SetProjectileImpactEffect();
+
                             // bosses cause a score penalty as long as not destroyed
                             if (destructible.HasNoHealth)
                             {
@@ -251,6 +250,8 @@ namespace AstroOdyssey
 
                             // fade the a bit on projectile hit
                             meteor.Fade();
+
+                            meteor.SetProjectileImpactEffect();
 
                             if (destructible.HasNoHealth)
                             {

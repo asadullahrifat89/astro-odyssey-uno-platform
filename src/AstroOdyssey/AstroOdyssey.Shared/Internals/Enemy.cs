@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -32,6 +33,10 @@ namespace AstroOdyssey
             IsDestructible = true;
             Child = content;
             YDirection = YDirection.DOWN;
+
+            Background = new SolidColorBrush(Colors.Transparent);
+            BorderBrush = new SolidColorBrush(Colors.Transparent);
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
         }
 
         #endregion
@@ -107,6 +112,46 @@ namespace AstroOdyssey
             }
         }
 
+        //public void SetRecoilEffect()
+        //{
+        //    BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: 0, bottom: 4);
+        //}
+
+        //public void CoolDownRecoilEffect()
+        //{
+        //    if (BorderThickness.Bottom != 0)
+        //    {
+        //        BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: 0, bottom: BorderThickness.Bottom - 1);
+        //    }
+        //}
+
+        public void SetProjectileImpactEffect()
+        {
+            var effect = random.Next(0, 2);
+
+            switch (effect)
+            {
+                case 0: BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: 5, bottom: 0); break;
+                case 1: BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 5, top: 0, right: 0, bottom: 0); break;
+                default:
+                    break;
+            }
+        }
+
+        public void CoolDownProjectileImpactEffect()
+        {
+            if (BorderThickness.Left != 0)
+            {
+                BorderThickness = new Microsoft.UI.Xaml.Thickness(left: BorderThickness.Left - 1, top: 0, right: 0, bottom: 0);
+            }
+
+            if (BorderThickness.Right != 0)
+            {
+                BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: BorderThickness.Right - 1, bottom: 0);
+            }
+        }
+
         #endregion
     }
 }
+

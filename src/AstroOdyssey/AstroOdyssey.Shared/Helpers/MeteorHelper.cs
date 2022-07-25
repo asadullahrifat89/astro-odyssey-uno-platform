@@ -128,9 +128,9 @@ namespace AstroOdyssey
 
             // side ways meteors fly at a higher speed
             meteor.Speed++;
-//#if DEBUG
-//            Console.WriteLine("Meteor XDirection: " + meteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-//#endif
+            //#if DEBUG
+            //            Console.WriteLine("Meteor XDirection: " + meteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+            //#endif
             top = random.Next(0, (int)gameEnvironment.Height / 3);
             meteor.Rotate();
 
@@ -155,7 +155,9 @@ namespace AstroOdyssey
         /// <param name="destroyed"></param>
         public void UpdateMeteor(Meteor meteor, out bool destroyed)
         {
-            destroyed = false;          
+            destroyed = false;
+
+            meteor.CoolDownProjectileImpactEffect();
 
             // move meteor down
             meteor.Rotate();

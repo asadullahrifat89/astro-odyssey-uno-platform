@@ -22,7 +22,6 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        const float FRAME_CAP_MS = 1000.0f / 50.0f;
         private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
@@ -467,7 +466,7 @@ namespace AstroOdyssey
 
             HandleInGameText();
 
-            HandleDamageRecovery();
+            DamageRecoveryCoolDown();
         }
 
         /// <summary>
@@ -531,7 +530,7 @@ namespace AstroOdyssey
 
                         if (IsPoweredUp)
                         {
-                            if (_playerHelper.PowerDown(Player))
+                            if (_playerHelper.PowerUpCoolDown(Player))
                             {
                                 _playerProjectileHelper.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
@@ -815,8 +814,7 @@ namespace AstroOdyssey
         /// </summary>
         private void GetFrameDuration()
         {
-            frameDuration = frameEndTime - frameStartTime;
-            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
+            frameDuration = frameEndTime - frameStartTime;            
         }
 
         /// <summary>
@@ -874,9 +872,9 @@ namespace AstroOdyssey
         /// <summary>
         /// Handles damage recovery of the player after getting hit.
         /// </summary>
-        private void HandleDamageRecovery()
+        private void DamageRecoveryCoolDown()
         {
-            _playerHelper.HandleDamageRecovery(Player);
+            _playerHelper.DamageRecoveryCoolDown(Player);
         }
 
         #endregion

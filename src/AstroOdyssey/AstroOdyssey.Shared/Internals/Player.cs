@@ -57,7 +57,7 @@ namespace AstroOdyssey
             //TODO: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
 
             Tag = PLAYER;
-            
+
             Height = PLAYER_HEIGHT;
             Width = DESTRUCTIBLE_OBJECT_SIZE;
 
@@ -163,31 +163,13 @@ namespace AstroOdyssey
             //}
         }
 
-        public void TriggerPowerDown()
+        public void PowerUpCoolDown()
         {
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed -= 1;
             powerGauge.Width = 0;
         }
-
-        ///// <summary>
-        ///// Gets the player health points.
-        ///// </summary>
-        ///// <returns></returns>
-        //public string GetHealthPoints()
-        //{
-        //    var healthPoints = Health / HitPoint;
-        //    var healthIcon = "❤️";
-        //    var health = string.Empty;
-
-        //    for (int i = 0; i < healthPoints; i++)
-        //    {
-        //        health += healthIcon;
-        //    }
-
-        //    return health;
-        //}
 
         /// <summary>
         /// Checks if there is any game object within the left side range of the player.
@@ -218,6 +200,19 @@ namespace AstroOdyssey
         public new Rect GetRect()
         {
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
+        }
+
+        public void SetRecoilEffect()
+        {
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 4, right: 0, bottom: 0);
+        }
+
+        public void CoolDownRecoilEffect() 
+        {
+            if (BorderThickness.Top != 0)
+            {
+                BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: BorderThickness.Top - 1, right: 0, bottom: 0);
+            }
         }
 
         #endregion
