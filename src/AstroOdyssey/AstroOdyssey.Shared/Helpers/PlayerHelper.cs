@@ -104,9 +104,7 @@ namespace AstroOdyssey
             if (pointerX - player.HalfWidth > playerX + playerSpeed)
             {
                 if (playerX + player.HalfWidth < gameEnvironment.Width)
-                {
                     SetPlayerX(player: player, left: playerX + playerSpeed);
-                }
             }
 
             // move left
@@ -146,6 +144,12 @@ namespace AstroOdyssey
             {
                 var playerX = player.GetX();
 
+                if (playerX + player.Width >= gameEnvironment.Width - 20 || playerX <= 20)
+                {
+                    accelerationCounter = 0;
+                    return pointerX;
+                }
+
                 switch (xDirectionLast)
                 {
                     case XDirection.NONE:
@@ -160,6 +164,7 @@ namespace AstroOdyssey
                         {
                             pointerX += accelerationCounter;
                             SetPlayerX(player: player, left: playerX + accelerationCounter);
+
                         }
                         break;
                     default:
