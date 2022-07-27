@@ -515,17 +515,25 @@ namespace AstroOdyssey
                     {
                         if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
                         {
-                            var pointer = _playerHelper.UpdatePlayer(
+                            var pointerX = _playerHelper.UpdatePlayer(
                                 player: Player,
                                 pointerX: PointerX,
-                                pointerY: PointerY,
+                                //pointerY: PointerY,
                                 moveLeft: MoveLeft,
                                 moveRight: MoveRight/*,*/
                                 //moveUp: MoveUp,
                                 /*moveDown: MoveDown*/);
 
-                            PointerX = pointer.PointerX;
-                            PointerY = pointer.PointerY;
+                            //PointerX = pointer.PointerX;
+                            //PointerY = pointer.PointerY;
+
+                            PointerX = pointerX;
+                        }
+                        else
+                        {
+                            var pointerX = _playerHelper.UpdateAcceleration(player: Player, pointerX: PointerX);
+
+                            PointerX = pointerX;
                         }
 
                         if (IsPoweredUp)
@@ -814,7 +822,7 @@ namespace AstroOdyssey
         /// </summary>
         private void GetFrameDuration()
         {
-            frameDuration = frameEndTime - frameStartTime;            
+            frameDuration = frameEndTime - frameStartTime;
         }
 
         /// <summary>

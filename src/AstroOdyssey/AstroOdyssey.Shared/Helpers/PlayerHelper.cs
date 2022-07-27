@@ -19,6 +19,10 @@ namespace AstroOdyssey
         private readonly int powerUpTriggerDelay = 1000;
 
         private double playerSpeed = 12;
+        private double accelerationCounter = 0;
+
+        private XDirection xDirectionLast = XDirection.NONE;
+
 
         #endregion
 
@@ -41,7 +45,7 @@ namespace AstroOdyssey
         {
             var player = new Player();
 
-            var scale = gameEnvironment.GetGameObjectScale();          
+            var scale = gameEnvironment.GetGameObjectScale();
 
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
@@ -56,22 +60,34 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
+        public /*(double PointerX, double PointerY)*/ double UpdatePlayer(Player player, double pointerX, /*double pointerY,*/ bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
         {
             var playerX = player.GetX();
-            //var playerY = player.GetY();
 
-            var playerSpeed = player.Speed /*/ 2*/;
+            var xDirectionNow = moveLeft ? XDirection.LEFT : XDirection.RIGHT;
+
+            // if direction was changed reset acceleration
+            if (xDirectionNow != xDirectionLast)
+                accelerationCounter = 0;
+
+            //var playerY = player.GetY();         
+
+            var playerSpeed = accelerationCounter >= player.Speed ? player.Speed : accelerationCounter / 1.3;
+
+            // increase acceleration and stop when player speed is reached
+            accelerationCounter++;
 
             // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
             {
                 pointerX -= playerSpeed;
+                xDirectionLast = XDirection.LEFT;
             }
 
             if (moveRight && playerX + player.Width < gameEnvironment.Width)
             {
                 pointerX += playerSpeed;
+                xDirectionLast = XDirection.RIGHT;
             }
 
             //if (moveUp && playerY > player.Height)
@@ -114,7 +130,46 @@ namespace AstroOdyssey
             //    }
             //}
 
-            return (pointerX, pointerY);
+            //return (pointerX, pointerY);
+
+            return pointerX;
+        }
+
+        public double UpdateAcceleration(Player player, double pointerX)
+        {
+            // reset acceleration if was beyond player speed
+            if (accelerationCounter > player.Speed)
+                accelerationCounter = player.Speed;
+
+            // slowly deaccelerate based on last x axis direction
+            if (accelerationCounter > 0)
+            {
+                var playerX = player.GetX();
+
+                switch (xDirectionLast)
+                {
+                    case XDirection.NONE:
+                        break;
+                    case XDirection.LEFT:
+                        {
+                            pointerX -= accelerationCounter;
+                            SetPlayerX(player: player, left: playerX - accelerationCounter);
+                        }
+                        break;
+                    case XDirection.RIGHT:
+                        {
+                            pointerX += accelerationCounter;
+                            SetPlayerX(player: player, left: playerX + accelerationCounter);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                accelerationCounter--;
+            }
+
+            return pointerX;
         }
 
         /// <summary>
