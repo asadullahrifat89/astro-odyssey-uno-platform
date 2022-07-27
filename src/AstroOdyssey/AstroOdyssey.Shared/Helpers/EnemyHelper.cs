@@ -388,7 +388,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            enemySpawnDelay -= 5;
+            enemySpawnDelay -= 4;
             enemySpeed += 1;
         }
 

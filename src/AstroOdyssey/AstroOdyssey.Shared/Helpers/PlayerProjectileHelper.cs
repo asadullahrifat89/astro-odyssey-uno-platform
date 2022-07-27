@@ -20,7 +20,7 @@ namespace AstroOdyssey
         private readonly int RAPID_SHOT_ROUNDS_DELAY_DECREASE = 2;
         private readonly int RAPID_SHOT_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int DEAD_SHOT_ROUNDS_DELAY_INCREASE = 25;
+        private readonly int DEAD_SHOT_ROUNDS_DELAY_INCREASE = 20;
         private readonly int DEAD_SHOT_ROUNDS_SPEED_DECREASE = 5;
 
         private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
@@ -83,7 +83,12 @@ namespace AstroOdyssey
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
+            projectile.SetAttributes(
+                speed: projectileSpeed,
+                gameLevel: gameLevel,
+                isPoweredUp: isPoweredUp,
+                powerUpType: powerUpType,
+                scale: scale);
 
             projectile.AddToGameEnvironment(
                 top: player.GetY() - projectile.Height,

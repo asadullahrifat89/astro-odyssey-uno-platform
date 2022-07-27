@@ -61,7 +61,11 @@ namespace AstroOdyssey
             var scale = gameEnvironment.GetGameObjectScale();
 
             // boss fires a little faster than usual enemies
-            projectile.SetAttributes(speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
+            projectile.SetAttributes(
+                speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50,
+                gameLevel: gameLevel,
+                scale: scale,
+                isOverPowered: enemy.IsOverPowered);
 
             if (enemy.IsBoss)
             {
