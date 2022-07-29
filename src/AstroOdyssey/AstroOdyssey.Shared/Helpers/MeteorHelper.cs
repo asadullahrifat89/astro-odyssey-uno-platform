@@ -145,7 +145,7 @@ namespace AstroOdyssey
         public void DestroyMeteor(Meteor meteor)
         {
             meteor.IsMarkedForFadedDestruction = true;
-            App.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
+            AudioHelper.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
         }
 
         /// <summary>

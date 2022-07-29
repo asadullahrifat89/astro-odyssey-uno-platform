@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
+using Uno.Foundation;
 using Windows.Foundation;
 
 namespace AstroOdyssey
 {
+
     public class GameEnvironment : Canvas
     {
         #region Fields
@@ -18,7 +20,7 @@ namespace AstroOdyssey
 
         public GameEnvironment()
         {
-            CanDrag = false;            
+            CanDrag = false;
         }
 
         #endregion
