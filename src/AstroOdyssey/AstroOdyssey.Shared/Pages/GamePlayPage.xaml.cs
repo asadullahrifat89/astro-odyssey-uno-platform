@@ -323,7 +323,7 @@ namespace AstroOdyssey
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
 
-            App.PlaySound(baseUrl, SoundType.GAME_START);
+            AudioHelper.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
 
@@ -367,7 +367,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Start();
 
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+            AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -399,7 +399,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Stop();
 
-            App.StopSound();
+            AudioHelper.StopSound();
         }
 
         /// <summary>
@@ -732,7 +732,7 @@ namespace AstroOdyssey
         /// </summary>
         private void GetBaseUrl()
         {
-            var indexUrl = this.ExecuteJavascript/*Uno.Foundation.WebAssemblyRuntime.InvokeJS*/("window.location.href;");
+            var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
             var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
             baseUrl = $"{indexUrl}{appPackage}";
 
@@ -805,7 +805,7 @@ namespace AstroOdyssey
 
                 StopGame();
 
-                App.PlaySound(baseUrl, SoundType.GAME_OVER);
+                AudioHelper.PlaySound(baseUrl, SoundType.GAME_OVER);
 
                 App.SetScore(Score);
 
@@ -962,7 +962,7 @@ namespace AstroOdyssey
                 else
                 {
                     ShowInGameText("METEORS INCOMING");
-                    App.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                    AudioHelper.PlaySound(baseUrl, SoundType.LEVEL_UP);
                 }
             }
         }

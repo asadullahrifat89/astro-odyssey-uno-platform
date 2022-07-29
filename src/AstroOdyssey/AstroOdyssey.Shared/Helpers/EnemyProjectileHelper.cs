@@ -87,7 +87,7 @@ namespace AstroOdyssey
                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                 gameEnvironment: gameEnvironment);
 
-            App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
+            AudioHelper.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         /// <summary>

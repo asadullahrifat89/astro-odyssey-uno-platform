@@ -262,7 +262,7 @@ namespace AstroOdyssey
         {
             player.LooseHealth();
 
-            App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
+            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
 
             // enter ethereal state, prevent taking damage for a few milliseconds
             player.Opacity = 0.4d;
@@ -296,7 +296,7 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Player player, Health health)
         {
             player.GainHealth(health.Health);
-            App.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
+            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace AstroOdyssey
         {
             powerUpTriggerSpawnCounter = powerUpTriggerDelay;
 
-            App.PlaySound(baseUrl, SoundType.POWER_UP);
+            AudioHelper.PlaySound(baseUrl, SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
         }
 
@@ -323,7 +323,7 @@ namespace AstroOdyssey
 
             if (powerUpTriggerSpawnCounter <= 0)
             {
-                App.PlaySound(baseUrl, SoundType.POWER_DOWN);
+                AudioHelper.PlaySound(baseUrl, SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
                 return true;
             }

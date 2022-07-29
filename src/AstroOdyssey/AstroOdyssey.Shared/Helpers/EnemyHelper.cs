@@ -84,8 +84,8 @@ namespace AstroOdyssey
 
             gameEnvironment.IsBossEngaged = true;
 
-            App.StopSound();
-            App.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
+            AudioHelper.StopSound();
+            AudioHelper.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
 
             return enemy;
         }
@@ -96,9 +96,9 @@ namespace AstroOdyssey
         public void DisengageBossEnemy()
         {
             gameEnvironment.IsBossEngaged = false;
-            App.StopSound();
-            App.PlaySound(baseUrl, SoundType.BOSS_DESTRUCTION);
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+            AudioHelper.StopSound();
+            AudioHelper.PlaySound(baseUrl, SoundType.BOSS_DESTRUCTION);
+            AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace AstroOdyssey
         public void DestroyEnemy(Enemy enemy)
         {
             enemy.IsMarkedForFadedDestruction = true;
-            App.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
+            AudioHelper.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
         }
 
         /// <summary>

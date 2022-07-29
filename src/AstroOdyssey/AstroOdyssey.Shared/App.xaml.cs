@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using System;
+using Uno.Foundation;
 using Windows.ApplicationModel;
 using Windows.UI.ViewManagement;
 using static AstroOdyssey.Constants;
@@ -62,19 +63,8 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void PlaySound(string baseUrl, SoundType soundType)
-        {
-            _mainPage.PlaySound(baseUrl, soundType);
-        }
-
-        public static void StopSound()
-        {
-            _mainPage.StopSound();
-        }
-
         public static void EnterFullScreen(bool value)
         {
-#if !DEBUG
             var view = ApplicationView.GetForCurrentView();
 
             if (view is not null)
@@ -88,7 +78,6 @@ namespace AstroOdyssey
                     view.ExitFullScreenMode();
                 }
             }
-#endif
         }
 
         public static void SetScore(double score)

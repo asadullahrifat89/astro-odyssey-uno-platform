@@ -19,12 +19,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\HealthHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MeteorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ship.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml.cs">
@@ -212,7 +214,6 @@
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Internals\Base\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
 </Project>
