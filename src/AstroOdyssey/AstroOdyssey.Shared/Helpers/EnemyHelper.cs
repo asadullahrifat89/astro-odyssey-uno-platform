@@ -31,8 +31,8 @@ namespace AstroOdyssey
         private int hoveringEnemySpawnDelay = 12;
         private int hoveringEnemySpawnCounter = 12;
 
-        private int enemySpawnCounter;
-        private int enemySpawnDelay = 48;
+        private double enemySpawnCounter;
+        private double enemySpawnDelay = 48;
         private double enemySpeed = 2;
 
         #endregion
@@ -282,9 +282,9 @@ namespace AstroOdyssey
                 default:
                     break;
             }
-//#if DEBUG
-//            Console.WriteLine("Enemy XDirection: " + enemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
-//#endif
+            //#if DEBUG
+            //            Console.WriteLine("Enemy XDirection: " + enemy.XDirection + ", " + "X: " + left + " " + "Y: " + top);
+            //#endif
             top = random.Next(0, (int)gameEnvironment.Height / 3);
             enemy.Rotate();
 
@@ -388,7 +388,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            enemySpawnDelay -= 4;
+            var delayScale = 3 + gameEnvironment.GetGameObjectScale();
+            enemySpawnDelay -= delayScale;
             enemySpeed += 1;
         }
 
