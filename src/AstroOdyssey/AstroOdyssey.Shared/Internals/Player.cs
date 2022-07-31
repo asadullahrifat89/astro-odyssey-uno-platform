@@ -202,18 +202,18 @@ namespace AstroOdyssey
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
         }
 
-        public void SetRecoilEffect()
-        {
-            BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 4, right: 0, bottom: 0);
-        }
+        //public void SetRecoilEffect()
+        //{
+        //    BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 4, right: 0, bottom: 0);
+        //}
 
-        public void CoolDownRecoilEffect() 
-        {
-            if (BorderThickness.Top != 0)
-            {
-                BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: BorderThickness.Top - 1, right: 0, bottom: 0);
-            }
-        }
+        //public void CoolDownRecoilEffect() 
+        //{
+        //    if (BorderThickness.Top != 0)
+        //    {
+        //        BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: BorderThickness.Top - 1, right: 0, bottom: 0);
+        //    }
+        //}
 
         #endregion
     }

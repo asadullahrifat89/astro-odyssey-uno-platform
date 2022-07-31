@@ -18,8 +18,8 @@ namespace AstroOdyssey
         private int overPoweredMeteorSpawnCounter = 15;
         private int overPoweredMeteorSpawnDelay = 15;
 
-        private int meteorSpawnCounter;
-        private int meteorSpawnDelay = 55;
+        private double meteorSpawnCounter;
+        private double meteorSpawnDelay = 55;
         private double meteorSpeed = 1.5;
 
         #endregion
@@ -177,7 +177,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            meteorSpawnDelay -= 4;
+            var delayScale = 3 + gameEnvironment.GetGameObjectScale();
+            meteorSpawnDelay -= delayScale;
             meteorSpeed += 1;
         }
 

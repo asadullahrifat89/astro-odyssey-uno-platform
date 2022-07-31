@@ -55,7 +55,7 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
 
-            player.CoolDownRecoilEffect();
+            //player.CoolDownRecoilEffect();
 
             if (projectileSpawnCounter <= 0)
             {
@@ -68,7 +68,7 @@ namespace AstroOdyssey
 
                 projectileSpawnCounter = projectileSpawnDelay;
 
-                player.SetRecoilEffect();
+                //player.SetRecoilEffect();
             }
         }
 
