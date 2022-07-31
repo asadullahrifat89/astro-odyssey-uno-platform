@@ -12,7 +12,7 @@
     <Grid x:Name="RootGrid">
 
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
-        <GameEnvironment x:Name="GameView" />
+        <GameEnvironment x:Name="GameView" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
 
         <StackPanel
             Margin="5"
