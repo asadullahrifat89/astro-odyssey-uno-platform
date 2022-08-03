@@ -36,12 +36,16 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             enemy.ProjectileSpawnCounter -= 1;
 
+            //enemy.CoolDownRecoilEffect();
+
             if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy, gameLevel);
 
-                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnFrequency;
-                enemy.ProjectileSpawnFrequency = random.Next(30, 60);
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
+                enemy.ProjectileSpawnDelay = random.Next(25, 60);
+
+                //enemy.SetRecoilEffect();
             }
         }
 
@@ -57,7 +61,11 @@ namespace AstroOdyssey
             var scale = gameEnvironment.GetGameObjectScale();
 
             // boss fires a little faster than usual enemies
-            projectile.SetAttributes(speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50, gameLevel: gameLevel, scale: scale, isOverPowered: enemy.IsOverPowered);
+            projectile.SetAttributes(
+                speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50,
+                gameLevel: gameLevel,
+                scale: scale,
+                isOverPowered: enemy.IsOverPowered);
 
             if (enemy.IsBoss)
             {
@@ -67,10 +75,10 @@ namespace AstroOdyssey
 
                 if (enemy.OverPoweredProjectileSpawnCounter <= 0)
                 {
-                    projectile.OverPower();                    
+                    projectile.OverPower();
 
-                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnFrequency;
-                    enemy.OverPoweredProjectileSpawnFrequency = random.Next(4, 7);
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                    enemy.OverPoweredProjectileSpawnDelay = random.Next(4, 7);
                 }
             }
 
@@ -79,7 +87,7 @@ namespace AstroOdyssey
                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                 gameEnvironment: gameEnvironment);
 
-            App.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
+            AudioHelper.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         /// <summary>

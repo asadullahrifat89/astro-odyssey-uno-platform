@@ -60,15 +60,15 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void PlaySound(string baseUrl, SoundType soundType)
-        {
-            this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
-        }
+        //public void PlaySound(string baseUrl, SoundType soundType)
+        //{
+        //    this.ExecuteJavascript($"playGameSound('{baseUrl}','{soundType}');");
+        //}
 
-        public void StopSound()
-        {
-            this.ExecuteJavascript("stopSound();");
-        }
+        //public void StopSound()
+        //{
+        //    this.ExecuteJavascript("stopSound();");
+        //}
 
         public void SetAccount()
         {

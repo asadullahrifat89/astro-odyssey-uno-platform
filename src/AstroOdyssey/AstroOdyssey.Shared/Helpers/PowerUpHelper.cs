@@ -12,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int powerUpSpawnCounter = 1500;
-        private int powerUpSpawnFrequency = 1500;
+        private int powerUpSpawnDelay = 1500;
         private double powerUpSpeed = 2;
 
         #endregion
@@ -41,8 +41,8 @@ namespace AstroOdyssey
             if (powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                powerUpSpawnCounter = powerUpSpawnFrequency;
-                powerUpSpawnFrequency = random.Next(1400, 1501);
+                powerUpSpawnCounter = powerUpSpawnDelay;
+                powerUpSpawnDelay = random.Next(1400, 1501);
             }
         }
 
@@ -57,7 +57,7 @@ namespace AstroOdyssey
             powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
 
             // change the next power up spawn time
-            powerUpSpawnFrequency = random.Next(1500, 2000);
+            powerUpSpawnDelay = random.Next(1500, 2000);
         }
 
         /// <summary>

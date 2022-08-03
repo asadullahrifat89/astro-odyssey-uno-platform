@@ -13,12 +13,16 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int playerDamagedOpacitySpawnCounter;
-        private readonly int playerDamagedOpacityFrequency = 120;
+        private readonly int playerDamagedOpacityDelay = 120;
 
         private int powerUpTriggerSpawnCounter;
-        private readonly int powerUpTriggerFrequency = 1000;
+        private readonly int powerUpTriggerDelay = 1000;
 
         private double playerSpeed = 12;
+        private double accelerationCounter = 0;
+
+        private XDirection xDirectionLast = XDirection.NONE;
+
 
         #endregion
 
@@ -41,7 +45,7 @@ namespace AstroOdyssey
         {
             var player = new Player();
 
-            var scale = gameEnvironment.GetGameObjectScale();          
+            var scale = gameEnvironment.GetGameObjectScale();
 
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
@@ -56,22 +60,34 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public (double PointerX, double PointerY) UpdatePlayer(Player player, double pointerX, double pointerY, bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
+        public /*(double PointerX, double PointerY)*/ double UpdatePlayer(Player player, double pointerX, /*double pointerY,*/ bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
         {
             var playerX = player.GetX();
-            //var playerY = player.GetY();
 
-            var playerSpeed = player.Speed /*/ 2*/;
+            var xDirectionNow = moveLeft ? XDirection.LEFT : XDirection.RIGHT;
+
+            // if direction was changed reset acceleration
+            if (xDirectionNow != xDirectionLast)
+                accelerationCounter = 0;
+
+            //var playerY = player.GetY();         
+
+            var playerSpeed = accelerationCounter >= player.Speed ? player.Speed : accelerationCounter / 1.3;
+
+            // increase acceleration and stop when player speed is reached
+            accelerationCounter++;
 
             // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
             {
                 pointerX -= playerSpeed;
+                xDirectionLast = XDirection.LEFT;
             }
 
             if (moveRight && playerX + player.Width < gameEnvironment.Width)
             {
                 pointerX += playerSpeed;
+                xDirectionLast = XDirection.RIGHT;
             }
 
             //if (moveUp && playerY > player.Height)
@@ -88,9 +104,7 @@ namespace AstroOdyssey
             if (pointerX - player.HalfWidth > playerX + playerSpeed)
             {
                 if (playerX + player.HalfWidth < gameEnvironment.Width)
-                {
                     SetPlayerX(player: player, left: playerX + playerSpeed);
-                }
             }
 
             // move left
@@ -114,7 +128,53 @@ namespace AstroOdyssey
             //    }
             //}
 
-            return (pointerX, pointerY);
+            //return (pointerX, pointerY);
+
+            return pointerX;
+        }
+
+        public double UpdateAcceleration(Player player, double pointerX)
+        {
+            // reset acceleration if was beyond player speed
+            if (accelerationCounter > player.Speed)
+                accelerationCounter = player.Speed;
+
+            // slowly deaccelerate based on last x axis direction
+            if (accelerationCounter > 0)
+            {
+                var playerX = player.GetX();
+
+                if (playerX + player.Width >= gameEnvironment.Width - 20 || playerX <= 20)
+                {
+                    accelerationCounter = 0;
+                    return pointerX;
+                }
+
+                switch (xDirectionLast)
+                {
+                    case XDirection.NONE:
+                        break;
+                    case XDirection.LEFT:
+                        {
+                            pointerX -= accelerationCounter;
+                            SetPlayerX(player: player, left: playerX - accelerationCounter);
+                        }
+                        break;
+                    case XDirection.RIGHT:
+                        {
+                            pointerX += accelerationCounter;
+                            SetPlayerX(player: player, left: playerX + accelerationCounter);
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                accelerationCounter--;
+            }
+
+            return pointerX;
         }
 
         /// <summary>
@@ -202,20 +262,20 @@ namespace AstroOdyssey
         {
             player.LooseHealth();
 
-            App.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
+            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
 
             // enter ethereal state, prevent taking damage for a few milliseconds
             player.Opacity = 0.4d;
 
             player.IsInEtherealState = true;
 
-            playerDamagedOpacitySpawnCounter = playerDamagedOpacityFrequency;
+            playerDamagedOpacitySpawnCounter = playerDamagedOpacityDelay;
         }
 
         /// <summary>
         /// Handles the opacity of the player upon taking damage.
         /// </summary>
-        public void HandleDamageRecovery(Player player)
+        public void DamageRecoveryCoolDown(Player player)
         {
             if (player.IsInEtherealState)
             {
@@ -236,7 +296,7 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Player player, Health health)
         {
             player.GainHealth(health.Health);
-            App.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
+            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
@@ -244,16 +304,16 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            powerUpTriggerSpawnCounter = powerUpTriggerFrequency;
+            powerUpTriggerSpawnCounter = powerUpTriggerDelay;
 
-            App.PlaySound(baseUrl, SoundType.POWER_UP);
+            AudioHelper.PlaySound(baseUrl, SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
         }
 
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public bool PowerDown(Player player)
+        public bool PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
@@ -263,8 +323,8 @@ namespace AstroOdyssey
 
             if (powerUpTriggerSpawnCounter <= 0)
             {
-                App.PlaySound(baseUrl, SoundType.POWER_DOWN);
-                player.TriggerPowerDown();
+                AudioHelper.PlaySound(baseUrl, SoundType.POWER_DOWN);
+                player.PowerUpCoolDown();
                 return true;
             }
 

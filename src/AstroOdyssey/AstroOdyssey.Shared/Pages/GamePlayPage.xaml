@@ -6,13 +6,13 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
-    Background="Black"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
 
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
-        <GameEnvironment x:Name="GameView" />
+        <GameEnvironment x:Name="GameView" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
 
         <StackPanel
             Margin="5"

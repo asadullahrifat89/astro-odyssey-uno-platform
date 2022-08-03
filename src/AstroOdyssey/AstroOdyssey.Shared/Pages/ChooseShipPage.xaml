@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="Black"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
     <Grid>
@@ -37,7 +37,7 @@
 
             <GridView
                 Name="ShipsList"
-                Height="220"
+                Height="250"
                 Margin="0,50,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"

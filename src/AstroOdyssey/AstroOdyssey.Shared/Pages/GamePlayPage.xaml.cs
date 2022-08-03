@@ -22,7 +22,6 @@ namespace AstroOdyssey
 
         private string baseUrl;
 
-        const float FRAME_CAP_MS = 1000.0f / 50.0f;
         private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
@@ -30,10 +29,10 @@ namespace AstroOdyssey
         private long frameEndTime;
         private int frameStatUpdateSpawnCounter;
 
-        private int frameStatUpdateFrequency = 5;
+        private int frameStatUpdateDelay = 5;
 
         private int showInGameTextSpawnCounter = 110;
-        private int showInGameTextFrequency = 110;
+        private int showInGameTextDelay = 110;
 
         private double frameTime = 19;
         private double frameDuration;
@@ -95,8 +94,6 @@ namespace AstroOdyssey
 
         public Player Player { get; set; }
 
-        public Enemy Boss { get; set; }
-
         public GameLevel GameLevel { get; set; }
 
         public PowerUpType PowerUpType { get; set; }
@@ -133,9 +130,24 @@ namespace AstroOdyssey
             }
         }
 
-        //private bool MoveUp { get; set; } = false;
+        private Enemy _boss;
+        public Enemy Boss
+        {
+            get { return _boss; }
+            set
+            {
+                _boss = value;
 
-        //private bool MoveDown { get; set; } = false;
+                if (_boss is null)
+                {
+                    BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    BossHealthBarPanel.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
         #endregion
 
@@ -311,7 +323,7 @@ namespace AstroOdyssey
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
 
-            App.PlaySound(baseUrl, SoundType.GAME_START);
+            AudioHelper.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
 
@@ -324,6 +336,8 @@ namespace AstroOdyssey
             InGameText.Text = "";
 
             IsGameRunning = true;
+
+            //TODO: show player entrace animation            
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -353,7 +367,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Start();
 
-            App.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+            AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -385,7 +399,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Stop();
 
-            App.StopSound();
+            AudioHelper.StopSound();
         }
 
         /// <summary>
@@ -452,7 +466,7 @@ namespace AstroOdyssey
 
             HandleInGameText();
 
-            HandleDamageRecovery();
+            DamageRecoveryCoolDown();
         }
 
         /// <summary>
@@ -465,9 +479,11 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(gameObjects, gameObject =>
             {
+                // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
                 {
                     gameObject.Fade();
+                    gameObject.Explode();
 
                     if (gameObject.HasFadedAway)
                     {
@@ -499,22 +515,30 @@ namespace AstroOdyssey
                     {
                         if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
                         {
-                            var pointer = _playerHelper.UpdatePlayer(
+                            var pointerX = _playerHelper.UpdatePlayer(
                                 player: Player,
                                 pointerX: PointerX,
-                                pointerY: PointerY,
+                                //pointerY: PointerY,
                                 moveLeft: MoveLeft,
                                 moveRight: MoveRight/*,*/
                                 //moveUp: MoveUp,
                                 /*moveDown: MoveDown*/);
 
-                            PointerX = pointer.PointerX;
-                            PointerY = pointer.PointerY;
+                            //PointerX = pointer.PointerX;
+                            //PointerY = pointer.PointerY;
+
+                            PointerX = pointerX;
+                        }
+                        else
+                        {
+                            var pointerX = _playerHelper.UpdateAcceleration(player: Player, pointerX: PointerX);
+
+                            PointerX = pointerX;
                         }
 
                         if (IsPoweredUp)
                         {
-                            if (_playerHelper.PowerDown(Player))
+                            if (_playerHelper.PowerUpCoolDown(Player))
                             {
                                 _playerProjectileHelper.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
@@ -559,12 +583,7 @@ namespace AstroOdyssey
 
                                         if (enemy.IsBoss)
                                         {
-                                            ShowInGameText($"BOSS CLEARED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
-                                            _enemyHelper.DisengageBossEnemy();
-
-                                            BossHealthBar.Width = 0;
-                                            Boss = null;
-                                            BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                                            DisengageBoss();
                                         }
                                     }
                                     break;
@@ -746,7 +765,7 @@ namespace AstroOdyssey
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateSpawnCounter = frameStatUpdateFrequency;
+                frameStatUpdateSpawnCounter = frameStatUpdateDelay;
             }
         }
 
@@ -770,7 +789,7 @@ namespace AstroOdyssey
                 if (showInGameTextSpawnCounter <= 0)
                 {
                     InGameText.Text = null;
-                    showInGameTextSpawnCounter = showInGameTextFrequency;
+                    showInGameTextSpawnCounter = showInGameTextDelay;
                 }
             }
         }
@@ -786,7 +805,7 @@ namespace AstroOdyssey
 
                 StopGame();
 
-                App.PlaySound(baseUrl, SoundType.GAME_OVER);
+                AudioHelper.PlaySound(baseUrl, SoundType.GAME_OVER);
 
                 App.SetScore(Score);
 
@@ -804,7 +823,6 @@ namespace AstroOdyssey
         private void GetFrameDuration()
         {
             frameDuration = frameEndTime - frameStartTime;
-            //FrameTime = Math.Max((int)(FRAME_CAP_MS - FrameDuration), 10);
         }
 
         /// <summary>
@@ -846,7 +864,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = windowHeight - Player.Height - 20;
+            PointerY = windowHeight - Player.Height - 25;
 
             Player.SetY(PointerY);
         }
@@ -862,9 +880,41 @@ namespace AstroOdyssey
         /// <summary>
         /// Handles damage recovery of the player after getting hit.
         /// </summary>
-        private void HandleDamageRecovery()
+        private void DamageRecoveryCoolDown()
         {
-            _playerHelper.HandleDamageRecovery(Player);
+            _playerHelper.DamageRecoveryCoolDown(Player);
+        }
+
+        #endregion
+
+        #region Boss Methods
+
+        /// <summary>
+        /// Engages a boss.
+        /// </summary>
+        private void EngageBoss()
+        {
+            ShowInGameText("BOSS INCOMING");
+            Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+            SetBossHealthBar(); // set boss health on boss appearance            
+        }
+
+        /// <summary>
+        /// Disengages a boss.
+        /// </summary>
+        private void DisengageBoss()
+        {
+            ShowInGameText($"BOSS DEFEATED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
+            _enemyHelper.DisengageBossEnemy();
+            Boss = null;
+        }
+
+        /// <summary>
+        /// Sets the boss health bar.
+        /// </summary>
+        private void SetBossHealthBar()
+        {
+            BossHealthBar.Width = Boss.Health / 1.5;
         }
 
         #endregion
@@ -904,28 +954,17 @@ namespace AstroOdyssey
             {
                 LevelUpObjects();
 
-                //TODO: Bosses apprear after level 2
+                // bosses apprear after level 2
                 if (GameLevel > GameLevel.Level_2)
                 {
-                    ShowInGameText("BOSS INCOMING");
-                    Boss = _enemyHelper.EngageBossEnemy(GameLevel);
-                    SetBossHealthBar(); // set boss health on boss appearance
-                    BossHealthBarPanel.Visibility = Visibility.Visible; // set boss health on boss appearance
+                    EngageBoss();
                 }
                 else
                 {
-                    ShowInGameText(GameLevel.ToString().ToUpper().Replace("_", " "));
-                    App.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                    ShowInGameText("METEORS INCOMING");
+                    AudioHelper.PlaySound(baseUrl, SoundType.LEVEL_UP);
                 }
             }
-        }
-
-        /// <summary>
-        /// Sets the boss health bar.
-        /// </summary>
-        private void SetBossHealthBar()
-        {
-            BossHealthBar.Width = Boss.Health / 1.5;            
         }
 
         /// <summary>

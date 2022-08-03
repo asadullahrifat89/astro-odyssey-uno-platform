@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -13,19 +14,19 @@ namespace AstroOdyssey
         private readonly Random random = new Random();
 
         private int projectileSpawnCounter;
-        private int projectileSpawnFrequency = 14;
+        private int projectileSpawnDelay = 14;
         private double projectileSpeed = 18;
 
-        private readonly int RAPID_SHOT_ROUNDS_LIMIT_DECREASE = 2;
+        private readonly int RAPID_SHOT_ROUNDS_DELAY_DECREASE = 2;
         private readonly int RAPID_SHOT_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int DEAD_SHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DEAD_SHOT_ROUNDS_DELAY_INCREASE = 20;
         private readonly int DEAD_SHOT_ROUNDS_SPEED_DECREASE = 5;
 
-        private readonly int DOOM_SHOT_ROUNDS_LIMIT_INCREASE = 25;
+        private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
-        private int xSide = 10;
+        private int xSide = 15;
 
         #endregion
 
@@ -54,16 +55,20 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
 
+            //player.CoolDownRecoilEffect();
+
             if (projectileSpawnCounter <= 0)
             {
-                if (firingProjectiles)
+                //if (firingProjectiles)
                 //// any object falls within player range
-                //if (GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => Player.AnyObjectsOnTheRightProximity(gameObject: x) || Player.AnyObjectsOnTheLeftProximity(gameObject: x)))
-                {
-                    GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
-                }
+                //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
+                //{
+                GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
+                //}
 
-                projectileSpawnCounter = projectileSpawnFrequency;
+                projectileSpawnCounter = projectileSpawnDelay;
+
+                //player.SetRecoilEffect();
             }
         }
 
@@ -78,11 +83,16 @@ namespace AstroOdyssey
 
             var scale = gameEnvironment.GetGameObjectScale();
 
-            projectile.SetAttributes(speed: projectileSpeed, gameLevel: gameLevel, isPoweredUp: isPoweredUp, powerUpType: powerUpType, scale: scale);
+            projectile.SetAttributes(
+                speed: projectileSpeed,
+                gameLevel: gameLevel,
+                isPoweredUp: isPoweredUp,
+                powerUpType: powerUpType,
+                scale: scale);
 
             projectile.AddToGameEnvironment(
-                top: player.GetY() - projectile.Height / 2,
-                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType != PowerUpType.RAPID_SHOT_ROUNDS ? 0 : xSide * scale),
+                top: player.GetY() - projectile.Height,
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.RAPID_SHOT_ROUNDS ? xSide * scale : 0),
                 gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
@@ -90,17 +100,17 @@ namespace AstroOdyssey
                 switch (powerUpType)
                 {
                     case PowerUpType.NONE:
-                        App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
                         break;
                     case PowerUpType.RAPID_SHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE);
                         xSide = xSide * -1;
                         break;
                     case PowerUpType.DEAD_SHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE);
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
-                        App.PlaySound(baseUrl, SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -108,8 +118,8 @@ namespace AstroOdyssey
             }
             else
             {
-                App.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
-                xSide = xSide * -1;
+                AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
+                //xSide = xSide * -1;
             }
         }
 
@@ -167,8 +177,8 @@ namespace AstroOdyssey
                                 // upon hit with a destructible object remove the projectile
                                 gameEnvironment.AddDestroyableGameObject(projectile);
 
-                                // loose 3 times hit point
-                                destructible.LooseHealth(destructible.HitPoint * 3);
+                                // loose 5 times hit point
+                                destructible.LooseHealth(destructible.HitPoint * 5);
                             }
                             break;
                         case PowerUpType.DOOM_SHOT_ROUNDS:
@@ -194,7 +204,7 @@ namespace AstroOdyssey
                     destructible.LooseHealth();
                 }
 
-                App.PlaySound(baseUrl, SoundType.ROUNDS_HIT);
+                AudioHelper.PlaySound(baseUrl, SoundType.ROUNDS_HIT);
 
                 switch (destructible.Tag)
                 {
@@ -212,6 +222,8 @@ namespace AstroOdyssey
                                 // fade the a bit on projectile hit
                                 enemy.Fade();
                             }
+
+                            enemy.SetProjectileImpactEffect();
 
                             // bosses cause a score penalty as long as not destroyed
                             if (destructible.HasNoHealth)
@@ -243,6 +255,8 @@ namespace AstroOdyssey
 
                             // fade the a bit on projectile hit
                             meteor.Fade();
+
+                            meteor.SetProjectileImpactEffect();
 
                             if (destructible.HasNoHealth)
                             {
@@ -281,19 +295,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPID_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency -= RAPID_SHOT_ROUNDS_LIMIT_DECREASE; // fast firing rate
+                        projectileSpawnDelay -= RAPID_SHOT_ROUNDS_DELAY_DECREASE; // fast firing rate
                         projectileSpeed += RAPID_SHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.DEAD_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency += DEAD_SHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnDelay += DEAD_SHOT_ROUNDS_DELAY_INCREASE; // slow firing rate
                         projectileSpeed -= DEAD_SHOT_ROUNDS_SPEED_DECREASE; // slow projectile
                     }
                     break;
                 case PowerUpType.DOOM_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency += DOOM_SHOT_ROUNDS_LIMIT_INCREASE; // slow firing rate
+                        projectileSpawnDelay += DOOM_SHOT_ROUNDS_DELAY_INCREASE; // slow firing rate
                         projectileSpeed += DOOM_SHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
@@ -313,19 +327,19 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.RAPID_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency += RAPID_SHOT_ROUNDS_LIMIT_DECREASE;
+                        projectileSpawnDelay += RAPID_SHOT_ROUNDS_DELAY_DECREASE;
                         projectileSpeed -= RAPID_SHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.DEAD_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency -= DEAD_SHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnDelay -= DEAD_SHOT_ROUNDS_DELAY_INCREASE;
                         projectileSpeed += DEAD_SHOT_ROUNDS_SPEED_DECREASE;
                     }
                     break;
                 case PowerUpType.DOOM_SHOT_ROUNDS:
                     {
-                        projectileSpawnFrequency -= DOOM_SHOT_ROUNDS_LIMIT_INCREASE;
+                        projectileSpawnDelay -= DOOM_SHOT_ROUNDS_DELAY_INCREASE;
                         projectileSpeed -= DOOM_SHOT_ROUNDS_SPEED_INCREASE;
                     }
                     break;
@@ -339,7 +353,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            projectileSpawnFrequency -= 1;
+            projectileSpawnDelay -= 1;
         }
 
         #endregion
