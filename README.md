@@ -1,5 +1,5 @@
 # Astro-Odyssey-Uno-Platform
-A simple space shooter game built with uno platform and blazor wasm. The game is completely developed with C# and XAML.
+A simple space shooter game built with uno platform and wasm. The game is completely developed with C# and XAML.
 This is to demostrate that 2D games can be developed using these tech stacks.
 
 The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platform/
