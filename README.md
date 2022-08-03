@@ -16,6 +16,7 @@ The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platfo
 * Game over if player health reaches zero.
 * Game levels increase at certain scores and difficulty scales.
 * PhysX effects for projectile impact.
+* Explosion effects for enemy or meteor destruction.
 * A parallax space background filled with stars.
 * Plays at roughly 53 FPS with 19 milliseconds frame time.
 * A random background music plays during each game session.
