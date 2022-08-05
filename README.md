@@ -48,9 +48,27 @@ The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platfo
 
 ## Screenshots
 
-![1](https://user-images.githubusercontent.com/25480176/183200054-d1c1fef3-f0d5-4ac2-86e1-3c2915bfedb7.PNG)
-![2](https://user-images.githubusercontent.com/25480176/183200137-b63cd766-35b8-40be-ab65-e34f1bbd6095.PNG)
-![3](https://user-images.githubusercontent.com/25480176/183200346-7a050263-ef47-4633-94b8-5bf1ddcf7722.PNG)
-![4](https://user-images.githubusercontent.com/25480176/183200419-a0f930b7-dfe6-4d24-adc3-d44c2a9bbf3f.PNG)
-![5](https://user-images.githubusercontent.com/25480176/183200523-f938b922-38db-480e-a0a7-d07813ba141a.PNG)
-![6](https://user-images.githubusercontent.com/25480176/183200595-4b0fbcf7-a6c0-4f61-9f45-ddae55bac1e7.PNG)
+<table>
+  <tr>
+     <td>Login</td>
+     <td>Select Game Mode</td>
+     <td>Select Spacecraft</td>    
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200054-d1c1fef3-f0d5-4ac2-86e1-3c2915bfedb7.PNG" height="500"></td>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200137-b63cd766-35b8-40be-ab65-e34f1bbd6095.PNG" height="500"></td>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200346-7a050263-ef47-4633-94b8-5bf1ddcf7722.PNG" height="500"></td>   
+  </tr>
+ </table>
+<table>
+  <tr>
+     <td>Play</td>
+     <td>Fight Bosses</td>
+     <td>Score</td>        
+  </tr>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200419-a0f930b7-dfe6-4d24-adc3-d44c2a9bbf3f.PNG" height="500"></td>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200523-f938b922-38db-480e-a0a7-d07813ba141a.PNG" height="500"></td>
+    <td><img src="https://user-images.githubusercontent.com/25480176/183200595-4b0fbcf7-a6c0-4f61-9f45-ddae55bac1e7.PNG" height="500"></td>
+  </tr>
+ </table>
