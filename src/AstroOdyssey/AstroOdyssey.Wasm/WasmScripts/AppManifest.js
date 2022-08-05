@@ -1,5 +1,5 @@
 ﻿var UnoAppManifest = {
     splashScreenImage: "Assets/SplashScreen.png",
-    splashScreenColor: "transparent",
+    splashScreenColor: "#202020",
     displayName: "Astro-Odyssey"
 }

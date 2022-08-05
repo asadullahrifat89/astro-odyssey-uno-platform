@@ -18,10 +18,10 @@
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<ItemGroup>
-		<Content Include="Assets\SplashScreen.png" />
+		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
-		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
+	  <None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
@@ -61,5 +61,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\FolderProfile2.pubxml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 </Project>
