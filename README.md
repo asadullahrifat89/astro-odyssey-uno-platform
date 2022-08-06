@@ -47,10 +47,11 @@ The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platfo
 * Health pickups, if picked up restores 10 health points.
 
 ## Screenshots
+![Astro-Odyssey-1](https://user-images.githubusercontent.com/25480176/183248690-056e3a11-1ebf-4539-a4d7-f104d6b9ad5b.png)
+![Astro-Odyssey-2](https://user-images.githubusercontent.com/25480176/183248692-8456fc4d-c117-4e8a-b7c3-d9dd5d74d8fe.png)
+![Astro-Odyssey-3](https://user-images.githubusercontent.com/25480176/183248694-31c3482c-4282-4912-aa25-7613a108c54d.png)
+![Astro-Odyssey-4](https://user-images.githubusercontent.com/25480176/183248695-b2d8c386-ebf8-4878-bbd1-b0432bb29d33.png)
+![Astro-Odyssey-5](https://user-images.githubusercontent.com/25480176/183248699-3e948232-f435-4c8d-ad7c-da77837fdd36.png)
+![Astro-Odyssey-6](https://user-images.githubusercontent.com/25480176/183248700-fdf0cd9d-e83a-4702-a368-6f57fec95815.png)
+![Astro-Odyssey-7](https://user-images.githubusercontent.com/25480176/183248703-5d64079c-f1fe-4016-9fab-40eb946397bd.png)
 
-<img src="https://user-images.githubusercontent.com/25480176/183200054-d1c1fef3-f0d5-4ac2-86e1-3c2915bfedb7.PNG" height="500" style="object-fit: cover">
-<img src="https://user-images.githubusercontent.com/25480176/183200137-b63cd766-35b8-40be-ab65-e34f1bbd6095.PNG" height="500" style="object-fit: cover">
-<img src="https://user-images.githubusercontent.com/25480176/183200346-7a050263-ef47-4633-94b8-5bf1ddcf7722.PNG" height="500" style="object-fit: cover">
-<img src="https://user-images.githubusercontent.com/25480176/183200419-a0f930b7-dfe6-4d24-adc3-d44c2a9bbf3f.PNG" height="500" style="object-fit: cover">
-<img src="https://user-images.githubusercontent.com/25480176/183200523-f938b922-38db-480e-a0a7-d07813ba141a.PNG" height="500" style="object-fit: cover">
-<img src="https://user-images.githubusercontent.com/25480176/183200595-4b0fbcf7-a6c0-4f61-9f45-ddae55bac1e7.PNG" height="500" style="object-fit: cover">
