@@ -1,8 +1,7 @@
 # Astro-Odyssey-Uno-Platform
-A simple space shooter game built with uno platform and wasm. The game is completely developed with C# and XAML.
-This is to demostrate that 2D games can be developed using these tech stacks.
+A simple space shooter game built with uno platform and wasm. This game adapts to your screen size, generates random enemies, objects and power ups. Plays cool sound effects and a random music each time you play it. And it has some really annoying boss fights. It gets harder as you level up. But also with that, power ups and health pickups get more frequent and your firepower increases. Also the enemies get surprising and start to follow you, shoot at you, crash at you and will do anything to stop you. It's a game built on the soulsborn philosophy. The key objective is how fast and reactive you can be and how high you can score! The game only ends when you die.
 
-The game is live at: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platform/
+Have a go at it here: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platform/
 
 ![master](https://github.com/asadullahrifat89/Astro-Odyssey-Uno-Platform/actions/workflows/main.yml/badge.svg)
 
