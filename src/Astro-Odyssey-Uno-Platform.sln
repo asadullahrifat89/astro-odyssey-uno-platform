@@ -7,7 +7,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AstroOdyssey.Shared", "Astr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{C78ECF62-6B65-4C3A-9B84-95FE33CFC895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroOdyssey.Wasm", "AstroOdyssey\AstroOdyssey.Wasm\AstroOdyssey.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroOdyssey.Wasm", "AstroOdyssey\AstroOdyssey.Wasm\AstroOdyssey.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
