@@ -5,8 +5,6 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AstroOdyssey.Shared", "AstroOdyssey\AstroOdyssey.Shared\AstroOdyssey.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{C78ECF62-6B65-4C3A-9B84-95FE33CFC895}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroOdyssey.Wasm", "AstroOdyssey\AstroOdyssey.Wasm\AstroOdyssey.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
 EndProject
 Global
@@ -22,9 +20,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC} = {C78ECF62-6B65-4C3A-9B84-95FE33CFC895}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {633360BA-A180-42B0-8CAD-A99A4CB7FF2A}
