@@ -3,7 +3,8 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
 		<NoWarn>NU1701</NoWarn>
-		<LangVersion>9.0</LangVersion>		
+		<!--<NoWarn>$(NoWarn);NU1504;NU1505;NU1701</NoWarn>-->
+		<LangVersion>10.0</LangVersion>		
 		<RunAOTCompilation>true</RunAOTCompilation>			
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -58,9 +59,6 @@
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\PlayerProjectile.cs" />
 	  <_Globbed_Compile Remove="HighScore.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\FolderProfile2.pubxml" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Include="Assets\SplashScreen.png" />
