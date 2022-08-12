@@ -163,6 +163,20 @@ namespace AstroOdyssey
         void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
+
+            GameView.Children.Clear();
+            ScoreText.Text = "";
+            FPSText.Text = "";            
+            ObjectsCountText.Text = "";
+            Boss = null;
+            BossHealthBarPanel.Visibility = Visibility.Collapsed;            
+            Player = null;
+            PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
+            GameLevel = GameLevel.Level_1;
+            PowerUpType = PowerUpType.NONE;
+
+            PointerX = windowWidth / 2;
+
             ShowInGameText("TAP TO START");
             InputView.Focus(FocusState.Programmatic);
         }

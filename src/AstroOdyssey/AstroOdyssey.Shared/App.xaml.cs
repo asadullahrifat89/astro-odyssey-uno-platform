@@ -1,10 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 using System;
-using Uno.Foundation;
+using System.Collections.Generic;
+using System.Linq;
+using Uno.UI.RemoteControl.HotReload.Messages;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
-using static AstroOdyssey.Constants;
+using Frame = Microsoft.UI.Xaml.Controls.Frame;
 
 namespace AstroOdyssey
 {
@@ -15,13 +21,10 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private Window _window;
-
-        private static MainPage _mainPage;
-
-        public static double Score { get; set; }
-
-        public static Ship Ship { get; set; }
+        private static Window _window;
+        private SystemNavigationManager _systemNavigationManager;
+        private readonly List<Type> _goBackNotAllowedToPages;
+        private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
 
         #endregion
 
@@ -43,6 +46,13 @@ namespace AstroOdyssey
             Suspending += OnSuspending;
 #endif
             UnhandledException += App_UnhandledException;
+
+            Uno.UI.FeatureConfiguration.Page.IsPoolingEnabled = true;
+
+            _systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+
+            _goBackNotAllowedToPages = new List<Type>() { typeof(GamePlayPage) };
+            _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -57,28 +67,15 @@ namespace AstroOdyssey
 
         #region Properties
 
+        public static double Score { get; set; }
+
+        public static Ship Ship { get; set; }
+
         public static Account Account { get; set; }
 
         #endregion
 
-        #region Methods
-
-        public static void EnterFullScreen(bool value)
-        {
-            var view = ApplicationView.GetForCurrentView();
-
-            if (view is not null)
-            {
-                if (value)
-                {
-                    view.TryEnterFullScreenMode();
-                }
-                else
-                {
-                    view.ExitFullScreenMode();
-                }
-            }
-        }
+        #region Methods    
 
         public static void SetScore(double score)
         {
@@ -88,38 +85,100 @@ namespace AstroOdyssey
         public static double GetScore()
         {
             return Score;
-        }
-
-        public static void SetAccount()
-        {
-            _mainPage.SetAccount();
-        }
-
-        public static void NavigateToPage(Type page)
-        {
-            _mainPage.Navigate(page);
-        }
+        }       
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            _window = Window.Current;
-            _mainPage = _window.Content as MainPage;
-
-            if (_mainPage == null)
+#if DEBUG
+            if (System.Diagnostics.Debugger.IsAttached)
             {
-                _mainPage = new MainPage();
-                _window.Content = _mainPage;
+                // this.DebugSettings.EnableFrameRateCounter = true;
+            }
+#endif
+
+#if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
+            _window = new Window();
+            _window.Activate();
+#else
+            _window = Microsoft.UI.Xaml.Window.Current;
+#endif
+
+            var rootFrame = _window.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.IsNavigationStackEnabled = true;
+
+                if (args.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    // TODO: Load state from previously suspended application
+                }
+
+                // Place the frame in the current Window
+                _window.Content = rootFrame;
             }
 
+#if !(NET6_0_OR_GREATER && WINDOWS)
             if (args.UWPLaunchActivatedEventArgs.PrelaunchActivated == false)
+#endif
             {
+                if (rootFrame.Content == null)
+                {
+                    // When the navigation stack isn't restored navigate to the first page,
+                    // configuring the new page by passing required information as a navigation
+                    // parameter
+                    rootFrame.Navigate(typeof(LoginPage), args.Arguments);
+                }
+                // Ensure the current window is active
                 _window.Activate();
             }
+
+            _systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            _systemNavigationManager.BackRequested += OnBackRequested;
+        }
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            var rootFrame = _window.Content as Frame;
+
+            if (rootFrame.CanGoBack)
+            {
+                var backPage = rootFrame.BackStack.LastOrDefault();
+
+                if (_goBackNotAllowedToPages.Contains(backPage.SourcePageType))
+                    return;
+
+                if (_goBackPageRoutes.Any(x => x.IfGoingBackTo == backPage.SourcePageType))
+                {
+                    var reroute = _goBackPageRoutes.FirstOrDefault(x => x.IfGoingBackTo == backPage.SourcePageType).RouteTo;
+
+                    rootFrame.Navigate(reroute);
+                    return;
+                }
+
+                rootFrame.GoBack();
+            }   
+        }
+
+        /// <summary>
+        /// Invoked when Navigation to a certain page fails
+        /// </summary>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
         }
 
         /// <summary>
@@ -206,7 +265,42 @@ namespace AstroOdyssey
 #endif
         }
 
+        public static void SetIsBusy(bool isBusy)
+        {
+            //_mainPage.SetIsBusy(isBusy, message);
 
+            var rootFrame = _window.Content as Frame;
+            rootFrame.IsEnabled = !isBusy;
+            rootFrame.Opacity = isBusy ? 0.6 : 1;
+        }
+
+        public static void EnterFullScreen(bool value)
+        {
+            var view = ApplicationView.GetForCurrentView();
+
+            if (view is not null)
+            {
+                if (value)
+                {
+                    view.TryEnterFullScreenMode();                    
+                }
+                else
+                {
+                    view.ExitFullScreenMode();                    
+                }
+            }
+        }
+
+        public static void SetAccount()
+        {
+            //_mainPage.SetAccount();
+        }
+
+        public static void NavigateToPage(Type page, object parameter = null)
+        {
+            var rootFrame = _window.Content as Frame;
+            rootFrame.Navigate(page, parameter);
+        }
 
         #endregion
     }
