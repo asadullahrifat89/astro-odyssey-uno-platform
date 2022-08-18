@@ -94,22 +94,15 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Baren.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_purple.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\effect_yellow.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_A.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_B.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_C.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_D.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_E.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Ice.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossLarge.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_crossSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_exclamationSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\icon_plusSmall.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Lava.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedLarge.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_detailedSmall.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\meteor_large.png" />
@@ -142,44 +135,26 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_A.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_B.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\station_C.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet_Terran.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-sitar-7546.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-powerup-6768.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-score-4_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\beam-8-43831.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-matter-10710.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dead-8bit-41400.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\drone-space-main-9706.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-36210.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-sfx-43814.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\firework-explode-distant_zJ6kk3VO_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\halloween-impact-05-93808.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-blast-descend_Gy7C5dEO_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-descend_GJPs9OE__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-gun-single-shot_M1ZNL3Nd_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\low-impactwav-14905.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magnetic-destroy-shot_fkxD6SV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-down-7103.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-up-35839.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\punchy-laser-shot_f11BarNO_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\retro-video-game-coin-pickup-38299.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\robotic-punch-shot_M1vDpHE__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\rocket-missile-launcher_MyHKjH4__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\scale-e6-14577.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\shoot02wav-14562.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-trap-18565.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-age-10714.mp3" />
@@ -187,7 +162,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-jet-flyby_MkgS2BVu_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-trip-114102.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\spellcast-46164.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\swirly-air-deploy_GyxMaH4__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\videogame-death-sound-43894.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
