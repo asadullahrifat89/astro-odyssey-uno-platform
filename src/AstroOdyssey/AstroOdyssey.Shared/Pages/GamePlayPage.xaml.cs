@@ -142,13 +142,17 @@ namespace AstroOdyssey
                 if (_boss is null)
                 {
                     BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                    BossTotalHealth = 0;
                 }
                 else
                 {
                     BossHealthBarPanel.Visibility = Visibility.Visible;
+                    BossTotalHealth = _boss.Health;
                 }
             }
         }
+
+        private double BossTotalHealth { get; set; }
 
         #endregion
 
@@ -889,7 +893,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerHealthBar()
         {
-            PlayerHealthBar.Width = Player.Health;
+            PlayerHealthBar.Value = Player.Health;
         }
 
         /// <summary>
@@ -911,7 +915,17 @@ namespace AstroOdyssey
         {
             ShowInGameText("BOSS INCOMING");
             Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+
             SetBossHealthBar(); // set boss health on boss appearance            
+        }
+
+        /// <summary>
+        /// Sets the boss health bar.
+        /// </summary>
+        private void SetBossHealthBar()
+        {
+            //TODO: progress bar adaptation
+            BossHealthBar.Value = Boss.Health / BossTotalHealth * 100;
         }
 
         /// <summary>
@@ -922,14 +936,6 @@ namespace AstroOdyssey
             ShowInGameText($"{GameLevel.ToString().ToUpper().Replace("_", " ")} CLEARED\n");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
-        }
-
-        /// <summary>
-        /// Sets the boss health bar.
-        /// </summary>
-        private void SetBossHealthBar()
-        {
-            BossHealthBar.Width = Boss.Health / 1.5;
         }
 
         #endregion

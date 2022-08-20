@@ -60,17 +60,17 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <Border
+                <ProgressBar
                     Name="BossHealthBar"
-                    Width="0"
-                    Height="15"
+                    Width="250"
+                    Height="10"
                     Margin="5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Background="Red"
-                    BorderBrush="DarkRed"
-                    BorderThickness="3"
-                    CornerRadius="50" />
+                    Foreground="Red"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="100" />
 
                 <TextBlock
                     Name="BossHealthBarCount"
@@ -80,7 +80,7 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Foreground="White"
-                    Text="{x:Bind Path=BossHealthBar.Width.ToString('0'), Mode=OneWay}"
+                    Text="{x:Bind Path=BossHealthBar.Value.ToString('0'), Mode=OneWay}"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
@@ -161,16 +161,16 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-            <Border
+            <ProgressBar
                 Name="PlayerHealthBar"
-                Width="0"
-                Height="15"
+                Width="250"
+                Height="10"
                 Margin="5"
                 VerticalAlignment="Center"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                CornerRadius="50" />
+                Foreground="Red"
+                Maximum="100"
+                Minimum="0"
+                Value="100" />
 
             <TextBlock
                 Name="PlayerHealthBarCount"
@@ -180,7 +180,7 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
-                Text="{x:Bind Path=PlayerHealthBar.Width.ToString('0'), Mode=OneWay}"
+                Text="{x:Bind Path=PlayerHealthBar.Value.ToString('0'), Mode=OneWay}"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
