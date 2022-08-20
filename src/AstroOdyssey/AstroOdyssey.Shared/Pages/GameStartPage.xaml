@@ -16,6 +16,11 @@
             VerticalAlignment="Center"
             Orientation="Vertical">
 
+            <Image
+                Width="125"
+                Height="125"
+                Source="ms-appx:///Assets/Images/ship_H.png" />
+
             <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,40"
@@ -30,7 +35,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"
-                Text="A classic space shooter arcade remade for the web."
+                Text="A classic space shooter game remade for the web on WebAssembly."
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 

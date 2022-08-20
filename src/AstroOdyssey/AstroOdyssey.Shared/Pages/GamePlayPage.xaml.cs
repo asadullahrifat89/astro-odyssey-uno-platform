@@ -191,7 +191,7 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
-            ShowInGameText("TAP TO START");
+            ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
             InputView.Focus(FocusState.Programmatic);
         }
 
@@ -690,7 +690,7 @@ namespace AstroOdyssey
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
-                            ShowInGameText("HEALTH PICKUP");
+                            ShowInGameText("‍❤️\nHEALTH PICKUP");
                         }
                     }
                     break;
@@ -708,7 +708,7 @@ namespace AstroOdyssey
                         {
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
-                            ShowInGameText(PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
+                            ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ")/*.Replace("ROUNDS", "")*/);
                             _playerProjectileHelper.PowerUp(PowerUpType);
                         }
                     }
@@ -924,7 +924,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText("BOSS INCOMING");
+            ShowInGameText("💀\nBEHOLD BOSS");
             Boss = _enemyHelper.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -943,7 +943,7 @@ namespace AstroOdyssey
         /// </summary>
         private void DisengageBoss()
         {
-            ShowInGameText($"LEVEL {(int)GameLevel} BOSS DEFEATED");
+            ShowInGameText($"💥\nLEVEL {(int)GameLevel} BOSS DEFEATED");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
         }
@@ -973,43 +973,43 @@ namespace AstroOdyssey
             }
             if (Score > 100)
             {
-                GameLevel = GameLevel.Level_3;              
+                GameLevel = GameLevel.Level_3;
                 ScoreBar.Value = Score / 200 * 100;
                 ScoreBarCount.Text = $"{Score}/200";
             }
             if (Score > 200)
             {
-                GameLevel = GameLevel.Level_4;             
+                GameLevel = GameLevel.Level_4;
                 ScoreBar.Value = Score / 400 * 100;
                 ScoreBarCount.Text = $"{Score}/400";
             }
             if (Score > 400)
             {
-                GameLevel = GameLevel.Level_5;               
+                GameLevel = GameLevel.Level_5;
                 ScoreBar.Value = Score / 600 * 100;
                 ScoreBarCount.Text = $"{Score}/600";
             }
             if (Score > 600)
             {
-                GameLevel = GameLevel.Level_6;              
+                GameLevel = GameLevel.Level_6;
                 ScoreBar.Value = Score / 800 * 100;
                 ScoreBarCount.Text = Score.ToString();
             }
             if (Score > 800)
             {
-                GameLevel = GameLevel.Level_7;               
+                GameLevel = GameLevel.Level_7;
                 ScoreBar.Value = Score / 1000 * 100;
                 ScoreBarCount.Text = $"{Score}/1000";
             }
             if (Score > 1000)
             {
-                GameLevel = GameLevel.Level_8;              
+                GameLevel = GameLevel.Level_8;
                 ScoreBar.Value = Score / 1200 * 100;
                 ScoreBarCount.Text = $"{Score}/1200";
             }
             if (Score > 1200)
             {
-                GameLevel = GameLevel.Level_9;              
+                GameLevel = GameLevel.Level_9;
                 ScoreBar.Value = Score / 1400 * 100;
                 ScoreBarCount.Text = $"{Score}/1400";
             }
@@ -1031,7 +1031,7 @@ namespace AstroOdyssey
                 }
                 else
                 {
-                    ShowInGameText("METEORS INCOMING");
+                    ShowInGameText("☄️\nMETEORS INCOMING");
                     AudioHelper.PlaySound(baseUrl, SoundType.METEOR_INCOMING);
                 }
 
@@ -1051,15 +1051,10 @@ namespace AstroOdyssey
                 default:
                     {
                         _enemyHelper.LevelUp();
-
                         _meteorHelper.LevelUp();
-
                         _healthHelper.LevelUp();
-
                         _powerUpHelper.LevelUp();
-
                         _starHelper.LevelUp();
-
                         _playerProjectileHelper.LevelUp();
                     }
                     break;

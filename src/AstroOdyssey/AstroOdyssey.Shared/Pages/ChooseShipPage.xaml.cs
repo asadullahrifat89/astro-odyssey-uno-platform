@@ -45,7 +45,7 @@ namespace AstroOdyssey
                 string shipUri = null;
                 string name = null;
 
-                for (int i = 1; i <= 18; i++)
+                for (int i = 1; i <= 15; i++)
                 {
                     switch (i)
                     {
@@ -101,26 +101,26 @@ namespace AstroOdyssey
                             shipUri = "ms-appx:///Assets/Images/ship_K.png";
                             name = "Argon";
                             break;
+                        //case 14:
+                        //    shipUri = "ms-appx:///Assets/Images/ship_L.png";
+                        //    name = "Helium";
+                        //    break;
                         case 14:
-                            shipUri = "ms-appx:///Assets/Images/ship_L.png";
-                            name = "Helium";
-                            break;
-                        case 15:
                             shipUri = "ms-appx:///Assets/Images/ship_sidesA.png";
                             name = "Thorium";
                             break;
-                        case 16:
-                            shipUri = "ms-appx:///Assets/Images/ship_sidesB.png";
-                            name = "Lawrencium";
-                            break;
-                        case 17:
+                        //case 16:
+                        //    shipUri = "ms-appx:///Assets/Images/ship_sidesB.png";
+                        //    name = "Lawrencium";
+                        //    break;
+                        case 15:
                             shipUri = "ms-appx:///Assets/Images/ship_sidesC.png";
                             name = "Promethium";
                             break;
-                        case 18:
-                            shipUri = "ms-appx:///Assets/Images/ship_sidesD.png";
-                            name = "Erbium";
-                            break;
+                        //case 16:
+                        //    shipUri = "ms-appx:///Assets/Images/ship_sidesD.png";
+                        //    name = "Erbium";
+                        //    break;
 
                     }
 

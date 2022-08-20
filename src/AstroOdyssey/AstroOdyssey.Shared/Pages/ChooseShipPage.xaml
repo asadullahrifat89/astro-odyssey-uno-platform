@@ -16,6 +16,11 @@
             VerticalAlignment="Center"
             Orientation="Vertical">
 
+            <Image
+                Width="125"
+                Height="125"
+                Source="ms-appx:///Assets/Images/ship_H.png" />
+
             <!--  Game title  -->
             <TextBlock
                 Margin="10,10,10,40"
@@ -26,11 +31,11 @@
                 Text="ASTRO ODYSSEY" />
 
             <TextBlock
-                Margin="10"
+                Margin="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="20"
-                Text="Select a ship."
+                Text="Select your 🚀"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
@@ -38,7 +43,7 @@
             <GridView
                 Name="ShipsList"
                 Height="250"
-                Margin="0,50,0,0"
+                Margin="0,50,0,50"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 SelectionChanged="ShipsList_SelectionChanged">
@@ -63,7 +68,6 @@
             <Button
                 x:Name="ChooseButton"
                 Height="40"
-                Margin="0,50,0,0"
                 HorizontalAlignment="Stretch"
                 Background="Red"
                 BorderBrush="DarkRed"
