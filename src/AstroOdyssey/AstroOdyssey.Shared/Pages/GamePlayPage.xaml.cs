@@ -708,7 +708,7 @@ namespace AstroOdyssey
                         {
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
-                            ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ")/*.Replace("ROUNDS", "")*/);
+                            ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
                             _playerProjectileHelper.PowerUp(PowerUpType);
                         }
                     }
@@ -924,7 +924,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText("💀\nBEHOLD BOSS");
+            ShowInGameText("💀\nDEFEAT THE BOSS");
             Boss = _enemyHelper.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
