@@ -47,20 +47,33 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.RAPID_SHOT_ROUNDS:
                         {
-                            height = 35; width = 10; // medium and faster rounds                            
+                            height = 35; width = 10; // medium and faster rounds
+
+                            Background = new SolidColorBrush(Colors.Goldenrod);
+                            BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
                         }
                         break;
                     case PowerUpType.DEAD_SHOT_ROUNDS:
                         {
-                            height = 25; width = 25; // larger and slower rounds                            
+                            height = 25; width = 25; // larger and slower rounds
+
+                            Background = new SolidColorBrush(Colors.Cyan);
+                            BorderBrush = new SolidColorBrush(Colors.DarkCyan);
                         }
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
                         {
-                            height = 300; width = 20; // larger and longer and faster piercing rounds                            
+                            height = 300; width = 20; // larger and longer and faster piercing rounds
+
+                            Background = new SolidColorBrush(Colors.SlateBlue);
+                            BorderBrush = new SolidColorBrush(Colors.DarkSlateBlue);
                         }
                         break;
                     default:
+                        {
+                            Background = new SolidColorBrush(Colors.Red);
+                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                        }
                         break;
                 }
             }
@@ -121,14 +134,14 @@ namespace AstroOdyssey
                     default:
                         break;
                 }
-            }
 
-            Background = new SolidColorBrush(Colors.Red);
-            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                Background = new SolidColorBrush(Colors.Red);
+                BorderBrush = new SolidColorBrush(Colors.DarkRed);
+            }
 
             if (PowerUpType == PowerUpType.DEAD_SHOT_ROUNDS)
             {
-                BorderThickness = new Thickness(3); 
+                BorderThickness = new Thickness(3);
             }
             else
             {
