@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Controls;
+using System;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -53,6 +54,8 @@ namespace AstroOdyssey
             var top = gameEnvironment.Height - player.Height - 20;
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+
+            Canvas.SetZIndex(player, 999);
 
             return player;
         }

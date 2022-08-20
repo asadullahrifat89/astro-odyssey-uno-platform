@@ -35,12 +35,12 @@
                 Name="ScoreBarPanel"
                 Margin="5"
                 HorizontalAlignment="Center"
-                Orientation="Horizontal"
+                Orientation="Vertical"
                 Visibility="Collapsed">
 
                 <TextBlock
-                    Name="ScoreBarText"
-                    Margin="5"
+                    Name="GameLevelText"
+                    Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
@@ -51,9 +51,9 @@
 
                 <ProgressBar
                     Name="ScoreBar"
-                    Width="200"
+                    Width="250"
                     Height="10"
-                    Margin="5"
+                    Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Foreground="Red"
@@ -63,7 +63,7 @@
 
                 <TextBlock
                     Name="ScoreBarCount"
-                    Margin="5"
+                    Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
