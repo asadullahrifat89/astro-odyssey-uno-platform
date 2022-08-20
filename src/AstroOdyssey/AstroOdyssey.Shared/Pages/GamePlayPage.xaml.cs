@@ -746,6 +746,8 @@ namespace AstroOdyssey
             //TODO: progress bar adapt
             ScoreBarText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
             ScoreBarCount.Text = Score.ToString();
+            //TimeText.Text = $"{(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
+
             //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         }
 
