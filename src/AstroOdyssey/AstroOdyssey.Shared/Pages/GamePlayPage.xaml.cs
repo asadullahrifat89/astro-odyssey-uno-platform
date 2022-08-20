@@ -170,7 +170,7 @@ namespace AstroOdyssey
             SizeChanged += GamePage_SizeChanged;
 
             GameView.Children.Clear();
-            ScoreText.Text = "";
+            ScoreBarPanel.Visibility = Visibility.Collapsed;
             FPSText.Text = "";
             ObjectsCountText.Text = "";
             Boss = null;
@@ -361,6 +361,7 @@ namespace AstroOdyssey
             await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
+            ScoreBarPanel.Visibility = Visibility.Visible;
 
             SetStars();
 
@@ -742,8 +743,10 @@ namespace AstroOdyssey
         private void UpdateScore()
         {
             var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
-
-            ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
+            //TODO: progress bar adapt
+            ScoreBarText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
+            ScoreBarCount.Text = Score.ToString();
+            //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         }
 
         /// <summary>
@@ -923,8 +926,7 @@ namespace AstroOdyssey
         /// Sets the boss health bar.
         /// </summary>
         private void SetBossHealthBar()
-        {
-            //TODO: progress bar adaptation
+        {            
             BossHealthBar.Value = Boss.Health / BossTotalHealth * 100;
         }
 
@@ -952,47 +954,47 @@ namespace AstroOdyssey
             if (Score > 0)
             {
                 GameLevel = GameLevel.Level_1;
-                ExpGauge.Value = Score / 50 * 100;
+                ScoreBar.Value = Score / 50 * 100;
             }
             if (Score > 50)
             {
                 GameLevel = GameLevel.Level_2;
-                ExpGauge.Value = Score / 100 * 100;
+                ScoreBar.Value = Score / 100 * 100;
             }
             if (Score > 100)
             {
                 GameLevel = GameLevel.Level_3;
-                ExpGauge.Value = Score / 200 * 100;
+                ScoreBar.Value = Score / 200 * 100;
             }
             if (Score > 200)
             {
                 GameLevel = GameLevel.Level_4;
-                ExpGauge.Value = Score / 400 * 100;
+                ScoreBar.Value = Score / 400 * 100;
             }
             if (Score > 400)
             {
                 GameLevel = GameLevel.Level_5;
-                ExpGauge.Value = Score / 600 * 100;
+                ScoreBar.Value = Score / 600 * 100;
             }
             if (Score > 600)
             {
                 GameLevel = GameLevel.Level_6;
-                ExpGauge.Value = Score / 800 * 100;
+                ScoreBar.Value = Score / 800 * 100;
             }
             if (Score > 800)
             {
                 GameLevel = GameLevel.Level_7;
-                ExpGauge.Value = Score / 1000 * 100;
+                ScoreBar.Value = Score / 1000 * 100;
             }
             if (Score > 1000)
             {
                 GameLevel = GameLevel.Level_8;
-                ExpGauge.Value = Score / 1200 * 100;
+                ScoreBar.Value = Score / 1200 * 100;
             }
             if (Score > 1200)
             {
                 GameLevel = GameLevel.Level_9;
-                ExpGauge.Value = Score / 1400 * 100;
+                ScoreBar.Value = Score / 1400 * 100;
             }
             if (Score > 1400)
             {

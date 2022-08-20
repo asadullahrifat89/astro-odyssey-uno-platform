@@ -55,8 +55,6 @@ namespace AstroOdyssey
         /// <param name="gameLevel"></param>
         public Enemy EngageBossEnemy(GameLevel gameLevel)
         {
-            //TODO: bosses must have health bars
-
             var enemy = new Enemy();
 
             enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());

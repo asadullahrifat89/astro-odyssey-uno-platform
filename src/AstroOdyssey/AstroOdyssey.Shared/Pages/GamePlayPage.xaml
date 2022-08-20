@@ -6,13 +6,13 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="Black"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
 
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
-        <GameEnvironment x:Name="GameView" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+        <GameEnvironment x:Name="GameView" Background="Black" />
 
         <StackPanel
             Margin="5"
@@ -20,25 +20,48 @@
             Orientation="Vertical">
 
             <!--  This shows current score, level and game time  -->
-            <TextBlock
-                Name="ScoreText"
-                Margin="5"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                TextAlignment="Center"
-                TextWrapping="Wrap" />
-
-            <ProgressBar
-                Name="ExpGauge"
-                Width="300"
-                Height="10"
+            <StackPanel
+                Name="ScoreBarPanel"
                 Margin="5"
                 HorizontalAlignment="Center"
-                Foreground="Red"
-                Maximum="100"
-                Minimum="0"
-                Value="0" />
+                Orientation="Horizontal"
+                Visibility="Collapsed">
+
+                <TextBlock
+                    Name="ScoreBarText"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <ProgressBar
+                    Name="ScoreBar"
+                    Width="250"
+                    Height="10"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Red"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="100" />
+
+                <TextBlock
+                    Name="ScoreBarCount"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+            </StackPanel>
 
             <!--  This shows the health bar of boss  -->
             <StackPanel
