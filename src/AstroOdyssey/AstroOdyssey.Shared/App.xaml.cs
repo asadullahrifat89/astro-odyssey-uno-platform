@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Uno.UI.RemoteControl.HotReload.Messages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -138,7 +137,7 @@ namespace AstroOdyssey
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(LoginPage), args.Arguments);
+                    rootFrame.Navigate(typeof(GameStartPage), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();

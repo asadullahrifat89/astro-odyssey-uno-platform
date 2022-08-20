@@ -943,7 +943,7 @@ namespace AstroOdyssey
         /// </summary>
         private void DisengageBoss()
         {
-            ShowInGameText($"{GameLevel.ToString().ToUpper().Replace("_", " ")} CLEARED\n");
+            ShowInGameText($"LEVEL {(int)GameLevel} CLEARED");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
         }
@@ -1040,7 +1040,7 @@ namespace AstroOdyssey
                 else
                 {
                     ShowInGameText("METEORS INCOMING");
-                    AudioHelper.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                    AudioHelper.PlaySound(baseUrl, SoundType.METEOR_INCOMING);
                 }
 
                 GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();

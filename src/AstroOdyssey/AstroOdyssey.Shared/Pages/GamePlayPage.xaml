@@ -52,7 +52,7 @@
                 <ProgressBar
                     Name="ScoreBar"
                     Width="250"
-                    Height="10"
+                    Height="5"
                     Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -77,27 +77,27 @@
             <!--  This shows the health bar of boss  -->
             <StackPanel
                 Name="BossHealthBarPanel"
-                Margin="5"
+                Margin="5,0,5,5"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
 
                 <TextBlock
                     Name="BossHealthBarText"
-                    Margin="5"
+                    Margin="5,0,5,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
                     FontWeight="Bold"
                     Foreground="White"
-                    Text="BOSS"
+                    Text="💀"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
                 <ProgressBar
                     Name="BossHealthBar"
                     Width="200"
-                    Height="10"
+                    Height="5"
                     Margin="5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -191,14 +191,14 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
-                Text="HEALTH"
+                Text="❤️"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
             <ProgressBar
                 Name="PlayerHealthBar"
                 Width="200"
-                Height="10"
+                Height="5"
                 Margin="5"
                 VerticalAlignment="Center"
                 Foreground="Red"
