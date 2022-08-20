@@ -918,7 +918,7 @@ namespace AstroOdyssey
         /// </summary>
         private void DisengageBoss()
         {
-            ShowInGameText($"BOSS DEFEATED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
+            ShowInGameText($"{GameLevel.ToString().ToUpper().Replace("_", " ")} CLEARED\n");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
         }
