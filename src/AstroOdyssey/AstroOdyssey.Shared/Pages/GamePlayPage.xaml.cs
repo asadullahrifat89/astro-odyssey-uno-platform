@@ -943,7 +943,7 @@ namespace AstroOdyssey
         /// </summary>
         private void DisengageBoss()
         {
-            ShowInGameText($"LEVEL {(int)GameLevel} CLEARED");
+            ShowInGameText($"LEVEL {(int)GameLevel} BOSS DEFEATED");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
         }
@@ -962,62 +962,54 @@ namespace AstroOdyssey
             if (Score > 0)
             {
                 GameLevel = GameLevel.Level_1;
-                ScoreBar.Minimum = 0;
                 ScoreBar.Value = Score / 50 * 100;
                 ScoreBarCount.Text = $"{Score}/50";
             }
             if (Score > 50)
             {
                 GameLevel = GameLevel.Level_2;
-                ScoreBar.Minimum = 50;
                 ScoreBar.Value = Score / 100 * 100;
                 ScoreBarCount.Text = $"{Score}/100";
             }
             if (Score > 100)
             {
-                GameLevel = GameLevel.Level_3;
+                GameLevel = GameLevel.Level_3;              
                 ScoreBar.Value = Score / 200 * 100;
                 ScoreBarCount.Text = $"{Score}/200";
             }
             if (Score > 200)
             {
-                GameLevel = GameLevel.Level_4;
-                ScoreBar.Minimum = 200;
+                GameLevel = GameLevel.Level_4;             
                 ScoreBar.Value = Score / 400 * 100;
                 ScoreBarCount.Text = $"{Score}/400";
             }
             if (Score > 400)
             {
-                GameLevel = GameLevel.Level_5;
-                ScoreBar.Minimum = 400;
+                GameLevel = GameLevel.Level_5;               
                 ScoreBar.Value = Score / 600 * 100;
                 ScoreBarCount.Text = $"{Score}/600";
             }
             if (Score > 600)
             {
-                GameLevel = GameLevel.Level_6;
-                ScoreBar.Minimum = 600;
+                GameLevel = GameLevel.Level_6;              
                 ScoreBar.Value = Score / 800 * 100;
                 ScoreBarCount.Text = Score.ToString();
             }
             if (Score > 800)
             {
-                GameLevel = GameLevel.Level_7;
-                ScoreBar.Minimum = 800;
+                GameLevel = GameLevel.Level_7;               
                 ScoreBar.Value = Score / 1000 * 100;
                 ScoreBarCount.Text = $"{Score}/1000";
             }
             if (Score > 1000)
             {
-                GameLevel = GameLevel.Level_8;
-                ScoreBar.Minimum = 1000;
+                GameLevel = GameLevel.Level_8;              
                 ScoreBar.Value = Score / 1200 * 100;
                 ScoreBarCount.Text = $"{Score}/1200";
             }
             if (Score > 1200)
             {
-                GameLevel = GameLevel.Level_9;
-                ScoreBar.Minimum = 1200;
+                GameLevel = GameLevel.Level_9;              
                 ScoreBar.Value = Score / 1400 * 100;
                 ScoreBarCount.Text = $"{Score}/1400";
             }
