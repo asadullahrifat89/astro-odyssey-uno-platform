@@ -19,7 +19,7 @@
             <TextBlock
                 FontSize="45"
                 FontWeight="Bold"
-                Text="Game Over"
+                Text="☠️ Game Over"
                 TextAlignment="Center" />
 
             <TextBlock
