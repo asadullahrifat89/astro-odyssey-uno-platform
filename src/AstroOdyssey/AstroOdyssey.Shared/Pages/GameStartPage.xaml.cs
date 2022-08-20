@@ -25,11 +25,12 @@ namespace AstroOdyssey
 
         private void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            App.EnterFullScreen(true);
+            
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
+            App.EnterFullScreen(true);
             App.NavigateToPage(typeof(ChooseShipPage));
         }
 

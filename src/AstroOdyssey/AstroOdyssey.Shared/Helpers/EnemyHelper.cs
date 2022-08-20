@@ -55,8 +55,6 @@ namespace AstroOdyssey
         /// <param name="gameLevel"></param>
         public Enemy EngageBossEnemy(GameLevel gameLevel)
         {
-            //TODO: bosses must have health bars
-
             var enemy = new Enemy();
 
             enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
@@ -68,7 +66,7 @@ namespace AstroOdyssey
             enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
             enemy.Speed--;
 
-            enemy.Health = 50 * (int)gameLevel;
+            enemy.Health = 50 * (int)gameLevel;            
 
             SetProjectileFiringEnemy(enemy);
             SetHoveringEnemy(enemy);

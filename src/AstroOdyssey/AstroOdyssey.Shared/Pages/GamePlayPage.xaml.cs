@@ -8,6 +8,7 @@ using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -141,13 +142,17 @@ namespace AstroOdyssey
                 if (_boss is null)
                 {
                     BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                    BossTotalHealth = 0;
                 }
                 else
                 {
                     BossHealthBarPanel.Visibility = Visibility.Visible;
+                    BossTotalHealth = _boss.Health;
                 }
             }
         }
+
+        private double BossTotalHealth { get; set; }
 
         #endregion
 
@@ -165,15 +170,24 @@ namespace AstroOdyssey
             SizeChanged += GamePage_SizeChanged;
 
             GameView.Children.Clear();
-            ScoreText.Text = "";
-            FPSText.Text = "";            
+            ScoreBarPanel.Visibility = Visibility.Collapsed;
+
+            FPSText.Text = "";
             ObjectsCountText.Text = "";
+
             Boss = null;
-            BossHealthBarPanel.Visibility = Visibility.Collapsed;            
+            BossHealthBarPanel.Visibility = Visibility.Collapsed;
+
             Player = null;
             PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
+
             GameLevel = GameLevel.Level_1;
+            GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
+
             PowerUpType = PowerUpType.NONE;
+
+            Score = 0;
+            ScoreBarCount.Text = $"{Score}/50";
 
             PointerX = windowWidth / 2;
 
@@ -345,8 +359,6 @@ namespace AstroOdyssey
 
             SetPlayerHealthBar(); // set player health bar at game start
 
-            UpdateScore();
-
             InGameText.Text = "";
 
             IsGameRunning = true;
@@ -356,6 +368,7 @@ namespace AstroOdyssey
             await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
+            ScoreBarPanel.Visibility = Visibility.Visible;
 
             SetStars();
 
@@ -374,9 +387,8 @@ namespace AstroOdyssey
                 frameEndTime = Stopwatch.ElapsedMilliseconds;
 
                 GetFrameDuration();
-#if DEBUG
+
                 SetAnalytics();
-#endif
             };
 
             GameFrameTimer.Start();
@@ -476,7 +488,7 @@ namespace AstroOdyssey
 
             SpawnGameObjects();
 
-            UpdateScore();
+            //UpdateScore(); // render frame
 
             HandleInGameText();
 
@@ -731,15 +743,18 @@ namespace AstroOdyssey
             _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
         }
 
-        /// <summary>
-        /// Updates the game score, player health.
-        /// </summary>
-        private void UpdateScore()
-        {
-            var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
+        ///// <summary>
+        ///// Updates the game score, player health.
+        ///// </summary>
+        //private void UpdateScore()
+        //{   
+        //    //GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
+        //    //ScoreBarCount.Text = Score.ToString();
 
-            ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
-        }
+        //    //var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
+        //    //TimeText.Text = $"{(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
+        //    //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
+        //}
 
         /// <summary>
         /// Get base url for the app.
@@ -760,6 +775,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
+#if DEBUG
             frameStatUpdateSpawnCounter -= 1;
 
             if (frameStatUpdateSpawnCounter < 0)
@@ -781,6 +797,7 @@ namespace AstroOdyssey
 
                 frameStatUpdateSpawnCounter = frameStatUpdateDelay;
             }
+#endif
         }
 
         /// <summary>
@@ -865,12 +882,11 @@ namespace AstroOdyssey
         private void SpawnPlayer()
         {
             var scale = GameView.GetGameObjectScale();
+            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
 
 #if DEBUG
             Console.WriteLine($"Render Scale: {scale}");
 #endif
-
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
         }
 
         /// <summary>
@@ -888,7 +904,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerHealthBar()
         {
-            PlayerHealthBar.Width = Player.Health;
+            PlayerHealthBar.Value = Player.Health;
         }
 
         /// <summary>
@@ -910,17 +926,8 @@ namespace AstroOdyssey
         {
             ShowInGameText("BOSS INCOMING");
             Boss = _enemyHelper.EngageBossEnemy(GameLevel);
-            SetBossHealthBar(); // set boss health on boss appearance            
-        }
 
-        /// <summary>
-        /// Disengages a boss.
-        /// </summary>
-        private void DisengageBoss()
-        {
-            ShowInGameText($"BOSS DEFEATED\n{GameLevel.ToString().ToUpper().Replace("_", " ")}");
-            _enemyHelper.DisengageBossEnemy();
-            Boss = null;
+            SetBossHealthBar(); // set boss health on boss appearance            
         }
 
         /// <summary>
@@ -928,7 +935,17 @@ namespace AstroOdyssey
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Width = Boss.Health / 1.5;
+            BossHealthBar.Value = Boss.Health / BossTotalHealth * 100;
+        }
+
+        /// <summary>
+        /// Disengages a boss.
+        /// </summary>
+        private void DisengageBoss()
+        {
+            ShowInGameText($"LEVEL {(int)GameLevel} BOSS DEFEATED");
+            _enemyHelper.DisengageBossEnemy();
+            Boss = null;
         }
 
         #endregion
@@ -943,25 +960,64 @@ namespace AstroOdyssey
             var lastGameLevel = GameLevel;
 
             if (Score > 0)
+            {
                 GameLevel = GameLevel.Level_1;
+                ScoreBar.Value = Score / 50 * 100;
+                ScoreBarCount.Text = $"{Score}/50";
+            }
             if (Score > 50)
+            {
                 GameLevel = GameLevel.Level_2;
+                ScoreBar.Value = Score / 100 * 100;
+                ScoreBarCount.Text = $"{Score}/100";
+            }
             if (Score > 100)
-                GameLevel = GameLevel.Level_3;
+            {
+                GameLevel = GameLevel.Level_3;              
+                ScoreBar.Value = Score / 200 * 100;
+                ScoreBarCount.Text = $"{Score}/200";
+            }
             if (Score > 200)
-                GameLevel = GameLevel.Level_4;
+            {
+                GameLevel = GameLevel.Level_4;             
+                ScoreBar.Value = Score / 400 * 100;
+                ScoreBarCount.Text = $"{Score}/400";
+            }
             if (Score > 400)
-                GameLevel = GameLevel.Level_5;
+            {
+                GameLevel = GameLevel.Level_5;               
+                ScoreBar.Value = Score / 600 * 100;
+                ScoreBarCount.Text = $"{Score}/600";
+            }
             if (Score > 600)
-                GameLevel = GameLevel.Level_6;
+            {
+                GameLevel = GameLevel.Level_6;              
+                ScoreBar.Value = Score / 800 * 100;
+                ScoreBarCount.Text = Score.ToString();
+            }
             if (Score > 800)
-                GameLevel = GameLevel.Level_7;
+            {
+                GameLevel = GameLevel.Level_7;               
+                ScoreBar.Value = Score / 1000 * 100;
+                ScoreBarCount.Text = $"{Score}/1000";
+            }
             if (Score > 1000)
-                GameLevel = GameLevel.Level_8;
+            {
+                GameLevel = GameLevel.Level_8;              
+                ScoreBar.Value = Score / 1200 * 100;
+                ScoreBarCount.Text = $"{Score}/1200";
+            }
             if (Score > 1200)
-                GameLevel = GameLevel.Level_9;
+            {
+                GameLevel = GameLevel.Level_9;              
+                ScoreBar.Value = Score / 1400 * 100;
+                ScoreBarCount.Text = $"{Score}/1400";
+            }
             if (Score > 1400)
+            {
                 GameLevel = GameLevel.Level_10;
+                ScoreBarCount.Text = $"{Score}/MAX";
+            }
 
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)
@@ -976,8 +1032,10 @@ namespace AstroOdyssey
                 else
                 {
                     ShowInGameText("METEORS INCOMING");
-                    AudioHelper.PlaySound(baseUrl, SoundType.LEVEL_UP);
+                    AudioHelper.PlaySound(baseUrl, SoundType.METEOR_INCOMING);
                 }
+
+                GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
             }
         }
 

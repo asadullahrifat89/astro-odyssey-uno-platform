@@ -135,9 +135,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-sitar-7546.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />

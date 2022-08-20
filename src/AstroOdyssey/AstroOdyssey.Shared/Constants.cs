@@ -57,7 +57,7 @@ namespace AstroOdyssey
             ROUNDS_HIT,
             POWER_UP,
             POWER_DOWN,
-            LEVEL_UP,
+            METEOR_INCOMING,
             HEALTH_GAIN,
             HEALTH_LOSS,
             GAME_START,

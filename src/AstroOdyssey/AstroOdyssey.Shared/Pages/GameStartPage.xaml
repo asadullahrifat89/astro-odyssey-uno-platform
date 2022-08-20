@@ -21,42 +21,50 @@
                 Margin="10,10,10,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="45"
+                FontSize="35"
                 FontWeight="Bold"
-                Text="Astro Odyssey" />
+                Text="ASTRO ODYSSEY" />
 
             <TextBlock
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="25"
-                FontWeight="SemiBold"
-                Text="Choose your journey"
+                FontSize="20"
+                Text="A classic space shooter arcade remade for the web."
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
+
+            <TextBlock
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="Press left or right arrow keys on your keyboard or touch left or right edges of your screen to move ship."
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
+
 
             <!--  Arcade mode button  -->
             <Button
                 x:Name="PlayButton"
                 Height="40"
-                Margin="0,50,0,0"
+                Margin="0,50,0,50"
                 HorizontalAlignment="Stretch"
                 Background="Red"
                 BorderBrush="DarkRed"
                 BorderThickness="3"
                 Click="PlayButton_Click"
-                Content="Arcade Mode"
+                Content="START GAME"
                 CornerRadius="50"
                 FontWeight="SemiBold"
                 Foreground="White" />
 
             <TextBlock
-                Margin="10,20"
+                Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="16"
-                FontWeight="SemiBold"
-                Text="Only arcade mode is available right now."
+                FontSize="20"
+                Text="Made with ❤️ by Asadullah Rifat."
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
