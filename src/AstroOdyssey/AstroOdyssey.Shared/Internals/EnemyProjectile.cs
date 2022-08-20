@@ -90,14 +90,14 @@ namespace AstroOdyssey
             {
                 Background = new SolidColorBrush(Colors.Violet);
                 BorderBrush = new SolidColorBrush(Colors.DarkViolet);
+                BorderThickness = new Thickness(3);
             }
             else
             {
-                Background = new SolidColorBrush(Colors.Goldenrod);
-                BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
-            }
-
-            BorderThickness = new Thickness(3);
+                Background = new SolidColorBrush(Colors.Red);
+                BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                BorderThickness = new Thickness(2);
+            }           
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
             Width = width * scale * (isOverPowered ? 1.5 : 1);
