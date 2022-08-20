@@ -8,6 +8,7 @@ using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -943,25 +944,54 @@ namespace AstroOdyssey
             var lastGameLevel = GameLevel;
 
             if (Score > 0)
+            {
                 GameLevel = GameLevel.Level_1;
+                ExpGauge.Value = Score / 50 * 100;
+            }
             if (Score > 50)
+            {
                 GameLevel = GameLevel.Level_2;
+                ExpGauge.Value = Score / 100 * 100;
+            }
             if (Score > 100)
+            {
                 GameLevel = GameLevel.Level_3;
+                ExpGauge.Value = Score / 200 * 100;
+            }
             if (Score > 200)
+            {
                 GameLevel = GameLevel.Level_4;
+                ExpGauge.Value = Score / 400 * 100;
+            }
             if (Score > 400)
+            {
                 GameLevel = GameLevel.Level_5;
+                ExpGauge.Value = Score / 600 * 100;
+            }
             if (Score > 600)
+            {
                 GameLevel = GameLevel.Level_6;
+                ExpGauge.Value = Score / 800 * 100;
+            }
             if (Score > 800)
+            {
                 GameLevel = GameLevel.Level_7;
+                ExpGauge.Value = Score / 1000 * 100;
+            }
             if (Score > 1000)
+            {
                 GameLevel = GameLevel.Level_8;
+                ExpGauge.Value = Score / 1200 * 100;
+            }
             if (Score > 1200)
+            {
                 GameLevel = GameLevel.Level_9;
+                ExpGauge.Value = Score / 1400 * 100;
+            }
             if (Score > 1400)
+            {
                 GameLevel = GameLevel.Level_10;
+            }
 
             // when difficulty changes show level up
             if (lastGameLevel != GameLevel)

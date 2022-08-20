@@ -29,6 +29,17 @@
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
 
+            <ProgressBar
+                Name="ExpGauge"
+                Width="300"
+                Height="10"
+                Margin="5"
+                HorizontalAlignment="Center"
+                Foreground="Red"
+                Maximum="100"
+                Minimum="0"
+                Value="0" />
+
             <!--  This shows the health bar of boss  -->
             <StackPanel
                 Name="BossHealthBarPanel"
