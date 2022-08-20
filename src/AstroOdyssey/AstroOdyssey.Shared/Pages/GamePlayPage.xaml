@@ -26,7 +26,8 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
-                TextAlignment="Center" />
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
 
             <!--  This shows the health bar of boss  -->
             <StackPanel

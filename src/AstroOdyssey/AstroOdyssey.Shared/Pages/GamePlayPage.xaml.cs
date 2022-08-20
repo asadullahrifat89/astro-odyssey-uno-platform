@@ -166,10 +166,10 @@ namespace AstroOdyssey
 
             GameView.Children.Clear();
             ScoreText.Text = "";
-            FPSText.Text = "";            
+            FPSText.Text = "";
             ObjectsCountText.Text = "";
             Boss = null;
-            BossHealthBarPanel.Visibility = Visibility.Collapsed;            
+            BossHealthBarPanel.Visibility = Visibility.Collapsed;
             Player = null;
             PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
             GameLevel = GameLevel.Level_1;
