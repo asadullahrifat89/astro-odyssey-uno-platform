@@ -94,6 +94,7 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_A.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_B.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_C.png" />
@@ -137,7 +138,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-sitar-7546.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />

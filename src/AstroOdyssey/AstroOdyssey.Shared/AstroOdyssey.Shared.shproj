@@ -42,6 +42,7 @@
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Content Remove="Assets\AstroOdysseyLogo.png" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-crash-6_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-powerup-6768.mp3" />
