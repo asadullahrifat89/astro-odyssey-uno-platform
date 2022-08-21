@@ -21,14 +21,16 @@
                 Height="125"
                 Source="ms-appx:///Assets/Images/ship_H.png" />
 
+            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
+
             <!--  Game title  -->
-            <TextBlock
+            <!--<TextBlock
                 Margin="10,10,10,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="35"
                 FontWeight="Bold"
-                Text="ASTRO ODYSSEY" />
+                Text="ASTRO ODYSSEY" />-->
 
             <TextBlock
                 Margin="5"
