@@ -46,11 +46,7 @@ Have a go at it here: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platf
 * Health pickups, if picked up restores 10 health points.
 
 ## Screenshots
-![Astro-Odyssey-1](https://user-images.githubusercontent.com/25480176/183248690-056e3a11-1ebf-4539-a4d7-f104d6b9ad5b.png)
-![Astro-Odyssey-2](https://user-images.githubusercontent.com/25480176/183248692-8456fc4d-c117-4e8a-b7c3-d9dd5d74d8fe.png)
-![Astro-Odyssey-3](https://user-images.githubusercontent.com/25480176/183248694-31c3482c-4282-4912-aa25-7613a108c54d.png)
-![Astro-Odyssey-4](https://user-images.githubusercontent.com/25480176/183248695-b2d8c386-ebf8-4878-bbd1-b0432bb29d33.png)
-![Astro-Odyssey-5](https://user-images.githubusercontent.com/25480176/183248699-3e948232-f435-4c8d-ad7c-da77837fdd36.png)
-![Astro-Odyssey-6](https://user-images.githubusercontent.com/25480176/183248700-fdf0cd9d-e83a-4702-a368-6f57fec95815.png)
-![Astro-Odyssey-7](https://user-images.githubusercontent.com/25480176/183248703-5d64079c-f1fe-4016-9fab-40eb946397bd.png)
-
+![pika-2022-08-23T19_18_14 378Z](https://user-images.githubusercontent.com/25480176/186250802-35dbb008-23d8-4ee1-bfb2-72fe8bdb6d46.png)
+![pika-2022-08-23T19_18_27 273Z](https://user-images.githubusercontent.com/25480176/186250816-5d1c9d48-0417-4b4e-b944-9c5ca6508125.png)
+![pika-2022-08-23T19_20_52 715Z](https://user-images.githubusercontent.com/25480176/186250836-ae93bf20-c10c-41d3-bc07-97edac990174.png)
+![pika-2022-08-23T19_21_05 717Z](https://user-images.githubusercontent.com/25480176/186250844-e1e3a01c-7783-43fa-afc6-5524327c041c.png)
