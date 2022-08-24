@@ -22,17 +22,17 @@ namespace AstroOdyssey
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ChooseShipPage : Page
+    public sealed partial class ShipSelectionPage : Page
     {
         private Ship selectedShip;
 
-        public ChooseShipPage()
+        public ShipSelectionPage()
         {
             this.InitializeComponent();
-            this.Loaded += ChooseShipPage_Loaded;
+            this.Loaded += ShipSelectionPage_Loaded;
         }
 
-        private void ChooseShipPage_Loaded(object sender, RoutedEventArgs e)
+        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             selectedShip = null;
             App.Ship = null;

@@ -31,7 +31,7 @@ namespace AstroOdyssey
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             App.EnterFullScreen(true);
-            App.NavigateToPage(typeof(ChooseShipPage));
+            App.NavigateToPage(typeof(ShipSelectionPage));
         }
 
         #endregion
