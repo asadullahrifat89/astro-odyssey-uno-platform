@@ -353,14 +353,12 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
-        private async void StartGame()
+        private void StartGame()
         {
-
 #if !DEBUG
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
-
             AudioHelper.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
@@ -375,9 +373,9 @@ namespace AstroOdyssey
 
             PauseGameButton.Visibility = Visibility.Visible;
 
-            //TODO: show player entrace animation            
+            //TODO: show player entrace animation
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            //await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
@@ -404,6 +402,8 @@ namespace AstroOdyssey
             };
 
             GameFrameTimer.Start();
+
+            _starHelper.StartSpaceWarping();
 
             AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
@@ -502,8 +502,6 @@ namespace AstroOdyssey
 
             SpawnGameObjects();
 
-            //UpdateScore(); // render frame
-
             HandleInGameText();
 
             DamageRecoveryCoolDown();
@@ -521,7 +519,7 @@ namespace AstroOdyssey
             {
                 // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
-                {                    
+                {
                     gameObject.Explode();
 
                     if (gameObject.HasExploded)
@@ -745,15 +743,18 @@ namespace AstroOdyssey
         {
             _starHelper.SpawnStar();
 
-            _meteorHelper.SpawnMeteor(GameLevel);
+            if (!GameView.IsWarpingThroughSpace)
+            {
+                _meteorHelper.SpawnMeteor(GameLevel);
 
-            _enemyHelper.SpawnEnemy(GameLevel);
+                _enemyHelper.SpawnEnemy(GameLevel);
 
-            _healthHelper.SpawnHealth(Player);
+                _healthHelper.SpawnHealth(Player);
 
-            _powerUpHelper.SpawnPowerUp();
+                _powerUpHelper.SpawnPowerUp();
 
-            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
+                _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType); 
+            }
         }
 
         ///// <summary>
