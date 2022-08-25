@@ -58,9 +58,9 @@ namespace AstroOdyssey
 
         public bool HasHealth => Health > 0;
 
-        public int ExplosionCounter { get; set; } = 10;
+        public double ExplosionCounter { get; set; } = 1;
 
-        public bool HasFadedAway => Opacity <= 0;
+        public bool HasFadedAway => ExplosionCounter <= 0; //Opacity <= 0;
 
         public bool IsOverPowered { get; set; } = false;
 
@@ -85,7 +85,7 @@ namespace AstroOdyssey
                     {
                         BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod),
                         Background = new SolidColorBrush(Colors.Goldenrod),
-                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),                        
+                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
                         CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100)
                     };
                 }
@@ -242,14 +242,13 @@ namespace AstroOdyssey
             gameEnvironment.AddGameObject(this);
         }
 
-        public void Fade()
-        {
-            Opacity -= 0.1d;
-        }
-
         public void Explode()
         {
             //TODO: explode image set
+            ExplosionCounter -= 0.1d;
+
+            if (ExplosionCounter <= 0.3d)
+                Opacity -= 0.1d;
 
             compositeTransform.ScaleX += 0.3d;
             compositeTransform.ScaleY += 0.3d;

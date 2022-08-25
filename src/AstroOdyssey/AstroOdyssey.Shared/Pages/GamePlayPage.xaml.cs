@@ -521,8 +521,7 @@ namespace AstroOdyssey
             {
                 // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
-                {
-                    gameObject.Fade();
+                {                    
                     gameObject.Explode();
 
                     if (gameObject.HasFadedAway)
