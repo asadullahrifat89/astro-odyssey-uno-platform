@@ -212,16 +212,16 @@ namespace AstroOdyssey
                         {
                             var enemy = destructible as Enemy;
 
-                            if (enemy.IsBoss)
-                            {
-                                if (enemy.Health <= 3)
-                                    enemy.Fade();
-                            }
-                            else
-                            {
-                                // fade the a bit on projectile hit
-                                enemy.Fade();
-                            }
+                            //if (enemy.IsBoss)
+                            //{
+                            //    if (enemy.Health <= 3)
+                            //        enemy.Fade();
+                            //}
+                            //else
+                            //{
+                            //    // fade the a bit on projectile hit
+                            //    enemy.Fade();
+                            //}
 
                             enemy.SetProjectileImpactEffect();
 
@@ -253,8 +253,8 @@ namespace AstroOdyssey
                         {
                             var meteor = destructible as Meteor;
 
-                            // fade the a bit on projectile hit
-                            meteor.Fade();
+                            //// fade the a bit on projectile hit
+                            //meteor.Fade();
 
                             meteor.SetProjectileImpactEffect();
 

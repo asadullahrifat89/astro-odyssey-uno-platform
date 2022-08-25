@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Foundation;
+using Point = Windows.Foundation.Point;
 
 namespace AstroOdyssey
 {
@@ -56,15 +58,39 @@ namespace AstroOdyssey
 
         public bool HasHealth => Health > 0;
 
-        public bool HasFadedAway => Opacity <= 0;
+        public double ExplosionCounter { get; set; } = 1;
+
+        public bool HasFadedAway => ExplosionCounter <= 0; //Opacity <= 0;
 
         public bool IsOverPowered { get; set; } = false;
 
         public bool IsDestructible { get; set; }
 
-        public bool IsMarkedForFadedDestruction { get; set; }
-
         public double HalfWidth { get; set; }
+
+        private bool isMarkedForFadedDestruction;
+
+        public bool IsMarkedForFadedDestruction
+        {
+            get { return isMarkedForFadedDestruction; }
+            set
+            {
+                isMarkedForFadedDestruction = value;
+
+                //change the content to explosion
+
+                if (isMarkedForFadedDestruction)
+                {
+                    Child = new Border()
+                    {
+                        BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod),
+                        Background = new SolidColorBrush(Colors.Goldenrod),
+                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
+                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100)
+                    };
+                }
+            }
+        }
 
         #endregion
 
@@ -216,13 +242,14 @@ namespace AstroOdyssey
             gameEnvironment.AddGameObject(this);
         }
 
-        public void Fade()
-        {
-            Opacity -= 0.1d;
-        }
-
         public void Explode()
         {
+            //TODO: explode image set
+            ExplosionCounter -= 0.1d;
+
+            if (ExplosionCounter <= 0.3d)
+                Opacity -= 0.1d;
+
             compositeTransform.ScaleX += 0.3d;
             compositeTransform.ScaleY += 0.3d;
         }
