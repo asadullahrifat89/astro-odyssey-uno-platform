@@ -373,17 +373,12 @@ namespace AstroOdyssey
 
             PauseGameButton.Visibility = Visibility.Visible;
 
-            //TODO: show player entrace animation
-
-            //await Task.Delay(TimeSpan.FromSeconds(1));
-
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
 
             SetStars();
 
             Stopwatch = Stopwatch.StartNew();
-
             GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
 
             GameFrameTimer.Tick += (s, e) =>
@@ -402,9 +397,7 @@ namespace AstroOdyssey
             };
 
             GameFrameTimer.Start();
-
-            _starHelper.WarpThroughSpace();
-
+            WarpThroughSpace();
             AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
 
@@ -882,6 +875,44 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Warps the player through space.
+        /// </summary>
+        private void WarpThroughSpace()
+        {
+            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
+
+            if (destructibles is not null)
+            {
+                Parallel.ForEach(destructibles, destructible =>
+                {
+                    destructible.IsMarkedForFadedDestruction = true;
+                });
+            }
+
+            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
+
+            if (projectiles is not null)
+            {
+                Parallel.ForEach(projectiles, projectile =>
+                {
+                    GameView.AddDestroyableGameObject(projectile);
+                });
+            }
+
+            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
+
+            if (pickups is not null)
+            {
+                Parallel.ForEach(pickups, pickup =>
+                {
+                    GameView.AddDestroyableGameObject(pickup);
+                });
+            }
+
+            _starHelper.WarpThroughSpace();
+        }
+
         #endregion
 
         #region Frame Methods
@@ -988,41 +1019,6 @@ namespace AstroOdyssey
             Boss = null;
 
             //TODO: clear all objects except stars
-        }
-
-        private void WarpThroughSpace()
-        {
-            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
-
-            if (destructibles is not null)
-            {
-                Parallel.ForEach(destructibles, destructible =>
-                {
-                    destructible.IsMarkedForFadedDestruction = true;
-                });
-            }
-
-            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
-
-            if (projectiles is not null)
-            {
-                Parallel.ForEach(projectiles, projectile =>
-                {
-                    GameView.AddDestroyableGameObject(projectile);
-                }); 
-            }
-
-            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
-
-            if (pickups is not null)
-            {
-                Parallel.ForEach(pickups, pickup =>
-                {
-                    GameView.AddDestroyableGameObject(pickup);
-                }); 
-            }
-
-            _starHelper.WarpThroughSpace();
         }
 
         #endregion
