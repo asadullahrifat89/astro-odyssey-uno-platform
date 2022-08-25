@@ -31,7 +31,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void StartSpaceWarping()
+        public void WarpThroughSpace()
         {
             starSpawnDelay -= 249;
             starSpeed += 35d;
@@ -41,7 +41,7 @@ namespace AstroOdyssey
             gameEnvironment.IsWarpingThroughSpace = true;
         }
 
-        public void StopSpaceWarping()
+        public void StopSpaceWarp()
         {
             starSpawnDelay += 249;
             starSpeed -= 35d;
@@ -61,7 +61,7 @@ namespace AstroOdyssey
 
                 if (spaceWarpCounter <= 0)
                 {
-                    StopSpaceWarping();
+                    StopSpaceWarp();
                 }
             }
 
