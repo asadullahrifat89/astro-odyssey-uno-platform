@@ -223,8 +223,10 @@ namespace AstroOdyssey
 
         public void Explode()
         {
+            //TODO: explode image set
+
             compositeTransform.ScaleX += 0.3d;
-            compositeTransform.ScaleY += 0.3d;
+            compositeTransform.ScaleY += 0.3d;            
         }
 
         public void OverPower()
