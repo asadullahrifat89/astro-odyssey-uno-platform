@@ -26,6 +26,8 @@ namespace AstroOdyssey
 
             YDirection = YDirection.DOWN;
             PowerUpType = PowerUpType.NONE;
+
+            IsPickup = true;
         }
 
         #endregion

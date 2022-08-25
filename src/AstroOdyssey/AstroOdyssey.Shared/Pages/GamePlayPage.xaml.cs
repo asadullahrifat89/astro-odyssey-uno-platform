@@ -353,14 +353,12 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
-        private async void StartGame()
+        private void StartGame()
         {
-
 #if !DEBUG
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
-
             AudioHelper.PlaySound(baseUrl, SoundType.GAME_START);
 
             SpawnPlayer();
@@ -375,9 +373,9 @@ namespace AstroOdyssey
 
             PauseGameButton.Visibility = Visibility.Visible;
 
-            //TODO: show player entrace animation            
+            //TODO: show player entrace animation
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            //await Task.Delay(TimeSpan.FromSeconds(1));
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
@@ -404,6 +402,8 @@ namespace AstroOdyssey
             };
 
             GameFrameTimer.Start();
+
+            _starHelper.WarpThroughSpace();
 
             AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
         }
@@ -502,8 +502,6 @@ namespace AstroOdyssey
 
             SpawnGameObjects();
 
-            //UpdateScore(); // render frame
-
             HandleInGameText();
 
             DamageRecoveryCoolDown();
@@ -521,10 +519,10 @@ namespace AstroOdyssey
             {
                 // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
-                {                    
+                {
                     gameObject.Explode();
 
-                    if (gameObject.HasFadedAway)
+                    if (gameObject.HasExploded)
                     {
                         GameView.AddDestroyableGameObject(gameObject);
                         return;
@@ -597,6 +595,9 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
+                        if (GameView.IsWarpingThroughSpace)
+                            return;
+
                         _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                         if (GameView.IsBossEngaged)
@@ -646,6 +647,9 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
+                        if (GameView.IsWarpingThroughSpace)
+                            return;
+
                         // check if enemy projectile collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: projectile))
                         {
@@ -660,6 +664,9 @@ namespace AstroOdyssey
                         _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
 
                         if (destroyed)
+                            return;
+
+                        if (GameView.IsWarpingThroughSpace)
                             return;
 
                         // check if enemy collides with player
@@ -683,6 +690,9 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
+                        if (GameView.IsWarpingThroughSpace)
+                            return;
+
                         // check if meteor collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: meteor))
                         {
@@ -697,6 +707,9 @@ namespace AstroOdyssey
                         _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
 
                         if (destroyed)
+                            return;
+
+                        if (GameView.IsWarpingThroughSpace)
                             return;
 
                         // check if health collides with player
@@ -714,6 +727,9 @@ namespace AstroOdyssey
                         _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
 
                         if (destroyed)
+                            return;
+
+                        if (GameView.IsWarpingThroughSpace)
                             return;
 
                         // check if power up collides with player
@@ -745,15 +761,24 @@ namespace AstroOdyssey
         {
             _starHelper.SpawnStar();
 
-            _meteorHelper.SpawnMeteor(GameLevel);
+            // only generate game objects if not warping thorugh space
+            if (!GameView.IsWarpingThroughSpace)
+            {
+                _meteorHelper.SpawnMeteor(GameLevel);
 
-            _enemyHelper.SpawnEnemy(GameLevel);
+                _enemyHelper.SpawnEnemy(GameLevel);
 
-            _healthHelper.SpawnHealth(Player);
+                _healthHelper.SpawnHealth(Player);
 
-            _powerUpHelper.SpawnPowerUp();
+                _powerUpHelper.SpawnPowerUp();
 
-            _playerProjectileHelper.SpawnProjectile(isPoweredUp: IsPoweredUp, firingProjectiles: FiringProjectiles, player: Player, gameLevel: GameLevel, powerUpType: PowerUpType);
+                _playerProjectileHelper.SpawnProjectile(
+                    isPoweredUp: IsPoweredUp,
+                    firingProjectiles: FiringProjectiles,
+                    player: Player,
+                    gameLevel: GameLevel,
+                    powerUpType: PowerUpType);
+            }
         }
 
         ///// <summary>
@@ -956,9 +981,48 @@ namespace AstroOdyssey
         /// </summary>
         private void DisengageBoss()
         {
+            WarpThroughSpace();
+
             ShowInGameText($"💥\nLEVEL {(int)GameLevel} BOSS DEFEATED");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
+
+            //TODO: clear all objects except stars
+        }
+
+        private void WarpThroughSpace()
+        {
+            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
+
+            if (destructibles is not null)
+            {
+                Parallel.ForEach(destructibles, destructible =>
+                {
+                    destructible.IsMarkedForFadedDestruction = true;
+                });
+            }
+
+            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
+
+            if (projectiles is not null)
+            {
+                Parallel.ForEach(projectiles, projectile =>
+                {
+                    GameView.AddDestroyableGameObject(projectile);
+                }); 
+            }
+
+            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
+
+            if (pickups is not null)
+            {
+                Parallel.ForEach(pickups, pickup =>
+                {
+                    GameView.AddDestroyableGameObject(pickup);
+                }); 
+            }
+
+            _starHelper.WarpThroughSpace();
         }
 
         #endregion
@@ -1044,6 +1108,7 @@ namespace AstroOdyssey
                 }
                 else
                 {
+                    WarpThroughSpace();
                     ShowInGameText("☄️\nMETEORS INCOMING");
                     AudioHelper.PlaySound(baseUrl, SoundType.METEOR_INCOMING);
                 }

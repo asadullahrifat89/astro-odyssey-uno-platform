@@ -60,11 +60,15 @@ namespace AstroOdyssey
 
         public double ExplosionCounter { get; set; } = 1;
 
-        public bool HasFadedAway => ExplosionCounter <= 0; //Opacity <= 0;
+        public bool HasExploded => ExplosionCounter <= 0; //Opacity <= 0;
 
         public bool IsOverPowered { get; set; } = false;
 
         public bool IsDestructible { get; set; }
+
+        public bool IsProjectile { get; set; }
+
+        public bool IsPickup { get; set; }
 
         public double HalfWidth { get; set; }
 
@@ -78,7 +82,6 @@ namespace AstroOdyssey
                 isMarkedForFadedDestruction = value;
 
                 //change the content to explosion
-
                 if (isMarkedForFadedDestruction)
                 {
                     Child = new Border()
@@ -244,7 +247,6 @@ namespace AstroOdyssey
 
         public void Explode()
         {
-            //TODO: explode image set
             ExplosionCounter -= 0.1d;
 
             if (ExplosionCounter <= 0.3d)

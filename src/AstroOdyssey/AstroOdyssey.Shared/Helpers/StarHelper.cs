@@ -15,6 +15,9 @@ namespace AstroOdyssey
         private int starSpawnDelay = 250;
         private double starSpeed = 0.1d;
 
+        private int spaceWarpCounter;
+        private int spaceWarpDelay = 50;        
+
         #endregion
 
         #region Ctor
@@ -24,15 +27,44 @@ namespace AstroOdyssey
             this.gameEnvironment = gameEnvironment;
         }
 
-        #endregion
+        #endregion       
 
         #region Methods
+
+        public void WarpThroughSpace()
+        {
+            starSpawnDelay -= 249;
+            starSpeed += 35d;
+            starSpawnCounter = starSpawnDelay;
+
+            spaceWarpCounter = spaceWarpDelay;
+            gameEnvironment.IsWarpingThroughSpace = true;
+        }
+
+        public void StopSpaceWarp()
+        {
+            starSpawnDelay += 249;
+            starSpeed -= 35d;
+            starSpawnCounter = starSpawnDelay;
+
+            gameEnvironment.IsWarpingThroughSpace = false;
+        }
 
         /// <summary>
         /// Spawns random stars in the star view.
         /// </summary>
         public void SpawnStar()
         {
+            if (gameEnvironment.IsWarpingThroughSpace)
+            {
+                spaceWarpCounter--;
+
+                if (spaceWarpCounter <= 0)
+                {
+                    StopSpaceWarp();
+                }
+            }
+
             // each frame progress decreases this counter
             starSpawnCounter -= 1;
 

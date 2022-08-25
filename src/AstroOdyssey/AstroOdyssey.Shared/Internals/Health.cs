@@ -22,6 +22,8 @@ namespace AstroOdyssey
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
             Child = content;
             YDirection = YDirection.DOWN;
+
+            IsPickup = true;
         } 
 
         #endregion

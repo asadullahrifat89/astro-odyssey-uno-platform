@@ -27,6 +27,8 @@ namespace AstroOdyssey
 
         #region Properties
 
+        public bool IsWarpingThroughSpace { get; set; }
+
         public bool IsBossEngaged { get; set; }
 
         public double HalfWidth => Width > 0 && double.IsFinite(Width) ? Width / 2 : 0;
