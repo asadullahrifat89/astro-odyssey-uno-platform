@@ -11,7 +11,6 @@
   <Import Project="AstroOdyssey.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\ChooseShipPage.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
     <UpToDateCheckInput Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
@@ -91,7 +90,6 @@
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <_Globbled_Page Remove="Pages\ChooseShipPage.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />
     <_Globbled_Page Remove="Pages\LoginPage.xaml" />
   </ItemGroup>

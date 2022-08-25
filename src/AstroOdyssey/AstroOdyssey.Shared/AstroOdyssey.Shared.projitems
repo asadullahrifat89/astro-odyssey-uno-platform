@@ -29,8 +29,8 @@
     <Compile Include="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ship.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml.cs">
-      <DependentUpon>ChooseShipPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml.cs">
+      <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
@@ -61,7 +61,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\ChooseShipPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
