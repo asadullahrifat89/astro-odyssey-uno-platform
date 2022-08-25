@@ -524,7 +524,7 @@ namespace AstroOdyssey
                 {                    
                     gameObject.Explode();
 
-                    if (gameObject.HasFadedAway)
+                    if (gameObject.HasExploded)
                     {
                         GameView.AddDestroyableGameObject(gameObject);
                         return;
