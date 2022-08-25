@@ -18,6 +18,8 @@ namespace AstroOdyssey
 
             CornerRadius = new CornerRadius(50);
             YDirection = YDirection.DOWN;
+
+            IsProjectile = true;
         }
 
         #endregion

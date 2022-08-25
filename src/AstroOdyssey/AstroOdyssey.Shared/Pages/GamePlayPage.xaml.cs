@@ -992,12 +992,35 @@ namespace AstroOdyssey
 
         private void WarpThroughSpace()
         {
-            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
+            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
 
-            Parallel.ForEach(gameObjects, gameObject =>
+            if (destructibles is not null)
             {
-                gameObject.IsMarkedForFadedDestruction = true;
-            });
+                Parallel.ForEach(destructibles, destructible =>
+                {
+                    destructible.IsMarkedForFadedDestruction = true;
+                });
+            }
+
+            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
+
+            if (projectiles is not null)
+            {
+                Parallel.ForEach(projectiles, projectile =>
+                {
+                    GameView.AddDestroyableGameObject(projectile);
+                }); 
+            }
+
+            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
+
+            if (pickups is not null)
+            {
+                Parallel.ForEach(pickups, pickup =>
+                {
+                    GameView.AddDestroyableGameObject(pickup);
+                }); 
+            }
 
             _starHelper.WarpThroughSpace();
         }

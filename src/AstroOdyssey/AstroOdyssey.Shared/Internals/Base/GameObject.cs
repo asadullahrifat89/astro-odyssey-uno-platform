@@ -66,6 +66,10 @@ namespace AstroOdyssey
 
         public bool IsDestructible { get; set; }
 
+        public bool IsProjectile { get; set; }
+
+        public bool IsPickup { get; set; }
+
         public double HalfWidth { get; set; }
 
         private bool isMarkedForFadedDestruction;
