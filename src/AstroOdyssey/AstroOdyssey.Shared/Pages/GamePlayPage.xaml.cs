@@ -191,6 +191,8 @@ namespace AstroOdyssey
 
             PointerX = windowWidth / 2;
 
+            PauseGameButton.Visibility = Visibility.Collapsed;
+
             ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
             InputView.Focus(FocusState.Programmatic);
         }
@@ -223,7 +225,15 @@ namespace AstroOdyssey
 #endif
         }
 
-        #endregion   
+        private void PauseGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsGamePaused)
+                ResumeGame();
+            else
+                PauseGame();
+        }
+
+        #endregion
 
         #region Input Events       
 
@@ -394,6 +404,8 @@ namespace AstroOdyssey
             GameFrameTimer.Start();
 
             AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+
+            PauseGameButton.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -462,7 +474,7 @@ namespace AstroOdyssey
             GameFrameTimer?.Stop();
             ShowInGameText("PAUSED");
             FiringProjectiles = false;
-            IsGamePaused = true;
+            IsGamePaused = true;            
         }
 
         /// <summary>
@@ -474,7 +486,7 @@ namespace AstroOdyssey
             InGameText.Text = "";
             GameFrameTimer?.Start();
             FiringProjectiles = true;
-            IsGamePaused = false;
+            IsGamePaused = false;            
         }
 
         /// <summary>
