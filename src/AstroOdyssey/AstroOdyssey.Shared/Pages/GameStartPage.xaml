@@ -6,6 +6,7 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    IsTabStop="False"
     mc:Ignorable="d">
 
     <Grid>

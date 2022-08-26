@@ -163,7 +163,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void GamePage_Loaded(object sender, RoutedEventArgs e)
+        async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
 
@@ -193,7 +193,7 @@ namespace AstroOdyssey
             QuitGameButton.Visibility = Visibility.Collapsed;
 
             ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
-            InputView.Focus(FocusState.Keyboard);
+            await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
         }
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace AstroOdyssey
             }
         }
 
-        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private async void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             if (IsGameQuitting)
             {
@@ -379,7 +379,7 @@ namespace AstroOdyssey
             }
             else
             {
-                InputView.Focus(FocusState.Keyboard);
+                await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
                 StartGame();
                 FiringProjectiles = true;
             }
@@ -522,7 +522,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Resumes the game.
         /// </summary>
-        private void ResumeGame()
+        private async void ResumeGame()
         {
             InGameText.Text = "";
             GameFrameTimer?.Start();
@@ -537,7 +537,7 @@ namespace AstroOdyssey
             if (GameView.IsBossEngaged)
                 AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
 
-            InputView.Focus(FocusState.Keyboard);
+            await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
         }
 
         /// <summary>
