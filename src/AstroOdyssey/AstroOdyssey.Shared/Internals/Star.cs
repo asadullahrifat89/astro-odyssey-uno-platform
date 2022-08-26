@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
             double size = 0;
 
-            var starType = random.Next(1, 5);
+            var starType = random.Next(1, 9);
 
             switch (starType)
             {
@@ -54,6 +54,22 @@ namespace AstroOdyssey
                     break;
                 case 4:
                     uri = new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute);
+                    size = 20;
+                    break;
+                case 5:
+                    uri = new Uri("ms-appx:///Assets/Images/star_large2.png", UriKind.RelativeOrAbsolute);
+                    size = 20;
+                    break;
+                case 6:
+                    uri = new Uri("ms-appx:///Assets/Images/star_medium2.png", UriKind.RelativeOrAbsolute);
+                    size = 20;
+                    break;
+                case 7:
+                    uri = new Uri("ms-appx:///Assets/Images/star_small2.png", UriKind.RelativeOrAbsolute);
+                    size = 20;
+                    break;
+                case 8:
+                    uri = new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute);
                     size = 20;
                     break;
             }
