@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using static AstroOdyssey.Constants;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,6 +37,7 @@ namespace AstroOdyssey
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(typeof(ShipSelectionPage));
         }
     }
