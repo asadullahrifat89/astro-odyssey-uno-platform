@@ -201,18 +201,6 @@
                 Minimum="0"
                 Value="100" />
 
-            <ProgressBar
-                Name="PlayerPowerBar"
-                Width="100"
-                Height="5"
-                Margin="5"
-                VerticalAlignment="Center"
-                Foreground="Goldenrod"
-                Maximum="100"
-                Minimum="0"
-                Visibility="Collapsed"
-                Value="100" />
-
             <TextBlock
                 Name="PlayerHealthBarCount"
                 Margin="5"
@@ -225,6 +213,28 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="🔥"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords"
+                Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />
+
+            <ProgressBar
+                Name="PlayerPowerBar"
+                Width="100"
+                Height="5"
+                Margin="5"
+                VerticalAlignment="Center"
+                Foreground="Goldenrod"
+                Maximum="1050"
+                Minimum="0"
+                Visibility="Collapsed"
+                Value="1050" />
 
             <!--<TextBlock
                 Name="PlayerHealthBarCount"

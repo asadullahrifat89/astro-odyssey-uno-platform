@@ -356,8 +356,8 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var powerGauge = Math.Abs((powerUpTriggerSpawnCounter / 1050) * 100);
-            return (false, powerGauge);
+            //var powerGauge = Math.Abs((powerUpTriggerSpawnCounter / 1050) * 100);
+            return (false, powerUpTriggerSpawnCounter);
         }
 
         #endregion
