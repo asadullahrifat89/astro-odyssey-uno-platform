@@ -212,17 +212,39 @@ namespace AstroOdyssey
             switch (tag)
             {
                 case METEOR:
+                    {
+                        // only loose health if player is now in physical state
+                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            gameObject.IsMarkedForFadedDestruction = true;
+                            PlayerHealthLoss(player);
+
+                            return true;
+                        }
+                    }
+                    break;
                 case ENEMY:
+                    {
+                        // only loose health if player is now in physical state
+                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            if (gameObject is Enemy enemy && !enemy.IsBoss)
+                            {
+                                gameObject.IsMarkedForFadedDestruction = true;
+                            }
+
+                            PlayerHealthLoss(player);
+
+                            return true;
+                        }
+                    }
+                    break;
                 case ENEMY_PROJECTILE:
                     {
                         // only loose health if player is now in physical state
                         if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (gameObject is not Enemy enemy || !enemy.IsBoss)
-                            {
-                                gameEnvironment.AddDestroyableGameObject(gameObject);
-                            }
-
+                            gameEnvironment.AddDestroyableGameObject(gameObject);
                             PlayerHealthLoss(player);
 
                             return true;

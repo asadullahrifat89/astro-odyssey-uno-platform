@@ -34,7 +34,7 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnHealth(Player player)
         {
-            if (player.Health <= 60)
+            if (player.Health <= 70)
             {
                 // each frame progress decreases this counter
                 healthSpawnCounter -= 1;
