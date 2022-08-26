@@ -67,21 +67,45 @@ namespace AstroOdyssey
             Opacity = 1;
 
             Uri uri = null;
-            var enemyShipType = random.Next(1, 4);
+            var enemyShipType = random.Next(1, 7);
 
             switch (enemyShipType)
             {
                 case 1:
-                    uri = new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute);
+                        Health = 1;
+                    }
                     break;
                 case 2:
-                    uri = new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute);
+                        Health = 2;
+                    }
                     break;
                 case 3:
-                    uri = new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute);
-                    Health = 1;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute);
+                        Health = 3;
+                    }
+                    break;
+                case 4:
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_4.png", UriKind.RelativeOrAbsolute);
+                        Health = 1;
+                    }
+                    break;
+                case 5:
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_5.png", UriKind.RelativeOrAbsolute);
+                        Health = 2;
+                    }
+                    break;
+                case 6:
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/enemy_6.png", UriKind.RelativeOrAbsolute);
+                        Health = 3;                       
+                    }
                     break;
             }
 

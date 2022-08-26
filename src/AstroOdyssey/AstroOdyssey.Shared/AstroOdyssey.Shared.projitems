@@ -96,6 +96,13 @@
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Assets\10803966.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\2180138.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_6.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock7.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock8.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock9.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock10.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\player_ship2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\player_ship3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_1.png" />
