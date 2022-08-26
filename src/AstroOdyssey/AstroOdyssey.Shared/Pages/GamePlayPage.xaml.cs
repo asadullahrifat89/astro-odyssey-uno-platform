@@ -609,8 +609,18 @@ namespace AstroOdyssey
 
                         if (IsPoweredUp)
                         {
-                            if (_playerHelper.PowerUpCoolDown(Player))
+                            var coolDown = _playerHelper.PowerUpCoolDown(Player);
+
+                            PlayerPowerBar.Value = coolDown.PowerRemaining;
+
+#if DEBUG
+                            Console.WriteLine("Power Remaining:" + coolDown.PowerRemaining);
+#endif
+
+                            if (coolDown.PoweredDown)
                             {
+                                PlayerPowerBar.Visibility = Visibility.Collapsed;
+
                                 _playerProjectileHelper.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
@@ -772,6 +782,7 @@ namespace AstroOdyssey
                         // check if power up collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
                         {
+                            PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
                             ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));

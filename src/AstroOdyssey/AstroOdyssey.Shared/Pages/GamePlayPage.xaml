@@ -201,6 +201,18 @@
                 Minimum="0"
                 Value="100" />
 
+            <ProgressBar
+                Name="PlayerPowerBar"
+                Width="100"
+                Height="5"
+                Margin="5"
+                VerticalAlignment="Center"
+                Foreground="Goldenrod"
+                Maximum="100"
+                Minimum="0"
+                Visibility="Collapsed"
+                Value="100" />
+
             <TextBlock
                 Name="PlayerHealthBarCount"
                 Margin="5"
@@ -212,6 +224,20 @@
                 Text="{x:Bind Path=PlayerHealthBar.Value.ToString('0'), Mode=OneWay}"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
+
+
+            <!--<TextBlock
+                Name="PlayerHealthBarCount"
+                Margin="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="{x:Bind Path=PlayerPowerBar.Value.ToString('0'), Mode=OneWay}"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords"
+                Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />-->
 
         </StackPanel>
 

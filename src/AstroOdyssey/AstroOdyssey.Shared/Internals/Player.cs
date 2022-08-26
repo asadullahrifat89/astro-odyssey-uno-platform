@@ -25,15 +25,15 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform
         };
 
-        private readonly Border powerGauge = new Border()
-        {
-            Height = 5,
-            Width = 0, // TODO: leave it to 0
-            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
-            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
-            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-            Background = new SolidColorBrush(Colors.Goldenrod),
-        };
+        //private readonly Border powerGauge = new Border()
+        //{
+        //    Height = 5,
+        //    Width = 0, // TODO: leave it to 0
+        //    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
+        //    VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
+        //    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+        //    Background = new SolidColorBrush(Colors.Goldenrod),
+        //};
 
         //private readonly Border contentShipHealthBar = new Border()
         //{
@@ -68,7 +68,7 @@ namespace AstroOdyssey
             body = new Grid();
             body.Children.Add(contentShipBlaze);
             body.Children.Add(ship);
-            body.Children.Add(powerGauge);
+            //body.Children.Add(powerGauge);
             //content.Children.Add(contentShipHealthBar);           
 
             Child = body;
@@ -132,15 +132,15 @@ namespace AstroOdyssey
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
         }
 
-        public void SetPowerGauge(double powerGauge)
-        {
-            this.powerGauge.Width = powerGauge * 3;
-        }
+        //public void SetPowerGauge(double powerGauge)
+        //{
+        //    this.powerGauge.Width = powerGauge * 3;
+        //}
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
             Speed += 1;
-            powerGauge.Width = Width / 2;
+            //powerGauge.Width = Width / 2;
 
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
@@ -171,7 +171,7 @@ namespace AstroOdyssey
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
             //contentShipBlaze.Source = new BitmapImage(exhaustUri);
             Speed -= 1;
-            powerGauge.Width = 0;
+            //powerGauge.Width = 0;
         }
 
         /// <summary>

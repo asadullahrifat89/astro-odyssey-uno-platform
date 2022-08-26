@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Text.RegularExpressions;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -341,22 +342,22 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public bool PowerUpCoolDown(Player player)
+        public (bool PoweredDown, int PowerRemaining) PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
-            var powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
-
-            player.SetPowerGauge(powerGauge);
+            //powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
+            //player.SetPowerGauge(powerGauge);
 
             if (powerUpTriggerSpawnCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
-                return true;
+                return (true, 0);
             }
 
-            return false;
+            var powerGauge = Math.Abs((powerUpTriggerSpawnCounter / 1050) * 100);
+            return (false, powerGauge);
         }
 
         #endregion
