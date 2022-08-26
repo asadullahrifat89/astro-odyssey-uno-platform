@@ -12,24 +12,29 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/2180138.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/sDA_z4.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <StackPanel
-            MaxWidth="315"
+        <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Vertical">
+            CornerRadius="10">
+            <StackPanel
+                MaxWidth="315"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
 
-            <Image
-                Width="115"
-                Height="115"
-                Source="ms-appx:///Assets/Images/player_ship1.png" />
+                <Image
+                    Width="115"
+                    Height="115"
+                    Source="ms-appx:///Assets/Images/player_ship1.png" />
 
-            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
+                <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
-            <!--  Game title  -->
-            <!--<TextBlock
+                <!--  Game title  -->
+                <!--<TextBlock
                 Margin="10,10,10,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -37,53 +42,46 @@
                 FontWeight="Bold"
                 Text="ASTRO ODYSSEY" />-->
 
-            <TextBlock
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                Text="A classic space shooter game remade for the web on WebAssembly."
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+                <TextBlock
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="A classic space shooter game remade for the web on WebAssembly."
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <TextBlock
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="16"
-                Text="Press left or right arrow keys on your keyboard or touch left or right edges of your screen to move ship."
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+                <!--  Arcade mode button  -->
+                <Button
+                    x:Name="PlayButton"
+                    Height="40"
+                    Margin="0,50,0,50"
+                    HorizontalAlignment="Stretch"
+                    Background="Red"
+                    BorderBrush="DarkRed"
+                    BorderThickness="3"
+                    Click="PlayButton_Click"
+                    Content="START GAME"
+                    CornerRadius="50"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
 
+                <TextBlock
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="Made with ❤️ by Asadullah Rifat."
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <!--  Arcade mode button  -->
-            <Button
-                x:Name="PlayButton"
-                Height="40"
-                Margin="0,50,0,50"
-                HorizontalAlignment="Stretch"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                Click="PlayButton_Click"
-                Content="START GAME"
-                CornerRadius="50"
-                FontWeight="SemiBold"
-                Foreground="White"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False" />
-
-            <TextBlock
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                Text="Made with ❤️ by Asadullah Rifat."
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
-
-        </StackPanel>
-
+            </StackPanel>
+            <Border.Background>
+                <SolidColorBrush Opacity="0.7" Color="Black" />
+            </Border.Background>
+        </Border>
     </Grid>
 
 </Page>
