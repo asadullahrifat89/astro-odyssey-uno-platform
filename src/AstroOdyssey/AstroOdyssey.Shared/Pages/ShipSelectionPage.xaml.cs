@@ -46,83 +46,14 @@ namespace AstroOdyssey
                 string shipUri = null;
                 string name = null;
 
-                for (int i = 1; i <= 11; i++)
+                for (int i = 1; i <= 1; i++)
                 {
                     switch (i)
                     {
-                        //case 1:
-                        //    shipUri = "ms-appx:///Assets/Images/satellite_A.png";
-                        //    name = "Gallium";
-                        //    break;
                         case 1:
-                            shipUri = "ms-appx:///Assets/Images/satellite_B.png";
+                            shipUri = "ms-appx:///Assets/Images/player_ship.png";
                             name = "Antimony";
                             break;
-                        case 2:
-                            shipUri = "ms-appx:///Assets/Images/satellite_C.png";
-                            name = "Bismuth";
-                            break;
-                        case 3:
-                            shipUri = "ms-appx:///Assets/Images/satellite_D.png";
-                            name = "Cerium";
-                            break;
-                        case 4:
-                            shipUri = "ms-appx:///Assets/Images/ship_C.png";
-                            name = "Cadmium";
-                            break;
-                        case 5:
-                            shipUri = "ms-appx:///Assets/Images/ship_D.png";
-                            name = "Krypton";
-                            break;
-                        case 6:
-                            shipUri = "ms-appx:///Assets/Images/ship_E.png";
-                            name = "Radon";
-                            break;
-                        case 7:
-                            shipUri = "ms-appx:///Assets/Images/ship_F.png";
-                            name = "Cobalt";
-                            break;
-                        case 8:
-                            shipUri = "ms-appx:///Assets/Images/ship_G.png";
-                            name = "Radium";
-                            break;
-                        case 9:
-                            shipUri = "ms-appx:///Assets/Images/ship_H.png";
-                            name = "Barium";
-                            break;
-                        case 10:
-                            shipUri = "ms-appx:///Assets/Images/ship_I.png";
-                            name = "Neon";
-                            break;
-                        case 11:
-                            shipUri = "ms-appx:///Assets/Images/ship_J.png";
-                            name = "Xenon";
-                            break;
-                        //case 13:
-                        //    shipUri = "ms-appx:///Assets/Images/ship_K.png";
-                        //    name = "Argon";
-                        //    break;
-                        //case 14:
-                        //    shipUri = "ms-appx:///Assets/Images/ship_L.png";
-                        //    name = "Helium";
-                        //    break;
-                        case 14:
-                            shipUri = "ms-appx:///Assets/Images/ship_sidesA.png";
-                            name = "Thorium";
-                            break;
-                        //case 16:
-                        //    shipUri = "ms-appx:///Assets/Images/ship_sidesB.png";
-                        //    name = "Lawrencium";
-                        //    break;
-                        case 15:
-                            shipUri = "ms-appx:///Assets/Images/ship_sidesC.png";
-                            name = "Promethium";
-                            break;
-                            //case 16:
-                            //    shipUri = "ms-appx:///Assets/Images/ship_sidesD.png";
-                            //    name = "Erbium";
-                            //    break;
-
                     }
 
                     ships.Add(new Ship()

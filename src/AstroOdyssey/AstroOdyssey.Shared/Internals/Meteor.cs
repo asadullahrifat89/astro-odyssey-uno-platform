@@ -49,42 +49,30 @@ namespace AstroOdyssey
 
             Uri uri = null;
 
-            var meteorType = random.Next(1, 9);
+            var meteorType = random.Next(1, 6);
 
             switch (meteorType)
             {
                 case 1:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_detailedLarge.png", UriKind.RelativeOrAbsolute);
+                    uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
                     Health = 3;
                     break;
                 case 2:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_detailedSmall.png", UriKind.RelativeOrAbsolute);
+                    uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
                     Health = 2;
                     break;
                 case 3:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_large.png", UriKind.RelativeOrAbsolute);
+                    uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
                     Health = 3;
                     break;
                 case 4:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_small.png", UriKind.RelativeOrAbsolute);
+                    uri = new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute);
                     Health = 2;
                     break;
                 case 5:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_squareDetailedLarge.png", UriKind.RelativeOrAbsolute);
+                    uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
                     Health = 3;
-                    break;
-                case 6:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_squareDetailedSmall.png", UriKind.RelativeOrAbsolute);
-                    Health = 1;
-                    break;
-                case 7:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_squareLarge.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
-                    break;
-                case 8:
-                    uri = new Uri("ms-appx:///Assets/Images/meteor_squareSmall.png", UriKind.RelativeOrAbsolute);
-                    Health = 1;
-                    break;
+                    break;                
             }
 
             content.Source = new BitmapImage(uri);
