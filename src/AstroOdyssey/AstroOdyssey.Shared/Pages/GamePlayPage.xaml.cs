@@ -466,7 +466,12 @@ namespace AstroOdyssey
             FiringProjectiles = false;
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
+           
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            AudioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
+            if (GameView.IsBossEngaged)
+                AudioHelper.PauseSound(SoundType.BOSS_APPEARANCE);
         }
 
         /// <summary>
@@ -480,7 +485,12 @@ namespace AstroOdyssey
             FiringProjectiles = true;
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
+
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            AudioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
+            if (GameView.IsBossEngaged)
+                AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
         }
 
         /// <summary>
