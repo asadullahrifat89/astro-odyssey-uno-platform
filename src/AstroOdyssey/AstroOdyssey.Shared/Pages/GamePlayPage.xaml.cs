@@ -613,10 +613,6 @@ namespace AstroOdyssey
 
                             PlayerPowerBar.Value = coolDown.PowerRemaining;
 
-#if DEBUG
-                            Console.WriteLine("Power Remaining:" + coolDown.PowerRemaining);
-#endif
-
                             if (coolDown.PoweredDown)
                             {
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;

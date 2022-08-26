@@ -9,9 +9,6 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-        private readonly string baseUrl;
-
-        private readonly Random random = new Random();
 
         private int projectileSpawnCounter;
         private int projectileSpawnDelay = 14;
@@ -35,7 +32,6 @@ namespace AstroOdyssey
         public PlayerProjectileHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion

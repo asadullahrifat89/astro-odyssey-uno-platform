@@ -192,7 +192,7 @@
 
             <ProgressBar
                 Name="PlayerHealthBar"
-                Width="200"
+                Width="150"
                 Height="5"
                 Margin="5"
                 VerticalAlignment="Center"

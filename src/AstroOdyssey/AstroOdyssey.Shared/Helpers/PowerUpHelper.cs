@@ -7,11 +7,10 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
-        private int powerUpSpawnCounter = 0; //TODO: leave it 1500
+        private int powerUpSpawnCounter = 1500;
         private int powerUpSpawnDelay = 1500;
         private double powerUpSpeed = 2;
 
@@ -22,7 +21,6 @@ namespace AstroOdyssey
         public PowerUpHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion

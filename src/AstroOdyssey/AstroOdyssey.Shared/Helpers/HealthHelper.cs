@@ -7,7 +7,6 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
@@ -22,7 +21,6 @@ namespace AstroOdyssey
         public HealthHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
