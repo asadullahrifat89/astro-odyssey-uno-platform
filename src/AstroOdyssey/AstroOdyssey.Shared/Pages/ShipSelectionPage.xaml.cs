@@ -46,13 +46,17 @@ namespace AstroOdyssey
                 string shipUri = null;
                 string name = null;
 
-                for (int i = 1; i <= 1; i++)
+                for (int i = 1; i <= 2; i++)
                 {
                     switch (i)
                     {
                         case 1:
-                            shipUri = "ms-appx:///Assets/Images/player_ship.png";
+                            shipUri = "ms-appx:///Assets/Images/player_ship1.png";
                             name = "Antimony";
+                            break;
+                        case 2:
+                            shipUri = "ms-appx:///Assets/Images/player_ship2.png";
+                            name = "Bismuth";
                             break;
                     }
 
