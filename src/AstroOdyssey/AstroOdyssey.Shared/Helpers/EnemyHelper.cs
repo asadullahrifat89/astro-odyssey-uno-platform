@@ -64,9 +64,10 @@ namespace AstroOdyssey
 
             enemy.Height = enemy.Height * 2 + (int)gameLevel / 3 + 0.25d;
             enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
+            enemy.HalfWidth = enemy.Width / 2;
             enemy.Speed--;
 
-            enemy.Health = 50 * (int)gameLevel;            
+            enemy.Health = 50 * (int)gameLevel;
 
             SetProjectileFiringEnemy(enemy);
             SetHoveringEnemy(enemy);
