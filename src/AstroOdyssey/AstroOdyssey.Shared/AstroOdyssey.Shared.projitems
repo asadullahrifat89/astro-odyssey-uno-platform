@@ -123,7 +123,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\inspiring-motivational-rock-inspire-mesenses-111448.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\sexy-fashion-beats-simulate-11176.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
