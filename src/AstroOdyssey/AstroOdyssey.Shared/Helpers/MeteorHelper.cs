@@ -41,17 +41,14 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnMeteor(GameLevel gameLevel)
         {
-            if ((int)gameLevel > 0)
-            {
-                // each frame progress decreases this counter
-                meteorSpawnCounter -= 1;
+            // each frame progress decreases this counter
+            meteorSpawnCounter -= 1;
 
-                // when counter reaches zero, create a meteor
-                if (meteorSpawnCounter < 0)
-                {
-                    GenerateMeteor(gameLevel);
-                    meteorSpawnCounter = meteorSpawnDelay;
-                }
+            // when counter reaches zero, create a meteor
+            if (meteorSpawnCounter < 0)
+            {
+                GenerateMeteor(gameLevel);
+                meteorSpawnCounter = meteorSpawnDelay;
             }
         }
 
