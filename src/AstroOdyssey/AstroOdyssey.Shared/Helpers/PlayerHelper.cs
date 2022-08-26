@@ -29,10 +29,10 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerHelper(GameEnvironment gameEnvironment, string baseUrl)
+        public PlayerHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = baseUrl;
+            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion

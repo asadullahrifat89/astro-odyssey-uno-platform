@@ -24,7 +24,7 @@ namespace AstroOdyssey
         private SystemNavigationManager _systemNavigationManager;
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
-
+        private static string baseUrl;
         #endregion
 
         #region Ctor
@@ -84,7 +84,7 @@ namespace AstroOdyssey
         public static double GetScore()
         {
             return Score;
-        }       
+        }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -167,7 +167,7 @@ namespace AstroOdyssey
                 }
 
                 rootFrame.GoBack();
-            }   
+            }
         }
 
         /// <summary>
@@ -281,11 +281,11 @@ namespace AstroOdyssey
             {
                 if (value)
                 {
-                    view.TryEnterFullScreenMode();                    
+                    view.TryEnterFullScreenMode();
                 }
                 else
                 {
-                    view.ExitFullScreenMode();                    
+                    view.ExitFullScreenMode();
                 }
             }
         }
@@ -299,6 +299,24 @@ namespace AstroOdyssey
         {
             var rootFrame = _window.Content as Frame;
             rootFrame.Navigate(page, parameter);
+        }
+
+        /// <summary>
+        /// Get base url for the app.
+        /// </summary>
+        public static string GetBaseUrl()
+        {
+            if (baseUrl.IsNullOrBlank())
+            {
+                var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
+                var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
+                baseUrl = $"{indexUrl}{appPackage}";
+
+#if DEBUG
+                Console.WriteLine(baseUrl);
+#endif 
+            }
+            return baseUrl;
         }
 
         #endregion

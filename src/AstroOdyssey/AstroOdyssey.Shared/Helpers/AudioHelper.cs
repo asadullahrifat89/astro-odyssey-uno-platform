@@ -9,6 +9,7 @@ namespace AstroOdyssey
 
         private static Random random = new Random();
 
+        private static AudioPlayer MENU_SELECT = null;
         private static AudioPlayer BACKGROUND_MUSIC = null;
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_RAPID_SHOT_ROUNDS_FIRE = null;
@@ -36,6 +37,18 @@ namespace AstroOdyssey
         {
             switch (soundType)
             {
+                case SoundType.MENU_SELECT:
+                    {
+                        if (MENU_SELECT is null)
+                        {
+                            MENU_SELECT = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-score-4_NWM.mp3"),
+                                volume: 1);
+                        }
+
+                        MENU_SELECT.Play();
+                    }
+                    break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
                         var musicTrack = random.Next(1, 12);
