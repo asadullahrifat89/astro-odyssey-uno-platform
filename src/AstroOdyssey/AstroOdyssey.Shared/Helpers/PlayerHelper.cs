@@ -242,9 +242,12 @@ namespace AstroOdyssey
                 case ENEMY_PROJECTILE:
                     {
                         // only loose health if player is now in physical state
-                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                        if (!player.IsInEtherealState && !gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameEnvironment.AddDestroyableGameObject(gameObject);
+                            //gameEnvironment.AddDestroyableGameObject(gameObject);
+
+                            gameObject.IsMarkedForFadedDestruction = true;
+
                             PlayerHealthLoss(player);
 
                             return true;

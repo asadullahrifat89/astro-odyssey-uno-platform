@@ -168,7 +168,8 @@ namespace AstroOdyssey
                         case PowerUpType.RAPID_SHOT_ROUNDS:
                             {
                                 // upon hit with a destructible object remove the projectile
-                                gameEnvironment.AddDestroyableGameObject(projectile);
+                                //gameEnvironment.AddDestroyableGameObject(projectile);
+                                projectile.IsMarkedForFadedDestruction = true;
 
                                 destructible.LooseHealth(destructible.HitPoint);
                             }
@@ -176,7 +177,8 @@ namespace AstroOdyssey
                         case PowerUpType.DEAD_SHOT_ROUNDS:
                             {
                                 // upon hit with a destructible object remove the projectile
-                                gameEnvironment.AddDestroyableGameObject(projectile);
+                                //gameEnvironment.AddDestroyableGameObject(projectile);
+                                projectile.IsMarkedForFadedDestruction = true;
 
                                 // loose 5 times hit point
                                 destructible.LooseHealth(destructible.HitPoint * 5);
@@ -191,7 +193,8 @@ namespace AstroOdyssey
                         default:
                             {
                                 // upon hit with a destructible object remove the projectile
-                                gameEnvironment.AddDestroyableGameObject(projectile);
+                                //gameEnvironment.AddDestroyableGameObject(projectile);
+                                projectile.IsMarkedForFadedDestruction = true;
 
                                 destructible.LooseHealth();
                             }
@@ -201,7 +204,8 @@ namespace AstroOdyssey
                 else
                 {
                     // upon hit with a destructible object remove the projectile
-                    gameEnvironment.AddDestroyableGameObject(projectile);
+                    //gameEnvironment.AddDestroyableGameObject(projectile);
+                    projectile.IsMarkedForFadedDestruction = true;
                     destructible.LooseHealth();
                 }
 

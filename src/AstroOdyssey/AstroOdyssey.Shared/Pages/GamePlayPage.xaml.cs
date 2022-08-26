@@ -29,14 +29,14 @@ namespace AstroOdyssey
 
 #if DEBUG
         private int frameStatUpdateSpawnCounter;
-        private int frameStatUpdateDelay = 5; 
+        private int frameStatUpdateDelay = 5;
         private double frameDuration;
 #endif
 
         private int showInGameTextSpawnCounter = 110;
         private int showInGameTextDelay = 110;
 
-        private double frameTime = 19;       
+        private double frameTime = 19;
 
         private double windowWidth, windowHeight;
 
@@ -632,6 +632,9 @@ namespace AstroOdyssey
                         if (GameView.IsWarpingThroughSpace)
                             return;
 
+                        if (projectile.IsMarkedForFadedDestruction)
+                            return;
+
                         _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                         if (GameView.IsBossEngaged)
@@ -958,7 +961,7 @@ namespace AstroOdyssey
         private void GetFrameDuration()
         {
 #if DEBUG
-            frameDuration = frameEndTime - frameStartTime; 
+            frameDuration = frameEndTime - frameStartTime;
 #endif
         }
 

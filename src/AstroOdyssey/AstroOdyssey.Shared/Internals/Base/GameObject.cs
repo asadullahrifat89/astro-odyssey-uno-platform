@@ -84,13 +84,23 @@ namespace AstroOdyssey
                 //change the content to explosion
                 if (isMarkedForFadedDestruction)
                 {
-                    Child = new Border()
+                    if (IsDestructible)
                     {
-                        BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod),
-                        Background = new SolidColorBrush(Colors.Goldenrod),
-                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
-                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100)
-                    };
+                        Child = new Border()
+                        {
+                            BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod),
+                            Background = new SolidColorBrush(Colors.Goldenrod),
+                            BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
+                            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100)
+                        };
+                    }
+
+                    if (IsProjectile)
+                    {
+                        Height = 15;
+                        Width = 15;
+                        YDirection = YDirection.NONE;
+                    }
                 }
             }
         }
