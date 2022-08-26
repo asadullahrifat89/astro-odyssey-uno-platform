@@ -105,6 +105,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />

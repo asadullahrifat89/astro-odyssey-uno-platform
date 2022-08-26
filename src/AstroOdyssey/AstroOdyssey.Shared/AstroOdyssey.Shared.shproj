@@ -53,6 +53,10 @@
     <_Globbed_Content Remove="Assets\Images\rock3.png" />
     <_Globbed_Content Remove="Assets\Images\rock4.png" />
     <_Globbed_Content Remove="Assets\Images\rock5.png" />
+    <_Globbed_Content Remove="Assets\Images\star_large.png" />
+    <_Globbed_Content Remove="Assets\Images\star_medium.png" />
+    <_Globbed_Content Remove="Assets\Images\star_small.png" />
+    <_Globbed_Content Remove="Assets\Images\star_tiny.png" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-crash-6_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-powerup-6768.mp3" />
