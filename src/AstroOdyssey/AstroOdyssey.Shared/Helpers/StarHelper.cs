@@ -16,7 +16,7 @@ namespace AstroOdyssey
         private double starSpeed = 0.1d;
 
         private int spaceWarpCounter;
-        private int spaceWarpDelay = 50;        
+        private int spaceWarpDelay = 100;        
 
         #endregion
 

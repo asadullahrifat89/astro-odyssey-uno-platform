@@ -86,7 +86,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
-                        var musicTrack = random.Next(1, 3);
+                        var musicTrack = random.Next(1, 4);
                         var src = "";
 
                         var musicPath = "Assets/Sounds/Boss";
@@ -95,6 +95,7 @@ namespace AstroOdyssey
                         {
                             case 1: { src = musicPath + "/despair-metal-trailer-109943.mp3"; } break;
                             case 2: { src = musicPath + "/frantic-15190.mp3"; } break;
+                            case 3: { src = musicPath + "/frage-15292.mp3"; } break;
                             default:
                                 break;
                         }
@@ -247,7 +248,7 @@ namespace AstroOdyssey
                         if (BOSS_DESTRUCTION is null)
                         {
                             BOSS_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/halloween-impact-05-93808.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
                                 volume: 1.0);
                         }
 
@@ -295,7 +296,7 @@ namespace AstroOdyssey
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/asteroid-incoming-effect.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
                                 volume: 0.8);
                         }
 
