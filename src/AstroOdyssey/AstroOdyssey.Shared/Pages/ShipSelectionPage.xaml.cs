@@ -118,10 +118,10 @@ namespace AstroOdyssey
                             shipUri = "ms-appx:///Assets/Images/ship_sidesC.png";
                             name = "Promethium";
                             break;
-                        //case 16:
-                        //    shipUri = "ms-appx:///Assets/Images/ship_sidesD.png";
-                        //    name = "Erbium";
-                        //    break;
+                            //case 16:
+                            //    shipUri = "ms-appx:///Assets/Images/ship_sidesD.png";
+                            //    name = "Erbium";
+                            //    break;
 
                     }
 

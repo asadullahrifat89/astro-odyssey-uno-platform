@@ -32,13 +32,16 @@ namespace AstroOdyssey
 
         private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ScoreText.Text = "You Scored " + App.GetScore() + "\nGood game!";            
+            var score = App.GetScore();
+
+            ScoreText.Text = "You Scored " + score + (score == 0 ? "\nNo luck!" : score <= 400 ? "\nGood game!" : "\nGreat game!");
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(typeof(ShipSelectionPage));
+            AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
     }
 }

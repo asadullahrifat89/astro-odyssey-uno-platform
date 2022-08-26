@@ -44,6 +44,7 @@ namespace AstroOdyssey
 
         public enum SoundType
         {
+            GAME_INTRO,
             MENU_SELECT,
             BACKGROUND_MUSIC,
             PLAYER_ROUNDS_FIRE,

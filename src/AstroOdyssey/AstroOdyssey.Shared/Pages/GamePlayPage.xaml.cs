@@ -378,6 +378,7 @@ namespace AstroOdyssey
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
+            AudioHelper.StopSound();
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             AudioHelper.PlaySound(SoundType.GAME_START);
 

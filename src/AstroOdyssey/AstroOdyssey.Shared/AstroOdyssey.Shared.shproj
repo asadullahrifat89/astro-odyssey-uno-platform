@@ -50,6 +50,8 @@
     <_Globbed_Content Remove="Assets\Sounds\asteroid-incoming-effect.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\audioblocks-retro-game-point-bonus-gold-pick-up-bonus-gold-pick-up_SYkZG7fLRvI_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\beam-8-43831.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Boss\frantic-15190.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\cinematic-space-drone-10623.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\cyberpunk-2099-10701.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\dark-matter-10710.mp3" />
@@ -70,6 +72,16 @@
     <_Globbed_Content Remove="Assets\Sounds\magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\magnetic-destroy-shot_fkxD6SV__NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\action-stylish-rock-dedication-15038.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\electronic-rock-king-around-here-15045.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\fashion-hip-hop-rock-stylish-boy-111449.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\groovy-rock-short-110355.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\inspiring-motivational-rock-inspire-mesenses-111448.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\sexy-fashion-beats-simulate-11176.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
+    <_Globbed_Content Remove="Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\plasmablaster-37114.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\power-down-7103.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\power-up-35839.mp3" />
