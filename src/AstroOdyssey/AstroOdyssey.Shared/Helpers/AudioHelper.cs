@@ -148,7 +148,7 @@ namespace AstroOdyssey
 
                             BACKGROUND_MUSIC.OnCompleted += (s, e) =>
                             {
-                                PlaySound(soundType);
+                                PlaySound(SoundType.BACKGROUND_MUSIC);
                             };
                         }
                         else
@@ -242,7 +242,7 @@ namespace AstroOdyssey
 
                         METEOR_DESTRUCTION.Play();
                     }
-                    break;               
+                    break;
                 case SoundType.BOSS_DESTRUCTION:
                     {
                         if (BOSS_DESTRUCTION is null)

@@ -18,8 +18,8 @@
             Orientation="Vertical">
 
             <Image
-                Width="125"
-                Height="125"
+                Width="115"
+                Height="115"
                 Source="ms-appx:///Assets/Images/player_ship1.png" />
 
             <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />

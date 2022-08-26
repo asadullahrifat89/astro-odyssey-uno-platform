@@ -46,19 +46,19 @@ namespace AstroOdyssey
                 string shipUri = null;
                 string name = null;
 
-                for (int i = 1; i <= 3; i++)
+                for (int i = 0; i <= 2; i++)
                 {
                     switch (i)
                     {
-                        case 1:
+                        case 0:
                             shipUri = "ms-appx:///Assets/Images/player_ship1.png";
                             name = "Antimony";
                             break;
-                        case 2:
+                        case 1:
                             shipUri = "ms-appx:///Assets/Images/player_ship2.png";
                             name = "Bismuth";
                             break;
-                        case 3:
+                        case 2:
                             shipUri = "ms-appx:///Assets/Images/player_ship3.png";
                             name = "Curium";
                             break;
@@ -66,9 +66,10 @@ namespace AstroOdyssey
 
                     ships.Add(new Ship()
                     {
-                        Id = i.ToString(),
+                        Id = Guid.NewGuid().ToString(),
                         Name = name,
-                        ImageUrl = shipUri
+                        ImageUrl = shipUri,
+                        ShipClass = (ShipClass)i,
                     });
                 }
 

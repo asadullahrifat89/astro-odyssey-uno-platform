@@ -89,6 +89,8 @@ namespace AstroOdyssey
 
         //public double ExhaustHeight { get; set; } = 50;
 
+        public ShipClass ShipClass { get; set; }
+
         #endregion
 
         #region Methods
@@ -98,6 +100,7 @@ namespace AstroOdyssey
             Speed = speed;
 
             this.ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            ShipClass = ship.ShipClass;
 
             //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
 
