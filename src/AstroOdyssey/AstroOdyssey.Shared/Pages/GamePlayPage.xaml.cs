@@ -99,6 +99,8 @@ namespace AstroOdyssey
 
         public bool IsGamePaused { get; set; }
 
+        public bool IsGameQuitting { get; set; }
+
         private bool FiringProjectiles { get; set; } = false;
 
         private bool IsPoweredUp { get; set; }
@@ -188,6 +190,7 @@ namespace AstroOdyssey
             PointerX = windowWidth / 2;
 
             PauseGameButton.Visibility = Visibility.Collapsed;
+            QuitGameButton.Visibility = Visibility.Collapsed;
 
             ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
             InputView.Focus(FocusState.Programmatic);
@@ -221,12 +224,33 @@ namespace AstroOdyssey
 #endif
         }
 
+        #endregion
+
+        #region UI Events
+
         private void PauseGameButton_Click(object sender, RoutedEventArgs e)
         {
             if (IsGamePaused)
                 ResumeGame();
             else
                 PauseGame();
+        }
+
+        private void QuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsGameQuitting)
+            {
+                IsGameQuitting = false;
+                PauseGame();
+            }
+            else
+            {
+                AudioHelper.PlaySound(SoundType.MENU_SELECT);
+                IsGameQuitting = true;
+                ShowInGameText("🛸\nQUIT GAME?\nTAP TO QUIT");
+
+                InputView.Focus(FocusState.Programmatic);
+            }
         }
 
         #endregion
@@ -287,13 +311,12 @@ namespace AstroOdyssey
             {
                 var point = e.GetCurrentPoint(GameView);
 
-                // move left
-                if (point.Position.X < windowWidth / 2)
+                if (point.Position.X < windowWidth / 2)  // move left
                 {
                     MoveLeft = true;
                     MoveRight = false;
-                } // move right
-                else if (point.Position.X > windowWidth / 2)
+                }
+                else if (point.Position.X > windowWidth / 2) // move right
                 {
                     MoveRight = true;
                     MoveLeft = false;
@@ -317,22 +340,22 @@ namespace AstroOdyssey
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
+            if (IsGameQuitting)
+            {
+                QuitGame();
+                return;
+            }
+
             if (IsGameRunning)
             {
                 if (IsGamePaused)
-                {
                     ResumeGame();
-                }
 
                 if (MoveLeft)
-                {
                     MoveLeft = false;
-                }
 
                 if (MoveRight)
-                {
                     MoveRight = false;
-                }
             }
             else
             {
@@ -369,6 +392,7 @@ namespace AstroOdyssey
             IsGameRunning = true;
 
             PauseGameButton.Visibility = Visibility.Visible;
+            QuitGameButton.Visibility = Visibility.Collapsed;
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
@@ -461,12 +485,15 @@ namespace AstroOdyssey
         /// </summary>
         private void PauseGame()
         {
+            InputView.Focus(FocusState.Programmatic);
+
             GameFrameTimer?.Stop();
-            ShowInGameText("GAME PAUSED\nTAP TO RESUME");
+            ShowInGameText("👨‍🚀\nGAME PAUSED\nTAP TO RESUME");
             FiringProjectiles = false;
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
-           
+            QuitGameButton.Visibility = Visibility.Visible;
+
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
             AudioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
@@ -480,11 +507,13 @@ namespace AstroOdyssey
         private void ResumeGame()
         {
             InputView.Focus(FocusState.Programmatic);
+
             InGameText.Text = "";
             GameFrameTimer?.Start();
             FiringProjectiles = true;
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
+            QuitGameButton.Visibility = Visibility.Collapsed;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
@@ -796,8 +825,6 @@ namespace AstroOdyssey
         //    //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         //}
 
-
-
         /// <summary>
         /// Sets analytics of fps, frame time and objects currently in view.
         /// </summary>
@@ -862,14 +889,22 @@ namespace AstroOdyssey
             {
                 PlayerHealthBar.Width = 0;
 
-                StopGame();
-
-                AudioHelper.PlaySound(SoundType.GAME_OVER);
-
-                App.SetScore(Score);
-
-                App.NavigateToPage(typeof(GameOverPage));
+                QuitGame();
             }
+        }
+
+        /// <summary>
+        /// Quits the current game.
+        /// </summary>
+        private void QuitGame()
+        {
+            StopGame();
+
+            AudioHelper.PlaySound(SoundType.GAME_OVER);
+
+            App.SetScore(Score);
+
+            App.NavigateToPage(typeof(GameOverPage));
         }
 
         /// <summary>

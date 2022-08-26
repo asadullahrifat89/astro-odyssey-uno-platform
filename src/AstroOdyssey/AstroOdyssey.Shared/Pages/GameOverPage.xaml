@@ -6,6 +6,7 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    IsTabStop="False"
     mc:Ignorable="d">
 
     <Grid>
@@ -49,7 +50,9 @@
                 Content="Play Again"
                 CornerRadius="50"
                 FontWeight="SemiBold"
-                Foreground="White" />
+                Foreground="White"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False" />
         </StackPanel>
 
     </Grid>
