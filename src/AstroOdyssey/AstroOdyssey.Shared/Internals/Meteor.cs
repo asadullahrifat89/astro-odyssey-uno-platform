@@ -49,7 +49,7 @@ namespace AstroOdyssey
 
             Uri uri = null;
 
-            var meteorType = random.Next(1, 6);
+            var meteorType = random.Next(1, 7);
 
             switch (meteorType)
             {
@@ -58,8 +58,8 @@ namespace AstroOdyssey
                         uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
                         Health = 2;
 
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                     }
                     break;
                 case 2:
@@ -67,8 +67,8 @@ namespace AstroOdyssey
                         uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
                         Health = 2;
 
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                     }
                     break;
                 case 3:
@@ -76,8 +76,8 @@ namespace AstroOdyssey
                         uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
                         Health = 3;
 
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
                     }
                     break;
                 case 4:
@@ -92,6 +92,15 @@ namespace AstroOdyssey
                 case 5:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
+                        Health = 4;
+
+                        Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+                        Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+                    }
+                    break;
+                case 6:
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock6.png", UriKind.RelativeOrAbsolute);
                         Health = 4;
 
                         Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
