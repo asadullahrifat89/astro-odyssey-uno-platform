@@ -251,7 +251,7 @@ namespace AstroOdyssey
                         if (BOSS_DESTRUCTION is null)
                         {
                             BOSS_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/halloween-impact-05-93808.mp3"),
                                 volume: 1.0);
                         }
 
@@ -275,7 +275,7 @@ namespace AstroOdyssey
                         if (POWER_UP is null)
                         {
                             POWER_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/power-up-35839.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/spellcast-46164.mp3"),
                                 volume: 1.0);
                         }
 
