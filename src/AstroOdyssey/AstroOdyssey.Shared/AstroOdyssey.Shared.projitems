@@ -107,6 +107,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
