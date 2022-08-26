@@ -179,12 +179,31 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
+                        var musicTrack = random.Next(1, 3);
+                        var src = "";
+
+                        var musicPath = "Assets/Sounds/Music";
+
+                        switch (musicTrack)
+                        {
+                            case 1: { src = musicPath + "/fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
+                            case 2: { src = musicPath + "/inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
+                            default:
+                                break;
+                        }
+
+                        var source = string.Concat(baseUrl, "/", src);
+
                         if (BOSS_APPEARANCE is null)
                         {
                             BOSS_APPEARANCE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/dark-sitar-7546.mp3"),
-                                volume: 1.0,
+                                source: source,
+                                volume: 0.4,
                                 loop: true);
+                        }
+                        else
+                        {
+                            BOSS_APPEARANCE.SetSource(source);
                         }
 
                         BOSS_APPEARANCE.Play();
