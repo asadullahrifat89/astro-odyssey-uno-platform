@@ -54,31 +54,53 @@ namespace AstroOdyssey
             switch (meteorType)
             {
                 case 1:
-                    uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
+                        Health = 2;
+
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                    }
                     break;
                 case 2:
-                    uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
+                        Health = 2;
+
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
+                    }
                     break;
                 case 3:
-                    uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
+                        Health = 3;
+
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
+                    }
                     break;
                 case 4:
-                    uri = new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute);
-                    Health = 2;
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute);
+                        Health = 3;
+
+                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
+                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
+                    }
                     break;
                 case 5:
-                    uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
-                    Health = 3;
-                    break;                
+                    {
+                        uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
+                        Health = 4;
+
+                        Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+                        Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+                    }
+                    break;
             }
 
             content.Source = new BitmapImage(uri);
-
-            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
         }

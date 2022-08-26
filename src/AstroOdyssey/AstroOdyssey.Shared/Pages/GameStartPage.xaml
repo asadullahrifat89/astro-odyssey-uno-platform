@@ -11,6 +11,10 @@
 
     <Grid>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/2180138.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+
         <StackPanel
             MaxWidth="315"
             HorizontalAlignment="Center"
@@ -65,7 +69,9 @@
                 Content="START GAME"
                 CornerRadius="50"
                 FontWeight="SemiBold"
-                Foreground="White" />
+                Foreground="White"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False" />
 
             <TextBlock
                 Margin="10"

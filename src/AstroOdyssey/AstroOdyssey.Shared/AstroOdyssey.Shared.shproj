@@ -41,7 +41,13 @@
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Content Remove="Assets\10803965.jpg" />
+    <_Globbed_Content Remove="Assets\10803966.jpg" />
+    <_Globbed_Content Remove="Assets\2180138.jpg" />
+    <_Globbed_Content Remove="Assets\340618.png" />
+    <_Globbed_Content Remove="Assets\935315.png" />
     <_Globbed_Content Remove="Assets\AstroOdysseyLogo.png" />
+    <_Globbed_Content Remove="Assets\Images\809883.jpg" />
     <_Globbed_Content Remove="Assets\Images\enemy_1.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_2.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_3.png" />

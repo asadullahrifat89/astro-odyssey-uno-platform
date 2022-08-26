@@ -11,25 +11,29 @@
 
     <Grid>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/2180138.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+
         <StackPanel
             MaxWidth="315"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Vertical">
 
-            <Image
+            <!--<Image
                 Width="115"
                 Height="115"
-                Source="ms-appx:///Assets/Images/player_ship1.png" />
+                Source="ms-appx:///Assets/Images/player_ship1.png" />-->
 
-            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />           
+            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="25"
-                Text="Choose Ship"
+                Text="Select a Ship"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
