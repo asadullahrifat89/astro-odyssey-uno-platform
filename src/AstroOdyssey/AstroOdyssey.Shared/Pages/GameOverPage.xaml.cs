@@ -30,10 +30,9 @@ namespace AstroOdyssey
             Loaded += GameOverPage_Loaded;
         }
 
-        private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
+        private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ScoreText.Text = "You Scored " + App.GetScore() + "\nGood game!";
-            await FocusManager.TryFocusAsync(PlayAgainButton, FocusState.Programmatic);
+            ScoreText.Text = "You Scored " + App.GetScore() + "\nGood game!";            
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

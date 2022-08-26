@@ -50,7 +50,9 @@
                 Content="Play Again"
                 CornerRadius="50"
                 FontWeight="SemiBold"
-                Foreground="White" />
+                Foreground="White"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False" />
         </StackPanel>
 
     </Grid>

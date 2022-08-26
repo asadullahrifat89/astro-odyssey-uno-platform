@@ -261,7 +261,7 @@
             CornerRadius="100"
             IsFocusEngagementEnabled="False"
             IsTabStop="False">
-            <SymbolIcon Symbol="Back" />
+            <SymbolIcon Symbol="Undo" />
         </Button>
 
     </Grid>
