@@ -43,5 +43,10 @@ namespace AstroOdyssey
         {
             this.ExecuteJavascript("element.pause();");
         }
+
+        public void Resume()
+        {
+            this.ExecuteJavascript("element.play();");
+        }
     }
 }

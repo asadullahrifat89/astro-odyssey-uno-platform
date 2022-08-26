@@ -332,9 +332,11 @@ namespace AstroOdyssey
                 case SoundType.MENU_SELECT:
                     break;
                 case SoundType.BACKGROUND_MUSIC:
-                    if (BACKGROUND_MUSIC is not null)
                     {
-                        BACKGROUND_MUSIC.Pause();
+                        if (BACKGROUND_MUSIC is not null)
+                        {
+                            BACKGROUND_MUSIC.Pause();
+                        }
                     }
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
@@ -352,9 +354,11 @@ namespace AstroOdyssey
                 case SoundType.METEOR_DESTRUCTION:
                     break;
                 case SoundType.BOSS_APPEARANCE:
-                    if (BOSS_APPEARANCE is not null)
                     {
-                        BOSS_APPEARANCE.Pause();
+                        if (BOSS_APPEARANCE is not null)
+                        {
+                            BOSS_APPEARANCE.Pause();
+                        }
                     }
                     break;
                 case SoundType.BOSS_DESTRUCTION:
@@ -387,9 +391,11 @@ namespace AstroOdyssey
                 case SoundType.MENU_SELECT:
                     break;
                 case SoundType.BACKGROUND_MUSIC:
-                    if (BACKGROUND_MUSIC is not null)
                     {
-                        BACKGROUND_MUSIC.Play();
+                        if (BACKGROUND_MUSIC is not null)
+                        {
+                            BACKGROUND_MUSIC.Resume();
+                        }
                     }
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
@@ -407,9 +413,11 @@ namespace AstroOdyssey
                 case SoundType.METEOR_DESTRUCTION:
                     break;
                 case SoundType.BOSS_APPEARANCE:
-                    if (BOSS_APPEARANCE is not null)
                     {
-                        BOSS_APPEARANCE.Play();
+                        if (BOSS_APPEARANCE is not null)
+                        {
+                            BOSS_APPEARANCE.Resume();
+                        }
                     }
                     break;
                 case SoundType.BOSS_DESTRUCTION:
