@@ -94,12 +94,14 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\action-stylish-rock-dedication-15038.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\electronic-rock-king-around-here-15045.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\fashion-hip-hop-rock-stylish-boy-111449.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\fashion-hip-hop-rock-stylish-boy-111449.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\groovy-rock-short-110355.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\inspiring-motivational-rock-inspire-mesenses-111448.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\inspiring-motivational-rock-inspire-mesenses-111448.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\sexy-fashion-beats-simulate-11176.mp3" />
@@ -181,6 +183,7 @@
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
 </Project>

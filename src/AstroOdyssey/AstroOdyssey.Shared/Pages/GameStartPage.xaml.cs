@@ -26,7 +26,7 @@ namespace AstroOdyssey
 
         private void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)

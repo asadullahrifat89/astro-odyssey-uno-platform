@@ -9,6 +9,7 @@ namespace AstroOdyssey
 
         private static Random random = new Random();
 
+        private static AudioPlayer GAME_INTRO = null;
         private static AudioPlayer MENU_SELECT = null;
         private static AudioPlayer BACKGROUND_MUSIC = null;
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
@@ -39,6 +40,38 @@ namespace AstroOdyssey
 
             switch (soundType)
             {
+                case SoundType.GAME_INTRO:
+                    {
+                        var musicTrack = random.Next(1, 3);
+                        var src = "";
+
+                        var musicPath = "Assets/Sounds/Intro";
+
+                        switch (musicTrack)
+                        {
+                            case 1: { src = musicPath + "/fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
+                            case 2: { src = musicPath + "/inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
+                            default:
+                                break;
+                        }
+
+                        var source = string.Concat(baseUrl, "/", src);
+
+                        if (GAME_INTRO is null)
+                        {
+                            GAME_INTRO = new AudioPlayer(
+                                source: source,
+                                volume: 0.5,
+                                loop: true);
+                        }
+                        else
+                        {
+                            GAME_INTRO.SetSource(source);
+                        }
+
+                        GAME_INTRO.Play();
+                    }
+                    break;
                 case SoundType.MENU_SELECT:
                     {
                         if (MENU_SELECT is null)
@@ -49,6 +82,38 @@ namespace AstroOdyssey
                         }
 
                         MENU_SELECT.Play();
+                    }
+                    break;
+                case SoundType.BOSS_APPEARANCE:
+                    {
+                        var musicTrack = random.Next(1, 3);
+                        var src = "";
+
+                        var musicPath = "Assets/Sounds/Boss";
+
+                        switch (musicTrack)
+                        {
+                            case 1: { src = musicPath + "/despair-metal-trailer-109943.mp3"; } break;
+                            case 2: { src = musicPath + "/frantic-15190.mp3"; } break;
+                            default:
+                                break;
+                        }
+
+                        var source = string.Concat(baseUrl, "/", src);
+
+                        if (BOSS_APPEARANCE is null)
+                        {
+                            BOSS_APPEARANCE = new AudioPlayer(
+                                source: source,
+                                volume: 0.5,
+                                loop: true);
+                        }
+                        else
+                        {
+                            BOSS_APPEARANCE.SetSource(source);
+                        }
+
+                        BOSS_APPEARANCE.Play();
                     }
                     break;
                 case SoundType.BACKGROUND_MUSIC:
@@ -78,7 +143,7 @@ namespace AstroOdyssey
                         {
                             BACKGROUND_MUSIC = new AudioPlayer(
                                 source: source,
-                                volume: 0.3);
+                                volume: 0.5);
 
                             BACKGROUND_MUSIC.OnCompleted += (s, e) =>
                             {
@@ -176,39 +241,7 @@ namespace AstroOdyssey
 
                         METEOR_DESTRUCTION.Play();
                     }
-                    break;
-                case SoundType.BOSS_APPEARANCE:
-                    {
-                        var musicTrack = random.Next(1, 3);
-                        var src = "";
-
-                        var musicPath = "Assets/Sounds/Music";
-
-                        switch (musicTrack)
-                        {
-                            case 1: { src = musicPath + "/fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
-                            case 2: { src = musicPath + "/inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
-                            default:
-                                break;
-                        }
-
-                        var source = string.Concat(baseUrl, "/", src);
-
-                        if (BOSS_APPEARANCE is null)
-                        {
-                            BOSS_APPEARANCE = new AudioPlayer(
-                                source: source,
-                                volume: 0.4,
-                                loop: true);
-                        }
-                        else
-                        {
-                            BOSS_APPEARANCE.SetSource(source);
-                        }
-
-                        BOSS_APPEARANCE.Play();
-                    }
-                    break;
+                    break;               
                 case SoundType.BOSS_DESTRUCTION:
                     {
                         if (BOSS_DESTRUCTION is null)
@@ -332,6 +365,11 @@ namespace AstroOdyssey
 
         public static void StopSound()
         {
+            if (GAME_INTRO is not null)
+            {
+                GAME_INTRO.Stop();
+            }
+
             if (BACKGROUND_MUSIC is not null)
             {
                 BACKGROUND_MUSIC.Stop();
