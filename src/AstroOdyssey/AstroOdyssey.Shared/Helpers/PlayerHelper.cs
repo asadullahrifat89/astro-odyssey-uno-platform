@@ -17,7 +17,7 @@ namespace AstroOdyssey
         private readonly int playerDamagedOpacityDelay = 120;
 
         private int powerUpTriggerSpawnCounter;
-        private readonly int powerUpTriggerDelay = 1000;
+        private readonly int powerUpTriggerDelay = 1050;
 
         private double playerSpeed = 12;
         private double accelerationCounter = 0;

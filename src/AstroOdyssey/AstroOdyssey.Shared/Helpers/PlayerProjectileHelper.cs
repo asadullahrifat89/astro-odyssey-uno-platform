@@ -86,6 +86,7 @@ namespace AstroOdyssey
             projectile.SetAttributes(
                 speed: projectileSpeed,
                 gameLevel: gameLevel,
+                shipClass: player.ShipClass, 
                 isPoweredUp: isPoweredUp,
                 powerUpType: powerUpType,
                 scale: scale);

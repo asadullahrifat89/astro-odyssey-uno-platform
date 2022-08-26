@@ -20,10 +20,10 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform,
         };
 
-        //private readonly Image contentShipBlaze = new Image()
-        //{
-        //    Stretch = Stretch.Uniform
-        //};
+        private readonly Image contentShipBlaze = new Image()
+        {
+            Stretch = Stretch.Uniform
+        };
 
         private readonly Border powerGauge = new Border()
         {
@@ -66,7 +66,7 @@ namespace AstroOdyssey
 
             // combine power gauge, ship, and blaze
             body = new Grid();
-            //content.Children.Add(contentShipBlaze);
+            body.Children.Add(contentShipBlaze);
             body.Children.Add(ship);
             body.Children.Add(powerGauge);
             //content.Children.Add(contentShipHealthBar);           
@@ -89,6 +89,8 @@ namespace AstroOdyssey
 
         //public double ExhaustHeight { get; set; } = 50;
 
+        public ShipClass ShipClass { get; set; }
+
         #endregion
 
         #region Methods
@@ -98,13 +100,14 @@ namespace AstroOdyssey
             Speed = speed;
 
             this.ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            ShipClass = ship.ShipClass;
 
-            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
+            var exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust.png", UriKind.RelativeOrAbsolute);
 
-            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            //contentShipBlaze.Width = contentShip.Width;
+            contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            contentShipBlaze.Width = body.Width;
+            contentShipBlaze.Height = body.Height;
 
-            //contentShipBlaze.Height = ExhaustHeight * scale;
             //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
             //contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 5 * scale, 0, 0);

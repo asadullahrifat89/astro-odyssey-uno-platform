@@ -18,35 +18,24 @@
             Orientation="Vertical">
 
             <Image
-                Width="125"
-                Height="125"
+                Width="115"
+                Height="115"
                 Source="ms-appx:///Assets/Images/player_ship1.png" />
 
-            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
-
-            <!--  Game title  -->
-            <!--<TextBlock
-                Margin="10,10,10,40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="35"
-                FontWeight="Bold"
-                Text="ASTRO ODYSSEY" />-->
+            <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />           
 
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 FontSize="25"
-                Text="🚀 Select your ship"
+                Text="Choose Ship"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-
             <GridView
                 Name="ShipsList"
-                Height="250"
-                Margin="0,50,0,50"
+                Margin="0,50,0,40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 SelectionChanged="ShipsList_SelectionChanged">

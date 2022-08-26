@@ -86,15 +86,17 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
-                        var musicTrack = random.Next(1, 3);
+                        var musicTrack = random.Next(1, 5);
                         var src = "";
 
-                        var musicPath = "Assets/Sounds/Boss";
+                        var musicPath = "Assets/Sounds/Boss/";
 
                         switch (musicTrack)
                         {
-                            case 1: { src = musicPath + "/despair-metal-trailer-109943.mp3"; } break;
-                            case 2: { src = musicPath + "/frantic-15190.mp3"; } break;
+                            case 1: { src = musicPath + "despair-metal-trailer-109943.mp3"; } break;
+                            case 2: { src = musicPath + "frantic-15190.mp3"; } break;
+                            case 3: { src = musicPath + "frage-15292.mp3"; } break;
+                            case 4: { src = musicPath + "metal-dark-matter-111451.mp3"; } break;
                             default:
                                 break;
                         }
@@ -118,21 +120,22 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(1, 9);
+                        var musicTrack = random.Next(1, 10);
                         var src = "";
 
-                        var musicPath = "Assets/Sounds/Music";
+                        var musicPath = "Assets/Sounds/Music/";
 
                         switch (musicTrack)
                         {
-                            case 1: { src = musicPath + "/action-stylish-rock-dedication-15038.mp3"; } break;
-                            case 2: { src = musicPath + "/electronic-rock-king-around-here-15045.mp3"; } break;
-                            case 3: { src = musicPath + "/groovy-rock-short-110355.mp3"; } break;
-                            case 4: { src = musicPath + "/powerful-stylish-stomp-rock-lets-go-114255.mp3"; } break;
-                            case 5: { src = musicPath + "/rockstar-trailer-109945.mp3"; } break;
-                            case 6: { src = musicPath + "/sexy-fashion-beats-simulate-11176.mp3"; } break;
-                            case 7: { src = musicPath + "/stomping-rock-four-shots-111444.mp3"; } break;
-                            case 8: { src = musicPath + "/stylish-rock-beat-trailer-116346.mp3"; } break;
+                            case 1: { src = musicPath + "action-stylish-rock-dedication-15038.mp3"; } break;
+                            case 2: { src = musicPath + "electronic-rock-king-around-here-15045.mp3"; } break;                            
+                            case 3: { src = musicPath + "powerful-stylish-stomp-rock-lets-go-114255.mp3"; } break;
+                            case 4: { src = musicPath + "rockstar-trailer-109945.mp3"; } break;                            
+                            case 5: { src = musicPath + "stomping-rock-four-shots-111444.mp3"; } break;
+                            case 6: { src = musicPath + "stylish-rock-beat-trailer-116346.mp3"; } break;
+                            case 7: { src = musicPath + "modern-fashion-promo-rock-18397.mp3"; } break;
+                            case 8: { src = musicPath + "hard-rock-21056.mp3"; } break;
+                            case 9: { src = musicPath + "crag-hard-rock-14401.mp3"; } break;
                             default:
                                 break;
                         }
@@ -143,12 +146,13 @@ namespace AstroOdyssey
                         {
                             BACKGROUND_MUSIC = new AudioPlayer(
                                 source: source,
-                                volume: 0.5);
+                                volume: 0.4,
+                                loop: true);
 
-                            BACKGROUND_MUSIC.OnCompleted += (s, e) =>
-                            {
-                                PlaySound(soundType);
-                            };
+                            //BACKGROUND_MUSIC.OnCompleted += (s, e) =>
+                            //{
+                            //    PlaySound(SoundType.BACKGROUND_MUSIC);
+                            //};
                         }
                         else
                         {
@@ -241,7 +245,7 @@ namespace AstroOdyssey
 
                         METEOR_DESTRUCTION.Play();
                     }
-                    break;               
+                    break;
                 case SoundType.BOSS_DESTRUCTION:
                     {
                         if (BOSS_DESTRUCTION is null)
@@ -295,7 +299,7 @@ namespace AstroOdyssey
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/asteroid-incoming-effect.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
                                 volume: 0.8);
                         }
 
