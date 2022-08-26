@@ -11,6 +11,10 @@
 
     <Grid>
 
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/10803966.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
+
         <StackPanel
             MaxWidth="315"
             HorizontalAlignment="Center"

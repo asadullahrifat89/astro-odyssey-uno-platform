@@ -41,7 +41,13 @@
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Content Remove="Assets\10803965.jpg" />
+    <_Globbed_Content Remove="Assets\10803966.jpg" />
+    <_Globbed_Content Remove="Assets\2180138.jpg" />
+    <_Globbed_Content Remove="Assets\340618.png" />
+    <_Globbed_Content Remove="Assets\935315.png" />
     <_Globbed_Content Remove="Assets\AstroOdysseyLogo.png" />
+    <_Globbed_Content Remove="Assets\Images\809883.jpg" />
     <_Globbed_Content Remove="Assets\Images\enemy_1.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_2.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_3.png" />
@@ -57,6 +63,8 @@
     <_Globbed_Content Remove="Assets\Images\star_medium.png" />
     <_Globbed_Content Remove="Assets\Images\star_small.png" />
     <_Globbed_Content Remove="Assets\Images\star_tiny.png" />
+    <_Globbed_Content Remove="Assets\RDMFcT.gif" />
+    <_Globbed_Content Remove="Assets\sDA_z4.gif" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-crash-6_NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-explosion1wav-14656.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\8-bit-powerup-6768.mp3" />
