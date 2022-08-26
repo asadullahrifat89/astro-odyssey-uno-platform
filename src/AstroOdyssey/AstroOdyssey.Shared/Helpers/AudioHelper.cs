@@ -45,12 +45,12 @@ namespace AstroOdyssey
                         var musicTrack = random.Next(1, 3);
                         var src = "";
 
-                        var musicPath = "Assets/Sounds/Intro";
+                        var musicPath = "Assets/Sounds/Intro/";
 
                         switch (musicTrack)
                         {
-                            case 1: { src = musicPath + "/fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
-                            case 2: { src = musicPath + "/inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
+                            case 1: { src = musicPath + "fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
+                            case 2: { src = musicPath + "inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
                             default:
                                 break;
                         }
@@ -95,8 +95,8 @@ namespace AstroOdyssey
                         {
                             case 1: { src = musicPath + "despair-metal-trailer-109943.mp3"; } break;
                             case 2: { src = musicPath + "frantic-15190.mp3"; } break;
-                            case 3: { src = musicPath + "frage-15292.mp3"; } break;
-                            case 4: { src = musicPath + "metal-dark-matter-111451.mp3"; } break;
+                            case 3: { src = musicPath + "metal-dark-matter-111451.mp3"; } break;
+                            case 4: { src = musicPath + "rage-15292.mp3"; } break;
                             default:
                                 break;
                         }
@@ -299,7 +299,7 @@ namespace AstroOdyssey
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/asteroid-incoming-effect.mp3"),
                                 volume: 0.8);
                         }
 
