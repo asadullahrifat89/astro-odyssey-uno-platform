@@ -73,8 +73,8 @@ namespace AstroOdyssey
                         break;
                     default:
                         {
-                            Background = new SolidColorBrush(Colors.Red);
-                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                            Background = new SolidColorBrush(Colors.SkyBlue);
+                            BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
                         }
                         break;
                 }
@@ -137,8 +137,8 @@ namespace AstroOdyssey
                         break;
                 }
 
-                Background = new SolidColorBrush(Colors.Red);
-                BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                Background = new SolidColorBrush(Colors.SkyBlue);
+                BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
             }
 
             if (PowerUpType == PowerUpType.DEAD_SHOT_ROUNDS)
