@@ -101,7 +101,7 @@ namespace AstroOdyssey
                         height = 15; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
                         break;
                     case ShipClass.Curium:
-                        height = 5; width = 20; BorderThickness = new Thickness(2); CornerRadius = new CornerRadius(5);
+                        height = 5; width = 20; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
                         break;
                     default:
                         break;
