@@ -260,6 +260,7 @@ namespace AstroOdyssey
         {
             Height = Height * 1.5;
             Width = Width * 1.5;
+            HalfWidth = Width / 2;
             Speed--;
             Health += 3;
 
