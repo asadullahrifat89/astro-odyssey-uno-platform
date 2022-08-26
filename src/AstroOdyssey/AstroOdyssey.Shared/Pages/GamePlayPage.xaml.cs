@@ -163,7 +163,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void GamePage_Loaded(object sender, RoutedEventArgs e)
+        void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
 
@@ -193,7 +193,7 @@ namespace AstroOdyssey
             QuitGameButton.Visibility = Visibility.Collapsed;
 
             ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
-            await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
+            InputView.Focus(FocusState.Programmatic);
         }
 
         /// <summary>
@@ -248,29 +248,9 @@ namespace AstroOdyssey
                 AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 IsGameQuitting = true;
                 ShowInGameText("🛸\nQUIT GAME?\nTAP TO QUIT");
+
+                InputView.Focus(FocusState.Programmatic);
             }
-        }
-
-        private async Task<ContentDialogResult> ShowContentDialog(
-          string title,
-          object content,
-          string okButtonText = "Ok",
-          string cancelButtonText = "Cancel")
-        {
-            ContentDialog dialog = new ContentDialog
-            {
-                XamlRoot = XamlRoot,
-                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
-                Title = title,
-                PrimaryButtonText = okButtonText,
-                CloseButtonText = cancelButtonText,
-                DefaultButton = ContentDialogButton.Primary,
-                Content = content,
-            };
-
-            var result = await dialog.ShowAsync();
-
-            return result;
         }
 
         #endregion
@@ -358,7 +338,7 @@ namespace AstroOdyssey
             }
         }
 
-        private async void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
             if (IsGameQuitting)
             {
@@ -379,7 +359,7 @@ namespace AstroOdyssey
             }
             else
             {
-                await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
+                InputView.Focus(FocusState.Programmatic);
                 StartGame();
                 FiringProjectiles = true;
             }
@@ -505,6 +485,8 @@ namespace AstroOdyssey
         /// </summary>
         private void PauseGame()
         {
+            InputView.Focus(FocusState.Programmatic);
+
             GameFrameTimer?.Stop();
             ShowInGameText("👨‍🚀\nGAME PAUSED\nTAP TO RESUME");
             FiringProjectiles = false;
@@ -522,8 +504,10 @@ namespace AstroOdyssey
         /// <summary>
         /// Resumes the game.
         /// </summary>
-        private async void ResumeGame()
+        private void ResumeGame()
         {
+            InputView.Focus(FocusState.Programmatic);
+
             InGameText.Text = "";
             GameFrameTimer?.Start();
             FiringProjectiles = true;
@@ -536,8 +520,6 @@ namespace AstroOdyssey
             AudioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
             if (GameView.IsBossEngaged)
                 AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
-
-            await FocusManager.TryFocusAsync(InputView, FocusState.Programmatic);
         }
 
         /// <summary>

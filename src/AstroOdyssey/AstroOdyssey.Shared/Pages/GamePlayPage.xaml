@@ -243,7 +243,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="PauseGameButton_Click"
-            CornerRadius="100">
+            CornerRadius="100"
+            IsFocusEngagementEnabled="False"
+            IsTabStop="False">
             <SymbolIcon Symbol="Pause" />
         </Button>
 
@@ -256,7 +258,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="QuitGameButton_Click"
-            CornerRadius="100">
+            CornerRadius="100"
+            IsFocusEngagementEnabled="False"
+            IsTabStop="False">
             <SymbolIcon Symbol="Back" />
         </Button>
 
