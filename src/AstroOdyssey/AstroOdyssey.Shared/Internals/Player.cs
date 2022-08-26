@@ -110,7 +110,7 @@ namespace AstroOdyssey
 
             //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 
-            //contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 5 * scale, 0, 0);
+            //powerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 0, 0, 5 * scale);
 
             //contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
             //contentShipHealthBar.Width = Health / 1.70;
