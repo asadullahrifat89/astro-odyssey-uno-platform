@@ -29,14 +29,14 @@ namespace AstroOdyssey
 
 #if DEBUG
         private int frameStatUpdateSpawnCounter;
-        private int frameStatUpdateDelay = 5; 
+        private int frameStatUpdateDelay = 5;
         private double frameDuration;
 #endif
 
         private int showInGameTextSpawnCounter = 110;
         private int showInGameTextDelay = 110;
 
-        private double frameTime = 19;       
+        private double frameTime = 19;
 
         private double windowWidth, windowHeight;
 
@@ -609,8 +609,14 @@ namespace AstroOdyssey
 
                         if (IsPoweredUp)
                         {
-                            if (_playerHelper.PowerUpCoolDown(Player))
+                            var coolDown = _playerHelper.PowerUpCoolDown(Player);
+
+                            PlayerPowerBar.Value = coolDown.PowerRemaining;
+
+                            if (coolDown.PoweredDown)
                             {
+                                PlayerPowerBar.Visibility = Visibility.Collapsed;
+
                                 _playerProjectileHelper.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
@@ -630,6 +636,9 @@ namespace AstroOdyssey
                             return;
 
                         if (GameView.IsWarpingThroughSpace)
+                            return;
+
+                        if (projectile.IsMarkedForFadedDestruction)
                             return;
 
                         _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
@@ -769,6 +778,7 @@ namespace AstroOdyssey
                         // check if power up collides with player
                         if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
                         {
+                            PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
                             ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
@@ -958,7 +968,7 @@ namespace AstroOdyssey
         private void GetFrameDuration()
         {
 #if DEBUG
-            frameDuration = frameEndTime - frameStartTime; 
+            frameDuration = frameEndTime - frameStartTime;
 #endif
         }
 
@@ -1142,7 +1152,7 @@ namespace AstroOdyssey
                 else
                 {
                     WarpThroughSpace();
-                    ShowInGameText("☄️\nMETEORS INCOMING");
+                    ShowInGameText("☄️\nENEMY APPROACHES");
                     AudioHelper.PlaySound(SoundType.METEOR_INCOMING);
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                 }

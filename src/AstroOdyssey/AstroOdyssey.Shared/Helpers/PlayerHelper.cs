@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Text.RegularExpressions;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -9,9 +10,6 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-        private readonly string baseUrl;
-
-        private readonly Random random = new Random();
 
         private int playerDamagedOpacitySpawnCounter;
         private readonly int playerDamagedOpacityDelay = 120;
@@ -32,7 +30,6 @@ namespace AstroOdyssey
         public PlayerHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -242,9 +239,12 @@ namespace AstroOdyssey
                 case ENEMY_PROJECTILE:
                     {
                         // only loose health if player is now in physical state
-                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                        if (!player.IsInEtherealState && !gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameEnvironment.AddDestroyableGameObject(gameObject);
+                            //gameEnvironment.AddDestroyableGameObject(gameObject);
+
+                            gameObject.IsMarkedForFadedDestruction = true;
+
                             PlayerHealthLoss(player);
 
                             return true;
@@ -338,22 +338,22 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public bool PowerUpCoolDown(Player player)
+        public (bool PoweredDown, int PowerRemaining) PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
-            var powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
-
-            player.SetPowerGauge(powerGauge);
+            //powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
+            //player.SetPowerGauge(powerGauge);
 
             if (powerUpTriggerSpawnCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
-                return true;
+                return (true, 0);
             }
 
-            return false;
+            //var powerGauge = Math.Abs((powerUpTriggerSpawnCounter / 1050) * 100);
+            return (false, powerUpTriggerSpawnCounter);
         }
 
         #endregion

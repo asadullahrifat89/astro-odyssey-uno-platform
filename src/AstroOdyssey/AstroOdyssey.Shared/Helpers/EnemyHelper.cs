@@ -9,7 +9,6 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment gameEnvironment;
-        private readonly string baseUrl;
 
         private readonly Random random = new Random();
 
@@ -42,7 +41,6 @@ namespace AstroOdyssey
         public EnemyHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -105,14 +103,17 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnEnemy(GameLevel gameLevel)
         {
-            // each frame progress decreases this counter
-            enemySpawnCounter -= 1;
-
-            // when counter reaches zero, create an enemy
-            if (enemySpawnCounter < 0)
+            if ((int)gameLevel > 0)
             {
-                GenerateEnemy(gameLevel);
-                enemySpawnCounter = enemySpawnDelay;
+                // each frame progress decreases this counter
+                enemySpawnCounter -= 1;
+
+                // when counter reaches zero, create an enemy
+                if (enemySpawnCounter < 0)
+                {
+                    GenerateEnemy(gameLevel);
+                    enemySpawnCounter = enemySpawnDelay;
+                }
             }
         }
 
