@@ -59,6 +59,8 @@ namespace AstroOdyssey
 
                             Background = new SolidColorBrush(Colors.Goldenrod);
                             BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+
+                            BorderThickness = new Thickness(2, 3, 2, 1);
                         }
                         break;
                     case PowerUpType.DEAD_SHOT_ROUNDS:
@@ -67,6 +69,8 @@ namespace AstroOdyssey
 
                             Background = new SolidColorBrush(Colors.Cyan);
                             BorderBrush = new SolidColorBrush(Colors.DarkCyan);
+
+                            BorderThickness = new Thickness(3);
                         }
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
@@ -75,6 +79,8 @@ namespace AstroOdyssey
 
                             Background = new SolidColorBrush(Colors.SlateBlue);
                             BorderBrush = new SolidColorBrush(Colors.DarkSlateBlue);
+
+                            BorderThickness = new Thickness(2, 3, 2, 1);
                         }
                         break;
                     default:
@@ -86,87 +92,22 @@ namespace AstroOdyssey
             }
             else // normal shots
             {
-                //switch (gameLevel)
-                //{
-                //    case GameLevel.Level_1:
-                //        {
-                //            height = 20; width = 10;
-                //        }
-                //        break;
-                //    case GameLevel.Level_2:
-                //        {
-                //            height = 25; width = 11;
-                //        }
-                //        break;
-                //    case GameLevel.Level_3:
-                //        {
-                //            height = 30; width = 12;
-                //        }
-                //        break;
-                //    case GameLevel.Level_4:
-                //        {
-                //            height = 35; width = 13;
-                //        }
-                //        break;
-                //    case GameLevel.Level_5:
-                //        {
-                //            height = 35; width = 14;
-                //        }
-                //        break;
-                //    case GameLevel.Level_6:
-                //        {
-                //            height = 35; width = 15;
-                //        }
-                //        break;
-                //    case GameLevel.Level_7:
-                //        {
-                //            height = 35; width = 16;
-                //        }
-                //        break;
-                //    case GameLevel.Level_8:
-                //        {
-                //            height = 35; width = 17;
-                //        }
-                //        break;
-                //    case GameLevel.Level_9:
-                //        {
-                //            height = 35; width = 18;
-                //        }
-                //        break;
-                //    case GameLevel.Level_10:
-                //        {
-                //            height = 35; width = 19;
-                //        }
-                //        break;
-                //    default:
-                //        break;
-                //}
-
                 switch (shipClass)
                 {
                     case ShipClass.Antimony:
-                        height = 20; width = 5;
+                        height = 20; width = 5; BorderThickness = new Thickness(2, 3, 2, 1);
                         break;
                     case ShipClass.Bismuth:
-                        height = 15; width = 15;
+                        height = 15; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
                         break;
                     case ShipClass.Curium:
-                        height = 5; width = 20;
+                        height = 5; width = 20; BorderThickness = new Thickness(2); CornerRadius = new CornerRadius(5);
                         break;
                     default:
                         break;
                 }
 
                 SetDefaultPlayerProjectileColors(shipClass);
-            }
-
-            if (PowerUpType == PowerUpType.DEAD_SHOT_ROUNDS)
-            {
-                BorderThickness = new Thickness(3);
-            }
-            else
-            {
-                BorderThickness = new Thickness(2, 3, 2, 1);
             }
 
             Height = height * scale;
@@ -199,7 +140,7 @@ namespace AstroOdyssey
                     break;
                 default:
                     break;
-            }           
+            }
         }
 
         #endregion

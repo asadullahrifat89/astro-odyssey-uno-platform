@@ -1140,6 +1140,7 @@ namespace AstroOdyssey
                     WarpThroughSpace();
                     ShowInGameText("☄️\nMETEORS INCOMING");
                     AudioHelper.PlaySound(SoundType.METEOR_INCOMING);
+                    AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                 }
 
                 GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
