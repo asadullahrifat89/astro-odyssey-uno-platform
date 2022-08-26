@@ -86,7 +86,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
-                        var musicTrack = random.Next(1, 4);
+                        var musicTrack = random.Next(1, 5);
                         var src = "";
 
                         var musicPath = "Assets/Sounds/Boss/";
@@ -96,6 +96,7 @@ namespace AstroOdyssey
                             case 1: { src = musicPath + "despair-metal-trailer-109943.mp3"; } break;
                             case 2: { src = musicPath + "frantic-15190.mp3"; } break;
                             case 3: { src = musicPath + "frage-15292.mp3"; } break;
+                            case 4: { src = musicPath + "metal-dark-matter-111451.mp3"; } break;
                             default:
                                 break;
                         }
@@ -119,7 +120,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(1, 7);
+                        var musicTrack = random.Next(1, 10);
                         var src = "";
 
                         var musicPath = "Assets/Sounds/Music/";
@@ -132,6 +133,9 @@ namespace AstroOdyssey
                             case 4: { src = musicPath + "rockstar-trailer-109945.mp3"; } break;                            
                             case 5: { src = musicPath + "stomping-rock-four-shots-111444.mp3"; } break;
                             case 6: { src = musicPath + "stylish-rock-beat-trailer-116346.mp3"; } break;
+                            case 7: { src = musicPath + "modern-fashion-promo-rock-18397.mp3"; } break;
+                            case 8: { src = musicPath + "hard-rock-21056.mp3"; } break;
+                            case 9: { src = musicPath + "crag-hard-rock-14401.mp3"; } break;
                             default:
                                 break;
                         }
