@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Threading.Tasks;
+using static AstroOdyssey.Constants;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -140,6 +141,7 @@ namespace AstroOdyssey
         {
             if (selectedShip is not null)
             {
+                AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
                 App.NavigateToPage(typeof(GamePlayPage));
             }

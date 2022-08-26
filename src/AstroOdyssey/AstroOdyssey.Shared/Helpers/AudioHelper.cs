@@ -9,6 +9,7 @@ namespace AstroOdyssey
 
         private static Random random = new Random();
 
+        private static AudioPlayer MENU_SELECT = null;
         private static AudioPlayer BACKGROUND_MUSIC = null;
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_RAPID_SHOT_ROUNDS_FIRE = null;
@@ -32,10 +33,24 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void PlaySound(string baseUrl, SoundType soundType)
+        public static void PlaySound(SoundType soundType)
         {
+            var baseUrl = App.GetBaseUrl();
+
             switch (soundType)
             {
+                case SoundType.MENU_SELECT:
+                    {
+                        if (MENU_SELECT is null)
+                        {
+                            MENU_SELECT = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/game-start-6104.mp3"),
+                                volume: 1);
+                        }
+
+                        MENU_SELECT.Play();
+                    }
+                    break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
                         var musicTrack = random.Next(1, 12);
@@ -68,7 +83,7 @@ namespace AstroOdyssey
 
                             BACKGROUND_MUSIC.OnCompleted += (s, e) =>
                             {
-                                PlaySound(baseUrl, soundType);
+                                PlaySound(soundType);
                             };
                         }
                         else
@@ -301,12 +316,130 @@ namespace AstroOdyssey
         {
             if (BACKGROUND_MUSIC is not null)
             {
-                BACKGROUND_MUSIC.Pause();
+                BACKGROUND_MUSIC.Stop();
             }
 
             if (BOSS_APPEARANCE is not null)
             {
-                BOSS_APPEARANCE.Pause();
+                BOSS_APPEARANCE.Stop();
+            }
+        }
+
+        public static void PauseSound(SoundType soundType)
+        {
+            switch (soundType)
+            {
+                case SoundType.MENU_SELECT:
+                    break;
+                case SoundType.BACKGROUND_MUSIC:
+                    {
+                        if (BACKGROUND_MUSIC is not null)
+                        {
+                            BACKGROUND_MUSIC.Pause();
+                        }
+                    }
+                    break;
+                case SoundType.PLAYER_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.ENEMY_ROUNDS_FIRE:
+                    break;
+                case SoundType.ENEMY_DESTRUCTION:
+                    break;
+                case SoundType.METEOR_DESTRUCTION:
+                    break;
+                case SoundType.BOSS_APPEARANCE:
+                    {
+                        if (BOSS_APPEARANCE is not null)
+                        {
+                            BOSS_APPEARANCE.Pause();
+                        }
+                    }
+                    break;
+                case SoundType.BOSS_DESTRUCTION:
+                    break;
+                case SoundType.ROUNDS_HIT:
+                    break;
+                case SoundType.POWER_UP:
+                    break;
+                case SoundType.POWER_DOWN:
+                    break;
+                case SoundType.METEOR_INCOMING:
+                    break;
+                case SoundType.HEALTH_GAIN:
+                    break;
+                case SoundType.HEALTH_LOSS:
+                    break;
+                case SoundType.GAME_START:
+                    break;
+                case SoundType.GAME_OVER:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void ResumeSound(SoundType soundType)
+        {
+            switch (soundType)
+            {
+                case SoundType.MENU_SELECT:
+                    break;
+                case SoundType.BACKGROUND_MUSIC:
+                    {
+                        if (BACKGROUND_MUSIC is not null)
+                        {
+                            BACKGROUND_MUSIC.Resume();
+                        }
+                    }
+                    break;
+                case SoundType.PLAYER_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE:
+                    break;
+                case SoundType.ENEMY_ROUNDS_FIRE:
+                    break;
+                case SoundType.ENEMY_DESTRUCTION:
+                    break;
+                case SoundType.METEOR_DESTRUCTION:
+                    break;
+                case SoundType.BOSS_APPEARANCE:
+                    {
+                        if (BOSS_APPEARANCE is not null)
+                        {
+                            BOSS_APPEARANCE.Resume();
+                        }
+                    }
+                    break;
+                case SoundType.BOSS_DESTRUCTION:
+                    break;
+                case SoundType.ROUNDS_HIT:
+                    break;
+                case SoundType.POWER_UP:
+                    break;
+                case SoundType.POWER_DOWN:
+                    break;
+                case SoundType.METEOR_INCOMING:
+                    break;
+                case SoundType.HEALTH_GAIN:
+                    break;
+                case SoundType.HEALTH_LOSS:
+                    break;
+                case SoundType.GAME_START:
+                    break;
+                case SoundType.GAME_OVER:
+                    break;
+                default:
+                    break;
             }
         }
 

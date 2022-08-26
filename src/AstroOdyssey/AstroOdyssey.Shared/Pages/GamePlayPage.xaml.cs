@@ -21,8 +21,6 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private string baseUrl;
-
         private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
         private float lastFPSTime = 0;
@@ -67,16 +65,14 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            GetBaseUrl();
-
             _starHelper = new StarHelper(GameView);
-            _meteorHelper = new MeteorHelper(GameView, baseUrl);
-            _enemyHelper = new EnemyHelper(GameView, baseUrl);
-            _healthHelper = new HealthHelper(GameView, baseUrl);
-            _powerUpHelper = new PowerUpHelper(GameView, baseUrl);
-            _playerHelper = new PlayerHelper(GameView, baseUrl);
-            _playerProjectileHelper = new PlayerProjectileHelper(GameView, baseUrl);
-            _enemyProjectileHelper = new EnemyProjectileHelper(GameView, baseUrl);
+            _meteorHelper = new MeteorHelper(GameView);
+            _enemyHelper = new EnemyHelper(GameView);
+            _healthHelper = new HealthHelper(GameView);
+            _powerUpHelper = new PowerUpHelper(GameView);
+            _playerHelper = new PlayerHelper(GameView);
+            _playerProjectileHelper = new PlayerProjectileHelper(GameView);
+            _enemyProjectileHelper = new EnemyProjectileHelper(GameView);
         }
 
         #endregion
@@ -359,7 +355,8 @@ namespace AstroOdyssey
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
-            AudioHelper.PlaySound(baseUrl, SoundType.GAME_START);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.GAME_START);
 
             SpawnPlayer();
 
@@ -373,17 +370,12 @@ namespace AstroOdyssey
 
             PauseGameButton.Visibility = Visibility.Visible;
 
-            //TODO: show player entrace animation
-
-            //await Task.Delay(TimeSpan.FromSeconds(1));
-
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
 
             SetStars();
 
             Stopwatch = Stopwatch.StartNew();
-
             GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
 
             GameFrameTimer.Tick += (s, e) =>
@@ -402,10 +394,8 @@ namespace AstroOdyssey
             };
 
             GameFrameTimer.Start();
-
-            _starHelper.WarpThroughSpace();
-
-            AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+            WarpThroughSpace();
+            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -476,6 +466,12 @@ namespace AstroOdyssey
             FiringProjectiles = false;
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
+           
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            AudioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
+            if (GameView.IsBossEngaged)
+                AudioHelper.PauseSound(SoundType.BOSS_APPEARANCE);
         }
 
         /// <summary>
@@ -489,6 +485,12 @@ namespace AstroOdyssey
             FiringProjectiles = true;
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
+
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            AudioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
+            if (GameView.IsBossEngaged)
+                AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
         }
 
         /// <summary>
@@ -794,19 +796,7 @@ namespace AstroOdyssey
         //    //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
         //}
 
-        /// <summary>
-        /// Get base url for the app.
-        /// </summary>
-        private void GetBaseUrl()
-        {
-            var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
-            var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-            baseUrl = $"{indexUrl}{appPackage}";
 
-#if DEBUG
-            Console.WriteLine(baseUrl);
-#endif
-        }
 
         /// <summary>
         /// Sets analytics of fps, frame time and objects currently in view.
@@ -874,12 +864,50 @@ namespace AstroOdyssey
 
                 StopGame();
 
-                AudioHelper.PlaySound(baseUrl, SoundType.GAME_OVER);
+                AudioHelper.PlaySound(SoundType.GAME_OVER);
 
                 App.SetScore(Score);
 
                 App.NavigateToPage(typeof(GameOverPage));
             }
+        }
+
+        /// <summary>
+        /// Warps the player through space.
+        /// </summary>
+        private void WarpThroughSpace()
+        {
+            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
+
+            if (destructibles is not null)
+            {
+                Parallel.ForEach(destructibles, destructible =>
+                {
+                    destructible.IsMarkedForFadedDestruction = true;
+                });
+            }
+
+            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
+
+            if (projectiles is not null)
+            {
+                Parallel.ForEach(projectiles, projectile =>
+                {
+                    GameView.AddDestroyableGameObject(projectile);
+                });
+            }
+
+            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
+
+            if (pickups is not null)
+            {
+                Parallel.ForEach(pickups, pickup =>
+                {
+                    GameView.AddDestroyableGameObject(pickup);
+                });
+            }
+
+            _starHelper.WarpThroughSpace();
         }
 
         #endregion
@@ -990,41 +1018,6 @@ namespace AstroOdyssey
             //TODO: clear all objects except stars
         }
 
-        private void WarpThroughSpace()
-        {
-            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
-
-            if (destructibles is not null)
-            {
-                Parallel.ForEach(destructibles, destructible =>
-                {
-                    destructible.IsMarkedForFadedDestruction = true;
-                });
-            }
-
-            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
-
-            if (projectiles is not null)
-            {
-                Parallel.ForEach(projectiles, projectile =>
-                {
-                    GameView.AddDestroyableGameObject(projectile);
-                }); 
-            }
-
-            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
-
-            if (pickups is not null)
-            {
-                Parallel.ForEach(pickups, pickup =>
-                {
-                    GameView.AddDestroyableGameObject(pickup);
-                }); 
-            }
-
-            _starHelper.WarpThroughSpace();
-        }
-
         #endregion
 
         #region Difficulty Methods
@@ -1110,7 +1103,7 @@ namespace AstroOdyssey
                 {
                     WarpThroughSpace();
                     ShowInGameText("☄️\nMETEORS INCOMING");
-                    AudioHelper.PlaySound(baseUrl, SoundType.METEOR_INCOMING);
+                    AudioHelper.PlaySound(SoundType.METEOR_INCOMING);
                 }
 
                 GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();

@@ -26,10 +26,10 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public MeteorHelper(GameEnvironment gameEnvironment, string baseUrl)
+        public MeteorHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = baseUrl;
+            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -145,7 +145,7 @@ namespace AstroOdyssey
         public void DestroyMeteor(Meteor meteor)
         {
             meteor.IsMarkedForFadedDestruction = true;
-            AudioHelper.PlaySound(baseUrl, SoundType.METEOR_DESTRUCTION);
+            AudioHelper.PlaySound(SoundType.METEOR_DESTRUCTION);
         }
 
         /// <summary>

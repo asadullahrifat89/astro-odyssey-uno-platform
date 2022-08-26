@@ -29,10 +29,10 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerHelper(GameEnvironment gameEnvironment, string baseUrl)
+        public PlayerHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = baseUrl;
+            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -265,7 +265,7 @@ namespace AstroOdyssey
         {
             player.LooseHealth();
 
-            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_LOSS);
+            AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
 
             // enter ethereal state, prevent taking damage for a few milliseconds
             player.Opacity = 0.4d;
@@ -299,7 +299,7 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Player player, Health health)
         {
             player.GainHealth(health.Health);
-            AudioHelper.PlaySound(baseUrl, SoundType.HEALTH_GAIN);
+            AudioHelper.PlaySound(SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace AstroOdyssey
         {
             powerUpTriggerSpawnCounter = powerUpTriggerDelay;
 
-            AudioHelper.PlaySound(baseUrl, SoundType.POWER_UP);
+            AudioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
         }
 
@@ -326,7 +326,7 @@ namespace AstroOdyssey
 
             if (powerUpTriggerSpawnCounter <= 0)
             {
-                AudioHelper.PlaySound(baseUrl, SoundType.POWER_DOWN);
+                AudioHelper.PlaySound(SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
                 return true;
             }

@@ -39,10 +39,10 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyHelper(GameEnvironment gameEnvironment, string baseUrl)
+        public EnemyHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = baseUrl;
+            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -83,7 +83,7 @@ namespace AstroOdyssey
             gameEnvironment.IsBossEngaged = true;
 
             AudioHelper.StopSound();
-            AudioHelper.PlaySound(baseUrl, SoundType.BOSS_APPEARANCE);
+            AudioHelper.PlaySound(SoundType.BOSS_APPEARANCE);
 
             return enemy;
         }
@@ -95,8 +95,8 @@ namespace AstroOdyssey
         {
             gameEnvironment.IsBossEngaged = false;
             AudioHelper.StopSound();
-            AudioHelper.PlaySound(baseUrl, SoundType.BOSS_DESTRUCTION);
-            AudioHelper.PlaySound(baseUrl, SoundType.BACKGROUND_MUSIC);
+            AudioHelper.PlaySound(SoundType.BOSS_DESTRUCTION);
+            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace AstroOdyssey
         public void DestroyEnemy(Enemy enemy)
         {
             enemy.IsMarkedForFadedDestruction = true;
-            AudioHelper.PlaySound(baseUrl, SoundType.ENEMY_DESTRUCTION);
+            AudioHelper.PlaySound(SoundType.ENEMY_DESTRUCTION);
         }
 
         /// <summary>

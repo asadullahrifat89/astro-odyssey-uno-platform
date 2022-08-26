@@ -34,9 +34,19 @@ namespace AstroOdyssey
             this.ExecuteJavascript("element.currentTime = 0; element.play();");
         }
 
-        public void Pause()
+        public void Stop()
         {
             this.ExecuteJavascript("element.pause(); element.currentTime = 0;");
+        }
+
+        public void Pause()
+        {
+            this.ExecuteJavascript("element.pause();");
+        }
+
+        public void Resume()
+        {
+            this.ExecuteJavascript("element.play();");
         }
     }
 }

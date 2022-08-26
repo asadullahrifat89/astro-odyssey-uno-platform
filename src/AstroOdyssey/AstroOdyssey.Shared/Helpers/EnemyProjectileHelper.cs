@@ -16,10 +16,10 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyProjectileHelper(GameEnvironment gameEnvironment, string baseUrl)
+        public EnemyProjectileHelper(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
-            this.baseUrl = baseUrl;
+            this.baseUrl = App.GetBaseUrl();
         }
 
         #endregion
@@ -87,7 +87,7 @@ namespace AstroOdyssey
                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                 gameEnvironment: gameEnvironment);
 
-            AudioHelper.PlaySound(baseUrl, SoundType.ENEMY_ROUNDS_FIRE);
+            AudioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         /// <summary>
