@@ -299,7 +299,7 @@ namespace AstroOdyssey
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/8-bit-powerup-6768.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/asteroid-incoming-effect.mp3"),
                                 volume: 0.8);
                         }
 

@@ -26,15 +26,17 @@ namespace AstroOdyssey
         private float lastFPSTime = 0;
         private long frameStartTime;
         private long frameEndTime;
-        private int frameStatUpdateSpawnCounter;
 
-        private int frameStatUpdateDelay = 5;
+#if DEBUG
+        private int frameStatUpdateSpawnCounter;
+        private int frameStatUpdateDelay = 5; 
+        private double frameDuration;
+#endif
 
         private int showInGameTextSpawnCounter = 110;
         private int showInGameTextDelay = 110;
 
-        private double frameTime = 19;
-        private double frameDuration;
+        private double frameTime = 19;       
 
         private double windowWidth, windowHeight;
 
@@ -955,7 +957,9 @@ namespace AstroOdyssey
         /// </summary>
         private void GetFrameDuration()
         {
-            frameDuration = frameEndTime - frameStartTime;
+#if DEBUG
+            frameDuration = frameEndTime - frameStartTime; 
+#endif
         }
 
         /// <summary>
