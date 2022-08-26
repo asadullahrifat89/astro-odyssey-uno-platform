@@ -33,8 +33,10 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void PlaySound(string baseUrl, SoundType soundType)
+        public static void PlaySound(SoundType soundType)
         {
+            var baseUrl = App.GetBaseUrl();
+
             switch (soundType)
             {
                 case SoundType.MENU_SELECT:
@@ -81,7 +83,7 @@ namespace AstroOdyssey
 
                             BACKGROUND_MUSIC.OnCompleted += (s, e) =>
                             {
-                                PlaySound(baseUrl, soundType);
+                                PlaySound(soundType);
                             };
                         }
                         else

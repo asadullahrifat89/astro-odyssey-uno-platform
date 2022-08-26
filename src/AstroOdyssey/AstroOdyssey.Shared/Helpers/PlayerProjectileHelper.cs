@@ -100,17 +100,17 @@ namespace AstroOdyssey
                 switch (powerUpType)
                 {
                     case PowerUpType.NONE:
-                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
                         break;
                     case PowerUpType.RAPID_SHOT_ROUNDS:
-                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE);
                         xSide = xSide * -1;
                         break;
                     case PowerUpType.DEAD_SHOT_ROUNDS:
-                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE);
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
-                        AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE);
+                        AudioHelper.PlaySound(SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -118,7 +118,7 @@ namespace AstroOdyssey
             }
             else
             {
-                AudioHelper.PlaySound(baseUrl, SoundType.PLAYER_ROUNDS_FIRE);
+                AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
                 //xSide = xSide * -1;
             }
         }
@@ -204,7 +204,7 @@ namespace AstroOdyssey
                     destructible.LooseHealth();
                 }
 
-                AudioHelper.PlaySound(baseUrl, SoundType.ROUNDS_HIT);
+                AudioHelper.PlaySound(SoundType.ROUNDS_HIT);
 
                 switch (destructible.Tag)
                 {

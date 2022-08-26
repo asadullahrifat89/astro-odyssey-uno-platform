@@ -31,7 +31,7 @@ namespace AstroOdyssey
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(typeof(ShipSelectionPage));
             App.EnterFullScreen(true);
         }

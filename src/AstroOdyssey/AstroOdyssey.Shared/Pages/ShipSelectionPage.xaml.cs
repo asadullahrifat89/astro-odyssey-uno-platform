@@ -141,7 +141,7 @@ namespace AstroOdyssey
         {
             if (selectedShip is not null)
             {
-                AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.MENU_SELECT);
+                AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
                 App.NavigateToPage(typeof(GamePlayPage));
             }

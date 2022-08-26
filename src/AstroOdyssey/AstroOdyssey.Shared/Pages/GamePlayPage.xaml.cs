@@ -355,7 +355,8 @@ namespace AstroOdyssey
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
-            AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.GAME_START);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.GAME_START);
 
             SpawnPlayer();
 
@@ -394,7 +395,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Start();
             WarpThroughSpace();
-            AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.BACKGROUND_MUSIC);
+            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -465,7 +466,7 @@ namespace AstroOdyssey
             FiringProjectiles = false;
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
-            AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
         }
 
         /// <summary>
@@ -479,7 +480,7 @@ namespace AstroOdyssey
             FiringProjectiles = true;
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
-            AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
         }
 
         /// <summary>
@@ -853,7 +854,7 @@ namespace AstroOdyssey
 
                 StopGame();
 
-                AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.GAME_OVER);
+                AudioHelper.PlaySound(SoundType.GAME_OVER);
 
                 App.SetScore(Score);
 
@@ -1092,7 +1093,7 @@ namespace AstroOdyssey
                 {
                     WarpThroughSpace();
                     ShowInGameText("☄️\nMETEORS INCOMING");
-                    AudioHelper.PlaySound(App.GetBaseUrl(), SoundType.METEOR_INCOMING);
+                    AudioHelper.PlaySound(SoundType.METEOR_INCOMING);
                 }
 
                 GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
