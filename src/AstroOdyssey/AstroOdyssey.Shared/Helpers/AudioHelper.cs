@@ -53,22 +53,21 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(1, 12);
+                        var musicTrack = random.Next(1, 9);
                         var src = "";
+
+                        var musicPath = "Assets/Sounds/Music";
 
                         switch (musicTrack)
                         {
-                            case 1: { src = "Assets/Sounds/slow-trap-18565.mp3"; } break;
-                            case 2: { src = "Assets/Sounds/space-chillout-14194.mp3"; } break;
-                            case 3: { src = "Assets/Sounds/cinematic-space-drone-10623.mp3"; } break;
-                            case 4: { src = "Assets/Sounds/slow-thoughtful-sad-piano-114586.mp3"; } break;
-                            case 5: { src = "Assets/Sounds/space-age-10714.mp3"; } break;
-                            case 6: { src = "Assets/Sounds/drone-space-main-9706.mp3"; } break;
-                            case 7: { src = "Assets/Sounds/cyberpunk-2099-10701.mp3"; } break;
-                            case 8: { src = "Assets/Sounds/insurrection-10941.mp3"; } break;
-                            case 9: { src = "Assets/Sounds/space-trip-114102.mp3"; } break;
-                            case 10: { src = "Assets/Sounds/dark-matter-10710.mp3"; } break;
-                            case 11: { src = "Assets/Sounds/music-807dfe09ce23793891674eb022b38c1b.mp3"; } break;
+                            case 1: { src = musicPath + "/action-stylish-rock-dedication-15038.mp3"; } break;
+                            case 2: { src = musicPath + "/electronic-rock-king-around-here-15045.mp3"; } break;
+                            case 3: { src = musicPath + "/groovy-rock-short-110355.mp3"; } break;
+                            case 4: { src = musicPath + "/powerful-stylish-stomp-rock-lets-go-114255.mp3"; } break;
+                            case 5: { src = musicPath + "/rockstar-trailer-109945.mp3"; } break;
+                            case 6: { src = musicPath + "/sexy-fashion-beats-simulate-11176.mp3"; } break;
+                            case 7: { src = musicPath + "/stomping-rock-four-shots-111444.mp3"; } break;
+                            case 8: { src = musicPath + "/stylish-rock-beat-trailer-116346.mp3"; } break;
                             default:
                                 break;
                         }

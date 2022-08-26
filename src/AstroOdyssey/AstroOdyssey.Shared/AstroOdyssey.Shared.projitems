@@ -95,6 +95,14 @@
 		 without manipulating the projitem file.
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\game-start-6104.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\action-stylish-rock-dedication-15038.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\electronic-rock-king-around-here-15045.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\groovy-rock-short-110355.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\sexy-fashion-beats-simulate-11176.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_A.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_B.png" />
@@ -140,28 +148,17 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-sitar-7546.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cinematic-space-drone-10623.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\cyberpunk-2099-10701.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-matter-10710.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\drone-space-main-9706.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\halloween-impact-05-93808.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\insurrection-10941.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-blast-descend_Gy7C5dEO_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-descend_GJPs9OE__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magnetic-destroy-shot_fkxD6SV__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\music-807dfe09ce23793891674eb022b38c1b.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-down-7103.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\punchy-laser-shot_f11BarNO_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\rocket-missile-launcher_MyHKjH4__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\scale-e6-14577.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-thoughtful-sad-piano-114586.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\slow-trap-18565.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-age-10714.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-chillout-14194.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-jet-flyby_MkgS2BVu_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\space-trip-114102.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\spellcast-46164.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\videogame-death-sound-43894.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
