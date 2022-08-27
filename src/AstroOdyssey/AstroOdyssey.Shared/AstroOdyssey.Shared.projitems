@@ -143,6 +143,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-up-35839.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\asteroid-incoming-effect.mp3" />

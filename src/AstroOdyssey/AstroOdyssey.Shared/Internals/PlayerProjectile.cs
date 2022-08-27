@@ -83,6 +83,16 @@ namespace AstroOdyssey
                             BorderThickness = new Thickness(2, 3, 2, 1);
                         }
                         break;
+                    case PowerUpType.SONIC_BLAST_ROUNDS:
+                        {
+                            height = 3; width = 80; // wider and thiner and slower piercing rounds
+
+                            Background = new SolidColorBrush(Colors.SkyBlue);
+                            BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+
+                            BorderThickness = new Thickness(1);
+                        }
+                        break;
                     default:
                         {
                             SetDefaultPlayerProjectileColors(shipClass);

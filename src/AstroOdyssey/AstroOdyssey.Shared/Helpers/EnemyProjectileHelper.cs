@@ -1,5 +1,4 @@
 ﻿using System;
-using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -67,7 +66,7 @@ namespace AstroOdyssey
 
             if (enemy.IsBoss)
             {
-                //TODO: star blast shot across screen
+                //TODO: Boss: star blast shot across screen
 
                 enemy.OverPoweredProjectileSpawnCounter--;
 

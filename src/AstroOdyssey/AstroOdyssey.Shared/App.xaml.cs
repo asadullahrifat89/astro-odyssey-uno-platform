@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -121,7 +120,7 @@ namespace AstroOdyssey
 
                 if (args.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    // TODO: Load state from previously suspended application
+                    // TODO: App: Load state from previously suspended application
                 }
 
                 // Place the frame in the current Window
@@ -190,7 +189,7 @@ namespace AstroOdyssey
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            //TODO: App: Save application state and stop any background activity
             deferral.Complete();
         }
 
@@ -320,5 +319,12 @@ namespace AstroOdyssey
         }
 
         #endregion
+    }
+
+    public enum ShipClass
+    {
+        Antimony,
+        Bismuth,
+        Curium,
     }
 }

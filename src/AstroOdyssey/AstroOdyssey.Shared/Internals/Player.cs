@@ -52,9 +52,9 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
-            //TODO: Develop shield which protects damage for a certain number of hits
-            //TODO: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
+            //TODO: Player: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: Player: Develop shield which protects damage for a certain number of hits
+            //TODO: Player: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
 
             Tag = PLAYER;
 
@@ -62,7 +62,7 @@ namespace AstroOdyssey
             Width = DESTRUCTIBLE_OBJECT_SIZE;
 
             Health = 100;
-            HitPoint = 10; //TODO: HitPoint is always 10
+            HitPoint = 10;
 
             // combine power gauge, ship, and blaze
             body = new Grid();

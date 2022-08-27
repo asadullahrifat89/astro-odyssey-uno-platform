@@ -2,12 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
-using Uno.Foundation;
 using Windows.Foundation;
 
 namespace AstroOdyssey
 {
-
     public class GameEnvironment : Canvas
     {
         #region Fields
@@ -126,5 +124,19 @@ namespace AstroOdyssey
         }
 
         #endregion
+    }
+
+    public enum GameLevel
+    {
+        Level_1,
+        Level_2,
+        Level_3,
+        Level_4,
+        Level_5,
+        Level_6,
+        Level_7,
+        Level_8,
+        Level_9,
+        Level_10,
     }
 }

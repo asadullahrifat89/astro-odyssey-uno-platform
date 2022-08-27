@@ -1,15 +1,12 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml.Markup;
-using Microsoft.UI.Xaml.Media;
-using System;
-using System.Globalization;
+﻿using System;
 using Windows.Foundation;
-using Windows.UI;
 
 namespace AstroOdyssey
 {
     public static class Constants
     {
+        #region Fields
+
         public const double DESTRUCTIBLE_OBJECT_SIZE = 70;
         public const double PLAYER_HEIGHT = 80;
 
@@ -26,45 +23,9 @@ namespace AstroOdyssey
 
         public const string STAR = "star";
 
-        //public static Color SPECIAL_ROUNDS_COLOR = Colors.White; //Windows.UI.ColorHelper.FromArgb(255, 232, 18, 36);
+        #endregion
 
-        public enum GameLevel
-        {
-            Level_1,
-            Level_2,
-            Level_3,
-            Level_4,
-            Level_5,
-            Level_6,
-            Level_7,
-            Level_8,
-            Level_9,
-            Level_10,
-        }
-
-        public enum SoundType
-        {
-            GAME_INTRO,
-            MENU_SELECT,
-            BACKGROUND_MUSIC,
-            PLAYER_ROUNDS_FIRE,
-            PLAYER_RAPID_SHOT_ROUNDS_FIRE,
-            PLAYER_DEAD_SHOT_ROUNDS_FIRE,
-            PLAYER_DOOM_SHOT_ROUNDS_FIRE,
-            ENEMY_ROUNDS_FIRE,
-            ENEMY_DESTRUCTION,
-            METEOR_DESTRUCTION,
-            BOSS_APPEARANCE,
-            BOSS_DESTRUCTION,
-            ROUNDS_HIT,
-            POWER_UP,
-            POWER_DOWN,
-            METEOR_INCOMING,
-            HEALTH_GAIN,
-            HEALTH_LOSS,
-            GAME_START,
-            GAME_OVER
-        }
+        #region Methods
 
         /// <summary>
         /// Checks if the provided string is null or empty or white space.
@@ -83,8 +44,6 @@ namespace AstroOdyssey
         /// <returns></returns>
         public static string GetInitials(string name)
         {
-            // StringSplitOptions.RemoveEmptyEntries excludes empty spaces returned by the Split method
-
             string[] nameSplit = name.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
 
             string initials = "";
@@ -125,5 +84,7 @@ namespace AstroOdyssey
 
             return false;
         }
+
+        #endregion
     }
 }
