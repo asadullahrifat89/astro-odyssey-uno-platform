@@ -11,8 +11,8 @@
 		<WasmShellEnableLongPathSupport>false</WasmShellEnableLongPathSupport>
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
 		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)' == 'Debug'">true</MonoRuntimeDebuggerEnabled>
-		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
-		<!--<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
+		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Release'">false</WasmShellILLinkerEnabled>
+		<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
 	</PropertyGroup>
 
 	<ItemGroup>
