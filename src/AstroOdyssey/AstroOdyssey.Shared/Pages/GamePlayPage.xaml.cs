@@ -3,11 +3,9 @@ using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -81,6 +79,10 @@ namespace AstroOdyssey
         public DispatcherTimer GameFrameTimer { get; set; }
 
         public Stopwatch Stopwatch { get; set; }
+
+        public bool IsRageUp { get; set; }
+
+        public double Rage { get; set; } = 0;
 
         public double Score { get; set; } = 0;
 
@@ -181,7 +183,11 @@ namespace AstroOdyssey
             GameLevel = GameLevel.Level_1;
             GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
 
+            IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
+
+            IsRageUp = false;
+            Rage = 0;
 
             Score = 0;
             ScoreBarCount.Text = $"{Score}/50";
@@ -620,6 +626,16 @@ namespace AstroOdyssey
                                 ShowInGameText("POWER DOWN");
                             }
                         }
+
+                        if (IsRageUp)
+                        {
+                            if (_playerFactory.RageUpCoolDown(Player))
+                            {
+                                _playerProjectileFactory.RageDown(Player);
+                                IsRageUp = false;
+                                ShowInGameText("RAGE DOWN");
+                            }
+                        }
                     }
                     break;
                 case PLAYER_PROJECTILE:
@@ -646,7 +662,19 @@ namespace AstroOdyssey
                         }
 
                         if (score > 0)
-                        {
+                        {                            
+                            if (!IsRageUp)
+                                Rage++;
+
+                            // trigger rage after each 50 kills
+                            if (Rage >= 50)
+                            {
+                                _playerFactory.RageUp(Player);
+                                _playerProjectileFactory.RageUp(Player);
+                                ShowInGameText("💪\nRAGE");
+                            }
+
+
                             Score += score;
                             SetGameLevel(); // check game level on score change
                         }
@@ -1007,7 +1035,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = windowHeight - Player.Height - 25;
+            PointerY = windowHeight - Player.Height - 30;
 
             Player.SetY(PointerY);
         }

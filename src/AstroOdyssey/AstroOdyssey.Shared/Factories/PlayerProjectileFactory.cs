@@ -24,6 +24,9 @@ namespace AstroOdyssey
         private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 15;
         private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 3;
 
+        private readonly int RAGE_UP_ROUNDS_DELAY_DECREASE = 3;
+        private readonly int RAGE_UP_ROUNDS_SPEED_INCREASE = 2;
+
         private int xSide = 15;
 
         #endregion
@@ -387,6 +390,44 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             projectileSpawnDelay -= 1;
+        }
+
+        public void RageUp(Player player) 
+        {
+            switch (player.ShipClass)
+            {
+                case ShipClass.Antimony:
+                    break;
+                case ShipClass.Bismuth:
+                    {
+                        projectileSpawnDelay -= RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        projectileSpeed += RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
+                    }
+                    break;
+                case ShipClass.Curium:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void RageDown(Player player) 
+        {
+            switch (player.ShipClass)
+            {
+                case ShipClass.Antimony:
+                    break;
+                case ShipClass.Bismuth:
+                    {
+                        projectileSpawnDelay += RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        projectileSpeed -= RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
+                    }
+                    break;
+                case ShipClass.Curium:
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion

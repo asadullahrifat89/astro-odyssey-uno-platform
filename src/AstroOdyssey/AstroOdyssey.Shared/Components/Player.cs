@@ -78,18 +78,68 @@ namespace AstroOdyssey
             BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
 #if DEBUG
             //Background = new SolidColorBrush(Colors.White);
-#endif      
+#endif
+            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
         }
 
         #endregion
 
         #region Properties
 
-        public bool IsInEtherealState { get; set; }
+        private bool _isEtherealStateUp;
 
-        //public double ExhaustHeight { get; set; } = 50;
+        public bool IsEtherealStateUp
+        {
+            get { return _isEtherealStateUp; }
+            set
+            {
+                _isEtherealStateUp = value;
+
+                if (_isEtherealStateUp)
+                    Opacity = 0.4d;
+                else
+                    Opacity = 1;
+            }
+        }
+
+        private bool _isShieldUp;
+
+        public bool IsShieldUp
+        {
+            get { return _isShieldUp; }
+            set
+            {
+                _isShieldUp = value;
+
+                if (_isShieldUp)
+                {
+                    BorderBrush = new SolidColorBrush(Colors.SkyBlue);
+                    BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 3, 0, 0);
+                    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(10);
+                }
+                else
+                {
+                    BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+                    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
+                }
+            }
+        }
+
+        private bool _isRapidFireUp;
+
+        public bool IsRapidFireUp
+        {
+            get { return _isRapidFireUp; }
+            set
+            {
+                _isRapidFireUp = value;
+            }
+        }
 
         public ShipClass ShipClass { get; set; }
+
+        //public double ExhaustHeight { get; set; } = 50;
 
         #endregion
 

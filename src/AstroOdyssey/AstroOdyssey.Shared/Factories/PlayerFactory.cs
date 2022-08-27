@@ -15,6 +15,9 @@ namespace AstroOdyssey
         private int powerUpTriggerSpawnCounter;
         private readonly int powerUpTriggerDelay = 1050;
 
+        private int playerRageCoolDownCounter;
+        private readonly int playerRageCoolDownDelay = 900;
+
         private double playerSpeed = 12;
         private double accelerationCounter = 0;
 
@@ -46,7 +49,7 @@ namespace AstroOdyssey
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
             var left = pointerX - player.HalfWidth;
-            var top = gameEnvironment.Height - player.Height - 20;
+            var top = gameEnvironment.Height - player.Height - 30;
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
@@ -208,42 +211,69 @@ namespace AstroOdyssey
             {
                 case METEOR:
                     {
-                        // only loose health if player is now in physical state
-                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                        if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameObject.IsMarkedForFadedDestruction = true;
-                            PlayerHealthLoss(player);
+                            if (player.IsEtherealStateUp)  // only loose health if player is in physical state
+                            {
+                                return false;
+                            }
+                            else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
+                            {
+                                gameObject.IsMarkedForFadedDestruction = true;
+                            }
+                            else
+                            {
+                                gameObject.IsMarkedForFadedDestruction = true;
+                                PlayerHealthLoss(player);
+                            }
 
                             return true;
                         }
                     }
                     break;
                 case ENEMY:
-                    {
-                        // only loose health if player is now in physical state
-                        if (!player.IsInEtherealState && player.GetRect().Intersects(gameObject.GetRect()))
+                    {                       
+                        if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (gameObject is Enemy enemy && !enemy.IsBoss)
+                            if (player.IsEtherealStateUp)  // only loose health if player is in physical state
+                            {
+                                return false;
+                            }
+                            else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
                             }
+                            else
+                            {
+                                if (gameObject is Enemy enemy && !enemy.IsBoss)
+                                {
+                                    gameObject.IsMarkedForFadedDestruction = true;
+                                }
 
-                            PlayerHealthLoss(player);
+                                PlayerHealthLoss(player);
+                            }
 
                             return true;
                         }
                     }
                     break;
                 case ENEMY_PROJECTILE:
-                    {
-                        // only loose health if player is now in physical state
-                        if (!player.IsInEtherealState && !gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
+                    {                        
+                        if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            //gameEnvironment.AddDestroyableGameObject(gameObject);
-
-                            gameObject.IsMarkedForFadedDestruction = true;
-
-                            PlayerHealthLoss(player);
+                            if (player.IsEtherealStateUp) // only loose health if player is in physical state
+                            {
+                                return false;
+                            }
+                            else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
+                            {
+                                gameObject.IsMarkedForFadedDestruction = true;
+                            }
+                            else
+                            {
+                                gameObject.IsMarkedForFadedDestruction = true;
+                                PlayerHealthLoss(player);
+                            }                           
 
                             return true;
                         }
@@ -287,10 +317,8 @@ namespace AstroOdyssey
 
             AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
 
-            // enter ethereal state, prevent taking damage for a few milliseconds
-            player.Opacity = 0.4d;
-
-            player.IsInEtherealState = true;
+            // enter ethereal state, prevent taking damage for a few milliseconds            
+            player.IsEtherealStateUp = true;
 
             playerDamagedOpacitySpawnCounter = playerDamagedOpacityDelay;
         }
@@ -300,14 +328,13 @@ namespace AstroOdyssey
         /// </summary>
         public void DamageRecoveryCoolDown(Player player)
         {
-            if (player.IsInEtherealState)
+            if (player.IsEtherealStateUp)
             {
                 playerDamagedOpacitySpawnCounter -= 1;
 
                 if (playerDamagedOpacitySpawnCounter <= 0)
                 {
-                    player.Opacity = 1;
-                    player.IsInEtherealState = false;
+                    player.IsEtherealStateUp = false;
                 }
             }
         }
@@ -348,6 +375,74 @@ namespace AstroOdyssey
             }
 
             return (false, powerUpTriggerSpawnCounter);
+        }
+
+        public void RageUp(Player player)
+        {
+            playerRageCoolDownCounter = playerRageCoolDownDelay;
+            switch (player.ShipClass)
+            {
+                case ShipClass.Antimony:
+                    {
+                        //TODO: shield up
+                        player.IsShieldUp = true;
+                    }
+                    break;
+                case ShipClass.Bismuth:
+                    {
+                        //TODO: faster shots
+                        player.IsRapidFireUp = true;
+                    }
+                    break;
+                case ShipClass.Curium:
+                    {
+                        //TODO: ethereal state
+                        player.IsEtherealStateUp = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public bool RageUpCoolDown(Player player)
+        {
+            playerRageCoolDownCounter--;
+
+            switch (player.ShipClass)
+            {
+                case ShipClass.Antimony:
+                    {
+                        //TODO: shield up
+                        if (playerRageCoolDownCounter <= 0)
+                            player.IsShieldUp = false;
+                    }
+                    break;
+                case ShipClass.Bismuth:
+                    {
+                        //TODO: faster shots
+                        if (playerRageCoolDownCounter <= 0)
+                            player.IsRapidFireUp = false;
+                    }
+                    break;
+                case ShipClass.Curium:
+                    {
+                        //TODO: ethereal state
+                        if (playerRageCoolDownCounter <= 0)
+                            player.IsEtherealStateUp = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (playerRageCoolDownCounter <= 0)
+            {
+                AudioHelper.PlaySound(SoundType.POWER_DOWN);
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
