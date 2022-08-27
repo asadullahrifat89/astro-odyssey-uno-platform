@@ -616,7 +616,7 @@ namespace AstroOdyssey
 
                             PlayerPowerBar.Value = coolDown.PowerRemaining;
 
-                            if (coolDown.PoweredDown)
+                            if (coolDown.PowerDown)
                             {
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
 
@@ -629,7 +629,11 @@ namespace AstroOdyssey
 
                         if (IsRageUp)
                         {
-                            if (_playerFactory.RageUpCoolDown(Player))
+                            var coolDown = _playerFactory.RageUpCoolDown(Player);
+
+                            PlayerRageBar.Value = coolDown.RageRemaining;
+
+                            if (coolDown.RageDown)
                             {
                                 _playerProjectileFactory.RageDown(Player);
                                 IsRageUp = false;

@@ -16,7 +16,7 @@ namespace AstroOdyssey
         private readonly int powerUpTriggerDelay = 1050;
 
         private int playerRageCoolDownCounter;
-        private readonly int playerRageCoolDownDelay = 900;
+        private readonly int playerRageCoolDownDelay = 1000;
 
         private double playerSpeed = 12;
         private double accelerationCounter = 0;
@@ -232,7 +232,7 @@ namespace AstroOdyssey
                     }
                     break;
                 case ENEMY:
-                    {                       
+                    {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             if (player.IsEtherealStateUp)  // only loose health if player is in physical state
@@ -258,7 +258,7 @@ namespace AstroOdyssey
                     }
                     break;
                 case ENEMY_PROJECTILE:
-                    {                        
+                    {
                         if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             if (player.IsEtherealStateUp) // only loose health if player is in physical state
@@ -273,7 +273,7 @@ namespace AstroOdyssey
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
                                 PlayerHealthLoss(player);
-                            }                           
+                            }
 
                             return true;
                         }
@@ -363,7 +363,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public (bool PoweredDown, int PowerRemaining) PowerUpCoolDown(Player player)
+        public (bool PowerDown, int PowerRemaining) PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
@@ -403,9 +403,11 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+
+            AudioHelper.PlaySound(SoundType.POWER_UP);
         }
 
-        public bool RageUpCoolDown(Player player)
+        public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
         {
             playerRageCoolDownCounter--;
 
@@ -439,10 +441,10 @@ namespace AstroOdyssey
             if (playerRageCoolDownCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.POWER_DOWN);
-                return true;
+                return (true, 0);
             }
 
-            return false;
+            return (false, (playerRageCoolDownCounter / playerRageCoolDownDelay) * 50);
         }
 
         #endregion
