@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class EnemyHelper
+    public class EnemyFactory
     {
         #region Fields
 
@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyHelper(GameEnvironment gameEnvironment)
+        public EnemyFactory(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
         }

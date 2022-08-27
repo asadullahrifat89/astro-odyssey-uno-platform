@@ -97,6 +97,7 @@ namespace AstroOdyssey
                         Height = 15;
                         Width = 15;
                         YDirection = YDirection.NONE;
+                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50);
                     }
                 }
             }

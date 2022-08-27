@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class PowerUpHelper
+    public class PowerUpFactory
     {
         #region Fields
 
@@ -18,7 +18,7 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PowerUpHelper(GameEnvironment gameEnvironment)
+        public PowerUpFactory(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
         }

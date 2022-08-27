@@ -54,6 +54,9 @@
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\EnemyProjectileFactory.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\HealthFactory.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\MeteorFactory.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />

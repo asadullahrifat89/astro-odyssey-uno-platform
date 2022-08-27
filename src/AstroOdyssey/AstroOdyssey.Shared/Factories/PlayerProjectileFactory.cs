@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class PlayerProjectileHelper
+    public class PlayerProjectileFactory
     {
         #region Fields
 
@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerProjectileHelper(GameEnvironment gameEnvironment)
+        public PlayerProjectileFactory(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
         }

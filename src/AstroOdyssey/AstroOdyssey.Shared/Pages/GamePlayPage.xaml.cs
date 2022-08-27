@@ -20,7 +20,7 @@ namespace AstroOdyssey
 
         private int fpsSpawnCounter = 0;
         private int fpsCount = 0;
-        private float lastFPSTime = 0;
+        private float lastFpsTime = 0;
         private long frameStartTime;
         private long frameEndTime;
 
@@ -37,14 +37,14 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private readonly StarHelper _starHelper;
-        private readonly MeteorHelper _meteorHelper;
-        private readonly EnemyHelper _enemyHelper;
-        private readonly HealthHelper _healthHelper;
-        private readonly PowerUpHelper _powerUpHelper;
-        private readonly PlayerHelper _playerHelper;
-        private readonly PlayerProjectileHelper _playerProjectileHelper;
-        private readonly EnemyProjectileHelper _enemyProjectileHelper;
+        private readonly StarFactory _starFactory;
+        private readonly MeteorFactory _meteorFactory;
+        private readonly EnemyFactory _enemyFactory;
+        private readonly HealthFactory _healthFactory;
+        private readonly PowerUpFactory _powerUpFactory;
+        private readonly PlayerFactory _playerFactory;
+        private readonly PlayerProjectileFactory _playerProjectileFactory;
+        private readonly EnemyProjectileFactory _enemyProjectileFactory;
 
         #endregion
 
@@ -64,14 +64,14 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _starHelper = new StarHelper(GameView);
-            _meteorHelper = new MeteorHelper(GameView);
-            _enemyHelper = new EnemyHelper(GameView);
-            _healthHelper = new HealthHelper(GameView);
-            _powerUpHelper = new PowerUpHelper(GameView);
-            _playerHelper = new PlayerHelper(GameView);
-            _playerProjectileHelper = new PlayerProjectileHelper(GameView);
-            _enemyProjectileHelper = new EnemyProjectileHelper(GameView);
+            _starFactory = new StarFactory(GameView);
+            _meteorFactory = new MeteorFactory(GameView);
+            _enemyFactory = new EnemyFactory(GameView);
+            _healthFactory = new HealthFactory(GameView);
+            _powerUpFactory = new PowerUpFactory(GameView);
+            _playerFactory = new PlayerFactory(GameView);
+            _playerProjectileFactory = new PlayerProjectileFactory(GameView);
+            _enemyProjectileFactory = new EnemyProjectileFactory(GameView);
         }
 
         #endregion
@@ -583,7 +583,7 @@ namespace AstroOdyssey
                     {
                         if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
                         {
-                            var pointerX = _playerHelper.UpdatePlayer(
+                            var pointerX = _playerFactory.UpdatePlayer(
                                 player: Player,
                                 pointerX: PointerX,
                                 //pointerY: PointerY,
@@ -599,14 +599,14 @@ namespace AstroOdyssey
                         }
                         else
                         {
-                            var pointerX = _playerHelper.UpdateAcceleration(player: Player, pointerX: PointerX);
+                            var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
 
                             PointerX = pointerX;
                         }
 
                         if (IsPoweredUp)
                         {
-                            var coolDown = _playerHelper.PowerUpCoolDown(Player);
+                            var coolDown = _playerFactory.PowerUpCoolDown(Player);
 
                             PlayerPowerBar.Value = coolDown.PowerRemaining;
 
@@ -614,7 +614,7 @@ namespace AstroOdyssey
                             {
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
 
-                                _playerProjectileHelper.PowerDown(PowerUpType);
+                                _playerProjectileFactory.PowerDown(PowerUpType);
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
                                 ShowInGameText("POWER DOWN");
@@ -627,7 +627,7 @@ namespace AstroOdyssey
                         var projectile = gameObject as PlayerProjectile;
 
                         // move the projectile up and check if projectile has gone beyond the game view
-                        _playerProjectileHelper.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+                        _playerProjectileFactory.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -638,7 +638,7 @@ namespace AstroOdyssey
                         if (projectile.IsMarkedForFadedDestruction)
                             return;
 
-                        _playerProjectileHelper.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+                        _playerProjectileFactory.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
 
                         if (GameView.IsBossEngaged)
                         {
@@ -659,7 +659,7 @@ namespace AstroOdyssey
                                     {
                                         var enemy = destroyedObject as Enemy;
 
-                                        _enemyHelper.DestroyEnemy(enemy);
+                                        _enemyFactory.DestroyEnemy(enemy);
 
                                         if (enemy.IsBoss)
                                         {
@@ -669,7 +669,7 @@ namespace AstroOdyssey
                                     break;
                                 case METEOR:
                                     {
-                                        _meteorHelper.DestroyMeteor(destroyedObject as Meteor);
+                                        _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
                                     }
                                     break;
                                 default:
@@ -682,7 +682,7 @@ namespace AstroOdyssey
                     {
                         var projectile = gameObject as EnemyProjectile;
 
-                        _enemyProjectileHelper.UpdateProjectile(projectile, destroyed: out bool destroyed);
+                        _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -691,7 +691,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if enemy projectile collides with player
-                        if (_playerHelper.PlayerCollision(player: Player, gameObject: projectile))
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
                         {
                             SetPlayerHealthBar();
                         }
@@ -701,7 +701,7 @@ namespace AstroOdyssey
                     {
                         var enemy = gameObject as Enemy;
 
-                        _enemyHelper.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
+                        _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -710,7 +710,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if enemy collides with player
-                        if (_playerHelper.PlayerCollision(player: Player, gameObject: enemy))
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
                         {
                             SetPlayerHealthBar();
                             return;
@@ -718,14 +718,14 @@ namespace AstroOdyssey
 
                         // fire projectiles if at a legitimate distance from player
                         if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
-                            _enemyProjectileHelper.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+                            _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                     }
                     break;
                 case METEOR:
                     {
                         var meteor = gameObject as Meteor;
 
-                        _meteorHelper.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
+                        _meteorFactory.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -734,7 +734,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if meteor collides with player
-                        if (_playerHelper.PlayerCollision(player: Player, gameObject: meteor))
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
                         {
                             SetPlayerHealthBar();
                         }
@@ -744,7 +744,7 @@ namespace AstroOdyssey
                     {
                         var health = gameObject as Health;
 
-                        _healthHelper.UpdateHealth(health: health, destroyed: out bool destroyed);
+                        _healthFactory.UpdateHealth(health: health, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -753,7 +753,7 @@ namespace AstroOdyssey
                             return;
 
                         // check if health collides with player
-                        if (_playerHelper.PlayerCollision(player: Player, gameObject: health))
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
                             ShowInGameText("‍❤️\nHEALTH PICKUP");
@@ -764,7 +764,7 @@ namespace AstroOdyssey
                     {
                         var powerUp = gameObject as PowerUp;
 
-                        _powerUpHelper.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
+                        _powerUpFactory.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
 
                         if (destroyed)
                             return;
@@ -773,13 +773,13 @@ namespace AstroOdyssey
                             return;
 
                         // check if power up collides with player
-                        if (_playerHelper.PlayerCollision(player: Player, gameObject: powerUp))
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
                         {
                             PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
                             ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
-                            _playerProjectileHelper.PowerUp(PowerUpType);
+                            _playerProjectileFactory.PowerUp(PowerUpType);
                         }
                     }
                     break;
@@ -787,7 +787,7 @@ namespace AstroOdyssey
                     {
                         var star = gameObject as Star;
 
-                        _starHelper.UpdateStar(star: star, destroyed: out bool destroyed);
+                        _starFactory.UpdateStar(star: star, destroyed: out bool destroyed);
                     }
                     break;
                 default:
@@ -800,20 +800,20 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnGameObjects()
         {
-            _starHelper.SpawnStar();
+            _starFactory.SpawnStar();
 
             // only generate game objects if not warping thorugh space
             if (!GameView.IsWarpingThroughSpace)
             {
-                _meteorHelper.SpawnMeteor(GameLevel);
+                _meteorFactory.SpawnMeteor(GameLevel);
 
-                _enemyHelper.SpawnEnemy(GameLevel);
+                _enemyFactory.SpawnEnemy(GameLevel);
 
-                _healthHelper.SpawnHealth(Player);
+                _healthFactory.SpawnHealth(Player);
 
-                _powerUpHelper.SpawnPowerUp();
+                _powerUpFactory.SpawnPowerUp();
 
-                _playerProjectileHelper.SpawnProjectile(
+                _playerProjectileFactory.SpawnProjectile(
                     isPoweredUp: IsPoweredUp,
                     firingProjectiles: FiringProjectiles,
                     player: Player,
@@ -952,7 +952,7 @@ namespace AstroOdyssey
                 });
             }
 
-            _starHelper.WarpThroughSpace();
+            _starFactory.WarpThroughSpace();
         }
 
         #endregion
@@ -975,11 +975,11 @@ namespace AstroOdyssey
         private void CalculateFPS()
         {
             // calculate FPS
-            if (lastFPSTime + 1000 < frameStartTime)
+            if (lastFpsTime + 1000 < frameStartTime)
             {
                 fpsCount = fpsSpawnCounter;
                 fpsSpawnCounter = 0;
-                lastFPSTime = frameStartTime;
+                lastFpsTime = frameStartTime;
             }
 
             fpsSpawnCounter++;
@@ -995,7 +995,7 @@ namespace AstroOdyssey
         private void SpawnPlayer()
         {
             var scale = GameView.GetGameObjectScale();
-            Player = _playerHelper.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
+            Player = _playerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
 
 #if DEBUG
             Console.WriteLine($"Render Scale: {scale}");
@@ -1025,7 +1025,7 @@ namespace AstroOdyssey
         /// </summary>
         private void DamageRecoveryCoolDown()
         {
-            _playerHelper.DamageRecoveryCoolDown(Player);
+            _playerFactory.DamageRecoveryCoolDown(Player);
         }
 
         #endregion
@@ -1038,7 +1038,7 @@ namespace AstroOdyssey
         private void EngageBoss()
         {
             ShowInGameText("💀\nDEFEAT THE BOSS");
-            Boss = _enemyHelper.EngageBossEnemy(GameLevel);
+            Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
         }
@@ -1059,7 +1059,7 @@ namespace AstroOdyssey
             WarpThroughSpace();
 
             ShowInGameText($"💥\nLEVEL {(int)GameLevel} BOSS DEFEATED");
-            _enemyHelper.DisengageBossEnemy();
+            _enemyFactory.DisengageBossEnemy();
             Boss = null;
         }
 
@@ -1167,12 +1167,12 @@ namespace AstroOdyssey
                     break;
                 default:
                     {
-                        _enemyHelper.LevelUp();
-                        _meteorHelper.LevelUp();
-                        _healthHelper.LevelUp();
-                        _powerUpHelper.LevelUp();
-                        _starHelper.LevelUp();
-                        _playerProjectileHelper.LevelUp();
+                        _enemyFactory.LevelUp();
+                        _meteorFactory.LevelUp();
+                        _healthFactory.LevelUp();
+                        _powerUpFactory.LevelUp();
+                        _starFactory.LevelUp();
+                        _playerProjectileFactory.LevelUp();
                     }
                     break;
             }
