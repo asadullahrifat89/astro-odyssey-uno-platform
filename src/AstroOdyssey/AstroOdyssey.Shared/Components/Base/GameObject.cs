@@ -69,17 +69,17 @@ namespace AstroOdyssey
 
         public double HalfWidth { get; set; }
 
-        private bool isMarkedForFadedDestruction;
+        private bool _isMarkedForFadedDestruction;
 
         public bool IsMarkedForFadedDestruction
         {
-            get { return isMarkedForFadedDestruction; }
+            get { return _isMarkedForFadedDestruction; }
             set
             {
-                isMarkedForFadedDestruction = value;
+                _isMarkedForFadedDestruction = value;
 
                 //change the content to explosion
-                if (isMarkedForFadedDestruction)
+                if (_isMarkedForFadedDestruction)
                 {
                     if (IsDestructible)
                     {

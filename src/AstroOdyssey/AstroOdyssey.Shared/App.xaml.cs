@@ -323,8 +323,8 @@ namespace AstroOdyssey
 
     public enum ShipClass
     {
-        Antimony,
-        Bismuth,
-        Curium,
+        Antimony, // shield generate when enraged
+        Bismuth, // shoots faster shots when enraged
+        Curium, // goes into etheral mode when enraged
     }
 }

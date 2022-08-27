@@ -37,6 +37,8 @@ namespace AstroOdyssey
 
             if (enemy.ProjectileSpawnCounter <= 0)
             {
+                //TODO: Boss: star blast shot across screen
+
                 GenerateProjectile(enemy, gameLevel);
 
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
@@ -66,8 +68,6 @@ namespace AstroOdyssey
 
             if (enemy.IsBoss)
             {
-                //TODO: Boss: star blast shot across screen
-
                 enemy.OverPoweredProjectileSpawnCounter--;
 
                 if (enemy.OverPoweredProjectileSpawnCounter <= 0)

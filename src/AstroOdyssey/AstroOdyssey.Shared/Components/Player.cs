@@ -12,15 +12,15 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Grid body = new Grid();
+        private readonly Grid _body = new Grid();
 
 
-        private readonly Image ship = new Image()
+        private readonly Image _ship = new Image()
         {
             Stretch = Stretch.Uniform,
         };
 
-        private readonly Image contentShipBlaze = new Image()
+        private readonly Image _contentShipBlaze = new Image()
         {
             Stretch = Stretch.Uniform
         };
@@ -65,31 +65,97 @@ namespace AstroOdyssey
             HitPoint = 10;
 
             // combine power gauge, ship, and blaze
-            body = new Grid();
-            body.Children.Add(contentShipBlaze);
-            body.Children.Add(ship);
+            _body = new Grid();
+            _body.Children.Add(_contentShipBlaze);
+            _body.Children.Add(_ship);
             //body.Children.Add(powerGauge);
             //content.Children.Add(contentShipHealthBar);           
 
-            Child = body;
+            Child = _body;
 
             Background = new SolidColorBrush(Colors.Transparent);
             BorderBrush = new SolidColorBrush(Colors.Transparent);
             BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
 #if DEBUG
             //Background = new SolidColorBrush(Colors.White);
-#endif      
+#endif
+            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
         }
 
         #endregion
 
         #region Properties
 
-        public bool IsInEtherealState { get; set; }
+        private bool _isRecoveringFromDamage;
 
-        //public double ExhaustHeight { get; set; } = 50;
+        public bool IsRecoveringFromDamage
+        {
+            get { return _isRecoveringFromDamage; }
+            set
+            {
+                _isRecoveringFromDamage = value;
+
+                if (_isRecoveringFromDamage)
+                    Opacity = 0.4d;
+                else
+                    Opacity = 1;
+            }
+        }
+
+        private bool _isEtherealStateUp;
+
+        public bool IsEtherealStateUp
+        {
+            get { return _isEtherealStateUp; }
+            set
+            {
+                _isEtherealStateUp = value;
+
+                if (_isEtherealStateUp)
+                    Opacity = 0.6d;
+                else
+                    Opacity = 1;
+            }
+        }
+
+        private bool _isShieldUp;
+
+        public bool IsShieldUp
+        {
+            get { return _isShieldUp; }
+            set
+            {
+                _isShieldUp = value;
+
+                if (_isShieldUp)
+                {
+                    BorderBrush = new SolidColorBrush(Colors.SkyBlue);
+                    BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 3, 0, 0);
+                    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(10);
+                }
+                else
+                {
+                    BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+                    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
+                }
+            }
+        }
+
+        private bool _isRapidFireUp;
+
+        public bool IsRapidFireUp
+        {
+            get { return _isRapidFireUp; }
+            set
+            {
+                _isRapidFireUp = value;
+            }
+        }
 
         public ShipClass ShipClass { get; set; }
+
+        //public double ExhaustHeight { get; set; } = 50;
 
         #endregion
 
@@ -99,14 +165,14 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            this.ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            this._ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
             var exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust.png", UriKind.RelativeOrAbsolute);
 
-            contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            contentShipBlaze.Width = body.Width;
-            contentShipBlaze.Height = body.Height;
+            _contentShipBlaze.Source = new BitmapImage(exhaustUri);
+            _contentShipBlaze.Width = _body.Width;
+            _contentShipBlaze.Height = _body.Height;
 
             //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
 

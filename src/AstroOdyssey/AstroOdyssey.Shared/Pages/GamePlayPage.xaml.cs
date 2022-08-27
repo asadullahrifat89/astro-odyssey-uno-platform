@@ -3,11 +3,9 @@ using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using static AstroOdyssey.Constants;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -81,6 +79,10 @@ namespace AstroOdyssey
         public DispatcherTimer GameFrameTimer { get; set; }
 
         public Stopwatch Stopwatch { get; set; }
+
+        public bool IsRageUp { get; set; }
+
+        public double Rage { get; set; } = 0;
 
         public double Score { get; set; } = 0;
 
@@ -181,7 +183,14 @@ namespace AstroOdyssey
             GameLevel = GameLevel.Level_1;
             GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
 
+            IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
+            PlayerPowerBar.Maximum = POWER_UP_METER;
+            PlayerPowerBar.Value = POWER_UP_METER;
+
+            IsRageUp = false;
+            Rage = 0;
+            PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
             Score = 0;
             ScoreBarCount.Text = $"{Score}/50";
@@ -610,14 +619,43 @@ namespace AstroOdyssey
 
                             PlayerPowerBar.Value = coolDown.PowerRemaining;
 
-                            if (coolDown.PoweredDown)
+                            if (coolDown.PowerDown)
                             {
-                                PlayerPowerBar.Visibility = Visibility.Collapsed;
-
                                 _playerProjectileFactory.PowerDown(PowerUpType);
+                                PlayerPowerBar.Visibility = Visibility.Collapsed;                                
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
                                 ShowInGameText("POWER DOWN");
+                            }
+                        }
+
+                        if (IsRageUp)
+                        {
+                            var coolDown = _playerFactory.RageUpCoolDown(Player);
+
+                            PlayerRageBar.Value = coolDown.RageRemaining;
+
+                            if (coolDown.RageDown)
+                            {
+                                _playerProjectileFactory.RageDown(Player);
+                                IsRageUp = false;
+                                Rage = 0;
+                                PlayerRageBar.Value = Rage;
+
+                                switch (Player.ShipClass)
+                                {
+                                    case ShipClass.Antimony:
+                                        ShowInGameText("SHIELD DOWN");
+                                        break;
+                                    case ShipClass.Bismuth:
+                                        ShowInGameText("RAPID FIRE DOWN");
+                                        break;
+                                    case ShipClass.Curium:
+                                        ShowInGameText("ETHERAL STATE DOWN");
+                                        break;
+                                    default:
+                                        break;
+                                }                               
                             }
                         }
                     }
@@ -647,6 +685,35 @@ namespace AstroOdyssey
 
                         if (score > 0)
                         {
+                            if (!IsRageUp)
+                            {
+                                Rage++;
+                                PlayerRageBar.Value = Rage;
+                            }
+
+                            // trigger rage after each 25 kills
+                            if (!IsRageUp && Rage >= RAGE_THRESHOLD)
+                            {
+                                IsRageUp = true;
+                                _playerFactory.RageUp(Player);
+                                _playerProjectileFactory.RageUp(Player);
+
+                                switch (Player.ShipClass)
+                                {
+                                    case ShipClass.Antimony:
+                                        ShowInGameText("💪SHIELD UP");
+                                        break;
+                                    case ShipClass.Bismuth:
+                                        ShowInGameText("💪RAPID FIRE");
+                                        break;
+                                    case ShipClass.Curium:
+                                        ShowInGameText("💪ETHERAL STATE");
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
                             Score += score;
                             SetGameLevel(); // check game level on score change
                         }
@@ -1007,7 +1074,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = windowHeight - Player.Height - 25;
+            PointerY = windowHeight - Player.Height - 30;
 
             Player.SetY(PointerY);
         }

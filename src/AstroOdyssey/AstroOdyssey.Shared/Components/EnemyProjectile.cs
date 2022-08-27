@@ -30,65 +30,8 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            double height = 0, width = 0;
-
-            //switch (gameLevel)
-            //{
-            //    case GameLevel.Level_1:
-            //        {
-            //            height = 10; width = 10;
-            //        }
-            //        break;
-            //    case GameLevel.Level_2:
-            //        {
-            //            height = 11; width = 11;
-            //        }
-            //        break;
-            //    case GameLevel.Level_3:
-            //        {
-            //            height = 12; width = 12;
-            //        }
-            //        break;
-            //    case GameLevel.Level_4:
-            //        {
-            //            height = 13; width = 13;
-            //        }
-            //        break;
-            //    case GameLevel.Level_5:
-            //        {
-            //            height = 14; width = 14;
-            //        }
-            //        break;
-            //    case GameLevel.Level_6:
-            //        {
-            //            height = 15; width = 15;
-            //        }
-            //        break;
-            //    case GameLevel.Level_7:
-            //        {
-            //            height = 16; width = 16;
-            //        }
-            //        break;
-            //    case GameLevel.Level_8:
-            //        {
-            //            height = 17; width = 17;
-            //        }
-            //        break;
-            //    case GameLevel.Level_9:
-            //        {
-            //            height = 18; width = 18;
-            //        }
-            //        break;
-            //    case GameLevel.Level_10:
-            //        {
-            //            height = 19; width = 19;
-            //        }
-            //        break;
-            //    default:
-            //        break;
-            //}
-
-            height = 12; width = 12;
+            double height = 12;
+            double width = 12;
 
             if (isOverPowered)
             {
