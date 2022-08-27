@@ -185,9 +185,12 @@ namespace AstroOdyssey
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
+            PlayerPowerBar.Maximum = POWER_UP_METER;
+            PlayerPowerBar.Value = POWER_UP_METER;
 
             IsRageUp = false;
             Rage = 0;
+            PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
             Score = 0;
             ScoreBarCount.Text = $"{Score}/50";
@@ -688,8 +691,8 @@ namespace AstroOdyssey
                                 PlayerRageBar.Value = Rage;
                             }
 
-                            // trigger rage after each 50 kills
-                            if (!IsRageUp && Rage >= 50)
+                            // trigger rage after each 25 kills
+                            if (!IsRageUp && Rage >= RAGE_THRESHOLD)
                             {
                                 IsRageUp = true;
                                 _playerFactory.RageUp(Player);

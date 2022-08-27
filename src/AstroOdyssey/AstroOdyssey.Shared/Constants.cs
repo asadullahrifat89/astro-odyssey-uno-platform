@@ -23,6 +23,9 @@ namespace AstroOdyssey
 
         public const string STAR = "star";
 
+        public const double RAGE_THRESHOLD = 25;
+        public const double POWER_UP_METER = 100;
+
         #endregion
 
         #region Methods

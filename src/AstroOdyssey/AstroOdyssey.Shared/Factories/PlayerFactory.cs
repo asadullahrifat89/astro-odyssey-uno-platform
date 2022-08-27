@@ -9,8 +9,8 @@ namespace AstroOdyssey
 
         private readonly GameEnvironment gameEnvironment;
 
-        private int playerDamagedOpacitySpawnCounter;
-        private readonly int playerDamagedOpacityDelay = 120;
+        private int playerDamageRecoveryCounter;
+        private readonly int playerDamageRecoveryDelay = 120;
 
         private int powerUpTriggerSpawnCounter;
         private readonly int powerUpTriggerDelay = 1050;
@@ -213,7 +213,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp)  // only loose health if player is in physical state
+                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -235,7 +235,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp)  // only loose health if player is in physical state
+                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -261,7 +261,7 @@ namespace AstroOdyssey
                     {
                         if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp) // only loose health if player is in physical state
+                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage) // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -317,10 +317,10 @@ namespace AstroOdyssey
 
             AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
 
-            // enter ethereal state, prevent taking damage for a few milliseconds            
-            player.IsEtherealStateUp = true;
+            // enter damage recovery state, prevent taking damage for a few milliseconds            
+            player.IsRecoveringFromDamage = true;
 
-            playerDamagedOpacitySpawnCounter = playerDamagedOpacityDelay;
+            playerDamageRecoveryCounter = playerDamageRecoveryDelay;
         }
 
         /// <summary>
@@ -328,13 +328,13 @@ namespace AstroOdyssey
         /// </summary>
         public void DamageRecoveryCoolDown(Player player)
         {
-            if (player.IsEtherealStateUp)
+            if (player.IsRecoveringFromDamage)
             {
-                playerDamagedOpacitySpawnCounter -= 1;
+                playerDamageRecoveryCounter -= 1;
 
-                if (playerDamagedOpacitySpawnCounter <= 0)
+                if (playerDamageRecoveryCounter <= 0)
                 {
-                    player.IsEtherealStateUp = false;
+                    player.IsRecoveringFromDamage = false;
                 }
             }
         }
@@ -374,7 +374,7 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var remainingPower = (double)((double)powerUpTriggerSpawnCounter / (double)powerUpTriggerDelay) * 100;
+            var remainingPower = (double)((double)powerUpTriggerSpawnCounter / (double)powerUpTriggerDelay) * POWER_UP_METER;
             return (false, remainingPower);
         }
 
@@ -385,19 +385,16 @@ namespace AstroOdyssey
             {
                 case ShipClass.Antimony:
                     {
-                        //TODO: shield up
                         player.IsShieldUp = true;
                     }
                     break;
                 case ShipClass.Bismuth:
                     {
-                        //TODO: faster shots
                         player.IsRapidFireUp = true;
                     }
                     break;
                 case ShipClass.Curium:
                     {
-                        //TODO: ethereal state
                         player.IsEtherealStateUp = true;
                     }
                     break;
@@ -416,21 +413,18 @@ namespace AstroOdyssey
             {
                 case ShipClass.Antimony:
                     {
-                        //TODO: shield up
                         if (playerRageCoolDownCounter <= 0)
                             player.IsShieldUp = false;
                     }
                     break;
                 case ShipClass.Bismuth:
                     {
-                        //TODO: faster shots
                         if (playerRageCoolDownCounter <= 0)
                             player.IsRapidFireUp = false;
                     }
                     break;
                 case ShipClass.Curium:
                     {
-                        //TODO: ethereal state
                         if (playerRageCoolDownCounter <= 0)
                             player.IsEtherealStateUp = false;
                     }
@@ -445,7 +439,7 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var remainingRage = (double)((double)playerRageCoolDownCounter / (double)playerRageCoolDownDelay) * 50;
+            var remainingRage = (double)((double)playerRageCoolDownCounter / (double)playerRageCoolDownDelay) * RAGE_THRESHOLD;
 
             return (false, remainingRage);
         }
