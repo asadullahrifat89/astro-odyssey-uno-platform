@@ -52,9 +52,9 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
-            //TODO: Develop shield which protects damage for a certain number of hits
-            //TODO: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
+            //TODO: Player: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: Player: Develop shield which protects damage for a certain number of hits
+            //TODO: Player: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
 
             Tag = PLAYER;
 

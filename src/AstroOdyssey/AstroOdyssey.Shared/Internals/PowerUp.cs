@@ -43,7 +43,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
-            PowerUpType = PowerUpType.SONIC_BLAST_ROUNDS; //TODO: leave it (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
+            PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
 
             var uri = new Uri("ms-appx:///Assets/Images/powerup1.png", UriKind.RelativeOrAbsolute);
             Health = 10;

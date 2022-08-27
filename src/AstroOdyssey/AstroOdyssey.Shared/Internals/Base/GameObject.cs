@@ -271,7 +271,7 @@ namespace AstroOdyssey
         public void Widen()
         {
             Width += 1.2d;
-            compositeTransform.ScaleY += 0.1d;
+            Height += 0.08d;
         }
 
         public void OverPower()

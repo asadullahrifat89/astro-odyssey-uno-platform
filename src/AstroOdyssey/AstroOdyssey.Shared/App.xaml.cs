@@ -120,7 +120,7 @@ namespace AstroOdyssey
 
                 if (args.UWPLaunchActivatedEventArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    // TODO: Load state from previously suspended application
+                    // TODO: App: Load state from previously suspended application
                 }
 
                 // Place the frame in the current Window
@@ -189,7 +189,7 @@ namespace AstroOdyssey
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            //TODO: App: Save application state and stop any background activity
             deferral.Complete();
         }
 
