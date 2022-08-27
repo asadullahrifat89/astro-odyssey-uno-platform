@@ -3,7 +3,7 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class PlayerHelper
+    public class PlayerFactory
     {
         #region Fields
 
@@ -25,7 +25,7 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerHelper(GameEnvironment gameEnvironment)
+        public PlayerFactory(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
         }

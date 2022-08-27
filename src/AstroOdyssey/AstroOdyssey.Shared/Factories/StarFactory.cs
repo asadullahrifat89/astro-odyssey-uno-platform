@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class StarHelper
+    public class StarFactory
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public StarHelper(GameEnvironment gameEnvironment)
+        public StarFactory(GameEnvironment gameEnvironment)
         {
             this.gameEnvironment = gameEnvironment;
         }

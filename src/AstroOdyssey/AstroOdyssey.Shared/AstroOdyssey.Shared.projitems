@@ -20,32 +20,32 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\EnemyProjectileHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\HealthHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MeteorHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\PowerUpHelper.cs" />
-    <Compile Include="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\EnemyProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Factories\EnemyProjectileFactory.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Factories\HealthFactory.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Factories\MeteorFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\PowerUpFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\AudioPlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\EnemyProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Ship.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml.cs">
       <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\StarHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Enemy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Health.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerProjectileFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\StarFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Health.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameScore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\HighScore.cs" />
-    <Compile Include="..\AstroOdyssey.Shared\Internals\PlayerProjectile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Meteor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\PowerUp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\PlayerProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Meteor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\PowerUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Star.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Base\GameEnvironment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Base\GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
       <DependentUpon>GameOverPage.xaml</DependentUpon>
@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
 </Project>
