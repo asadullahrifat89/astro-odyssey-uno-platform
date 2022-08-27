@@ -1,12 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">	
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
 		<NoWarn>NU1701</NoWarn>
-		<!--<NoWarn>$(NoWarn);NU1504;NU1505;NU1701</NoWarn>-->
-		<LangVersion>10.0</LangVersion>		
-		<RunAOTCompilation>true</RunAOTCompilation>			
-	</PropertyGroup>
+		<LangVersion>10.0</LangVersion>
+		<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
+	</PropertyGroup>	
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
 		<DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
@@ -22,7 +21,7 @@
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Assets\SplashScreen.png" />
+		<None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
@@ -54,16 +53,6 @@
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\EnemyProjectileFactory.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\HealthFactory.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Factories\MeteorFactory.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\PlayerProjectileHelper.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\Base\AudioPlayer.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Internals\PlayerProjectile.cs" />
-	  <_Globbed_Compile Remove="HighScore.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Content Include="Assets\SplashScreen.png" />
+		<Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 </Project>
