@@ -12,7 +12,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/sDA_z4.gif" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/gameIntro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
         <Border
@@ -27,8 +27,8 @@
                 Orientation="Vertical">
 
                 <Image
-                    Width="115"
-                    Height="115"
+                    Width="100"
+                    Height="100"
                     Source="ms-appx:///Assets/Images/player_ship1.png" />
 
                 <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />

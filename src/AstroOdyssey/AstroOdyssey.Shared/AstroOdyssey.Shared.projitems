@@ -94,7 +94,7 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
-    <Content Include="$(MSBuildThisFileDirectory)Assets\10803966.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\gameOver.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny2.png" />
@@ -125,8 +125,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock6.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\sDA_z4.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\8-bit-powerup-6768.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\gameIntro.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
@@ -144,10 +143,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\power-up-35839.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\asteroid-incoming-effect.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\dark-sitar-7546.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\halloween-impact-05-93808.mp3" />

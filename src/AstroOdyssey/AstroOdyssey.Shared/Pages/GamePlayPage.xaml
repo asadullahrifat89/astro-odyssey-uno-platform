@@ -12,10 +12,6 @@
 
     <Grid x:Name="RootGrid">
 
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/sDA_z4.gif" Stretch="UniformToFill" />
-        </Grid.Background>-->
-
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
