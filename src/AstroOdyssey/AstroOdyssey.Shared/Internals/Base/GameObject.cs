@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Foundation;
 using Point = Windows.Foundation.Point;
 
@@ -42,9 +39,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public int Health { get; set; } = 1;
+        public double Health { get; set; } = 1;
 
-        public int HitPoint { get; set; } = 1;
+        public double HitPoint { get; set; } = 1;
 
         public double Speed { get; set; } = 1;
 
@@ -60,7 +57,7 @@ namespace AstroOdyssey
 
         public double ExplosionCounter { get; set; } = 1;
 
-        public bool HasExploded => ExplosionCounter <= 0; //Opacity <= 0;
+        public bool HasExploded => ExplosionCounter <= 0;
 
         public bool IsOverPowered { get; set; } = false;
 
@@ -125,7 +122,7 @@ namespace AstroOdyssey
             Health += HitPoint;
         }
 
-        public void GainHealth(int health)
+        public void GainHealth(double health)
         {
             Health += health;
         }
@@ -135,7 +132,7 @@ namespace AstroOdyssey
             Health -= HitPoint;
         }
 
-        public void LooseHealth(int health)
+        public void LooseHealth(double health)
         {
             Health -= health;
         }
@@ -262,8 +259,19 @@ namespace AstroOdyssey
             if (ExplosionCounter <= 0.3d)
                 Opacity -= 0.1d;
 
+            Enlarge();
+        }
+
+        public void Enlarge()
+        {
             compositeTransform.ScaleX += 0.3d;
             compositeTransform.ScaleY += 0.3d;
+        }
+
+        public void Widen()
+        {
+            Width += 1.2d;
+            compositeTransform.ScaleY += 0.1d;
         }
 
         public void OverPower()

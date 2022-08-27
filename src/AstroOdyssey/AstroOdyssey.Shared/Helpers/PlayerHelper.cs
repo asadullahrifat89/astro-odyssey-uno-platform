@@ -1,6 +1,4 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using System;
-using System.Text.RegularExpressions;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey

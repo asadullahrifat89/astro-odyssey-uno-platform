@@ -10,7 +10,7 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        private int powerUpSpawnCounter = 1500;
+        private int powerUpSpawnCounter = 0; // TODO: leave it to 1500
         private int powerUpSpawnDelay = 1500;
         private double powerUpSpeed = 2;
 

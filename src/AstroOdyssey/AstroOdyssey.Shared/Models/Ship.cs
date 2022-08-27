@@ -10,11 +10,4 @@
 
         public ShipClass ShipClass { get; set; }
     }
-
-    public enum ShipClass 
-    {
-        Antimony,
-        Bismuth,
-        Curium,
-    }
 }

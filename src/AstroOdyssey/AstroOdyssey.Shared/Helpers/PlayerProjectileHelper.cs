@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using static AstroOdyssey.Constants;
+﻿using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -23,8 +21,8 @@ namespace AstroOdyssey
         private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
-        private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 10;
-        private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 5;
+        private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 15;
+        private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 3;
 
         private int xSide = 15;
 
@@ -67,7 +65,11 @@ namespace AstroOdyssey
                 //// any object falls within player range
                 //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 //{
-                GenerateProjectile(isPoweredUp: isPoweredUp, player: player, gameLevel: gameLevel, powerUpType: powerUpType);
+                GenerateProjectile(
+                    isPoweredUp: isPoweredUp,
+                    player: player,
+                    gameLevel: gameLevel,
+                    powerUpType: powerUpType);
                 //}
 
                 projectileSpawnCounter = projectileSpawnDelay;
@@ -147,6 +149,9 @@ namespace AstroOdyssey
             // move projectile up                
             projectile.MoveY();
 
+            if (projectile.IsPoweredUp && projectile.PowerUpType == PowerUpType.SONIC_BLAST_ROUNDS)
+                projectile.Widen();
+
             // remove projectile if outside game canvas
             if (projectile.GetY() < 10)
             {
@@ -179,7 +184,6 @@ namespace AstroOdyssey
                         case PowerUpType.RAPID_SHOT_ROUNDS:
                             {
                                 // upon hit with a destructible object remove the projectile
-                                //gameEnvironment.AddDestroyableGameObject(projectile);
                                 projectile.IsMarkedForFadedDestruction = true;
 
                                 destructible.LooseHealth(destructible.HitPoint);
@@ -188,24 +192,27 @@ namespace AstroOdyssey
                         case PowerUpType.DEAD_SHOT_ROUNDS:
                             {
                                 // upon hit with a destructible object remove the projectile
-                                //gameEnvironment.AddDestroyableGameObject(projectile);
                                 projectile.IsMarkedForFadedDestruction = true;
 
                                 // loose 5 times hit point
                                 destructible.LooseHealth(destructible.HitPoint * 5);
                             }
                             break;
-                        case PowerUpType.SONIC_BLAST_ROUNDS:
                         case PowerUpType.DOOM_SHOT_ROUNDS:
                             {
                                 // loose health point but projectile is armor penetrating
                                 destructible.LooseHealth(destructible.HitPoint);
                             }
                             break;
+                        case PowerUpType.SONIC_BLAST_ROUNDS:
+                            {
+                                // loose 1/4 health point but projectile is armor penetrating
+                                destructible.LooseHealth(destructible.HitPoint / 4);
+                            }
+                            break;
                         default:
                             {
-                                // upon hit with a destructible object remove the projectile
-                                //gameEnvironment.AddDestroyableGameObject(projectile);
+                                // upon hit with a destructible object remove the projectile                             
                                 projectile.IsMarkedForFadedDestruction = true;
 
                                 destructible.LooseHealth();
@@ -215,8 +222,7 @@ namespace AstroOdyssey
                 }
                 else
                 {
-                    // upon hit with a destructible object remove the projectile
-                    //gameEnvironment.AddDestroyableGameObject(projectile);
+                    // upon hit with a destructible object remove the projectile                    
                     projectile.IsMarkedForFadedDestruction = true;
                     destructible.LooseHealth();
                 }
@@ -330,8 +336,8 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.SONIC_BLAST_ROUNDS:
                     {
-                        projectileSpawnDelay += SONIC_BLAST_ROUNDS_DELAY_INCREASE; // slow firing rate
-                        projectileSpeed += SONIC_BLAST_ROUNDS_SPEED_INCREASE; // slow projectile
+                        projectileSpawnDelay += SONIC_BLAST_ROUNDS_DELAY_INCREASE; // medium firing rate
+                        projectileSpeed += SONIC_BLAST_ROUNDS_SPEED_INCREASE; // medium projectile
                     }
                     break;
                 default:

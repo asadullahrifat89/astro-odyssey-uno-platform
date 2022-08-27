@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using static AstroOdyssey.Constants;
 using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -1064,8 +1061,6 @@ namespace AstroOdyssey
             ShowInGameText($"💥\nLEVEL {(int)GameLevel} BOSS DEFEATED");
             _enemyHelper.DisengageBossEnemy();
             Boss = null;
-
-            //TODO: clear all objects except stars
         }
 
         #endregion

@@ -56,7 +56,7 @@ namespace AstroOdyssey
                 case 1:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
+                        Health = 1;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
@@ -65,7 +65,7 @@ namespace AstroOdyssey
                 case 2:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
+                        Health = 1;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
@@ -74,7 +74,7 @@ namespace AstroOdyssey
                 case 3:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
+                        Health = 2;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
@@ -83,7 +83,7 @@ namespace AstroOdyssey
                 case 4:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
+                        Health = 2;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
@@ -92,7 +92,7 @@ namespace AstroOdyssey
                 case 5:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
-                        Health = 4;
+                        Health = 3;
 
                         Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
                         Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
@@ -101,7 +101,7 @@ namespace AstroOdyssey
                 case 6:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock6.png", UriKind.RelativeOrAbsolute);
-                        Health = 4;
+                        Health = 3;
 
                         Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
                         Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
@@ -110,7 +110,7 @@ namespace AstroOdyssey
                 case 7:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock7.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
+                        Health = 2;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
@@ -119,7 +119,7 @@ namespace AstroOdyssey
                 case 8:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock8.png", UriKind.RelativeOrAbsolute);
-                        Health = 4;
+                        Health = 3;
 
                         Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
                         Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
@@ -128,7 +128,7 @@ namespace AstroOdyssey
                 case 9:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock9.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
+                        Health = 1;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
@@ -137,7 +137,7 @@ namespace AstroOdyssey
                 case 10:
                     {
                         uri = new Uri("ms-appx:///Assets/Images/rock10.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
+                        Health = 2;
 
                         Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;

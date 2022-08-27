@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -320,5 +319,12 @@ namespace AstroOdyssey
         }
 
         #endregion
+    }
+
+    public enum ShipClass
+    {
+        Antimony,
+        Bismuth,
+        Curium,
     }
 }

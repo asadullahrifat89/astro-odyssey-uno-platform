@@ -1,5 +1,4 @@
 ﻿using System;
-using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {

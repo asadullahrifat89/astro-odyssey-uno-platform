@@ -85,12 +85,12 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.SONIC_BLAST_ROUNDS:
                         {
-                            height = 15; width = 250; // wider and thiner and slower piercing rounds
+                            height = 3; width = 80; // wider and thiner and slower piercing rounds
 
-                            Background = new SolidColorBrush(Colors.Violet);
-                            BorderBrush = new SolidColorBrush(Colors.DarkViolet);
+                            Background = new SolidColorBrush(Colors.SkyBlue);
+                            BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
 
-                            BorderThickness = new Thickness(2);
+                            BorderThickness = new Thickness(1);
                         }
                         break;
                     default:

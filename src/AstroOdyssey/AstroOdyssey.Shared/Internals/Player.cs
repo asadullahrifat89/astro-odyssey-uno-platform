@@ -62,7 +62,7 @@ namespace AstroOdyssey
             Width = DESTRUCTIBLE_OBJECT_SIZE;
 
             Health = 100;
-            HitPoint = 10; //TODO: HitPoint is always 10
+            HitPoint = 10;
 
             // combine power gauge, ship, and blaze
             body = new Grid();
