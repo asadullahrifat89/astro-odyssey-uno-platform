@@ -46,7 +46,4 @@ Have a go at it here: https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platf
 * Health pickups, if picked up restores 10 health points.
 
 ## Screenshots
-![pika-2022-08-23T19_18_14 378Z](https://user-images.githubusercontent.com/25480176/186250802-35dbb008-23d8-4ee1-bfb2-72fe8bdb6d46.png)
-![pika-2022-08-23T19_18_27 273Z](https://user-images.githubusercontent.com/25480176/186250816-5d1c9d48-0417-4b4e-b944-9c5ca6508125.png)
-![pika-2022-08-23T19_20_52 715Z](https://user-images.githubusercontent.com/25480176/186250836-ae93bf20-c10c-41d3-bc07-97edac990174.png)
-![pika-2022-08-23T19_21_05 717Z](https://user-images.githubusercontent.com/25480176/186250844-e1e3a01c-7783-43fa-afc6-5524327c041c.png)
+![wide-banner](https://user-images.githubusercontent.com/25480176/187021351-7889a3ec-b359-4a82-8877-81e2c09b80b0.png)
