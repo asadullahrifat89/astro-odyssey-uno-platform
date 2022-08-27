@@ -633,6 +633,8 @@ namespace AstroOdyssey
                             {
                                 _playerProjectileFactory.RageDown(Player);
                                 IsRageUp = false;
+                                Rage = 0;
+                                PlayerRageBar.Value = Rage;
                                 ShowInGameText("RAGE DOWN");
                             }
                         }
@@ -662,18 +664,21 @@ namespace AstroOdyssey
                         }
 
                         if (score > 0)
-                        {                            
+                        {
                             if (!IsRageUp)
-                                Rage++;
-
-                            // trigger rage after each 50 kills
-                            if (Rage >= 50)
                             {
-                                _playerFactory.RageUp(Player);
-                                _playerProjectileFactory.RageUp(Player);
-                                ShowInGameText("💪\nRAGE");
+                                Rage++;
+                                PlayerRageBar.Value = Rage;
                             }
 
+                            // trigger rage after each 50 kills
+                            if (!IsRageUp && Rage >= 50)
+                            {
+                                IsRageUp = true;
+                                _playerFactory.RageUp(Player);
+                                _playerProjectileFactory.RageUp(Player);
+                                ShowInGameText("💪\nRAGE UP");
+                            }
 
                             Score += score;
                             SetGameLevel(); // check game level on score change

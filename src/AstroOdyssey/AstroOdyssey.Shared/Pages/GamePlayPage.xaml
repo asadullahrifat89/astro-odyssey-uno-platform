@@ -171,7 +171,7 @@
 
         </Grid>
 
-        <!--  This shows the player health bar  -->
+        <!--  This shows the player health, rage, power bar  -->
         <StackPanel
             Name="PlayerHealthBarPanel"
             Margin="5"
@@ -180,6 +180,30 @@
             Orientation="Horizontal"
             Visibility="Collapsed">
 
+            <!--  Rage  -->
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="💪"
+                TextAlignment="Center"
+                TextWrapping="WrapWholeWords" />
+
+            <!--  Rage bar  -->
+            <ProgressBar
+                Name="PlayerRageBar"
+                Width="50"
+                Height="5"
+                Margin="5"
+                VerticalAlignment="Center"
+                Foreground="Purple"
+                Maximum="50"
+                Minimum="0"
+                Value="0" />
+
+            <!--  Health  -->
             <TextBlock
                 Margin="5"
                 VerticalAlignment="Center"
@@ -190,6 +214,7 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <!--  Health bar  -->
             <ProgressBar
                 Name="PlayerHealthBar"
                 Width="150"
@@ -201,6 +226,7 @@
                 Minimum="0"
                 Value="100" />
 
+            <!--  Health count  -->
             <TextBlock
                 Name="PlayerHealthBarCount"
                 Margin="5"
@@ -213,6 +239,7 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
+            <!--  Power up  -->
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -224,9 +251,10 @@
                 TextWrapping="WrapWholeWords"
                 Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />
 
+            <!--  Power up bar  -->
             <ProgressBar
                 Name="PlayerPowerBar"
-                Width="100"
+                Width="50"
                 Height="5"
                 Margin="5"
                 VerticalAlignment="Center"
@@ -235,19 +263,6 @@
                 Minimum="0"
                 Visibility="Collapsed"
                 Value="1050" />
-
-            <!--<TextBlock
-                Name="PlayerHealthBarCount"
-                Margin="5"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="{x:Bind Path=PlayerPowerBar.Value.ToString('0'), Mode=OneWay}"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords"
-                Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />-->
 
         </StackPanel>
 
