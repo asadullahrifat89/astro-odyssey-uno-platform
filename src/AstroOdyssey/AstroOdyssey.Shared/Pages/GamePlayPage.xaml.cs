@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Input;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using static AstroOdyssey.Constants;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AstroOdyssey
 {
@@ -396,7 +397,7 @@ namespace AstroOdyssey
 
             SetPlayerHealthBar(); // set player health bar at game start
 
-            InGameText.Text = "";
+            HideInGameText();
 
             IsGameRunning = true;
 
@@ -429,7 +430,7 @@ namespace AstroOdyssey
             GameFrameTimer.Start();
             WarpThroughSpace();
             AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
-        }
+        }     
 
         /// <summary>
         /// Add stars to game environemnt randomly.
@@ -517,7 +518,7 @@ namespace AstroOdyssey
         {
             InputView.Focus(FocusState.Programmatic);
 
-            InGameText.Text = "";
+            HideInGameText();
             GameFrameTimer?.Start();
             FiringProjectiles = true;
             IsGamePaused = false;
@@ -845,7 +846,7 @@ namespace AstroOdyssey
                             PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
-                            ShowInGameText("‍🔥\nPOWER UP\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
+                            ShowInGameText("‍🔥\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
                             _playerProjectileFactory.PowerUp(PowerUpType);
                         }
                     }
@@ -937,7 +938,18 @@ namespace AstroOdyssey
         /// </summary>
         private void ShowInGameText(string text)
         {
+            InGameText.Visibility = Visibility.Visible;
             InGameText.Text = text;
+            showInGameTextSpawnCounter = showInGameTextDelay;
+        }
+
+        /// <summary>
+        /// Hides the in game text.
+        /// </summary>
+        private void HideInGameText()
+        {
+            InGameText.Visibility = Visibility.Collapsed;
+            InGameText.Text = null;
         }
 
         /// <summary>
@@ -951,8 +963,7 @@ namespace AstroOdyssey
 
                 if (showInGameTextSpawnCounter <= 0)
                 {
-                    InGameText.Text = null;
-                    showInGameTextSpawnCounter = showInGameTextDelay;
+                    HideInGameText();                 
                 }
             }
         }
