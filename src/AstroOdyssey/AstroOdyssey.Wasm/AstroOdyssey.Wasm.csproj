@@ -10,8 +10,11 @@
 		<WasmHead>true</WasmHead>
 		<WasmShellEnableLongPathSupport>false</WasmShellEnableLongPathSupport>
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)' == 'Debug'">$(DefineConstants);TRACE;DEBUG</DefineConstants>
+		<DebugType Condition="'$(Configuration)' == 'Debug'">portable</DebugType>
+		<DebugSymbols Condition="'$(Configuration)' == 'Debug'">true</DebugSymbols>
 		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)' == 'Debug'">true</MonoRuntimeDebuggerEnabled>
-		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Release'">false</WasmShellILLinkerEnabled>
+		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Debug'">false</WasmShellILLinkerEnabled>
 		<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
 	</PropertyGroup>
 
@@ -72,14 +75,22 @@
 		<None Include="wwwroot\web.config" />
 	</ItemGroup>-->
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<!--<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
 		<PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
 		<PackageReference Include="Uno.WinUI.WebAssembly" Version="4.4.13" />
 		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.4.13" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.13" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
-		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
+		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />-->
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0-preview.7.22375.6" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.7.22375.6" />
+		<PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
+		<PackageReference Include="Uno.WinUI.WebAssembly" Version="4.5.0-dev.645" />
+		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.5.0-dev.645" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.0-dev.645" />
+		<PackageReference Include="Uno.Wasm.Bootstrap" Version="4.0.0-dev.174" />
+		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="4.0.0-dev.174" />
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
