@@ -248,10 +248,10 @@ namespace AstroOdyssey
 
                             enemy.SetProjectileImpactEffect();
 
-                            // bosses cause a score penalty as long as not destroyed
+                            // bosses cause a score penalty
                             if (destructible.HasNoHealth)
                             {
-                                if (enemy.IsPlayerTargeting)
+                                if (enemy.IsPlayerColliding)
                                     score += gameEnvironment.IsBossEngaged ? 1 : 3;
                                 else if (enemy.IsOverPowered)
                                     score += gameEnvironment.IsBossEngaged ? 2 : 4;
@@ -261,7 +261,6 @@ namespace AstroOdyssey
                                     score += gameEnvironment.IsBossEngaged ? 1 : 2;
 
                                 destroyedObject = enemy;
-
                                 return;
                             }
 
@@ -289,7 +288,6 @@ namespace AstroOdyssey
                                     score++;
 
                                 destroyedObject = meteor;
-
                                 return;
                             }
 

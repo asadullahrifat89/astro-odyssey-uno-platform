@@ -198,9 +198,9 @@ namespace AstroOdyssey
             enemy.IsHovering = true;
             hoveringEnemySpawnDelay = random.Next(9, 13);
 
-            // hovering enemies do not evade or target player
+            // hovering enemies do not evade or collide with the player
             enemy.IsEvading = false;
-            enemy.IsPlayerTargeting = false;
+            enemy.IsPlayerColliding = false;
         }
 
         /// <summary>
@@ -215,13 +215,13 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Generates an enemy that targets player.
+        /// Generates an enemy that collides with the player.
         /// </summary>
         /// <param name="enemy"></param>
         private void SetPlayerTargetingEnemy(Enemy enemy)
         {
             targetingEnemySpawnCounter = targetingEnemySpawnDelay;
-            enemy.IsPlayerTargeting = true;
+            enemy.IsPlayerColliding = true;
             targetingEnemySpawnDelay = random.Next(7, 12);
 
             // player targeting enemies do not evade on hit
@@ -287,7 +287,7 @@ namespace AstroOdyssey
             enemy.Rotate();
 
             // sideways flying enemies do not follow player or evade on hit
-            enemy.IsPlayerTargeting = false;
+            enemy.IsPlayerColliding = false;
             enemy.IsEvading = false;
             enemy.IsHovering = false;
 
@@ -330,7 +330,7 @@ namespace AstroOdyssey
                 enemy.MoveY();
             }
 
-            if (enemy.IsPlayerTargeting)
+            if (enemy.IsPlayerColliding)
             {
                 var enemyX = enemy.GetX();
 

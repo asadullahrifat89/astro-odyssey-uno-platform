@@ -45,7 +45,7 @@ namespace AstroOdyssey
 
         public bool IsBoss { get; set; }
 
-        public bool IsPlayerTargeting { get; set; }
+        public bool IsPlayerColliding { get; set; }
 
         public bool IsProjectileFiring { get; set; }
 
