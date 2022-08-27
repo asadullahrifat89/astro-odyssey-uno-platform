@@ -65,5 +65,6 @@ namespace AstroOdyssey
         RAPID_SHOT_ROUNDS,
         DEAD_SHOT_ROUNDS,
         DOOM_SHOT_ROUNDS,
+        SONIC_BLAST_ROUNDS
     }
 }

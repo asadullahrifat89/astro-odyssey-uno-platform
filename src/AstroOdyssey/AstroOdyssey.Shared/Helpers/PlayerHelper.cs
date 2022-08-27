@@ -342,9 +342,6 @@ namespace AstroOdyssey
         {
             powerUpTriggerSpawnCounter -= 1;
 
-            //powerGauge = ((powerUpTriggerSpawnCounter / 100) + 1) * gameEnvironment.GetGameObjectScale();
-            //player.SetPowerGauge(powerGauge);
-
             if (powerUpTriggerSpawnCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.POWER_DOWN);
@@ -352,7 +349,6 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            //var powerGauge = Math.Abs((powerUpTriggerSpawnCounter / 1050) * 100);
             return (false, powerUpTriggerSpawnCounter);
         }
 

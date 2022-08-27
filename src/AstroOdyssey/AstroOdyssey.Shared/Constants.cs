@@ -51,6 +51,7 @@ namespace AstroOdyssey
             PLAYER_RAPID_SHOT_ROUNDS_FIRE,
             PLAYER_DEAD_SHOT_ROUNDS_FIRE,
             PLAYER_DOOM_SHOT_ROUNDS_FIRE,
+            PLAYER_SONIC_BLAST_ROUNDS_FIRE,
             ENEMY_ROUNDS_FIRE,
             ENEMY_DESTRUCTION,
             METEOR_DESTRUCTION,

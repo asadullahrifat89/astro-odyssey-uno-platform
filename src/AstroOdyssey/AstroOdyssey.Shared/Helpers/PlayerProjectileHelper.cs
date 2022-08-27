@@ -23,6 +23,9 @@ namespace AstroOdyssey
         private readonly int DOOM_SHOT_ROUNDS_DELAY_INCREASE = 25;
         private readonly int DOOM_SHOT_ROUNDS_SPEED_INCREASE = 25;
 
+        private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 10;
+        private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 5;
+
         private int xSide = 15;
 
         #endregion
@@ -46,7 +49,12 @@ namespace AstroOdyssey
         /// <param name="player"></param>
         /// <param name="gameLevel"></param>
         /// <param name="powerUpType"></param>
-        public void SpawnProjectile(bool isPoweredUp, bool firingProjectiles, Player player, GameLevel gameLevel, PowerUpType powerUpType)
+        public void SpawnProjectile(
+            bool isPoweredUp,
+            bool firingProjectiles,
+            Player player,
+            GameLevel gameLevel,
+            PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
             projectileSpawnCounter -= 1;
@@ -73,7 +81,11 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="projectileHeight"></param>
         /// <param name="projectileWidth"></param>
-        public void GenerateProjectile(bool isPoweredUp, Player player, GameLevel gameLevel, PowerUpType powerUpType)
+        public void GenerateProjectile(
+            bool isPoweredUp,
+            Player player,
+            GameLevel gameLevel,
+            PowerUpType powerUpType)
         {
             var projectile = new PlayerProjectile();
 
@@ -82,7 +94,7 @@ namespace AstroOdyssey
             projectile.SetAttributes(
                 speed: projectileSpeed,
                 gameLevel: gameLevel,
-                shipClass: player.ShipClass, 
+                shipClass: player.ShipClass,
                 isPoweredUp: isPoweredUp,
                 powerUpType: powerUpType,
                 scale: scale);
@@ -108,6 +120,9 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.DOOM_SHOT_ROUNDS:
                         AudioHelper.PlaySound(SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE);
+                        break;
+                    case PowerUpType.SONIC_BLAST_ROUNDS:
+                        AudioHelper.PlaySound(SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -180,6 +195,7 @@ namespace AstroOdyssey
                                 destructible.LooseHealth(destructible.HitPoint * 5);
                             }
                             break;
+                        case PowerUpType.SONIC_BLAST_ROUNDS:
                         case PowerUpType.DOOM_SHOT_ROUNDS:
                             {
                                 // loose health point but projectile is armor penetrating
@@ -312,6 +328,12 @@ namespace AstroOdyssey
                         projectileSpeed += DOOM_SHOT_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
+                case PowerUpType.SONIC_BLAST_ROUNDS:
+                    {
+                        projectileSpawnDelay += SONIC_BLAST_ROUNDS_DELAY_INCREASE; // slow firing rate
+                        projectileSpeed += SONIC_BLAST_ROUNDS_SPEED_INCREASE; // slow projectile
+                    }
+                    break;
                 default:
                     break;
             }
@@ -342,6 +364,12 @@ namespace AstroOdyssey
                     {
                         projectileSpawnDelay -= DOOM_SHOT_ROUNDS_DELAY_INCREASE;
                         projectileSpeed -= DOOM_SHOT_ROUNDS_SPEED_INCREASE;
+                    }
+                    break;
+                case PowerUpType.SONIC_BLAST_ROUNDS:
+                    {
+                        projectileSpawnDelay -= SONIC_BLAST_ROUNDS_DELAY_INCREASE;
+                        projectileSpeed -= SONIC_BLAST_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 default:
