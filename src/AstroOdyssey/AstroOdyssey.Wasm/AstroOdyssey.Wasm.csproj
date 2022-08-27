@@ -10,8 +10,11 @@
 		<WasmHead>true</WasmHead>
 		<WasmShellEnableLongPathSupport>false</WasmShellEnableLongPathSupport>
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+		<DefineConstants Condition="'$(Configuration)' == 'Debug'">$(DefineConstants);TRACE;DEBUG</DefineConstants>
+		<DebugType Condition="'$(Configuration)' == 'Debug'">portable</DebugType>
+		<DebugSymbols Condition="'$(Configuration)' == 'Debug'">true</DebugSymbols>
 		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)' == 'Debug'">true</MonoRuntimeDebuggerEnabled>
-		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Release'">false</WasmShellILLinkerEnabled>
+		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Debug'">false</WasmShellILLinkerEnabled>
 		<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
 	</PropertyGroup>
 
