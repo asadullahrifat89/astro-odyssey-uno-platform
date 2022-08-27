@@ -618,9 +618,8 @@ namespace AstroOdyssey
 
                             if (coolDown.PowerDown)
                             {
-                                PlayerPowerBar.Visibility = Visibility.Collapsed;
-
                                 _playerProjectileFactory.PowerDown(PowerUpType);
+                                PlayerPowerBar.Visibility = Visibility.Collapsed;                                
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
                                 ShowInGameText("POWER DOWN");
@@ -639,7 +638,21 @@ namespace AstroOdyssey
                                 IsRageUp = false;
                                 Rage = 0;
                                 PlayerRageBar.Value = Rage;
-                                ShowInGameText("RAGE DOWN");
+
+                                switch (Player.ShipClass)
+                                {
+                                    case ShipClass.Antimony:
+                                        ShowInGameText("SHIELD DOWN");
+                                        break;
+                                    case ShipClass.Bismuth:
+                                        ShowInGameText("RAPID FIRE DOWN");
+                                        break;
+                                    case ShipClass.Curium:
+                                        ShowInGameText("ETHERAL STATE DOWN");
+                                        break;
+                                    default:
+                                        break;
+                                }                               
                             }
                         }
                     }
@@ -681,7 +694,21 @@ namespace AstroOdyssey
                                 IsRageUp = true;
                                 _playerFactory.RageUp(Player);
                                 _playerProjectileFactory.RageUp(Player);
-                                ShowInGameText("💪\nRAGE UP");
+
+                                switch (Player.ShipClass)
+                                {
+                                    case ShipClass.Antimony:
+                                        ShowInGameText("💪SHIELD UP");
+                                        break;
+                                    case ShipClass.Bismuth:
+                                        ShowInGameText("💪RAPID FIRE");
+                                        break;
+                                    case ShipClass.Curium:
+                                        ShowInGameText("💪ETHERAL STATE");
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
 
                             Score += score;

@@ -259,10 +259,10 @@
                 Margin="5"
                 VerticalAlignment="Center"
                 Foreground="Goldenrod"
-                Maximum="1050"
+                Maximum="100"
                 Minimum="0"
                 Visibility="Collapsed"
-                Value="1050" />
+                Value="100" />
 
         </StackPanel>
 

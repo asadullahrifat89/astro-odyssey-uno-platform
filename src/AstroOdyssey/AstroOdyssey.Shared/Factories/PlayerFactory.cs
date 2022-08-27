@@ -363,7 +363,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Triggers the powered up state off.
         /// </summary>
-        public (bool PowerDown, int PowerRemaining) PowerUpCoolDown(Player player)
+        public (bool PowerDown, double PowerRemaining) PowerUpCoolDown(Player player)
         {
             powerUpTriggerSpawnCounter -= 1;
 
@@ -374,7 +374,8 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            return (false, powerUpTriggerSpawnCounter);
+            var remainingPower = (double)((double)powerUpTriggerSpawnCounter / (double)powerUpTriggerDelay) * 100;
+            return (false, remainingPower);
         }
 
         public void RageUp(Player player)
@@ -444,7 +445,9 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            return (false, (playerRageCoolDownCounter / playerRageCoolDownDelay) * 50);
+            var remainingRage = (double)((double)playerRageCoolDownCounter / (double)playerRageCoolDownDelay) * 50;
+
+            return (false, remainingRage);
         }
 
         #endregion
