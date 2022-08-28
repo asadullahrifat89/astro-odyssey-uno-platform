@@ -39,6 +39,7 @@
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 		<None Include="Program.cs" />
 		<None Include="wwwroot\web.config" />
+		<None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 
 	<!--<PropertyGroup>
