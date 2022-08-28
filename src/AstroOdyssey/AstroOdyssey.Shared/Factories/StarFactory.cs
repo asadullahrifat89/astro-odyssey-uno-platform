@@ -82,6 +82,8 @@ namespace AstroOdyssey
             {
                 GenerateStar();
                 starSpawnCounter = starSpawnDelay;
+
+                return;
             }
 
             celestialObjectSpawnCounter--;

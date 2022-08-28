@@ -38,21 +38,65 @@ namespace AstroOdyssey
 
             if (isCelestialObject)
             {
-                var starType = random.Next(1, 4);
+                var starType = random.Next(1, 15);
 
                 switch (starType)
                 {
                     case 1:
-                        uri = new Uri("ms-appx:///Assets/Images/black-hole.png", UriKind.RelativeOrAbsolute);
+                        uri = new Uri("ms-appx:///Assets/Images/black-hole1.png", UriKind.RelativeOrAbsolute);
                         size = 130 - random.Next(1, 15);
                         break;
                     case 2:
+                        uri = new Uri("ms-appx:///Assets/Images/black-hole2.png", UriKind.RelativeOrAbsolute);
+                        size = 1400 - random.Next(1, 15);
+                        break;
+                    case 3:
                         uri = new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute);
                         size = 130 - random.Next(1, 15);
                         break;
-                    case 3:
+                    case 4:
                         uri = new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute);
                         size = 130 - random.Next(1, 15);
+                        break;
+                    case 5:
+                        uri = new Uri("ms-appx:///Assets/Images/galaxy.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 6:
+                        uri = new Uri("ms-appx:///Assets/Images/planet1.png", UriKind.RelativeOrAbsolute);
+                        size = 1400 - random.Next(1, 15);
+                        break;
+                    case 7:
+                        uri = new Uri("ms-appx:///Assets/Images/planet2.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 8:
+                        uri = new Uri("ms-appx:///Assets/Images/planet3.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 9:
+                        uri = new Uri("ms-appx:///Assets/Images/planet4.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 10:
+                        uri = new Uri("ms-appx:///Assets/Images/planet5.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 11:
+                        uri = new Uri("ms-appx:///Assets/Images/planet6.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 12:
+                        uri = new Uri("ms-appx:///Assets/Images/planet7.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 13:
+                        uri = new Uri("ms-appx:///Assets/Images/planet8.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
+                        break;
+                    case 14:
+                        uri = new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute);
+                        size = 700 - random.Next(1, 15);
                         break;
                 }
             }
