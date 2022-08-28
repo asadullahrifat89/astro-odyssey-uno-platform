@@ -16,7 +16,8 @@
 		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>
 		<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Debug'">false</WasmShellILLinkerEnabled>
 		<!--<WasmShellMonoRuntimeExecutionMode Condition="'$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
-		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+		<!--<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>-->
+		<WasmShellEnableAOT Condition="$([MSBuild]::IsOsUnixLike()) and '$(Configuration)'=='Release'">true</WasmShellEnableAOT>
 	</PropertyGroup>
 
 	<ItemGroup>
