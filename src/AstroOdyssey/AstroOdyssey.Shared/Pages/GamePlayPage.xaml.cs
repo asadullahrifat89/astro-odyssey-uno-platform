@@ -1258,7 +1258,7 @@ namespace AstroOdyssey
                 {
                     WarpThroughSpace();
                     ShowInGameText("☄️\nENEMY APPROACHES");
-                    AudioHelper.PlaySound(SoundType.METEOR_INCOMING);
+                    AudioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                 }
 

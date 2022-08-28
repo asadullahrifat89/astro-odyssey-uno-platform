@@ -26,13 +26,14 @@
 
 	<ItemGroup>
 		<LinkerDescriptor Include="LinkerConfig.xml" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.jpg" Link="Assets\Images\%(FileName)%(Extension)" />
+		<!--<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.jpg" Link="Assets\Images\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.gif" Link="Assets\Images\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.png" Link="Assets\Images\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\*.mp3" Link="Assets\Sounds\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Boss\*.mp3" Link="Assets\Sounds\Boss\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Intro\*.mp3" Link="Assets\Sounds\Intro\%(FileName)%(Extension)" />
 		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Music\*.mp3" Link="Assets\Sounds\Music\%(FileName)%(Extension)" />
+		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Rage\*.mp3" Link="Assets\Sounds\Rage\%(FileName)%(Extension)" />-->
 		<Content Include="LinkerConfig.xml" />
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
 		<EmbeddedResource Include="WasmScripts\AppManifest.js" />
