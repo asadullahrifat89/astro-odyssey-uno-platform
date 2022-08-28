@@ -95,7 +95,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    Text="A classic space shooter game remade for the web on WebAssembly."
+                    Text="A classic rock metal ⚡ space shooter on WebAssembly."
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
@@ -116,20 +116,30 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
-                <TextBlock
-                    Margin="10"
+                <HyperlinkButton
+                    Margin="0,10"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content="Made with ❤️ by Asadullah Rifat"
                     FontSize="20"
-                    Text="Made with ❤️ by Asadullah Rifat."
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                    Foreground="White"
+                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
             </StackPanel>
             <Border.Background>
                 <SolidColorBrush Opacity="0.7" Color="Black" />
             </Border.Background>
         </Border>
+
+        <HyperlinkButton
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Content="Assets by redfoc.com 😘"
+            FontSize="20"
+            Foreground="White"
+            NavigateUri="http://www.redfoc.com" />
+
     </Grid>
 
 </Page>
