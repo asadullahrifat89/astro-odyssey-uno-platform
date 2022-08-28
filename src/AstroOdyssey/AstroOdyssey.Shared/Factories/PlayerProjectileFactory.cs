@@ -188,7 +188,6 @@ namespace AstroOdyssey
                             {
                                 // upon hit with a destructible object remove the projectile
                                 projectile.IsMarkedForFadedDestruction = true;
-
                                 destructible.LooseHealth(destructible.HitPoint);
                             }
                             break;
@@ -209,15 +208,14 @@ namespace AstroOdyssey
                             break;
                         case PowerUpType.SONIC_BLAST_ROUNDS:
                             {
-                                // loose 1/4 health point but projectile is armor penetrating
-                                destructible.LooseHealth(destructible.HitPoint / 4);
+                                // loose 1/2 health point but projectile is armor penetrating
+                                destructible.LooseHealth(destructible.HitPoint / 2);
                             }
                             break;
                         default:
                             {
                                 // upon hit with a destructible object remove the projectile                             
                                 projectile.IsMarkedForFadedDestruction = true;
-
                                 destructible.LooseHealth();
                             }
                             break;
@@ -237,17 +235,6 @@ namespace AstroOdyssey
                     case ENEMY:
                         {
                             var enemy = destructible as Enemy;
-
-                            //if (enemy.IsBoss)
-                            //{
-                            //    if (enemy.Health <= 3)
-                            //        enemy.Fade();
-                            //}
-                            //else
-                            //{
-                            //    // fade the a bit on projectile hit
-                            //    enemy.Fade();
-                            //}
 
                             enemy.SetProjectileImpactEffect();
 
@@ -277,9 +264,6 @@ namespace AstroOdyssey
                     case METEOR:
                         {
                             var meteor = destructible as Meteor;
-
-                            //// fade the a bit on projectile hit
-                            //meteor.Fade();
 
                             meteor.SetProjectileImpactEffect();
 
@@ -392,7 +376,7 @@ namespace AstroOdyssey
             projectileSpawnDelay -= 1;
         }
 
-        public void RageUp(Player player) 
+        public void RageUp(Player player)
         {
             switch (player.ShipClass)
             {
@@ -411,7 +395,7 @@ namespace AstroOdyssey
             }
         }
 
-        public void RageDown(Player player) 
+        public void RageDown(Player player)
         {
             switch (player.ShipClass)
             {
