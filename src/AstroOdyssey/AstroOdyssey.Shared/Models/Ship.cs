@@ -10,4 +10,11 @@
 
         public ShipClass ShipClass { get; set; }
     }
+
+    public enum ShipClass
+    {
+        Antimony, // shield generate when enraged
+        Bismuth, // shoots faster shots when enraged
+        Curium, // goes into etheral mode when enraged
+    }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿#if DEBUG
+using Microsoft.Extensions.Logging; 
+#endif
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -24,6 +26,7 @@ namespace AstroOdyssey
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
         private static string baseUrl;
+
         #endregion
 
         #region Ctor
@@ -259,14 +262,11 @@ namespace AstroOdyssey
 #if HAS_UNO
             Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
-
 #endif
         }
 
         public static void SetIsBusy(bool isBusy)
         {
-            //_mainPage.SetIsBusy(isBusy, message);
-
             var rootFrame = _window.Content as Frame;
             rootFrame.IsEnabled = !isBusy;
             rootFrame.Opacity = isBusy ? 0.6 : 1;
@@ -319,12 +319,5 @@ namespace AstroOdyssey
         }
 
         #endregion
-    }
-
-    public enum ShipClass
-    {
-        Antimony, // shield generate when enraged
-        Bismuth, // shoots faster shots when enraged
-        Curium, // goes into etheral mode when enraged
     }
 }
