@@ -33,7 +33,7 @@
       <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerProjectileFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Factories\CelestialFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\CelestialObjectFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Health.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameScore.cs" />

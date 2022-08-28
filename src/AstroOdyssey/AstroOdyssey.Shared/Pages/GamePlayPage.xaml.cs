@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private readonly CelestialFactory _celestialFactory;
+        private readonly CelestialObjectFactory _celestialObjectFactory;
         private readonly MeteorFactory _meteorFactory;
         private readonly EnemyFactory _enemyFactory;
         private readonly HealthFactory _healthFactory;
@@ -63,7 +63,7 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _celestialFactory = new CelestialFactory(StarView, PlanetView);
+            _celestialObjectFactory = new CelestialObjectFactory(StarView, PlanetView);
             _meteorFactory = new MeteorFactory(GameView);
             _enemyFactory = new EnemyFactory(GameView);
             _healthFactory = new HealthFactory(GameView);
@@ -886,7 +886,7 @@ namespace AstroOdyssey
                     {
                         var star = gameObject as CelestialObject;
 
-                        _celestialFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
+                        _celestialObjectFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
                     }
                     break;
                 default:
@@ -899,7 +899,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnGameObjects()
         {
-            _celestialFactory.SpawnCelestialObject();
+            _celestialObjectFactory.SpawnCelestialObject();
 
             // only generate game objects if not warping thorugh space
             if (!StarView.IsWarpingThroughSpace)
@@ -1062,7 +1062,7 @@ namespace AstroOdyssey
                 });
             }
 
-            _celestialFactory.StartSpaceWarp();
+            _celestialObjectFactory.StartSpaceWarp();
         }
 
         #endregion
@@ -1281,7 +1281,7 @@ namespace AstroOdyssey
                         _meteorFactory.LevelUp();
                         _healthFactory.LevelUp();
                         _powerUpFactory.LevelUp();
-                        _celestialFactory.LevelUp();
+                        _celestialObjectFactory.LevelUp();
                         _playerProjectileFactory.LevelUp();
                     }
                     break;

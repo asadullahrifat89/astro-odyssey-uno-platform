@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Media;
+using Microsoft.UI;
+using System;
 
 namespace AstroOdyssey
 {
-    public class CelestialFactory
+    public class CelestialObjectFactory
     {
         #region Fields
 
@@ -15,17 +17,23 @@ namespace AstroOdyssey
         private int starSpawnDelay = 250;
         private double starSpeed = 0.1d;
 
-        private int spaceWarpCounter;
-        private int spaceWarpDelay = 100;
+        private int spaceWarpDurationCounter;
+        private int spaceWarpDurationDelay = 100;
 
-        private int planetSpawnCounter = 3000;
-        private int planetSpawnDelay = 3000;
+        private int planetSpawnCounter;
+        private int planetSpawnDelay = 2000;
+
+        private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
+        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
+        private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
+
+        private double lastStarSpeed;
 
         #endregion
 
         #region Ctor
 
-        public CelestialFactory(GameEnvironment starView, GameEnvironment planetView)
+        public CelestialObjectFactory(GameEnvironment starView, GameEnvironment planetView)
         {
             this.starView = starView;
             this.planetView = planetView;
@@ -35,32 +43,49 @@ namespace AstroOdyssey
 
         #region Methods
 
+        /// <summary>
+        /// Starts the space warp effect.
+        /// </summary>
         public void StartSpaceWarp()
         {
-            starSpawnDelay -= 249;
-            starSpeed += 35d;
+            lastStarSpeed = starSpeed;
+
+            starSpawnDelay -= SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
+
+            starSpeed += SPACE_WARP_STAR_SPEED_INCREASE;
+
             starSpawnCounter = starSpawnDelay;
 
-            planetSpawnDelay -= 1000;
+            planetSpawnDelay -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
             planetSpawnCounter = planetSpawnDelay;
-
-            spaceWarpCounter = spaceWarpDelay;
+                       
+            spaceWarpDurationCounter = spaceWarpDurationDelay;
 
             starView.IsWarpingThroughSpace = true;
             planetView.IsWarpingThroughSpace = true;
+
+            //starView.Background = new SolidColorBrush(Colors.DeepPink);
         }
 
+        /// <summary>
+        /// Stops the space warp effect.
+        /// </summary>
         public void StopSpaceWarp()
         {
-            starSpawnDelay += 249;
-            starSpeed -= 35d;
+            starSpeed = lastStarSpeed;
+            starSpawnDelay += SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
             starSpawnCounter = starSpawnDelay;
 
-            planetSpawnDelay = random.Next(3000, 3500);
+            planetSpawnDelay += SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
             planetSpawnCounter = planetSpawnDelay;
 
             starView.IsWarpingThroughSpace = false;
             planetView.IsWarpingThroughSpace = false;
+
+            // generate a planet after each warp
+            GeneratePlanet();
+
+            //starView.Background = new SolidColorBrush(Colors.Transparent);
         }
 
         /// <summary>
@@ -70,11 +95,21 @@ namespace AstroOdyssey
         {
             if (starView.IsWarpingThroughSpace)
             {
-                spaceWarpCounter--;
+                // TODO: Space warp: speed up effect               
 
-                if (spaceWarpCounter <= 0)
+                spaceWarpDurationCounter--;
+
+                if (spaceWarpDurationCounter <= 0)
                 {
-                    StopSpaceWarp();
+                    StopSpaceWarp();                    
+                    //return;
+                }
+
+                // slowing down effect
+                if (spaceWarpDurationCounter <= 50)
+                {
+                    if (starSpeed > lastStarSpeed + 4)
+                        starSpeed--;
                 }
             }
 
@@ -93,8 +128,8 @@ namespace AstroOdyssey
             if (planetSpawnCounter <= 0)
             {
                 GeneratePlanet();
-               
-                planetSpawnDelay = random.Next(3000, 3500);
+
+                planetSpawnDelay = random.Next(4000, 4500);
                 planetSpawnCounter = planetSpawnDelay;
             }
         }
@@ -130,7 +165,7 @@ namespace AstroOdyssey
                 celestialObjectType: CelestialObjectType.Planet);
 
             var top = 0 - planet.Height;
-            var left = random.Next(10, (int)planetView.Width - 50);
+            var left = random.Next(10, (int)planetView.Width - 100);
 
             planet.AddToGameEnvironment(top: top, left: left, gameEnvironment: planetView);
         }
