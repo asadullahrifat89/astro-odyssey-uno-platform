@@ -213,7 +213,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -235,7 +235,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -261,7 +261,7 @@ namespace AstroOdyssey
                     {
                         if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage) // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage) // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -390,12 +390,12 @@ namespace AstroOdyssey
                     break;
                 case ShipClass.Bismuth:
                     {
-                        player.IsRapidFireUp = true;
+                        player.IsFirePowerUp = true;
                     }
                     break;
                 case ShipClass.Curium:
                     {
-                        player.IsEtherealStateUp = true;
+                        player.IsCloakUp = true;
                     }
                     break;
                 default:
@@ -420,13 +420,13 @@ namespace AstroOdyssey
                 case ShipClass.Bismuth:
                     {
                         if (playerRageCoolDownCounter <= 0)
-                            player.IsRapidFireUp = false;
+                            player.IsFirePowerUp = false;
                     }
                     break;
                 case ShipClass.Curium:
                     {
                         if (playerRageCoolDownCounter <= 0)
-                            player.IsEtherealStateUp = false;
+                            player.IsCloakUp = false;
                     }
                     break;
                 default:

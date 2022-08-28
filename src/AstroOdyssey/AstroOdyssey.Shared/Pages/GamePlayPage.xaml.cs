@@ -657,7 +657,7 @@ namespace AstroOdyssey
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
-                                ShowInGameText("POWER DOWN");
+                                ShowInGameText("🔥 POWER DOWN");
                             }
                         }
 
@@ -677,13 +677,13 @@ namespace AstroOdyssey
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.Antimony:
-                                        ShowInGameText("SHIELD DOWN");
+                                        ShowInGameText("🛡 SHIELD DOWN");
                                         break;
                                     case ShipClass.Bismuth:
-                                        ShowInGameText("RAPID FIRE DOWN");
+                                        ShowInGameText("⚔️ FIREPOWER DOWN");
                                         break;
                                     case ShipClass.Curium:
-                                        ShowInGameText("ETHERAL STATE DOWN");
+                                        ShowInGameText("👁 CLOAK DOWN");
                                         break;
                                     default:
                                         break;
@@ -733,13 +733,13 @@ namespace AstroOdyssey
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.Antimony:
-                                        ShowInGameText("💪SHIELD UP");
+                                        ShowInGameText("🛡 SHIELD UP");
                                         break;
                                     case ShipClass.Bismuth:
-                                        ShowInGameText("💪RAPID FIRE");
+                                        ShowInGameText("⚔️ FIREPOWER UP");
                                         break;
                                     case ShipClass.Curium:
-                                        ShowInGameText("💪ETHERAL STATE");
+                                        ShowInGameText("👁 CLOAK UP");
                                         break;
                                     default:
                                         break;
@@ -855,7 +855,7 @@ namespace AstroOdyssey
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
-                            ShowInGameText("‍❤️\nHEALTH PICKUP");
+                            ShowInGameText("‍🔧 SHIP REPAIRED");
                         }
                     }
                     break;
@@ -877,7 +877,7 @@ namespace AstroOdyssey
                             PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
-                            ShowInGameText("‍🔥\n" + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
+                            ShowInGameText("‍🔥 " + PowerUpType.ToString().Replace("_", " ").Replace("ROUNDS", ""));
                             _playerProjectileFactory.PowerUp(PowerUpType);
                         }
                     }
@@ -1147,7 +1147,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText("💀\nDEFEAT THE BOSS");
+            ShowInGameText("💀 DEFEAT THE BOSS");
             Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -1168,7 +1168,7 @@ namespace AstroOdyssey
         {
             WarpThroughSpace();
 
-            ShowInGameText($"💥\nLEVEL {(int)GameLevel} BOSS DEFEATED");
+            ShowInGameText($"🤘 LEVEL {(int)GameLevel} COMPLETE");
             _enemyFactory.DisengageBossEnemy();
             Boss = null;
         }
@@ -1257,7 +1257,7 @@ namespace AstroOdyssey
                 else
                 {
                     WarpThroughSpace();
-                    ShowInGameText("☄️\nENEMY APPROACHES");
+                    ShowInGameText("👊 ENEMY APPROACHES");
                     AudioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                 }

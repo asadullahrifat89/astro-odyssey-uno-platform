@@ -21,6 +21,7 @@
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
+        <!--  This shows score, level bar, boss health  -->
         <StackPanel
             Margin="5"
             HorizontalAlignment="Center"
@@ -46,6 +47,7 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
+                <!--  Level bar  -->
                 <ProgressBar
                     Name="ScoreBar"
                     Width="250"
@@ -53,7 +55,7 @@
                     Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="Red"
+                    Foreground="Orange"
                     Maximum="100"
                     Minimum="0"
                     Value="100" />
@@ -97,7 +99,7 @@
                     Margin="5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="Red"
+                    Foreground="Purple"
                     Maximum="100"
                     Minimum="0"
                     Value="100" />
@@ -224,7 +226,7 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Foreground="White"
-                Text="💪"
+                Text="💢"
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
@@ -235,7 +237,7 @@
                 Height="5"
                 Margin="5"
                 VerticalAlignment="Center"
-                Foreground="Purple"
+                Foreground="Red"
                 Minimum="0"
                 Value="0" />
 
@@ -328,4 +330,5 @@
         </Button>
 
     </Grid>
+
 </Page>

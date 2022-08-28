@@ -84,8 +84,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        private bool _isRecoveringFromDamage;
+        public ShipClass ShipClass { get; set; }
 
+        private bool _isRecoveringFromDamage;
         public bool IsRecoveringFromDamage
         {
             get { return _isRecoveringFromDamage; }
@@ -99,25 +100,9 @@ namespace AstroOdyssey
                     Opacity = 1;
             }
         }
-
-        private bool _isEtherealStateUp;
-
-        public bool IsEtherealStateUp
-        {
-            get { return _isEtherealStateUp; }
-            set
-            {
-                _isEtherealStateUp = value;
-
-                if (_isEtherealStateUp)
-                    Opacity = 0.6d;
-                else
-                    Opacity = 1;
-            }
-        }
+            
 
         private bool _isShieldUp;
-
         public bool IsShieldUp
         {
             get { return _isShieldUp; }
@@ -140,18 +125,32 @@ namespace AstroOdyssey
             }
         }
 
-        private bool _isRapidFireUp;
-
-        public bool IsRapidFireUp
+        
+        private bool _isFirePowerUp;
+        public bool IsFirePowerUp
         {
-            get { return _isRapidFireUp; }
+            get { return _isFirePowerUp; }
             set
             {
-                _isRapidFireUp = value;
+                _isFirePowerUp = value;
             }
         }
 
-        public ShipClass ShipClass { get; set; }
+
+        private bool _isCloakUp;
+        public bool IsCloakUp
+        {
+            get { return _isCloakUp; }
+            set
+            {
+                _isCloakUp = value;
+
+                if (_isCloakUp)
+                    Opacity = 0.6d;
+                else
+                    Opacity = 1;
+            }
+        }
 
         //public double ExhaustHeight { get; set; } = 50;
 

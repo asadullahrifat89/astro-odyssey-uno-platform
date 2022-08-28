@@ -80,7 +80,9 @@ namespace AstroOdyssey
                             Background = new SolidColorBrush(Colors.SlateBlue);
                             BorderBrush = new SolidColorBrush(Colors.DarkSlateBlue);
 
-                            BorderThickness = new Thickness(2, 3, 2, 1);
+                            BorderThickness = new Thickness(3, 2);
+
+                            CornerRadius = new CornerRadius(20);
                         }
                         break;
                     case PowerUpType.SONIC_BLAST_ROUNDS:

@@ -24,7 +24,7 @@ namespace AstroOdyssey
         private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 15;
         private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 3;
 
-        private readonly int RAGE_UP_ROUNDS_DELAY_DECREASE = 5;
+        private readonly int RAGE_UP_ROUNDS_DELAY_DECREASE = 2;
         private readonly int RAGE_UP_ROUNDS_SPEED_INCREASE = 3;
 
         private int xSide = 15;
