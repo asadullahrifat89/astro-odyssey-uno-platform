@@ -65,7 +65,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="16"
-                    Text="Press left or right arrow keys on your keyboard or touch left or right edges of your screen to move ship."
+                    Text="Press or touch left or right arrow keys or edges on your keyboard or screen to move ship."
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 

@@ -12,8 +12,8 @@ namespace AstroOdyssey
         private int projectileSpawnDelay = 14;
         private double projectileSpeed = 18;
 
-        private readonly int BLAZE_CHAIN_ROUNDS_DELAY_DECREASE = 2;
-        private readonly int BLAZE_CHAIN_ROUNDS_SPEED_INCREASE = 1;
+        private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
+        private readonly int BLAZE_BLITZ_ROUNDS_SPEED_INCREASE = 1;
 
         private readonly int PLASMA_BOMB_ROUNDS_DELAY_INCREASE = 20;
         private readonly int PLASMA_BOMB_ROUNDS_SPEED_DECREASE = 5;
@@ -106,7 +106,7 @@ namespace AstroOdyssey
 
             projectile.AddToGameEnvironment(
                 top: player.GetY() - projectile.Height,
-                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.BLAZE_CHAIN_ROUNDS ? xSide * scale : 0),
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.BLAZE_BLITZ_ROUNDS ? xSide * scale : 0),
                 gameEnvironment: gameEnvironment);
 
             if (projectile.IsPoweredUp)
@@ -116,8 +116,8 @@ namespace AstroOdyssey
                     case PowerUpType.NONE:
                         AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
                         break;
-                    case PowerUpType.BLAZE_CHAIN_ROUNDS:
-                        AudioHelper.PlaySound(SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE);
+                    case PowerUpType.BLAZE_BLITZ_ROUNDS:
+                        AudioHelper.PlaySound(SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE);
                         xSide = xSide * -1;
                         break;
                     case PowerUpType.PLASMA_BOMB_ROUNDS:
@@ -158,7 +158,7 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.NONE:
                         break;
-                    case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                    case PowerUpType.BLAZE_BLITZ_ROUNDS:
                         break;
                     case PowerUpType.PLASMA_BOMB_ROUNDS:
                         projectile.Lengthen();
@@ -202,7 +202,7 @@ namespace AstroOdyssey
                 {
                     switch (projectile.PowerUpType)
                     {
-                        case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                        case PowerUpType.BLAZE_BLITZ_ROUNDS:
                             {
                                 // upon hit with a destructible object remove the projectile
                                 projectile.IsMarkedForFadedDestruction = true;
@@ -319,10 +319,10 @@ namespace AstroOdyssey
             {
                 case PowerUpType.NONE:
                     break;
-                case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                case PowerUpType.BLAZE_BLITZ_ROUNDS:
                     {
-                        projectileSpawnDelay -= BLAZE_CHAIN_ROUNDS_DELAY_DECREASE; // fast firing rate
-                        projectileSpeed += BLAZE_CHAIN_ROUNDS_SPEED_INCREASE; // fast projectile
+                        projectileSpawnDelay -= BLAZE_BLITZ_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        projectileSpeed += BLAZE_BLITZ_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.PLASMA_BOMB_ROUNDS:
@@ -357,10 +357,10 @@ namespace AstroOdyssey
             {
                 case PowerUpType.NONE:
                     break;
-                case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                case PowerUpType.BLAZE_BLITZ_ROUNDS:
                     {
-                        projectileSpawnDelay += BLAZE_CHAIN_ROUNDS_DELAY_DECREASE;
-                        projectileSpeed -= BLAZE_CHAIN_ROUNDS_SPEED_INCREASE;
+                        projectileSpawnDelay += BLAZE_BLITZ_ROUNDS_DELAY_DECREASE;
+                        projectileSpeed -= BLAZE_BLITZ_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.PLASMA_BOMB_ROUNDS:

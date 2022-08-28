@@ -12,52 +12,61 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameOver.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameOver.png" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <StackPanel
-            MaxWidth="315"
+        <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Orientation="Vertical">
+            CornerRadius="10">
+            <StackPanel
+                MaxWidth="315"
+                Margin="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
 
-            <TextBlock
-                FontSize="45"
-                FontWeight="Bold"
-                Text="☠️"
-                TextAlignment="Center" />
+                <TextBlock
+                    FontSize="45"
+                    FontWeight="Bold"
+                    Text="☠️"
+                    TextAlignment="Center" />
 
-            <TextBlock
-                FontSize="45"
-                FontWeight="Bold"
-                Text="Game Over"
-                TextAlignment="Center" />
+                <TextBlock
+                    FontSize="45"
+                    FontWeight="Bold"
+                    Text="Game Over"
+                    TextAlignment="Center" />
 
-            <TextBlock
-                x:Name="ScoreText"
-                Margin="60"
-                FontSize="30"
-                FontWeight="Bold"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+                <TextBlock
+                    x:Name="ScoreText"
+                    Margin="60"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <!--  Play again button  -->
-            <Button
-                x:Name="PlayAgainButton"
-                Height="40"
-                Margin="5,20,5,5"
-                HorizontalAlignment="Stretch"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                Click="PlayAgainButton_Click"
-                Content="Play Again"
-                CornerRadius="50"
-                FontWeight="SemiBold"
-                Foreground="White"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False" />
-        </StackPanel>
+                <!--  Play again button  -->
+                <Button
+                    x:Name="PlayAgainButton"
+                    Height="40"
+                    Margin="5,20,5,5"
+                    HorizontalAlignment="Stretch"
+                    Background="Red"
+                    BorderBrush="DarkRed"
+                    BorderThickness="3"
+                    Click="PlayAgainButton_Click"
+                    Content="Play Again"
+                    CornerRadius="50"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
+            </StackPanel>
+            <Border.Background>
+                <SolidColorBrush Opacity="0.7" Color="Black" />
+            </Border.Background>
+        </Border>
 
     </Grid>
 </Page>

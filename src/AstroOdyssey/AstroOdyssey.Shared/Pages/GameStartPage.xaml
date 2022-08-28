@@ -14,6 +14,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
         </Grid.Background>
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.png" Stretch="UniformToFill" />
+        </Grid.Background>-->
 
         <!--  Pre-load-images  -->
         <Grid
@@ -21,14 +24,15 @@
             Height="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Top">
+            <Image Source="ms-appx:///Assets/Images/gameOver.png" />
             <Image Source="ms-appx:///Assets/Images/black-hole1.png" />
+            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_1.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_2.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_3.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_4.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_5.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_6.png" />
-            <Image Source="ms-appx:///Assets/Images/gameOver.jpg" />
             <Image Source="ms-appx:///Assets/Images/gas_star1.png" />
             <Image Source="ms-appx:///Assets/Images/gas_star2.png" />
             <Image Source="ms-appx:///Assets/Images/gas_star3.png" />
@@ -49,7 +53,9 @@
             <Image Source="ms-appx:///Assets/Images/rock7.png" />
             <Image Source="ms-appx:///Assets/Images/rock8.png" />
             <Image Source="ms-appx:///Assets/Images/rock9.png" />
-            <Image Source="ms-appx:///Assets/Images/space_thrust.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust1.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust2.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust3.png" />
             <Image Source="ms-appx:///Assets/Images/star_large.png" />
             <Image Source="ms-appx:///Assets/Images/star_large2.png" />
             <Image Source="ms-appx:///Assets/Images/star_medium.png" />
@@ -58,7 +64,6 @@
             <Image Source="ms-appx:///Assets/Images/star_small2.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny2.png" />
-            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
             <Image Source="ms-appx:///Assets/Images/galaxy.png" />
             <Image Source="ms-appx:///Assets/Images/planet1.png" />
             <Image Source="ms-appx:///Assets/Images/planet2.png" />
@@ -95,7 +100,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    Text="A classic space shooter game remade for the web on WebAssembly."
+                    Text="A classic rock metal ⚡ space shooter on WebAssembly."
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
@@ -116,20 +121,30 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
-                <TextBlock
-                    Margin="10"
+                <HyperlinkButton
+                    Margin="0,10"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content="Made with ❤️ by Asadullah Rifat"
                     FontSize="20"
-                    Text="Made with ❤️ by Asadullah Rifat."
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                    Foreground="White"
+                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
             </StackPanel>
             <Border.Background>
                 <SolidColorBrush Opacity="0.7" Color="Black" />
             </Border.Background>
         </Border>
+
+        <HyperlinkButton
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Content="Assets by redfoc.com 😘"
+            FontSize="20"
+            Foreground="White"
+            NavigateUri="http://www.redfoc.com" />
+
     </Grid>
 
 </Page>
