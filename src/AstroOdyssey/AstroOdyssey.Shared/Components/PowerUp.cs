@@ -43,7 +43,7 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
-            PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
+            PowerUpType = PowerUpType.PLASMA_BOMB_ROUNDS; //(PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length); //TODO: PowerUpType: set to code
 
             var uri = new Uri("ms-appx:///Assets/Images/powerup1.png", UriKind.RelativeOrAbsolute);
             Health = 10;
@@ -62,9 +62,9 @@ namespace AstroOdyssey
     public enum PowerUpType
     {
         NONE,
-        RAPID_SHOT_ROUNDS,
-        DEAD_SHOT_ROUNDS,
-        DOOM_SHOT_ROUNDS,
+        BLAZE_CHAIN_ROUNDS,
+        PLASMA_BOMB_ROUNDS,
+        BEAM_CANON_ROUNDS,
         SONIC_BLAST_ROUNDS
     }
 }

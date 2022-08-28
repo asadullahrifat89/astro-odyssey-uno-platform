@@ -214,17 +214,17 @@ namespace AstroOdyssey
 
             //switch (powerUpType)
             //{
-            //case PowerUpType.RAPID_SHOT_ROUNDS:
+            //case PowerUpType.BLAZE_CHAIN_ROUNDS:
             //    {
             //        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             //        contentShipBlaze.Source = new BitmapImage(exhaustUri);
             //        contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    }
             //    break;
-            //case PowerUpType.DEAD_SHOT_ROUNDS:
+            //case PowerUpType.PLASMA_BOMB_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
-            //case PowerUpType.DOOM_SHOT_ROUNDS:
+            //case PowerUpType.BEAM_CANON_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
             //default:
