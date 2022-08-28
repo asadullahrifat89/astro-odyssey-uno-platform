@@ -56,9 +56,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameStartPage.xaml.cs">
       <DependentUpon>GameStartPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml">
@@ -77,10 +74,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
@@ -94,7 +87,14 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny2.png" />
@@ -102,10 +102,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_6.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock7.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock8.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock9.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock10.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\player_ship2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\player_ship3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_1.png" />
@@ -124,7 +124,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />

@@ -63,7 +63,7 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _starFactory = new StarFactory(GameView);
+            _starFactory = new StarFactory(StarView);
             _meteorFactory = new MeteorFactory(GameView);
             _enemyFactory = new EnemyFactory(GameView);
             _healthFactory = new HealthFactory(GameView);
@@ -170,6 +170,8 @@ namespace AstroOdyssey
             SizeChanged += GamePage_SizeChanged;
 
             GameView.Children.Clear();
+            StarView.Children.Clear();
+
             ScoreBarPanel.Visibility = Visibility.Collapsed;
 
             FPSText.Text = "";
@@ -443,12 +445,12 @@ namespace AstroOdyssey
             {
                 var star = new Star();
 
-                star.SetAttributes(speed: 0.1d, scale: GameView.GetGameObjectScale());
+                star.SetAttributes(speed: 0.1d, scale: StarView.GetGameObjectScale());
 
-                var top = random.Next(10, (int)GameView.Height - 10);
-                var left = random.Next(10, (int)GameView.Width - 10);
+                var top = random.Next(10, (int)StarView.Height - 10);
+                var left = random.Next(10, (int)StarView.Width - 10);
 
-                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: GameView);
+                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
             }
         }
 
@@ -470,6 +472,7 @@ namespace AstroOdyssey
         private void AdjustView()
         {
             GameView.SetSize(windowHeight, windowWidth);
+            StarView.SetSize(windowHeight, windowWidth);
 
             frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
@@ -577,6 +580,19 @@ namespace AstroOdyssey
                 // clean removable objects from game view
                 GameView.RemoveDestroyableGameObjects();
             }
+
+            var starObjects = StarView.GetGameObjects<GameObject>();
+
+            // update game view objects
+            if (Parallel.ForEach(starObjects, gameObject =>
+            {
+                UpdateGameObject(gameObject);
+
+            }).IsCompleted)
+            {
+                // clean removable objects from game view
+                StarView.RemoveDestroyableGameObjects();
+            }
         }
 
         /// <summary>
@@ -671,7 +687,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         if (projectile.IsMarkedForFadedDestruction)
@@ -755,7 +771,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         // check if enemy projectile collides with player
@@ -774,7 +790,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         // check if enemy collides with player
@@ -798,7 +814,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         // check if meteor collides with player
@@ -817,7 +833,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         // check if health collides with player
@@ -837,7 +853,7 @@ namespace AstroOdyssey
                         if (destroyed)
                             return;
 
-                        if (GameView.IsWarpingThroughSpace)
+                        if (StarView.IsWarpingThroughSpace)
                             return;
 
                         // check if power up collides with player
@@ -871,7 +887,7 @@ namespace AstroOdyssey
             _starFactory.SpawnStar();
 
             // only generate game objects if not warping thorugh space
-            if (!GameView.IsWarpingThroughSpace)
+            if (!StarView.IsWarpingThroughSpace)
             {
                 _meteorFactory.SpawnMeteor(GameLevel);
 
@@ -921,7 +937,7 @@ namespace AstroOdyssey
                 var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
                 var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
-                var stars = GameView.Children.OfType<Star>().Count();
+                var stars = StarView.Children.OfType<Star>().Count();
 
                 var total = GameView.Children.Count;
 

@@ -12,6 +12,9 @@
 
     <Grid x:Name="RootGrid">
 
+        <!--  This redenders stars  -->
+        <GameEnvironment x:Name="StarView" Background="Transparent" />
+
         <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 

@@ -49,7 +49,7 @@ namespace AstroOdyssey
 
             Uri uri = null;
 
-            var meteorType = random.Next(1, 11);
+            var meteorType = random.Next(1, 10);
 
             switch (meteorType)
             {
@@ -134,15 +134,6 @@ namespace AstroOdyssey
                         Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
                     }
                     break;
-                case 10:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock10.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
-                    }
-                    break;
             }
 
             content.Source = new BitmapImage(uri);
@@ -156,7 +147,7 @@ namespace AstroOdyssey
             {
                 YDirection = YDirection.UP;
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = (Speed / 2); // decrease speed by 50%
+                Speed = Speed / 2; // decrease speed by 50%
 
                 IsFloating = true;
             }

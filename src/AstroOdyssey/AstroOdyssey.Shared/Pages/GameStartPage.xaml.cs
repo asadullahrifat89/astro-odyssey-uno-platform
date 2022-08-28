@@ -15,7 +15,6 @@ namespace AstroOdyssey
         public GameStartPage()
         {
             InitializeComponent();
-
             Loaded += StartPage_Loaded;
         } 
 
@@ -30,7 +29,7 @@ namespace AstroOdyssey
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);            
             App.NavigateToPage(typeof(ShipSelectionPage));
             App.EnterFullScreen(true);
         }

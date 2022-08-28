@@ -53,7 +53,9 @@ namespace AstroOdyssey
         {
             var enemy = new Enemy();
 
-            enemy.SetAttributes(speed: enemySpeed + random.Next(0, 4), scale: gameEnvironment.GetGameObjectScale());
+            enemy.SetAttributes(
+                speed: enemySpeed + random.Next(0, 4),
+                scale: gameEnvironment.GetGameObjectScale());
 
             enemy.IsBoss = true;
             enemy.IsOverPowered = true;
@@ -75,7 +77,10 @@ namespace AstroOdyssey
             if (enemy.IsHovering)
                 enemy.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
 
-            enemy.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            enemy.AddToGameEnvironment(
+                top: top,
+                left: left,
+                gameEnvironment: gameEnvironment);
 
             gameEnvironment.IsBossEngaged = true;
 

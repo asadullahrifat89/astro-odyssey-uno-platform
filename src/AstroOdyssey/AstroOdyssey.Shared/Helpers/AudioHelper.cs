@@ -184,11 +184,6 @@ namespace AstroOdyssey
                                 source: source,
                                 volume: 0.4,
                                 loop: true);
-
-                            //BACKGROUND_MUSIC.OnCompleted += (s, e) =>
-                            //{
-                            //    PlaySound(SoundType.BACKGROUND_MUSIC);
-                            //};
                         }
                         else
                         {
