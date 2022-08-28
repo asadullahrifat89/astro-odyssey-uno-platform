@@ -15,7 +15,7 @@ namespace AstroOdyssey
 
         private int starSpawnCounter;
         private int starSpawnDelay = 250;
-        private double starSpeed = 0.1d;
+        private double starSpeed = 0.2d;
 
         private int spaceWarpDurationCounter;
         private int spaceWarpDurationDelay = 100;
@@ -58,7 +58,7 @@ namespace AstroOdyssey
 
             planetSpawnDelay -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
             planetSpawnCounter = planetSpawnDelay;
-                       
+
             spaceWarpDurationCounter = spaceWarpDurationDelay;
 
             starView.IsWarpingThroughSpace = true;
@@ -101,7 +101,7 @@ namespace AstroOdyssey
 
                 if (spaceWarpDurationCounter <= 0)
                 {
-                    StopSpaceWarp();                    
+                    StopSpaceWarp();
                     //return;
                 }
 
