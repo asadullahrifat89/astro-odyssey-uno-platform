@@ -47,7 +47,7 @@ namespace AstroOdyssey
                         size = 130 - random.Next(1, 15);
                         break;
                     case 2:
-                        uri = new Uri("ms-appx:///Assets/Images/nebula.png", UriKind.RelativeOrAbsolute);
+                        uri = new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute);
                         size = 130 - random.Next(1, 15);
                         break;
                     case 3:
