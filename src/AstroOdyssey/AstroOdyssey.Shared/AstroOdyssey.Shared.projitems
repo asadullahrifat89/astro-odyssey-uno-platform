@@ -93,7 +93,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star4.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
