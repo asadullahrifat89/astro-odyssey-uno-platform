@@ -100,6 +100,9 @@ namespace AstroOdyssey
             projectile.MoveY();
             projectile.MoveX();
 
+            if (projectile.IsOverPowered)
+                projectile.Lengthen();
+
             // remove projectile if outside game canvas
             if (projectile.GetY() > gameEnvironment.Height)
             {
