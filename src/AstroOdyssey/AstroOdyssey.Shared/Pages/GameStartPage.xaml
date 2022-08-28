@@ -101,7 +101,7 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <!--  Arcade mode button  -->
+                <!--  Start game button  -->
                 <Button
                     x:Name="PlayButton"
                     Height="40"
