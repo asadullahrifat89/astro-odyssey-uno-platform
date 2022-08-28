@@ -402,7 +402,7 @@ namespace AstroOdyssey
                     break;
             }
 
-            AudioHelper.PlaySound(SoundType.POWER_UP);
+            AudioHelper.PlaySound(SoundType.RAGE_UP);
         }
 
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
@@ -435,7 +435,7 @@ namespace AstroOdyssey
 
             if (playerRageCoolDownCounter <= 0)
             {
-                AudioHelper.PlaySound(SoundType.POWER_DOWN);
+                AudioHelper.PlaySound(SoundType.RAGE_DOWN);
                 return (true, 0);
             }
 

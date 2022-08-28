@@ -12,9 +12,9 @@ namespace AstroOdyssey
         private static AudioPlayer MENU_SELECT = null;
         private static AudioPlayer BACKGROUND_MUSIC = null;
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_RAPID_SHOT_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_DEAD_SHOT_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_DOOM_SHOT_ROUNDS_FIRE = null;
+        private static AudioPlayer PLAYER_BLAZE_CHAIN_ROUNDS_FIRE = null;
+        private static AudioPlayer PLAYER_PLASMA_BOMB_ROUNDS_FIRE = null;
+        private static AudioPlayer PLAYER_BEAM_CANON_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_SONIC_BLAST_ROUNDS_FIRE = null;
         private static AudioPlayer ENEMY_ROUNDS_FIRE = null;
         private static AudioPlayer ENEMY_DESTRUCTION = null;
@@ -24,6 +24,8 @@ namespace AstroOdyssey
         private static AudioPlayer ROUNDS_HIT = null;
         private static AudioPlayer POWER_UP = null;
         private static AudioPlayer POWER_DOWN = null;
+        private static AudioPlayer RAGE_UP = null;
+        private static AudioPlayer RAGE_DOWN = null;
         private static AudioPlayer LEVEL_UP = null;
         private static AudioPlayer HEALTH_GAIN = null;
         private static AudioPlayer HEALTH_LOSS = null;
@@ -77,7 +79,7 @@ namespace AstroOdyssey
                         if (GAME_START is null)
                         {
                             GAME_START = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/space-jet-flyby_MkgS2BVu_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Game/space-jet-flyby_MkgS2BVu_NWM.mp3"),
                                 volume: 1.0);
                         }
 
@@ -89,7 +91,7 @@ namespace AstroOdyssey
                         if (GAME_OVER is null)
                         {
                             GAME_OVER = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/videogame-death-sound-43894.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Game/videogame-death-sound-43894.mp3"),
                                 volume: 1.0);
                         }
 
@@ -147,7 +149,7 @@ namespace AstroOdyssey
                         if (BOSS_DESTRUCTION is null)
                         {
                             BOSS_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/halloween-impact-05-93808.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Boss/halloween-impact-05-93808.mp3"),
                                 volume: 1.0);
                         }
 
@@ -205,40 +207,40 @@ namespace AstroOdyssey
                         PLAYER_ROUNDS_FIRE.Play();
                     }
                     break;
-                case SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
                     {
-                        if (PLAYER_RAPID_SHOT_ROUNDS_FIRE is null)
+                        if (PLAYER_BLAZE_CHAIN_ROUNDS_FIRE is null)
                         {
-                            PLAYER_RAPID_SHOT_ROUNDS_FIRE = new AudioPlayer(
+                            PLAYER_BLAZE_CHAIN_ROUNDS_FIRE = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3"),
                                 volume: 0.2);
                         }
 
-                        PLAYER_RAPID_SHOT_ROUNDS_FIRE.Play();
+                        PLAYER_BLAZE_CHAIN_ROUNDS_FIRE.Play();
                     }
                     break;
-                case SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     {
-                        if (PLAYER_DEAD_SHOT_ROUNDS_FIRE is null)
+                        if (PLAYER_PLASMA_BOMB_ROUNDS_FIRE is null)
                         {
-                            PLAYER_DEAD_SHOT_ROUNDS_FIRE = new AudioPlayer(
+                            PLAYER_PLASMA_BOMB_ROUNDS_FIRE = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/magnetic-destroy-shot_fkxD6SV__NWM.mp3"),
                                 volume: 0.3);
                         }
 
-                        PLAYER_DEAD_SHOT_ROUNDS_FIRE.Play();
+                        PLAYER_PLASMA_BOMB_ROUNDS_FIRE.Play();
                     }
                     break;
-                case SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
                     {
-                        if (PLAYER_DOOM_SHOT_ROUNDS_FIRE is null)
+                        if (PLAYER_BEAM_CANON_ROUNDS_FIRE is null)
                         {
-                            PLAYER_DOOM_SHOT_ROUNDS_FIRE = new AudioPlayer(
+                            PLAYER_BEAM_CANON_ROUNDS_FIRE = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3"),
                                 volume: 0.3);
                         }
 
-                        PLAYER_DOOM_SHOT_ROUNDS_FIRE.Play();
+                        PLAYER_BEAM_CANON_ROUNDS_FIRE.Play();
                     }
                     break;
                 case SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE:
@@ -264,19 +266,7 @@ namespace AstroOdyssey
 
                         ENEMY_ROUNDS_FIRE.Play();
                     }
-                    break;
-                case SoundType.ENEMY_DESTRUCTION:
-                    {
-                        if (ENEMY_DESTRUCTION is null)
-                        {
-                            ENEMY_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3"),
-                                volume: 0.4);
-                        }
-
-                        ENEMY_DESTRUCTION.Play();
-                    }
-                    break;
+                    break;              
                 case SoundType.METEOR_DESTRUCTION:
                     {
                         if (METEOR_DESTRUCTION is null)
@@ -307,7 +297,7 @@ namespace AstroOdyssey
                         if (POWER_UP is null)
                         {
                             POWER_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/spellcast-46164.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Power/spellcast-46164.mp3"),
                                 volume: 1.0);
                         }
 
@@ -319,23 +309,59 @@ namespace AstroOdyssey
                         if (POWER_DOWN is null)
                         {
                             POWER_DOWN = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/power-down-7103.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Power/power-down-7103.mp3"),
                                 volume: 1.0);
                         }
 
                         POWER_DOWN.Play();
                     }
                     break;
-                case SoundType.METEOR_INCOMING:
+                case SoundType.RAGE_UP:
+                    {
+                        if (RAGE_UP is null)
+                        {
+                            RAGE_UP = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Rage/audioblocks-hi-tech-metal-whoosh_HZs-SOQFvI_NWM.mp3"),
+                                volume: 1.0);
+                        }
+
+                        RAGE_UP.Play();
+                    }
+                    break;
+                case SoundType.RAGE_DOWN:
+                    {
+                        if (RAGE_DOWN is null)
+                        {
+                            RAGE_DOWN = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Rage/audioblocks-hi-tech-metal-whoosh-2_rZh-HuQFwI_NWM.mp3"),
+                                volume: 1.0);
+                        }
+
+                        RAGE_DOWN.Play();
+                    }
+                    break;
+                case SoundType.ENEMY_INCOMING:
                     {
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/asteroid-incoming-effect.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Enemy/asteroid-incoming-effect.mp3"),
                                 volume: 0.8);
                         }
 
                         LEVEL_UP.Play();
+                    }
+                    break;
+                case SoundType.ENEMY_DESTRUCTION:
+                    {
+                        if (ENEMY_DESTRUCTION is null)
+                        {
+                            ENEMY_DESTRUCTION = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3"),
+                                volume: 0.4);
+                        }
+
+                        ENEMY_DESTRUCTION.Play();
                     }
                     break;
                 case SoundType.HEALTH_GAIN:
@@ -343,7 +369,7 @@ namespace AstroOdyssey
                         if (HEALTH_GAIN is null)
                         {
                             HEALTH_GAIN = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/scale-e6-14577.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Health/scale-e6-14577.mp3"),
                                 volume: 1.0);
                         }
 
@@ -355,7 +381,7 @@ namespace AstroOdyssey
                         if (HEALTH_LOSS is null)
                         {
                             HEALTH_LOSS = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/rocket-missile-launcher_MyHKjH4__NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Health/rocket-missile-launcher_MyHKjH4__NWM.mp3"),
                                 volume: 1.0);
                         }
 
@@ -409,11 +435,11 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
                     break;
                 case SoundType.ENEMY_ROUNDS_FIRE:
                     break;
@@ -437,7 +463,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.POWER_DOWN:
                     break;
-                case SoundType.METEOR_INCOMING:
+                case SoundType.ENEMY_INCOMING:
                     break;
                 case SoundType.HEALTH_GAIN:
                     break;
@@ -468,11 +494,11 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_RAPID_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_DEAD_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_DOOM_SHOT_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
                     break;
                 case SoundType.ENEMY_ROUNDS_FIRE:
                     break;
@@ -496,7 +522,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.POWER_DOWN:
                     break;
-                case SoundType.METEOR_INCOMING:
+                case SoundType.ENEMY_INCOMING:
                     break;
                 case SoundType.HEALTH_GAIN:
                     break;
@@ -520,9 +546,9 @@ namespace AstroOdyssey
         MENU_SELECT,
         BACKGROUND_MUSIC,
         PLAYER_ROUNDS_FIRE,
-        PLAYER_RAPID_SHOT_ROUNDS_FIRE,
-        PLAYER_DEAD_SHOT_ROUNDS_FIRE,
-        PLAYER_DOOM_SHOT_ROUNDS_FIRE,
+        PLAYER_BLAZE_CHAIN_ROUNDS_FIRE,
+        PLAYER_PLASMA_BOMB_ROUNDS_FIRE,
+        PLAYER_BEAM_CANON_ROUNDS_FIRE,
         PLAYER_SONIC_BLAST_ROUNDS_FIRE,
         ENEMY_ROUNDS_FIRE,
         ENEMY_DESTRUCTION,
@@ -532,7 +558,9 @@ namespace AstroOdyssey
         ROUNDS_HIT,
         POWER_UP,
         POWER_DOWN,
-        METEOR_INCOMING,
+        RAGE_UP,
+        RAGE_DOWN,
+        ENEMY_INCOMING,
         HEALTH_GAIN,
         HEALTH_LOSS,
         GAME_START,

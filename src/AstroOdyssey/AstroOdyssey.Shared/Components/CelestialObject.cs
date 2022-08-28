@@ -48,7 +48,7 @@ namespace AstroOdyssey
             {
                 case CelestialObjectType.Star:
                     {
-                        var starType = random.Next(1, 13);
+                        var starType = random.Next(1, 12);
 
                         switch (starType)
                         {
@@ -96,10 +96,10 @@ namespace AstroOdyssey
                                 uri = new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute);
                                 size = 30 - random.Next(1, 15);
                                 break;
-                            case 12:
-                                uri = new Uri("ms-appx:///Assets/Images/gas_star4.png", UriKind.RelativeOrAbsolute);
-                                size = 30 - random.Next(1, 15);
-                                break;
+                            //case 12:
+                            //    uri = new Uri("ms-appx:///Assets/Images/gas_star4.png", UriKind.RelativeOrAbsolute);
+                            //    size = 30 - random.Next(1, 15);
+                            //    break;
                         }
                     }
                     break;
