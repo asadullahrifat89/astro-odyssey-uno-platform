@@ -152,8 +152,26 @@ namespace AstroOdyssey
             // move projectile up                
             projectile.MoveY();
 
-            if (projectile.IsPoweredUp && (projectile.PowerUpType == PowerUpType.SONIC_BLAST_ROUNDS || projectile.PowerUpType == PowerUpType.PLASMA_BOMB_ROUNDS)) //TODO: PowerUp: experimenting widen with plasma bomb
-                projectile.Widen();
+            if (projectile.IsPoweredUp)
+            {
+                switch (projectile.PowerUpType)
+                {
+                    case PowerUpType.NONE:
+                        break;
+                    case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                        break;
+                    case PowerUpType.PLASMA_BOMB_ROUNDS:
+                        projectile.Lengthen();
+                        break;
+                    case PowerUpType.BEAM_CANON_ROUNDS:
+                        break;
+                    case PowerUpType.SONIC_BLAST_ROUNDS:
+                        projectile.Widen();
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             // remove projectile if outside game canvas
             if (projectile.GetY() < 10)

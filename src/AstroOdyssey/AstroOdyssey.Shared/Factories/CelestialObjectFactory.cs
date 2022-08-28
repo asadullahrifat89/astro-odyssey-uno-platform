@@ -95,8 +95,6 @@ namespace AstroOdyssey
         {
             if (starView.IsWarpingThroughSpace)
             {
-                // TODO: Space warp: speed up effect               
-
                 spaceWarpDurationCounter--;
 
                 if (spaceWarpDurationCounter <= 0)
