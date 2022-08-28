@@ -100,7 +100,7 @@ namespace AstroOdyssey
                     Opacity = 1;
             }
         }
-            
+
 
         private bool _isShieldUp;
         public bool IsShieldUp
@@ -125,7 +125,7 @@ namespace AstroOdyssey
             }
         }
 
-        
+
         private bool _isFirePowerUp;
         public bool IsFirePowerUp
         {
@@ -165,7 +165,22 @@ namespace AstroOdyssey
             this._ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust.png", UriKind.RelativeOrAbsolute);
+            Uri exhaustUri = null;
+
+            switch (ShipClass)
+            {
+                case ShipClass.Antimony:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
+                    break;
+                case ShipClass.Bismuth:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
+                    break;
+                case ShipClass.Curium:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
+                    break;
+                default:
+                    break;
+            }
 
             _contentShipBlaze.Source = new BitmapImage(exhaustUri);
             _contentShipBlaze.Width = _body.Width;

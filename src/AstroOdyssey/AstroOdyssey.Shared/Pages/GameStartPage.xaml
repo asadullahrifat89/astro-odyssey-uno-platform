@@ -49,7 +49,9 @@
             <Image Source="ms-appx:///Assets/Images/rock7.png" />
             <Image Source="ms-appx:///Assets/Images/rock8.png" />
             <Image Source="ms-appx:///Assets/Images/rock9.png" />
-            <Image Source="ms-appx:///Assets/Images/space_thrust.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust1.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust2.png" />
+            <Image Source="ms-appx:///Assets/Images/space_thrust3.png" />
             <Image Source="ms-appx:///Assets/Images/star_large.png" />
             <Image Source="ms-appx:///Assets/Images/star_large2.png" />
             <Image Source="ms-appx:///Assets/Images/star_medium.png" />

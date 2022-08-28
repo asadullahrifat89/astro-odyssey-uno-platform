@@ -106,6 +106,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet7.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet8.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet9.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny2.png" />
@@ -130,7 +132,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock5.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
