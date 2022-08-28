@@ -19,6 +19,10 @@
 		<!--<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>-->		
 	</PropertyGroup>
 
+	<ItemGroup Condition="$([MSBuild]::IsOsUnixLike()) and '$(Configuration)'=='Release'">
+		<WasmShellExtraEmccFlags Include="-lidbfs.js" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v1" />
 		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v2" />
