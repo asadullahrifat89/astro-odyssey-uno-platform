@@ -462,6 +462,9 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
+            if (StarView.IsWarpingThroughSpace)
+                _celestialObjectFactory.StopSpaceWarp();
+
             GameFrameTimer.Stop();
 
             AudioHelper.StopSound();
