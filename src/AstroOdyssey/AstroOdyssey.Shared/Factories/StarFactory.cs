@@ -17,8 +17,8 @@ namespace AstroOdyssey
         private int spaceWarpCounter;
         private int spaceWarpDelay = 100;
 
-        private int celestialObjectSpawnCounter = 3500;
-        private int celestialObjectSpawnDelay = 3500;
+        private int celestialObjectSpawnCounter = 2500;
+        private int celestialObjectSpawnDelay = 2500;
 
         #endregion
 
@@ -53,7 +53,7 @@ namespace AstroOdyssey
             starSpeed -= 35d;
             starSpawnCounter = starSpawnDelay;
 
-            celestialObjectSpawnDelay = random.Next(2500, 3500);
+            celestialObjectSpawnDelay = random.Next(1500, 2500);
             celestialObjectSpawnCounter = celestialObjectSpawnDelay;
 
             gameEnvironment.IsWarpingThroughSpace = false;
@@ -103,7 +103,7 @@ namespace AstroOdyssey
             var star = new Star();
 
             star.SetAttributes(
-                speed: isCelestialObject ? starSpeed * 2 : starSpeed,
+                speed: starSpeed,
                 scale: gameEnvironment.GetGameObjectScale(),
                 isCelestialObject: isCelestialObject);
 
