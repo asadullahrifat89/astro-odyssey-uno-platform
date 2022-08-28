@@ -105,6 +105,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet7.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet8.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet9.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
@@ -137,7 +138,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />

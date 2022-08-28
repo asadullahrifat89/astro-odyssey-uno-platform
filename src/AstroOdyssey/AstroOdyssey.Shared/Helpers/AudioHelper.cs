@@ -12,7 +12,7 @@ namespace AstroOdyssey
         private static AudioPlayer MENU_SELECT = null;
         private static AudioPlayer BACKGROUND_MUSIC = null;
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_BLAZE_CHAIN_ROUNDS_FIRE = null;
+        private static AudioPlayer PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_PLASMA_BOMB_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_BEAM_CANON_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_SONIC_BLAST_ROUNDS_FIRE = null;
@@ -207,16 +207,16 @@ namespace AstroOdyssey
                         PLAYER_ROUNDS_FIRE.Play();
                     }
                     break;
-                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE:
                     {
-                        if (PLAYER_BLAZE_CHAIN_ROUNDS_FIRE is null)
+                        if (PLAYER_BLAZE_BLITZ_ROUNDS_FIRE is null)
                         {
-                            PLAYER_BLAZE_CHAIN_ROUNDS_FIRE = new AudioPlayer(
+                            PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3"),
                                 volume: 0.2);
                         }
 
-                        PLAYER_BLAZE_CHAIN_ROUNDS_FIRE.Play();
+                        PLAYER_BLAZE_BLITZ_ROUNDS_FIRE.Play();
                     }
                     break;
                 case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
@@ -435,7 +435,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE:
                     break;
                 case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
@@ -494,7 +494,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_BLAZE_CHAIN_ROUNDS_FIRE:
+                case SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE:
                     break;
                 case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
@@ -546,7 +546,7 @@ namespace AstroOdyssey
         MENU_SELECT,
         BACKGROUND_MUSIC,
         PLAYER_ROUNDS_FIRE,
-        PLAYER_BLAZE_CHAIN_ROUNDS_FIRE,
+        PLAYER_BLAZE_BLITZ_ROUNDS_FIRE,
         PLAYER_PLASMA_BOMB_ROUNDS_FIRE,
         PLAYER_BEAM_CANON_ROUNDS_FIRE,
         PLAYER_SONIC_BLAST_ROUNDS_FIRE,

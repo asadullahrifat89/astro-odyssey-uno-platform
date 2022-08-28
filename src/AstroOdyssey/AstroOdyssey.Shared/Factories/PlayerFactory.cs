@@ -49,7 +49,7 @@ namespace AstroOdyssey
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
             var left = pointerX - player.HalfWidth;
-            var top = gameEnvironment.Height - player.Height - 30;
+            var top = gameEnvironment.Height - player.Height - 40;
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 

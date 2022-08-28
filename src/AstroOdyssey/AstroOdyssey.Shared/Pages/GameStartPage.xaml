@@ -14,6 +14,9 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
         </Grid.Background>
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.png" Stretch="UniformToFill" />
+        </Grid.Background>-->
 
         <!--  Pre-load-images  -->
         <Grid
@@ -21,14 +24,15 @@
             Height="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Top">
+            <Image Source="ms-appx:///Assets/Images/gameOver.png" />
             <Image Source="ms-appx:///Assets/Images/black-hole1.png" />
+            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_1.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_2.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_3.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_4.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_5.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_6.png" />
-            <Image Source="ms-appx:///Assets/Images/gameOver.jpg" />
             <Image Source="ms-appx:///Assets/Images/gas_star1.png" />
             <Image Source="ms-appx:///Assets/Images/gas_star2.png" />
             <Image Source="ms-appx:///Assets/Images/gas_star3.png" />
@@ -60,7 +64,6 @@
             <Image Source="ms-appx:///Assets/Images/star_small2.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny2.png" />
-            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
             <Image Source="ms-appx:///Assets/Images/galaxy.png" />
             <Image Source="ms-appx:///Assets/Images/planet1.png" />
             <Image Source="ms-appx:///Assets/Images/planet2.png" />

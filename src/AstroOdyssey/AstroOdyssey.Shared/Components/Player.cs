@@ -226,7 +226,7 @@ namespace AstroOdyssey
 
             //switch (powerUpType)
             //{
-            //case PowerUpType.BLAZE_CHAIN_ROUNDS:
+            //case PowerUpType.BLAZE_BLITZ_ROUNDS:
             //    {
             //        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             //        contentShipBlaze.Source = new BitmapImage(exhaustUri);

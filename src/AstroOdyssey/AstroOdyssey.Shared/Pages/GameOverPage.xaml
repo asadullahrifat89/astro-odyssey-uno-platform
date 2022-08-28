@@ -12,7 +12,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameOver.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameOver.png" Stretch="UniformToFill" />
         </Grid.Background>
 
         <Border

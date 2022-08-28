@@ -53,7 +53,7 @@ namespace AstroOdyssey
             {
                 switch (PowerUpType)
                 {
-                    case PowerUpType.BLAZE_CHAIN_ROUNDS:
+                    case PowerUpType.BLAZE_BLITZ_ROUNDS:
                         {
                             height = 35; width = 10; // medium and faster rounds
 
