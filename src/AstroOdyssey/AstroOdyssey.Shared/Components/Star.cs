@@ -38,23 +38,27 @@ namespace AstroOdyssey
 
             if (isCelestialObject)
             {
-                var starType = random.Next(1, 3);
+                var starType = random.Next(1, 4);
 
                 switch (starType)
                 {
                     case 1:
                         uri = new Uri("ms-appx:///Assets/Images/black-hole.png", UriKind.RelativeOrAbsolute);
-                        size = 140;
+                        size = 130 - random.Next(1, 15);
                         break;
                     case 2:
                         uri = new Uri("ms-appx:///Assets/Images/nebula.png", UriKind.RelativeOrAbsolute);
-                        size = 170;
-                        break;                   
+                        size = 130 - random.Next(1, 15);
+                        break;
+                    case 3:
+                        uri = new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute);
+                        size = 130 - random.Next(1, 15);
+                        break;
                 }
             }
             else
             {
-                var starType = random.Next(1, 9);
+                var starType = random.Next(1, 13);
 
                 switch (starType)
                 {
@@ -90,8 +94,24 @@ namespace AstroOdyssey
                         uri = new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute);
                         size = 20;
                         break;
+                    case 9:
+                        uri = new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute);
+                        size = 30 - random.Next(1, 15);
+                        break;
+                    case 10:
+                        uri = new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute);
+                        size = 30 - random.Next(1, 15);
+                        break;
+                    case 11:
+                        uri = new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute);
+                        size = 30 - random.Next(1, 15);
+                        break;
+                    case 12:
+                        uri = new Uri("ms-appx:///Assets/Images/gas_star4.png", UriKind.RelativeOrAbsolute);
+                        size = 30 - random.Next(1, 15);
+                        break;
                 }
-            }           
+            }
 
             content.Source = new BitmapImage(uri);
 
