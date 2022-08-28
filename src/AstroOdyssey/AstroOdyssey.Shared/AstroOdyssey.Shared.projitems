@@ -90,7 +90,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
@@ -138,6 +137,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
