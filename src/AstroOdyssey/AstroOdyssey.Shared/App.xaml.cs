@@ -22,7 +22,7 @@ namespace AstroOdyssey
         #region Fields
 
         private static Window _window;
-        private SystemNavigationManager _systemNavigationManager;
+        private readonly SystemNavigationManager _systemNavigationManager;
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
         private static string baseUrl;
@@ -76,17 +76,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods    
-
-        public static void SetScore(double score)
-        {
-            Score = score;
-        }
-
-        public static double GetScore()
-        {
-            return Score;
-        }
+        #region Events
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -196,6 +186,20 @@ namespace AstroOdyssey
             deferral.Complete();
         }
 
+        #endregion
+
+        #region Methods    
+
+        public static void SetScore(double score)
+        {
+            Score = score;
+        }
+
+        public static double GetScore()
+        {
+            return Score;
+        }
+
         /// <summary>
         /// Configures global Uno Platform logging
         /// </summary>
@@ -272,6 +276,10 @@ namespace AstroOdyssey
             rootFrame.Opacity = isBusy ? 0.6 : 1;
         }
 
+        /// <summary>
+        /// Toggle fullscreen mode.
+        /// </summary>
+        /// <param name="value"></param>
         public static void EnterFullScreen(bool value)
         {
             var view = ApplicationView.GetForCurrentView();
@@ -294,6 +302,11 @@ namespace AstroOdyssey
             //_mainPage.SetAccount();
         }
 
+        /// <summary>
+        /// Navigate to provided page.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="parameter"></param>
         public static void NavigateToPage(Type page, object parameter = null)
         {
             var rootFrame = _window.Content as Frame;
