@@ -33,7 +33,7 @@
       <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerProjectileFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Factories\StarFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\CelestialFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Health.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GameScore.cs" />
@@ -42,7 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Meteor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\PowerUp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Star.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\CelestialObject.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameObject.cs" />
@@ -87,7 +87,9 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
@@ -95,6 +97,15 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet6.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet7.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet8.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet9.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny2.png" />

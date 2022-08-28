@@ -36,7 +36,7 @@ namespace AstroOdyssey
 
         private double windowWidth, windowHeight;
 
-        private readonly StarFactory _starFactory;
+        private readonly CelestialFactory _celestialFactory;
         private readonly MeteorFactory _meteorFactory;
         private readonly EnemyFactory _enemyFactory;
         private readonly HealthFactory _healthFactory;
@@ -63,7 +63,7 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _starFactory = new StarFactory(StarView);
+            _celestialFactory = new CelestialFactory(StarView, PlanetView);
             _meteorFactory = new MeteorFactory(GameView);
             _enemyFactory = new EnemyFactory(GameView);
             _healthFactory = new HealthFactory(GameView);
@@ -171,6 +171,7 @@ namespace AstroOdyssey
 
             GameView.Children.Clear();
             StarView.Children.Clear();
+            PlanetView.Children.Clear();
 
             ScoreBarPanel.Visibility = Visibility.Collapsed;
 
@@ -432,7 +433,7 @@ namespace AstroOdyssey
             GameFrameTimer.Start();
             WarpThroughSpace();
             AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
-        }     
+        }
 
         /// <summary>
         /// Add stars to game environemnt randomly.
@@ -443,7 +444,7 @@ namespace AstroOdyssey
 
             for (int i = 0; i < 20; i++)
             {
-                var star = new Star();
+                var star = new CelestialObject();
 
                 star.SetAttributes(speed: 0.1d, scale: StarView.GetGameObjectScale());
 
@@ -473,6 +474,7 @@ namespace AstroOdyssey
         {
             GameView.SetSize(windowHeight, windowWidth);
             StarView.SetSize(windowHeight, windowWidth);
+            PlanetView.SetSize(windowHeight, windowWidth);
 
             frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
@@ -593,6 +595,19 @@ namespace AstroOdyssey
                 // clean removable objects from game view
                 StarView.RemoveDestroyableGameObjects();
             }
+
+            var planetObjects = PlanetView.GetGameObjects<GameObject>();
+
+            // update game view objects
+            if (Parallel.ForEach(planetObjects, gameObject =>
+            {
+                UpdateGameObject(gameObject);
+
+            }).IsCompleted)
+            {
+                // clean removable objects from game view
+                PlanetView.RemoveDestroyableGameObjects();
+            }
         }
 
         /// <summary>
@@ -639,7 +654,7 @@ namespace AstroOdyssey
                             if (coolDown.PowerDown)
                             {
                                 _playerProjectileFactory.PowerDown(PowerUpType);
-                                PlayerPowerBar.Visibility = Visibility.Collapsed;                                
+                                PlayerPowerBar.Visibility = Visibility.Collapsed;
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
                                 ShowInGameText("POWER DOWN");
@@ -672,7 +687,7 @@ namespace AstroOdyssey
                                         break;
                                     default:
                                         break;
-                                }                               
+                                }
                             }
                         }
                     }
@@ -869,9 +884,9 @@ namespace AstroOdyssey
                     break;
                 case STAR:
                     {
-                        var star = gameObject as Star;
+                        var star = gameObject as CelestialObject;
 
-                        _starFactory.UpdateStar(star: star, destroyed: out bool destroyed);
+                        _celestialFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
                     }
                     break;
                 default:
@@ -884,7 +899,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SpawnGameObjects()
         {
-            _starFactory.SpawnStar();
+            _celestialFactory.SpawnCelestialObject();
 
             // only generate game objects if not warping thorugh space
             if (!StarView.IsWarpingThroughSpace)
@@ -937,12 +952,13 @@ namespace AstroOdyssey
                 var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
                 var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
 
-                var stars = StarView.Children.OfType<Star>().Count();
+                var stars = StarView.Children.OfType<CelestialObject>().Count();
+                var planets = PlanetView.Children.OfType<CelestialObject>().Count();
 
-                var total = GameView.Children.Count;
+                var total = GameView.Children.Count + StarView.Children.Count + PlanetView.Children.Count;
 
                 FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
-                ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + " }\n{ Total: " + total + " }";
+                ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + ", Planets: " + planets + " }\n{ Total: " + total + " }";
 
                 frameStatUpdateSpawnCounter = frameStatUpdateDelay;
             }
@@ -979,7 +995,7 @@ namespace AstroOdyssey
 
                 if (showInGameTextSpawnCounter <= 0)
                 {
-                    HideInGameText();                 
+                    HideInGameText();
                 }
             }
         }
@@ -1046,7 +1062,7 @@ namespace AstroOdyssey
                 });
             }
 
-            _starFactory.WarpThroughSpace();
+            _celestialFactory.StartSpaceWarp();
         }
 
         #endregion
@@ -1265,7 +1281,7 @@ namespace AstroOdyssey
                         _meteorFactory.LevelUp();
                         _healthFactory.LevelUp();
                         _powerUpFactory.LevelUp();
-                        _starFactory.LevelUp();
+                        _celestialFactory.LevelUp();
                         _playerProjectileFactory.LevelUp();
                     }
                     break;

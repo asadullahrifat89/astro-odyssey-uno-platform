@@ -21,7 +21,7 @@
             Height="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Top">
-            <Image Source="ms-appx:///Assets/Images/black-hole.png" />
+            <Image Source="ms-appx:///Assets/Images/black-hole1.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_1.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_2.png" />
             <Image Source="ms-appx:///Assets/Images/enemy_3.png" />
@@ -58,6 +58,17 @@
             <Image Source="ms-appx:///Assets/Images/star_small2.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny.png" />
             <Image Source="ms-appx:///Assets/Images/star_tiny2.png" />
+            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
+            <Image Source="ms-appx:///Assets/Images/galaxy.png" />
+            <Image Source="ms-appx:///Assets/Images/planet1.png" />
+            <Image Source="ms-appx:///Assets/Images/planet2.png" />
+            <Image Source="ms-appx:///Assets/Images/planet3.png" />
+            <Image Source="ms-appx:///Assets/Images/planet4.png" />
+            <Image Source="ms-appx:///Assets/Images/planet5.png" />
+            <Image Source="ms-appx:///Assets/Images/planet6.png" />
+            <Image Source="ms-appx:///Assets/Images/planet7.png" />
+            <Image Source="ms-appx:///Assets/Images/planet8.png" />
+            <Image Source="ms-appx:///Assets/Images/planet9.png" />
         </Grid>
 
         <Border
