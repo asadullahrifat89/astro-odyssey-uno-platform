@@ -127,7 +127,7 @@ namespace AstroOdyssey
             {
                 GeneratePlanet();
 
-                planetSpawnDelay = random.Next(4000, 4500);
+                planetSpawnDelay = random.Next(2500, 3500);
                 planetSpawnCounter = planetSpawnDelay;
             }
         }
