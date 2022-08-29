@@ -79,9 +79,9 @@ namespace AstroOdyssey
         {
             if ((sender as Button)?.Tag is string tag)
             {
-                LocalizationHelper.SetAppLanguage(tag);
-                App.Restart();
-            }                
+                App.CurrentCulture = tag;
+                App.Refresh();
+            }
         }
 
         #endregion

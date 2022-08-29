@@ -3,27 +3,26 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace AstroOdyssey
 {
     public static class LocalizationHelper
     {
-        private static IDictionary<string, string> _localizationResourceCache = new Dictionary<string, string>();
-        private static string _currentlanguage;
+        //private static IDictionary<string, string> _localizationResourceCache = new Dictionary<string, string>();
 
-        public static void SetAppLanguage(string name)
-        {
-            _currentlanguage = name;
-            var culture = new System.Globalization.CultureInfo(name);
+        //public static void SetAppCulture(string name)
+        //{
+        //    //var culture = new System.Globalization.CultureInfo(name);
 
-            System.Globalization.CultureInfo.CurrentUICulture = culture;
-            System.Globalization.CultureInfo.CurrentCulture = culture;
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
-            Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
+        //    //System.Globalization.CultureInfo.CurrentUICulture = culture;
+        //    //System.Globalization.CultureInfo.CurrentCulture = culture;
+        //    //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
+        //    //Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
 
 
-            _localizationResourceCache.Clear(); // clear the resources cache          
-        }
+        //    //_localizationResourceCache.Clear(); // clear the resources cache          
+        //}
 
         /// <summary>
         /// Gets the localization resource.
@@ -32,16 +31,20 @@ namespace AstroOdyssey
         /// <returns></returns>
         public static string GetLocalizedResource(string resourceKey)
         {
-            if (_localizationResourceCache.ContainsKey(resourceKey))
-            {
-                return _localizationResourceCache[resourceKey];
-            }
-            else
-            {
-                var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
-                _localizationResourceCache.Add(resourceKey, resourceValue);
-                return resourceValue;
-            }
+            var localizationTemplate = Constants.LOCALIZATION_TEMPLATES.FirstOrDefault(x => x.Key == resourceKey);
+
+            return localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
+
+            //if (_localizationResourceCache.ContainsKey(resourceKey))
+            //{
+            //    return _localizationResourceCache[resourceKey];
+            //}
+            //else
+            //{
+            //    var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
+            //    _localizationResourceCache.Add(resourceKey, resourceValue);
+            //    return resourceValue;
+            //}
         }
-    }    
+    }
 }

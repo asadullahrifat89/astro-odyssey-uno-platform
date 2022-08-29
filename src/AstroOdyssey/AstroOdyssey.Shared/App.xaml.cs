@@ -54,6 +54,8 @@ namespace AstroOdyssey
 
             _goBackNotAllowedToPages = new List<Type>() { typeof(GamePlayPage) };
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
+
+            CurrentCulture = "en";
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -73,6 +75,8 @@ namespace AstroOdyssey
         public static Ship Ship { get; set; }
 
         public static Account Account { get; set; }
+
+        public static string CurrentCulture { get; set; }
 
         #endregion
 
@@ -190,7 +194,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void Restart()
+        public static void Refresh()
         {
             var rootFrame = _window.Content as Frame;
             rootFrame.Navigate(typeof(GameStartPage));
