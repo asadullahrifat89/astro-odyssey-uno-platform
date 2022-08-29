@@ -158,7 +158,7 @@ namespace AstroOdyssey
             var planet = new CelestialObject();
 
             planet.SetAttributes(
-                speed: starSpeed,
+                speed: starSpeed * 2,
                 scale: planetView.GetGameObjectScale(),
                 celestialObjectType: CelestialObjectType.Planet);
 
@@ -193,7 +193,7 @@ namespace AstroOdyssey
                 case CelestialObjectType.Planet:
                     {
                         // move star down
-                        celestialObject.MoveY(starSpeed);
+                        celestialObject.MoveY(starSpeed * 2);
 
                         if (celestialObject.GetY() > planetView.Height)
                         {

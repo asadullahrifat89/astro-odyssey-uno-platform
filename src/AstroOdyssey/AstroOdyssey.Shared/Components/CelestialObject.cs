@@ -34,7 +34,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, double scale = 1, CelestialObjectType celestialObjectType  = CelestialObjectType.Star)
+        public void SetAttributes(double speed, double scale = 1, CelestialObjectType celestialObjectType = CelestialObjectType.Star)
         {
             Speed = speed;
 
@@ -48,124 +48,29 @@ namespace AstroOdyssey
             {
                 case CelestialObjectType.Star:
                     {
-                        var starType = random.Next(1, 12);
+                        var starType = random.Next(0, Constants.STAR_TEMPLATES.Length);
 
-                        switch (starType)
-                        {
-                            case 1:
-                                uri = new Uri("ms-appx:///Assets/Images/star_large.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 2:
-                                uri = new Uri("ms-appx:///Assets/Images/star_medium.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 3:
-                                uri = new Uri("ms-appx:///Assets/Images/star_small.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 4:
-                                uri = new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 5:
-                                uri = new Uri("ms-appx:///Assets/Images/star_large2.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 6:
-                                uri = new Uri("ms-appx:///Assets/Images/star_medium2.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 7:
-                                uri = new Uri("ms-appx:///Assets/Images/star_small2.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 8:
-                                uri = new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute);
-                                size = 20;
-                                break;
-                            case 9:
-                                uri = new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute);
-                                size = 30 - random.Next(1, 15);
-                                break;
-                            case 10:
-                                uri = new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute);
-                                size = 30 - random.Next(1, 15);
-                                break;
-                            case 11:
-                                uri = new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute);
-                                size = 30 - random.Next(1, 15);
-                                break;
-                            //case 12:
-                            //    uri = new Uri("ms-appx:///Assets/Images/gas_star4.png", UriKind.RelativeOrAbsolute);
-                            //    size = 30 - random.Next(1, 15);
-                            //    break;
-                        }
+                        var starTemplate = Constants.STAR_TEMPLATES[starType];
+
+                        uri = starTemplate.AssetUri;
+
+                        size = starTemplate.Size;
+
+                        if (size > 20)
+                            size -= random.Next(1, 15);
                     }
                     break;
                 case CelestialObjectType.Planet:
                     {
-                        var planetType = random.Next(1, 15);
+                        var planetType = random.Next(0, Constants.PLANET_TEMPLATES.Length);
 
-                        switch (planetType)
-                        {
-                            case 1:
-                                uri = new Uri("ms-appx:///Assets/Images/black-hole1.png", UriKind.RelativeOrAbsolute);
-                                size = 130 - random.Next(1, 15);
-                                break;
-                            case 2:
-                                uri = new Uri("ms-appx:///Assets/Images/black-hole2.png", UriKind.RelativeOrAbsolute);
-                                size = 1400 - random.Next(1, 15);
-                                break;
-                            case 3:
-                                uri = new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute);
-                                size = 130 - random.Next(1, 15);
-                                break;
-                            case 4:
-                                uri = new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute);
-                                size = 130 - random.Next(1, 15);
-                                break;
-                            case 5:
-                                uri = new Uri("ms-appx:///Assets/Images/galaxy.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 6:
-                                uri = new Uri("ms-appx:///Assets/Images/planet1.png", UriKind.RelativeOrAbsolute);
-                                size = 1400 - random.Next(1, 15);
-                                break;
-                            case 7:
-                                uri = new Uri("ms-appx:///Assets/Images/planet2.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 8:
-                                uri = new Uri("ms-appx:///Assets/Images/planet3.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 9:
-                                uri = new Uri("ms-appx:///Assets/Images/planet4.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 10:
-                                uri = new Uri("ms-appx:///Assets/Images/planet5.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 11:
-                                uri = new Uri("ms-appx:///Assets/Images/planet6.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 12:
-                                uri = new Uri("ms-appx:///Assets/Images/planet7.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 13:
-                                uri = new Uri("ms-appx:///Assets/Images/planet8.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                            case 14:
-                                uri = new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute);
-                                size = 700 - random.Next(1, 15);
-                                break;
-                        }
+                        var planetTemplate = Constants.PLANET_TEMPLATES[planetType];
+
+                        uri = planetTemplate.AssetUri;
+
+                        size = planetTemplate.Size;
+
+                        size -= random.Next(1, 100);
                     }
                     break;
                 default:
@@ -180,7 +85,20 @@ namespace AstroOdyssey
             HalfWidth = Width / 2;
         }
 
-        #endregion
+        #endregion      
+    }
+
+    public class CelestialObjectTemplate
+    {
+        public CelestialObjectTemplate(Uri assetUri, double size)
+        {
+            AssetUri = assetUri;
+            Size = size;
+        }
+
+        public Uri AssetUri { get; set; }
+
+        public double Size { get; set; }
     }
 
     public enum CelestialObjectType
