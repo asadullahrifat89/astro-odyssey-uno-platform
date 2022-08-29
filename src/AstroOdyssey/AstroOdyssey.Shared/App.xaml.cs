@@ -26,7 +26,7 @@ namespace AstroOdyssey
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
         private static string baseUrl;
-        private static Windows.ApplicationModel.Resources.ResourceLoader _resourceLoader;
+        private static IDictionary<string, string> _localizationResourceCache = new Dictionary<string, string>();
 
         #endregion
 
@@ -138,8 +138,6 @@ namespace AstroOdyssey
 
             _systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             _systemNavigationManager.BackRequested += OnBackRequested;
-
-            _resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse();
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -193,15 +191,33 @@ namespace AstroOdyssey
 
         #region Methods   
 
-        public static string GetLocalizedResource(string resourceName)
+        /// <summary>
+        /// Gets the localization resource.
+        /// </summary>
+        /// <param name="resourceKey"></param>
+        /// <returns></returns>
+        public static string GetLocalizedResource(string resourceKey)
         {
-            return _resourceLoader.GetString(resourceName);
+            if (_localizationResourceCache.ContainsKey(resourceKey))
+            {
+                return _localizationResourceCache[resourceKey];
+            }
+            else
+            {
+                var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
+                _localizationResourceCache.Add(resourceKey, resourceValue);
+                return resourceValue;
+            }
         }
 
         public static void SetAppLanguage(string tag)
         {
             var culture = new System.Globalization.CultureInfo(tag);
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
+
+            //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
+            System.Globalization.CultureInfo.CurrentUICulture = culture;
+            System.Globalization.CultureInfo.CurrentCulture = culture;
+            Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
 
             var rootFrame = _window.Content as Frame;
 

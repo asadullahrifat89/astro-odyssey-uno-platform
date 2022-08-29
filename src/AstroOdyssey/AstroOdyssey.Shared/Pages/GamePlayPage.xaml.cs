@@ -185,7 +185,7 @@ namespace AstroOdyssey
             PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
 
             GameLevel = GameLevel.Level_1;
-            GameLevelText.Text =$"{App.GetLocalizedResource("LEVEL")} {((int)GameLevel)}";
+            SetGameLevelText();
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
@@ -683,7 +683,7 @@ namespace AstroOdyssey
                                         ShowInGameText($"🛡 {App.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"⚔️ {App.GetLocalizedResource("FIREPOWER DOWN")}");
+                                        ShowInGameText($"⚔️ {App.GetLocalizedResource("FIREPOWER_DOWN")}");
                                         break;
                                     case ShipClass.SPECTRE:
                                         ShowInGameText($"👁 {App.GetLocalizedResource("CLOAK_DOWN")}");
@@ -1149,7 +1149,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText($"💀 {App.GetLocalizedResource("LEVEL")} {(int)GameLevel} {App.GetLocalizedResource("BOSS")}");
+            ShowInGameText($"💀 {App.GetLocalizedResource("LEVEL")} {(int)GameLevel - 1} {App.GetLocalizedResource("BOSS")}");
             Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -1264,8 +1264,13 @@ namespace AstroOdyssey
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                 }
 
-                GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
+                SetGameLevelText();
             }
+        }
+
+        private void SetGameLevelText()
+        {
+            GameLevelText.Text = $"{App.GetLocalizedResource("LEVEL")} {((int)GameLevel)}";
         }
 
         /// <summary>
