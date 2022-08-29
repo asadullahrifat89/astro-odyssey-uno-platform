@@ -14,7 +14,13 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class ShipSelectionPage : Page
     {
-        private Ship selectedShip;
+        #region Fields
+        
+        private Ship selectedShip; 
+
+        #endregion
+
+        #region Ctor
 
         public ShipSelectionPage()
         {
@@ -22,11 +28,13 @@ namespace AstroOdyssey
             this.Loaded += ShipSelectionPage_Loaded;
         }
 
+        #endregion
+
+        #region Events
+
         private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+            SetLocalization();
 
             selectedShip = null;
             App.Ship = null;
@@ -44,7 +52,7 @@ namespace AstroOdyssey
                 ShipClass = x.ShipClass,
             }).ToArray();
 
-            this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
+            this.ShipsList.ItemsSource = ships.ToList();
             //}
         }
 
@@ -63,5 +71,18 @@ namespace AstroOdyssey
             selectedShip = ShipsList.SelectedItem as Ship;
             ShipSelectionPage_ChooseButton.IsEnabled = true;
         }
+
+        #endregion
+
+        #region Methods
+
+        private void SetLocalization()
+        {
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+        } 
+
+        #endregion
     }
 }

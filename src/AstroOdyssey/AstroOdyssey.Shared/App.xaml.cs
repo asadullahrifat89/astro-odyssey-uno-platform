@@ -194,13 +194,6 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void Refresh()
-        {
-            var rootFrame = _window.Content as Frame;
-            rootFrame.Navigate(typeof(GameStartPage));
-            rootFrame.BackStack.Clear();
-        }
-
         public static void SetScore(double score)
         {
             Score = score;
