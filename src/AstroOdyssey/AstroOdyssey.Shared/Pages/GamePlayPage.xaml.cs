@@ -1149,7 +1149,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText($"💀 {App.GetLocalizedResource("LEVEL")} {(int)GameLevel - 1} {App.GetLocalizedResource("BOSS")}");
+            ShowInGameText($"💀 {App.GetLocalizedResource("LEVEL")} {(int)GameLevel} {App.GetLocalizedResource("BOSS")}");
             Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -1270,7 +1270,7 @@ namespace AstroOdyssey
 
         private void SetGameLevelText()
         {
-            GameLevelText.Text = $"{App.GetLocalizedResource("LEVEL")} {((int)GameLevel)}";
+            GameLevelText.Text = $"{App.GetLocalizedResource("LEVEL")} {(int)GameLevel + 1}";
         }
 
         /// <summary>
