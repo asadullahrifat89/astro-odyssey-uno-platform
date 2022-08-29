@@ -1262,9 +1262,8 @@ namespace AstroOdyssey
                     ShowInGameText($"👊 {App.GetLocalizedResource("ENEMY_APPROACHES")}");
                     AudioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
-                }
-
-                SetGameLevelText();
+                    SetGameLevelText();
+                }                
             }
         }
 

@@ -133,6 +133,8 @@
                     Content="Made with ❤️ by Asadullah Rifat"
                     FontSize="18"
                     Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False"
                     NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
             </StackPanel>
@@ -150,6 +152,8 @@
             Content="Assets by redfoc.com 😘"
             FontSize="20"
             Foreground="White"
+            IsFocusEngagementEnabled="False"
+            IsTabStop="False"
             NavigateUri="http://www.redfoc.com" />
     </Grid>
 

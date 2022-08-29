@@ -219,10 +219,12 @@ namespace AstroOdyssey
             System.Globalization.CultureInfo.CurrentCulture = culture;
             Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
 
+            _localizationResourceCache.Clear(); // clear the resources cache
+
             var rootFrame = _window.Content as Frame;
 
             rootFrame.Navigate(typeof(GameStartPage));
-            rootFrame.BackStack.Clear(); // Clear the back-navigation stack
+            rootFrame.BackStack.Clear(); // clear the back-navigation stack
         }
 
         public static void SetScore(double score)
