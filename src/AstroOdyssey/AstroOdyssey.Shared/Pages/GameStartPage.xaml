@@ -23,6 +23,28 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
 
+        <StackPanel
+            Margin="0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <Button
+                Margin="2"
+                Background="Transparent"
+                Content="English"
+                CornerRadius="50" />
+            <Button
+                Margin="2"
+                Background="Transparent"
+                Content="French"
+                CornerRadius="50" />
+            <Button
+                Margin="2"
+                Background="Transparent"
+                Content="Deutsch"
+                CornerRadius="50" />
+        </StackPanel>
+
         <!--  UI controls  -->
         <Border
             HorizontalAlignment="Center"
@@ -58,7 +80,7 @@
                 <Button
                     x:Name="PlayButton"
                     Height="40"
-                    Margin="0,50,0,50"
+                    Margin="0,50,0,30"
                     HorizontalAlignment="Stretch"
                     Background="Red"
                     BorderBrush="DarkRed"
@@ -94,7 +116,6 @@
             FontSize="20"
             Foreground="White"
             NavigateUri="http://www.redfoc.com" />
-
     </Grid>
 
 </Page>

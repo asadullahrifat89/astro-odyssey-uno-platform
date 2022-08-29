@@ -54,8 +54,6 @@ namespace AstroOdyssey
 
             _goBackNotAllowedToPages = new List<Type>() { typeof(GamePlayPage) };
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
-
-            ChangeStartingLanguage();
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -139,6 +137,8 @@ namespace AstroOdyssey
 
             _systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             _systemNavigationManager.BackRequested += OnBackRequested;
+
+            //SetAppLanguage("fr");
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -192,10 +192,15 @@ namespace AstroOdyssey
 
         #region Methods   
 
-        private void ChangeStartingLanguage()
+        private void SetAppLanguage(string tag)
         {
-            var culture = new System.Globalization.CultureInfo("fr");
+            var culture = new System.Globalization.CultureInfo(tag);
             Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
+
+            var rootFrame = _window.Content as Frame;
+
+            rootFrame.BackStack.Clear();
+            rootFrame.Navigate(typeof(GameStartPage));
         }
 
         public static void SetScore(double score)
