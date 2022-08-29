@@ -213,11 +213,12 @@ namespace AstroOdyssey
         public static void SetAppLanguage(string tag)
         {
             var culture = new System.Globalization.CultureInfo(tag);
-
-            //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
+            
             System.Globalization.CultureInfo.CurrentUICulture = culture;
             System.Globalization.CultureInfo.CurrentCulture = culture;
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
             Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
+            
 
             _localizationResourceCache.Clear(); // clear the resources cache
 

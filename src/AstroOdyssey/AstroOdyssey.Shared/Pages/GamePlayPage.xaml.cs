@@ -1173,6 +1173,7 @@ namespace AstroOdyssey
             ShowInGameText($"🤘 {App.GetLocalizedResource("LEVEL")} {(int)GameLevel} {App.GetLocalizedResource("COMPLETE")}");
             _enemyFactory.DisengageBossEnemy();
             Boss = null;
+            SetGameLevelText();
         }
 
         #endregion
