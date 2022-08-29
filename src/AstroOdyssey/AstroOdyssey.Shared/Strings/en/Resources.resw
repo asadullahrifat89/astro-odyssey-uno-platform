@@ -120,6 +120,24 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
   </data>
+  <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
+    <value>Assets by redfoc.com 😘</value>
+  </data>
+  <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
+    <value>Made with ❤️ by Asadullah Rifat</value>
+  </data>
+  <data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="GameStartPage_PlayButton.Content" xml:space="preserve">
+    <value>START GAME</value>
+  </data>
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>A classic rock metal ⚡ space shooter on WebAssembly.</value>
   </data>

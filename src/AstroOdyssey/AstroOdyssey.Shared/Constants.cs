@@ -97,7 +97,7 @@ namespace AstroOdyssey
             new PlayerShipTemplate(name: "Antimony", assetUri: "ms-appx:///Assets/Images/player_ship1.png", shipClass: ShipClass.DEFENDER),
             new PlayerShipTemplate(name: "Bismuth", assetUri: "ms-appx:///Assets/Images/player_ship2.png", shipClass: ShipClass.BERSERKER),
             new PlayerShipTemplate(name: "Curium", assetUri: "ms-appx:///Assets/Images/player_ship3.png", shipClass: ShipClass.SPECTRE),
-        };
+        };     
 
         #endregion
 

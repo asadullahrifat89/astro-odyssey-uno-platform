@@ -23,26 +23,39 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
 
+        <!--  Language selection buttons  -->
         <StackPanel
             Margin="0,10"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Orientation="Horizontal">
             <Button
+                x:Name="EnglishButton"
+                x:Uid="GameStartPage_EnglishButton"
                 Margin="2"
                 Background="Transparent"
+                Click="LanguageButton_Click"
                 Content="English"
-                CornerRadius="50" />
+                CornerRadius="50"
+                Tag="en" />
             <Button
+                x:Name="FrenchButton"
+                x:Uid="GameStartPage_FrenchButton"
                 Margin="2"
                 Background="Transparent"
+                Click="LanguageButton_Click"
                 Content="French"
-                CornerRadius="50" />
+                CornerRadius="50"
+                Tag="fr" />
             <Button
+                x:Name="DeutschButton"
+                x:Uid="GameStartPage_DeutschButton"
                 Margin="2"
                 Background="Transparent"
+                Click="LanguageButton_Click"
                 Content="Deutsch"
-                CornerRadius="50" />
+                CornerRadius="50"
+                Tag="de" />
         </StackPanel>
 
         <!--  UI controls  -->
@@ -79,6 +92,7 @@
                 <!--  Start game button  -->
                 <Button
                     x:Name="PlayButton"
+                    x:Uid="GameStartPage_PlayButton"
                     Height="40"
                     Margin="0,50,0,30"
                     HorizontalAlignment="Stretch"
@@ -94,6 +108,8 @@
                     IsTabStop="False" />
 
                 <HyperlinkButton
+                    x:Name="DeveloperProfileButton"
+                    x:Uid="GameStartPage_DeveloperProfileButton"
                     Margin="0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -109,6 +125,8 @@
         </Border>
 
         <HyperlinkButton
+            x:Name="AssetsCreditButton"
+            x:Uid="GameStartPage_AssetsCreditButton"
             Margin="10"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"

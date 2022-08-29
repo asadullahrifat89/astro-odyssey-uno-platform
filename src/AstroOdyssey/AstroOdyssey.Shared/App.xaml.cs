@@ -192,7 +192,7 @@ namespace AstroOdyssey
 
         #region Methods   
 
-        private void SetAppLanguage(string tag)
+        public static void SetAppLanguage(string tag)
         {
             var culture = new System.Globalization.CultureInfo(tag);
             Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
