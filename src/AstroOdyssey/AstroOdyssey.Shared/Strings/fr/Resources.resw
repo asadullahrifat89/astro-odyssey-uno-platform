@@ -121,6 +121,6 @@
     <value>AstroOdyssey</value>
   </data>
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
-    <value>A classic rock metal ⚡ space shooter on WebAssembly.</value>
+    <value>Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly.</value>
   </data>
 </root>

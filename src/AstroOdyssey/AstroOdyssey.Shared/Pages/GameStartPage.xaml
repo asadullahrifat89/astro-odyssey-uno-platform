@@ -23,6 +23,7 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top" />
 
+        <!--  UI controls  -->
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -44,6 +45,7 @@
 
                 <!--  Tag line  -->
                 <TextBlock
+                    x:Uid="GameStartPage_Tagline"
                     Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

@@ -255,6 +255,9 @@
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />
     <_Globbled_Page Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
