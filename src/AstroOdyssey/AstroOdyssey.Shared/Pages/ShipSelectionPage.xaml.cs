@@ -32,20 +32,20 @@ namespace AstroOdyssey
             App.Ship = null;
             ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            if (this.ShipsList.ItemsSource is null)
+            //if (this.ShipsList.ItemsSource is null)
+            //{
+            var ships = new Ship[] { };
+
+            ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
             {
-                var ships = new Ship[] { };
+                Id = Guid.NewGuid().ToString(),
+                Name = LocalizationHelper.GetLocalizedResource(x.Name),
+                ImageUrl = x.AssetUri,
+                ShipClass = x.ShipClass,
+            }).ToArray();
 
-                ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = LocalizationHelper.GetLocalizedResource(x.Name),
-                    ImageUrl = x.AssetUri,
-                    ShipClass = x.ShipClass,
-                }).ToArray();
-
-                this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
-            }
+            this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
+            //}
         }
 
         private void ChooseButton_Click(object sender, RoutedEventArgs e)

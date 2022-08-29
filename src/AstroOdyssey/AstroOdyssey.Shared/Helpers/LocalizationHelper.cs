@@ -9,21 +9,6 @@ namespace AstroOdyssey
 {
     public static class LocalizationHelper
     {
-        //private static IDictionary<string, string> _localizationResourceCache = new Dictionary<string, string>();
-
-        //public static void SetAppCulture(string name)
-        //{
-        //    //var culture = new System.Globalization.CultureInfo(name);
-
-        //    //System.Globalization.CultureInfo.CurrentUICulture = culture;
-        //    //System.Globalization.CultureInfo.CurrentCulture = culture;
-        //    //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
-        //    //Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
-
-
-        //    //_localizationResourceCache.Clear(); // clear the resources cache          
-        //}
-
         /// <summary>
         /// Gets the localization resource.
         /// </summary>
@@ -32,21 +17,13 @@ namespace AstroOdyssey
         public static string GetLocalizedResource(string resourceKey)
         {
             var localizationTemplate = Constants.LOCALIZATION_TEMPLATES.FirstOrDefault(x => x.Key == resourceKey);
-
             return localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
-
-            //if (_localizationResourceCache.ContainsKey(resourceKey))
-            //{
-            //    return _localizationResourceCache[resourceKey];
-            //}
-            //else
-            //{
-            //    var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
-            //    _localizationResourceCache.Add(resourceKey, resourceValue);
-            //    return resourceValue;
-            //}
         }
 
+        /// <summary>
+        /// Sets a localized value on the provided ui element.
+        /// </summary>
+        /// <param name="uIElement"></param>
         public static void SetLocalizedResource(UIElement uIElement)
         {
             var localizationTemplate = Constants.LOCALIZATION_TEMPLATES.FirstOrDefault(x => x.Key == uIElement.Name);
@@ -57,17 +34,8 @@ namespace AstroOdyssey
                 textBlock.Text = value;
             else if (uIElement is Button button)
                 button.Content = value;
-
-            //if (_localizationResourceCache.ContainsKey(resourceKey))
-            //{
-            //    return _localizationResourceCache[resourceKey];
-            //}
-            //else
-            //{
-            //    var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
-            //    _localizationResourceCache.Add(resourceKey, resourceValue);
-            //    return resourceValue;
-            //}
+            else if (uIElement is HyperlinkButton hyperlinkButton)
+                hyperlinkButton.Content = value;
         }
     }
 }
