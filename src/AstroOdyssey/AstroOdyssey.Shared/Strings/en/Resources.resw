@@ -141,4 +141,13 @@
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>A classic rock metal ⚡ space shooter on WebAssembly.</value>
   </data>
+  <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
+    <value>SELECT</value>
+  </data>
+  <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
+    <value>Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship.</value>
+  </data>
+  <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
+    <value>Select a Ship</value>
+  </data>
 </root>

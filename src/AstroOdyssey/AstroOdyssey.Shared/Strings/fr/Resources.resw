@@ -141,4 +141,13 @@
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly.</value>
   </data>
+  <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
+    <value>SÉLECTIONNER</value>
+  </data>
+  <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
+    <value>Appuyez ou touchez les touches fléchées gauche ou droite ou les bords de votre clavier ou de votre écran pour déplacer le navire.</value>
+  </data>
+  <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
+    <value>Sélectionnez un navire</value>
+  </data>
 </root>
