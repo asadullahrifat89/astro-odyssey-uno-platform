@@ -28,34 +28,44 @@ namespace AstroOdyssey
 
         public static CelestialObjectTemplate[] STAR_TEMPLATES = new CelestialObjectTemplate[]
         {
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_large.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_medium.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_small.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_large2.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_medium2.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_small2.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute), 20),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute), 30),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute), 30),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), 30),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), 130),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute), 130),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_large.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_medium.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_small.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_large2.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_medium2.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_small2.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute), size : 30),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute), size : 30),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), size : 30),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), size : 130),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute), size : 130),
         };
 
         public static CelestialObjectTemplate[] PLANET_TEMPLATES = new CelestialObjectTemplate[]
         {
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/black-hole2.png", UriKind.RelativeOrAbsolute), 1400),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/galaxy.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet1.png", UriKind.RelativeOrAbsolute), 1400),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet2.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet3.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet4.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet5.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet6.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet7.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet8.png", UriKind.RelativeOrAbsolute), 700),
-            new CelestialObjectTemplate(new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute), 700),
+            new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/black-hole2.png", UriKind.RelativeOrAbsolute), size: 1400),
+            new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy.png", UriKind.RelativeOrAbsolute), size: 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet1.png", UriKind.RelativeOrAbsolute), size : 1400),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet2.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet3.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet4.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet5.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet6.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet7.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet8.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute), size : 700),
+        };
+
+        public static EnemyTemplate[] ENEMY_TEMPLATES = new EnemyTemplate[]
+        {
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute), health: 1),
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute), health: 2),
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute), health: 3),
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_4.png", UriKind.RelativeOrAbsolute), health: 1),
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_5.png", UriKind.RelativeOrAbsolute), health: 2),
+            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_6.png", UriKind.RelativeOrAbsolute), health: 3),
         };
 
         #endregion
