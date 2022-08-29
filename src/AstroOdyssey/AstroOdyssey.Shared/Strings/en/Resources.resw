@@ -168,6 +168,9 @@
   <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
     <value>Assets by redfoc.com 😘</value>
   </data>
+  <data name="GameStartPage_BanglaButton.Content" xml:space="preserve">
+    <value>Bangla</value>
+  </data>
   <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
     <value>Deutsch</value>
   </data>

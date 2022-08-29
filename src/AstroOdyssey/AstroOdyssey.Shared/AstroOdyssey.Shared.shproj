@@ -261,6 +261,7 @@
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\de\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
   </ItemGroup>

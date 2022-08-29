@@ -62,6 +62,17 @@
                 IsFocusEngagementEnabled="False"
                 IsTabStop="False"
                 Tag="de" />
+            <Button
+                x:Name="BanglaButton"
+                x:Uid="GameStartPage_BanglaButton"
+                Margin="2"
+                Background="Transparent"
+                Click="LanguageButton_Click"
+                Content="Bangla"
+                CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
+                Tag="bn" />
         </StackPanel>
 
         <!--  UI controls  -->
@@ -120,7 +131,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Content="Made with ❤️ by Asadullah Rifat"
-                    FontSize="20"
+                    FontSize="18"
                     Foreground="White"
                     NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 

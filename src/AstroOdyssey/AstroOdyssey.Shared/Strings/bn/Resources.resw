@@ -118,138 +118,138 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Antimony" xml:space="preserve">
-    <value>Antimon</value>
+    <value>অ্যান্টিমনি</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
   </data>
   <data name="BEAM_CANNON" xml:space="preserve">
-    <value>STRAHLKANONE</value>
+    <value>রশ্মি কামান</value>
   </data>
   <data name="Bismuth" xml:space="preserve">
-    <value>Wismut</value>
+    <value>বিসমাথ</value>
   </data>
   <data name="BLAZE_BLITZ" xml:space="preserve">
-    <value>BLAZE BLITZ</value>
+    <value>ব্লেজ ব্লিটজ</value>
   </data>
   <data name="BOSS" xml:space="preserve">
-    <value>BOSS</value>
+    <value>বস</value>
   </data>
   <data name="CLOAK_DOWN" xml:space="preserve">
-    <value>KLAPPEN SIE SICH</value>
+    <value>ক্লোক ডাউন</value>
   </data>
   <data name="CLOAK_UP" xml:space="preserve">
-    <value>KLEIDE DICH</value>
+    <value>ক্লোক আপ</value>
   </data>
   <data name="COMPLETE" xml:space="preserve">
-    <value>KOMPLETT</value>
+    <value>সম্পূর্ণ</value>
   </data>
   <data name="Curium" xml:space="preserve">
-    <value>Gericht</value>
+    <value>কিউরিয়াম</value>
   </data>
   <data name="ENEMY_APPROACHES" xml:space="preserve">
-    <value>Feindliche Annäherungen</value>
+    <value>শত্রু কাছে পৌঁছেছে</value>
   </data>
   <data name="FANTASTIC_GAME" xml:space="preserve">
-    <value>Fantastisches Spiel</value>
+    <value>চমত্কার খেলা</value>
   </data>
   <data name="FIREPOWER_DOWN" xml:space="preserve">
-    <value>FEUERKRAFT AUS</value>
+    <value>ফায়ার পাওয়ার ডাউন</value>
   </data>
   <data name="FIREPOWER_UP" xml:space="preserve">
-    <value>FEUERKRAFT HOCH</value>
+    <value>ফায়ার পাওয়ার আপ</value>
   </data>
   <data name="GameOverPage_PlayAgainButton.Content" xml:space="preserve">
-    <value>NOCHMAL ABSPIELEN</value>
+    <value>আবার খেলো</value>
   </data>
   <data name="GameOverPage_Tagline.Text" xml:space="preserve">
-    <value>SPIEL IST AUS</value>
+    <value>খেলা শেষ</value>
   </data>
   <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
-    <value>Assets von redfoc.com 😘</value>
+    <value>Assets by redfoc.com 😘</value>
   </data>
   <data name="GameStartPage_BanglaButton.Content" xml:space="preserve">
-    <value>Bangla</value>
+    <value>বাংলা</value>
   </data>
   <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
-    <value>Deutsch</value>
+    <value>ডয়েচ</value>
   </data>
   <data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
-    <value>Hergestellt mit ❤️ von Asadullah Rifat</value>
+    <value>আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি</value>
   </data>
   <data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
-    <value>Englisch</value>
+    <value>ইংরেজি</value>
   </data>
   <data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
-    <value>Französisch</value>
+    <value>ফরাসি</value>
   </data>
   <data name="GameStartPage_PlayButton.Content" xml:space="preserve">
-    <value>SPIEL BEGINNEN</value>
+    <value>খেলা শুরু কর</value>
   </data>
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
-    <value>Ein klassischer Rock Metal ⚡ Weltraum-Shooter auf WebAssembly.</value>
+    <value>WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।</value>
   </data>
   <data name="GAME_PAUSED" xml:space="preserve">
-    <value>DAS SPIEL PAUSIERT</value>
+    <value>খেলা থামানো হয়েছে</value>
   </data>
   <data name="GOOD_GAME" xml:space="preserve">
-    <value>Gute Partie</value>
+    <value>ভাল খেলা</value>
   </data>
   <data name="GREAT_GAME" xml:space="preserve">
-    <value>Tolles Spiel</value>
+    <value>অসাধারন খেলা</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>de</value>
+    <value>en</value>
   </data>
   <data name="LEVEL" xml:space="preserve">
-    <value>EBEN</value>
+    <value>স্তর</value>
   </data>
   <data name="NO_LUCK" xml:space="preserve">
-    <value>Kein Glück</value>
+    <value>ভাগ্য নেই</value>
   </data>
   <data name="PLASMA_BOMB" xml:space="preserve">
-    <value>Plasmabombe</value>
+    <value>প্লাজমা বোমা</value>
   </data>
   <data name="POWER_DOWN" xml:space="preserve">
-    <value>STROMAUSFALL</value>
+    <value>ক্ষমতা হ্রাস</value>
   </data>
   <data name="QUIT_GAME" xml:space="preserve">
-    <value>SPIEL VERLASSEN?</value>
+    <value>বন্ধ খেলা?</value>
   </data>
   <data name="SCORE" xml:space="preserve">
-    <value>Punktzahl</value>
+    <value>স্কোর</value>
   </data>
   <data name="SHIELD_DOWN" xml:space="preserve">
-    <value>SCHILD NACH UNTEN</value>
+    <value>শিল্ড ডাউন</value>
   </data>
   <data name="SHIELD_UP" xml:space="preserve">
-    <value>SCHILD AUF</value>
+    <value>শিল্ড আপ</value>
   </data>
   <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
-    <value>AUSWÄHLEN</value>
+    <value>নির্বাচন করুন</value>
   </data>
   <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
-    <value>Drücke oder berühre die linke oder rechte Pfeiltaste oder die Kanten auf deiner Tastatur oder deinem Bildschirm, um das Schiff zu bewegen.</value>
+    <value>জাহাজটি সরাতে আপনার কীবোর্ড বা স্ক্রিনে বাম বা ডান তীর কী বা প্রান্তগুলি টিপুন বা স্পর্শ করুন৷</value>
   </data>
   <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
-    <value>Wählen Sie ein Schiff aus</value>
+    <value>একটি জাহাজ নির্বাচন করুন</value>
   </data>
   <data name="SHIP_REPAIRED" xml:space="preserve">
-    <value>SCHIFF REPARIERT</value>
+    <value>জাহাজ মেরামত</value>
   </data>
   <data name="SONIC_BLAST" xml:space="preserve">
-    <value>SONIC BLAST</value>
+    <value>সোনিক বিস্ফোরণ</value>
   </data>
   <data name="SUPREME_GAME" xml:space="preserve">
-    <value>Höchstes Spiel</value>
+    <value>সর্বোচ্চ খেলা</value>
   </data>
   <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
-    <value>TIPPEN SIE AUF DEN BILDSCHIRM, UM ZU BEGINNEN</value>
+    <value>শুরু করতে স্ক্রিনে ট্যাপ করুন</value>
   </data>
   <data name="TAP_TO_QUIT" xml:space="preserve">
-    <value>TIPPEN SIE ZUM BEENDEN</value>
+    <value>প্রস্থান করতে ট্যাপ করুন</value>
   </data>
   <data name="TAP_TO_RESUME" xml:space="preserve">
-    <value>TIPPEN, UM WEITERZUFAHREN</value>
+    <value>আবার শুরু করতে ট্যাপ করুন</value>
   </data>
 </root>
