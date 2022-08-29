@@ -125,6 +125,7 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
+                <!--  Developer page  -->
                 <HyperlinkButton
                     x:Name="GameStartPage_DeveloperProfileButton"
                     x:Uid="GameStartPage_DeveloperProfileButton"
@@ -132,7 +133,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Content="Made with ❤️ by Asadullah Rifat"
-                    FontSize="18"
+                    FontSize="17"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False"
@@ -144,6 +145,7 @@
             </Border.Background>
         </Border>
 
+        <!--  Asset credits  -->
         <HyperlinkButton
             x:Name="GameStartPage_AssetsCreditButton"
             x:Uid="GameStartPage_AssetsCreditButton"

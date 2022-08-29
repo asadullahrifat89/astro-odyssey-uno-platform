@@ -332,10 +332,10 @@ namespace AstroOdyssey
             }),
             new LocalizationTemplate(key: "GameStartPage_AssetsCreditButton", cultureValues: new (string Culture, string Value)[]
             { 
-                new ("en", "Assets by redfoc.com 😘"), 
-                new ("bn", "Assets by redfoc.com 😘"),
-                new ("de", "Assets von redfoc.com 😘"),
-                new ("fr", "Actifs par redfoc.com 😘"),
+                new ("en", "😘 Assets by redfoc.com"), 
+                new ("bn", "😘 Assets by redfoc.com"),
+                new ("de", "😘 Assets von redfoc.com"),
+                new ("fr", "😘 Actifs par redfoc.com"),
             }),
 
             new LocalizationTemplate(key: "GameStartPage_BanglaButton", cultureValues: new (string Culture, string Value)[]

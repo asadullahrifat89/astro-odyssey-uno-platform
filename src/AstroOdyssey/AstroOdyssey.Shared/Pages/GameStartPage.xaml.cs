@@ -23,20 +23,13 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Events  
+        #region Events
 
         private void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.GAME_INTRO);
 
-            LocalizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
+            SetLocalization();
 
             if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
             {
@@ -89,8 +82,24 @@ namespace AstroOdyssey
             if ((sender as Button)?.Tag is string tag)
             {
                 App.CurrentCulture = tag;
-                App.Refresh();
+                SetLocalization();
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void SetLocalization()
+        {
+            LocalizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
         }
 
         #endregion
