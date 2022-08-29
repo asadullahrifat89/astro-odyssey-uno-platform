@@ -28,25 +28,29 @@ namespace AstroOdyssey
 
         public static CelestialObjectTemplate[] STAR_TEMPLATES = new CelestialObjectTemplate[]
         {
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_large.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_medium.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_small.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_tiny.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_large2.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_medium2.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_small2.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star_tiny2.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star1.png", UriKind.RelativeOrAbsolute), size : 25),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star2.png", UriKind.RelativeOrAbsolute), size : 25),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star3.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star4.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star5.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star6.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star7.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star8.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star9.png", UriKind.RelativeOrAbsolute), size : 20),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star10.png", UriKind.RelativeOrAbsolute), size : 20),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute), size : 30),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute), size : 30),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), size : 30),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), size : 130),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), size : 30),           
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), size : 130),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute), size : 130),
+            //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy1.png", UriKind.RelativeOrAbsolute), size: 200),
+            //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy2.png", UriKind.RelativeOrAbsolute), size: 200),
+            //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy3.png", UriKind.RelativeOrAbsolute), size: 200),
         };
 
         public static CelestialObjectTemplate[] PLANET_TEMPLATES = new CelestialObjectTemplate[]
         {
             new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/black-hole2.png", UriKind.RelativeOrAbsolute), size: 1400),
-            new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy.png", UriKind.RelativeOrAbsolute), size: 700),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet1.png", UriKind.RelativeOrAbsolute), size : 1400),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet2.png", UriKind.RelativeOrAbsolute), size : 700),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet3.png", UriKind.RelativeOrAbsolute), size : 700),
@@ -56,6 +60,9 @@ namespace AstroOdyssey
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet7.png", UriKind.RelativeOrAbsolute), size : 700),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet8.png", UriKind.RelativeOrAbsolute), size : 700),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/sun1.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/sun2.png", UriKind.RelativeOrAbsolute), size : 700),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/sun3.png", UriKind.RelativeOrAbsolute), size : 700),
         };
 
         public static DestructibleObjectTemplate[] ENEMY_TEMPLATES = new DestructibleObjectTemplate[]
@@ -81,11 +88,11 @@ namespace AstroOdyssey
             new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock9.png", UriKind.RelativeOrAbsolute), health: 1),
         };
 
-        public static (string Name, string AssetUri, ShipClass ShipClass)[] PLAYER_SHIP_TEMPLATES = new (string Name, string AssetUri, ShipClass ShipClass)[] 
+        public static PlayerShipTemplate[] PLAYER_SHIP_TEMPLATES = new PlayerShipTemplate[]
         {
-            new ("Antimony", "ms-appx:///Assets/Images/player_ship1.png", ShipClass.DEFENDER),
-            new ("Bismuth", "ms-appx:///Assets/Images/player_ship2.png", ShipClass.BERSERKER),
-            new ("Curium", "ms-appx:///Assets/Images/player_ship3.png", ShipClass.SPECTRE),
+            new PlayerShipTemplate(name: "Antimony", assetUri: "ms-appx:///Assets/Images/player_ship1.png", shipClass: ShipClass.DEFENDER),
+            new PlayerShipTemplate(name: "Bismuth", assetUri: "ms-appx:///Assets/Images/player_ship2.png", shipClass: ShipClass.BERSERKER),
+            new PlayerShipTemplate(name: "Curium", assetUri: "ms-appx:///Assets/Images/player_ship3.png", shipClass: ShipClass.SPECTRE),
         };
 
         #endregion

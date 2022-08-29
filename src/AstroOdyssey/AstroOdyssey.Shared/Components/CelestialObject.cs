@@ -56,7 +56,9 @@ namespace AstroOdyssey
 
                         size = starTemplate.Size;
 
-                        if (size > 20)
+                        if (size >= 100)
+                            size -= random.Next(20, 100);
+                        else if (size > 25)
                             size -= random.Next(1, 15);
                     }
                     break;
@@ -76,6 +78,10 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+
+            // add a random rotation
+            Rotation = random.Next(0, 360);
+            Rotate();
 
             content.Source = new BitmapImage(uri);
 

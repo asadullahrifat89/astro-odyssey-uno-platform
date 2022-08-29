@@ -20,6 +20,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\CelestialObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
@@ -89,13 +90,17 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\nebula2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\planet1.png" />
@@ -110,10 +115,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameOver.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny2.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star7.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star9.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\enemy_6.png" />
@@ -135,10 +142,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rock5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\space_thrust1.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_large.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_medium.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_small.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star_tiny.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star10.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star8.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star6.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
