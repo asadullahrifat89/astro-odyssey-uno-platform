@@ -204,7 +204,7 @@ namespace AstroOdyssey
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
-            ShowInGameText("👆\nTAP ON SCREEN TO BEGIN");
+            ShowInGameText(App.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
         }
 

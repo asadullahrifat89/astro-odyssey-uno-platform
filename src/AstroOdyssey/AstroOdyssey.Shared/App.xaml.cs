@@ -1,5 +1,5 @@
 ﻿#if DEBUG
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
 #endif
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
@@ -26,6 +26,7 @@ namespace AstroOdyssey
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
         private static string baseUrl;
+        private static Windows.ApplicationModel.Resources.ResourceLoader _resourceLoader;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace AstroOdyssey
 #endif
             UnhandledException += App_UnhandledException;
 
-            Uno.UI.FeatureConfiguration.Page.IsPoolingEnabled = true;
+            //Uno.UI.FeatureConfiguration.Page.IsPoolingEnabled = true;
 
             _systemNavigationManager = SystemNavigationManager.GetForCurrentView();
 
@@ -138,7 +139,7 @@ namespace AstroOdyssey
             _systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             _systemNavigationManager.BackRequested += OnBackRequested;
 
-            //SetAppLanguage("fr");
+            _resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse();
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -192,6 +193,11 @@ namespace AstroOdyssey
 
         #region Methods   
 
+        public static string GetLocalizedResource(string resourceName)
+        {
+            return _resourceLoader.GetString(resourceName);
+        }
+
         public static void SetAppLanguage(string tag)
         {
             var culture = new System.Globalization.CultureInfo(tag);
@@ -199,8 +205,8 @@ namespace AstroOdyssey
 
             var rootFrame = _window.Content as Frame;
 
-            rootFrame.BackStack.Clear();
             rootFrame.Navigate(typeof(GameStartPage));
+            rootFrame.BackStack.Clear(); // Clear the back-navigation stack
         }
 
         public static void SetScore(double score)

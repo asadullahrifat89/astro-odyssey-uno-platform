@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Antimony" xml:space="preserve">
+    <value>Antimoine</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
+  </data>
+  <data name="Bismuth" xml:space="preserve">
+    <value>Bismuth</value>
+  </data>
+  <data name="Curium" xml:space="preserve">
+    <value>Rechercher</value>
   </data>
   <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
     <value>Actifs par redfoc.com 😘</value>
@@ -141,6 +150,9 @@
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>fr</value>
+  </data>
   <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
     <value>SÉLECTIONNER</value>
   </data>
@@ -149,5 +161,8 @@
   </data>
   <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
     <value>Sélectionnez un navire</value>
+  </data>
+  <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
+    <value>👆 APPUYEZ SUR L'ÉCRAN POUR COMMENCER</value>
   </data>
 </root>
