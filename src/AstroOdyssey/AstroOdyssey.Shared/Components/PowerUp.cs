@@ -62,9 +62,9 @@ namespace AstroOdyssey
     public enum PowerUpType
     {
         NONE,
-        BLAZE_BLITZ_ROUNDS,
-        PLASMA_BOMB_ROUNDS,
-        BEAM_CANON_ROUNDS,
-        SONIC_BLAST_ROUNDS
+        BLAZE_BLITZ,
+        PLASMA_BOMB,
+        BEAM_CANNON,
+        SONIC_BLAST
     }
 }

@@ -75,6 +75,12 @@ namespace AstroOdyssey
             App.EnterFullScreen(true);
         }
 
+        private void LanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as Button)?.Tag is string tag)
+                App.SetAppLanguage(tag);
+        }       
+
         #endregion
     }
 }

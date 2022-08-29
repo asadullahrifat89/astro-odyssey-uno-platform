@@ -11,12 +11,15 @@
   <Import Project="AstroOdyssey.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\GameOverPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
+    <UpToDateCheckInput Remove="Pages\LanguageSelectionPage.xaml" />
     <UpToDateCheckInput Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <_Globbed_Compile Remove="Components\Base\CelestialObjectTemplate.cs" />
     <_Globbed_Compile Remove="Components\Base\DestructibleObjectTemplate.cs" />
+    <_Globbed_Compile Remove="Components\Base\LanguageTemplate.cs" />
     <_Globbed_Compile Remove="Components\Base\PlayerShipTemplate.cs" />
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
@@ -34,12 +37,15 @@
     <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Models\GameScore.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />
+    <_Globbed_Compile Remove="Models\Language.cs" />
     <_Globbed_Compile Remove="Models\Ship.cs" />
     <_Globbed_Compile Remove="Pages\ChooseShipPage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\GameOverPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\LanguageSelectionPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\LoginPage.xaml.cs" />
     <_Globbed_Compile Remove="Services\AudioService.cs" />
   </ItemGroup>
@@ -255,7 +261,14 @@
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />
+    <_Globbed_PRIResource Remove="Strings\de\Resources.resw" />
+    <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <_Globbled_Page Remove="Pages\GameOverPage - Copy.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />
+    <_Globbled_Page Remove="Pages\LanguageSelectionPage.xaml" />
     <_Globbled_Page Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
 </Project>

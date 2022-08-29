@@ -30,6 +30,7 @@
                 <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
                 <TextBlock
+                    x:Uid="ShipSelectionPage_Tagline"
                     Margin="0,40"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -39,7 +40,7 @@
                     TextWrapping="WrapWholeWords" />
 
                 <GridView
-                    Name="ShipsList"
+                    x:Name="ShipsList"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     SelectionChanged="ShipsList_SelectionChanged">
@@ -61,17 +62,19 @@
                 </GridView>
 
                 <TextBlock
+                    x:Uid="ShipSelectionPage_ControlInstructions"
                     Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="16"
-                    Text="Press or touch left or right arrow keys or edges on your keyboard or screen to move ship."
+                    Text="Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship."
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
                 <!--  Choose button  -->
                 <Button
                     x:Name="ChooseButton"
+                    x:Uid="ShipSelectionPage_ChooseButton"
                     Height="40"
                     Margin="0,10,0,50"
                     HorizontalAlignment="Stretch"
@@ -91,4 +94,5 @@
         </Border>
 
     </Grid>
+
 </Page>

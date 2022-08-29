@@ -14,7 +14,7 @@ namespace AstroOdyssey
         private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_PLASMA_BOMB_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_BEAM_CANON_ROUNDS_FIRE = null;
+        private static AudioPlayer PLAYER_BEAM_CANNON_ROUNDS_FIRE = null;
         private static AudioPlayer PLAYER_SONIC_BLAST_ROUNDS_FIRE = null;
         private static AudioPlayer ENEMY_ROUNDS_FIRE = null;
         private static AudioPlayer ENEMY_DESTRUCTION = null;
@@ -231,16 +231,16 @@ namespace AstroOdyssey
                         PLAYER_PLASMA_BOMB_ROUNDS_FIRE.Play();
                     }
                     break;
-                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE:
                     {
-                        if (PLAYER_BEAM_CANON_ROUNDS_FIRE is null)
+                        if (PLAYER_BEAM_CANNON_ROUNDS_FIRE is null)
                         {
-                            PLAYER_BEAM_CANON_ROUNDS_FIRE = new AudioPlayer(
+                            PLAYER_BEAM_CANNON_ROUNDS_FIRE = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3"),
                                 volume: 0.3);
                         }
 
-                        PLAYER_BEAM_CANON_ROUNDS_FIRE.Play();
+                        PLAYER_BEAM_CANNON_ROUNDS_FIRE.Play();
                     }
                     break;
                 case SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE:
@@ -439,7 +439,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE:
                     break;
                 case SoundType.ENEMY_ROUNDS_FIRE:
                     break;
@@ -498,7 +498,7 @@ namespace AstroOdyssey
                     break;
                 case SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE:
                     break;
-                case SoundType.PLAYER_BEAM_CANON_ROUNDS_FIRE:
+                case SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE:
                     break;
                 case SoundType.ENEMY_ROUNDS_FIRE:
                     break;
@@ -548,7 +548,7 @@ namespace AstroOdyssey
         PLAYER_ROUNDS_FIRE,
         PLAYER_BLAZE_BLITZ_ROUNDS_FIRE,
         PLAYER_PLASMA_BOMB_ROUNDS_FIRE,
-        PLAYER_BEAM_CANON_ROUNDS_FIRE,
+        PLAYER_BEAM_CANNON_ROUNDS_FIRE,
         PLAYER_SONIC_BLAST_ROUNDS_FIRE,
         ENEMY_ROUNDS_FIRE,
         ENEMY_DESTRUCTION,

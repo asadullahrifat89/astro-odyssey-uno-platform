@@ -53,7 +53,7 @@ namespace AstroOdyssey
             {
                 switch (PowerUpType)
                 {
-                    case PowerUpType.BLAZE_BLITZ_ROUNDS:
+                    case PowerUpType.BLAZE_BLITZ:
                         {
                             height = 35; width = 10; // medium and faster rounds
 
@@ -63,7 +63,7 @@ namespace AstroOdyssey
                             BorderThickness = new Thickness(2, 3, 2, 1);
                         }
                         break;
-                    case PowerUpType.PLASMA_BOMB_ROUNDS:
+                    case PowerUpType.PLASMA_BOMB:
                         {
                             height = 25; width = 25; // larger and slower rounds
 
@@ -73,7 +73,7 @@ namespace AstroOdyssey
                             BorderThickness = new Thickness(3);
                         }
                         break;
-                    case PowerUpType.BEAM_CANON_ROUNDS:
+                    case PowerUpType.BEAM_CANNON:
                         {
                             height = 300; width = 20; // larger and longer and faster piercing rounds
 
@@ -85,7 +85,7 @@ namespace AstroOdyssey
                             CornerRadius = new CornerRadius(20);
                         }
                         break;
-                    case PowerUpType.SONIC_BLAST_ROUNDS:
+                    case PowerUpType.SONIC_BLAST:
                         {
                             height = 3; width = 80; // wider and thiner and slower piercing rounds
 

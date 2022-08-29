@@ -236,7 +236,7 @@ namespace AstroOdyssey
             //case PowerUpType.PLASMA_BOMB_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
-            //case PowerUpType.BEAM_CANON_ROUNDS:
+            //case PowerUpType.BEAM_CANNON_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
             //default:

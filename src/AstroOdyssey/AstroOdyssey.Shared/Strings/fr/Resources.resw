@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Antimony" xml:space="preserve">
-    <value>Antimony</value>
+    <value>Antimoine</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
   </data>
   <data name="BEAM_CANNON" xml:space="preserve">
-    <value>BEAM CANNON</value>
+    <value>CANON À FAISCEAU</value>
   </data>
   <data name="Bismuth" xml:space="preserve">
     <value>Bismuth</value>
@@ -133,123 +133,123 @@
     <value>BLAZE BLITZ</value>
   </data>
   <data name="BOSS" xml:space="preserve">
-    <value>BOSS</value>
+    <value>CHEF</value>
   </data>
   <data name="CLOAK_DOWN" xml:space="preserve">
-    <value>CLOAK DOWN</value>
+    <value>CLOCHEZ-VOUS</value>
   </data>
   <data name="CLOAK_UP" xml:space="preserve">
-    <value>CLOAK UP</value>
+    <value>COUVREZ-VOUS</value>
   </data>
   <data name="COMPLETE" xml:space="preserve">
-    <value>COMPLETE</value>
+    <value>ACHEVÉ</value>
   </data>
   <data name="Curium" xml:space="preserve">
-    <value>Curium</value>
+    <value>Rechercher</value>
   </data>
   <data name="ENEMY_APPROACHES" xml:space="preserve">
-    <value>ENEMY APPROACHES</value>
+    <value>APPROCHES ENNEMIES</value>
   </data>
   <data name="FANTASTIC_GAME" xml:space="preserve">
-    <value>Fantastic game</value>
+    <value>Jeu fantastique</value>
   </data>
   <data name="FIREPOWER_DOWN" xml:space="preserve">
-    <value>FIREPOWER DOWN</value>
+    <value>PUISSANCE DE FEU ARRÊTÉE</value>
   </data>
   <data name="FIREPOWER_UP" xml:space="preserve">
-    <value>FIREPOWER UP</value>
+    <value>PUISSANCE DE FEU</value>
   </data>
   <data name="GameOverPage_PlayAgainButton.Content" xml:space="preserve">
-    <value>PLAY AGAIN</value>
+    <value>REJOUER</value>
   </data>
   <data name="GameOverPage_Tagline.Text" xml:space="preserve">
-    <value>GAME OVER</value>
+    <value>JEU TERMINÉ</value>
   </data>
   <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
-    <value>Assets by redfoc.com 😘</value>
+    <value>Actifs par redfoc.com 😘</value>
   </data>
   <data name="GameStartPage_BanglaButton.Content" xml:space="preserve">
-    <value>Bangla</value>
+    <value>bangla</value>
   </data>
   <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
     <value>Deutsch</value>
   </data>
   <data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
-    <value>Made with ❤️ by Asadullah Rifat</value>
+    <value>Fait avec ❤️ par Asadullah Rifat</value>
   </data>
   <data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
-    <value>English</value>
+    <value>Anglais</value>
   </data>
   <data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
-    <value>French</value>
+    <value>Français</value>
   </data>
   <data name="GameStartPage_PlayButton.Content" xml:space="preserve">
-    <value>START GAME</value>
+    <value>DÉMARRER JEU</value>
   </data>
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
-    <value>A classic rock metal ⚡ space shooter on WebAssembly.</value>
+    <value>Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly.</value>
   </data>
   <data name="GAME_PAUSED" xml:space="preserve">
-    <value>GAME PAUSED</value>
+    <value>JEU EN PAUSE</value>
   </data>
   <data name="GOOD_GAME" xml:space="preserve">
-    <value>Good game</value>
+    <value>Bon jeu</value>
   </data>
   <data name="GREAT_GAME" xml:space="preserve">
-    <value>Great game</value>
+    <value>bon jeu</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>en</value>
   </data>
   <data name="LEVEL" xml:space="preserve">
-    <value>LEVEL</value>
+    <value>NIVEAU</value>
   </data>
   <data name="NO_LUCK" xml:space="preserve">
-    <value>No luck</value>
+    <value>Pas de chance</value>
   </data>
   <data name="PLASMA_BOMB" xml:space="preserve">
-    <value>PLASMA BOMB</value>
+    <value>BOMBE À PLASMA</value>
   </data>
   <data name="POWER_DOWN" xml:space="preserve">
-    <value>POWER DOWN</value>
+    <value>ÉTEINDRE</value>
   </data>
   <data name="QUIT_GAME" xml:space="preserve">
-    <value>QUIT GAME?</value>
+    <value>QUITTER LE JEU?</value>
   </data>
   <data name="SCORE" xml:space="preserve">
     <value>Score</value>
   </data>
   <data name="SHIELD_DOWN" xml:space="preserve">
-    <value>SHIELD DOWN</value>
+    <value>BOUCLIER BAS</value>
   </data>
   <data name="SHIELD_UP" xml:space="preserve">
-    <value>SHIELD UP</value>
+    <value>BOUCLIER</value>
   </data>
   <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
-    <value>SELECT</value>
+    <value>SÉLECTIONNER</value>
   </data>
   <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
-    <value>Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship.</value>
+    <value>Appuyez ou touchez les touches fléchées gauche ou droite ou les bords de votre clavier ou de votre écran pour déplacer le navire.</value>
   </data>
   <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
-    <value>Select a Ship</value>
+    <value>Sélectionnez un navire</value>
   </data>
   <data name="SHIP_REPAIRED" xml:space="preserve">
-    <value>SHIP REPAIRED</value>
+    <value>NAVIRE RÉPARÉ</value>
   </data>
   <data name="SONIC_BLAST" xml:space="preserve">
-    <value>SONIC BLAST</value>
+    <value>SONIC SONIC</value>
   </data>
   <data name="SUPREME_GAME" xml:space="preserve">
-    <value>Supreme game</value>
+    <value>Jeu suprême</value>
   </data>
   <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
-    <value>TAP ON THE SCREEN TO BEGIN</value>
+    <value>APPUYEZ SUR L'ÉCRAN POUR COMMENCER</value>
   </data>
   <data name="TAP_TO_QUIT" xml:space="preserve">
-    <value>TAP TO QUIT</value>
+    <value>APPUYER POUR QUITTER</value>
   </data>
   <data name="TAP_TO_RESUME" xml:space="preserve">
-    <value>TAP TO RESUME</value>
+    <value>APPUYER POUR REPRENDRE</value>
   </data>
 </root>
