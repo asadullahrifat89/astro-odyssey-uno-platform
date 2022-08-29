@@ -462,6 +462,9 @@ namespace AstroOdyssey
         {
             IsGameRunning = false;
 
+            if (StarView.IsWarpingThroughSpace)
+                _celestialObjectFactory.StopSpaceWarp();
+
             GameFrameTimer.Stop();
 
             AudioHelper.StopSound();
@@ -676,13 +679,13 @@ namespace AstroOdyssey
 
                                 switch (Player.ShipClass)
                                 {
-                                    case ShipClass.Antimony:
+                                    case ShipClass.DEFENDER:
                                         ShowInGameText("🛡 SHIELD DOWN");
                                         break;
-                                    case ShipClass.Bismuth:
+                                    case ShipClass.BERSERKER:
                                         ShowInGameText("⚔️ FIREPOWER DOWN");
                                         break;
-                                    case ShipClass.Curium:
+                                    case ShipClass.SPECTRE:
                                         ShowInGameText("👁 CLOAK DOWN");
                                         break;
                                     default:
@@ -732,13 +735,13 @@ namespace AstroOdyssey
 
                                 switch (Player.ShipClass)
                                 {
-                                    case ShipClass.Antimony:
+                                    case ShipClass.DEFENDER:
                                         ShowInGameText("🛡 SHIELD UP");
                                         break;
-                                    case ShipClass.Bismuth:
+                                    case ShipClass.BERSERKER:
                                         ShowInGameText("⚔️ FIREPOWER UP");
                                         break;
-                                    case ShipClass.Curium:
+                                    case ShipClass.SPECTRE:
                                         ShowInGameText("👁 CLOAK UP");
                                         break;
                                     default:

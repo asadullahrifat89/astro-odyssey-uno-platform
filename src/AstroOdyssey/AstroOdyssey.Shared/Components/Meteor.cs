@@ -46,95 +46,17 @@ namespace AstroOdyssey
             Opacity = 1;
 
             Rotation = random.NextDouble();
+            var meteorType = random.Next(1, Constants.METEOR_TEMPLATES.Length);
+            var meteorTemplate = Constants.METEOR_TEMPLATES[meteorType];
 
-            Uri uri = null;
+            Uri uri = meteorTemplate.AssetUri;
+            Health = meteorTemplate.Health;
 
-            var meteorType = random.Next(1, 10);
+            var size = meteorTemplate.Size;
+            size -= random.Next(1, 15);
 
-            switch (meteorType)
-            {
-                case 1:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute);
-                        Health = 1;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                    }
-                    break;
-                case 2:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute);
-                        Health = 1;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                    }
-                    break;
-                case 3:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                    }
-                    break;
-                case 4:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 5) * scale;
-                    }
-                    break;
-                case 5:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
-
-                        Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                        Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                    }
-                    break;
-                case 6:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock6.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
-
-                        Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                        Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                    }
-                    break;
-                case 7:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock7.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 10) * scale;
-                    }
-                    break;
-                case 8:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock8.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
-
-                        Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                        Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-                    }
-                    break;
-                case 9:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/rock9.png", UriKind.RelativeOrAbsolute);
-                        Health = 1;
-
-                        Height = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                        Width = (Constants.DESTRUCTIBLE_OBJECT_SIZE - 15) * scale;
-                    }
-                    break;
-            }
+            Height = size * scale;
+            Width = size * scale;
 
             content.Source = new BitmapImage(uri);
 

@@ -383,17 +383,17 @@ namespace AstroOdyssey
             playerRageCoolDownCounter = playerRageCoolDownDelay;
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     {
                         player.IsShieldUp = true;
                     }
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         player.IsFirePowerUp = true;
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     {
                         player.IsCloakUp = true;
                     }
@@ -411,19 +411,19 @@ namespace AstroOdyssey
 
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     {
                         if (playerRageCoolDownCounter <= 0)
                             player.IsShieldUp = false;
                     }
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         if (playerRageCoolDownCounter <= 0)
                             player.IsFirePowerUp = false;
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     {
                         if (playerRageCoolDownCounter <= 0)
                             player.IsCloakUp = false;

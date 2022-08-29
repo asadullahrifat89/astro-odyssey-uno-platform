@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,39 +28,17 @@ namespace AstroOdyssey
             App.Ship = null;
             ChooseButton.IsEnabled = false;
 
-            if (this.ShipsList.Items.Count == 0)
+            if (this.ShipsList.ItemsSource is null)
             {
-                var ships = new List<Ship>();
+                var ships = new Ship[] { };
 
-                string shipUri = null;
-                string name = null;
-
-                for (int i = 0; i <= 2; i++)
+                ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            shipUri = "ms-appx:///Assets/Images/player_ship1.png";
-                            name = "Antimony";
-                            break;
-                        case 1:
-                            shipUri = "ms-appx:///Assets/Images/player_ship2.png";
-                            name = "Bismuth";
-                            break;
-                        case 2:
-                            shipUri = "ms-appx:///Assets/Images/player_ship3.png";
-                            name = "Curium";
-                            break;
-                    }
-
-                    ships.Add(new Ship()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = name,
-                        ImageUrl = shipUri,
-                        ShipClass = (ShipClass)i,
-                    });
-                }
+                    Id = Guid.NewGuid().ToString(),
+                    Name = x.Name,
+                    ImageUrl = x.AssetUri,
+                    ShipClass = x.ShipClass,
+                }).ToArray();
 
                 this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
             }

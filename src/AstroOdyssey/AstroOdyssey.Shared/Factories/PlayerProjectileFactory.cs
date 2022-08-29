@@ -398,15 +398,15 @@ namespace AstroOdyssey
         {
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         projectileSpawnDelay -= RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
                         projectileSpeed += RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     break;
                 default:
                     break;
@@ -417,15 +417,15 @@ namespace AstroOdyssey
         {
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         projectileSpawnDelay += RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
                         projectileSpeed -= RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     break;
                 default:
                     break;

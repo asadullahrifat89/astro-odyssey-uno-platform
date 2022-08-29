@@ -13,8 +13,8 @@
 
     public enum ShipClass
     {
-        Antimony, // shield generate when enraged
-        Bismuth, // shoots faster shots when enraged
-        Curium, // goes into etheral mode when enraged
+        DEFENDER, // shield generate when enraged
+        BERSERKER, // shoots faster shots when enraged
+        SPECTRE, // goes into etheral mode when enraged
     }
 }

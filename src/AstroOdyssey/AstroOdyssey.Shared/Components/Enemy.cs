@@ -66,53 +66,17 @@ namespace AstroOdyssey
             IsMarkedForFadedDestruction = false;
             Opacity = 1;
 
-            Uri uri = null;
-            var enemyShipType = random.Next(1, 7);
+            var enemyType = random.Next(0, Constants.ENEMY_TEMPLATES.Length);
+            var enemyTemplate = Constants.ENEMY_TEMPLATES[enemyType];
 
-            switch (enemyShipType)
-            {
-                case 1:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute);
-                        Health = 1;
-                    }
-                    break;
-                case 2:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-                    }
-                    break;
-                case 3:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;
-                    }
-                    break;
-                case 4:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_4.png", UriKind.RelativeOrAbsolute);
-                        Health = 1;
-                    }
-                    break;
-                case 5:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_5.png", UriKind.RelativeOrAbsolute);
-                        Health = 2;
-                    }
-                    break;
-                case 6:
-                    {
-                        uri = new Uri("ms-appx:///Assets/Images/enemy_6.png", UriKind.RelativeOrAbsolute);
-                        Health = 3;                       
-                    }
-                    break;
-            }
+            Uri uri = enemyTemplate.AssetUri;
+            Health = enemyTemplate.Health;
+
+            var size = enemyTemplate.Size;
+            Height = size * scale;
+            Width = size * scale;
 
             content.Source = new BitmapImage(uri);
-
-            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
         }
