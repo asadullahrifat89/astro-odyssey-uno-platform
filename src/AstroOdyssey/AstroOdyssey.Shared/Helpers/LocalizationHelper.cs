@@ -43,5 +43,5 @@ namespace AstroOdyssey
                 return resourceValue;
             }
         }
-    }
+    }    
 }
