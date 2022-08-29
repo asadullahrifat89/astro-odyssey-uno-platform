@@ -67,16 +67,16 @@ namespace AstroOdyssey
             Opacity = 1;
 
             var enemyType = random.Next(0, Constants.ENEMY_TEMPLATES.Length);
-
             var enemyTemplate = Constants.ENEMY_TEMPLATES[enemyType];
 
             Uri uri = enemyTemplate.AssetUri;
             Health = enemyTemplate.Health;
 
-            content.Source = new BitmapImage(uri);
+            var size = enemyTemplate.Size;
+            Height = size * scale;
+            Width = size * scale;
 
-            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
+            content.Source = new BitmapImage(uri);
 
             HalfWidth = Width / 2;
         }
@@ -134,9 +134,9 @@ namespace AstroOdyssey
         #endregion
     }
 
-    public class EnemyTemplate
+    public class DestructibleObjectTemplate
     {
-        public EnemyTemplate(Uri assetUri, double health, double size = Constants.DESTRUCTIBLE_OBJECT_SIZE)
+        public DestructibleObjectTemplate(Uri assetUri, double health, double size = Constants.DESTRUCTIBLE_OBJECT_SIZE)
         {
             AssetUri = assetUri;
             Health = health;

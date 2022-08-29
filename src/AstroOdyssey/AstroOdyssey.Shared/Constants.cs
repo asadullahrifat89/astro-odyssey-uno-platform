@@ -58,14 +58,27 @@ namespace AstroOdyssey
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/planet9.png", UriKind.RelativeOrAbsolute), size : 700),
         };
 
-        public static EnemyTemplate[] ENEMY_TEMPLATES = new EnemyTemplate[]
+        public static DestructibleObjectTemplate[] ENEMY_TEMPLATES = new DestructibleObjectTemplate[]
         {
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute), health: 1),
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute), health: 2),
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute), health: 3),
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_4.png", UriKind.RelativeOrAbsolute), health: 1),
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_5.png", UriKind.RelativeOrAbsolute), health: 2),
-            new EnemyTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_6.png", UriKind.RelativeOrAbsolute), health: 3),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_1.png", UriKind.RelativeOrAbsolute), health: 1),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_2.png", UriKind.RelativeOrAbsolute), health: 2),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_3.png", UriKind.RelativeOrAbsolute), health: 3),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_4.png", UriKind.RelativeOrAbsolute), health: 1),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_5.png", UriKind.RelativeOrAbsolute), health: 2),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/enemy_6.png", UriKind.RelativeOrAbsolute), health: 3),
+        };
+
+        public static DestructibleObjectTemplate[] METEOR_TEMPLATES = new DestructibleObjectTemplate[]
+        {
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock1.png", UriKind.RelativeOrAbsolute), health: 1),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock2.png", UriKind.RelativeOrAbsolute), health: 1),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock3.png", UriKind.RelativeOrAbsolute), health: 2),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock4.png", UriKind.RelativeOrAbsolute), health: 2),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock5.png", UriKind.RelativeOrAbsolute), health: 3),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock6.png", UriKind.RelativeOrAbsolute), health: 3),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock7.png", UriKind.RelativeOrAbsolute), health: 2),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock8.png", UriKind.RelativeOrAbsolute), health: 3),
+            new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock9.png", UriKind.RelativeOrAbsolute), health: 1),
         };
 
         #endregion
