@@ -30,14 +30,14 @@
 
             <!--  This shows current score, level and game time  -->
             <StackPanel
-                Name="ScoreBarPanel"
+                x:Name="ScoreBarPanel"
                 Margin="5"
                 HorizontalAlignment="Center"
                 Orientation="Vertical"
                 Visibility="Collapsed">
 
                 <TextBlock
-                    Name="GameLevelText"
+                    x:Name="GameLevelText"
                     Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -49,7 +49,7 @@
 
                 <!--  Level bar  -->
                 <ProgressBar
-                    Name="ScoreBar"
+                    x:Name="ScoreBar"
                     Width="250"
                     Height="5"
                     Margin="3"
@@ -61,7 +61,7 @@
                     Value="100" />
 
                 <TextBlock
-                    Name="ScoreBarCount"
+                    x:Name="ScoreBarCount"
                     Margin="3"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -75,14 +75,14 @@
 
             <!--  This shows the health bar of boss  -->
             <StackPanel
-                Name="BossHealthBarPanel"
+                x:Name="BossHealthBarPanel"
                 Margin="5,0,5,5"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
 
                 <TextBlock
-                    Name="BossHealthBarText"
+                    x:Name="BossHealthBarText"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
@@ -93,7 +93,7 @@
                     TextWrapping="WrapWholeWords" />
 
                 <ProgressBar
-                    Name="BossHealthBar"
+                    x:Name="BossHealthBar"
                     Width="200"
                     Height="5"
                     Margin="5"
@@ -104,23 +104,11 @@
                     Minimum="0"
                     Value="100" />
 
-                <!--<TextBlock
-                    Name="BossHealthBarCount"
-                    Margin="5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    Text="{x:Bind Path=BossHealthBar.Value.ToString('0'), Mode=OneWay}"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />-->
-
             </StackPanel>
 
             <!--  This shows fps  -->
             <TextBlock
-                Name="FPSText"
+                x:Name="FPSText"
                 Margin="5"
                 FontWeight="Bold"
                 Foreground="White"
@@ -129,7 +117,7 @@
 
             <!--  This shows current objects count in game canvas  -->
             <TextBlock
-                Name="ObjectsCountText"
+                x:Name="ObjectsCountText"
                 Margin="5"
                 FontWeight="Bold"
                 Foreground="White"
@@ -176,7 +164,7 @@
 
         <!--  This shows the player health, rage, power bar  -->
         <StackPanel
-            Name="PlayerHealthBarPanel"
+            x:Name="PlayerHealthBarPanel"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
@@ -196,7 +184,7 @@
 
             <!--  Health bar  -->
             <ProgressBar
-                Name="PlayerHealthBar"
+                x:Name="PlayerHealthBar"
                 Width="150"
                 Height="5"
                 Margin="5"
@@ -208,7 +196,7 @@
 
             <!--  Health count  -->
             <!--<TextBlock
-                Name="PlayerHealthBarCount"
+                x:Name="PlayerHealthBarCount"
                 Margin="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -232,7 +220,7 @@
 
             <!--  Rage bar  -->
             <ProgressBar
-                Name="PlayerRageBar"
+                x:Name="PlayerRageBar"
                 Width="50"
                 Height="5"
                 Margin="5"
@@ -255,7 +243,7 @@
 
             <!--  Power up bar  -->
             <ProgressBar
-                Name="PlayerPowerBar"
+                x:Name="PlayerPowerBar"
                 Width="50"
                 Height="5"
                 Margin="5"
@@ -301,7 +289,7 @@
 
         <!--  This pauses the game  -->
         <Button
-            Name="PauseGameButton"
+            x:Name="PauseGameButton"
             Width="50"
             Height="50"
             Margin="5"
@@ -316,7 +304,7 @@
 
         <!--  This quits the game  -->
         <Button
-            Name="QuitGameButton"
+            x:Name="QuitGameButton"
             Width="50"
             Height="50"
             Margin="5"

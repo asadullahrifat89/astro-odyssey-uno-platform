@@ -39,7 +39,7 @@
                     TextWrapping="WrapWholeWords" />
 
                 <GridView
-                    Name="ShipsList"
+                    x:Name="ShipsList"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     SelectionChanged="ShipsList_SelectionChanged">

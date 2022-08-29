@@ -17,7 +17,7 @@
 
         <!--  Pre-load-images  -->
         <Grid
-            Name="AssetsPreloadGrid"
+            x:Name="AssetsPreloadGrid"
             Width="1"
             Height="1"
             HorizontalAlignment="Left"
@@ -42,6 +42,7 @@
                 <!--  Logo  -->
                 <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
+                <!--  Tag line  -->
                 <TextBlock
                     Margin="10"
                     HorizontalAlignment="Center"
