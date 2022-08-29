@@ -37,6 +37,8 @@
                 Click="LanguageButton_Click"
                 Content="English"
                 CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
                 Tag="en" />
             <Button
                 x:Name="FrenchButton"
@@ -46,6 +48,8 @@
                 Click="LanguageButton_Click"
                 Content="French"
                 CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
                 Tag="fr" />
             <Button
                 x:Name="DeutschButton"
@@ -55,6 +59,8 @@
                 Click="LanguageButton_Click"
                 Content="Deutsch"
                 CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
                 Tag="de" />
         </StackPanel>
 
