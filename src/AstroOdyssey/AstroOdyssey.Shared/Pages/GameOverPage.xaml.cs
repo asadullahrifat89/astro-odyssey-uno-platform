@@ -20,7 +20,10 @@ namespace AstroOdyssey
         {
             var score = App.GetScore();
 
-            ScoreText.Text = $"{App.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? App.GetLocalizedResource("NO_LUCK") : score <= 400 ? App.GetLocalizedResource("GOOD_GAME") : score <= 800 ? App.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? App.GetLocalizedResource("FANTASTIC_GAME") : App.GetLocalizedResource("SUPREME_GAME")) + "!";
+            LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
+
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : score <= 400 ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : score <= 800 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

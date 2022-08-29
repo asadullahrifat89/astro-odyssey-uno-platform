@@ -26,7 +26,6 @@ namespace AstroOdyssey
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
         private static string baseUrl;
-        private static IDictionary<string, string> _localizationResourceCache = new Dictionary<string, string>();
 
         #endregion
 
@@ -49,12 +48,14 @@ namespace AstroOdyssey
 #endif
             UnhandledException += App_UnhandledException;
 
-            //Uno.UI.FeatureConfiguration.Page.IsPoolingEnabled = true;
+            Uno.UI.FeatureConfiguration.Page.IsPoolingEnabled = true;
 
             _systemNavigationManager = SystemNavigationManager.GetForCurrentView();
 
             _goBackNotAllowedToPages = new List<Type>() { typeof(GamePlayPage) };
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
+
+            CurrentCulture = "en";
         }
 
         private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -74,6 +75,8 @@ namespace AstroOdyssey
         public static Ship Ship { get; set; }
 
         public static Account Account { get; set; }
+
+        public static string CurrentCulture { get; set; }
 
         #endregion
 
@@ -189,43 +192,13 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods   
+        #region Methods
 
-        /// <summary>
-        /// Gets the localization resource.
-        /// </summary>
-        /// <param name="resourceKey"></param>
-        /// <returns></returns>
-        public static string GetLocalizedResource(string resourceKey)
+        public static void Refresh()
         {
-            if (_localizationResourceCache.ContainsKey(resourceKey))
-            {
-                return _localizationResourceCache[resourceKey];
-            }
-            else
-            {
-                var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
-                _localizationResourceCache.Add(resourceKey, resourceValue);
-                return resourceValue;
-            }
-        }
-
-        public static void SetAppLanguage(string tag)
-        {
-            var culture = new System.Globalization.CultureInfo(tag);
-            
-            System.Globalization.CultureInfo.CurrentUICulture = culture;
-            System.Globalization.CultureInfo.CurrentCulture = culture;
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.IetfLanguageTag;
-            Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = culture.IetfLanguageTag;
-            
-
-            _localizationResourceCache.Clear(); // clear the resources cache
-
             var rootFrame = _window.Content as Frame;
-
             rootFrame.Navigate(typeof(GameStartPage));
-            rootFrame.BackStack.Clear(); // clear the back-navigation stack
+            rootFrame.BackStack.Clear();
         }
 
         public static void SetScore(double score)

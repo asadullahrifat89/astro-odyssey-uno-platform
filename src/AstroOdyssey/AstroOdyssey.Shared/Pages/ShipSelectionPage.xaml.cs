@@ -24,24 +24,28 @@ namespace AstroOdyssey
 
         private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+
             selectedShip = null;
             App.Ship = null;
-            ChooseButton.IsEnabled = false;
+            ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            if (this.ShipsList.ItemsSource is null)
+            //if (this.ShipsList.ItemsSource is null)
+            //{
+            var ships = new Ship[] { };
+
+            ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
             {
-                var ships = new Ship[] { };
+                Id = Guid.NewGuid().ToString(),
+                Name = LocalizationHelper.GetLocalizedResource(x.Name),
+                ImageUrl = x.AssetUri,
+                ShipClass = x.ShipClass,
+            }).ToArray();
 
-                ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = App.GetLocalizedResource(x.Name),
-                    ImageUrl = x.AssetUri,
-                    ShipClass = x.ShipClass,
-                }).ToArray();
-
-                this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
-            }
+            this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
+            //}
         }
 
         private void ChooseButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +61,7 @@ namespace AstroOdyssey
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedShip = ShipsList.SelectedItem as Ship;
-            ChooseButton.IsEnabled = true;
+            ShipSelectionPage_ChooseButton.IsEnabled = true;
         }
     }
 }

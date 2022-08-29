@@ -30,6 +30,7 @@
                 <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
                 <TextBlock
+                    x:Name="ShipSelectionPage_Tagline"
                     x:Uid="ShipSelectionPage_Tagline"
                     Margin="0,40"
                     HorizontalAlignment="Center"
@@ -62,6 +63,7 @@
                 </GridView>
 
                 <TextBlock
+                    x:Name="ShipSelectionPage_ControlInstructions"
                     x:Uid="ShipSelectionPage_ControlInstructions"
                     Margin="10"
                     HorizontalAlignment="Center"
@@ -73,7 +75,7 @@
 
                 <!--  Choose button  -->
                 <Button
-                    x:Name="ChooseButton"
+                    x:Name="ShipSelectionPage_ChooseButton"
                     x:Uid="ShipSelectionPage_ChooseButton"
                     Height="40"
                     Margin="0,10,0,50"

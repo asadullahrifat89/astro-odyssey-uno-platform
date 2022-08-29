@@ -20,10 +20,12 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\CelestialObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\EnemyProjectileFactory.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\HealthFactory.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\MeteorFactory.cs" />
@@ -80,20 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\bn\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <!--
@@ -206,7 +194,6 @@
     </_Globbed_Compile>
     <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.cs" Exclude="@(Compile);@(_Globbed_Compile)" />
     <_Globbed_PRIResource Include="$(MSBuildThisFileDirectory)**/*.resw" Exclude="@(PRIResource)" />
-    <PRIResource Include="@(_Globbed_PRIResource)" />
     <_Globbed_Content Include="$(MSBuildThisFileDirectory)Assets/**/*.*" Exclude="@(Content)" />
     <!-- Mark the files from this folder as being part of WinUI -->
     <Page Update="$(MSBuildThisFileDirectory)**/*.xaml" XamlRuntime="WinUI" />
@@ -221,6 +208,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
     <Folder Include="$(MSBuildThisFileDirectory)Factories\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
 </Project>

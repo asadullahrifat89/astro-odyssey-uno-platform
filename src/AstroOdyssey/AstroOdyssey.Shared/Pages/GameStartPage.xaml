@@ -30,7 +30,7 @@
             VerticalAlignment="Top"
             Orientation="Horizontal">
             <Button
-                x:Name="EnglishButton"
+                x:Name="GameStartPage_EnglishButton"
                 x:Uid="GameStartPage_EnglishButton"
                 Margin="2"
                 Background="Transparent"
@@ -41,7 +41,7 @@
                 IsTabStop="False"
                 Tag="en" />
             <Button
-                x:Name="FrenchButton"
+                x:Name="GameStartPage_FrenchButton"
                 x:Uid="GameStartPage_FrenchButton"
                 Margin="2"
                 Background="Transparent"
@@ -52,7 +52,7 @@
                 IsTabStop="False"
                 Tag="fr" />
             <Button
-                x:Name="DeutschButton"
+                x:Name="GameStartPage_DeutschButton"
                 x:Uid="GameStartPage_DeutschButton"
                 Margin="2"
                 Background="Transparent"
@@ -63,7 +63,7 @@
                 IsTabStop="False"
                 Tag="de" />
             <Button
-                x:Name="BanglaButton"
+                x:Name="GameStartPage_BanglaButton"
                 x:Uid="GameStartPage_BanglaButton"
                 Margin="2"
                 Background="Transparent"
@@ -97,6 +97,7 @@
 
                 <!--  Tag line  -->
                 <TextBlock
+                    x:Name="GameStartPage_Tagline"
                     x:Uid="GameStartPage_Tagline"
                     Margin="10"
                     HorizontalAlignment="Center"
@@ -108,7 +109,7 @@
 
                 <!--  Start game button  -->
                 <Button
-                    x:Name="PlayButton"
+                    x:Name="GameStartPage_PlayButton"
                     x:Uid="GameStartPage_PlayButton"
                     Height="40"
                     Margin="0,50,0,30"
@@ -125,7 +126,7 @@
                     IsTabStop="False" />
 
                 <HyperlinkButton
-                    x:Name="DeveloperProfileButton"
+                    x:Name="GameStartPage_DeveloperProfileButton"
                     x:Uid="GameStartPage_DeveloperProfileButton"
                     Margin="0,10"
                     HorizontalAlignment="Center"
@@ -144,7 +145,7 @@
         </Border>
 
         <HyperlinkButton
-            x:Name="AssetsCreditButton"
+            x:Name="GameStartPage_AssetsCreditButton"
             x:Uid="GameStartPage_AssetsCreditButton"
             Margin="10"
             HorizontalAlignment="Center"
