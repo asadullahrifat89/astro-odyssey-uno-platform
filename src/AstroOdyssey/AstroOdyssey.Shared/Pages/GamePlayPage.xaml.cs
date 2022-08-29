@@ -185,7 +185,7 @@ namespace AstroOdyssey
             PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
 
             GameLevel = GameLevel.Level_1;
-            GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
+            GameLevelText.Text =$"{App.GetLocalizedResource("LEVEL")} {((int)GameLevel)}";
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
