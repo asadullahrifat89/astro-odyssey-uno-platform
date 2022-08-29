@@ -123,11 +123,47 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
   </data>
+  <data name="BEAM_CANNON" xml:space="preserve">
+    <value>CANON À FAISCEAU</value>
+  </data>
   <data name="Bismuth" xml:space="preserve">
     <value>Bismuth</value>
   </data>
+  <data name="BLAZE_BLITZ" xml:space="preserve">
+    <value>BLAZE BLITZ</value>
+  </data>
+  <data name="BOSS" xml:space="preserve">
+    <value>CHEF</value>
+  </data>
+  <data name="CLOAK_DOWN" xml:space="preserve">
+    <value>CLOCHEZ-VOUS</value>
+  </data>
+  <data name="CLOAK_UP" xml:space="preserve">
+    <value>COUVREZ-VOUS</value>
+  </data>
+  <data name="COMPLETE" xml:space="preserve">
+    <value>ACHEVÉ</value>
+  </data>
   <data name="Curium" xml:space="preserve">
     <value>Rechercher</value>
+  </data>
+  <data name="ENEMY_APPROACHES" xml:space="preserve">
+    <value>APPROCHES ENNEMIES</value>
+  </data>
+  <data name="FANTASTIC_GAME" xml:space="preserve">
+    <value>Jeu fantastique</value>
+  </data>
+  <data name="FIREPOWER_DOWN" xml:space="preserve">
+    <value>PUISSANCE DE FEU ARRÊTÉE</value>
+  </data>
+  <data name="FIREPOWER_UP" xml:space="preserve">
+    <value>PUISSANCE DE FEU</value>
+  </data>
+  <data name="GameOverPage_PlayAgainButton.Content" xml:space="preserve">
+    <value>REJOUER</value>
+  </data>
+  <data name="GameOverPage_Tagline.Text" xml:space="preserve">
+    <value>JEU TERMINÉ</value>
   </data>
   <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
     <value>Actifs par redfoc.com 😘</value>
@@ -150,8 +186,41 @@
   <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly.</value>
   </data>
+  <data name="GAME_PAUSED" xml:space="preserve">
+    <value>JEU EN PAUSE</value>
+  </data>
+  <data name="GOOD_GAME" xml:space="preserve">
+    <value>Bon jeu</value>
+  </data>
+  <data name="GREAT_GAME" xml:space="preserve">
+    <value>bon jeu</value>
+  </data>
   <data name="Language" xml:space="preserve">
-    <value>fr</value>
+    <value>en</value>
+  </data>
+  <data name="LEVEL" xml:space="preserve">
+    <value>NIVEAU</value>
+  </data>
+  <data name="NO_LUCK" xml:space="preserve">
+    <value>Pas de chance</value>
+  </data>
+  <data name="PLASMA_BOMB" xml:space="preserve">
+    <value>BOMBE À PLASMA</value>
+  </data>
+  <data name="POWER_DOWN" xml:space="preserve">
+    <value>ÉTEINDRE</value>
+  </data>
+  <data name="QUIT_GAME" xml:space="preserve">
+    <value>QUITTER LE JEU?</value>
+  </data>
+  <data name="SCORE" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="SHIELD_DOWN" xml:space="preserve">
+    <value>BOUCLIER BAS</value>
+  </data>
+  <data name="SHIELD_UP" xml:space="preserve">
+    <value>BOUCLIER</value>
   </data>
   <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
     <value>SÉLECTIONNER</value>
@@ -162,7 +231,22 @@
   <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
     <value>Sélectionnez un navire</value>
   </data>
+  <data name="SHIP_REPAIRED" xml:space="preserve">
+    <value>NAVIRE RÉPARÉ</value>
+  </data>
+  <data name="SONIC_BLAST" xml:space="preserve">
+    <value>SONIC SONIC</value>
+  </data>
+  <data name="SUPREME_GAME" xml:space="preserve">
+    <value>Jeu suprême</value>
+  </data>
   <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
-    <value>👆 APPUYEZ SUR L'ÉCRAN POUR COMMENCER</value>
+    <value>APPUYEZ SUR L'ÉCRAN POUR COMMENCER</value>
+  </data>
+  <data name="TAP_TO_QUIT" xml:space="preserve">
+    <value>APPUYER POUR QUITTER</value>
+  </data>
+  <data name="TAP_TO_RESUME" xml:space="preserve">
+    <value>APPUYER POUR REPRENDRE</value>
   </data>
 </root>

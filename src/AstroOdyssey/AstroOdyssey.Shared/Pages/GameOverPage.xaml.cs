@@ -20,7 +20,7 @@ namespace AstroOdyssey
         {
             var score = App.GetScore();
 
-            ScoreText.Text = "You Scored " + score + (score == 0 ? "\nNo luck!" : score <= 400 ? "\nGood game!" : "\nGreat game!");
+            ScoreText.Text = $"{App.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? App.GetLocalizedResource("NO_LUCK") : score <= 400 ? App.GetLocalizedResource("GOOD_GAME") : score <= 800 ? App.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? App.GetLocalizedResource("FANTASTIC_GAME") : App.GetLocalizedResource("SUPREME_GAME")) + "!";
         }
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)

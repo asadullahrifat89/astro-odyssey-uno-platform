@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,110 +59,194 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="Antimony" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Antimony" xml:space="preserve">
     <value>Antimony</value>
   </data>
-	<data name="ApplicationName" xml:space="preserve">
+  <data name="ApplicationName" xml:space="preserve">
     <value>AstroOdyssey</value>
   </data>
-	<data name="Bismuth" xml:space="preserve">
+  <data name="BEAM_CANNON" xml:space="preserve">
+    <value>BEAM CANNON</value>
+  </data>
+  <data name="Bismuth" xml:space="preserve">
     <value>Bismuth</value>
   </data>
-	<data name="Curium" xml:space="preserve">
+  <data name="BLAZE_BLITZ" xml:space="preserve">
+    <value>BLAZE BLITZ</value>
+  </data>
+  <data name="BOSS" xml:space="preserve">
+    <value>BOSS</value>
+  </data>
+  <data name="CLOAK_DOWN" xml:space="preserve">
+    <value>CLOAK DOWN</value>
+  </data>
+  <data name="CLOAK_UP" xml:space="preserve">
+    <value>CLOAK UP</value>
+  </data>
+  <data name="COMPLETE" xml:space="preserve">
+    <value>COMPLETE</value>
+  </data>
+  <data name="Curium" xml:space="preserve">
     <value>Curium</value>
   </data>
-	<data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
+  <data name="ENEMY_APPROACHES" xml:space="preserve">
+    <value>ENEMY APPROACHES</value>
+  </data>
+  <data name="FANTASTIC_GAME" xml:space="preserve">
+    <value>Fantastic game</value>
+  </data>
+  <data name="FIREPOWER_DOWN" xml:space="preserve">
+    <value>FIREPOWER DOWN</value>
+  </data>
+  <data name="FIREPOWER_UP" xml:space="preserve">
+    <value>FIREPOWER UP</value>
+  </data>
+  <data name="GameOverPage_PlayAgainButton.Content" xml:space="preserve">
+    <value>PLAY AGAIN</value>
+  </data>
+  <data name="GameOverPage_Tagline.Text" xml:space="preserve">
+    <value>GAME OVER</value>
+  </data>
+  <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
     <value>Assets by redfoc.com 😘</value>
   </data>
-	<data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
+  <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
     <value>Deutsch</value>
   </data>
-	<data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
+  <data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
     <value>Made with ❤️ by Asadullah Rifat</value>
   </data>
-	<data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
+  <data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
     <value>English</value>
   </data>
-	<data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
+  <data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
     <value>French</value>
   </data>
-	<data name="GameStartPage_PlayButton.Content" xml:space="preserve">
+  <data name="GameStartPage_PlayButton.Content" xml:space="preserve">
     <value>START GAME</value>
   </data>
-	<data name="GameStartPage_Tagline.Text" xml:space="preserve">
+  <data name="GameStartPage_Tagline.Text" xml:space="preserve">
     <value>A classic rock metal ⚡ space shooter on WebAssembly.</value>
   </data>
-	<data name="Language" xml:space="preserve">
+  <data name="GAME_PAUSED" xml:space="preserve">
+    <value>GAME PAUSED</value>
+  </data>
+  <data name="GOOD_GAME" xml:space="preserve">
+    <value>Good game</value>
+  </data>
+  <data name="GREAT_GAME" xml:space="preserve">
+    <value>Great game</value>
+  </data>
+  <data name="Language" xml:space="preserve">
     <value>en</value>
   </data>
-	<data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
+  <data name="LEVEL" xml:space="preserve">
+    <value>LEVEL</value>
+  </data>
+  <data name="NO_LUCK" xml:space="preserve">
+    <value>No luck</value>
+  </data>
+  <data name="PLASMA_BOMB" xml:space="preserve">
+    <value>PLASMA BOMB</value>
+  </data>
+  <data name="POWER_DOWN" xml:space="preserve">
+    <value>POWER DOWN</value>
+  </data>
+  <data name="QUIT_GAME" xml:space="preserve">
+    <value>QUIT GAME?</value>
+  </data>
+  <data name="SCORE" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="SHIELD_DOWN" xml:space="preserve">
+    <value>SHIELD DOWN</value>
+  </data>
+  <data name="SHIELD_UP" xml:space="preserve">
+    <value>SHIELD UP</value>
+  </data>
+  <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
     <value>SELECT</value>
   </data>
-	<data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
+  <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
     <value>Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship.</value>
   </data>
-	<data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
+  <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
     <value>Select a Ship</value>
   </data>
-	<data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
-    <value>👆 TAP ON SCREEN TO BEGIN</value>
+  <data name="SHIP_REPAIRED" xml:space="preserve">
+    <value>SHIP REPAIRED</value>
+  </data>
+  <data name="SONIC_BLAST" xml:space="preserve">
+    <value>SONIC BLAST</value>
+  </data>
+  <data name="SUPREME_GAME" xml:space="preserve">
+    <value>Supreme game</value>
+  </data>
+  <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
+    <value>TAP ON THE SCREEN TO BEGIN</value>
+  </data>
+  <data name="TAP_TO_QUIT" xml:space="preserve">
+    <value>TAP TO QUIT</value>
+  </data>
+  <data name="TAP_TO_RESUME" xml:space="preserve">
+    <value>TAP TO RESUME</value>
   </data>
 </root>

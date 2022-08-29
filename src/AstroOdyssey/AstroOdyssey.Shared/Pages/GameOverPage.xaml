@@ -33,9 +33,10 @@
                     TextAlignment="Center" />
 
                 <TextBlock
+                    x:Uid="GameOverPage_Tagline"
                     FontSize="45"
                     FontWeight="Bold"
-                    Text="Game Over"
+                    Text="GAME OVER"
                     TextAlignment="Center" />
 
                 <TextBlock
@@ -49,6 +50,7 @@
                 <!--  Play again button  -->
                 <Button
                     x:Name="PlayAgainButton"
+                    x:Uid="GameOverPage_PlayAgainButton"
                     Height="40"
                     Margin="5,20,5,5"
                     HorizontalAlignment="Stretch"
@@ -56,7 +58,7 @@
                     BorderBrush="DarkRed"
                     BorderThickness="3"
                     Click="PlayAgainButton_Click"
-                    Content="Play Again"
+                    Content="PLAY AGAIN"
                     CornerRadius="50"
                     FontWeight="SemiBold"
                     Foreground="White"
