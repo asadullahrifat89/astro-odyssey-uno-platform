@@ -33,6 +33,7 @@
                     TextAlignment="Center" />
 
                 <TextBlock
+                    x:Name="GameOverPage_Tagline"
                     x:Uid="GameOverPage_Tagline"
                     FontSize="45"
                     FontWeight="Bold"
@@ -49,7 +50,7 @@
 
                 <!--  Play again button  -->
                 <Button
-                    x:Name="PlayAgainButton"
+                    x:Name="GameOverPage_PlayAgainButton"
                     x:Uid="GameOverPage_PlayAgainButton"
                     Height="40"
                     Margin="5,20,5,5"
@@ -63,7 +64,8 @@
                     FontWeight="SemiBold"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
-                    IsTabStop="False" />
+                    IsTabStop="False"
+                    Tag="GameOverPage_PlayAgainButton.Content" />
             </StackPanel>
             <Border.Background>
                 <SolidColorBrush Opacity="0.7" Color="Black" />

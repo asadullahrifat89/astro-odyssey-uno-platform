@@ -24,9 +24,13 @@ namespace AstroOdyssey
 
         private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+
             selectedShip = null;
             App.Ship = null;
-            ChooseButton.IsEnabled = false;
+            ShipSelectionPage_ChooseButton.IsEnabled = false;
 
             if (this.ShipsList.ItemsSource is null)
             {
@@ -57,7 +61,7 @@ namespace AstroOdyssey
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedShip = ShipsList.SelectedItem as Ship;
-            ChooseButton.IsEnabled = true;
+            ShipSelectionPage_ChooseButton.IsEnabled = true;
         }
     }
 }

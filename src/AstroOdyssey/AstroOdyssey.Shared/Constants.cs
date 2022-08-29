@@ -104,53 +104,266 @@ namespace AstroOdyssey
             new LocalizationTemplate(key: "ApplicationName", cultureValues: new (string Culture, string Value)[]{ new ("en", "AstroOdyssey") }),
             new LocalizationTemplate(key: "Language", cultureValues: new (string Culture, string Value)[]{ new ("en", "en") }),
 
-            new LocalizationTemplate(key: "Antimony", cultureValues: new (string Culture, string Value)[]{ new ("en", "Antimony") }),
-            new LocalizationTemplate(key: "Bismuth", cultureValues: new (string Culture, string Value)[]{ new ("en", "Bismuth") }),
-            new LocalizationTemplate(key: "Curium", cultureValues: new (string Culture, string Value)[]{ new ("en", "Curium") }),
+            new LocalizationTemplate(key: "Antimony", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Antimony"),
+                new ("bn", "অ্যান্টিমনি"),
+                new ("de", "Antimon"),
+            }),
+            new LocalizationTemplate(key: "Bismuth", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Bismuth"),
+                new ("bn", "বিসমাথ"),
+                new ("de", "Wismut"),
+            }),
+            new LocalizationTemplate(key: "Curium", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Curium"), 
+                new ("bn", "কিউরিয়াম"),
+                new ("de", "Gericht"),
+            }),
 
-            new LocalizationTemplate(key: "BEAM_CANNON", cultureValues: new (string Culture, string Value)[]{ new ("en", "BEAM CANNON") }),
-            new LocalizationTemplate(key: "BLAZE_BLITZ", cultureValues: new (string Culture, string Value)[]{ new ("en", "BLAZE BLITZ") }),
-            new LocalizationTemplate(key: "BOSS", cultureValues: new (string Culture, string Value)[]{ new ("en", "BOSS") }),
-            new LocalizationTemplate(key: "CLOAK_DOWN", cultureValues: new (string Culture, string Value)[]{ new ("en", "CLOAK DOWN") }),
-            new LocalizationTemplate(key: "CLOAK_UP", cultureValues: new (string Culture, string Value)[]{ new ("en", "CLOAK UP") }),
-            new LocalizationTemplate(key: "COMPLETE", cultureValues: new (string Culture, string Value)[]{ new ("en", "COMPLETE") }),
-            new LocalizationTemplate(key: "ENEMY_APPROACHES", cultureValues: new (string Culture, string Value)[]{ new ("en", "ENEMY APPROACHES") }),
-            new LocalizationTemplate(key: "FANTASTIC_GAME", cultureValues: new (string Culture, string Value)[]{ new ("en", "Fantastic game") }),
-            new LocalizationTemplate(key: "FIREPOWER_DOWN", cultureValues: new (string Culture, string Value)[]{ new ("en", "FIREPOWER DOWN") }),
-            new LocalizationTemplate(key: "FIREPOWER_UP", cultureValues: new (string Culture, string Value)[]{ new ("en", "FIREPOWER UP") }),
-            new LocalizationTemplate(key: "GAME_PAUSED", cultureValues: new (string Culture, string Value)[]{ new ("en", "GAME PAUSED") }),
-            new LocalizationTemplate(key: "GOOD_GAME", cultureValues: new (string Culture, string Value)[]{ new ("en", "Good game") }),
-            new LocalizationTemplate(key: "GREAT_GAME", cultureValues: new (string Culture, string Value)[]{ new ("en", "Great game") }),
-            new LocalizationTemplate(key: "LEVEL", cultureValues: new (string Culture, string Value)[]{ new ("en", "LEVEL") }),
-            new LocalizationTemplate(key: "NO_LUCK", cultureValues: new (string Culture, string Value)[]{ new ("en", "No luck") }),
-            new LocalizationTemplate(key: "PLASMA_BOMB", cultureValues: new (string Culture, string Value)[]{ new ("en", "PLASMA BOMB") }),
-            new LocalizationTemplate(key: "POWER_DOWN", cultureValues: new (string Culture, string Value)[]{ new ("en", "POWER DOWN") }),
-            new LocalizationTemplate(key: "QUIT_GAME", cultureValues: new (string Culture, string Value)[]{ new ("en", "QUIT GAME?") }),
-            new LocalizationTemplate(key: "SCORE", cultureValues: new (string Culture, string Value)[]{ new ("en", "Score") }),
-            new LocalizationTemplate(key: "SHIELD_DOWN", cultureValues: new (string Culture, string Value)[]{ new ("en", "SHIELD DOWN") }),
-            new LocalizationTemplate(key: "SHIELD_UP", cultureValues: new (string Culture, string Value)[]{ new ("en", "SHIELD UP") }),
-            new LocalizationTemplate(key: "SHIP_REPAIRED", cultureValues: new (string Culture, string Value)[]{ new ("en", "SHIP REPAIRED") }),
-            new LocalizationTemplate(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]{ new ("en", "SONIC BLAST") }),
-            new LocalizationTemplate(key: "SUPREME_GAME", cultureValues: new (string Culture, string Value)[]{ new ("en", "Supreme game") }),
-            new LocalizationTemplate(key: "TAP_ON_SCREEN_TO_BEGIN", cultureValues: new (string Culture, string Value)[]{ new ("en", "TAP ON THE SCREEN TO BEGIN") }),
-            new LocalizationTemplate(key: "TAP_TO_QUIT", cultureValues: new (string Culture, string Value)[]{ new ("en", "TAP TO QUIT") }),
-            new LocalizationTemplate(key: "TAP_TO_RESUME", cultureValues: new (string Culture, string Value)[]{ new ("en", "TAP TO RESUME") }),
+            new LocalizationTemplate(key: "BEAM_CANNON", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "BEAM CANNON"), 
+                new ("bn", "রশ্মি কামান"),
+                new ("de", "STRAHLKANONE"),
+            }),
+            new LocalizationTemplate(key: "BLAZE_BLITZ", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "BLAZE BLITZ"),
+                new ("bn", "ব্লেজ ব্লিটজ"),
+                new ("de", "BLAZE BLITZ"),
+            }),
+            new LocalizationTemplate(key: "BOSS", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "BOSS"), 
+                new ("bn", "বস"),
+                new ("de", "BOSS"),
+            }),
+            new LocalizationTemplate(key: "CLOAK_DOWN", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "CLOAK DOWN"), 
+                new ("bn", "ক্লোক ডাউন"),
+                new ("de", "KLAPPEN SIE SICH"),
+            }),
+            new LocalizationTemplate(key: "CLOAK_UP", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "CLOAK UP"), 
+                new ("bn", "ক্লোক আপ"),
+                new ("de", "KLEIDE DICH"),
+            }),
+            new LocalizationTemplate(key: "COMPLETE", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "COMPLETE"), 
+                new ("bn", "সম্পূর্ণ"),
+                new ("de", "KOMPLETT"),
+            }),
+            new LocalizationTemplate(key: "ENEMY_APPROACHES", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "ENEMY APPROACHES"), 
+                new ("bn", "শত্রু কাছে পৌঁছেছে"),
+                new ("de", "Feindliche Annäherungen"),
+            }),
+            new LocalizationTemplate(key: "FANTASTIC_GAME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Fantastic game"), 
+                new ("bn", "চমত্কার খেলা"),
+                new ("de", "Fantastisches Spiel"),
+            }),
+            new LocalizationTemplate(key: "FIREPOWER_DOWN", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "FIREPOWER DOWN"),
+                new ("bn", "ফায়ার পাওয়ার ডাউন"),
+                new ("de", "FEUERKRAFT AUS"),
+            }),
+            new LocalizationTemplate(key: "FIREPOWER_UP", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "FIREPOWER UP"), 
+                new ("bn", "ফায়ার পাওয়ার আপ"),
+                new ("de", "FEUERKRAFT HOCH"),
+            }),
+            new LocalizationTemplate(key: "GAME_PAUSED", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "GAME PAUSED"), 
+                new ("bn", "খেলা থামানো হয়েছে"),
+                new ("de", "DAS SPIEL PAUSIERT"),
+            }),
+            new LocalizationTemplate(key: "GOOD_GAME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Good game"), 
+                new ("bn", "ভাল খেলা"),
+                new ("de", "Gute Partie"),
+            }),
+            new LocalizationTemplate(key: "GREAT_GAME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Great game"), 
+                new ("bn", "অসাধারন খেলা"),
+                new ("de", "Tolles Spiel"),
+            }),
+            new LocalizationTemplate(key: "LEVEL", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "LEVEL"), 
+                new ("bn", "স্তর"),
+                new ("de", "EBEN"),
+            }),
+            new LocalizationTemplate(key: "NO_LUCK", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "No luck"), 
+                new ("bn", "ভাগ্য নেই"),
+                new ("de", "Kein Glück"),
+            }),
+            new LocalizationTemplate(key: "PLASMA_BOMB", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "PLASMA BOMB"), 
+                new ("bn", "প্লাজমা বোমা"),
+                new ("de", "Plasmabombe"),
+            }),
+            new LocalizationTemplate(key: "POWER_DOWN", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "POWER DOWN"), 
+                new ("bn", "ক্ষমতা হ্রাস"),
+                new ("de", "STROMAUSFALL"),
+            }),
+            new LocalizationTemplate(key: "QUIT_GAME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "QUIT GAME?"), 
+                new ("bn", "খেলা বন্ধ?"),
+                new ("de", "SPIEL VERLASSEN?"),
+            }),
+            new LocalizationTemplate(key: "SCORE", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Score"), 
+                new ("bn", "স্কোর"),
+                new ("de", "Punktzahl"),
+            }),
+            new LocalizationTemplate(key: "SHIELD_DOWN", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "SHIELD DOWN"), 
+                new ("bn", "শিল্ড ডাউন"),
+                new ("de", "SCHILD NACH UNTEN"),
+            }),
+            new LocalizationTemplate(key: "SHIELD_UP", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "SHIELD UP"),
+                new ("bn", "শিল্ড আপ"),
+                new ("de", "SCHILD AUF"),
+            }),
+            new LocalizationTemplate(key: "SHIP_REPAIRED", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "SHIP REPAIRED"), 
+                new ("bn", "জাহাজ মেরামত"),
+                new ("de", "SCHIFF REPARIERT"),
+            }),
+            new LocalizationTemplate(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "SONIC BLAST"), 
+                new ("bn", "সোনিক বিস্ফোরণ"),
+                new ("de", "SONIC BLAST"),
+            }),
+            new LocalizationTemplate(key: "SUPREME_GAME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Supreme game"), 
+                new ("bn", "সর্বোচ্চ খেলা"),
+                new ("de", "Höchstes Spiel"),
+            }),
+            new LocalizationTemplate(key: "TAP_ON_SCREEN_TO_BEGIN", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "TAP ON THE SCREEN TO BEGIN"),
+                new ("bn", "শুরু করতে স্ক্রিনে ট্যাপ করুন"),
+                new ("de", "TIPPEN SIE AUF DEN BILDSCHIRM, UM ZU BEGINNEN"),
+            }),
+            new LocalizationTemplate(key: "TAP_TO_QUIT", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "TAP TO QUIT"), 
+                new ("bn", "প্রস্থান করতে ট্যাপ করুন"),
+                new ("de", "TIPPEN SIE ZUM BEENDEN"),
+            }),
+            new LocalizationTemplate(key: "TAP_TO_RESUME", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "TAP TO RESUME"), 
+                new ("bn", "আবার শুরু করতে ট্যাপ করুন"),
+                new ("de", "TIPPEN, UM WEITERZUFAHREN"),
+            }),
 
-            new LocalizationTemplate(key: "GameOverPage_PlayAgainButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "PLAY AGAIN") }),
-            new LocalizationTemplate(key: "GameOverPage_Tagline.Text", cultureValues: new (string Culture, string Value)[]{ new ("en", "GAME OVER") }),
-            new LocalizationTemplate(key: "GameStartPage_AssetsCreditButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "Assets by redfoc.com 😘") }),
-            new LocalizationTemplate(key: "GameStartPage_BanglaButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "Bangla") }),
-            new LocalizationTemplate(key: "GameStartPage_DeutschButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "Deutsch") }),
-            new LocalizationTemplate(key: "GameStartPage_DeveloperProfileButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "Made with ❤️ by Asadullah Rifat") }),
-            new LocalizationTemplate(key: "GameStartPage_EnglishButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "English") }),
-            new LocalizationTemplate(key: "GameStartPage_FrenchButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "French") }),
-            new LocalizationTemplate(key: "GameStartPage_PlayButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "START GAME") }),
-            new LocalizationTemplate(key: "GameStartPage_Tagline.Text", cultureValues: new (string Culture, string Value)[]{ new ("en", "A classic rock metal ⚡ space shooter on WebAssembly.") }),
-            new LocalizationTemplate(key: "ShipSelectionPage_ChooseButton.Content", cultureValues: new (string Culture, string Value)[]{ new ("en", "SELECT") }),
-            new LocalizationTemplate(key: "ShipSelectionPage_ControlInstructions.Text", cultureValues: new (string Culture, string Value)[]{ new ("en", "Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship.") }),
-            new LocalizationTemplate(key: "ShipSelectionPage_Tagline.Text", cultureValues: new (string Culture, string Value)[]{ new ("en", "Select a Ship") }),
-
-
+            new LocalizationTemplate(key: "GameOverPage_PlayAgainButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "PLAY AGAIN"), 
+                new ("bn", "আবার খেলুন"),
+                new ("de", "NOCHMAL ABSPIELEN"),
+            }),
+            new LocalizationTemplate(key: "GameOverPage_Tagline", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "GAME OVER"), 
+                new ("bn", "খেলা শেষ"),
+                new ("de", "SPIEL IST AUS"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_AssetsCreditButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Assets by redfoc.com 😘"), 
+                new ("bn", "Assets by redfoc.com 😘"),
+                new ("de", "Assets von redfoc.com 😘"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_BanglaButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Bangla"), 
+                new ("bn", "বাংলা"),
+                new ("de", "Bangla"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_DeutschButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Deutsch"), 
+                new ("bn", "ডয়েচ"),
+                new ("de", "Deutsch"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_DeveloperProfileButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Made with ❤️ by Asadullah Rifat"), 
+                new ("bn", "আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি"),
+                new ("de", "Hergestellt mit ❤️ von Asadullah Rifat"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_EnglishButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "English"), 
+                new ("bn", "ইংরেজি"),
+                new ("de", "Englisch"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_FrenchButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "French"),
+                new ("bn", "ফরাসি"),
+                new ("de", "Französisch"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_PlayButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "START GAME"), 
+                new ("bn", "খেলা শুরু করুন"),
+                new ("de", "SPIEL BEGINNEN"),
+            }),
+            new LocalizationTemplate(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "A classic rock metal ⚡ space shooter on WebAssembly."), 
+                new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।"),
+                new ("de", "Ein klassischer Rock Metal ⚡ Weltraum-Shooter auf WebAssembly."),
+            }),
+            new LocalizationTemplate(key: "ShipSelectionPage_ChooseButton", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "SELECT"), 
+                new ("bn", "নির্বাচন করুন"),
+                new ("de", "AUSWÄHLEN"),
+            }),
+            new LocalizationTemplate(key: "ShipSelectionPage_ControlInstructions", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship."), 
+                new ("bn", "জাহাজটি নিয়ন্ত্রন করতে আপনার কীবোর্ড বা স্ক্রিনের বাম বা ডান তীর কী বা প্রান্তগুলি টিপুন বা স্পর্শ করুন৷"),
+                new ("de", "Drücke oder berühre die linke oder rechte Pfeiltaste oder die Kanten auf deiner Tastatur oder deinem Bildschirm, um das Schiff zu bewegen."),
+            }),
+            new LocalizationTemplate(key: "ShipSelectionPage_Tagline", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Select a Ship"), 
+                new ("bn", "একটি জাহাজ নির্বাচন করুন"),
+                new ("de", "Wählen Sie ein Schiff aus"),
+            }),
         };
 
         #endregion

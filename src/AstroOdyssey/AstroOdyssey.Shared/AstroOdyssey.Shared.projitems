@@ -84,13 +84,7 @@
     <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\bn\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\de\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
-    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw">
       <SubType>Designer</SubType>
     </PRIResource>
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw">
@@ -208,7 +202,6 @@
     </_Globbed_Compile>
     <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.cs" Exclude="@(Compile);@(_Globbed_Compile)" />
     <_Globbed_PRIResource Include="$(MSBuildThisFileDirectory)**/*.resw" Exclude="@(PRIResource)" />
-    <PRIResource Include="@(_Globbed_PRIResource)" />
     <_Globbed_Content Include="$(MSBuildThisFileDirectory)Assets/**/*.*" Exclude="@(Content)" />
     <!-- Mark the files from this folder as being part of WinUI -->
     <Page Update="$(MSBuildThisFileDirectory)**/*.xaml" XamlRuntime="WinUI" />

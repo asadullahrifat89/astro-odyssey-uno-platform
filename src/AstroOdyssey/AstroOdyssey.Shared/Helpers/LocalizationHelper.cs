@@ -46,5 +46,28 @@ namespace AstroOdyssey
             //    return resourceValue;
             //}
         }
+
+        public static void SetLocalizedResource(UIElement uIElement)
+        {
+            var localizationTemplate = Constants.LOCALIZATION_TEMPLATES.FirstOrDefault(x => x.Key == uIElement.Name);
+
+            var value = localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
+
+            if (uIElement is TextBlock textBlock)
+                textBlock.Text = value;
+            else if (uIElement is Button button)
+                button.Content = value;
+
+            //if (_localizationResourceCache.ContainsKey(resourceKey))
+            //{
+            //    return _localizationResourceCache[resourceKey];
+            //}
+            //else
+            //{
+            //    var resourceValue = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse().GetString(resourceKey);
+            //    _localizationResourceCache.Add(resourceKey, resourceValue);
+            //    return resourceValue;
+            //}
+        }
     }
 }
