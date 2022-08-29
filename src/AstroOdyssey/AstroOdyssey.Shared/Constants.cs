@@ -81,6 +81,13 @@ namespace AstroOdyssey
             new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/rock9.png", UriKind.RelativeOrAbsolute), health: 1),
         };
 
+        public static (string Name, string AssetUri, ShipClass ShipClass)[] PLAYER_SHIP_TEMPLATES = new (string Name, string AssetUri, ShipClass ShipClass)[] 
+        {
+            new ("Antimony", "ms-appx:///Assets/Images/player_ship1.png", ShipClass.DEFENDER),
+            new ("Bismuth", "ms-appx:///Assets/Images/player_ship2.png", ShipClass.BERSERKER),
+            new ("Curium", "ms-appx:///Assets/Images/player_ship3.png", ShipClass.SPECTRE),
+        };
+
         #endregion
 
         #region Methods

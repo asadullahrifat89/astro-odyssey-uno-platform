@@ -106,13 +106,13 @@ namespace AstroOdyssey
             {
                 switch (shipClass)
                 {
-                    case ShipClass.Antimony:
+                    case ShipClass.DEFENDER:
                         height = 20; width = 5; BorderThickness = new Thickness(2, 3, 2, 1);
                         break;
-                    case ShipClass.Bismuth:
+                    case ShipClass.BERSERKER:
                         height = 15; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
                         break;
-                    case ShipClass.Curium:
+                    case ShipClass.SPECTRE:
                         height = 5; width = 20; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
                         break;
                     default:
@@ -132,19 +132,19 @@ namespace AstroOdyssey
         {
             switch (shipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     {
                         Background = new SolidColorBrush(Colors.SkyBlue);
                         BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
                     }
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         Background = new SolidColorBrush(Colors.Red);
                         BorderBrush = new SolidColorBrush(Colors.DarkRed);
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     {
                         Background = new SolidColorBrush(Colors.Pink);
                         BorderBrush = new SolidColorBrush(Colors.DeepPink);

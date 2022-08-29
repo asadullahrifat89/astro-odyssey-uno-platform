@@ -169,13 +169,13 @@ namespace AstroOdyssey
 
             switch (ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
                     break;
                 default:
