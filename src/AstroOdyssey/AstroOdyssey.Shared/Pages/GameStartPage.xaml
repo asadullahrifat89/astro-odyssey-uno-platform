@@ -21,75 +21,7 @@
             Width="1"
             Height="1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top">
-            <!--<Image Source="ms-appx:///Assets/Images/gameOver.png" />
-
-            <Image Source="ms-appx:///Assets/Images/black-hole1.png" />
-            <Image Source="ms-appx:///Assets/Images/black-hole2.png" />
-
-            <Image Source="ms-appx:///Assets/Images/enemy_1.png" />
-            <Image Source="ms-appx:///Assets/Images/enemy_2.png" />
-            <Image Source="ms-appx:///Assets/Images/enemy_3.png" />
-            <Image Source="ms-appx:///Assets/Images/enemy_4.png" />
-            <Image Source="ms-appx:///Assets/Images/enemy_5.png" />
-            <Image Source="ms-appx:///Assets/Images/enemy_6.png" />
-
-            <Image Source="ms-appx:///Assets/Images/nebula1.png" />
-            <Image Source="ms-appx:///Assets/Images/nebula2.png" />
-
-            <Image Source="ms-appx:///Assets/Images/player_ship1.png" />
-            <Image Source="ms-appx:///Assets/Images/player_ship2.png" />
-            <Image Source="ms-appx:///Assets/Images/player_ship3.png" />
-
-            <Image Source="ms-appx:///Assets/Images/powerup1.png" />
-            <Image Source="ms-appx:///Assets/Images/powerup2.png" />
-
-            <Image Source="ms-appx:///Assets/Images/rock1.png" />
-            <Image Source="ms-appx:///Assets/Images/rock2.png" />
-            <Image Source="ms-appx:///Assets/Images/rock3.png" />
-            <Image Source="ms-appx:///Assets/Images/rock4.png" />
-            <Image Source="ms-appx:///Assets/Images/rock5.png" />
-            <Image Source="ms-appx:///Assets/Images/rock6.png" />
-            <Image Source="ms-appx:///Assets/Images/rock7.png" />
-            <Image Source="ms-appx:///Assets/Images/rock8.png" />
-            <Image Source="ms-appx:///Assets/Images/rock9.png" />
-
-            <Image Source="ms-appx:///Assets/Images/space_thrust1.png" />
-            <Image Source="ms-appx:///Assets/Images/space_thrust2.png" />
-            <Image Source="ms-appx:///Assets/Images/space_thrust3.png" />
-
-            <Image Source="ms-appx:///Assets/Images/star1.png" />
-            <Image Source="ms-appx:///Assets/Images/star2.png" />
-            <Image Source="ms-appx:///Assets/Images/star3.png" />
-            <Image Source="ms-appx:///Assets/Images/star4.png" />
-            <Image Source="ms-appx:///Assets/Images/star5.png" />
-            <Image Source="ms-appx:///Assets/Images/star6.png" />
-            <Image Source="ms-appx:///Assets/Images/star7.png" />
-            <Image Source="ms-appx:///Assets/Images/star8.png" />
-            <Image Source="ms-appx:///Assets/Images/star9.png" />
-            <Image Source="ms-appx:///Assets/Images/star10.png" />
-
-            <Image Source="ms-appx:///Assets/Images/gas_star1.png" />
-            <Image Source="ms-appx:///Assets/Images/gas_star2.png" />
-            <Image Source="ms-appx:///Assets/Images/gas_star3.png" />
-            <Image Source="ms-appx:///Assets/Images/gas_star4.png" />
-            <Image Source="ms-appx:///Assets/Images/gas_star5.png" />
-            <Image Source="ms-appx:///Assets/Images/gas_star6.png" />
-
-            <Image Source="ms-appx:///Assets/Images/galaxy1.png" />
-            <Image Source="ms-appx:///Assets/Images/galaxy2.png" />
-            <Image Source="ms-appx:///Assets/Images/galaxy3.png" />
-
-            <Image Source="ms-appx:///Assets/Images/planet1.png" />
-            <Image Source="ms-appx:///Assets/Images/planet2.png" />
-            <Image Source="ms-appx:///Assets/Images/planet3.png" />
-            <Image Source="ms-appx:///Assets/Images/planet4.png" />
-            <Image Source="ms-appx:///Assets/Images/planet5.png" />
-            <Image Source="ms-appx:///Assets/Images/planet6.png" />
-            <Image Source="ms-appx:///Assets/Images/planet7.png" />
-            <Image Source="ms-appx:///Assets/Images/planet8.png" />
-            <Image Source="ms-appx:///Assets/Images/planet9.png" />-->
-        </Grid>
+            VerticalAlignment="Top" />
 
         <Border
             HorizontalAlignment="Center"

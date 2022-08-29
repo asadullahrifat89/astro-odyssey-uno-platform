@@ -160,6 +160,10 @@
     <_Globbed_Content Remove="Assets\Images - Copy\star8.png" />
     <_Globbed_Content Remove="Assets\Images - Copy\star9.png" />
     <_Globbed_Content Remove="Assets\Images\809883.jpg" />
+    <_Globbed_Content Remove="Assets\Images\asteroid1.png" />
+    <_Globbed_Content Remove="Assets\Images\asteroid2.png" />
+    <_Globbed_Content Remove="Assets\Images\asteroid3.png" />
+    <_Globbed_Content Remove="Assets\Images\asteroid4.png" />
     <_Globbed_Content Remove="Assets\Images\black-hole2.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_1.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_2.png" />
