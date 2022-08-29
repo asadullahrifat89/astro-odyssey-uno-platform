@@ -35,7 +35,7 @@ namespace AstroOdyssey
                 ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = App.GetLocalizedResource(x.Name),
+                    Name = LocalizationHelper.GetLocalizedResource(x.Name),
                     ImageUrl = x.AssetUri,
                     ShipClass = x.ShipClass,
                 }).ToArray();

@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\EnemyProjectileFactory.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\HealthFactory.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Factories\MeteorFactory.cs" />
