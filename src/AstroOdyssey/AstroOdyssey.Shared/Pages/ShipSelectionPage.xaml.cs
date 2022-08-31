@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Shapes;
@@ -15,8 +16,8 @@ namespace AstroOdyssey
     public sealed partial class ShipSelectionPage : Page
     {
         #region Fields
-        
-        private Ship selectedShip; 
+
+        private Ship selectedShip;
 
         #endregion
 
@@ -32,7 +33,14 @@ namespace AstroOdyssey
 
         #region Events
 
-        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
+        }
+
+        private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
 
@@ -54,14 +62,19 @@ namespace AstroOdyssey
 
             this.ShipsList.ItemsSource = ships.ToList();
             //}
+
+            await this.PlayPageLoadedTransition();
         }
 
-        private void ChooseButton_Click(object sender, RoutedEventArgs e)
+        private async void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedShip is not null)
             {
                 AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
+
+                await this.PlayPageUnLoadedTransition();
+
                 App.NavigateToPage(typeof(GamePlayPage));
             }
         }
@@ -81,8 +94,10 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
-        } 
+        }
 
         #endregion
+
+
     }
 }

@@ -165,7 +165,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void GamePage_Loaded(object sender, RoutedEventArgs e)
+        async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
 
@@ -206,6 +206,8 @@ namespace AstroOdyssey
 
             ShowInGameText("👆\n" + LocalizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
+
+            await this.PlayPageLoadedTransition();
         }
 
         /// <summary>
@@ -1019,13 +1021,15 @@ namespace AstroOdyssey
         /// <summary>
         /// Quits the current game.
         /// </summary>
-        private void QuitGame()
+        private async void QuitGame()
         {
             StopGame();
 
             AudioHelper.PlaySound(SoundType.GAME_OVER);
 
             App.SetScore(Score);
+
+            await this.PlayPageUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameOverPage));
         }
@@ -1264,7 +1268,7 @@ namespace AstroOdyssey
                     AudioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                     SetGameLevelText();
-                }                
+                }
             }
         }
 
