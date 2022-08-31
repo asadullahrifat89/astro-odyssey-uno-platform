@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -15,8 +13,8 @@ namespace AstroOdyssey
     public sealed partial class ShipSelectionPage : Page
     {
         #region Fields
-        
-        private Ship selectedShip; 
+
+        private Ship selectedShip;
 
         #endregion
 
@@ -32,7 +30,7 @@ namespace AstroOdyssey
 
         #region Events
 
-        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
+        private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
 
@@ -54,16 +52,28 @@ namespace AstroOdyssey
 
             this.ShipsList.ItemsSource = ships.ToList();
             //}
+
+            await this.PlayPageLoadedTransition();
         }
 
-        private void ChooseButton_Click(object sender, RoutedEventArgs e)
+        private async void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedShip is not null)
             {
                 AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
+
+                await this.PlayPageUnLoadedTransition();
+
                 App.NavigateToPage(typeof(GamePlayPage));
             }
+        }
+
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,8 +91,10 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
-        } 
+        }
 
         #endregion
+
+
     }
 }

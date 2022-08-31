@@ -25,11 +25,13 @@ namespace AstroOdyssey
 
         #region Events
 
-        private void StartPage_Loaded(object sender, RoutedEventArgs e)
+        private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.GAME_INTRO);
 
             SetLocalization();
+
+            await this.PlayPageLoadedTransition();
 
             if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
             {
@@ -70,9 +72,12 @@ namespace AstroOdyssey
             }
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
             App.NavigateToPage(typeof(ShipSelectionPage));
             App.EnterFullScreen(true);
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AstroOdyssey
+﻿namespace AstroOdyssey
 {
     public class PlayerShipTemplate 
     {
