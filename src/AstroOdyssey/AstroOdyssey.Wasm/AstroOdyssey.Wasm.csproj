@@ -13,17 +13,16 @@
 		<DefineConstants Condition="'$(Configuration)'=='Debug'">$(DefineConstants);TRACE;DEBUG</DefineConstants>
 		<DebugType Condition="'$(Configuration)'=='Debug'">portable</DebugType>
 		<DebugSymbols Condition="'$(Configuration)'=='Debug'">true</DebugSymbols>
-		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>
-		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>		
 		<!--<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Release'">false</WasmShellILLinkerEnabled>-->
 		<!--<WasmShellMonoRuntimeExecutionMode Condition="$([MSBuild]::IsOsUnixLike()) and '$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
 		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<!--<ItemGroup>
 		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v1" />
 		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v2" />
-	</ItemGroup>	
+	</ItemGroup>-->	
 
 	<ItemGroup>
 		<LinkerDescriptor Include="LinkerConfig.xml" />
