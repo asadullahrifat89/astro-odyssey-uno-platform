@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 #endif
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -103,7 +104,7 @@ namespace AstroOdyssey
             _window = Microsoft.UI.Xaml.Window.Current;
 #endif
 
-            var rootFrame = _window.Content as Frame;
+            var rootFrame = _window.Content as Frame;            
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -111,6 +112,7 @@ namespace AstroOdyssey
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                rootFrame.Background = App.Current.Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.IsNavigationStackEnabled = true;
@@ -309,12 +311,12 @@ namespace AstroOdyssey
         /// <summary>
         /// Navigate to provided page.
         /// </summary>
-        /// <param name="page"></param>
+        /// <param name="pageType"></param>
         /// <param name="parameter"></param>
-        public static void NavigateToPage(Type page, object parameter = null)
+        public static void NavigateToPage(Type pageType, object parameter = null)
         {
             var rootFrame = _window.Content as Frame;
-            rootFrame.Navigate(page, parameter);
+            rootFrame.Navigate(pageType, parameter);
         }
 
         /// <summary>

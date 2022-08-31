@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml.Media;
-using Microsoft.UI;
-using System;
+﻿using System;
 
 namespace AstroOdyssey
 {

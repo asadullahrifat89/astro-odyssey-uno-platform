@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,13 +29,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Events
-
-        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            await this.PlayPageUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameStartPage));
-        }
 
         private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -77,6 +67,13 @@ namespace AstroOdyssey
 
                 App.NavigateToPage(typeof(GamePlayPage));
             }
+        }
+
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

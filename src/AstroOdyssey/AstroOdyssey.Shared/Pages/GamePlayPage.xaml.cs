@@ -6,7 +6,6 @@ using Microsoft.UI.Xaml.Input;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using static AstroOdyssey.Constants;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace AstroOdyssey
 {
