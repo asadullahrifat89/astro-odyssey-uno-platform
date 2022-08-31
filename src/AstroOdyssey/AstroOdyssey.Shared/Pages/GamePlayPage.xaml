@@ -28,7 +28,7 @@
             VerticalAlignment="Top"
             Orientation="Vertical">
 
-            <!--  This shows current score, level and game time  -->
+            <!--  This shows current score, level bar  -->
             <StackPanel
                 x:Name="ScoreBarPanel"
                 Margin="5"
@@ -36,47 +36,57 @@
                 Orientation="Vertical"
                 Visibility="Collapsed">
 
-                <TextBlock
-                    x:Name="GameLevelText"
-                    Margin="3"
+                <Border
+                    Margin="3,0"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                    Background="Goldenrod"
+                    BorderBrush="DarkGoldenrod"
+                    BorderThickness="3"
+                    CornerRadius="50">
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="GameLevelText"
+                            Margin="15,3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                        <TextBlock
+                            x:Name="ScoreBarCount"
+                            Margin="15,3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                </Border>
 
                 <!--  Level bar  -->
                 <ProgressBar
                     x:Name="ScoreBar"
                     Width="250"
                     Height="5"
-                    Margin="3"
+                    Margin="5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Foreground="Orange"
+                    Foreground="Goldenrod"
                     Maximum="100"
                     Minimum="0"
                     Value="100" />
-
-                <TextBlock
-                    x:Name="ScoreBarCount"
-                    Margin="3"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
 
             </StackPanel>
 
             <!--  This shows the health bar of boss  -->
             <StackPanel
                 x:Name="BossHealthBarPanel"
-                Margin="5,0,5,5"
                 HorizontalAlignment="Center"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
@@ -163,96 +173,93 @@
         </Grid>
 
         <!--  This shows the player health, rage, power bar  -->
-        <StackPanel
+        <Border
             x:Name="PlayerHealthBarPanel"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
-            Orientation="Horizontal"
+            Background="Goldenrod"
+            BorderBrush="DarkGoldenrod"
+            BorderThickness="3"
+            CornerRadius="50"
             Visibility="Collapsed">
 
-            <!--  Health  -->
-            <TextBlock
-                Margin="5"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="❤️"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
-
-            <!--  Health bar  -->
-            <ProgressBar
-                x:Name="PlayerHealthBar"
-                Width="150"
-                Height="5"
-                Margin="5"
-                VerticalAlignment="Center"
-                Foreground="Red"
-                Maximum="100"
-                Minimum="0"
-                Value="100" />
-
-            <!--  Health count  -->
-            <!--<TextBlock
-                x:Name="PlayerHealthBarCount"
-                Margin="5"
+            <StackPanel
+                Margin="15,3"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="{x:Bind Path=PlayerHealthBar.Value.ToString('0'), Mode=OneWay}"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />-->
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
 
-            <!--  Rage  -->
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="💢"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+                <!--  Health  -->
+                <TextBlock
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="❤️"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <!--  Rage bar  -->
-            <ProgressBar
-                x:Name="PlayerRageBar"
-                Width="50"
-                Height="5"
-                Margin="5"
-                VerticalAlignment="Center"
-                Foreground="Red"
-                Minimum="0"
-                Value="0" />
+                <!--  Health bar  -->
+                <ProgressBar
+                    x:Name="PlayerHealthBar"
+                    Width="150"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="Red"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="100" />
 
-            <!--  Power up  -->
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="🔥"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords"
-                Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />
+                <!--  Rage  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="💢"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <!--  Power up bar  -->
-            <ProgressBar
-                x:Name="PlayerPowerBar"
-                Width="50"
-                Height="5"
-                Margin="5"
-                VerticalAlignment="Center"
-                Foreground="Goldenrod"
-                Minimum="0"
-                Visibility="Collapsed" />
+                <!--  Rage bar  -->
+                <ProgressBar
+                    x:Name="PlayerRageBar"
+                    Width="50"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="Red"
+                    Minimum="0"
+                    Value="0" />
 
-        </StackPanel>
+                <!--  Power up  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="🔥"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords"
+                    Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />
+
+                <!--  Power up bar  -->
+                <ProgressBar
+                    x:Name="PlayerPowerBar"
+                    Width="50"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="OrangeRed"
+                    Minimum="0"
+                    Visibility="Collapsed" />
+
+            </StackPanel>
+        </Border>
 
         <!--  This shows in game texts  -->
         <Border

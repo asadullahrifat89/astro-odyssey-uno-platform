@@ -49,13 +49,18 @@ namespace AstroOdyssey
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
             var left = pointerX - player.HalfWidth;
-            var top = gameEnvironment.Height - player.Height - 40;
+            double top = GetOptimalPlayerY(player);
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
             Canvas.SetZIndex(player, 999);
 
             return player;
+        }
+
+        public double GetOptimalPlayerY(Player player)
+        {
+            return gameEnvironment.Height - player.Height - 50;
         }
 
         /// <summary>
