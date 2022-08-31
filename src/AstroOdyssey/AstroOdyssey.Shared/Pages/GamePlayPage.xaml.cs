@@ -6,6 +6,8 @@ using Microsoft.UI.Xaml.Input;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using static AstroOdyssey.Constants;
+using Microsoft.UI;
+using Microsoft.UI.Xaml.Media;
 
 namespace AstroOdyssey
 {
@@ -185,6 +187,7 @@ namespace AstroOdyssey
 
             GameLevel = GameLevel.Level_1;
             SetGameLevelText();
+           
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
@@ -196,7 +199,7 @@ namespace AstroOdyssey
             PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
             Score = 0;
-            ScoreBarCount.Text = $"{Score}/50";
+            SetScoreBarCountText(25);
 
             PointerX = windowWidth / 2;
 
@@ -1113,6 +1116,30 @@ namespace AstroOdyssey
             var scale = GameView.GetGameObjectScale();
             Player = _playerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
 
+            switch (Player.ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    {
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Goldenrod);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+                    }
+                    break;
+                case ShipClass.BERSERKER:
+                    {
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Orange);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+                    }
+                    break;
+                case ShipClass.SPECTRE:
+                    {
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Pink);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
 #if DEBUG
             Console.WriteLine($"Render Scale: {scale}");
 #endif
@@ -1123,7 +1150,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = windowHeight - Player.Height - 40;
+            PointerY = _playerFactory.GetOptimalPlayerY(Player);
             Player.SetY(PointerY);
         }
 
@@ -1190,64 +1217,64 @@ namespace AstroOdyssey
         {
             var lastGameLevel = GameLevel;
 
-            if (Score > 0)
+            if (Score >= 0)
             {
                 GameLevel = GameLevel.Level_1;
-                ScoreBar.Value = Score / 50 * 100;
-                ScoreBarCount.Text = $"{Score}/50";
+                ScoreBar.Value = Score / 25 * 100;
+                SetScoreBarCountText(25);
             }
             if (Score > 50)
             {
                 GameLevel = GameLevel.Level_2;
                 ScoreBar.Value = Score / 100 * 100;
-                ScoreBarCount.Text = $"{Score}/100";
+                SetScoreBarCountText(100);
             }
             if (Score > 100)
             {
                 GameLevel = GameLevel.Level_3;
                 ScoreBar.Value = Score / 200 * 100;
-                ScoreBarCount.Text = $"{Score}/200";
+                SetScoreBarCountText(200);
             }
             if (Score > 200)
             {
                 GameLevel = GameLevel.Level_4;
                 ScoreBar.Value = Score / 400 * 100;
-                ScoreBarCount.Text = $"{Score}/400";
+                SetScoreBarCountText(400);
             }
             if (Score > 400)
             {
                 GameLevel = GameLevel.Level_5;
                 ScoreBar.Value = Score / 600 * 100;
-                ScoreBarCount.Text = $"{Score}/600";
+                SetScoreBarCountText(600);
             }
             if (Score > 600)
             {
                 GameLevel = GameLevel.Level_6;
                 ScoreBar.Value = Score / 800 * 100;
-                ScoreBarCount.Text = Score.ToString();
+                SetScoreBarCountText(800);
             }
             if (Score > 800)
             {
                 GameLevel = GameLevel.Level_7;
                 ScoreBar.Value = Score / 1000 * 100;
-                ScoreBarCount.Text = $"{Score}/1000";
+                SetScoreBarCountText(1000);
             }
             if (Score > 1000)
             {
                 GameLevel = GameLevel.Level_8;
                 ScoreBar.Value = Score / 1200 * 100;
-                ScoreBarCount.Text = $"{Score}/1200";
+                SetScoreBarCountText(1200);
             }
             if (Score > 1200)
             {
                 GameLevel = GameLevel.Level_9;
                 ScoreBar.Value = Score / 1400 * 100;
-                ScoreBarCount.Text = $"{Score}/1400";
+                SetScoreBarCountText(1400);
             }
             if (Score > 1400)
             {
                 GameLevel = GameLevel.Level_10;
-                ScoreBarCount.Text = $"{Score}/MAX";
+                ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {Score}/MAX";
             }
 
             // when difficulty changes show level up
@@ -1269,6 +1296,11 @@ namespace AstroOdyssey
                     SetGameLevelText();
                 }
             }
+        }
+
+        private void SetScoreBarCountText(int capacity)
+        {
+            ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {Score}/{capacity}";
         }
 
         private void SetGameLevelText()
