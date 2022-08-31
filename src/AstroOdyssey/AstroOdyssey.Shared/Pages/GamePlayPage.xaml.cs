@@ -1223,7 +1223,7 @@ namespace AstroOdyssey
                 ScoreBar.Value = Score / 25 * 100;
                 SetScoreBarCountText(25);
             }
-            if (Score > 50)
+            if (Score > 25)
             {
                 GameLevel = GameLevel.Level_2;
                 ScoreBar.Value = Score / 100 * 100;
