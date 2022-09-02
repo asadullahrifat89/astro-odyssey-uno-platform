@@ -1,15 +1,12 @@
 name: master
 on: 
-  pull_request:
+  push:
     branches: [ master ]
 jobs:
   build:  
     runs-on: ubuntu-latest
     container: 'unoplatform/wasm-build:3.0'
-    name: Build
-    env:
-      config: 'Release'
-      framework: 'net6.0'
+    name: Build    
     steps:
     - uses: actions/checkout@v3
     
@@ -20,6 +17,9 @@ jobs:
         include-prerelease: true
       
     - name: Build
+      env:
+        config: 'Release'
+        framework: 'net6.0'
       run: |
         mkdir -p $GITHUB_WORKSPACE/artifacts
         mkdir -p $GITHUB_WORKSPACE/artifacts/wasm
@@ -29,7 +29,7 @@ jobs:
     - name: Publish Artifacts
       uses: actions/upload-artifact@v2      
       with:
-        name: drop
+        name: pages
         path: artifacts
         
   deploy:
@@ -41,12 +41,12 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pages
-        path: $GITHUB_WORKSPACE/artifacts/wasm
+        path: artifacts
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2
       with:
         target_branch: gh-pages
-        build_dir: $GITHUB_WORKSPACE/artifacts/wasm
+        build_dir: artifacts
         jekyll: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
