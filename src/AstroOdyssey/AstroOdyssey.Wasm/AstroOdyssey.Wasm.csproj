@@ -5,96 +5,46 @@
 		<NoWarn>NU1701</NoWarn>
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
-
-	<PropertyGroup Label="WASM">
-		<WasmHead>true</WasmHead>
-		<WasmShellEnableLongPathSupport>false</WasmShellEnableLongPathSupport>
-		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
-		<DefineConstants Condition="'$(Configuration)'=='Debug'">$(DefineConstants);TRACE;DEBUG</DefineConstants>
-		<DebugType Condition="'$(Configuration)'=='Debug'">portable</DebugType>
-		<DebugSymbols Condition="'$(Configuration)'=='Debug'">true</DebugSymbols>
-		<MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>		
-		<!--<WasmShellILLinkerEnabled Condition="'$(Configuration)'=='Debug'">false</WasmShellILLinkerEnabled>-->
-		<!--<WasmShellMonoRuntimeExecutionMode Condition="$([MSBuild]::IsOsUnixLike()) and '$(Configuration)'=='Release'">InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
-		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
-	</PropertyGroup>
-
-	<!--<ItemGroup>
-		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v1" />
-		<MonoRuntimeMixedModeExcludedAssembly Include="Uno.UI.FluentTheme.v2" />
-	</ItemGroup>-->	
-
-	<ItemGroup>
-		<LinkerDescriptor Include="LinkerConfig.xml" />
-		<!--<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.jpg" Link="Assets\Images\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.gif" Link="Assets\Images\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Images\*.png" Link="Assets\Images\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\*.mp3" Link="Assets\Sounds\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Boss\*.mp3" Link="Assets\Sounds\Boss\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Intro\*.mp3" Link="Assets\Sounds\Intro\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Music\*.mp3" Link="Assets\Sounds\Music\%(FileName)%(Extension)" />
-		<Content Include="..\AstroOdyssey.Shared\Assets\Sounds\Rage\*.mp3" Link="Assets\Sounds\Rage\%(FileName)%(Extension)" />-->
-		<Content Include="LinkerConfig.xml" />
-		<EmbeddedResource Include="WasmCSS\Fonts.css" />
-		<EmbeddedResource Include="WasmScripts\AppManifest.js" />
-		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
-		<None Include="Program.cs" />
-		<None Include="wwwroot\web.config" />
-		<None Remove="Assets\SplashScreen.png" />
-	</ItemGroup>
-
-	<!--<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
-		<NoWarn>NU1701</NoWarn>
-		<LangVersion>10.0</LangVersion>		
-	</PropertyGroup>
-	
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
 		<DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
 		<DebugType>portable</DebugType>
 		<DebugSymbols>true</DebugSymbols>
-		-->
-	<!--
+		<!--
 		IL Linking is disabled in Debug configuration.
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
-	<!--
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
 	</PropertyGroup>
-	
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
+
+		<!-- Disable performance optimizations for faster builds -->
+		<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="Assets\SplashScreen.png" />
+	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 	</ItemGroup>
-	
-	<ItemGroup>
-		<None Remove="Assets\SplashScreen.png" />
-	</ItemGroup>
-	
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
 		<EmbeddedResource Include="WasmScripts\AppManifest.js" />
 	</ItemGroup>
-	
 	<ItemGroup>
 		<LinkerDescriptor Include="LinkerConfig.xml" />
 	</ItemGroup>
-	
 	<ItemGroup>
-		-->
-	<!--
+		<!--
 		This item group is required by the project template because of the
 		new SDK-Style project, otherwise some files are not added automatically.
-
 		You can safely remove this ItemGroup completely.
 		-->
-	<!--
 		<None Include="Program.cs" />
 		<None Include="LinkerConfig.xml" />
 		<None Include="wwwroot\web.config" />
-	</ItemGroup>-->
-
+	</ItemGroup>
 	<ItemGroup>
 		<!--<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
@@ -113,11 +63,5 @@
 		<PackageReference Include="Uno.Wasm.Bootstrap" Version="4.0.0-dev.174" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="4.0.0-dev.174" />
 	</ItemGroup>
-
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
-
-	<ItemGroup>
-		<Content Include="Assets\SplashScreen.png" />
-	</ItemGroup>
-
 </Project>
