@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,6 +34,11 @@ namespace AstroOdyssey
 
             await this.PlayPageLoadedTransition();
 
+            PreloadAssets();
+        }
+
+        private async void PreloadAssets()
+        {
             if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
             {
                 foreach (var asset in Constants.STAR_TEMPLATES)
@@ -42,12 +48,16 @@ namespace AstroOdyssey
                     AssetsPreloadGrid.Children.Add(content);
                 }
 
+                await Task.Delay(500);
+
                 foreach (var asset in Constants.PLANET_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
                     AssetsPreloadGrid.Children.Add(content);
                 }
+
+                await Task.Delay(500);
 
                 foreach (var asset in Constants.ENEMY_TEMPLATES)
                 {
@@ -56,12 +66,16 @@ namespace AstroOdyssey
                     AssetsPreloadGrid.Children.Add(content);
                 }
 
+                await Task.Delay(500);
+
                 foreach (var asset in Constants.METEOR_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
                     AssetsPreloadGrid.Children.Add(content);
                 }
+
+                await Task.Delay(500);
 
                 foreach (var asset in Constants.PLAYER_SHIP_TEMPLATES)
                 {
