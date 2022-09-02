@@ -17,8 +17,12 @@ jobs:
       with:
         dotnet-version: 6.0.x
         include-prerelease: true
-    - name: Workload Install
+    - name: Install macos
       run: dotnet workload install macos
+   # - name: Install ninja-build tool
+     # uses: seanmiddleditch/gha-setup-ninja@v3
+   # - name: Setup Emscripten toolchain
+    #  uses: mymindstorm/setup-emsdk@v11
     - name: Restore Dependencies
       run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
     - name: Build 
