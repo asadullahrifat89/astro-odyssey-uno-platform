@@ -53,8 +53,6 @@ namespace AstroOdyssey
         public Player()
         {
             //TODO: Player: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
-            //TODO: Player: Develop shield which protects damage for a certain number of hits
-            //TODO: Player: killing enemies fillsup power bar that unleashes a powerful blast damaging all enemies in view
 
             Tag = PLAYER;
 
@@ -86,8 +84,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        private bool _isRecoveringFromDamage;
+        public ShipClass ShipClass { get; set; }
 
+        private bool _isRecoveringFromDamage;
         public bool IsRecoveringFromDamage
         {
             get { return _isRecoveringFromDamage; }
@@ -102,24 +101,8 @@ namespace AstroOdyssey
             }
         }
 
-        private bool _isEtherealStateUp;
-
-        public bool IsEtherealStateUp
-        {
-            get { return _isEtherealStateUp; }
-            set
-            {
-                _isEtherealStateUp = value;
-
-                if (_isEtherealStateUp)
-                    Opacity = 0.6d;
-                else
-                    Opacity = 1;
-            }
-        }
 
         private bool _isShieldUp;
-
         public bool IsShieldUp
         {
             get { return _isShieldUp; }
@@ -142,18 +125,32 @@ namespace AstroOdyssey
             }
         }
 
-        private bool _isRapidFireUp;
 
-        public bool IsRapidFireUp
+        private bool _isFirePowerUp;
+        public bool IsFirePowerUp
         {
-            get { return _isRapidFireUp; }
+            get { return _isFirePowerUp; }
             set
             {
-                _isRapidFireUp = value;
+                _isFirePowerUp = value;
             }
         }
 
-        public ShipClass ShipClass { get; set; }
+
+        private bool _isCloakUp;
+        public bool IsCloakUp
+        {
+            get { return _isCloakUp; }
+            set
+            {
+                _isCloakUp = value;
+
+                if (_isCloakUp)
+                    Opacity = 0.6d;
+                else
+                    Opacity = 1;
+            }
+        }
 
         //public double ExhaustHeight { get; set; } = 50;
 
@@ -168,7 +165,22 @@ namespace AstroOdyssey
             this._ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
-            var exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust.png", UriKind.RelativeOrAbsolute);
+            Uri exhaustUri = null;
+
+            switch (ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
+                    break;
+                case ShipClass.BERSERKER:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
+                    break;
+                case ShipClass.SPECTRE:
+                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
+                    break;
+                default:
+                    break;
+            }
 
             _contentShipBlaze.Source = new BitmapImage(exhaustUri);
             _contentShipBlaze.Width = _body.Width;
@@ -214,17 +226,17 @@ namespace AstroOdyssey
 
             //switch (powerUpType)
             //{
-            //case PowerUpType.RAPID_SHOT_ROUNDS:
+            //case PowerUpType.BLAZE_BLITZ_ROUNDS:
             //    {
             //        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
             //        contentShipBlaze.Source = new BitmapImage(exhaustUri);
             //        contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    }
             //    break;
-            //case PowerUpType.DEAD_SHOT_ROUNDS:
+            //case PowerUpType.PLASMA_BOMB_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
-            //case PowerUpType.DOOM_SHOT_ROUNDS:
+            //case PowerUpType.BEAM_CANNON_ROUNDS:
             //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
             //    break;
             //default:

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Antimony" xml:space="preserve">
+    <value>অ্যান্টিমনি</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>AstroOdyssey</value>
+  </data>
+  <data name="BEAM_CANNON" xml:space="preserve">
+    <value>রশ্মি কামান</value>
+  </data>
+  <data name="Bismuth" xml:space="preserve">
+    <value>বিসমাথ</value>
+  </data>
+  <data name="BLAZE_BLITZ" xml:space="preserve">
+    <value>ব্লেজ ব্লিটজ</value>
+  </data>
+  <data name="BOSS" xml:space="preserve">
+    <value>বস</value>
+  </data>
+  <data name="CLOAK_DOWN" xml:space="preserve">
+    <value>ক্লোক ডাউন</value>
+  </data>
+  <data name="CLOAK_UP" xml:space="preserve">
+    <value>ক্লোক আপ</value>
+  </data>
+  <data name="COMPLETE" xml:space="preserve">
+    <value>সম্পূর্ণ</value>
+  </data>
+  <data name="Curium" xml:space="preserve">
+    <value>কিউরিয়াম</value>
+  </data>
+  <data name="ENEMY_APPROACHES" xml:space="preserve">
+    <value>শত্রু কাছে পৌঁছেছে</value>
+  </data>
+  <data name="FANTASTIC_GAME" xml:space="preserve">
+    <value>চমত্কার খেলা</value>
+  </data>
+  <data name="FIREPOWER_DOWN" xml:space="preserve">
+    <value>ফায়ার পাওয়ার ডাউন</value>
+  </data>
+  <data name="FIREPOWER_UP" xml:space="preserve">
+    <value>ফায়ার পাওয়ার আপ</value>
+  </data>
+  <data name="GameOverPage_PlayAgainButton.Content" xml:space="preserve">
+    <value>আবার খেলো</value>
+  </data>
+  <data name="GameOverPage_Tagline.Text" xml:space="preserve">
+    <value>খেলা শেষ</value>
+  </data>
+  <data name="GameStartPage_AssetsCreditButton.Content" xml:space="preserve">
+    <value>Assets by redfoc.com 😘</value>
+  </data>
+  <data name="GameStartPage_BanglaButton.Content" xml:space="preserve">
+    <value>বাংলা</value>
+  </data>
+  <data name="GameStartPage_DeutschButton.Content" xml:space="preserve">
+    <value>ডয়েচ</value>
+  </data>
+  <data name="GameStartPage_DeveloperProfileButton.Content" xml:space="preserve">
+    <value>আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি</value>
+  </data>
+  <data name="GameStartPage_EnglishButton.Content" xml:space="preserve">
+    <value>ইংরেজি</value>
+  </data>
+  <data name="GameStartPage_FrenchButton.Content" xml:space="preserve">
+    <value>ফরাসি</value>
+  </data>
+  <data name="GameStartPage_PlayButton.Content" xml:space="preserve">
+    <value>খেলা শুরু কর</value>
+  </data>
+  <data name="GameStartPage_Tagline.Text" xml:space="preserve">
+    <value>WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।</value>
+  </data>
+  <data name="GAME_PAUSED" xml:space="preserve">
+    <value>খেলা থামানো হয়েছে</value>
+  </data>
+  <data name="GOOD_GAME" xml:space="preserve">
+    <value>ভাল খেলা</value>
+  </data>
+  <data name="GREAT_GAME" xml:space="preserve">
+    <value>অসাধারন খেলা</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="LEVEL" xml:space="preserve">
+    <value>স্তর</value>
+  </data>
+  <data name="NO_LUCK" xml:space="preserve">
+    <value>ভাগ্য নেই</value>
+  </data>
+  <data name="PLASMA_BOMB" xml:space="preserve">
+    <value>প্লাজমা বোমা</value>
+  </data>
+  <data name="POWER_DOWN" xml:space="preserve">
+    <value>ক্ষমতা হ্রাস</value>
+  </data>
+  <data name="QUIT_GAME" xml:space="preserve">
+    <value>বন্ধ খেলা?</value>
+  </data>
+  <data name="SCORE" xml:space="preserve">
+    <value>স্কোর</value>
+  </data>
+  <data name="SHIELD_DOWN" xml:space="preserve">
+    <value>শিল্ড ডাউন</value>
+  </data>
+  <data name="SHIELD_UP" xml:space="preserve">
+    <value>শিল্ড আপ</value>
+  </data>
+  <data name="ShipSelectionPage_ChooseButton.Content" xml:space="preserve">
+    <value>নির্বাচন করুন</value>
+  </data>
+  <data name="ShipSelectionPage_ControlInstructions.Text" xml:space="preserve">
+    <value>জাহাজটি সরাতে আপনার কীবোর্ড বা স্ক্রিনে বাম বা ডান তীর কী বা প্রান্তগুলি টিপুন বা স্পর্শ করুন৷</value>
+  </data>
+  <data name="ShipSelectionPage_Tagline.Text" xml:space="preserve">
+    <value>একটি জাহাজ নির্বাচন করুন</value>
+  </data>
+  <data name="SHIP_REPAIRED" xml:space="preserve">
+    <value>জাহাজ মেরামত</value>
+  </data>
+  <data name="SONIC_BLAST" xml:space="preserve">
+    <value>সোনিক বিস্ফোরণ</value>
+  </data>
+  <data name="SUPREME_GAME" xml:space="preserve">
+    <value>সর্বোচ্চ খেলা</value>
+  </data>
+  <data name="TAP_ON_SCREEN_TO_BEGIN" xml:space="preserve">
+    <value>শুরু করতে স্ক্রিনে ট্যাপ করুন</value>
+  </data>
+  <data name="TAP_TO_QUIT" xml:space="preserve">
+    <value>প্রস্থান করতে ট্যাপ করুন</value>
+  </data>
+  <data name="TAP_TO_RESUME" xml:space="preserve">
+    <value>আবার শুরু করতে ট্যাপ করুন</value>
+  </data>
+</root>

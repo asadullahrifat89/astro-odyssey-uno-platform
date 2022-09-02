@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -13,7 +12,13 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class ShipSelectionPage : Page
     {
+        #region Fields
+
         private Ship selectedShip;
+
+        #endregion
+
+        #region Ctor
 
         public ShipSelectionPage()
         {
@@ -21,64 +26,75 @@ namespace AstroOdyssey
             this.Loaded += ShipSelectionPage_Loaded;
         }
 
-        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Events
+
+        private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
+            SetLocalization();
+
             selectedShip = null;
             App.Ship = null;
-            ChooseButton.IsEnabled = false;
+            ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            if (this.ShipsList.Items.Count == 0)
+            //if (this.ShipsList.ItemsSource is null)
+            //{
+            var ships = new Ship[] { };
+
+            ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
             {
-                var ships = new List<Ship>();
+                Id = Guid.NewGuid().ToString(),
+                Name = LocalizationHelper.GetLocalizedResource(x.Name),
+                ImageUrl = x.AssetUri,
+                ShipClass = x.ShipClass,
+            }).ToArray();
 
-                string shipUri = null;
-                string name = null;
+            this.ShipsList.ItemsSource = ships.ToList();
+            //}
 
-                for (int i = 0; i <= 2; i++)
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            shipUri = "ms-appx:///Assets/Images/player_ship1.png";
-                            name = "Antimony";
-                            break;
-                        case 1:
-                            shipUri = "ms-appx:///Assets/Images/player_ship2.png";
-                            name = "Bismuth";
-                            break;
-                        case 2:
-                            shipUri = "ms-appx:///Assets/Images/player_ship3.png";
-                            name = "Curium";
-                            break;
-                    }
-
-                    ships.Add(new Ship()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        Name = name,
-                        ImageUrl = shipUri,
-                        ShipClass = (ShipClass)i,
-                    });
-                }
-
-                this.ShipsList.ItemsSource = ships.OrderBy(x => x.Name).ToList();
-            }
+            await this.PlayPageLoadedTransition();
         }
 
-        private void ChooseButton_Click(object sender, RoutedEventArgs e)
+        private async void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedShip is not null)
             {
                 AudioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
+
+                await this.PlayPageUnLoadedTransition();
+
                 App.NavigateToPage(typeof(GamePlayPage));
             }
+        }
+
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedShip = ShipsList.SelectedItem as Ship;
-            ChooseButton.IsEnabled = true;
+            ShipSelectionPage_ChooseButton.IsEnabled = true;
         }
+
+        #endregion
+
+        #region Methods
+
+        private void SetLocalization()
+        {
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
+            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+        }
+
+        #endregion
+
+
     }
 }

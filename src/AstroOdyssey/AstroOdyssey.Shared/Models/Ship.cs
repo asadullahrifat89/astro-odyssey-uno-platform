@@ -10,4 +10,11 @@
 
         public ShipClass ShipClass { get; set; }
     }
+
+    public enum ShipClass
+    {
+        DEFENDER, // shield generate when enraged
+        BERSERKER, // shoots faster shots when enraged
+        SPECTRE, // goes into etheral mode when enraged
+    }
 }

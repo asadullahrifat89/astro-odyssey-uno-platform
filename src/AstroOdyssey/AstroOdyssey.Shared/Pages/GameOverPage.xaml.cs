@@ -10,24 +10,49 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class GameOverPage : Page
     {
+        #region Ctor
+
         public GameOverPage()
         {
             InitializeComponent();
             Loaded += GameOverPage_Loaded;
         }
 
-        private void GameOverPage_Loaded(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Events
+
+        private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
             var score = App.GetScore();
 
-            ScoreText.Text = "You Scored " + score + (score == 0 ? "\nNo luck!" : score <= 400 ? "\nGood game!" : "\nGreat game!");
-        }
+            SetLocalization();
 
-        private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : score <= 400 ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : score <= 800 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+
+            await this.PlayPageLoadedTransition();
+        }       
+
+        private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
             App.NavigateToPage(typeof(ShipSelectionPage));
             AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
+
+        #endregion
+
+        #region Methods
+
+        private void SetLocalization()
+        {
+            LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
+            LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
+        } 
+
+        #endregion
     }
 }

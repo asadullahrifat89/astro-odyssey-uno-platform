@@ -12,9 +12,70 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/gameIntro.gif" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
+        <!--  Pre-load-images  -->
+        <Grid
+            x:Name="AssetsPreloadGrid"
+            Width="1"
+            Height="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+
+        <!--  Language selection buttons  -->
+        <StackPanel
+            Margin="0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <Button
+                x:Name="GameStartPage_EnglishButton"
+                x:Uid="GameStartPage_EnglishButton"
+                Margin="2"
+                Background="Transparent"
+                Click="LanguageButton_Click"
+                Content="English"
+                CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
+                Tag="en" />
+            <Button
+                x:Name="GameStartPage_FrenchButton"
+                x:Uid="GameStartPage_FrenchButton"
+                Margin="2"
+                Background="Transparent"
+                Click="LanguageButton_Click"
+                Content="French"
+                CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
+                Tag="fr" />
+            <Button
+                x:Name="GameStartPage_DeutschButton"
+                x:Uid="GameStartPage_DeutschButton"
+                Margin="2"
+                Background="Transparent"
+                Click="LanguageButton_Click"
+                Content="Deutsch"
+                CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
+                Tag="de" />
+            <Button
+                x:Name="GameStartPage_BanglaButton"
+                x:Uid="GameStartPage_BanglaButton"
+                Margin="2"
+                Background="Transparent"
+                Click="LanguageButton_Click"
+                Content="Bangla"
+                CornerRadius="50"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False"
+                Tag="bn" />
+        </StackPanel>
+
+        <!--  UI controls  -->
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -31,31 +92,27 @@
                     Height="100"
                     Source="ms-appx:///Assets/Images/player_ship1.png" />
 
+                <!--  Logo  -->
                 <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
 
-                <!--  Game title  -->
-                <!--<TextBlock
-                Margin="10,10,10,40"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="35"
-                FontWeight="Bold"
-                Text="ASTRO ODYSSEY" />-->
-
+                <!--  Tag line  -->
                 <TextBlock
+                    x:Name="GameStartPage_Tagline"
+                    x:Uid="GameStartPage_Tagline"
                     Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    Text="A classic space shooter game remade for the web on WebAssembly."
+                    Text="A classic rock metal ⚡ space shooter on WebAssembly."
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <!--  Arcade mode button  -->
+                <!--  Start game button  -->
                 <Button
-                    x:Name="PlayButton"
+                    x:Name="GameStartPage_PlayButton"
+                    x:Uid="GameStartPage_PlayButton"
                     Height="40"
-                    Margin="0,50,0,50"
+                    Margin="0,50,0,30"
                     HorizontalAlignment="Stretch"
                     Background="Red"
                     BorderBrush="DarkRed"
@@ -68,20 +125,39 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
-                <TextBlock
-                    Margin="10"
+                <!--  Developer page  -->
+                <HyperlinkButton
+                    x:Name="GameStartPage_DeveloperProfileButton"
+                    x:Uid="GameStartPage_DeveloperProfileButton"
+                    Margin="0,10"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    Text="Made with ❤️ by Asadullah Rifat."
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                    VerticalAlignment="Bottom"
+                    Content="Made with ❤️ by Asadullah Rifat"
+                    FontSize="17"
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False"
+                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
             </StackPanel>
             <Border.Background>
                 <SolidColorBrush Opacity="0.7" Color="Black" />
             </Border.Background>
         </Border>
+
+        <!--  Asset credits  -->
+        <HyperlinkButton
+            x:Name="GameStartPage_AssetsCreditButton"
+            x:Uid="GameStartPage_AssetsCreditButton"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Content="Assets by redfoc.com 😘"
+            FontSize="20"
+            Foreground="White"
+            IsFocusEngagementEnabled="False"
+            IsTabStop="False"
+            NavigateUri="http://www.redfoc.com" />
     </Grid>
 
 </Page>

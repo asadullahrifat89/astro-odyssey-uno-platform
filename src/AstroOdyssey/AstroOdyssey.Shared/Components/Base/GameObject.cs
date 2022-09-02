@@ -260,10 +260,10 @@ namespace AstroOdyssey
             if (ExplosionCounter <= 0.3d)
                 Opacity -= 0.1d;
 
-            Enlarge();
+            ScaleUp();
         }
 
-        public void Enlarge()
+        public void ScaleUp()
         {
             compositeTransform.ScaleX += 0.3d;
             compositeTransform.ScaleY += 0.3d;
@@ -273,6 +273,11 @@ namespace AstroOdyssey
         {
             Width += 1.2d;
             Height += 0.08d;
+        }
+
+        public void Lengthen()
+        {            
+            Height += 0.6d;
         }
 
         public void OverPower()

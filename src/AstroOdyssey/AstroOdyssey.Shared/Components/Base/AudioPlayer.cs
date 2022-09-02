@@ -7,7 +7,7 @@ namespace AstroOdyssey
     [HtmlElement("audio")]
     public sealed class AudioPlayer : FrameworkElement
     {
-        public event EventHandler OnCompleted;
+        //public event EventHandler OnCompleted;
 
         public AudioPlayer(string source, double volume, bool loop = false)
         {
@@ -18,7 +18,7 @@ namespace AstroOdyssey
                 $"element.loop = {loop.ToString().ToLower()}; ";
 
             this.ExecuteJavascript(audio);
-            this.RegisterHtmlEventHandler("onended", OnCompleted);
+            //this.RegisterHtmlEventHandler("onended", OnCompleted);
 #if DEBUG
             Console.WriteLine("source: " + source + " volume: " + volume.ToString() + " loop: " + loop.ToString().ToLower());
 #endif

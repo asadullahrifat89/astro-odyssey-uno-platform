@@ -49,13 +49,18 @@ namespace AstroOdyssey
             player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
 
             var left = pointerX - player.HalfWidth;
-            var top = gameEnvironment.Height - player.Height - 30;
+            double top = GetOptimalPlayerY(player);
 
             player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
 
             Canvas.SetZIndex(player, 999);
 
             return player;
+        }
+
+        public double GetOptimalPlayerY(Player player)
+        {
+            return gameEnvironment.Height - player.Height - 45;
         }
 
         /// <summary>
@@ -213,7 +218,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -235,7 +240,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage)  // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -261,7 +266,7 @@ namespace AstroOdyssey
                     {
                         if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            if (player.IsEtherealStateUp || player.IsRecoveringFromDamage) // only loose health if player is in physical state
+                            if (player.IsCloakUp || player.IsRecoveringFromDamage) // only loose health if player is in physical state
                             {
                                 return false;
                             }
@@ -383,26 +388,26 @@ namespace AstroOdyssey
             playerRageCoolDownCounter = playerRageCoolDownDelay;
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     {
                         player.IsShieldUp = true;
                     }
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
-                        player.IsRapidFireUp = true;
+                        player.IsFirePowerUp = true;
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     {
-                        player.IsEtherealStateUp = true;
+                        player.IsCloakUp = true;
                     }
                     break;
                 default:
                     break;
             }
 
-            AudioHelper.PlaySound(SoundType.POWER_UP);
+            AudioHelper.PlaySound(SoundType.RAGE_UP);
         }
 
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
@@ -411,22 +416,22 @@ namespace AstroOdyssey
 
             switch (player.ShipClass)
             {
-                case ShipClass.Antimony:
+                case ShipClass.DEFENDER:
                     {
                         if (playerRageCoolDownCounter <= 0)
                             player.IsShieldUp = false;
                     }
                     break;
-                case ShipClass.Bismuth:
+                case ShipClass.BERSERKER:
                     {
                         if (playerRageCoolDownCounter <= 0)
-                            player.IsRapidFireUp = false;
+                            player.IsFirePowerUp = false;
                     }
                     break;
-                case ShipClass.Curium:
+                case ShipClass.SPECTRE:
                     {
                         if (playerRageCoolDownCounter <= 0)
-                            player.IsEtherealStateUp = false;
+                            player.IsCloakUp = false;
                     }
                     break;
                 default:
@@ -435,7 +440,7 @@ namespace AstroOdyssey
 
             if (playerRageCoolDownCounter <= 0)
             {
-                AudioHelper.PlaySound(SoundType.POWER_DOWN);
+                AudioHelper.PlaySound(SoundType.RAGE_DOWN);
                 return (true, 0);
             }
 
