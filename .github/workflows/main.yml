@@ -1,54 +1,52 @@
 name: master
 on: 
-  push:
-    branches: [ master ]   
-  #workflow_dispatch:  # Allows workflow to be ran via a button
+  pull_request:
+    branches: [ master ]
 jobs:
-  build:
+  build:  
     runs-on: ubuntu-latest
+    container: 'unoplatform/wasm-build:3.0'
     name: Build
     env:
       config: 'Release'
       framework: 'net6.0'
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 6.0.400
         include-prerelease: true
-    - name: Install macos
-      run: dotnet workload install macos
-   # - name: Install ninja-build tool
-     # uses: seanmiddleditch/gha-setup-ninja@v3
-   # - name: Setup Emscripten toolchain
-    #  uses: mymindstorm/setup-emsdk@v11
-    - name: Restore Dependencies
-      run: dotnet restore ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj
-    - name: Build 
-      run: dotnet build ./src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj --no-restore -f $framework -c $config
+      
+    - name: Build
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/artifacts
+        mkdir -p $GITHUB_WORKSPACE/artifacts/wasm
+        cd src/AstroOdyssey/AstroOdyssey.Wasm
+        dotnet publish -c Release /bl:/artifacts/mbuild.binlog -o $GITHUB_WORKSPACE/artifacts/wasm
+    
     - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
-      #if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran      
+      uses: actions/upload-artifact@v2      
       with:
-        name: pages
-        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
+        name: drop
+        path: artifacts
+        
   deploy:
     needs: build 
     runs-on: ubuntu-latest
-    name: Deploy
-    #if: github.event_name == 'workflow_dispatch' # Only deploy if Workflow manually ran
+    name: Deploy    
     steps:
     - name: Download artifacts
       uses: actions/download-artifact@v2
       with:
         name: pages
-        path: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
+        path: $GITHUB_WORKSPACE/artifacts/wasm
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2
       with:
         target_branch: gh-pages
-        build_dir: ./src/AstroOdyssey/AstroOdyssey.Wasm/bin/${{env.config}}/${{env.framework}}/dist/
+        build_dir: $GITHUB_WORKSPACE/artifacts/wasm
         jekyll: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
