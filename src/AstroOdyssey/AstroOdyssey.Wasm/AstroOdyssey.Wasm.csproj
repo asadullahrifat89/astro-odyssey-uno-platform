@@ -64,4 +64,7 @@
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="4.0.0-dev.174" />
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
+	<ItemGroup>
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Components\Collectible.cs" />
+	</ItemGroup>
 </Project>

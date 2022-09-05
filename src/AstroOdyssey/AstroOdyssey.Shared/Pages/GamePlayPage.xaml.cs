@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using static AstroOdyssey.Constants;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace AstroOdyssey
 {
@@ -18,30 +19,31 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private int fpsSpawnCounter = 0;
-        private int fpsCount = 0;
-        private float lastFpsTime = 0;
-        private long frameStartTime;
-        private long frameEndTime;
+        private int _fpsSpawnCounter = 0;
+        private int _fpsCount = 0;
+        private float _lastFpsTime = 0;
+        private long _frameStartTime;
+        private long _frameEndTime;
 
 #if DEBUG
-        private int frameStatUpdateSpawnCounter;
-        private int frameStatUpdateDelay = 5;
-        private double frameDuration;
+        private int _frameStatUpdateSpawnCounter;
+        private int _frameStatUpdateDelay = 5;
+        private double _frameDuration;
 #endif
 
-        private int showInGameTextSpawnCounter = 110;
-        private int showInGameTextDelay = 110;
+        private int _showInGameTextSpawnCounter = 110;
+        private int _showInGameTextDelay = 110;
 
-        private double frameTime = 19;
+        private double _frameTime = 19;
 
-        private double windowWidth, windowHeight;
+        private double _windowWidth, _windowHeight;
 
         private readonly CelestialObjectFactory _celestialObjectFactory;
         private readonly MeteorFactory _meteorFactory;
         private readonly EnemyFactory _enemyFactory;
         private readonly HealthFactory _healthFactory;
         private readonly PowerUpFactory _powerUpFactory;
+        private readonly CollectibleFactory _collectibleFactory;
         private readonly PlayerFactory _playerFactory;
         private readonly PlayerProjectileFactory _playerProjectileFactory;
         private readonly EnemyProjectileFactory _enemyProjectileFactory;
@@ -57,10 +59,10 @@ namespace AstroOdyssey
             Loaded += GamePage_Loaded;
             Unloaded += GamePage_Unloaded;
 
-            windowWidth = Window.Current.Bounds.Width - 10;
-            windowHeight = Window.Current.Bounds.Height - 10;
+            _windowWidth = Window.Current.Bounds.Width - 10;
+            _windowHeight = Window.Current.Bounds.Height - 10;
 
-            PointerX = windowWidth / 2;
+            PointerX = _windowWidth / 2;
 
             AdjustView(); // at constructor
 
@@ -69,6 +71,7 @@ namespace AstroOdyssey
             _enemyFactory = new EnemyFactory(GameView);
             _healthFactory = new HealthFactory(GameView);
             _powerUpFactory = new PowerUpFactory(GameView);
+            _collectibleFactory = new CollectibleFactory(GameView);
             _playerFactory = new PlayerFactory(GameView);
             _playerProjectileFactory = new PlayerProjectileFactory(GameView);
             _enemyProjectileFactory = new EnemyProjectileFactory(GameView);
@@ -196,10 +199,10 @@ namespace AstroOdyssey
             Rage = 0;
             PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
-            GameScore = new GameScore();          
+            GameScore = new GameScore();
             SetScoreBarCountText(25);
 
-            PointerX = windowWidth / 2;
+            PointerX = _windowWidth / 2;
 
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
@@ -228,13 +231,13 @@ namespace AstroOdyssey
         /// <param name="e"></param>
         private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
         {
-            windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
-            windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+            _windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            _windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
 
             AdjustView(); // at view size change
 
 #if DEBUG
-            Console.WriteLine($"View Size: {windowWidth} x {windowHeight}");
+            Console.WriteLine($"View Size: {_windowWidth} x {_windowHeight}");
 #endif
         }
 
@@ -325,12 +328,12 @@ namespace AstroOdyssey
             {
                 var point = e.GetCurrentPoint(GameView);
 
-                if (point.Position.X < windowWidth / 2)  // move left
+                if (point.Position.X < _windowWidth / 2)  // move left
                 {
                     MoveLeft = true;
                     MoveRight = false;
                 }
-                else if (point.Position.X > windowWidth / 2) // move right
+                else if (point.Position.X > _windowWidth / 2) // move right
                 {
                     MoveRight = true;
                     MoveLeft = false;
@@ -415,17 +418,17 @@ namespace AstroOdyssey
             SetStars();
 
             Stopwatch = Stopwatch.StartNew();
-            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(frameTime) };
+            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
 
             GameFrameTimer.Tick += (s, e) =>
             {
-                frameStartTime = Stopwatch.ElapsedMilliseconds;
+                _frameStartTime = Stopwatch.ElapsedMilliseconds;
 
                 RenderGameFrame();
 
                 CalculateFPS();
 
-                frameEndTime = Stopwatch.ElapsedMilliseconds;
+                _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
                 GetFrameDuration();
 
@@ -477,16 +480,16 @@ namespace AstroOdyssey
         /// </summary>
         private void AdjustView()
         {
-            GameView.SetSize(windowHeight, windowWidth);
-            StarView.SetSize(windowHeight, windowWidth);
-            PlanetView.SetSize(windowHeight, windowWidth);
+            GameView.SetSize(_windowHeight, _windowWidth);
+            StarView.SetSize(_windowHeight, _windowWidth);
+            PlanetView.SetSize(_windowHeight, _windowWidth);
 
-            frameTime = 19 + (windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
+            _frameTime = 19 + (_windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
             // resize player size
             if (IsGameRunning)
             {
-                PointerX = windowWidth / 2;
+                PointerX = _windowWidth / 2;
 
                 Player.SetX(PointerX - Player.HalfWidth);
 
@@ -867,6 +870,26 @@ namespace AstroOdyssey
                         }
                     }
                     break;
+                case COLLECTIBLE:
+                    {
+                        var collectible = gameObject as Collectible;
+
+                        _collectibleFactory.UpdateCollectible(collectible: collectible, destroyed: out bool destroyed);
+
+                        if (destroyed)
+                            return;
+
+                        if (StarView.IsWarpingThroughSpace)
+                            return;
+
+                        // check if collectible collides with player
+                        if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
+                        {
+                            GameScore.CollectiblesCollected++;
+                            ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COMIC_BOOK_COLLECTED")}");
+                        }
+                    }
+                    break;
                 case POWERUP:
                     {
                         var powerUp = gameObject as PowerUp;
@@ -948,9 +971,9 @@ namespace AstroOdyssey
         private void SetAnalytics()
         {
 #if DEBUG
-            frameStatUpdateSpawnCounter -= 1;
+            _frameStatUpdateSpawnCounter -= 1;
 
-            if (frameStatUpdateSpawnCounter < 0)
+            if (_frameStatUpdateSpawnCounter < 0)
             {
                 var enemies = GameView.Children.OfType<Enemy>().Count();
                 var meteors = GameView.Children.OfType<Meteor>().Count();
@@ -965,10 +988,10 @@ namespace AstroOdyssey
 
                 var total = GameView.Children.Count + StarView.Children.Count + PlanetView.Children.Count;
 
-                FPSText.Text = "{ FPS: " + fpsCount + ", Frame: { Time: " + frameTime + ", Duration: " + (int)frameDuration + " }}";
+                FPSText.Text = "{ FPS: " + _fpsCount + ", Frame: { Time: " + _frameTime + ", Duration: " + (int)_frameDuration + " }}";
                 ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + ", Planets: " + planets + " }\n{ Total: " + total + " }";
 
-                frameStatUpdateSpawnCounter = frameStatUpdateDelay;
+                _frameStatUpdateSpawnCounter = _frameStatUpdateDelay;
             }
 #endif
         }
@@ -980,7 +1003,7 @@ namespace AstroOdyssey
         {
             InGameText.Visibility = Visibility.Visible;
             InGameText.Text = text;
-            showInGameTextSpawnCounter = showInGameTextDelay;
+            _showInGameTextSpawnCounter = _showInGameTextDelay;
         }
 
         /// <summary>
@@ -999,9 +1022,9 @@ namespace AstroOdyssey
         {
             if (!InGameText.Text.IsNullOrBlank())
             {
-                showInGameTextSpawnCounter -= 1;
+                _showInGameTextSpawnCounter -= 1;
 
-                if (showInGameTextSpawnCounter <= 0)
+                if (_showInGameTextSpawnCounter <= 0)
                 {
                     HideInGameText();
                 }
@@ -1085,7 +1108,7 @@ namespace AstroOdyssey
         private void GetFrameDuration()
         {
 #if DEBUG
-            frameDuration = frameEndTime - frameStartTime;
+            _frameDuration = _frameEndTime - _frameStartTime;
 #endif
         }
 
@@ -1095,14 +1118,14 @@ namespace AstroOdyssey
         private void CalculateFPS()
         {
             // calculate FPS
-            if (lastFpsTime + 1000 < frameStartTime)
+            if (_lastFpsTime + 1000 < _frameStartTime)
             {
-                fpsCount = fpsSpawnCounter;
-                fpsSpawnCounter = 0;
-                lastFpsTime = frameStartTime;
+                _fpsCount = _fpsSpawnCounter;
+                _fpsSpawnCounter = 0;
+                _lastFpsTime = _frameStartTime;
             }
 
-            fpsSpawnCounter++;
+            _fpsSpawnCounter++;
         }
 
         #endregion

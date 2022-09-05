@@ -22,9 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\ComicBook.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Factories\ComicBookFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\CollectibleFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />

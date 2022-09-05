@@ -95,7 +95,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.COMIC_BOOK_TEMPLATES)
+                foreach (var asset in Constants.COLLECTIBLE_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset);

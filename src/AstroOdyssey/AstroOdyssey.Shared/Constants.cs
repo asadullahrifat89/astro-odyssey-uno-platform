@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public const string HEALTH = "health";
         public const string POWERUP = "powerup";
-        public const string COMIC_BOOK = "comic_book";
+        public const string COLLECTIBLE = "collectible";
 
         public const string PLAYER_PROJECTILE = "player_projectile";
         public const string ENEMY_PROJECTILE = "enemy_projectile";
@@ -109,7 +109,7 @@ namespace AstroOdyssey
              (new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute), ShipClass.SPECTRE),
         };
 
-        public static Uri[] COMIC_BOOK_TEMPLATES = new Uri[]
+        public static Uri[] COLLECTIBLE_TEMPLATES = new Uri[]
         {
             new Uri("ms-appx:///Assets/Images/comic1.jpg", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/comic2.jpg", UriKind.RelativeOrAbsolute),
@@ -327,6 +327,13 @@ namespace AstroOdyssey
                 new ("de", "Bosse"),
                 new ("fr", "Boss"),
             }),
+            new LocalizationTemplate(key: "COLLECTIBLES_COLLECTED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Collectibles"),
+                new ("bn", "সংগ্রহযোগ্য"),
+                new ("de", "SAMMLERSTÜCKE"),
+                new ("fr", "OBJETS DE COLLECTION"),
+            }),
 
             new LocalizationTemplate(key: "SHIP_REPAIRED", cultureValues: new (string Culture, string Value)[]
             {
@@ -334,6 +341,13 @@ namespace AstroOdyssey
                 new ("bn", "জাহাজ মেরামত"),
                 new ("de", "SCHIFF REPARIERT"),
                 new ("fr", "NAVIRE RÉPARÉ"),
+            }),
+            new LocalizationTemplate(key: "COMIC_BOOK_COLLECTED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "COMIC BOOK COLLECTED"),
+                new ("bn", "কমিক বই সংগৃহীত"),
+                new ("de", "COMIC-BUCH GESAMMELT"),
+                new ("fr", "BD COLLECTIONNÉE"),
             }),
             new LocalizationTemplate(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]
             {

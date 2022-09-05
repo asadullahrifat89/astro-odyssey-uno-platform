@@ -105,6 +105,22 @@
                             TextAlignment="Center"
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>
+
+                    <!--  Collectibles  -->
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image
+                            Width="35"
+                            Height="35"
+                            Margin="5"
+                            Source="ms-appx:///Assets/Images/comic1.png" />
+                        <TextBlock
+                            x:Name="CollectiblesCollectedText"
+                            Margin="5"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
                 </StackPanel>
 
                 <!--  Congratulations  -->
