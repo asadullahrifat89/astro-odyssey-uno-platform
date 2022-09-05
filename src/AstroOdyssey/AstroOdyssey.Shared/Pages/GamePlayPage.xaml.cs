@@ -885,7 +885,7 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
-                            GameScore.Score += 3;
+                            GameScore.Score += GameView.IsBossEngaged ? 1 : 3; // bosses cause a score penalty
                             GameScore.CollectiblesCollected++;
                             ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COMIC_BOOK_COLLECTED")}");
                         }

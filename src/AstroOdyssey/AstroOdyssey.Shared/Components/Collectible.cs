@@ -44,7 +44,7 @@ namespace AstroOdyssey
             HalfWidth = Width / 2;
 
             // add a random rotation
-            Rotation = random.Next(0, 180);
+            Rotation = random.Next(0, 20);
             Rotate();
         }
 

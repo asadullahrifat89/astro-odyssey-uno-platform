@@ -256,9 +256,10 @@ namespace AstroOdyssey
 
                             enemy.SetProjectileImpactEffect();
 
-                            // bosses cause a score penalty
+                           
                             if (destructible.HasNoHealth)
                             {
+                                // bosses cause a score penalty
                                 if (enemy.IsPlayerColliding)
                                     score += _gameEnvironment.IsBossEngaged ? 1 : 3;
                                 else if (enemy.IsOverPowered)

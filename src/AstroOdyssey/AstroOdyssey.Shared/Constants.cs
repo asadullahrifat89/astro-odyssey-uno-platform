@@ -331,8 +331,8 @@ namespace AstroOdyssey
             {
                 new ("en", "Collectibles"),
                 new ("bn", "সংগ্রহযোগ্য"),
-                new ("de", "SAMMLERSTÜCKE"),
-                new ("fr", "OBJETS DE COLLECTION"),
+                new ("de", "Sammlerstücke"),
+                new ("fr", "Objets de collection"),
             }),
 
             new LocalizationTemplate(key: "SHIP_REPAIRED", cultureValues: new (string Culture, string Value)[]
