@@ -83,6 +83,22 @@ namespace AstroOdyssey
                     content.Source = new BitmapImage(new Uri(asset.AssetUri, UriKind.RelativeOrAbsolute));
                     AssetsPreloadGrid.Children.Add(content);
                 }
+
+                Image gameOver = new Image() { Stretch = Stretch.Uniform };
+                gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/gameOver.png", UriKind.RelativeOrAbsolute));
+                AssetsPreloadGrid.Children.Add(gameOver);
+
+                Image space_thrust1 = new Image() { Stretch = Stretch.Uniform };
+                gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute));
+                AssetsPreloadGrid.Children.Add(gameOver);
+
+                Image space_thrust2 = new Image() { Stretch = Stretch.Uniform };
+                gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute));
+                AssetsPreloadGrid.Children.Add(gameOver);
+
+                Image space_thrust3 = new Image() { Stretch = Stretch.Uniform };
+                gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute));
+                AssetsPreloadGrid.Children.Add(gameOver);
             }
         }
 
