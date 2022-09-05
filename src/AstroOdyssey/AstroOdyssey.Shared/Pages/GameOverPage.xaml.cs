@@ -24,11 +24,13 @@ namespace AstroOdyssey
 
         private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var score = App.GetScore();
-
             SetLocalization();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : score <= 400 ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : score <= 800 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score + "\n" + (App.GameScore.Score == 0 
+                ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400 
+                ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800 
+                ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400 
+                ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
 
             await this.PlayPageLoadedTransition();
         }       
