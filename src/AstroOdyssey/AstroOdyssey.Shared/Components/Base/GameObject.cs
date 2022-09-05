@@ -67,6 +67,8 @@ namespace AstroOdyssey
 
         public bool IsPickup { get; set; }
 
+        public bool IsCollectible { get; set; }
+
         public double HalfWidth { get; set; }
 
         private bool _isMarkedForFadedDestruction;

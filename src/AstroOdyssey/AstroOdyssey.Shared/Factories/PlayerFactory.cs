@@ -7,21 +7,21 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment gameEnvironment;
+        private readonly GameEnvironment _gameEnvironment;
 
-        private int playerDamageRecoveryCounter;
-        private readonly int playerDamageRecoveryDelay = 120;
+        private int _playerDamageRecoveryCounter;
+        private readonly int _playerDamageRecoveryDelay = 120;
 
-        private int powerUpTriggerSpawnCounter;
-        private readonly int powerUpTriggerDelay = 1050;
+        private int _powerUpTriggerSpawnCounter;
+        private readonly int _powerUpTriggerDelay = 1050;
 
-        private int playerRageCoolDownCounter;
-        private readonly int playerRageCoolDownDelay = 1000;
+        private int _playerRageCoolDownCounter;
+        private readonly int _playerRageCoolDownDelay = 1000;
 
-        private double playerSpeed = 12;
-        private double accelerationCounter = 0;
+        private double _playerSpeed = 12;
+        private double _accelerationCounter = 0;
 
-        private XDirection xDirectionLast = XDirection.NONE;
+        private XDirection _xDirectionLast = XDirection.NONE;
 
 
         #endregion
@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         public PlayerFactory(GameEnvironment gameEnvironment)
         {
-            this.gameEnvironment = gameEnvironment;
+            this._gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -44,14 +44,14 @@ namespace AstroOdyssey
         {
             var player = new Player();
 
-            var scale = gameEnvironment.GetGameObjectScale();
+            var scale = _gameEnvironment.GetGameObjectScale();
 
-            player.SetAttributes(speed: playerSpeed * scale, ship: ship, scale: scale);
+            player.SetAttributes(speed: _playerSpeed * scale, ship: ship, scale: scale);
 
             var left = pointerX - player.HalfWidth;
             double top = GetOptimalPlayerY(player);
 
-            player.AddToGameEnvironment(top: top, left: left, gameEnvironment: gameEnvironment);
+            player.AddToGameEnvironment(top: top, left: left, gameEnvironment: _gameEnvironment);
 
             Canvas.SetZIndex(player, 999);
 
@@ -60,7 +60,7 @@ namespace AstroOdyssey
 
         public double GetOptimalPlayerY(Player player)
         {
-            return gameEnvironment.Height - player.Height - 45;
+            return _gameEnvironment.Height - player.Height - 45;
         }
 
         /// <summary>
@@ -73,27 +73,27 @@ namespace AstroOdyssey
             var xDirectionNow = moveLeft ? XDirection.LEFT : XDirection.RIGHT;
 
             // if direction was changed reset acceleration
-            if (xDirectionNow != xDirectionLast)
-                accelerationCounter = 0;
+            if (xDirectionNow != _xDirectionLast)
+                _accelerationCounter = 0;
 
             //var playerY = player.GetY();         
 
-            var playerSpeed = accelerationCounter >= player.Speed ? player.Speed : accelerationCounter / 1.3;
+            var playerSpeed = _accelerationCounter >= player.Speed ? player.Speed : _accelerationCounter / 1.3;
 
             // increase acceleration and stop when player speed is reached
-            accelerationCounter++;
+            _accelerationCounter++;
 
             // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
             {
                 pointerX -= playerSpeed;
-                xDirectionLast = XDirection.LEFT;
+                _xDirectionLast = XDirection.LEFT;
             }
 
-            if (moveRight && playerX + player.Width < gameEnvironment.Width)
+            if (moveRight && playerX + player.Width < _gameEnvironment.Width)
             {
                 pointerX += playerSpeed;
-                xDirectionLast = XDirection.RIGHT;
+                _xDirectionLast = XDirection.RIGHT;
             }
 
             //if (moveUp && playerY > player.Height)
@@ -109,7 +109,7 @@ namespace AstroOdyssey
             // move right
             if (pointerX - player.HalfWidth > playerX + playerSpeed)
             {
-                if (playerX + player.HalfWidth < gameEnvironment.Width)
+                if (playerX + player.HalfWidth < _gameEnvironment.Width)
                     SetPlayerX(player: player, left: playerX + playerSpeed);
             }
 
@@ -142,34 +142,34 @@ namespace AstroOdyssey
         public double UpdateAcceleration(Player player, double pointerX)
         {
             // reset acceleration if was beyond player speed
-            if (accelerationCounter > player.Speed)
-                accelerationCounter = player.Speed;
+            if (_accelerationCounter > player.Speed)
+                _accelerationCounter = player.Speed;
 
             // slowly deaccelerate based on last x axis direction
-            if (accelerationCounter > 0)
+            if (_accelerationCounter > 0)
             {
                 var playerX = player.GetX();
 
-                if (playerX + player.Width >= gameEnvironment.Width - 20 || playerX <= 20)
+                if (playerX + player.Width >= _gameEnvironment.Width - 20 || playerX <= 20)
                 {
-                    accelerationCounter = 0;
+                    _accelerationCounter = 0;
                     return pointerX;
                 }
 
-                switch (xDirectionLast)
+                switch (_xDirectionLast)
                 {
                     case XDirection.NONE:
                         break;
                     case XDirection.LEFT:
                         {
-                            pointerX -= accelerationCounter;
-                            SetPlayerX(player: player, left: playerX - accelerationCounter);
+                            pointerX -= _accelerationCounter;
+                            SetPlayerX(player: player, left: playerX - _accelerationCounter);
                         }
                         break;
                     case XDirection.RIGHT:
                         {
-                            pointerX += accelerationCounter;
-                            SetPlayerX(player: player, left: playerX + accelerationCounter);
+                            pointerX += _accelerationCounter;
+                            SetPlayerX(player: player, left: playerX + _accelerationCounter);
 
                         }
                         break;
@@ -177,7 +177,7 @@ namespace AstroOdyssey
                         break;
                 }
 
-                accelerationCounter--;
+                _accelerationCounter--;
             }
 
             return pointerX;
@@ -288,7 +288,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameEnvironment.AddDestroyableGameObject(gameObject);
+                            _gameEnvironment.AddDestroyableGameObject(gameObject);
                             PlayerHealthGain(player, gameObject as Health);
 
                             return true;
@@ -299,7 +299,7 @@ namespace AstroOdyssey
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
-                            gameEnvironment.AddDestroyableGameObject(gameObject);
+                            _gameEnvironment.AddDestroyableGameObject(gameObject);
                             PowerUp(player: player, powerUpType: (gameObject as PowerUp).PowerUpType);
 
                             return true;
@@ -325,7 +325,7 @@ namespace AstroOdyssey
             // enter damage recovery state, prevent taking damage for a few milliseconds            
             player.IsRecoveringFromDamage = true;
 
-            playerDamageRecoveryCounter = playerDamageRecoveryDelay;
+            _playerDamageRecoveryCounter = _playerDamageRecoveryDelay;
         }
 
         /// <summary>
@@ -335,9 +335,9 @@ namespace AstroOdyssey
         {
             if (player.IsRecoveringFromDamage)
             {
-                playerDamageRecoveryCounter -= 1;
+                _playerDamageRecoveryCounter -= 1;
 
-                if (playerDamageRecoveryCounter <= 0)
+                if (_playerDamageRecoveryCounter <= 0)
                 {
                     player.IsRecoveringFromDamage = false;
                 }
@@ -359,7 +359,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            powerUpTriggerSpawnCounter = powerUpTriggerDelay;
+            _powerUpTriggerSpawnCounter = _powerUpTriggerDelay;
 
             AudioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
@@ -370,22 +370,22 @@ namespace AstroOdyssey
         /// </summary>
         public (bool PowerDown, double PowerRemaining) PowerUpCoolDown(Player player)
         {
-            powerUpTriggerSpawnCounter -= 1;
+            _powerUpTriggerSpawnCounter -= 1;
 
-            if (powerUpTriggerSpawnCounter <= 0)
+            if (_powerUpTriggerSpawnCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
                 return (true, 0);
             }
 
-            var remainingPower = (double)((double)powerUpTriggerSpawnCounter / (double)powerUpTriggerDelay) * POWER_UP_METER;
+            var remainingPower = (double)((double)_powerUpTriggerSpawnCounter / (double)_powerUpTriggerDelay) * POWER_UP_METER;
             return (false, remainingPower);
         }
 
         public void RageUp(Player player)
         {
-            playerRageCoolDownCounter = playerRageCoolDownDelay;
+            _playerRageCoolDownCounter = _playerRageCoolDownDelay;
             switch (player.ShipClass)
             {
                 case ShipClass.DEFENDER:
@@ -412,25 +412,25 @@ namespace AstroOdyssey
 
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
         {
-            playerRageCoolDownCounter--;
+            _playerRageCoolDownCounter--;
 
             switch (player.ShipClass)
             {
                 case ShipClass.DEFENDER:
                     {
-                        if (playerRageCoolDownCounter <= 0)
+                        if (_playerRageCoolDownCounter <= 0)
                             player.IsShieldUp = false;
                     }
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        if (playerRageCoolDownCounter <= 0)
+                        if (_playerRageCoolDownCounter <= 0)
                             player.IsFirePowerUp = false;
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
-                        if (playerRageCoolDownCounter <= 0)
+                        if (_playerRageCoolDownCounter <= 0)
                             player.IsCloakUp = false;
                     }
                     break;
@@ -438,13 +438,13 @@ namespace AstroOdyssey
                     break;
             }
 
-            if (playerRageCoolDownCounter <= 0)
+            if (_playerRageCoolDownCounter <= 0)
             {
                 AudioHelper.PlaySound(SoundType.RAGE_DOWN);
                 return (true, 0);
             }
 
-            var remainingRage = (double)((double)playerRageCoolDownCounter / (double)playerRageCoolDownDelay) * RAGE_THRESHOLD;
+            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownDelay) * RAGE_THRESHOLD;
 
             return (false, remainingRage);
         }

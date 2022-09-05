@@ -6,13 +6,12 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment gameEnvironment;
+        private readonly GameEnvironment _gameEnvironment;
+        private readonly Random _random = new Random();
 
-        private readonly Random random = new Random();
-
-        private int healthSpawnCounter;
-        private int healthSpawnDelay = 1000;
-        private double healthSpeed = 2;
+        private int _healthSpawnCounter;
+        private int _healthSpawnDelay = 1000;
+        private double _healthSpeed = 2;
 
         #endregion
 
@@ -20,7 +19,7 @@ namespace AstroOdyssey
 
         public HealthFactory(GameEnvironment gameEnvironment)
         {
-            this.gameEnvironment = gameEnvironment;
+            this._gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -35,14 +34,14 @@ namespace AstroOdyssey
             if (player.Health <= 70)
             {
                 // each frame progress decreases this counter
-                healthSpawnCounter -= 1;
+                _healthSpawnCounter -= 1;
 
                 // when counter reaches zero, create a Health
-                if (healthSpawnCounter < 0)
+                if (_healthSpawnCounter < 0)
                 {
                     GenerateHealth();
-                    healthSpawnCounter = healthSpawnDelay;
-                    healthSpawnDelay = random.Next(900, 1001);
+                    _healthSpawnCounter = _healthSpawnDelay;
+                    _healthSpawnDelay = _random.Next(900, 1001);
                 }
             }
         }
@@ -54,11 +53,11 @@ namespace AstroOdyssey
         {
             var health = new Health();
 
-            health.SetAttributes(speed: healthSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
-            health.AddToGameEnvironment(top: 0 - health.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            health.SetAttributes(speed: _healthSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
+            health.AddToGameEnvironment(top: 0 - health.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
 
             // change the next health spawn time
-            healthSpawnDelay = random.Next(1000, 1500);
+            _healthSpawnDelay = _random.Next(1000, 1500);
         }
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace AstroOdyssey
             health.MoveY();
 
             // if health or meteor object has gone beyond game view
-            destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(health);
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(health);
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            healthSpeed += 1;
+            _healthSpeed += 1;
         }
 
         #endregion

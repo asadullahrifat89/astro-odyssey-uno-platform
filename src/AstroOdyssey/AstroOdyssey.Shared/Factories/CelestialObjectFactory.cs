@@ -6,26 +6,26 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment starView;
-        private readonly GameEnvironment planetView;
+        private readonly GameEnvironment _starView;
+        private readonly GameEnvironment _planetView;
 
-        private readonly Random random = new Random();
+        private readonly Random _random = new Random();
 
-        private int starSpawnCounter;
-        private int starSpawnDelay = 250;
-        private double starSpeed = 0.2d;
+        private int _starSpawnCounter;
+        private int _starSpawnDelay = 250;
+        private double _starSpeed = 0.2d;
 
-        private int spaceWarpDurationCounter;
-        private int spaceWarpDurationDelay = 100;
+        private int _spaceWarpDurationCounter;
+        private int _spaceWarpDurationDelay = 100;
 
-        private int planetSpawnCounter;
-        private int planetSpawnDelay = 2000;
+        private int _planetSpawnCounter;
+        private int _planetSpawnDelay = 2000;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
         private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
         private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
 
-        private double lastStarSpeed;
+        private double _lastStarSpeed;
 
         #endregion
 
@@ -33,8 +33,8 @@ namespace AstroOdyssey
 
         public CelestialObjectFactory(GameEnvironment starView, GameEnvironment planetView)
         {
-            this.starView = starView;
-            this.planetView = planetView;
+            this._starView = starView;
+            this._planetView = planetView;
         }
 
         #endregion       
@@ -46,21 +46,21 @@ namespace AstroOdyssey
         /// </summary>
         public void StartSpaceWarp()
         {
-            lastStarSpeed = starSpeed;
+            _lastStarSpeed = _starSpeed;
 
-            starSpawnDelay -= SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
+            _starSpawnDelay -= SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
 
-            starSpeed += SPACE_WARP_STAR_SPEED_INCREASE;
+            _starSpeed += SPACE_WARP_STAR_SPEED_INCREASE;
 
-            starSpawnCounter = starSpawnDelay;
+            _starSpawnCounter = _starSpawnDelay;
 
-            planetSpawnDelay -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
-            planetSpawnCounter = planetSpawnDelay;
+            _planetSpawnDelay -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
+            _planetSpawnCounter = _planetSpawnDelay;
 
-            spaceWarpDurationCounter = spaceWarpDurationDelay;
+            _spaceWarpDurationCounter = _spaceWarpDurationDelay;
 
-            starView.IsWarpingThroughSpace = true;
-            planetView.IsWarpingThroughSpace = true;
+            _starView.IsWarpingThroughSpace = true;
+            _planetView.IsWarpingThroughSpace = true;
 
             //starView.Background = new SolidColorBrush(Colors.DeepPink);
         }
@@ -70,15 +70,15 @@ namespace AstroOdyssey
         /// </summary>
         public void StopSpaceWarp()
         {
-            starSpeed = lastStarSpeed;
-            starSpawnDelay += SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
-            starSpawnCounter = starSpawnDelay;
+            _starSpeed = _lastStarSpeed;
+            _starSpawnDelay += SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
+            _starSpawnCounter = _starSpawnDelay;
 
-            planetSpawnDelay += SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
-            planetSpawnCounter = planetSpawnDelay;
+            _planetSpawnDelay += SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
+            _planetSpawnCounter = _planetSpawnDelay;
 
-            starView.IsWarpingThroughSpace = false;
-            planetView.IsWarpingThroughSpace = false;
+            _starView.IsWarpingThroughSpace = false;
+            _planetView.IsWarpingThroughSpace = false;
 
             // generate a planet after each warp
             GeneratePlanet();
@@ -91,42 +91,42 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnCelestialObject()
         {
-            if (starView.IsWarpingThroughSpace)
+            if (_starView.IsWarpingThroughSpace)
             {
-                spaceWarpDurationCounter--;
+                _spaceWarpDurationCounter--;
 
-                if (spaceWarpDurationCounter <= 0)
+                if (_spaceWarpDurationCounter <= 0)
                 {
                     StopSpaceWarp();
                     //return;
                 }
 
                 // slowing down effect
-                if (spaceWarpDurationCounter <= 50)
+                if (_spaceWarpDurationCounter <= 50)
                 {
-                    if (starSpeed > lastStarSpeed + 4)
-                        starSpeed--;
+                    if (_starSpeed > _lastStarSpeed + 4)
+                        _starSpeed--;
                 }
             }
 
             // each frame progress decreases this counter
-            starSpawnCounter--;
+            _starSpawnCounter--;
 
             // when counter reaches zero, create an star
-            if (starSpawnCounter < 0)
+            if (_starSpawnCounter < 0)
             {
                 GenerateStar();
-                starSpawnCounter = starSpawnDelay;
+                _starSpawnCounter = _starSpawnDelay;
             }
 
-            planetSpawnCounter--;
+            _planetSpawnCounter--;
 
-            if (planetSpawnCounter <= 0)
+            if (_planetSpawnCounter <= 0)
             {
                 GeneratePlanet();
 
-                planetSpawnDelay = random.Next(2500, 3500);
-                planetSpawnCounter = planetSpawnDelay;
+                _planetSpawnDelay = _random.Next(2500, 3500);
+                _planetSpawnCounter = _planetSpawnDelay;
             }
         }
 
@@ -138,14 +138,14 @@ namespace AstroOdyssey
             var star = new CelestialObject();
 
             star.SetAttributes(
-                speed: starSpeed,
-                scale: starView.GetGameObjectScale(),
+                speed: _starSpeed,
+                scale: _starView.GetGameObjectScale(),
                 celestialObjectType: CelestialObjectType.Star);
 
             var top = 0 - star.Height;
-            var left = random.Next(10, (int)starView.Width - 10);
+            var left = _random.Next(10, (int)_starView.Width - 10);
 
-            star.AddToGameEnvironment(top: top, left: left, gameEnvironment: starView);
+            star.AddToGameEnvironment(top: top, left: left, gameEnvironment: _starView);
         }
 
         /// <summary>
@@ -156,14 +156,14 @@ namespace AstroOdyssey
             var planet = new CelestialObject();
 
             planet.SetAttributes(
-                speed: starSpeed * 2,
-                scale: planetView.GetGameObjectScale(),
+                speed: _starSpeed * 2,
+                scale: _planetView.GetGameObjectScale(),
                 celestialObjectType: CelestialObjectType.Planet);
 
             var top = 0 - planet.Height;
-            var left = random.Next(10, (int)planetView.Width - 100);
+            var left = _random.Next(10, (int)_planetView.Width - 100);
 
-            planet.AddToGameEnvironment(top: top, left: left, gameEnvironment: planetView);
+            planet.AddToGameEnvironment(top: top, left: left, gameEnvironment: _planetView);
         }
 
         /// <summary>
@@ -179,11 +179,11 @@ namespace AstroOdyssey
                 case CelestialObjectType.Star:
                     {
                         // move star down
-                        celestialObject.MoveY(starSpeed);
+                        celestialObject.MoveY(_starSpeed);
 
-                        if (celestialObject.GetY() > starView.Height)
+                        if (celestialObject.GetY() > _starView.Height)
                         {
-                            starView.AddDestroyableGameObject(celestialObject);
+                            _starView.AddDestroyableGameObject(celestialObject);
                             destroyed = true;
                         }
                     }
@@ -191,11 +191,11 @@ namespace AstroOdyssey
                 case CelestialObjectType.Planet:
                     {
                         // move star down
-                        celestialObject.MoveY(starSpeed * 2);
+                        celestialObject.MoveY(_starSpeed * 2);
 
-                        if (celestialObject.GetY() > planetView.Height)
+                        if (celestialObject.GetY() > _planetView.Height)
                         {
-                            planetView.AddDestroyableGameObject(celestialObject);
+                            _planetView.AddDestroyableGameObject(celestialObject);
                             destroyed = true;
                         }
                     }
@@ -210,8 +210,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            starSpawnDelay -= 10;
-            starSpeed += 0.1d;
+            _starSpawnDelay -= 10;
+            _starSpeed += 0.1d;
         }
 
         #endregion

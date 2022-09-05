@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using static AstroOdyssey.Constants;
+using System.Linq;
 
 namespace AstroOdyssey
 {
@@ -167,20 +168,22 @@ namespace AstroOdyssey
 
             Uri exhaustUri = null;
 
-            switch (ShipClass)
-            {
-                case ShipClass.DEFENDER:
-                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
-                    break;
-                case ShipClass.BERSERKER:
-                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
-                    break;
-                case ShipClass.SPECTRE:
-                    exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
-                    break;
-                default:
-                    break;
-            }
+            exhaustUri = Constants.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
+
+            //switch (ShipClass)
+            //{
+            //    case ShipClass.DEFENDER:
+            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
+            //        break;
+            //    case ShipClass.BERSERKER:
+            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
+            //        break;
+            //    case ShipClass.SPECTRE:
+            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
+            //        break;
+            //    default:
+            //        break;
+            //}
 
             _contentShipBlaze.Source = new BitmapImage(exhaustUri);
             _contentShipBlaze.Width = _body.Width;

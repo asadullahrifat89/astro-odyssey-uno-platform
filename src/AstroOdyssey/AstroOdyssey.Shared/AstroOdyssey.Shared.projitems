@@ -22,7 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\ComicBook.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\ComicBookFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />
@@ -94,6 +96,16 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic1.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic10.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic2.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic3.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic4.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic5.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic6.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic7.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic8.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\comic9.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole1.png" />
@@ -208,7 +220,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>

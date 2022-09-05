@@ -8,6 +8,8 @@ namespace AstroOdyssey
         #region Fields
 
         public const double DESTRUCTIBLE_OBJECT_SIZE = 70;
+        public const double COLLECTIBLE_OBJECT_SIZE = 75;
+
         public const double PLAYER_HEIGHT = 80;
 
         public const string PLAYER = "player";
@@ -17,6 +19,7 @@ namespace AstroOdyssey
 
         public const string HEALTH = "health";
         public const string POWERUP = "powerup";
+        public const string COMIC_BOOK = "comic_book";
 
         public const string PLAYER_PROJECTILE = "player_projectile";
         public const string ENEMY_PROJECTILE = "enemy_projectile";
@@ -97,6 +100,27 @@ namespace AstroOdyssey
             new PlayerShipTemplate(name: "Antimony", assetUri: "ms-appx:///Assets/Images/player_ship1.png", shipClass: ShipClass.DEFENDER),
             new PlayerShipTemplate(name: "Bismuth", assetUri: "ms-appx:///Assets/Images/player_ship2.png", shipClass: ShipClass.BERSERKER),
             new PlayerShipTemplate(name: "Curium", assetUri: "ms-appx:///Assets/Images/player_ship3.png", shipClass: ShipClass.SPECTRE),
+        };
+
+        public static (Uri AssetUri, ShipClass ShipClass)[] PLAYER_SHIP_THRUST_TEMPLATES = new (Uri AssetUri, ShipClass ShipClass)[]
+        {
+             (new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute), ShipClass.DEFENDER),
+             (new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute), ShipClass.BERSERKER),
+             (new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute), ShipClass.SPECTRE),
+        };
+
+        public static Uri[] COMIC_BOOK_TEMPLATES = new Uri[]
+        {
+            new Uri("ms-appx:///Assets/Images/comic1.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic2.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic3.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic4.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic5.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic6.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic7.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic8.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic9.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/comic10.jpg", UriKind.RelativeOrAbsolute),
         };
 
         public static LocalizationTemplate[] LOCALIZATION_TEMPLATES = new LocalizationTemplate[]
