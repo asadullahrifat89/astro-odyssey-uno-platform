@@ -24,14 +24,24 @@ namespace AstroOdyssey
 
         private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var score = App.GetScore();
-
             SetLocalization();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + score + "\n" + (score == 0 ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : score <= 400 ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : score <= 800 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : score <= 1400 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;          
+
+            EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
+            MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
+            BossesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
+
+            CongratulationsText.Text = (App.GameScore.Score == 0
+                ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
+                ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
+                ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
+                ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+
+            
 
             await this.PlayPageLoadedTransition();
-        }       
+        }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
@@ -51,7 +61,7 @@ namespace AstroOdyssey
         {
             LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
             LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
-        } 
+        }
 
         #endregion
     }

@@ -32,6 +32,7 @@
                     Text="☠️"
                     TextAlignment="Center" />
 
+                <!--  Tagline  -->
                 <TextBlock
                     x:Name="GameOverPage_Tagline"
                     x:Uid="GameOverPage_Tagline"
@@ -40,13 +41,87 @@
                     Text="GAME OVER"
                     TextAlignment="Center" />
 
-                <TextBlock
-                    x:Name="ScoreText"
-                    Margin="60"
-                    FontSize="30"
-                    FontWeight="Bold"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                <!--  Score  -->
+                <StackPanel Margin="60,40,60,0">
+                    <TextBlock
+                        x:Name="ScoreText"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
+                    <Border
+                        Margin="10"
+                        Background="Goldenrod"
+                        BorderBrush="DarkGoldenrod"
+                        BorderThickness="3"
+                        CornerRadius="50" />
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Left">
+                    <!--  Enemies  -->
+                    <StackPanel Margin="5,10,5,5" Orientation="Horizontal">
+                        <Image
+                            Width="35"
+                            Height="35"
+                            Margin="5"
+                            Source="ms-appx:///Assets/Images/enemy_3.png" />
+                        <TextBlock
+                            x:Name="EnemiesDestroyedText"
+                            Margin="5"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <!--  Meteors  -->
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image
+                            Width="35"
+                            Height="35"
+                            Margin="5"
+                            Source="ms-appx:///Assets/Images/rock1.png" />
+                        <TextBlock
+                            x:Name="MeteorsDestroyedText"
+                            Margin="5"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <!--  Bosses  -->
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Image
+                            Width="35"
+                            Height="35"
+                            Margin="5"
+                            Source="ms-appx:///Assets/Images/enemy_1.png" />
+                        <TextBlock
+                            x:Name="BossesDestroyedText"
+                            Margin="5"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!--  Congratulations  -->
+                <StackPanel Margin="60,0,60,20">
+                    <Border
+                        Margin="10"
+                        Background="Goldenrod"
+                        BorderBrush="DarkGoldenrod"
+                        BorderThickness="3"
+                        CornerRadius="50" />
+                    <TextBlock
+                        x:Name="CongratulationsText"
+                        FontSize="25"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
+                </StackPanel>
 
                 <!--  Play again button  -->
                 <Button

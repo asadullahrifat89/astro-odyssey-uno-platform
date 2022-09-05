@@ -71,7 +71,7 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public static double Score { get; set; }
+        public static GameScore GameScore { get; set; }
 
         public static Ship Ship { get; set; }
 
@@ -196,14 +196,9 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void SetScore(double score)
+        public static void SetScore(GameScore gameScore)
         {
-            Score = score;
-        }
-
-        public static double GetScore()
-        {
-            return Score;
+            GameScore = gameScore;
         }
 
         /// <summary>

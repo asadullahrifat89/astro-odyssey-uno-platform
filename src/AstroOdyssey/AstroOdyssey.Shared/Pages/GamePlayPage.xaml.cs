@@ -86,7 +86,7 @@ namespace AstroOdyssey
 
         public double Rage { get; set; } = 0;
 
-        public double Score { get; set; } = 0;
+        public GameScore GameScore { get; set; } = new GameScore();
 
         public double PointerX { get; set; }
 
@@ -115,7 +115,6 @@ namespace AstroOdyssey
             set
             {
                 _moveLeft = value;
-
                 MoveLeftFeed.Visibility = _moveLeft ? Visibility.Visible : Visibility.Collapsed;
             }
         }
@@ -127,7 +126,6 @@ namespace AstroOdyssey
             set
             {
                 _moveRight = value;
-
                 MoveRightFeed.Visibility = _moveRight ? Visibility.Visible : Visibility.Collapsed;
             }
         }
@@ -187,7 +185,7 @@ namespace AstroOdyssey
 
             GameLevel = GameLevel.Level_1;
             SetGameLevelText();
-           
+
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
@@ -198,7 +196,7 @@ namespace AstroOdyssey
             Rage = 0;
             PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
-            Score = 0;
+            GameScore = new GameScore();          
             SetScoreBarCountText(25);
 
             PointerX = windowWidth / 2;
@@ -753,7 +751,7 @@ namespace AstroOdyssey
                                 }
                             }
 
-                            Score += score;
+                            GameScore.Score += score;
                             SetGameLevel(); // check game level on score change
                         }
 
@@ -766,16 +764,19 @@ namespace AstroOdyssey
                                         var enemy = destroyedObject as Enemy;
 
                                         _enemyFactory.DestroyEnemy(enemy);
+                                        GameScore.EnemiesDestroyed++;
 
                                         if (enemy.IsBoss)
                                         {
                                             DisengageBoss();
+                                            GameScore.BossesDestroyed++;
                                         }
                                     }
                                     break;
                                 case METEOR:
                                     {
                                         _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
+                                        GameScore.MeteorsDestroyed++;
                                     }
                                     break;
                                 default:
@@ -1029,7 +1030,7 @@ namespace AstroOdyssey
 
             AudioHelper.PlaySound(SoundType.GAME_OVER);
 
-            App.SetScore(Score);
+            App.SetScore(GameScore);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -1217,64 +1218,64 @@ namespace AstroOdyssey
         {
             var lastGameLevel = GameLevel;
 
-            if (Score >= 0)
+            if (GameScore.Score >= 0)
             {
                 GameLevel = GameLevel.Level_1;
-                ScoreBar.Value = Score / 25 * 100;
+                ScoreBar.Value = GameScore.Score / 25 * 100;
                 SetScoreBarCountText(25);
             }
-            if (Score > 25)
+            if (GameScore.Score > 25)
             {
                 GameLevel = GameLevel.Level_2;
-                ScoreBar.Value = Score / 100 * 100;
+                ScoreBar.Value = GameScore.Score / 100 * 100;
                 SetScoreBarCountText(100);
             }
-            if (Score > 100)
+            if (GameScore.Score > 100)
             {
                 GameLevel = GameLevel.Level_3;
-                ScoreBar.Value = Score / 200 * 100;
+                ScoreBar.Value = GameScore.Score / 200 * 100;
                 SetScoreBarCountText(200);
             }
-            if (Score > 200)
+            if (GameScore.Score > 200)
             {
                 GameLevel = GameLevel.Level_4;
-                ScoreBar.Value = Score / 400 * 100;
+                ScoreBar.Value = GameScore.Score / 400 * 100;
                 SetScoreBarCountText(400);
             }
-            if (Score > 400)
+            if (GameScore.Score > 400)
             {
                 GameLevel = GameLevel.Level_5;
-                ScoreBar.Value = Score / 600 * 100;
+                ScoreBar.Value = GameScore.Score / 600 * 100;
                 SetScoreBarCountText(600);
             }
-            if (Score > 600)
+            if (GameScore.Score > 600)
             {
                 GameLevel = GameLevel.Level_6;
-                ScoreBar.Value = Score / 800 * 100;
+                ScoreBar.Value = GameScore.Score / 800 * 100;
                 SetScoreBarCountText(800);
             }
-            if (Score > 800)
+            if (GameScore.Score > 800)
             {
                 GameLevel = GameLevel.Level_7;
-                ScoreBar.Value = Score / 1000 * 100;
+                ScoreBar.Value = GameScore.Score / 1000 * 100;
                 SetScoreBarCountText(1000);
             }
-            if (Score > 1000)
+            if (GameScore.Score > 1000)
             {
                 GameLevel = GameLevel.Level_8;
-                ScoreBar.Value = Score / 1200 * 100;
+                ScoreBar.Value = GameScore.Score / 1200 * 100;
                 SetScoreBarCountText(1200);
             }
-            if (Score > 1200)
+            if (GameScore.Score > 1200)
             {
                 GameLevel = GameLevel.Level_9;
-                ScoreBar.Value = Score / 1400 * 100;
+                ScoreBar.Value = GameScore.Score / 1400 * 100;
                 SetScoreBarCountText(1400);
             }
-            if (Score > 1400)
+            if (GameScore.Score > 1400)
             {
                 GameLevel = GameLevel.Level_10;
-                ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {Score}/MAX";
+                ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/MAX";
             }
 
             // when difficulty changes show level up
@@ -1300,7 +1301,7 @@ namespace AstroOdyssey
 
         private void SetScoreBarCountText(int capacity)
         {
-            ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {Score}/{capacity}";
+            ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/{capacity}";
         }
 
         private void SetGameLevelText()
