@@ -275,6 +275,34 @@ namespace AstroOdyssey
                 new ("de", "Punktzahl"),
                 new ("fr", "Score"),
             }),
+            new LocalizationTemplate(key: "DESTROYED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Destroyed"),
+                new ("bn", "ধ্বংস"),
+                new ("de", "Zerstört"),
+                new ("fr", "Détruits"),
+            }),
+            new LocalizationTemplate(key: "ENEMIES_DESTROYED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enemies"),
+                new ("bn", "শত্রু"),
+                new ("de", "Feinde"),
+                new ("fr", "Ennemis"),
+            }),
+            new LocalizationTemplate(key: "METEORS_DESTROYED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Meteors"),
+                new ("bn", "উল্কা"),
+                new ("de", "Meteoren"),
+                new ("fr", "Météores"),
+            }),
+            new LocalizationTemplate(key: "BOSSES_DESTROYED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Bosses"),
+                new ("bn", "বস"),
+                new ("de", "Bosse"),
+                new ("fr", "Boss"),
+            }),
 
             new LocalizationTemplate(key: "SHIP_REPAIRED", cultureValues: new (string Culture, string Value)[]
             {

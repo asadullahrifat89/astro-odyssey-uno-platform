@@ -42,8 +42,40 @@
 
                 <TextBlock
                     x:Name="ScoreText"
-                    Margin="60"
+                    Margin="60,60,60,10"
                     FontSize="30"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <TextBlock
+                    x:Name="EnemiesDestroyedText"
+                    Margin="5,20,5,5"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <TextBlock
+                    x:Name="MeteorsDestroyedText"
+                    Margin="5"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <TextBlock
+                    x:Name="BossesDestroyedText"
+                    Margin="5"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <TextBlock
+                    x:Name="CongratulationsText"
+                    Margin="60,40,60,60"
+                    FontSize="25"
                     FontWeight="Bold"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
