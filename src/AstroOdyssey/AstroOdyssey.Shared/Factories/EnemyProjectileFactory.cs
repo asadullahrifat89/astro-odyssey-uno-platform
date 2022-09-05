@@ -6,9 +6,8 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment gameEnvironment;
-
-        private Random random = new Random();
+        private readonly GameEnvironment _gameEnvironment;
+        private Random _random = new Random();
 
         #endregion
 
@@ -16,7 +15,7 @@ namespace AstroOdyssey
 
         public EnemyProjectileFactory(GameEnvironment gameEnvironment)
         {
-            this.gameEnvironment = gameEnvironment;
+            this._gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -42,7 +41,7 @@ namespace AstroOdyssey
                 GenerateProjectile(enemy, gameLevel);
 
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
-                enemy.ProjectileSpawnDelay = random.Next(25, 60);
+                enemy.ProjectileSpawnDelay = _random.Next(25, 60);
 
                 //enemy.SetRecoilEffect();
             }
@@ -57,7 +56,7 @@ namespace AstroOdyssey
         {
             var projectile = new EnemyProjectile();
 
-            var scale = gameEnvironment.GetGameObjectScale();
+            var scale = _gameEnvironment.GetGameObjectScale();
 
             // boss fires a little faster than usual enemies
             projectile.SetAttributes(
@@ -75,14 +74,14 @@ namespace AstroOdyssey
                     projectile.OverPower();
 
                     enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                    enemy.OverPoweredProjectileSpawnDelay = random.Next(4, 7);
+                    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
                 }
             }
 
             projectile.AddToGameEnvironment(
                 top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
-                gameEnvironment: gameEnvironment);
+                gameEnvironment: _gameEnvironment);
 
             AudioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
         }
@@ -104,9 +103,9 @@ namespace AstroOdyssey
                 projectile.Lengthen();
 
             // remove projectile if outside game canvas
-            if (projectile.GetY() > gameEnvironment.Height)
+            if (projectile.GetY() > _gameEnvironment.Height)
             {
-                gameEnvironment.AddDestroyableGameObject(projectile);
+                _gameEnvironment.AddDestroyableGameObject(projectile);
                 destroyed = true;
             }
         }

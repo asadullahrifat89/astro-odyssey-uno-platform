@@ -14,6 +14,6 @@
 
         public int BossesDestroyed { get; set; } = 0;
 
-        public int GemsCollected { get; set; } = 0;
+        public int CollectiblesCollected { get; set; } = 0;
     }
 }

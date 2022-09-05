@@ -29,6 +29,7 @@ namespace AstroOdyssey
         private static AudioPlayer LEVEL_UP = null;
         private static AudioPlayer HEALTH_GAIN = null;
         private static AudioPlayer HEALTH_LOSS = null;
+        private static AudioPlayer COLLECTIBLE_COLLECTED = null;
         private static AudioPlayer GAME_START = null;
         private static AudioPlayer GAME_OVER = null;
 
@@ -376,6 +377,18 @@ namespace AstroOdyssey
                         HEALTH_GAIN.Play();
                     }
                     break;
+                case SoundType.COLLECTIBLE_COLLECTED:
+                    {
+                        if (COLLECTIBLE_COLLECTED is null)
+                        {
+                            COLLECTIBLE_COLLECTED = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Collectible/8-bit-powerup-6768.mp3"),
+                                volume: 1.0);
+                        }
+
+                        COLLECTIBLE_COLLECTED.Play();
+                    }
+                    break;
                 case SoundType.HEALTH_LOSS:
                     {
                         if (HEALTH_LOSS is null)
@@ -563,7 +576,8 @@ namespace AstroOdyssey
         ENEMY_INCOMING,
         HEALTH_GAIN,
         HEALTH_LOSS,
+        COLLECTIBLE_COLLECTED,
         GAME_START,
-        GAME_OVER
+        GAME_OVER,
     }
 }

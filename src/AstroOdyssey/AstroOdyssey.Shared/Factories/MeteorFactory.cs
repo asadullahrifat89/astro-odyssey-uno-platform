@@ -6,19 +6,19 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment gameEnvironment;
+        private readonly GameEnvironment _gameEnvironment;
 
-        private readonly Random random = new Random();
+        private readonly Random _random = new Random();
 
-        private int rotatedMeteorSpawnCounter = 10;
-        private int rotatedMeteorSpawnDelay = 10;
+        private int _rotatedMeteorSpawnCounter = 10;
+        private int _rotatedMeteorSpawnDelay = 10;
 
-        private int overPoweredMeteorSpawnCounter = 15;
-        private int overPoweredMeteorSpawnDelay = 15;
+        private int _overPoweredMeteorSpawnCounter = 15;
+        private int _overPoweredMeteorSpawnDelay = 15;
 
-        private double meteorSpawnCounter;
-        private double meteorSpawnDelay = 55;
-        private double meteorSpeed = 1.5;
+        private double _meteorSpawnCounter;
+        private double _meteorSpawnDelay = 55;
+        private double _meteorSpeed = 1.5;
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace AstroOdyssey
 
         public MeteorFactory(GameEnvironment gameEnvironment)
         {
-            this.gameEnvironment = gameEnvironment;
+            this._gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -39,13 +39,13 @@ namespace AstroOdyssey
         public void SpawnMeteor(GameLevel gameLevel)
         {
             // each frame progress decreases this counter
-            meteorSpawnCounter -= 1;
+            _meteorSpawnCounter -= 1;
 
             // when counter reaches zero, create a meteor
-            if (meteorSpawnCounter < 0)
+            if (_meteorSpawnCounter < 0)
             {
                 GenerateMeteor(gameLevel);
-                meteorSpawnCounter = meteorSpawnDelay;
+                _meteorSpawnCounter = _meteorSpawnDelay;
             }
         }
 
@@ -56,32 +56,32 @@ namespace AstroOdyssey
         {
             var meteor = new Meteor();
 
-            meteor.SetAttributes(speed: meteorSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
+            meteor.SetAttributes(speed: _meteorSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
 
-            rotatedMeteorSpawnCounter--;
-            overPoweredMeteorSpawnCounter--;
+            _rotatedMeteorSpawnCounter--;
+            _overPoweredMeteorSpawnCounter--;
 
             double left = 0;
             double top = 0;
 
             // generate large but slower and stronger enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && overPoweredMeteorSpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_3 && _overPoweredMeteorSpawnCounter <= 0)
             {
                 SetOverPoweredMeteor(meteor);
             }
 
             // generate side ways flying meteors after level 2
-            if (gameLevel > GameLevel.Level_2 && rotatedMeteorSpawnCounter <= 0)
+            if (gameLevel > GameLevel.Level_2 && _rotatedMeteorSpawnCounter <= 0)
             {
                 SetSideWaysMovingMeteor(meteor, ref left, ref top);
             }
             else
             {
-                left = random.Next(10, (int)gameEnvironment.Width - 70);
+                left = _random.Next(10, (int)_gameEnvironment.Width - 70);
                 top = 0 - meteor.Height;
             }
 
-            meteor.AddToGameEnvironment(top: 0 - meteor.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            meteor.AddToGameEnvironment(top: 0 - meteor.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
         }
 
         /// <summary>
@@ -90,9 +90,9 @@ namespace AstroOdyssey
         /// <param name="meteor"></param>
         private void SetOverPoweredMeteor(Meteor meteor)
         {
-            overPoweredMeteorSpawnCounter = overPoweredMeteorSpawnDelay;
+            _overPoweredMeteorSpawnCounter = _overPoweredMeteorSpawnDelay;
             meteor.OverPower();
-            overPoweredMeteorSpawnDelay = random.Next(10, 20);
+            _overPoweredMeteorSpawnDelay = _random.Next(10, 20);
         }
 
         /// <summary>
@@ -103,14 +103,14 @@ namespace AstroOdyssey
         /// <param name="top"></param>
         private void SetSideWaysMovingMeteor(Meteor meteor, ref double left, ref double top)
         {
-            meteor.XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-            rotatedMeteorSpawnCounter = rotatedMeteorSpawnDelay;
+            meteor.XDirection = (XDirection)_random.Next(1, Enum.GetNames<XDirection>().Length);
+            _rotatedMeteorSpawnCounter = _rotatedMeteorSpawnDelay;
 
             switch (meteor.XDirection)
             {
                 case XDirection.LEFT:
                     meteor.Rotation = (meteor.Rotation + 1) * -1;
-                    left = gameEnvironment.Width;
+                    left = _gameEnvironment.Width;
                     break;
                 case XDirection.RIGHT:
                     meteor.Rotation = meteor.Rotation + 1;
@@ -125,11 +125,11 @@ namespace AstroOdyssey
             //#if DEBUG
             //            Console.WriteLine("Meteor XDirection: " + meteor.XDirection + ", " + "X: " + left + " " + "Y: " + top);
             //#endif
-            top = random.Next(0, (int)gameEnvironment.Height / 3);
+            top = _random.Next(0, (int)_gameEnvironment.Height / 3);
             meteor.Rotate();
 
             // randomize next x flying meteor pop up
-            rotatedMeteorSpawnDelay = random.Next(5, 15);
+            _rotatedMeteorSpawnDelay = _random.Next(5, 15);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace AstroOdyssey
                 return;
 
             // if meteor or meteor object has gone beyond game view
-            destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
         }
 
         /// <summary>
@@ -171,9 +171,9 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            var delayScale = 3 + gameEnvironment.GetGameObjectScale();
-            meteorSpawnDelay -= delayScale;
-            meteorSpeed += 1;
+            var delayScale = 3 + _gameEnvironment.GetGameObjectScale();
+            _meteorSpawnDelay -= delayScale;
+            _meteorSpeed += 1;
         }
 
         #endregion

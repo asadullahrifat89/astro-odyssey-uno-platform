@@ -26,7 +26,7 @@ namespace AstroOdyssey
         private readonly SystemNavigationManager _systemNavigationManager;
         private readonly List<Type> _goBackNotAllowedToPages;
         private readonly List<(Type IfGoingBackTo, Type RouteTo)> _goBackPageRoutes;
-        private static string baseUrl;
+        private static string _baseUrl;
 
         #endregion
 
@@ -319,17 +319,17 @@ namespace AstroOdyssey
         /// </summary>
         public static string GetBaseUrl()
         {
-            if (baseUrl.IsNullOrBlank())
+            if (_baseUrl.IsNullOrBlank())
             {
                 var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
                 var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-                baseUrl = $"{indexUrl}{appPackage}";
+                _baseUrl = $"{indexUrl}{appPackage}";
 
 #if DEBUG
-                Console.WriteLine(baseUrl);
+                Console.WriteLine(_baseUrl);
 #endif 
             }
-            return baseUrl;
+            return _baseUrl;
         }
 
         #endregion

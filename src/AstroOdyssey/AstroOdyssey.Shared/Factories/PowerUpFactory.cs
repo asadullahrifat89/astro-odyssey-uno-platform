@@ -6,13 +6,12 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment gameEnvironment;
+        private readonly GameEnvironment _gameEnvironment;
+        private readonly Random _random = new Random();
 
-        private readonly Random random = new Random();
-
-        private int powerUpSpawnCounter = 1500;
-        private int powerUpSpawnDelay = 1500;
-        private double powerUpSpeed = 2;
+        private int _powerUpSpawnCounter = 1500;
+        private int _powerUpSpawnDelay = 1500;
+        private double _powerUpSpeed = 2;
 
         #endregion
 
@@ -20,7 +19,7 @@ namespace AstroOdyssey
 
         public PowerUpFactory(GameEnvironment gameEnvironment)
         {
-            this.gameEnvironment = gameEnvironment;
+            this._gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -33,14 +32,14 @@ namespace AstroOdyssey
         public void SpawnPowerUp()
         {
             // each frame progress decreases this counter
-            powerUpSpawnCounter -= 1;
+            _powerUpSpawnCounter -= 1;
 
             // when counter reaches zero, create a PowerUp
-            if (powerUpSpawnCounter < 0)
+            if (_powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                powerUpSpawnCounter = powerUpSpawnDelay;
-                powerUpSpawnDelay = random.Next(1400, 1501);
+                _powerUpSpawnCounter = _powerUpSpawnDelay;
+                _powerUpSpawnDelay = _random.Next(1400, 1501);
             }
         }
 
@@ -51,11 +50,11 @@ namespace AstroOdyssey
         {
             var powerUp = new PowerUp();
 
-            powerUp.SetAttributes(speed: powerUpSpeed + random.NextDouble(), scale: gameEnvironment.GetGameObjectScale());
-            powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: random.Next(10, (int)gameEnvironment.Width - 100), gameEnvironment: gameEnvironment);
+            powerUp.SetAttributes(speed: _powerUpSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
+            powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
 
             // change the next power up spawn time
-            powerUpSpawnDelay = random.Next(1500, 2000);
+            _powerUpSpawnDelay = _random.Next(1500, 2000);
         }
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace AstroOdyssey
             powerUp.MoveY();
 
             // if powerUp or meteor object has gone beyond game view
-            destroyed = gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            powerUpSpeed += 1;
+            _powerUpSpeed += 1;
         }
 
         #endregion
