@@ -295,6 +295,17 @@ namespace AstroOdyssey
                         }
                     }
                     break;
+                case COLLECTIBLE:
+                    {
+                        if (player.GetRect().Intersects(gameObject.GetRect()))
+                        {
+                            _gameEnvironment.AddDestroyableGameObject(gameObject);
+                            PlayerCollectibleCollected(player, gameObject as Collectible);
+
+                            return true;
+                        }
+                    }
+                    break;
                 case POWERUP:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
@@ -352,6 +363,15 @@ namespace AstroOdyssey
         {
             player.GainHealth(health.Health);
             AudioHelper.PlaySound(SoundType.HEALTH_GAIN);
+        }
+
+        /// <summary>
+        /// Makes the player collect collectible.
+        /// </summary>
+        /// <param name="collectible"></param>
+        private void PlayerCollectibleCollected(Player player, Collectible collectible)
+        {
+            AudioHelper.PlaySound(SoundType.COLLECTIBLE_COLLECTED);
         }
 
         /// <summary>

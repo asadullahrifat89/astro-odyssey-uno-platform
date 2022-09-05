@@ -163,6 +163,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\8-bit-powerup-6768.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
@@ -219,6 +220,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Game\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />

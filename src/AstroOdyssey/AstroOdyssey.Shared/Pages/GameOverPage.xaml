@@ -112,7 +112,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/comic1.png" />
+                            Source="ms-appx:///Assets/Images/comic2.jpg" />
                         <TextBlock
                             x:Name="CollectiblesCollectedText"
                             Margin="5"

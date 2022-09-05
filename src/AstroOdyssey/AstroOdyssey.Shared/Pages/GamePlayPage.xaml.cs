@@ -885,6 +885,7 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
+                            GameScore.Score += 3;
                             GameScore.CollectiblesCollected++;
                             ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COMIC_BOOK_COLLECTED")}");
                         }
@@ -942,6 +943,8 @@ namespace AstroOdyssey
                 _healthFactory.SpawnHealth(Player);
 
                 _powerUpFactory.SpawnPowerUp();
+
+                _collectibleFactory.SpawnCollectible(GameLevel);
 
                 _playerProjectileFactory.SpawnProjectile(
                     isPoweredUp: IsPoweredUp,
@@ -1347,6 +1350,7 @@ namespace AstroOdyssey
                         _meteorFactory.LevelUp();
                         _healthFactory.LevelUp();
                         _powerUpFactory.LevelUp();
+                        _collectibleFactory.LevelUp();
                         _celestialObjectFactory.LevelUp();
                         _playerProjectileFactory.LevelUp();
                     }

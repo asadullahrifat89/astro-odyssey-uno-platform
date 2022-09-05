@@ -32,7 +32,7 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnCollectible(GameLevel gameLevel)
         {
-            if (gameLevel >= GameLevel.Level_1)
+            if (gameLevel > GameLevel.Level_1)
             {
                 // each frame progress decreases this counter
                 _collectibleSpawnCounter -= 1;

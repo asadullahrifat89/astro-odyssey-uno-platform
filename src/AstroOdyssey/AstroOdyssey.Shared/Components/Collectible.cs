@@ -42,6 +42,10 @@ namespace AstroOdyssey
             Width = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
+
+            // add a random rotation
+            Rotation = random.Next(0, 180);
+            Rotate();
         }
 
         #endregion
