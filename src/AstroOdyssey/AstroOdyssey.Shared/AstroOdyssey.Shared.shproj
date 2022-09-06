@@ -188,7 +188,14 @@
     <_Globbed_Content Remove="Assets\Images\enemy_1.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_2.png" />
     <_Globbed_Content Remove="Assets\Images\enemy_3.png" />
+    <_Globbed_Content Remove="Assets\Images\health.gif" />
     <_Globbed_Content Remove="Assets\Images\nebula2.png" />
+    <_Globbed_Content Remove="Assets\Images\pizza1.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza2.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza3.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza4.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza5.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza6.gif" />
     <_Globbed_Content Remove="Assets\Images\planet1.png" />
     <_Globbed_Content Remove="Assets\Images\planet2.png" />
     <_Globbed_Content Remove="Assets\Images\planet3.png" />
@@ -198,6 +205,7 @@
     <_Globbed_Content Remove="Assets\Images\planet7.png" />
     <_Globbed_Content Remove="Assets\Images\planet8.png" />
     <_Globbed_Content Remove="Assets\Images\planet9.png" />
+    <_Globbed_Content Remove="Assets\Images\powerup.gif" />
     <_Globbed_Content Remove="Assets\Images\powerup1.png" />
     <_Globbed_Content Remove="Assets\Images\powerup2.png" />
     <_Globbed_Content Remove="Assets\Images\rock1.png" />

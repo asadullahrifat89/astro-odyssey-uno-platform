@@ -55,9 +55,6 @@ namespace AstroOdyssey
 
             health.SetAttributes(speed: _healthSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
             health.AddToGameEnvironment(top: 0 - health.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
-
-            // change the next health spawn time
-            _healthSpawnDelay = _random.Next(1000, 1500);
         }
 
         /// <summary>
