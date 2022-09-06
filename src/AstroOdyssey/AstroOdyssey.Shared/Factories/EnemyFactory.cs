@@ -7,7 +7,6 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly GameEnvironment _gameEnvironment;
-
         private readonly Random _random = new Random();
 
         private int _xFlyingEnemySpawnCounter = 10;
@@ -64,11 +63,22 @@ namespace AstroOdyssey
             enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
             enemy.HalfWidth = enemy.Width / 2;
             enemy.Speed--;
+            enemy.ProjectileSpawnDelay -= (3 * (int)gameLevel);
 
             enemy.Health = 50 * (int)gameLevel;
 
             SetProjectileFiringEnemy(enemy);
-            SetHoveringEnemy(enemy);
+
+            //TODO: draw between player targeting and hovering enemy
+            var bossType = _random.Next(0, 2);
+
+            switch (bossType)
+            {
+                case 0: { SetHoveringEnemy(enemy); } break;
+                case 1: { SetPlayerTargetingEnemy(enemy); enemy.Speed--; } break;
+                default:
+                    break;
+            }
 
             // appear in the middle of the screen
             double left = _gameEnvironment.HalfWidth + enemy.HalfWidth;
