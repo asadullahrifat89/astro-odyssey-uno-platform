@@ -96,7 +96,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/enemy_1.png" />
+                            Source="ms-appx:///Assets/Images/boss_appeared.png" />
                         <TextBlock
                             x:Name="BossesDestroyedText"
                             Margin="5"
