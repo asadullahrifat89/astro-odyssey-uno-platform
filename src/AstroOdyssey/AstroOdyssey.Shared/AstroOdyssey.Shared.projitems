@@ -97,6 +97,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy2.png" />
@@ -106,12 +112,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza1.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza2.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza3.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza4.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza5.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza6.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun3.png" />

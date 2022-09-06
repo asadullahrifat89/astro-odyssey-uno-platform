@@ -191,11 +191,17 @@
     <_Globbed_Content Remove="Assets\Images\health.gif" />
     <_Globbed_Content Remove="Assets\Images\nebula2.png" />
     <_Globbed_Content Remove="Assets\Images\pizza1.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza1.png" />
     <_Globbed_Content Remove="Assets\Images\pizza2.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza2.png" />
     <_Globbed_Content Remove="Assets\Images\pizza3.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza3.png" />
     <_Globbed_Content Remove="Assets\Images\pizza4.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza4.png" />
     <_Globbed_Content Remove="Assets\Images\pizza5.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza5.png" />
     <_Globbed_Content Remove="Assets\Images\pizza6.gif" />
+    <_Globbed_Content Remove="Assets\Images\pizza6.png" />
     <_Globbed_Content Remove="Assets\Images\planet1.png" />
     <_Globbed_Content Remove="Assets\Images\planet2.png" />
     <_Globbed_Content Remove="Assets\Images\planet3.png" />

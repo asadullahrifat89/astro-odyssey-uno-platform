@@ -112,7 +112,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/pizza4.gif" />
+                            Source="ms-appx:///Assets/Images/pizza1.png" />
                         <TextBlock
                             x:Name="CollectiblesCollectedText"
                             Margin="5"

@@ -112,12 +112,12 @@ namespace AstroOdyssey
 
         public static Uri[] COLLECTIBLE_TEMPLATES = new Uri[]
         {
-            new Uri("ms-appx:///Assets/Images/pizza1.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza2.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza3.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza4.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza5.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza6.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza1.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza2.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza3.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza4.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza5.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza6.png", UriKind.RelativeOrAbsolute),
         };
 
         public static LocalizationTemplate[] LOCALIZATION_TEMPLATES = new LocalizationTemplate[]
