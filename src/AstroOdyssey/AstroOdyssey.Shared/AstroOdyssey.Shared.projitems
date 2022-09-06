@@ -96,6 +96,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid4.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_appeared.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_cleared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza1.png" />

@@ -40,7 +40,7 @@
                     Margin="3,0"
                     HorizontalAlignment="Center"
                     Background="Goldenrod"
-                    BorderBrush="DarkGoldenrod"
+                    BorderBrush="White"
                     BorderThickness="3"
                     CornerRadius="50">
 
@@ -179,7 +179,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="Goldenrod"
-            BorderBrush="DarkGoldenrod"
+            BorderBrush="White"
             BorderThickness="3"
             CornerRadius="50"
             Visibility="Collapsed">
