@@ -30,6 +30,13 @@ namespace AstroOdyssey
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
 
+        public static (Uri AssetUri, ShipClass ShipClass)[] PLAYER_RAGE_TEMPLATES = new (Uri AssetUri, ShipClass ShipClass)[]
+        {
+             (new Uri("ms-appx:///Assets/Images/rage1.png", UriKind.RelativeOrAbsolute), ShipClass.DEFENDER),
+             (new Uri("ms-appx:///Assets/Images/rage2.png", UriKind.RelativeOrAbsolute), ShipClass.BERSERKER),
+             (new Uri("ms-appx:///Assets/Images/rage3.png", UriKind.RelativeOrAbsolute), ShipClass.SPECTRE),
+        };
+
         public static CelestialObjectTemplate[] STAR_TEMPLATES = new CelestialObjectTemplate[]
         {
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star1.png", UriKind.RelativeOrAbsolute), size : 25),
@@ -112,12 +119,12 @@ namespace AstroOdyssey
 
         public static Uri[] COLLECTIBLE_TEMPLATES = new Uri[]
         {
-            new Uri("ms-appx:///Assets/Images/pizza1.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza2.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza3.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza4.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza5.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/pizza6.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza1.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza2.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza3.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza4.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza5.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza6.png", UriKind.RelativeOrAbsolute),
         };
 
         public static LocalizationTemplate[] LOCALIZATION_TEMPLATES = new LocalizationTemplate[]
@@ -389,10 +396,10 @@ namespace AstroOdyssey
 
             new LocalizationTemplate(key: "GameOverPage_PlayAgainButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "PLAY AGAIN"),
+                new ("en", "Play Again"),
                 new ("bn", "আবার খেলুন"),
-                new ("de", "NOCHMAL ABSPIELEN"),
-                new ("fr", "REJOUER"),
+                new ("de", "Nochmal Abspielen"),
+                new ("fr", "Rejouer"),
             }),
             new LocalizationTemplate(key: "GameOverPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
@@ -448,10 +455,10 @@ namespace AstroOdyssey
 
             new LocalizationTemplate(key: "GameStartPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "START GAME"),
+                new ("en", "Start Game"),
                 new ("bn", "খেলা শুরু করুন"),
-                new ("de", "SPIEL BEGINNEN"),
-                new ("fr", "DÉMARRER JEU"),
+                new ("de", "Spiel Beginnen"),
+                new ("fr", "Démarrer Jeu"),
             }),
             new LocalizationTemplate(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
@@ -462,10 +469,10 @@ namespace AstroOdyssey
             }),
             new LocalizationTemplate(key: "ShipSelectionPage_ChooseButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "SELECT"),
+                new ("en", "Select"),
                 new ("bn", "নির্বাচন করুন"),
-                new ("de", "AUSWÄHLEN"),
-                new ("fr", "SÉLECTIONNER"),
+                new ("de", "Auswählen"),
+                new ("fr", "Sélectionner"),
             }),
             new LocalizationTemplate(key: "ShipSelectionPage_ControlInstructions", cultureValues: new (string Culture, string Value)[]
             {

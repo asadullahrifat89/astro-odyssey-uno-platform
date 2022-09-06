@@ -96,7 +96,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/enemy_1.png" />
+                            Source="ms-appx:///Assets/Images/boss_appeared.png" />
                         <TextBlock
                             x:Name="BossesDestroyedText"
                             Margin="5"
@@ -112,7 +112,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/pizza4.gif" />
+                            Source="ms-appx:///Assets/Images/pizza3.png" />
                         <TextBlock
                             x:Name="CollectiblesCollectedText"
                             Margin="5"
@@ -144,10 +144,10 @@
                     x:Name="GameOverPage_PlayAgainButton"
                     x:Uid="GameOverPage_PlayAgainButton"
                     Height="40"
-                    Margin="5,20,5,5"
+                    Margin="30,20,30,5"
                     HorizontalAlignment="Stretch"
-                    Background="Red"
-                    BorderBrush="DarkRed"
+                    Background="Goldenrod"
+                    BorderBrush="White"
                     BorderThickness="3"
                     Click="PlayAgainButton_Click"
                     Content="PLAY AGAIN"

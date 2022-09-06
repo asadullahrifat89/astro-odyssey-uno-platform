@@ -9,6 +9,7 @@ using static AstroOdyssey.Constants;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using static System.Formats.Asn1.AsnWriter;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace AstroOdyssey
 {
@@ -18,6 +19,12 @@ namespace AstroOdyssey
     public sealed partial class GamePlayPage : Page
     {
         #region Fields
+
+        private Image _rageImage;
+        private Image _powerUpImage;
+        private Image _healthImage;
+        private Image _bossAppearedImage;
+        private Image _bossClearedImage;
 
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
@@ -33,6 +40,9 @@ namespace AstroOdyssey
 
         private int _showInGameTextSpawnCounter = 110;
         private int _showInGameTextDelay = 110;
+
+        private int _showInGameImagePanelSpawnCounter = 110;
+        private int _showInGameImagePanelDelay = 110;
 
         private double _defaultFrameTime = 17;
         private double _frameTime;
@@ -210,6 +220,30 @@ namespace AstroOdyssey
 
             ShowInGameText("👆\n" + LocalizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
+
+            _powerUpImage = new Image
+            {
+                Stretch = Stretch.Uniform,
+            };
+            _powerUpImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute));
+
+            _healthImage = new Image
+            {
+                Stretch = Stretch.Uniform,
+            };
+            _healthImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute));
+
+            _bossAppearedImage = new Image
+            {
+                Stretch = Stretch.Uniform,
+            };
+            _bossAppearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_appeared.png", UriKind.RelativeOrAbsolute));
+
+            _bossClearedImage = new Image
+            {
+                Stretch = Stretch.Uniform,
+            };
+            _bossClearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute));
 
             await this.PlayPageLoadedTransition();
         }
@@ -559,6 +593,8 @@ namespace AstroOdyssey
 
             HandleInGameText();
 
+            HandleInGameImagePanel();
+
             DamageRecoveryCoolDown();
         }
 
@@ -666,7 +702,8 @@ namespace AstroOdyssey
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
-                                ShowInGameText($"🔥 {LocalizationHelper.GetLocalizedResource("POWER_DOWN")}");
+                                ShowInGameImagePanel(_powerUpImage);
+                                ShowInGameText($"{LocalizationHelper.GetLocalizedResource("POWER_DOWN")}");
                             }
                         }
 
@@ -683,16 +720,20 @@ namespace AstroOdyssey
                                 Rage = 0;
                                 PlayerRageBar.Value = Rage;
 
+                                ShowInGameImagePanel(_rageImage);
+
+                                //TODO: hide rage image
+
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameText($"🛡 {LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"⚔️ {LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameText($"👁 {LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
                                         break;
                                     default:
                                         break;
@@ -739,16 +780,20 @@ namespace AstroOdyssey
                                 _playerFactory.RageUp(Player);
                                 _playerProjectileFactory.RageUp(Player);
 
+                                ShowInGameImagePanel(_rageImage);
+
+                                //TODO: show rage image
+
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameText($"🛡 {LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"⚔️ {LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameText($"👁 {LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
                                         break;
                                     default:
                                         break;
@@ -867,7 +912,10 @@ namespace AstroOdyssey
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
-                            ShowInGameText($"‍❤️ {LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
+
+                            //TODO: show health icon
+                            ShowInGameImagePanel(_healthImage);
+                            ShowInGameText($"‍{LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
                         }
                     }
                     break;
@@ -911,7 +959,8 @@ namespace AstroOdyssey
                             PlayerPowerBar.Visibility = Visibility.Visible;
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
-                            ShowInGameText($"‍🔥 {LocalizationHelper.GetLocalizedResource(PowerUpType.ToString())}");
+                            ShowInGameImagePanel(_powerUpImage);
+                            ShowInGameText($"‍{LocalizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
                             _playerProjectileFactory.PowerUp(PowerUpType);
                         }
                     }
@@ -1036,6 +1085,37 @@ namespace AstroOdyssey
             }
         }
 
+        private void ShowInGameImagePanel(Image image)
+        {
+            var scale = GameView.GetGameObjectScale();
+
+            image.Height = 150 * scale;
+            image.Width = 150 * scale;
+
+            RageImagePanel.Children.Clear();
+            RageImagePanel.Children.Add(image);
+            RageImagePanel.Visibility = Visibility.Visible;
+            _showInGameImagePanelSpawnCounter = _showInGameImagePanelDelay;
+        }
+
+        private void HandleInGameImagePanel()
+        {
+            if (RageImagePanel.Visibility == Visibility.Visible)
+            {
+                _showInGameImagePanelSpawnCounter -= 1;
+
+                if (_showInGameImagePanelSpawnCounter <= 0)
+                {
+                    HideInGameImagePanel();
+                }
+            }
+        }
+
+        private void HideInGameImagePanel()
+        {
+            RageImagePanel.Visibility = Visibility.Collapsed;
+        }
+
         /// <summary>
         /// Check if game if over.
         /// </summary>
@@ -1155,6 +1235,14 @@ namespace AstroOdyssey
             var scale = GameView.GetGameObjectScale();
             Player = _playerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
 
+            //TODO: set rage image
+            _rageImage = new Image()
+            {
+                Stretch = Stretch.Uniform,
+            };
+
+            _rageImage.Source = new BitmapImage(Constants.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri);
+
             switch (Player.ShipClass)
             {
                 case ShipClass.DEFENDER:
@@ -1218,7 +1306,9 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameText($"💀 {LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
+            //TODO: show boss image
+            ShowInGameImagePanel(_bossAppearedImage);
+            ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
             Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -1239,7 +1329,9 @@ namespace AstroOdyssey
         {
             WarpThroughSpace();
 
-            ShowInGameText($"🤘 {LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
+            //TODO: show boss image
+            ShowInGameImagePanel(_bossClearedImage);
+            ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
             _enemyFactory.DisengageBossEnemy();
             Boss = null;
             SetGameLevelText();

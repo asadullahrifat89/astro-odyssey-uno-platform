@@ -383,7 +383,7 @@ namespace AstroOdyssey
                         {
                             COLLECTIBLE_COLLECTED = new AudioPlayer(
                                 source: string.Concat(baseUrl, "/", "Assets/Sounds/Collectible/8-bit-powerup-6768.mp3"),
-                                volume: 0.5);
+                                volume: 0.4);
                         }
 
                         COLLECTIBLE_COLLECTED.Play();
