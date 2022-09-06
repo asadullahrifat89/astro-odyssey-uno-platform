@@ -184,6 +184,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh-2_rZh-HuQFwI_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh_HZs-SOQFvI_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />

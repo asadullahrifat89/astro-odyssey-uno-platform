@@ -273,6 +273,7 @@
     <_Globbed_Content Remove="Assets\Sounds\spellcast-46164.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\swirly-air-deploy_GyxMaH4__NWM.mp3" />
     <_Globbed_Content Remove="Assets\Sounds\videogame-death-sound-43894.mp3" />
+    <_Globbed_Content Remove="Assets\SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />

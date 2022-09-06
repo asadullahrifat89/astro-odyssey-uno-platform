@@ -141,6 +141,7 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
             LocalizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
             LocalizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
+            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
         }
 
         #endregion
