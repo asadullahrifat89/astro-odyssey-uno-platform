@@ -125,8 +125,13 @@ namespace AstroOdyssey
 
         public static LocalizationTemplate[] LOCALIZATION_TEMPLATES = new LocalizationTemplate[]
         {
-            new LocalizationTemplate(key: "ApplicationName", cultureValues: new (string Culture, string Value)[]{ new ("en", "AstroOdyssey") }),
-            new LocalizationTemplate(key: "Language", cultureValues: new (string Culture, string Value)[]{ new ("en", "en") }),
+            new LocalizationTemplate(key: "ApplicationName_Header", cultureValues: new (string Culture, string Value)[]
+            { 
+                new ("en", "Astro Odyssey"),
+                new ("bn", "অ্যাস্ট্রো ওডিসি"),
+                new ("de", "Astro-Odyssee"),
+                new ("fr", "Astro Odyssée"),
+            }),            
 
             new LocalizationTemplate(key: "Antimony", cultureValues: new (string Culture, string Value)[]
             {

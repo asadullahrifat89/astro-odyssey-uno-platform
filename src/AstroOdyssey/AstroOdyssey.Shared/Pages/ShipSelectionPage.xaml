@@ -27,7 +27,13 @@
                 Orientation="Vertical">
 
                 <!--  Logo  -->
-                <Image Width="300" Source="ms-appx:///Assets/SplashScreen.png" />
+                <TextBlock
+                    x:Name="ApplicationName_Header"
+                    Margin="0,10,0,20"
+                    FontSize="40"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
                 <TextBlock
                     x:Name="ShipSelectionPage_Tagline"

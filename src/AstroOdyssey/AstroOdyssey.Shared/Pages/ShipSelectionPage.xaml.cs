@@ -91,10 +91,9 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
             LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
         }
 
         #endregion
-
-
     }
 }
