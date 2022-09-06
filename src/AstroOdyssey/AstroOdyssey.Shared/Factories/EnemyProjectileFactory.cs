@@ -60,7 +60,7 @@ namespace AstroOdyssey
 
             // boss fires a little faster than usual enemies
             projectile.SetAttributes(
-                speed: enemy.IsBoss ? enemy.Speed * 2 / 1.15 : enemy.Speed * 2 / 1.50,
+                speed: enemy.IsBoss ? enemy.Speed * 1.50 : enemy.Speed * 1.65,
                 gameLevel: gameLevel,
                 scale: scale,
                 isOverPowered: enemy.IsOverPowered);
