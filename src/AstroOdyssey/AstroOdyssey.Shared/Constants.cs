@@ -30,6 +30,13 @@ namespace AstroOdyssey
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
 
+        public static (Uri AssetUri, ShipClass ShipClass)[] PLAYER_RAGE_TEMPLATES = new (Uri AssetUri, ShipClass ShipClass)[]
+        {
+             (new Uri("ms-appx:///Assets/Images/rage1.png", UriKind.RelativeOrAbsolute), ShipClass.DEFENDER),
+             (new Uri("ms-appx:///Assets/Images/rage2.png", UriKind.RelativeOrAbsolute), ShipClass.BERSERKER),
+             (new Uri("ms-appx:///Assets/Images/rage3.png", UriKind.RelativeOrAbsolute), ShipClass.SPECTRE),
+        };
+
         public static CelestialObjectTemplate[] STAR_TEMPLATES = new CelestialObjectTemplate[]
         {
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star1.png", UriKind.RelativeOrAbsolute), size : 25),

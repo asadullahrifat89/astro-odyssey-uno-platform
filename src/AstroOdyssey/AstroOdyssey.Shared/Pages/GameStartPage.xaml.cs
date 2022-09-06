@@ -102,6 +102,15 @@ namespace AstroOdyssey
                     AssetsPreloadGrid.Children.Add(content);
                 }
 
+                await Task.Delay(500);
+
+                foreach (var asset in Constants.PLAYER_RAGE_TEMPLATES)
+                {
+                    Image content = new Image() { Stretch = Stretch.Uniform };
+                    content.Source = new BitmapImage(asset.AssetUri);
+                    AssetsPreloadGrid.Children.Add(content);
+                }
+
                 Image gameOver = new Image() { Stretch = Stretch.Uniform };
                 gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/gameOver.png", UriKind.RelativeOrAbsolute));
                 AssetsPreloadGrid.Children.Add(gameOver);

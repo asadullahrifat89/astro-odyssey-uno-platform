@@ -260,27 +260,38 @@
             </StackPanel>
         </Border>
 
-        <!--  This shows in game texts  -->
-        <Border
-            x:Name="InGameTextPanel"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            CornerRadius="15"
-            Visibility="{x:Bind Path=InGameText.Visibility, Mode=OneWay}">
-            <TextBlock
-                x:Name="InGameText"
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <!--  This shows rage images  -->
+            <Grid
+                x:Name="RageImagePanel"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                FontSize="30"
-                FontWeight="Bold"
-                Foreground="White"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
-            <Border.Background>
-                <SolidColorBrush Opacity="0.5" Color="Gray" />
-            </Border.Background>
-        </Border>
+                Visibility="Collapsed" />
+
+            <!--  This shows in game texts  -->
+            <Border
+                x:Name="InGameTextPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                CornerRadius="15"
+                Visibility="{x:Bind Path=InGameText.Visibility, Mode=OneWay}">
+                <TextBlock
+                    x:Name="InGameText"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.5" Color="Gray" />
+                </Border.Background>
+            </Border>
+        </StackPanel>
 
         <!--  This is for capturing input  -->
         <Border

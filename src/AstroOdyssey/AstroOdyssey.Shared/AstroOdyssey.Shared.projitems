@@ -112,6 +112,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gas_star3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rage1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rage2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\rage3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\sun3.png" />

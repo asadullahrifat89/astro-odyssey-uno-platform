@@ -215,6 +215,9 @@
     <_Globbed_Content Remove="Assets\Images\powerup.gif" />
     <_Globbed_Content Remove="Assets\Images\powerup1.png" />
     <_Globbed_Content Remove="Assets\Images\powerup2.png" />
+    <_Globbed_Content Remove="Assets\Images\rage1.png" />
+    <_Globbed_Content Remove="Assets\Images\rage2.png" />
+    <_Globbed_Content Remove="Assets\Images\rage3.png" />
     <_Globbed_Content Remove="Assets\Images\rock1.png" />
     <_Globbed_Content Remove="Assets\Images\rock2.png" />
     <_Globbed_Content Remove="Assets\Images\rock3.png" />

@@ -9,6 +9,7 @@ using static AstroOdyssey.Constants;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using static System.Formats.Asn1.AsnWriter;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace AstroOdyssey
 {
@@ -33,6 +34,9 @@ namespace AstroOdyssey
 
         private int _showInGameTextSpawnCounter = 110;
         private int _showInGameTextDelay = 110;
+
+        private int _showInGameImagePanelSpawnCounter = 110;
+        private int _showInGameImagePanelDelay = 110;
 
         private double _defaultFrameTime = 17;
         private double _frameTime;
@@ -559,6 +563,8 @@ namespace AstroOdyssey
 
             HandleInGameText();
 
+            HandleInGameImagePanel();
+
             DamageRecoveryCoolDown();
         }
 
@@ -683,16 +689,20 @@ namespace AstroOdyssey
                                 Rage = 0;
                                 PlayerRageBar.Value = Rage;
 
+                                ShowInGameImagePanel();
+
+                                //TODO: hide rage image
+
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameText($"🛡 {LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"⚔️ {LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameText($"👁 {LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
                                         break;
                                     default:
                                         break;
@@ -739,16 +749,20 @@ namespace AstroOdyssey
                                 _playerFactory.RageUp(Player);
                                 _playerProjectileFactory.RageUp(Player);
 
+                                ShowInGameImagePanel();
+
+                                //TODO: show rage image
+
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameText($"🛡 {LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"⚔️ {LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameText($"👁 {LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
                                         break;
                                     default:
                                         break;
@@ -1036,6 +1050,30 @@ namespace AstroOdyssey
             }
         }
 
+        private void ShowInGameImagePanel()
+        {
+            RageImagePanel.Visibility = Visibility.Visible;
+            _showInGameImagePanelSpawnCounter = _showInGameImagePanelDelay;
+        }
+
+        private void HandleInGameImagePanel()
+        {
+            if (RageImagePanel.Visibility == Visibility.Visible)
+            {
+                _showInGameImagePanelSpawnCounter -= 1;
+
+                if (_showInGameImagePanelSpawnCounter <= 0)
+                {
+                    HideInGameImagePanel();
+                }
+            }
+        }
+
+        private void HideInGameImagePanel()
+        {
+            RageImagePanel.Visibility = Visibility.Collapsed;
+        }
+
         /// <summary>
         /// Check if game if over.
         /// </summary>
@@ -1154,6 +1192,19 @@ namespace AstroOdyssey
         {
             var scale = GameView.GetGameObjectScale();
             Player = _playerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
+
+            //TODO: set rage image
+            Image rageImage = new Image()
+            {
+                Stretch = Stretch.Uniform,
+            };
+
+            rageImage.Source = new BitmapImage(Constants.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri);
+            rageImage.Height = 150 * scale;
+            rageImage.Width = 150 * scale;
+
+            RageImagePanel.Children.Clear();
+            RageImagePanel.Children.Add(rageImage);
 
             switch (Player.ShipClass)
             {
