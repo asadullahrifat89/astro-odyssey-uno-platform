@@ -207,7 +207,7 @@
                     Height="5"
                     Margin="5,0"
                     VerticalAlignment="Center"
-                    Foreground="Red"
+                    Foreground="Crimson"
                     Maximum="100"
                     Minimum="0"
                     Value="100" />

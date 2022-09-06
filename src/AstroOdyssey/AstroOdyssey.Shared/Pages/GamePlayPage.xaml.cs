@@ -1165,14 +1165,14 @@ namespace AstroOdyssey
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Orange);
-                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Silver);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.Red);
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
-                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Pink);
-                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DeepPink);
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.MediumPurple);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.Purple);
                     }
                     break;
                 default:
