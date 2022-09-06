@@ -52,9 +52,6 @@ namespace AstroOdyssey
 
             powerUp.SetAttributes(speed: _powerUpSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
             powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
-
-            // change the next power up spawn time
-            _powerUpSpawnDelay = _random.Next(1500, 2000);
         }
 
         /// <summary>

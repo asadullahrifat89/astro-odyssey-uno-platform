@@ -183,7 +183,6 @@
             BorderThickness="3"
             CornerRadius="50"
             Visibility="Collapsed">
-
             <StackPanel
                 Margin="15,3"
                 HorizontalAlignment="Center"

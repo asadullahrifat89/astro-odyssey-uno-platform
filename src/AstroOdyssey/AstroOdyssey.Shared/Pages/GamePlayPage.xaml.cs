@@ -34,7 +34,8 @@ namespace AstroOdyssey
         private int _showInGameTextSpawnCounter = 110;
         private int _showInGameTextDelay = 110;
 
-        private double _frameTime = 19;
+        private double _defaultFrameTime = 17;
+        private double _frameTime;
 
         private double _windowWidth, _windowHeight;
 
@@ -484,7 +485,7 @@ namespace AstroOdyssey
             StarView.SetSize(_windowHeight, _windowWidth);
             PlanetView.SetSize(_windowHeight, _windowWidth);
 
-            _frameTime = 19 + (_windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
+            _frameTime = _defaultFrameTime + (_windowWidth <= 500 ? 3 : 0); // run a little slower on phones as phones have a faster timer
 
             // resize player size
             if (IsGameRunning)
@@ -866,7 +867,7 @@ namespace AstroOdyssey
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
-                            ShowInGameText($"‍🔧 {LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
+                            ShowInGameText($"‍❤️ {LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
                         }
                     }
                     break;
@@ -885,9 +886,10 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
-                            GameScore.Score += GameView.IsBossEngaged ? 1 : 3; // bosses cause a score penalty
+                            GameScore.Score++;
                             GameScore.CollectiblesCollected++;
-                            ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COMIC_BOOK_COLLECTED")}");
+                            SetGameLevel(); // check game level on score change
+                            //ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
                         }
                     }
                     break;
@@ -1095,6 +1097,16 @@ namespace AstroOdyssey
                 Parallel.ForEach(pickups, pickup =>
                 {
                     GameView.AddDestroyableGameObject(pickup);
+                });
+            }
+
+            var collectibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsCollectible);
+
+            if (collectibles is not null)
+            {
+                Parallel.ForEach(collectibles, collectible =>
+                {
+                    GameView.AddDestroyableGameObject(collectible);
                 });
             }
 

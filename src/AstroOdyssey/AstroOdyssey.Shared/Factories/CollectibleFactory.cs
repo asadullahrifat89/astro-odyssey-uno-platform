@@ -11,7 +11,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _collectibleSpawnCounter;
-        private int _collectibleSpawnDelay = 1000;
+        private int _collectibleSpawnDelay = 600;
         private double _collectibleSpeed = 2;
 
         #endregion
@@ -32,18 +32,15 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnCollectible(GameLevel gameLevel)
         {
-            if (gameLevel > GameLevel.Level_1)
-            {
-                // each frame progress decreases this counter
-                _collectibleSpawnCounter -= 1;
+            // each frame progress decreases this counter
+            _collectibleSpawnCounter -= 1;
 
-                // when counter reaches zero, create a Collectible
-                if (_collectibleSpawnCounter < 0)
-                {
-                    GenerateCollectible();
-                    _collectibleSpawnCounter = _collectibleSpawnDelay;
-                    _collectibleSpawnDelay = _random.Next(900, 1001);
-                }
+            // when counter reaches zero, create a Collectible
+            if (_collectibleSpawnCounter < 0)
+            {
+                GenerateCollectible();
+                _collectibleSpawnCounter = _collectibleSpawnDelay;
+                _collectibleSpawnDelay = _random.Next(500, 700);
             }
         }
 
@@ -56,9 +53,6 @@ namespace AstroOdyssey
 
             collectible.SetAttributes(speed: _collectibleSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
             collectible.AddToGameEnvironment(top: 0 - collectible.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
-
-            // change the next Collectible spawn time
-            _collectibleSpawnDelay = _random.Next(1000, 1500);
         }
 
         /// <summary>

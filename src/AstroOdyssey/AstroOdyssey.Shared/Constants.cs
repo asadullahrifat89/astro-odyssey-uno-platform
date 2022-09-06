@@ -8,7 +8,8 @@ namespace AstroOdyssey
         #region Fields
 
         public const double DESTRUCTIBLE_OBJECT_SIZE = 70;
-        public const double COLLECTIBLE_OBJECT_SIZE = 75;
+        public const double COLLECTIBLE_OBJECT_SIZE = 90;
+        public const double PICKUP_OBJECT_SIZE = 80;
 
         public const double PLAYER_HEIGHT = 80;
 
@@ -33,23 +34,23 @@ namespace AstroOdyssey
         {
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star1.png", UriKind.RelativeOrAbsolute), size : 25),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star2.png", UriKind.RelativeOrAbsolute), size : 25),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star3.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star4.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star5.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star6.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star7.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star8.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star9.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star10.png", UriKind.RelativeOrAbsolute), size : 20),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute), size : 30),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star3.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star4.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star5.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star6.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star7.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star8.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star9.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/star10.png", UriKind.RelativeOrAbsolute), size : 20),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star1.png", UriKind.RelativeOrAbsolute), size : 30),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star2.png", UriKind.RelativeOrAbsolute), size : 30),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), size : 30),           
-            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), size : 130),
+            //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/gas_star3.png", UriKind.RelativeOrAbsolute), size : 30),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula1.png", UriKind.RelativeOrAbsolute), size : 130),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/nebula2.png", UriKind.RelativeOrAbsolute), size : 130),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy1.png", UriKind.RelativeOrAbsolute), size: 200),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy2.png", UriKind.RelativeOrAbsolute), size: 200),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/galaxy3.png", UriKind.RelativeOrAbsolute), size: 200),
-            //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/asteroid1.png", UriKind.RelativeOrAbsolute), size: 250),
+            new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/asteroid1.png", UriKind.RelativeOrAbsolute), size: 250),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/asteroid2.png", UriKind.RelativeOrAbsolute), size: 250),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/asteroid3.png", UriKind.RelativeOrAbsolute), size: 250),
             //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/asteroid4.png", UriKind.RelativeOrAbsolute), size : 250),
@@ -111,16 +112,12 @@ namespace AstroOdyssey
 
         public static Uri[] COLLECTIBLE_TEMPLATES = new Uri[]
         {
-            new Uri("ms-appx:///Assets/Images/comic1.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic2.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic3.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic4.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic5.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic6.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic7.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic8.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic9.jpg", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/comic10.jpg", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza1.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza2.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza3.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza4.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza5.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/pizza6.gif", UriKind.RelativeOrAbsolute),
         };
 
         public static LocalizationTemplate[] LOCALIZATION_TEMPLATES = new LocalizationTemplate[]
@@ -347,13 +344,13 @@ namespace AstroOdyssey
                 new ("de", "SCHIFF REPARIERT"),
                 new ("fr", "NAVIRE RÉPARÉ"),
             }),
-            new LocalizationTemplate(key: "COMIC_BOOK_COLLECTED", cultureValues: new (string Culture, string Value)[]
-            {
-                new ("en", "COMIC BOOK COLLECTED"),
-                new ("bn", "কমিক বই সংগৃহীত"),
-                new ("de", "COMIC-BUCH GESAMMELT"),
-                new ("fr", "BD COLLECTIONNÉE"),
-            }),
+            //new LocalizationTemplate(key: "COLLECTIBLE_COLLECTED", cultureValues: new (string Culture, string Value)[]
+            //{
+            //    new ("en", "COMIC BOOK COLLECTED"),
+            //    new ("bn", "কমিক বই সংগৃহীত"),
+            //    new ("de", "COMIC-BUCH GESAMMELT"),
+            //    new ("fr", "BD COLLECTIONNÉE"),
+            //}),
             new LocalizationTemplate(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "SONIC BLAST"),

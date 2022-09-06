@@ -49,7 +49,6 @@ namespace AstroOdyssey
                 case CelestialObjectType.Star:
                     {
                         var starType = random.Next(0, Constants.STAR_TEMPLATES.Length);
-
                         var starTemplate = Constants.STAR_TEMPLATES[starType];
 
                         uri = starTemplate.AssetUri;
@@ -65,7 +64,6 @@ namespace AstroOdyssey
                 case CelestialObjectType.Planet:
                     {
                         var planetType = random.Next(0, Constants.PLANET_TEMPLATES.Length);
-
                         var planetTemplate = Constants.PLANET_TEMPLATES[planetType];
 
                         uri = planetTemplate.AssetUri;
