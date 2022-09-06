@@ -163,6 +163,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\star4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\8-bit-powerup-6768.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
@@ -183,7 +184,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh-2_rZh-HuQFwI_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh_HZs-SOQFvI_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
