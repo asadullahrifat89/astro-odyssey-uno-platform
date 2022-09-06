@@ -389,10 +389,10 @@ namespace AstroOdyssey
 
             new LocalizationTemplate(key: "GameOverPage_PlayAgainButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "PLAY AGAIN"),
+                new ("en", "Play Again"),
                 new ("bn", "আবার খেলুন"),
-                new ("de", "NOCHMAL ABSPIELEN"),
-                new ("fr", "REJOUER"),
+                new ("de", "Nochmal Abspielen"),
+                new ("fr", "Rejouer"),
             }),
             new LocalizationTemplate(key: "GameOverPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
@@ -448,10 +448,10 @@ namespace AstroOdyssey
 
             new LocalizationTemplate(key: "GameStartPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "START GAME"),
+                new ("en", "Start Game"),
                 new ("bn", "খেলা শুরু করুন"),
-                new ("de", "SPIEL BEGINNEN"),
-                new ("fr", "DÉMARRER JEU"),
+                new ("de", "Spiel Beginnen"),
+                new ("fr", "Démarrer Jeu"),
             }),
             new LocalizationTemplate(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
@@ -462,10 +462,10 @@ namespace AstroOdyssey
             }),
             new LocalizationTemplate(key: "ShipSelectionPage_ChooseButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "SELECT"),
+                new ("en", "Select"),
                 new ("bn", "নির্বাচন করুন"),
-                new ("de", "AUSWÄHLEN"),
-                new ("fr", "SÉLECTIONNER"),
+                new ("de", "Auswählen"),
+                new ("fr", "Sélectionner"),
             }),
             new LocalizationTemplate(key: "ShipSelectionPage_ControlInstructions", cultureValues: new (string Culture, string Value)[]
             {

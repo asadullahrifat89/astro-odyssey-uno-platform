@@ -203,7 +203,7 @@
                 <!--  Health bar  -->
                 <ProgressBar
                     x:Name="PlayerHealthBar"
-                    Width="150"
+                    Width="140"
                     Height="5"
                     Margin="5,0"
                     VerticalAlignment="Center"
