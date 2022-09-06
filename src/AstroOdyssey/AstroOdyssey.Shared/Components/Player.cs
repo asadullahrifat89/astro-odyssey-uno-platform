@@ -170,20 +170,20 @@ namespace AstroOdyssey
 
             exhaustUri = Constants.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
 
-            //switch (ShipClass)
-            //{
-            //    case ShipClass.DEFENDER:
-            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust1.png", UriKind.RelativeOrAbsolute);
-            //        break;
-            //    case ShipClass.BERSERKER:
-            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust2.png", UriKind.RelativeOrAbsolute);
-            //        break;
-            //    case ShipClass.SPECTRE:
-            //        exhaustUri = new Uri("ms-appx:///Assets/Images/space_thrust3.png", UriKind.RelativeOrAbsolute);
-            //        break;
-            //    default:
-            //        break;
-            //}
+            switch (ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    HitPoint = 5;
+                    break;
+                case ShipClass.BERSERKER:
+                    HitPoint = 15;
+                    break;
+                case ShipClass.SPECTRE:
+                    HitPoint = 10;
+                    break;
+                default:
+                    break;
+            }
 
             _contentShipBlaze.Source = new BitmapImage(exhaustUri);
             _contentShipBlaze.Width = _body.Width;
