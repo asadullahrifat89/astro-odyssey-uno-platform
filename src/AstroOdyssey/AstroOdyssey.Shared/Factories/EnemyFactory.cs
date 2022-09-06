@@ -63,7 +63,7 @@ namespace AstroOdyssey
             enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
             enemy.HalfWidth = enemy.Width / 2;
             enemy.Speed--;
-            enemy.ProjectileSpawnDelay -= (10 * (int)gameLevel);
+            enemy.ProjectileSpawnDelay -= (3 * (int)gameLevel);
 
             enemy.Health = 50 * (int)gameLevel;
 
