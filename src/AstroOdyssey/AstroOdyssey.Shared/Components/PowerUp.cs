@@ -51,7 +51,7 @@ namespace AstroOdyssey
             Speed = speed;
             PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
 
-            var uri = new Uri("ms-appx:///Assets/Images/powerup.gif", UriKind.RelativeOrAbsolute);
+            var uri = new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute);
             content.Source = new BitmapImage(uri);
 
             Height = Constants.PICKUP_OBJECT_SIZE * scale;

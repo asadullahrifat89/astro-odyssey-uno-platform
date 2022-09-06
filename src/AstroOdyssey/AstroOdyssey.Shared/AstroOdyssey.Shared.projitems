@@ -96,14 +96,14 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\asteroid4.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\pizza6.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\galaxy2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\black-hole1.png" />
