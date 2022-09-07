@@ -59,17 +59,18 @@ namespace AstroOdyssey
                 isBoss: true);
 
             SetProjectileFiringEnemy(enemy);
+            SetHoveringEnemy(enemy);
 
             // draw between player targeting and hovering enemy
-            var firingType = _random.Next(0, 2);
+            //var firingType = _random.Next(0, 2);
 
-            switch (firingType)
-            {
-                case 0: { SetHoveringEnemy(enemy); } break;
-                case 1: { SetPlayerTargetingEnemy(enemy); enemy.Speed--; } break;
-                default:
-                    break;
-            }
+            //switch (firingType)
+            //{
+            //    case 0: { SetHoveringEnemy(enemy); } break;
+            //    case 1: { SetPlayerTargetingEnemy(enemy); enemy.Speed--; } break;
+            //    default:
+            //        break;
+            //}
 
             // appear in the middle of the screen
             double left = _gameEnvironment.HalfWidth + enemy.HalfWidth;
