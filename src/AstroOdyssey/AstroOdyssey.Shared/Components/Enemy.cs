@@ -89,20 +89,20 @@ namespace AstroOdyssey
                 {
                     case BossClass.JUGGERNAUT:
                         {
-                            Width = 209;
-                            Height = 272;
+                            Width = 306;
+                            Height = 418;
                         }
                         break;
                     case BossClass.CRIMSON:
                         {
-                            Width = 224;
-                            Height = 132;
+                            Width = 510;
+                            Height = 458;
                         }
                         break;
                     case BossClass.VULTURE:
                         {
-                            Width = 325;
-                            Height = 169;
+                            Width = 553;
+                            Height = 492;
                         }
                         break;
                     default:
@@ -112,8 +112,12 @@ namespace AstroOdyssey
                 Uri uri = bossTemplate.AssetUri;
                 content.Source = new BitmapImage(uri);
 
-                Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
-                Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
+                //Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
+                //Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
+
+
+                Height = (Height / 2) * scale;
+                Width = (Width / 2) * scale;
 
                 HalfWidth = Width / 2;
                 Speed--;
@@ -134,7 +138,7 @@ namespace AstroOdyssey
                 Width = size * scale;
 
                 content.Source = new BitmapImage(uri);
-            }          
+            }
 
             HalfWidth = Width / 2;
         }

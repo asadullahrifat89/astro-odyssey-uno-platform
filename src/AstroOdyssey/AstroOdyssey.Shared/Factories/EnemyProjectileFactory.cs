@@ -69,24 +69,24 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile.AddToGameEnvironment(
-                               top: enemy.GetY() + enemy.Height - (90 * scale) + projectile.Height / 2,
+                               top: enemy.GetY() + enemy.Height - (40 * scale) + projectile.Height / 2,
                                left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                                gameEnvironment: _gameEnvironment);
                         }
                         break;
                     case BossClass.CRIMSON:
                         {
-                            var projectile = new EnemyProjectile();
+                            var projectile1 = new EnemyProjectile();
 
                             // boss fires a little faster than usual enemies
-                            projectile.SetAttributes(
+                            projectile1.SetAttributes(
                                 enemy: enemy,
                                 scale: scale,
                                 isOverPowered: enemy.IsOverPowered);
 
-                            projectile.AddToGameEnvironment(
-                               top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
-                               left: enemy.GetX() + (50 * scale) - projectile.HalfWidth,
+                            projectile1.AddToGameEnvironment(
+                               top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
+                               left: enemy.GetX() + (70 * scale) - projectile1.HalfWidth,
                                gameEnvironment: _gameEnvironment);
 
                             var projectile2 = new EnemyProjectile();
@@ -97,8 +97,8 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile2.AddToGameEnvironment(
-                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
-                                left: enemy.GetX() + enemy.Width - (50 * scale) - projectile.HalfWidth,
+                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
+                                left: enemy.GetX() + enemy.Width - (70 * scale) - projectile1.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
                         }
                         break;
