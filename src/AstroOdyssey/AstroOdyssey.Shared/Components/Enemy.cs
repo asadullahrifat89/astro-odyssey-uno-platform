@@ -118,7 +118,6 @@ namespace AstroOdyssey
                 //Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
                 //Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
 
-
                 Height = (height / 2.5) * scale;
                 Width = (width / 2.5) * scale;
 

@@ -138,5 +138,8 @@ namespace AstroOdyssey
         Level_8,
         Level_9,
         Level_10,
+        Level_11,
+        Level_12,
+        Level_13,
     }
 }

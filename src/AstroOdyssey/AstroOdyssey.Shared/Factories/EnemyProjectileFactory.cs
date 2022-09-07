@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.UI.Xaml.Media;
+using System;
 
 namespace AstroOdyssey
 {
@@ -36,8 +37,6 @@ namespace AstroOdyssey
 
             if (enemy.ProjectileSpawnCounter <= 0)
             {
-                //TODO: Boss: star blast shot across screen
-
                 GenerateProjectile(enemy);
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
 
@@ -72,6 +71,31 @@ namespace AstroOdyssey
                                top: enemy.GetY() + enemy.Height - (40 * scale) + projectile.Height / 2,
                                left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                                gameEnvironment: _gameEnvironment);
+
+                            enemy.OverPoweredProjectileSpawnCounter--;
+
+                            if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                            {
+                                var projectile2 = new EnemyProjectile();
+
+                                // boss fires a little faster than usual enemies
+                                projectile2.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile2.Width += 35;
+                                projectile2.Speed--;
+
+                                projectile2.AddToGameEnvironment(
+                                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile2.Height / 2,
+                                    left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
+                                    gameEnvironment: _gameEnvironment);
+
+
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                            }
                         }
                         break;
                     case BossClass.CRIMSON:
@@ -85,7 +109,7 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile1.AddToGameEnvironment(
-                               top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
+                               top: enemy.GetY() + enemy.Height - (15 * scale) + projectile1.Height / 2,
                                left: enemy.GetX() + (70 * scale) - projectile1.HalfWidth,
                                gameEnvironment: _gameEnvironment);
 
@@ -97,9 +121,42 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile2.AddToGameEnvironment(
-                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
-                                left: enemy.GetX() + enemy.Width - (70 * scale) - projectile1.HalfWidth,
+                                top: enemy.GetY() + enemy.Height - (15 * scale) + projectile2.Height / 2,
+                                left: enemy.GetX() + enemy.Width - (70 * scale) - projectile2.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
+
+                            enemy.OverPoweredProjectileSpawnCounter--;
+
+                            if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                            {
+                                var projectile3 = new EnemyProjectile();
+
+                                // boss fires a little faster than usual enemies
+                                projectile3.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile3.AddToGameEnvironment(
+                                   top: enemy.GetY() + enemy.Height - (25 * scale) + projectile3.Height / 2,
+                                   left: enemy.GetX() + (35 * scale) - projectile3.HalfWidth,
+                                   gameEnvironment: _gameEnvironment);
+
+                                var projectile4 = new EnemyProjectile();
+
+                                projectile4.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile4.AddToGameEnvironment(
+                                    top: enemy.GetY() + enemy.Height - (25 * scale) + projectile4.Height / 2,
+                                    left: enemy.GetX() + enemy.Width - (35 * scale) - projectile4.HalfWidth,
+                                    gameEnvironment: _gameEnvironment);
+
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                            }
                         }
                         break;
                     case BossClass.VULTURE:
@@ -112,25 +169,42 @@ namespace AstroOdyssey
                                 scale: scale,
                                 isOverPowered: enemy.IsOverPowered);
 
+                            //OverPowerProjectile(enemy, projectile);
+
                             projectile.AddToGameEnvironment(
                                 top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
                                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
+
+                            enemy.OverPoweredProjectileSpawnCounter--;
+
+                            if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                            {
+                                var projectile2 = new EnemyProjectile();
+
+                                // boss fires a little faster than usual enemies
+                                projectile2.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile2.Height += 35;
+                                projectile2.Speed *= 1.5;
+
+                                projectile2.AddToGameEnvironment(
+                                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile2.Height / 2,
+                                    left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
+                                    gameEnvironment: _gameEnvironment);
+
+
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                            }
                         }
                         break;
                     default:
                         break;
                 }
-
-                //enemy.OverPoweredProjectileSpawnCounter--;
-
-                //if (enemy.OverPoweredProjectileSpawnCounter <= 0)
-                //{
-                //    projectile.OverPower();
-
-                //    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                //    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
-                //}
             }
             else
             {
@@ -141,6 +215,8 @@ namespace AstroOdyssey
                     scale: scale,
                     isOverPowered: enemy.IsOverPowered);
 
+                OverPowerProjectile(enemy, projectile);
+
                 projectile.AddToGameEnvironment(
                     top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
                     left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
@@ -148,6 +224,22 @@ namespace AstroOdyssey
             }
 
             AudioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
+        }
+
+        private void OverPowerProjectile(Enemy enemy, EnemyProjectile projectile)
+        {
+            if (enemy.IsOverPowered)
+            {
+                enemy.OverPoweredProjectileSpawnCounter--;
+
+                if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                {
+                    projectile.OverPower();
+
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                }
+            }
         }
 
         /// <summary>

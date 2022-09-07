@@ -370,7 +370,7 @@ namespace AstroOdyssey
                 if (enemy.IsHovering)
                 {
                     // change direction of x axis movement
-                    if (enemy.GetX() + enemy.Width >= _gameEnvironment.Width - 50 || enemy.GetX() <= 50)
+                    if (enemy.GetX() + enemy.Width >= _gameEnvironment.Width - 25 || enemy.GetX() <= 25)
                         enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
                 }
             }
