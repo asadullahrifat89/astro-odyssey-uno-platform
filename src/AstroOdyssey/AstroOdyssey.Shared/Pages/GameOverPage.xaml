@@ -18,6 +18,8 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            BorderBrush="#4d437d"
+            BorderThickness="0,3,0,3"
             CornerRadius="10">
             <StackPanel
                 Width="300"
@@ -160,7 +162,7 @@
                     Tag="GameOverPage_PlayAgainButton.Content" />
             </StackPanel>
             <Border.Background>
-                <SolidColorBrush Opacity="0.7" Color="Black" />
+                <SolidColorBrush Color="#27223f" />
             </Border.Background>
         </Border>
 
