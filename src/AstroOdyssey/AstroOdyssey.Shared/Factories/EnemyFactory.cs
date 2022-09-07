@@ -340,6 +340,7 @@ namespace AstroOdyssey
                 enemy.MoveY();
             }
 
+            // player colliding enemies
             if (enemy.IsPlayerColliding)
             {
                 var enemyX = enemy.GetX();
@@ -365,10 +366,11 @@ namespace AstroOdyssey
             {
                 enemy.MoveX();
 
+                // hovering enemies x direction change
                 if (enemy.IsHovering)
                 {
                     // change direction of x axis movement
-                    if (enemy.GetX() + enemy.HalfWidth >= _gameEnvironment.Width - 50 || enemy.GetX() + enemy.HalfWidth <= 50)
+                    if (enemy.GetX() + enemy.Width >= _gameEnvironment.Width - 50 || enemy.GetX() <= 50)
                         enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
                 }
             }
