@@ -41,7 +41,7 @@ namespace AstroOdyssey
         {
             if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
             {
-                foreach (var asset in Constants.STAR_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.STAR_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
@@ -50,7 +50,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.PLANET_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.PLANET_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
@@ -59,7 +59,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.ENEMY_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.ENEMY_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
@@ -68,7 +68,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.METEOR_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.METEOR_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
@@ -77,7 +77,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.PLAYER_SHIP_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.PLAYER_SHIP_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(new Uri(asset.AssetUri, UriKind.RelativeOrAbsolute));
@@ -86,7 +86,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.PLAYER_SHIP_THRUST_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);
@@ -95,7 +95,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.COLLECTIBLE_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.COLLECTIBLE_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset);
@@ -104,7 +104,7 @@ namespace AstroOdyssey
 
                 await Task.Delay(500);
 
-                foreach (var asset in Constants.PLAYER_RAGE_TEMPLATES)
+                foreach (var asset in GameObjectTemplates.PLAYER_RAGE_TEMPLATES)
                 {
                     Image content = new Image() { Stretch = Stretch.Uniform };
                     content.Source = new BitmapImage(asset.AssetUri);

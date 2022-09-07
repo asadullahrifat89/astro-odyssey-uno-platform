@@ -46,8 +46,8 @@ namespace AstroOdyssey
             Opacity = 1;
 
             Rotation = random.NextDouble();
-            var meteorType = random.Next(1, Constants.METEOR_TEMPLATES.Length);
-            var meteorTemplate = Constants.METEOR_TEMPLATES[meteorType];
+            var meteorType = random.Next(1, GameObjectTemplates.METEOR_TEMPLATES.Length);
+            var meteorTemplate = GameObjectTemplates.METEOR_TEMPLATES[meteorType];
 
             Uri uri = meteorTemplate.AssetUri;
             Health = meteorTemplate.Health;

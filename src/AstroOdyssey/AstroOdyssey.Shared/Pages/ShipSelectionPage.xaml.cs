@@ -38,11 +38,9 @@ namespace AstroOdyssey
             App.Ship = null;
             ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            //if (this.ShipsList.ItemsSource is null)
-            //{
             var ships = new Ship[] { };
 
-            ships = Constants.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
+            ships = GameObjectTemplates.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = LocalizationHelper.GetLocalizedResource(x.Name),
@@ -51,7 +49,6 @@ namespace AstroOdyssey
             }).ToArray();
 
             this.ShipsList.ItemsSource = ships.ToList();
-            //}
 
             await this.PlayPageLoadedTransition();
         }

@@ -20,7 +20,6 @@
     <_Globbed_Compile Remove="Components\Base\CelestialObjectTemplate.cs" />
     <_Globbed_Compile Remove="Components\Base\DestructibleObjectTemplate.cs" />
     <_Globbed_Compile Remove="Components\Base\LanguageTemplate.cs" />
-    <_Globbed_Compile Remove="Components\Base\LocalizationTemplate.cs" />
     <_Globbed_Compile Remove="Components\Base\PlayerShipTemplate.cs" />
     <_Globbed_Compile Remove="Components\ComicBook.cs" />
     <_Globbed_Compile Remove="Constants.cs" />

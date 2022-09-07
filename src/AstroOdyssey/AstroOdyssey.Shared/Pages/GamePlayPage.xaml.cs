@@ -1241,7 +1241,7 @@ namespace AstroOdyssey
                 Stretch = Stretch.Uniform,
             };
 
-            _rageImage.Source = new BitmapImage(Constants.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri);
+            _rageImage.Source = new BitmapImage(GameObjectTemplates.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri);
 
             switch (Player.ShipClass)
             {
