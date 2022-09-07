@@ -100,8 +100,8 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile2.AddToGameEnvironment(
-                                top: enemy.GetY() + enemy.Height - (15 * scale) + projectile1.Height / 2,
-                                left: enemy.GetX() + enemy.Width - (70 * scale) - projectile1.HalfWidth,
+                                top: enemy.GetY() + enemy.Height - (15 * scale) + projectile2.Height / 2,
+                                left: enemy.GetX() + enemy.Width - (70 * scale) - projectile2.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
 
                             enemy.OverPoweredProjectileSpawnCounter--;
@@ -129,8 +129,8 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile4.AddToGameEnvironment(
-                                    top: enemy.GetY() + enemy.Height - (25 * scale) + projectile1.Height / 2,
-                                    left: enemy.GetX() + enemy.Width - (35 * scale) - projectile1.HalfWidth,
+                                    top: enemy.GetY() + enemy.Height - (25 * scale) + projectile4.Height / 2,
+                                    left: enemy.GetX() + enemy.Width - (35 * scale) - projectile4.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
                                 enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
@@ -148,12 +148,37 @@ namespace AstroOdyssey
                                 scale: scale,
                                 isOverPowered: enemy.IsOverPowered);
 
-                            OverPowerProjectile(enemy, projectile);
+                            //OverPowerProjectile(enemy, projectile);
 
                             projectile.AddToGameEnvironment(
                                 top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
                                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
+
+                            enemy.OverPoweredProjectileSpawnCounter--;
+
+                            if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                            {
+                                var projectile2 = new EnemyProjectile();
+
+                                // boss fires a little faster than usual enemies
+                                projectile2.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile2.Height += 35;
+                                projectile2.Speed *= 1.5;
+
+                                projectile2.AddToGameEnvironment(
+                                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile2.Height / 2,
+                                    left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
+                                    gameEnvironment: _gameEnvironment);
+
+
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                            }
                         }
                         break;
                     default:
