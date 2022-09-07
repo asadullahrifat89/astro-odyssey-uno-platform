@@ -722,8 +722,6 @@ namespace AstroOdyssey
 
                                 ShowInGameImagePanel(_rageImage);
 
-                                //TODO: hide rage image
-
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
@@ -781,8 +779,6 @@ namespace AstroOdyssey
                                 _playerProjectileFactory.RageUp(Player);
 
                                 ShowInGameImagePanel(_rageImage);
-
-                                //TODO: show rage image
 
                                 switch (Player.ShipClass)
                                 {
@@ -913,7 +909,6 @@ namespace AstroOdyssey
                         {
                             SetPlayerHealthBar();
 
-                            //TODO: show health icon
                             ShowInGameImagePanel(_healthImage);
                             ShowInGameText($"‍{LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
                         }
@@ -1235,7 +1230,6 @@ namespace AstroOdyssey
             var scale = GameView.GetGameObjectScale();
             Player = _playerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
 
-            //TODO: set rage image
             _rageImage = new Image()
             {
                 Stretch = Stretch.Uniform,
@@ -1306,9 +1300,9 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            //TODO: show boss image
             ShowInGameImagePanel(_bossAppearedImage);
             ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
+
             Boss = _enemyFactory.EngageBossEnemy(GameLevel);
 
             SetBossHealthBar(); // set boss health on boss appearance            
@@ -1329,10 +1323,11 @@ namespace AstroOdyssey
         {
             WarpThroughSpace();
 
-            //TODO: show boss image
             ShowInGameImagePanel(_bossClearedImage);
             ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
+
             _enemyFactory.DisengageBossEnemy();
+
             Boss = null;
             SetGameLevelText();
         }
@@ -1414,7 +1409,7 @@ namespace AstroOdyssey
                 LevelUpObjects();
 
                 // bosses apprear after level 2
-                if (GameLevel > GameLevel.Level_2)
+                if (GameLevel > GameLevel.Level_2) //TODO: set to level 2
                 {
                     EngageBoss();
                 }

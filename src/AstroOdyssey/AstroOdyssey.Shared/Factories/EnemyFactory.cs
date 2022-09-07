@@ -54,25 +54,16 @@ namespace AstroOdyssey
 
             enemy.SetAttributes(
                 speed: _enemySpeed + _random.Next(0, 4),
-                scale: _gameEnvironment.GetGameObjectScale());
-
-            enemy.IsBoss = true;
-            enemy.IsOverPowered = true;
-
-            enemy.Height = enemy.Height * 2 + (int)gameLevel / 3 + 0.25d;
-            enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
-            enemy.HalfWidth = enemy.Width / 2;
-            enemy.Speed--;
-            enemy.ProjectileSpawnDelay -= (3 * (int)gameLevel);
-
-            enemy.Health = 50 * (int)gameLevel;
+                gameLevel: gameLevel,
+                scale: _gameEnvironment.GetGameObjectScale(),
+                isBoss: true);
 
             SetProjectileFiringEnemy(enemy);
 
-            //TODO: draw between player targeting and hovering enemy
-            var bossType = _random.Next(0, 2);
+            // draw between player targeting and hovering enemy
+            var firingType = _random.Next(0, 2);
 
-            switch (bossType)
+            switch (firingType)
             {
                 case 0: { SetHoveringEnemy(enemy); } break;
                 case 1: { SetPlayerTargetingEnemy(enemy); enemy.Speed--; } break;
@@ -137,7 +128,10 @@ namespace AstroOdyssey
         {
             var enemy = new Enemy();
 
-            enemy.SetAttributes(speed: _enemySpeed + _random.Next(0, 4), scale: _gameEnvironment.GetGameObjectScale());
+            enemy.SetAttributes(
+                speed: _enemySpeed + _random.Next(0, 4),
+                gameLevel: gameLevel,
+                scale: _gameEnvironment.GetGameObjectScale());
 
             double left = 0;
             double top = 0;
