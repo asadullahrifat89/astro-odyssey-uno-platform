@@ -108,21 +108,29 @@ namespace AstroOdyssey
 
                             if (enemy.OverPoweredProjectileSpawnCounter <= 0)
                             {
-                                //TODO: add 3 shots
-
-                                var projectile = new EnemyProjectile();
+                                var projectile3 = new EnemyProjectile();
 
                                 // boss fires a little faster than usual enemies
-                                projectile.SetAttributes(
+                                projectile3.SetAttributes(
                                     enemy: enemy,
                                     scale: scale,
                                     isOverPowered: enemy.IsOverPowered);
 
-                                projectile.OverPower();
+                                projectile3.AddToGameEnvironment(
+                                   top: enemy.GetY() + enemy.Height - (20 * scale) + projectile3.Height / 2,
+                                   left: enemy.GetX() + (35 * scale) - projectile3.HalfWidth,
+                                   gameEnvironment: _gameEnvironment);
 
-                                projectile.AddToGameEnvironment(
-                                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
-                                    left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
+                                var projectile4 = new EnemyProjectile();
+
+                                projectile4.SetAttributes(
+                                    enemy: enemy,
+                                    scale: scale,
+                                    isOverPowered: enemy.IsOverPowered);
+
+                                projectile4.AddToGameEnvironment(
+                                    top: enemy.GetY() + enemy.Height - (20 * scale) + projectile1.Height / 2,
+                                    left: enemy.GetX() + enemy.Width - (35 * scale) - projectile1.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
                                 enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
