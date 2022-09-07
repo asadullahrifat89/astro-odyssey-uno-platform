@@ -117,7 +117,7 @@
                 <Button
                     x:Name="GameStartPage_PlayButton"
                     x:Uid="GameStartPage_PlayButton"
-                    Height="40"
+                    Height="50"
                     Margin="30,50,30,30"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
@@ -126,6 +126,7 @@
                     Click="PlayButton_Click"
                     Content="START GAME"
                     CornerRadius="50"
+                    FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"

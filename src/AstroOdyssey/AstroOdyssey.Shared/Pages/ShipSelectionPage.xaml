@@ -86,7 +86,7 @@
                 <Button
                     x:Name="ShipSelectionPage_ChooseButton"
                     x:Uid="ShipSelectionPage_ChooseButton"
-                    Height="40"
+                    Height="50"
                     Margin="30,10,30,50"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
@@ -95,6 +95,7 @@
                     Click="ChooseButton_Click"
                     Content="SELECT"
                     CornerRadius="50"
+                    FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="White" />
 
