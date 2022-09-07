@@ -1400,6 +1400,24 @@ namespace AstroOdyssey
             if (GameScore.Score > 1400)
             {
                 GameLevel = GameLevel.Level_10;
+                ScoreBar.Value = GameScore.Score / 1600 * 100;
+                SetScoreBarCountText(1600);
+            }
+            if (GameScore.Score > 1600)
+            {
+                GameLevel = GameLevel.Level_11;
+                ScoreBar.Value = GameScore.Score / 1800 * 100;
+                SetScoreBarCountText(1800);
+            }
+            if (GameScore.Score > 1800)
+            {
+                GameLevel = GameLevel.Level_12;
+                ScoreBar.Value = GameScore.Score / 2000 * 100;
+                SetScoreBarCountText(2000);
+            }
+            if (GameScore.Score > 2000)
+            {
+                GameLevel = GameLevel.Level_13;
                 ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/MAX";
             }
 
