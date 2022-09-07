@@ -53,7 +53,7 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: Player: Get side kicks which shoot additional projectile, lost on impact with enemy or meteor
+            //TODO: Player: fire additional bullet on pizza collection
 
             Tag = PLAYER;
 

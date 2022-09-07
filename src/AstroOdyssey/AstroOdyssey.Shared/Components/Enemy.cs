@@ -81,7 +81,7 @@ namespace AstroOdyssey
                 IsOverPowered = true;
 
                 var bossType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[2]; // TODO: set to boss type
+                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType]; // TODO: set to boss type
 
                 BossClass = bossTemplate.BossClass;
 
