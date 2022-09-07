@@ -80,10 +80,10 @@ namespace AstroOdyssey
                 IsBoss = true;
                 IsOverPowered = true;
 
-                var enemyType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                var enemyTemplate = GameObjectTemplates.BOSS_TEMPLATES[enemyType];
+                var bossType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
+                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType];
 
-                BossClass = enemyTemplate.BossClass;
+                BossClass = bossTemplate.BossClass;
 
                 switch (BossClass)
                 {
@@ -109,7 +109,7 @@ namespace AstroOdyssey
                         break;
                 }
 
-                Uri uri = enemyTemplate.AssetUri;
+                Uri uri = bossTemplate.AssetUri;
                 content.Source = new BitmapImage(uri);
 
                 Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;

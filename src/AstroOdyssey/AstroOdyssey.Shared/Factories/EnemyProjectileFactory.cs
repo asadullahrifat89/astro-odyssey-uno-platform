@@ -39,7 +39,6 @@ namespace AstroOdyssey
                 //TODO: Boss: star blast shot across screen
 
                 GenerateProjectile(enemy);
-
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
 
                 //enemy.SetRecoilEffect();

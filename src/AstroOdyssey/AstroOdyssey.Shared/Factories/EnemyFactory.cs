@@ -60,7 +60,7 @@ namespace AstroOdyssey
 
             SetProjectileFiringEnemy(enemy);
 
-            //TODO: draw between player targeting and hovering enemy
+            // draw between player targeting and hovering enemy
             var firingType = _random.Next(0, 2);
 
             switch (firingType)

@@ -39,8 +39,8 @@ namespace AstroOdyssey
                 {
                     case BossClass.JUGGERNAUT:
                         {
-                            Background = new SolidColorBrush(Colors.Green);
-                            BorderBrush = new SolidColorBrush(Colors.DarkGreen);
+                            Background = new SolidColorBrush(Colors.LightGreen);
+                            BorderBrush = new SolidColorBrush(Colors.Green);
                             BorderThickness = new Thickness(3);
 
                             width += 5;
