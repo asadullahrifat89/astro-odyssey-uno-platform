@@ -38,9 +38,9 @@ namespace AstroOdyssey
             {
                 //TODO: Boss: star blast shot across screen
 
-                GenerateProjectile(enemy, gameLevel);
+                GenerateProjectile(enemy);
 
-                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;                
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
 
                 //enemy.SetRecoilEffect();
             }
@@ -50,8 +50,8 @@ namespace AstroOdyssey
         /// Generates a projectile.
         /// </summary>
         /// <param name="enemy"></param>
-        /// <param name="gameLevel"></param>
-        private void GenerateProjectile(Enemy enemy, GameLevel gameLevel)
+        /// 
+        private void GenerateProjectile(Enemy enemy)
         {
             var projectile = new EnemyProjectile();
 
@@ -59,8 +59,7 @@ namespace AstroOdyssey
 
             // boss fires a little faster than usual enemies
             projectile.SetAttributes(
-                speed: enemy.IsBoss ? enemy.Speed * 1.50 : enemy.Speed * 1.65,
-                gameLevel: gameLevel,
+                enemy: enemy,
                 scale: scale,
                 isOverPowered: enemy.IsOverPowered);
 

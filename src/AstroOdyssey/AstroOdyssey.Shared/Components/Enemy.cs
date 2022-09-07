@@ -56,72 +56,85 @@ namespace AstroOdyssey
         public bool IsEvadingTriggered { get; set; }
 
 
-        private bool _isBoss;
+        public bool IsBoss { get; set; }
 
-        public bool IsBoss
-        {
-            get { return _isBoss; }
-            set
-            {
-                _isBoss = value;
-
-                if (_isBoss)
-                {
-                    var enemyType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                    var enemyTemplate = GameObjectTemplates.BOSS_TEMPLATES[enemyType];
-
-                    switch (enemyType)
-                    {
-                        case 0:
-                            {
-                                Width = 209;
-                                Height = 272;
-                            }
-                            break;
-                        case 1:
-                            {
-                                Width = 224;
-                                Height = 132;
-                            }
-                            break;
-                        case 2:
-                            {
-                                Width = 325;
-                                Height = 169;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-
-                    Uri uri = enemyTemplate;
-                    content.Source = new BitmapImage(uri);
-                }
-            }
-        }
+        public BossClass BossClass { get; set; }
 
         #endregion
 
         #region Methods
 
-        public void SetAttributes(double speed, double scale = 1)
+        public void SetAttributes(
+            double speed,
+            GameLevel gameLevel,
+            double scale = 1,
+            bool isBoss = false)
         {
             Speed = speed;
             XDirection = XDirection.NONE;
             IsMarkedForFadedDestruction = false;
             Opacity = 1;
 
-            var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
-            var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
+            if (isBoss)
+            {
+                IsBoss = true;
+                IsOverPowered = true;
 
-            Uri uri = enemyTemplate.AssetUri;
-            Health = enemyTemplate.Health;
+                var enemyType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
+                var enemyTemplate = GameObjectTemplates.BOSS_TEMPLATES[enemyType];
 
-            var size = enemyTemplate.Size;
-            Height = size * scale;
-            Width = size * scale;
+                BossClass = enemyTemplate.BossClass;
 
-            content.Source = new BitmapImage(uri);
+                switch (BossClass)
+                {
+                    case BossClass.JUGGERNAUT:
+                        {
+                            Width = 209;
+                            Height = 272;
+                        }
+                        break;
+                    case BossClass.BLAZER:
+                        {
+                            Width = 224;
+                            Height = 132;
+                        }
+                        break;
+                    case BossClass.VULTURE:
+                        {
+                            Width = 325;
+                            Height = 169;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                Uri uri = enemyTemplate.AssetUri;
+                content.Source = new BitmapImage(uri);
+
+                Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
+                Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
+
+                HalfWidth = Width / 2;
+                Speed--;
+                ProjectileSpawnDelay -= (3 * (int)gameLevel);
+
+                Health = 50 * (int)gameLevel;
+            }
+            else
+            {
+                var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
+                var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
+
+                Uri uri = enemyTemplate.AssetUri;
+                Health = enemyTemplate.Health;
+
+                var size = enemyTemplate.Size;
+                Height = size * scale;
+                Width = size * scale;
+
+                content.Source = new BitmapImage(uri);
+            }          
 
             HalfWidth = Width / 2;
         }
@@ -177,6 +190,13 @@ namespace AstroOdyssey
         }
 
         #endregion
+    }
+
+    public enum BossClass
+    {
+        JUGGERNAUT,
+        BLAZER,
+        VULTURE,
     }
 }
 

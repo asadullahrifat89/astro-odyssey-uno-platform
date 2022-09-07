@@ -26,24 +26,60 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, GameLevel gameLevel, double scale = 1, bool isOverPowered = false)
+        public void SetAttributes(Enemy enemy, double scale = 1, bool isOverPowered = false)
         {
-            Speed = speed;
+            Speed = enemy.IsBoss ? enemy.Speed * 1.50 : enemy.Speed * 1.65;
 
             double height = 12;
             double width = 12;
 
-            if (isOverPowered)
+            if (enemy.IsBoss)
             {
-                Background = new SolidColorBrush(Colors.Violet);
-                BorderBrush = new SolidColorBrush(Colors.DarkViolet);
-                BorderThickness = new Thickness(3);
+                switch (enemy.BossClass)
+                {
+                    case BossClass.JUGGERNAUT:
+                        {
+                            Background = new SolidColorBrush(Colors.Green);
+                            BorderBrush = new SolidColorBrush(Colors.DarkGreen);
+                            BorderThickness = new Thickness(3);
+
+                            width += 5;
+                        }
+                        break;
+                    case BossClass.BLAZER:
+                        {
+                            Background = new SolidColorBrush(Colors.Red);
+                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                            BorderThickness = new Thickness(3);
+
+                            height += 5;
+                        }
+                        break;
+                    case BossClass.VULTURE:
+                        {
+                            Background = new SolidColorBrush(Colors.Goldenrod);
+                            BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+                            BorderThickness = new Thickness(3);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
-                Background = new SolidColorBrush(Colors.Orange);
-                BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                BorderThickness = new Thickness(2);
+                if (isOverPowered)
+                {
+                    Background = new SolidColorBrush(Colors.Violet);
+                    BorderBrush = new SolidColorBrush(Colors.DarkViolet);
+                    BorderThickness = new Thickness(3);
+                }
+                else
+                {
+                    Background = new SolidColorBrush(Colors.Orange);
+                    BorderBrush = new SolidColorBrush(Colors.DarkOrange);
+                    BorderThickness = new Thickness(2);
+                }
             }           
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
