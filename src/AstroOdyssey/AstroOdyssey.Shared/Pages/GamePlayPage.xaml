@@ -184,7 +184,7 @@
             CornerRadius="50"
             Visibility="Collapsed">
             <StackPanel
-                Margin="15,3"
+                Margin="10,3"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">
