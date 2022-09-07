@@ -81,7 +81,7 @@ namespace AstroOdyssey
                 IsOverPowered = true;
 
                 var bossType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType];
+                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType]; // TODO: set to boss type
 
                 BossClass = bossTemplate.BossClass;
 
@@ -93,7 +93,7 @@ namespace AstroOdyssey
                             Height = 272;
                         }
                         break;
-                    case BossClass.BLAZER:
+                    case BossClass.CRIMSON:
                         {
                             Width = 224;
                             Height = 132;
@@ -195,7 +195,7 @@ namespace AstroOdyssey
     public enum BossClass
     {
         JUGGERNAUT,
-        BLAZER,
+        CRIMSON,
         VULTURE,
     }
 }

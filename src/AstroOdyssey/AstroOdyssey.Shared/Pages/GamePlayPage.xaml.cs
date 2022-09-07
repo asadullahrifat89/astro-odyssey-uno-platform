@@ -1409,7 +1409,7 @@ namespace AstroOdyssey
                 LevelUpObjects();
 
                 // bosses apprear after level 2
-                if (GameLevel > GameLevel.Level_2)
+                if (GameLevel > GameLevel.Level_2) //TODO: set to level 2
                 {
                     EngageBoss();
                 }

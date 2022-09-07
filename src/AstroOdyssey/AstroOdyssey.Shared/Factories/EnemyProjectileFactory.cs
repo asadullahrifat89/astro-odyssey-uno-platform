@@ -52,33 +52,100 @@ namespace AstroOdyssey
         /// 
         private void GenerateProjectile(Enemy enemy)
         {
-            var projectile = new EnemyProjectile();
-
             var scale = _gameEnvironment.GetGameObjectScale();
-
-            // boss fires a little faster than usual enemies
-            projectile.SetAttributes(
-                enemy: enemy,
-                scale: scale,
-                isOverPowered: enemy.IsOverPowered);
 
             if (enemy.IsBoss)
             {
-                enemy.OverPoweredProjectileSpawnCounter--;
-
-                if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                switch (enemy.BossClass)
                 {
-                    projectile.OverPower();
+                    case BossClass.JUGGERNAUT:
+                        {
+                            var projectile = new EnemyProjectile();
 
-                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                            // boss fires a little faster than usual enemies
+                            projectile.SetAttributes(
+                                enemy: enemy,
+                                scale: scale,
+                                isOverPowered: enemy.IsOverPowered);
+
+                            projectile.AddToGameEnvironment(
+                               top: enemy.GetY() + enemy.Height - (90 * scale) + projectile.Height / 2,
+                               left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
+                               gameEnvironment: _gameEnvironment);
+                        }
+                        break;
+                    case BossClass.CRIMSON:
+                        {
+                            var projectile = new EnemyProjectile();
+
+                            // boss fires a little faster than usual enemies
+                            projectile.SetAttributes(
+                                enemy: enemy,
+                                scale: scale,
+                                isOverPowered: enemy.IsOverPowered);
+
+                            projectile.AddToGameEnvironment(
+                               top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
+                               left: enemy.GetX() + (50 * scale) - projectile.HalfWidth,
+                               gameEnvironment: _gameEnvironment);
+
+                            var projectile2 = new EnemyProjectile();
+
+                            projectile2.SetAttributes(
+                                enemy: enemy,
+                                scale: scale,
+                                isOverPowered: enemy.IsOverPowered);
+
+                            projectile2.AddToGameEnvironment(
+                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
+                                left: enemy.GetX() + enemy.Width - (50 * scale) - projectile.HalfWidth,
+                                gameEnvironment: _gameEnvironment);
+                        }
+                        break;
+                    case BossClass.VULTURE:
+                        {
+                            var projectile = new EnemyProjectile();
+
+                            // boss fires a little faster than usual enemies
+                            projectile.SetAttributes(
+                                enemy: enemy,
+                                scale: scale,
+                                isOverPowered: enemy.IsOverPowered);
+
+                            projectile.AddToGameEnvironment(
+                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
+                                left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
+                                gameEnvironment: _gameEnvironment);
+                        }
+                        break;
+                    default:
+                        break;
                 }
-            }
 
-            projectile.AddToGameEnvironment(
-                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
-                left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
-                gameEnvironment: _gameEnvironment);
+                //enemy.OverPoweredProjectileSpawnCounter--;
+
+                //if (enemy.OverPoweredProjectileSpawnCounter <= 0)
+                //{
+                //    projectile.OverPower();
+
+                //    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
+                //    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                //}
+            }
+            else
+            {
+                var projectile = new EnemyProjectile();
+
+                projectile.SetAttributes(
+                    enemy: enemy,
+                    scale: scale,
+                    isOverPowered: enemy.IsOverPowered);
+
+                projectile.AddToGameEnvironment(
+                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
+                    left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
+                    gameEnvironment: _gameEnvironment);
+            }
 
             AudioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
         }

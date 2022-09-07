@@ -99,7 +99,7 @@ namespace AstroOdyssey
         public static (Uri AssetUri, BossClass BossClass)[] BOSS_TEMPLATES = new (Uri AssetUri, BossClass BossClass)[]
         {
             (new Uri("ms-appx:///Assets/Images/boss1.png", UriKind.RelativeOrAbsolute), BossClass.JUGGERNAUT),
-            (new Uri("ms-appx:///Assets/Images/boss2.png", UriKind.RelativeOrAbsolute), BossClass.BLAZER),
+            (new Uri("ms-appx:///Assets/Images/boss2.png", UriKind.RelativeOrAbsolute), BossClass.CRIMSON),
             (new Uri("ms-appx:///Assets/Images/boss3.png", UriKind.RelativeOrAbsolute), BossClass.VULTURE),
         };
     }

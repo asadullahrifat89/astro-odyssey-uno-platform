@@ -46,7 +46,7 @@ namespace AstroOdyssey
                             width += 5;
                         }
                         break;
-                    case BossClass.BLAZER:
+                    case BossClass.CRIMSON:
                         {
                             Background = new SolidColorBrush(Colors.Red);
                             BorderBrush = new SolidColorBrush(Colors.DarkRed);
