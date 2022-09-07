@@ -20,8 +20,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\CelestialObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\CollectibleFactory.cs" />

@@ -14,12 +14,6 @@ namespace AstroOdyssey
 
         private readonly Random random = new Random();
 
-        public int ProjectileSpawnCounter;
-        public int ProjectileSpawnDelay = 60;
-
-        public int OverPoweredProjectileSpawnCounter;
-        public int OverPoweredProjectileSpawnDelay = 5;
-
         #endregion
 
         #region Ctor
@@ -42,6 +36,14 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
+
+        public int ProjectileSpawnCounter { get; set; }
+
+        public int ProjectileSpawnDelay { get; set; } = 60;
+
+        public int OverPoweredProjectileSpawnCounter { get; set; }
+
+        public int OverPoweredProjectileSpawnDelay { get; set; } = 5;
 
         public bool IsBoss { get; set; }
 
@@ -66,8 +68,8 @@ namespace AstroOdyssey
             IsMarkedForFadedDestruction = false;
             Opacity = 1;
 
-            var enemyType = random.Next(0, Constants.ENEMY_TEMPLATES.Length);
-            var enemyTemplate = Constants.ENEMY_TEMPLATES[enemyType];
+            var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
+            var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
 
             Uri uri = enemyTemplate.AssetUri;
             Health = enemyTemplate.Health;
@@ -86,7 +88,7 @@ namespace AstroOdyssey
             if (XDirection == XDirection.NONE)
             {
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = Speed / 2; // decrease speed
+                Speed = Speed / 1.85; // decrease speed
 
                 IsEvadingTriggered = true;
             }

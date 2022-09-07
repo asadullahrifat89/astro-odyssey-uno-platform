@@ -1,5 +1,6 @@
 ﻿#if DEBUG
 using Microsoft.Extensions.Logging;
+using Microsoft.UI;
 #endif
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
@@ -103,8 +105,7 @@ namespace AstroOdyssey
 #else
             _window = Microsoft.UI.Xaml.Window.Current;
 #endif
-
-            var rootFrame = _window.Content as Frame;            
+            var rootFrame = _window.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -112,7 +113,8 @@ namespace AstroOdyssey
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-                rootFrame.Background = App.Current.Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
+
+                rootFrame.Background = SolidColorBrushHelper.FromARGB(255, 7, 10, 37); // App.Current.Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.IsNavigationStackEnabled = true;
@@ -137,6 +139,7 @@ namespace AstroOdyssey
                     // parameter
                     rootFrame.Navigate(typeof(GameStartPage), args.Arguments);
                 }
+
                 // Ensure the current window is active
                 _window.Activate();
             }

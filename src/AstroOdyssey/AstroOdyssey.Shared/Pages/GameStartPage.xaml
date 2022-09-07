@@ -79,6 +79,8 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            BorderBrush="#4d437d"
+            BorderThickness="0,3,0,3"
             CornerRadius="10">
             <StackPanel
                 MaxWidth="315"
@@ -117,7 +119,7 @@
                 <Button
                     x:Name="GameStartPage_PlayButton"
                     x:Uid="GameStartPage_PlayButton"
-                    Height="40"
+                    Height="50"
                     Margin="30,50,30,30"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
@@ -126,6 +128,7 @@
                     Click="PlayButton_Click"
                     Content="START GAME"
                     CornerRadius="50"
+                    FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
@@ -147,7 +150,7 @@
 
             </StackPanel>
             <Border.Background>
-                <SolidColorBrush Opacity="0.7" Color="Black" />
+                <SolidColorBrush Color="#27223f" />
             </Border.Background>
         </Border>
 

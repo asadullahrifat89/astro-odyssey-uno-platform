@@ -6,7 +6,7 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
-    Background="Black"
+    Background="#070a25"
     IsTabStop="False"
     mc:Ignorable="d">
 
@@ -184,7 +184,7 @@
             CornerRadius="50"
             Visibility="Collapsed">
             <StackPanel
-                Margin="15,3"
+                Margin="10,3"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 Orientation="Horizontal">

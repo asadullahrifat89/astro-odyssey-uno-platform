@@ -18,6 +18,8 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            BorderBrush="#4d437d"
+            BorderThickness="0,3,0,3"
             CornerRadius="10">
             <StackPanel
                 MaxWidth="315"
@@ -86,7 +88,7 @@
                 <Button
                     x:Name="ShipSelectionPage_ChooseButton"
                     x:Uid="ShipSelectionPage_ChooseButton"
-                    Height="40"
+                    Height="50"
                     Margin="30,10,30,50"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
@@ -95,12 +97,13 @@
                     Click="ChooseButton_Click"
                     Content="SELECT"
                     CornerRadius="50"
+                    FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="White" />
 
             </StackPanel>
             <Border.Background>
-                <SolidColorBrush Opacity="0.8" Color="Black" />
+                <SolidColorBrush Color="#27223f" />
             </Border.Background>
         </Border>
 

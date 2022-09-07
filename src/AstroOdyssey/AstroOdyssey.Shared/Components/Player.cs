@@ -168,7 +168,7 @@ namespace AstroOdyssey
 
             Uri exhaustUri = null;
 
-            exhaustUri = Constants.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
+            exhaustUri = GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
 
             switch (ShipClass)
             {

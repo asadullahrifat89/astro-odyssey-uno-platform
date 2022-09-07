@@ -18,9 +18,11 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            BorderBrush="#4d437d"
+            BorderThickness="0,3,0,3"
             CornerRadius="10">
             <StackPanel
-                MaxWidth="315"
+                Width="300"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -143,7 +145,7 @@
                 <Button
                     x:Name="GameOverPage_PlayAgainButton"
                     x:Uid="GameOverPage_PlayAgainButton"
-                    Height="40"
+                    Height="50"
                     Margin="30,20,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
@@ -152,6 +154,7 @@
                     Click="PlayAgainButton_Click"
                     Content="PLAY AGAIN"
                     CornerRadius="50"
+                    FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
@@ -159,7 +162,7 @@
                     Tag="GameOverPage_PlayAgainButton.Content" />
             </StackPanel>
             <Border.Background>
-                <SolidColorBrush Opacity="0.7" Color="Black" />
+                <SolidColorBrush Color="#27223f" />
             </Border.Background>
         </Border>
 

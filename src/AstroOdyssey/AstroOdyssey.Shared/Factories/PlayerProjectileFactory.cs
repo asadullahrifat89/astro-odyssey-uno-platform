@@ -19,7 +19,7 @@ namespace AstroOdyssey
         private readonly int PLASMA_BOMB_ROUNDS_SPEED_DECREASE = 5;
 
         private readonly int BEAM_CANNON_ROUNDS_DELAY_INCREASE = 25;
-        private readonly int BEAM_CANNON_ROUNDS_SPEED_INCREASE = 25;
+        private readonly int BEAM_CANNON_ROUNDS_SPEED_INCREASE = 20;
 
         private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 15;
         private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 3;
@@ -255,7 +255,6 @@ namespace AstroOdyssey
                             var enemy = destructible as Enemy;
 
                             enemy.SetProjectileImpactEffect();
-
                            
                             if (destructible.HasNoHealth)
                             {

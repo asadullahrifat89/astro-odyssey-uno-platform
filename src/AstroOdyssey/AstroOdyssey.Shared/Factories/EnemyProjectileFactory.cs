@@ -40,8 +40,7 @@ namespace AstroOdyssey
 
                 GenerateProjectile(enemy, gameLevel);
 
-                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
-                //enemy.ProjectileSpawnDelay = _random.Next(25, 60);
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;                
 
                 //enemy.SetRecoilEffect();
             }
