@@ -88,7 +88,7 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile1.AddToGameEnvironment(
-                               top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
+                               top: enemy.GetY() + enemy.Height - (15 * scale) + projectile1.Height / 2,
                                left: enemy.GetX() + (70 * scale) - projectile1.HalfWidth,
                                gameEnvironment: _gameEnvironment);
 
@@ -100,7 +100,7 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile2.AddToGameEnvironment(
-                                top: enemy.GetY() + enemy.Height - (10 * scale) + projectile1.Height / 2,
+                                top: enemy.GetY() + enemy.Height - (15 * scale) + projectile1.Height / 2,
                                 left: enemy.GetX() + enemy.Width - (70 * scale) - projectile1.HalfWidth,
                                 gameEnvironment: _gameEnvironment);
 
@@ -117,7 +117,7 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile3.AddToGameEnvironment(
-                                   top: enemy.GetY() + enemy.Height - (20 * scale) + projectile3.Height / 2,
+                                   top: enemy.GetY() + enemy.Height - (25 * scale) + projectile3.Height / 2,
                                    left: enemy.GetX() + (35 * scale) - projectile3.HalfWidth,
                                    gameEnvironment: _gameEnvironment);
 
@@ -129,7 +129,7 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile4.AddToGameEnvironment(
-                                    top: enemy.GetY() + enemy.Height - (20 * scale) + projectile1.Height / 2,
+                                    top: enemy.GetY() + enemy.Height - (25 * scale) + projectile1.Height / 2,
                                     left: enemy.GetX() + enemy.Width - (35 * scale) - projectile1.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
@@ -153,7 +153,7 @@ namespace AstroOdyssey
                             projectile.AddToGameEnvironment(
                                 top: enemy.GetY() + enemy.Height - (10 * scale) + projectile.Height / 2,
                                 left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
-                                gameEnvironment: _gameEnvironment);                           
+                                gameEnvironment: _gameEnvironment);
                         }
                         break;
                     default:
