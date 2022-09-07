@@ -48,8 +48,8 @@ namespace AstroOdyssey
                         break;
                     case BossClass.CRIMSON:
                         {
-                            Background = new SolidColorBrush(Colors.Red);
-                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                            Background = new SolidColorBrush(Colors.Violet);
+                            BorderBrush = new SolidColorBrush(Colors.DarkViolet);
                             BorderThickness = new Thickness(3);
 
                             height += 5;
