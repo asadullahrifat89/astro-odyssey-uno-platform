@@ -59,8 +59,14 @@ namespace AstroOdyssey
             enemy.IsBoss = true;
             enemy.IsOverPowered = true;
 
-            enemy.Height = enemy.Height * 2 + (int)gameLevel / 3 + 0.25d;
-            enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
+            var scale = _gameEnvironment.GetGameObjectScale();
+
+            //enemy.Height = enemy.Height * 2 + (int)gameLevel / 3 + 0.25d;
+            //enemy.Width = enemy.Width * 2 + (int)gameLevel / 3 + 0.25d;
+
+            enemy.Height = (enemy.Height + (int)gameLevel / 3 + 0.25d) * scale;
+            enemy.Width = (enemy.Width + (int)gameLevel / 3 + 0.25d) * scale;
+
             enemy.HalfWidth = enemy.Width / 2;
             enemy.Speed--;
             enemy.ProjectileSpawnDelay -= (3 * (int)gameLevel);

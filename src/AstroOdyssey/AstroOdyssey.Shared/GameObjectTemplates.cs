@@ -95,5 +95,12 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/pizza5.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/pizza6.png", UriKind.RelativeOrAbsolute),
         };
+
+        public static Uri[] BOSS_TEMPLATES = new Uri[]
+        {
+            new Uri("ms-appx:///Assets/Images/boss1.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/boss2.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/boss3.png", UriKind.RelativeOrAbsolute),
+        };
     }
 }

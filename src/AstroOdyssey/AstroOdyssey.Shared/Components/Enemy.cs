@@ -45,8 +45,6 @@ namespace AstroOdyssey
 
         public int OverPoweredProjectileSpawnDelay { get; set; } = 5;
 
-        public bool IsBoss { get; set; }
-
         public bool IsPlayerColliding { get; set; }
 
         public bool IsProjectileFiring { get; set; }
@@ -56,6 +54,51 @@ namespace AstroOdyssey
         public bool IsEvading { get; set; }
 
         public bool IsEvadingTriggered { get; set; }
+
+
+        private bool _isBoss;
+
+        public bool IsBoss
+        {
+            get { return _isBoss; }
+            set
+            {
+                _isBoss = value;
+
+                if (_isBoss)
+                {
+                    var enemyType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
+                    var enemyTemplate = GameObjectTemplates.BOSS_TEMPLATES[enemyType];
+
+                    switch (enemyType)
+                    {
+                        case 0:
+                            {
+                                Width = 209;
+                                Height = 272;
+                            }
+                            break;
+                        case 1:
+                            {
+                                Width = 224;
+                                Height = 132;
+                            }
+                            break;
+                        case 2:
+                            {
+                                Width = 325;
+                                Height = 169;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    Uri uri = enemyTemplate;
+                    content.Source = new BitmapImage(uri);
+                }
+            }
+        }
 
         #endregion
 
