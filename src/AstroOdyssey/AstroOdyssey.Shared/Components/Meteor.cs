@@ -69,7 +69,7 @@ namespace AstroOdyssey
             {
                 YDirection = YDirection.UP;
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = Speed / 2; // decrease speed by 50%
+                Speed = (Speed / 2.3); // decrease speed
 
                 IsFloating = true;
             }
