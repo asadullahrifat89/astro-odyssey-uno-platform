@@ -19,7 +19,7 @@ namespace AstroOdyssey
         private int _spaceWarpDurationDelay = 100;
 
         private int _planetSpawnCounter;
-        private int _planetSpawnDelay = 2000;
+        private int _planetSpawnDelay = 2500;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
         private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
@@ -61,8 +61,6 @@ namespace AstroOdyssey
 
             _starView.IsWarpingThroughSpace = true;
             _planetView.IsWarpingThroughSpace = true;
-
-            //starView.Background = new SolidColorBrush(Colors.DeepPink);
         }
 
         /// <summary>
@@ -82,8 +80,6 @@ namespace AstroOdyssey
 
             // generate a planet after each warp
             GeneratePlanet();
-
-            //starView.Background = new SolidColorBrush(Colors.Transparent);
         }
 
         /// <summary>
@@ -125,7 +121,7 @@ namespace AstroOdyssey
             {
                 GeneratePlanet();
 
-                _planetSpawnDelay = _random.Next(2000, 3000);
+                _planetSpawnDelay = _random.Next(2500, 3500);
                 _planetSpawnCounter = _planetSpawnDelay;
             }
         }

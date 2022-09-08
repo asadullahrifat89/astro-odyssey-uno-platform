@@ -49,6 +49,8 @@ namespace AstroOdyssey
         public void SetAttributes(double speed, double scale = 1)
         {
             Speed = speed;
+
+            //TODO: SET IT TO RANDOM
             PowerUpType = (PowerUpType)random.Next(1, Enum.GetNames<PowerUpType>().Length);
 
             var uri = new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute);

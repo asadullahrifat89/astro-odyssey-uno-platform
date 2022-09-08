@@ -10,6 +10,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using static System.Formats.Asn1.AsnWriter;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System.Collections.Generic;
 
 namespace AstroOdyssey
 {
@@ -144,15 +145,15 @@ namespace AstroOdyssey
             }
         }
 
-        private Enemy _boss;
-        public Enemy Boss
+        private List<Enemy> _boss = new List<Enemy>();
+        public List<Enemy> Bosses
         {
             get { return _boss; }
             set
             {
                 _boss = value;
 
-                if (_boss is null)
+                if (_boss is null || _boss.Count == 0)
                 {
                     BossHealthBarPanel.Visibility = Visibility.Collapsed;
                     BossTotalHealth = 0;
@@ -160,7 +161,7 @@ namespace AstroOdyssey
                 else
                 {
                     BossHealthBarPanel.Visibility = Visibility.Visible;
-                    BossTotalHealth = _boss.Health;
+                    BossTotalHealth = _boss.Sum(x => x.Health);
                 }
             }
         }
@@ -191,7 +192,7 @@ namespace AstroOdyssey
             FPSText.Text = "";
             ObjectsCountText.Text = "";
 
-            Boss = null;
+            Bosses = new List<Enemy>();
             BossHealthBarPanel.Visibility = Visibility.Collapsed;
 
             Player = null;
@@ -813,7 +814,7 @@ namespace AstroOdyssey
 
                                         if (enemy.IsBoss)
                                         {
-                                            DisengageBoss();
+                                            DisengageBoss(enemy);
                                             GameScore.BossesDestroyed++;
                                         }
                                     }
@@ -931,7 +932,7 @@ namespace AstroOdyssey
 
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
-                        {                            
+                        {
                             _playerProjectileFactory.IncreaseProjectilePower();
 
                             GameScore.Score++;
@@ -1312,7 +1313,7 @@ namespace AstroOdyssey
             ShowInGameImagePanel(_bossAppearedImage);
             ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
 
-            Boss = _enemyFactory.EngageBossEnemy(GameLevel);
+            Bosses.Add(_enemyFactory.EngageBossEnemy(GameLevel));
 
             SetBossHealthBar(); // set boss health on boss appearance            
         }
@@ -1322,13 +1323,14 @@ namespace AstroOdyssey
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Value = Boss.Health / BossTotalHealth * 100;
+            BossHealthBar.Value = Bosses.Sum(x => x.Health) / BossTotalHealth * 100;
         }
 
         /// <summary>
         /// Disengages a boss.
         /// </summary>
-        private void DisengageBoss()
+        /// <param name="boss"></param>
+        private void DisengageBoss(Enemy boss)
         {
             WarpThroughSpace();
 
@@ -1337,7 +1339,7 @@ namespace AstroOdyssey
 
             _enemyFactory.DisengageBossEnemy();
 
-            Boss = null;
+            Bosses.Remove(boss);
             SetGameLevelText();
         }
 

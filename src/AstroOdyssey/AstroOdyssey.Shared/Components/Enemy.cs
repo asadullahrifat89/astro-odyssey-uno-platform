@@ -55,6 +55,7 @@ namespace AstroOdyssey
 
         public bool IsEvadingTriggered { get; set; }
 
+        public EnemyClass EnemyClass { get; set; }
 
         public bool IsBoss { get; set; }
 
@@ -132,6 +133,8 @@ namespace AstroOdyssey
                 var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
                 var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
 
+                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
+
                 Uri uri = enemyTemplate.AssetUri;
                 Health = enemyTemplate.Health;
 
@@ -196,6 +199,12 @@ namespace AstroOdyssey
         }
 
         #endregion
+    }
+
+    public enum EnemyClass
+    {
+        RED,
+        GREEN
     }
 
     public enum BossClass

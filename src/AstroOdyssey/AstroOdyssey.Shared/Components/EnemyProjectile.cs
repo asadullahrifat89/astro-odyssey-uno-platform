@@ -76,9 +76,25 @@ namespace AstroOdyssey
                 }
                 else
                 {
-                    Background = new SolidColorBrush(Colors.Orange);
-                    BorderBrush = new SolidColorBrush(Colors.DarkOrange);
-                    BorderThickness = new Thickness(2);
+                    switch (enemy.EnemyClass)
+                    {
+                        case EnemyClass.RED:
+                            {
+                                Background = new SolidColorBrush(Colors.Crimson);
+                                BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                                BorderThickness = new Thickness(2);
+                            }
+                            break;
+                        case EnemyClass.GREEN:
+                            {
+                                Background = new SolidColorBrush(Colors.LightGreen);
+                                BorderBrush = new SolidColorBrush(Colors.Green);
+                                BorderThickness = new Thickness(2);
+                            }
+                            break;
+                        default:
+                            break;
+                    }                 
                 }
             }           
 
