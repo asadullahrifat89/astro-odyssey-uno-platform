@@ -11,6 +11,7 @@ namespace AstroOdyssey
         private double _projectileSpawnCounter;
         private double _projectileSpawnDelay = 14;
         private double _projectileSpeed = 18;
+        private double _projectileCount = 1;
 
         private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
         private readonly int BLAZE_BLITZ_ROUNDS_SPEED_INCREASE = 1;
@@ -40,7 +41,12 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods       
+        #region Methods
+
+        public void IncreaseFirePower() 
+        {
+        
+        }
 
         /// <summary>
         /// Spawns a projectile.
@@ -189,7 +195,10 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CollidePlayerProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
+        public void CollidePlayerProjectile(
+            PlayerProjectile projectile,
+            out double score,
+            out GameObject destroyedObject)
         {
             score = 0;
             destroyedObject = null;
@@ -397,6 +406,10 @@ namespace AstroOdyssey
             _projectileSpawnDelay -= (1 * scale);
         }
 
+        /// <summary>
+        /// Enforces rage power of the player's ship class.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageUp(Player player)
         {
             switch (player.ShipClass)
@@ -416,6 +429,10 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Nullifies rage power of the player's ship class.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageDown(Player player)
         {
             switch (player.ShipClass)

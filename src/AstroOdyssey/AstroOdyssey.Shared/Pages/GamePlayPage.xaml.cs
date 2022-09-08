@@ -728,7 +728,7 @@ namespace AstroOdyssey
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
@@ -786,7 +786,7 @@ namespace AstroOdyssey
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
@@ -929,6 +929,8 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
+                            //TODO: increase player blaster power
+
                             GameScore.Score++;
                             GameScore.CollectiblesCollected++;
                             SetGameLevel(); // check game level on score change
