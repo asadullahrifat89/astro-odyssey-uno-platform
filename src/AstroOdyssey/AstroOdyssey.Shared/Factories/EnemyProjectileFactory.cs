@@ -57,7 +57,7 @@ namespace AstroOdyssey
             {
                 switch (enemy.BossClass)
                 {
-                    case BossClass.JUGGERNAUT:
+                    case BossClass.GREEN:
                         {
                             var projectile = new EnemyProjectile();
 
@@ -85,6 +85,7 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile2.Width += 35;
+                                projectile2.Height += 35;
                                 projectile2.Speed--;
 
                                 projectile2.AddToGameEnvironment(
@@ -98,7 +99,7 @@ namespace AstroOdyssey
                             }
                         }
                         break;
-                    case BossClass.CRIMSON:
+                    case BossClass.PURPLE:
                         {
                             var projectile1 = new EnemyProjectile();
 
@@ -159,7 +160,7 @@ namespace AstroOdyssey
                             }
                         }
                         break;
-                    case BossClass.VULTURE:
+                    case BossClass.YELLOW:
                         {
                             var projectile = new EnemyProjectile();
 
@@ -188,7 +189,7 @@ namespace AstroOdyssey
                                     scale: scale,
                                     isOverPowered: enemy.IsOverPowered);
 
-                                projectile2.Height += 35;
+                                projectile2.Height += 45;
                                 projectile2.Speed *= 1.5;
 
                                 projectile2.AddToGameEnvironment(

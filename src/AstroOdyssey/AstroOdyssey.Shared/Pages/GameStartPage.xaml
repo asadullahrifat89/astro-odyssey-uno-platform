@@ -92,7 +92,7 @@
                 <Image
                     Width="100"
                     Height="100"
-                    Source="ms-appx:///Assets/Images/player_ship1.png" />
+                    Source="ms-appx:///Assets/Images/Player/player_ship1.png" />
 
                 <!--  Logo  -->
                 <TextBlock

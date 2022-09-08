@@ -15,7 +15,6 @@ namespace AstroOdyssey
 
         private readonly Grid _body = new Grid();
 
-
         private readonly Image _ship = new Image()
         {
             Stretch = Stretch.Uniform,
@@ -26,25 +25,6 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform
         };
 
-        //private readonly Border powerGauge = new Border()
-        //{
-        //    Height = 5,
-        //    Width = 0, // TODO: leave it to 0
-        //    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
-        //    VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
-        //    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-        //    Background = new SolidColorBrush(Colors.Goldenrod),
-        //};
-
-        //private readonly Border contentShipHealthBar = new Border()
-        //{
-        //    Height = 5,
-        //    CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50),
-        //    VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
-        //    HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
-        //    Background = new SolidColorBrush(Colors.Red),
-        //};
-
         private readonly Random random = new Random();
 
         #endregion
@@ -53,7 +33,7 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: Player: fire additional bullet on pizza collection
+            //TODO: Player: fire additional bullet on pizza collection for a certain period of time
 
             Tag = PLAYER;
 
@@ -66,9 +46,7 @@ namespace AstroOdyssey
             // combine power gauge, ship, and blaze
             _body = new Grid();
             _body.Children.Add(_contentShipBlaze);
-            _body.Children.Add(_ship);
-            //body.Children.Add(powerGauge);
-            //content.Children.Add(contentShipHealthBar);           
+            _body.Children.Add(_ship);                
 
             Child = _body;
 
@@ -153,8 +131,6 @@ namespace AstroOdyssey
             }
         }
 
-        //public double ExhaustHeight { get; set; } = 50;
-
         #endregion
 
         #region Methods
@@ -188,14 +164,7 @@ namespace AstroOdyssey
             _contentShipBlaze.Source = new BitmapImage(exhaustUri);
             _contentShipBlaze.Width = _body.Width;
             _contentShipBlaze.Height = _body.Height;
-
-            //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
-
-            //powerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 0, 0, 5 * scale);
-
-            //contentShipHealthBar.Margin = new Microsoft.UI.Xaml.Thickness(0, 75 * scale, 0, 0);
-            //contentShipHealthBar.Width = Health / 1.70;
-
+           
             Height = PLAYER_HEIGHT * scale;
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
 
@@ -204,55 +173,18 @@ namespace AstroOdyssey
 
         public void ReAdjustScale(double scale)
         {
-            //contentShipBlaze.Height = ExhaustHeight * scale;
-            //contentShipBlaze.Margin = new Microsoft.UI.Xaml.Thickness(0, 50 * scale, 0, 0);
-
-            //contentShipPowerGauge.Margin = new Microsoft.UI.Xaml.Thickness(0, 25 * scale, 0, 0);
-
             Height = PLAYER_HEIGHT * scale;
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
         }
 
-        //public void SetPowerGauge(double powerGauge)
-        //{
-        //    this.powerGauge.Width = powerGauge * 3;
-        //}
-
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            Speed += 1;
-            //powerGauge.Width = Width / 2;
-
-            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            //contentShipPowerGauge.Background = Colors.Red;
-
-            //switch (powerUpType)
-            //{
-            //case PowerUpType.BLAZE_BLITZ_ROUNDS:
-            //    {
-            //        var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_yellow.png", UriKind.RelativeOrAbsolute);
-            //        contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            //        contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
-            //    }
-            //    break;
-            //case PowerUpType.PLASMA_BOMB_ROUNDS:
-            //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
-            //    break;
-            //case PowerUpType.BEAM_CANNON_ROUNDS:
-            //    contentShipPowerGauge.Background = new SolidColorBrush(SPECIAL_ROUNDS_COLOR);
-            //    break;
-            //default:
-            //    break;
-            //}
+            Speed += 1;          
         }
 
         public void PowerUpCoolDown()
-        {
-            //var exhaustUri = new Uri("ms-appx:///Assets/Images/effect_purple.png", UriKind.RelativeOrAbsolute);
-            //contentShipBlaze.Source = new BitmapImage(exhaustUri);
+        {            
             Speed -= 1;
-            //powerGauge.Width = 0;
         }
 
         /// <summary>

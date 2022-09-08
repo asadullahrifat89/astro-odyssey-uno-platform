@@ -81,7 +81,7 @@ namespace AstroOdyssey
                 IsOverPowered = true;
 
                 var bossType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType]; // TODO: set to boss type
+                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType]; // TODO: SET TO BOSS TYPE
 
                 BossClass = bossTemplate.BossClass;
 
@@ -90,19 +90,19 @@ namespace AstroOdyssey
 
                 switch (BossClass)
                 {
-                    case BossClass.JUGGERNAUT:
+                    case BossClass.GREEN:
                         {
                             width = 306;
                             height = 418;
                         }
                         break;
-                    case BossClass.CRIMSON:
+                    case BossClass.PURPLE:
                         {
                             width = 510;
                             height = 458;
                         }
                         break;
-                    case BossClass.VULTURE:
+                    case BossClass.YELLOW:
                         {
                             width = 553;
                             height = 492;
@@ -200,9 +200,9 @@ namespace AstroOdyssey
 
     public enum BossClass
     {
-        JUGGERNAUT,
-        CRIMSON,
-        VULTURE,
+        GREEN,
+        PURPLE,
+        YELLOW,
     }
 }
 

@@ -257,7 +257,7 @@ namespace AstroOdyssey
         {
             _overPoweredEnemySpawnCounter = _overPoweredEnemySpawnDelay;
             enemy.OverPower();
-            _overPoweredEnemySpawnDelay = _random.Next(10, 20);
+            _overPoweredEnemySpawnDelay = _random.Next(10, 15);
         }
 
         /// <summary>
