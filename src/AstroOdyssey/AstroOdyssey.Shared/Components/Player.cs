@@ -15,15 +15,9 @@ namespace AstroOdyssey
 
         private readonly Grid _body = new Grid();
 
-        private readonly Image _ship = new Image()
-        {
-            Stretch = Stretch.Uniform,
-        };
+        private readonly Image _ship = new Image() { Stretch = Stretch.Uniform, };
 
-        private readonly Image _engineThrust = new Image()
-        {
-            Stretch = Stretch.Uniform
-        };        
+        private readonly Image _engineThrust = new Image() { Stretch = Stretch.Uniform };
 
         #endregion
 
@@ -44,7 +38,7 @@ namespace AstroOdyssey
             // combine power gauge, ship, and blaze
             _body = new Grid();
             _body.Children.Add(_engineThrust);
-            _body.Children.Add(_ship);                
+            _body.Children.Add(_ship);
 
             Child = _body;
 
@@ -134,16 +128,17 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, Ship ship, double scale = 1)
+        public void SetAttributes(
+            double speed,
+            Ship ship,
+            double scale = 1)
         {
             Speed = speed;
 
             _ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
-            Uri exhaustUri = null;
-
-            exhaustUri = GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
+            Uri engineThrustUri = GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
 
             switch (ShipClass)
             {
@@ -160,10 +155,10 @@ namespace AstroOdyssey
                     break;
             }
 
-            _engineThrust.Source = new BitmapImage(exhaustUri);
+            _engineThrust.Source = new BitmapImage(engineThrustUri);
             _engineThrust.Width = _body.Width;
             _engineThrust.Height = _body.Height;
-           
+
             Height = PLAYER_HEIGHT * scale;
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
 
@@ -178,11 +173,11 @@ namespace AstroOdyssey
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            Speed += 1;          
+            Speed += 1;
         }
 
         public void PowerUpCoolDown()
-        {            
+        {
             Speed -= 1;
         }
 
@@ -231,5 +226,5 @@ namespace AstroOdyssey
         //}
 
         #endregion
-    } 
+    }
 }
