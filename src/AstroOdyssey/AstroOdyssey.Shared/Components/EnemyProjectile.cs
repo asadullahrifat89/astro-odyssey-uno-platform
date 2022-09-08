@@ -37,7 +37,7 @@ namespace AstroOdyssey
             {
                 switch (enemy.BossClass)
                 {
-                    case BossClass.JUGGERNAUT:
+                    case BossClass.GREEN:
                         {
                             Background = new SolidColorBrush(Colors.LightGreen);
                             BorderBrush = new SolidColorBrush(Colors.Green);
@@ -46,7 +46,7 @@ namespace AstroOdyssey
                             width += 5;
                         }
                         break;
-                    case BossClass.CRIMSON:
+                    case BossClass.PURPLE:
                         {
                             Background = new SolidColorBrush(Colors.Violet);
                             BorderBrush = new SolidColorBrush(Colors.DarkViolet);
@@ -55,7 +55,7 @@ namespace AstroOdyssey
                             height += 5;
                         }
                         break;
-                    case BossClass.VULTURE:
+                    case BossClass.YELLOW:
                         {
                             Background = new SolidColorBrush(Colors.Goldenrod);
                             BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);

@@ -66,7 +66,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/enemy_3.png" />
+                            Source="ms-appx:///Assets/Images/Enemy/enemy_3.png" />
                         <TextBlock
                             x:Name="EnemiesDestroyedText"
                             Margin="5"
@@ -82,7 +82,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/rock1.png" />
+                            Source="ms-appx:///Assets/Images/Meteor/rock1.png" />
                         <TextBlock
                             x:Name="MeteorsDestroyedText"
                             Margin="5"
@@ -114,7 +114,7 @@
                             Width="35"
                             Height="35"
                             Margin="5"
-                            Source="ms-appx:///Assets/Images/pizza3.png" />
+                            Source="ms-appx:///Assets/Images/Collectible/pizza3.png" />
                         <TextBlock
                             x:Name="CollectiblesCollectedText"
                             Margin="5"
