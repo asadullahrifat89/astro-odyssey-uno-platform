@@ -73,6 +73,8 @@ namespace AstroOdyssey
                     player: player,
                     gameLevel: gameLevel,
                     powerUpType: powerUpType);
+
+                //TODO: shoot additional projectiles on pizza pickup
                 //}
 
                 _projectileSpawnCounter = _projectileSpawnDelay;
