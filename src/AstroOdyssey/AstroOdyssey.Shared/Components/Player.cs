@@ -20,12 +20,10 @@ namespace AstroOdyssey
             Stretch = Stretch.Uniform,
         };
 
-        private readonly Image _contentShipBlaze = new Image()
+        private readonly Image _engineThrust = new Image()
         {
             Stretch = Stretch.Uniform
-        };
-
-        private readonly Random random = new Random();
+        };        
 
         #endregion
 
@@ -45,7 +43,7 @@ namespace AstroOdyssey
 
             // combine power gauge, ship, and blaze
             _body = new Grid();
-            _body.Children.Add(_contentShipBlaze);
+            _body.Children.Add(_engineThrust);
             _body.Children.Add(_ship);                
 
             Child = _body;
@@ -162,9 +160,9 @@ namespace AstroOdyssey
                     break;
             }
 
-            _contentShipBlaze.Source = new BitmapImage(exhaustUri);
-            _contentShipBlaze.Width = _body.Width;
-            _contentShipBlaze.Height = _body.Height;
+            _engineThrust.Source = new BitmapImage(exhaustUri);
+            _engineThrust.Width = _body.Width;
+            _engineThrust.Height = _body.Height;
            
             Height = PLAYER_HEIGHT * scale;
             Width = DESTRUCTIBLE_OBJECT_SIZE * scale;

@@ -95,6 +95,9 @@
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy_thrust1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy_thrust2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy_thrust3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid3.png" />
@@ -212,7 +215,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Star\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Planet\" />

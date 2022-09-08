@@ -10,7 +10,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _ship = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
 
@@ -25,7 +25,7 @@ namespace AstroOdyssey
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             IsDestructible = true;
-            Child = content;
+            Child = _ship;
             YDirection = YDirection.DOWN;
 
             Background = new SolidColorBrush(Colors.Transparent);
@@ -114,7 +114,7 @@ namespace AstroOdyssey
                 }
 
                 Uri uri = bossTemplate.AssetUri;
-                content.Source = new BitmapImage(uri);
+                _ship.Source = new BitmapImage(uri);
 
                 //Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
                 //Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
@@ -142,7 +142,7 @@ namespace AstroOdyssey
                 Height = size * scale;
                 Width = size * scale;
 
-                content.Source = new BitmapImage(uri);
+                _ship.Source = new BitmapImage(uri);
             }
 
             HalfWidth = Width / 2;
