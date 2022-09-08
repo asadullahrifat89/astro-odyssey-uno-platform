@@ -73,7 +73,7 @@ namespace AstroOdyssey
             //}
 
             // appear in the middle of the screen
-            double left = _gameEnvironment.HalfWidth + enemy.HalfWidth;
+            double left = _gameEnvironment.HalfWidth - enemy.HalfWidth;
             double top = 0 - enemy.Height;
 
             if (enemy.IsHovering)

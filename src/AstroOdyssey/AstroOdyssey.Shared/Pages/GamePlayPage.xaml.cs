@@ -519,7 +519,7 @@ namespace AstroOdyssey
             StarView.SetSize(_windowHeight, _windowWidth);
             PlanetView.SetSize(_windowHeight, _windowWidth);
 
-            _frameTime = _defaultFrameTime + (_windowWidth <= 500 ? 4 : 0); // run a little slower on phones as phones have a faster timer
+            _frameTime = _defaultFrameTime + (_windowWidth <= 500 ? 2 : 0); // run a little slower on phones as phones have a faster timer
 
             // resize player size
             if (IsGameRunning)
