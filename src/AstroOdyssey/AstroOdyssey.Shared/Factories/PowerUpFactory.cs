@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public PowerUpFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -75,7 +75,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            _powerUpSpeed += 1;
+            var scale = _gameEnvironment.GetGameObjectScale();
+            _powerUpSpeed += (1 * scale);
         }
 
         #endregion

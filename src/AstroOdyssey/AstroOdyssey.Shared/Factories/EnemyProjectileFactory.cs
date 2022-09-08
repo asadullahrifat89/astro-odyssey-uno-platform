@@ -16,7 +16,7 @@ namespace AstroOdyssey
 
         public EnemyProjectileFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion

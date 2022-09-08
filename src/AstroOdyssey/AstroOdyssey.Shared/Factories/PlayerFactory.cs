@@ -30,7 +30,7 @@ namespace AstroOdyssey
 
         public PlayerFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion

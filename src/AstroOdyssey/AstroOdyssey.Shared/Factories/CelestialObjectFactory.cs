@@ -11,8 +11,8 @@ namespace AstroOdyssey
 
         private readonly Random _random = new Random();
 
-        private int _starSpawnCounter;
-        private int _starSpawnDelay = 250;
+        private double _starSpawnCounter;
+        private double _starSpawnDelay = 250;
         private double _starSpeed = 0.2d;
 
         private int _spaceWarpDurationCounter;
@@ -33,8 +33,8 @@ namespace AstroOdyssey
 
         public CelestialObjectFactory(GameEnvironment starView, GameEnvironment planetView)
         {
-            this._starView = starView;
-            this._planetView = planetView;
+            _starView = starView;
+            _planetView = planetView;
         }
 
         #endregion       
@@ -210,8 +210,9 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            _starSpawnDelay -= 10;
-            _starSpeed += 0.1d;
+            var scale = _starView.GetGameObjectScale();
+            _starSpawnDelay -= (10 * scale);
+            _starSpeed += (0.1d * scale);
         }
 
         #endregion
