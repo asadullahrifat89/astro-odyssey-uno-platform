@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public HealthFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -78,7 +78,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            _healthSpeed += 1;
+            var scale = _gameEnvironment.GetGameObjectScale();
+            _healthSpeed += (1 * scale);
         }
 
         #endregion

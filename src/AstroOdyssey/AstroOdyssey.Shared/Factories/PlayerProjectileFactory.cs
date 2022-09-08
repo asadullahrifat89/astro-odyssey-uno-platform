@@ -8,8 +8,8 @@ namespace AstroOdyssey
 
         private readonly GameEnvironment _gameEnvironment;
 
-        private int _projectileSpawnCounter;
-        private int _projectileSpawnDelay = 14;
+        private double _projectileSpawnCounter;
+        private double _projectileSpawnDelay = 14;
         private double _projectileSpeed = 18;
 
         private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
@@ -35,7 +35,7 @@ namespace AstroOdyssey
 
         public PlayerProjectileFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -257,7 +257,7 @@ namespace AstroOdyssey
                             var enemy = destructible as Enemy;
 
                             enemy.SetProjectileImpactEffect();
-                           
+
                             if (destructible.HasNoHealth)
                             {
                                 // bosses cause a score penalty
@@ -393,7 +393,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            _projectileSpawnDelay -= 1;
+            var scale = _gameEnvironment.GetGameObjectScale();
+            _projectileSpawnDelay -= (1 * scale);
         }
 
         public void RageUp(Player player)

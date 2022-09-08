@@ -37,7 +37,7 @@ namespace AstroOdyssey
 
         public EnemyFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -53,7 +53,7 @@ namespace AstroOdyssey
             var enemy = new Enemy();
 
             enemy.SetAttributes(
-                speed: _enemySpeed + _random.Next(0, 4),
+                speed: _enemySpeed + 1,
                 gameLevel: gameLevel,
                 scale: _gameEnvironment.GetGameObjectScale(),
                 isBoss: true);
@@ -108,18 +108,18 @@ namespace AstroOdyssey
         /// </summary>
         public void SpawnEnemy(GameLevel gameLevel)
         {
-            if ((int)gameLevel > 0)
-            {
-                // each frame progress decreases this counter
-                _enemySpawnCounter -= 1;
+            //if ((int)gameLevel > 0)
+            //{
+            // each frame progress decreases this counter
+            _enemySpawnCounter -= 1;
 
-                // when counter reaches zero, create an enemy
-                if (_enemySpawnCounter < 0)
-                {
-                    GenerateEnemy(gameLevel);
-                    _enemySpawnCounter = _enemySpawnDelay;
-                }
+            // when counter reaches zero, create an enemy
+            if (_enemySpawnCounter < 0)
+            {
+                GenerateEnemy(gameLevel);
+                _enemySpawnCounter = _enemySpawnDelay;
             }
+            //}
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace AstroOdyssey
             var enemy = new Enemy();
 
             enemy.SetAttributes(
-                speed: _enemySpeed + _random.Next(0, 4),
+                speed: _enemySpeed + _random.Next(0, 3),
                 gameLevel: gameLevel,
                 scale: _gameEnvironment.GetGameObjectScale());
 
@@ -398,9 +398,10 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            var delayScale = 3 + _gameEnvironment.GetGameObjectScale();
+            var scale = _gameEnvironment.GetGameObjectScale();
+            var delayScale = 2 + scale;
             _enemySpawnDelay -= delayScale;
-            _enemySpeed += 1;
+            _enemySpeed += (1 * scale);
         }
 
         #endregion

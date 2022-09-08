@@ -139,7 +139,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            this._ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            _ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
             Uri exhaustUri = null;

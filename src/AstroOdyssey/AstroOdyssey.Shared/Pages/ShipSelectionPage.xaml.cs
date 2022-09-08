@@ -22,8 +22,8 @@ namespace AstroOdyssey
 
         public ShipSelectionPage()
         {
-            this.InitializeComponent();
-            this.Loaded += ShipSelectionPage_Loaded;
+            InitializeComponent();
+            Loaded += ShipSelectionPage_Loaded;
         }
 
         #endregion
@@ -48,7 +48,7 @@ namespace AstroOdyssey
                 ShipClass = x.ShipClass,
             }).ToArray();
 
-            this.ShipsList.ItemsSource = ships.ToList();
+            ShipsList.ItemsSource = ships.ToList();
 
             await this.PlayPageLoadedTransition();
         }

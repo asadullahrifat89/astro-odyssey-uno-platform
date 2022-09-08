@@ -26,7 +26,7 @@ namespace AstroOdyssey
 
         public MeteorFactory(GameEnvironment gameEnvironment)
         {
-            this._gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
@@ -171,9 +171,10 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            var delayScale = 3 + _gameEnvironment.GetGameObjectScale();
+            var scale = _gameEnvironment.GetGameObjectScale();
+            var delayScale = 2 + scale;
             _meteorSpawnDelay -= delayScale;
-            _meteorSpeed += 1;
+            _meteorSpeed += (1 * scale);
         }
 
         #endregion
