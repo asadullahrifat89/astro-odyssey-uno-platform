@@ -5,12 +5,11 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using static AstroOdyssey.Constants;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
-using static System.Formats.Asn1.AsnWriter;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -155,11 +154,6 @@ namespace AstroOdyssey
 
         #region Window Events
 
-        /// <summary>
-        /// When the window is loaded, we add the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
@@ -229,22 +223,12 @@ namespace AstroOdyssey
             await this.PlayPageLoadedTransition();
         }
 
-        /// <summary>
-        /// When the window is unloaded, we remove the event Current_SizeChanged.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
             SizeChanged -= GamePage_SizeChanged;
             StopGame();
         }
 
-        /// <summary>
-        /// When the window size is changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
         {
             _windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
@@ -991,19 +975,6 @@ namespace AstroOdyssey
             }
         }
 
-        ///// <summary>
-        ///// Updates the game score, player health.
-        ///// </summary>
-        //private void UpdateScore()
-        //{   
-        //    //GameLevelText.Text = GameLevel.ToString().Replace("_", " ").ToUpper();
-        //    //ScoreBarCount.Text = Score.ToString();
-
-        //    //var timeSpan = TimeSpan.FromMilliseconds(frameStartTime);
-        //    //TimeText.Text = $"{(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
-        //    //ScoreText.Text = $"SCORE: {Score} - {GameLevel.ToString().Replace("_", " ").ToUpper()} - TIME: {(timeSpan.Hours > 0 ? $"{timeSpan.Hours}h" : "")}{(timeSpan.Minutes > 0 ? $"{timeSpan.Minutes}m" : "")}{timeSpan.Seconds}s";
-        //}
-
         /// <summary>
         /// Sets analytics of fps, frame time and objects currently in view.
         /// </summary>
@@ -1070,6 +1041,10 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Shows in game image.
+        /// </summary>
+        /// <param name="image"></param>
         private void ShowInGameImagePanel(Image image)
         {
             var scale = GameView.GetGameObjectScale();
@@ -1083,6 +1058,9 @@ namespace AstroOdyssey
             _showInGameImagePanelSpawnCounter = _showInGameImagePanelDelay;
         }
 
+        /// <summary>
+        /// Hides the in game image after keeping it visible for a few frames.
+        /// </summary>
         private void HandleInGameImagePanel()
         {
             if (RageImagePanel.Visibility == Visibility.Visible)
@@ -1096,6 +1074,9 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Hides in game image.
+        /// </summary>
         private void HideInGameImagePanel()
         {
             RageImagePanel.Visibility = Visibility.Collapsed;
@@ -1444,11 +1425,18 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Sets the score bar text in ui.
+        /// </summary>
+        /// <param name="capacity"></param>
         private void SetScoreBarCountText(int capacity)
         {
             ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/{capacity}";
         }
 
+        /// <summary>
+        /// Sets the game level text in ui.
+        /// </summary>
         private void SetGameLevelText()
         {
             GameLevelText.Text = $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel + 1}";
