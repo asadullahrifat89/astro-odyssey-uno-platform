@@ -11,7 +11,7 @@ namespace AstroOdyssey
         private double _projectileSpawnCounter;
         private double _projectileSpawnDelay = 14;
         private double _projectileSpeed = 18;
-        private double _projectileCount = 1;
+        private double _projectilePower = 0;
 
         private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
         private readonly int BLAZE_BLITZ_ROUNDS_SPEED_INCREASE = 1;
@@ -43,9 +43,26 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void IncreaseFirePower() 
+        /// <summary>
+        /// Increases projectile power.
+        /// </summary>
+        public void IncreaseProjectilePower()
         {
-        
+            if (_projectilePower <= 4)
+            {
+                _projectilePower += 0.5;
+            }
+        }
+
+        /// <summary>
+        /// Decreases projectile power.
+        /// </summary>
+        public void DecreaseProjectilePower()
+        {
+            if (_projectilePower > 1)
+            {
+                _projectilePower -= 0.5;
+            }
         }
 
         /// <summary>
@@ -74,6 +91,7 @@ namespace AstroOdyssey
                 //// any object falls within player range
                 //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 //{
+
                 GenerateProjectile(
                     isPoweredUp: isPoweredUp,
                     player: player,
@@ -108,6 +126,7 @@ namespace AstroOdyssey
                 speed: _projectileSpeed,
                 gameLevel: gameLevel,
                 shipClass: player.ShipClass,
+                projectilePower: _projectilePower,
                 isPoweredUp: isPoweredUp,
                 powerUpType: powerUpType,
                 scale: scale);
@@ -144,7 +163,6 @@ namespace AstroOdyssey
             else
             {
                 AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
-                //xSide = xSide * -1;
             }
         }
 
