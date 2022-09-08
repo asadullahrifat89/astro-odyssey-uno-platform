@@ -145,26 +145,7 @@ namespace AstroOdyssey
             }
         }
 
-        private List<Enemy> _boss = new List<Enemy>();
-        public List<Enemy> Bosses
-        {
-            get { return _boss; }
-            set
-            {
-                _boss = value;
-
-                if (_boss is null || _boss.Count == 0)
-                {
-                    BossHealthBarPanel.Visibility = Visibility.Collapsed;
-                    BossTotalHealth = 0;
-                }
-                else
-                {
-                    BossHealthBarPanel.Visibility = Visibility.Visible;
-                    BossTotalHealth = _boss.Sum(x => x.Health);
-                }
-            }
-        }
+        public List<Enemy> Bosses { get; set; }
 
         private double BossTotalHealth { get; set; }
 
@@ -200,7 +181,6 @@ namespace AstroOdyssey
 
             GameLevel = GameLevel.Level_1;
             SetGameLevelText();
-
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
@@ -1313,7 +1293,11 @@ namespace AstroOdyssey
             ShowInGameImagePanel(_bossAppearedImage);
             ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
 
-            Bosses.Add(_enemyFactory.EngageBossEnemy(GameLevel));
+            var boss = _enemyFactory.EngageBossEnemy(GameLevel);
+            Bosses.Add(boss);
+
+            BossHealthBarPanel.Visibility = Visibility.Visible;
+            BossTotalHealth = Bosses.Sum(x => x.Health);
 
             SetBossHealthBar(); // set boss health on boss appearance            
         }
@@ -1340,6 +1324,13 @@ namespace AstroOdyssey
             _enemyFactory.DisengageBossEnemy();
 
             Bosses.Remove(boss);
+
+            if (Bosses.Count == 0)
+            {
+                BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                BossTotalHealth = 0;
+            }
+
             SetGameLevelText();
         }
 

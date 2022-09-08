@@ -98,6 +98,7 @@ namespace AstroOdyssey
                     gameLevel: gameLevel,
                     powerUpType: powerUpType);
 
+                //TODO: shoot additional projectiles on pizza pickup
                 //}
 
                 _projectileSpawnCounter = _projectileSpawnDelay;
@@ -117,73 +118,43 @@ namespace AstroOdyssey
             GameLevel gameLevel,
             PowerUpType powerUpType)
         {
-            if (isPoweredUp)
+            var projectile = new PlayerProjectile();
+
+            var scale = _gameEnvironment.GetGameObjectScale();
+
+            projectile.SetAttributes(
+                speed: _projectileSpeed,
+                gameLevel: gameLevel,
+                shipClass: player.ShipClass,
+                projectilePower: _projectilePower,
+                isPoweredUp: isPoweredUp,
+                powerUpType: powerUpType,
+                scale: scale);
+
+            projectile.AddToGameEnvironment(
+                top: player.GetY() - projectile.Height,
+                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + (projectile.IsPoweredUp && powerUpType == PowerUpType.BLAZE_BLITZ ? _xSide * scale : 0),
+                gameEnvironment: _gameEnvironment);
+
+            if (projectile.IsPoweredUp)
             {
-                var projectile = new PlayerProjectile();
-
-                var scale = _gameEnvironment.GetGameObjectScale();
-
-                projectile.SetAttributes(
-                    speed: _projectileSpeed,
-                    gameLevel: gameLevel,
-                    shipClass: player.ShipClass,
-                    projectilePower: _projectilePower,
-                    isPoweredUp: isPoweredUp,
-                    powerUpType: powerUpType,
-                    scale: scale);
-
                 switch (powerUpType)
                 {
                     case PowerUpType.NONE:
-                        {
-                            projectile.AddToGameEnvironment(
-                                top: player.GetY() - projectile.Height,
-                                left: player.GetX() + player.HalfWidth - projectile.HalfWidth,
-                                gameEnvironment: _gameEnvironment);
-
-                            AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
-                        }
+                        AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
                         break;
                     case PowerUpType.BLAZE_BLITZ:
-                        {
-                            projectile.AddToGameEnvironment(
-                                top: player.GetY() - projectile.Height,
-                                left: player.GetX() + player.HalfWidth - projectile.HalfWidth + _xSide * scale,
-                                gameEnvironment: _gameEnvironment);
-
-                            AudioHelper.PlaySound(SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE);
-                            _xSide = _xSide * -1;
-                        }
+                        AudioHelper.PlaySound(SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE);
+                        _xSide = _xSide * -1;
                         break;
                     case PowerUpType.PLASMA_BOMB:
-                        {
-                            projectile.AddToGameEnvironment(
-                                top: player.GetY() - projectile.Height,
-                                left: player.GetX() + player.HalfWidth - projectile.HalfWidth,
-                                gameEnvironment: _gameEnvironment);
-
-                            AudioHelper.PlaySound(SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE);
-                        }
+                        AudioHelper.PlaySound(SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE);
                         break;
                     case PowerUpType.BEAM_CANNON:
-                        {
-                            projectile.AddToGameEnvironment(
-                                top: player.GetY() - projectile.Height,
-                                left: player.GetX() + player.HalfWidth - projectile.HalfWidth,
-                                gameEnvironment: _gameEnvironment);
-
-                            AudioHelper.PlaySound(SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE);
-                        }
+                        AudioHelper.PlaySound(SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE);
                         break;
                     case PowerUpType.SONIC_BLAST:
-                        {
-                            projectile.AddToGameEnvironment(
-                                top: player.GetY() - projectile.Height,
-                                left: player.GetX() + player.HalfWidth - projectile.HalfWidth,
-                                gameEnvironment: _gameEnvironment);
-
-                            AudioHelper.PlaySound(SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE);
-                        }
+                        AudioHelper.PlaySound(SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -191,24 +162,6 @@ namespace AstroOdyssey
             }
             else
             {
-                var projectile = new PlayerProjectile();
-
-                var scale = _gameEnvironment.GetGameObjectScale();
-
-                projectile.SetAttributes(
-                    speed: _projectileSpeed,
-                    gameLevel: gameLevel,
-                    shipClass: player.ShipClass,
-                    projectilePower: _projectilePower,
-                    isPoweredUp: isPoweredUp,
-                    powerUpType: powerUpType,
-                    scale: scale);
-
-                projectile.AddToGameEnvironment(
-                    top: player.GetY() - projectile.Height,
-                    left: player.GetX() + player.HalfWidth - projectile.HalfWidth,
-                    gameEnvironment: _gameEnvironment);
-
                 AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
             }
         }
