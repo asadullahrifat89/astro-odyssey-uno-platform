@@ -10,6 +10,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using static System.Formats.Asn1.AsnWriter;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System.Collections.Generic;
 
 namespace AstroOdyssey
 {
@@ -144,26 +145,7 @@ namespace AstroOdyssey
             }
         }
 
-        private Enemy _boss;
-        public Enemy Boss
-        {
-            get { return _boss; }
-            set
-            {
-                _boss = value;
-
-                if (_boss is null)
-                {
-                    BossHealthBarPanel.Visibility = Visibility.Collapsed;
-                    BossTotalHealth = 0;
-                }
-                else
-                {
-                    BossHealthBarPanel.Visibility = Visibility.Visible;
-                    BossTotalHealth = _boss.Health;
-                }
-            }
-        }
+        public List<Enemy> Bosses { get; set; }
 
         private double BossTotalHealth { get; set; }
 
@@ -191,7 +173,7 @@ namespace AstroOdyssey
             FPSText.Text = "";
             ObjectsCountText.Text = "";
 
-            Boss = null;
+            Bosses = new List<Enemy>();
             BossHealthBarPanel.Visibility = Visibility.Collapsed;
 
             Player = null;
@@ -199,7 +181,6 @@ namespace AstroOdyssey
 
             GameLevel = GameLevel.Level_1;
             SetGameLevelText();
-
 
             IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
@@ -728,7 +709,7 @@ namespace AstroOdyssey
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_DOWN")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
@@ -786,7 +767,7 @@ namespace AstroOdyssey
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIREPOWER_UP")}");
+                                        ShowInGameText($"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
                                         ShowInGameText($"{LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
@@ -813,7 +794,7 @@ namespace AstroOdyssey
 
                                         if (enemy.IsBoss)
                                         {
-                                            DisengageBoss();
+                                            DisengageBoss(enemy);
                                             GameScore.BossesDestroyed++;
                                         }
                                     }
@@ -845,6 +826,7 @@ namespace AstroOdyssey
                         // check if enemy projectile collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
                         {
+                            _playerProjectileFactory.DecreaseProjectilePower();
                             SetPlayerHealthBar();
                         }
                     }
@@ -864,6 +846,7 @@ namespace AstroOdyssey
                         // check if enemy collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
                         {
+                            _playerProjectileFactory.DecreaseProjectilePower();
                             SetPlayerHealthBar();
                             return;
                         }
@@ -888,6 +871,7 @@ namespace AstroOdyssey
                         // check if meteor collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
                         {
+                            _playerProjectileFactory.DecreaseProjectilePower();
                             SetPlayerHealthBar();
                         }
                     }
@@ -929,8 +913,11 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
+                            _playerProjectileFactory.IncreaseProjectilePower();
+
                             GameScore.Score++;
                             GameScore.CollectiblesCollected++;
+
                             SetGameLevel(); // check game level on score change
                             //ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
                         }
@@ -952,10 +939,13 @@ namespace AstroOdyssey
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
                         {
                             PlayerPowerBar.Visibility = Visibility.Visible;
+
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
+
                             ShowInGameImagePanel(_powerUpImage);
                             ShowInGameText($"‍{LocalizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+
                             _playerProjectileFactory.PowerUp(PowerUpType);
                         }
                     }
@@ -1303,7 +1293,11 @@ namespace AstroOdyssey
             ShowInGameImagePanel(_bossAppearedImage);
             ShowInGameText($"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
 
-            Boss = _enemyFactory.EngageBossEnemy(GameLevel);
+            var boss = _enemyFactory.EngageBossEnemy(GameLevel);
+            Bosses.Add(boss);
+
+            BossHealthBarPanel.Visibility = Visibility.Visible;
+            BossTotalHealth = Bosses.Sum(x => x.Health);
 
             SetBossHealthBar(); // set boss health on boss appearance            
         }
@@ -1313,13 +1307,14 @@ namespace AstroOdyssey
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Value = Boss.Health / BossTotalHealth * 100;
+            BossHealthBar.Value = Bosses.Sum(x => x.Health) / BossTotalHealth * 100;
         }
 
         /// <summary>
         /// Disengages a boss.
         /// </summary>
-        private void DisengageBoss()
+        /// <param name="boss"></param>
+        private void DisengageBoss(Enemy boss)
         {
             WarpThroughSpace();
 
@@ -1328,7 +1323,14 @@ namespace AstroOdyssey
 
             _enemyFactory.DisengageBossEnemy();
 
-            Boss = null;
+            Bosses.Remove(boss);
+
+            if (Bosses.Count == 0)
+            {
+                BossHealthBarPanel.Visibility = Visibility.Collapsed;
+                BossTotalHealth = 0;
+            }
+
             SetGameLevelText();
         }
 

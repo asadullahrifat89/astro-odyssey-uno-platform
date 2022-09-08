@@ -39,6 +39,7 @@ namespace AstroOdyssey
             GameLevel gameLevel,
             ShipClass shipClass,
             bool isPoweredUp = false,
+            double projectilePower = 0,
             PowerUpType powerUpType = PowerUpType.NONE,
             double scale = 1)
         {
@@ -107,13 +108,19 @@ namespace AstroOdyssey
                 switch (shipClass)
                 {
                     case ShipClass.DEFENDER:
-                        height = 20; width = 5; BorderThickness = new Thickness(2, 3, 2, 1);
+                        {
+                            height = 20; width = 5 + projectilePower; BorderThickness = new Thickness(2, 3, 2, 1);
+                        }                        
                         break;
                     case ShipClass.BERSERKER:
-                        height = 15; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
+                        {
+                            height = 15 + projectilePower; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
+                        }                        
                         break;
                     case ShipClass.SPECTRE:
-                        height = 5; width = 20; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
+                        {
+                            height = 5; width = 20 + projectilePower; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
+                        }                        
                         break;
                     default:
                         break;

@@ -60,6 +60,13 @@ namespace AstroOdyssey
             new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/Enemy/enemy_6.png", UriKind.RelativeOrAbsolute), health: 3),
         };
 
+        public static (Uri AssetUri, BossClass BossClass)[] BOSS_TEMPLATES = new (Uri AssetUri, BossClass BossClass)[]
+        {
+            (new Uri("ms-appx:///Assets/Images/Boss/boss1.png", UriKind.RelativeOrAbsolute), BossClass.GREEN),
+            (new Uri("ms-appx:///Assets/Images/Boss/boss2.png", UriKind.RelativeOrAbsolute), BossClass.PURPLE),
+            (new Uri("ms-appx:///Assets/Images/Boss/boss3.png", UriKind.RelativeOrAbsolute), BossClass.YELLOW),
+        };
+
         public static DestructibleObjectTemplate[] METEOR_TEMPLATES = new DestructibleObjectTemplate[]
         {
             new DestructibleObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/Meteor/rock1.png", UriKind.RelativeOrAbsolute), health: 1),
@@ -90,13 +97,6 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/Collectible/pizza4.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/Collectible/pizza5.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/Collectible/pizza6.png", UriKind.RelativeOrAbsolute),
-        };
-
-        public static (Uri AssetUri, BossClass BossClass)[] BOSS_TEMPLATES = new (Uri AssetUri, BossClass BossClass)[]
-        {
-            (new Uri("ms-appx:///Assets/Images/Boss/boss1.png", UriKind.RelativeOrAbsolute), BossClass.GREEN),
-            (new Uri("ms-appx:///Assets/Images/Boss/boss2.png", UriKind.RelativeOrAbsolute), BossClass.PURPLE),
-            (new Uri("ms-appx:///Assets/Images/Boss/boss3.png", UriKind.RelativeOrAbsolute), BossClass.YELLOW),
         };
     }
 }

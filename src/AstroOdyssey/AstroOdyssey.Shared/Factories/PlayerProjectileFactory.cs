@@ -11,6 +11,7 @@ namespace AstroOdyssey
         private double _projectileSpawnCounter;
         private double _projectileSpawnDelay = 14;
         private double _projectileSpeed = 18;
+        private double _projectilePower = 0;
 
         private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
         private readonly int BLAZE_BLITZ_ROUNDS_SPEED_INCREASE = 1;
@@ -40,7 +41,29 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods       
+        #region Methods
+
+        /// <summary>
+        /// Increases projectile power.
+        /// </summary>
+        public void IncreaseProjectilePower()
+        {
+            if (_projectilePower <= 4)
+            {
+                _projectilePower += 0.5;
+            }
+        }
+
+        /// <summary>
+        /// Decreases projectile power.
+        /// </summary>
+        public void DecreaseProjectilePower()
+        {
+            if (_projectilePower > 1)
+            {
+                _projectilePower -= 0.5;
+            }
+        }
 
         /// <summary>
         /// Spawns a projectile.
@@ -68,6 +91,7 @@ namespace AstroOdyssey
                 //// any object falls within player range
                 //if (gameEnvironment.GetGameObjects<GameObject>().Where(x => x.IsDestructible).Any(x => player.AnyObjectsOnTheRightProximity(gameObject: x) || player.AnyObjectsOnTheLeftProximity(gameObject: x)))
                 //{
+
                 GenerateProjectile(
                     isPoweredUp: isPoweredUp,
                     player: player,
@@ -102,6 +126,7 @@ namespace AstroOdyssey
                 speed: _projectileSpeed,
                 gameLevel: gameLevel,
                 shipClass: player.ShipClass,
+                projectilePower: _projectilePower,
                 isPoweredUp: isPoweredUp,
                 powerUpType: powerUpType,
                 scale: scale);
@@ -138,7 +163,6 @@ namespace AstroOdyssey
             else
             {
                 AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
-                //xSide = xSide * -1;
             }
         }
 
@@ -189,7 +213,10 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CollidePlayerProjectile(PlayerProjectile projectile, out double score, out GameObject destroyedObject)
+        public void CollidePlayerProjectile(
+            PlayerProjectile projectile,
+            out double score,
+            out GameObject destroyedObject)
         {
             score = 0;
             destroyedObject = null;
@@ -397,6 +424,10 @@ namespace AstroOdyssey
             _projectileSpawnDelay -= (1 * scale);
         }
 
+        /// <summary>
+        /// Enforces rage power of the player's ship class.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageUp(Player player)
         {
             switch (player.ShipClass)
@@ -416,6 +447,10 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Nullifies rage power of the player's ship class.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageDown(Player player)
         {
             switch (player.ShipClass)

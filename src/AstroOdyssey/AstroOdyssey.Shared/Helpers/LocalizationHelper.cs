@@ -83,19 +83,19 @@ namespace AstroOdyssey
                 new ("de", "KLEIDE DICH"),
                 new ("fr", "COUVREZ-VOUS"),
             }),
-            new LocalizationKey(key: "FIREPOWER_DOWN", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "FIRING_RATE_DECREASED", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "FIREPOWER DOWN"),
-                new ("bn", "ফায়ার পাওয়ার ডাউন"),
-                new ("de", "FEUERKRAFT AUS"),
-                new ("fr", "PUISSANCE DE FEU ARRÊTÉE"),
+                new ("en", "FIRING RATE DECREASED"),
+                new ("bn", "গুলিবর্ষণের হার কমেছে"),
+                new ("de", "FEUERRATE VERRINGERT"),
+                new ("fr", "LA CADENCE DE TIR A DIMINUÉ"),
             }),
-            new LocalizationKey(key: "FIREPOWER_UP", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "FIRING_RATE_INCREASED", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "FIREPOWER UP"),
-                new ("bn", "ফায়ার পাওয়ার আপ"),
-                new ("de", "FEUERKRAFT HOCH"),
-                new ("fr", "PUISSANCE DE FEU"),
+                new ("en", "FIRING RATE INCREASED"),
+                new ("bn", "গুলিবর্ষণের হার বেড়েছে"),
+                new ("de", "FEUERRATE ERHÖHT"),
+                new ("fr", "CADENCE DE TIR AUGMENTÉE"),
             }),
             new LocalizationKey(key: "SHIELD_DOWN", cultureValues: new (string Culture, string Value)[]
             {

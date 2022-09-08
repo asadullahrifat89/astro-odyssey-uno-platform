@@ -65,6 +65,7 @@ namespace AstroOdyssey
 
         public ShipClass ShipClass { get; set; }
 
+
         private bool _isRecoveringFromDamage;
         public bool IsRecoveringFromDamage
         {
@@ -232,5 +233,5 @@ namespace AstroOdyssey
         //}
 
         #endregion
-    }
+    } 
 }
