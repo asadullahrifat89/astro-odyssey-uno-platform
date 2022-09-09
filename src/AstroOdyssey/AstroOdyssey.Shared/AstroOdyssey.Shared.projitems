@@ -29,8 +29,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\GameScore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IGameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\GameApiHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -242,7 +243,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\Implementations\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Requests\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Implementations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />

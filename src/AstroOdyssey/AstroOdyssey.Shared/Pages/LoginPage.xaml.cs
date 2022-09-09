@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -10,12 +11,23 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class LoginPage : Page
     {
+        #region Fields
+
+        private readonly IGameApiHelper _gameApiHelper;
+
+        #endregion
+
         #region Ctor
 
         public LoginPage()
         {
             InitializeComponent();
             Loaded += LoginPage_Loaded;
+
+            // Get a local instance of the container
+            var container = ((App)App.Current).Container;
+
+            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
         }
 
         #endregion
@@ -57,7 +69,7 @@ namespace AstroOdyssey
         #region Methods
 
         private void Login()
-        { 
+        {
             // Get a local instance of the container
             var container = ((App)App.Current).Container;
 

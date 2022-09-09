@@ -26,6 +26,7 @@
     <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\AudioHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\Contracts\IGameApiHelper.cs" />
     <_Globbed_Compile Remove="Helpers\Contracts\IHttpRequestHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyProjectileHelper.cs" />
