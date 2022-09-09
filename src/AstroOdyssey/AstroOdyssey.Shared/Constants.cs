@@ -31,11 +31,11 @@ namespace AstroOdyssey
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
 
-#if DEBUG
-        public const string GAME_API_BASEURL = "https://localhost:7238";
-#else
+//#if DEBUG
+//        public const string GAME_API_BASEURL = "https://localhost:7238";
+//#else
         public const string GAME_API_BASEURL = "https://astro-odyssey-web-api.herokuapp.com";
-#endif
+//#endif
 
 
         public const string Action_Ping = "/api/Query/Ping";

@@ -82,6 +82,10 @@ namespace AstroOdyssey
 
                 App.NavigateToPage(typeof(GameStartPage));
             }
+            else
+            {
+
+            }
 
         }
 
