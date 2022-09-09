@@ -225,6 +225,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
+                                AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
                             }
                             else
                             {
@@ -247,6 +248,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
+                                AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
                             }
                             else
                             {

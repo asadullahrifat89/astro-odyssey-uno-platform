@@ -103,20 +103,20 @@ namespace AstroOdyssey
                 {
                     case BossClass.GREEN:
                         {
-                            width = 306;
-                            height = 418;
+                            width = 360;
+                            height = 289;
                         }
                         break;
-                    case BossClass.PURPLE:
+                    case BossClass.CRIMSON:
                         {
-                            width = 510;
-                            height = 458;
+                            width = 403;
+                            height = 279;
                         }
                         break;
-                    case BossClass.YELLOW:
+                    case BossClass.BLUE:
                         {
-                            width = 553;
-                            height = 492;
+                            width = 316;
+                            height = 285;
                         }
                         break;
                     default:
@@ -216,8 +216,8 @@ namespace AstroOdyssey
     public enum BossClass
     {
         GREEN,
-        PURPLE,
-        YELLOW,
+        CRIMSON,
+        BLUE,
     }
 }
 

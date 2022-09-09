@@ -93,13 +93,13 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\asteroid4.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_appeared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_cleared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />
@@ -209,7 +209,6 @@
     <UpToDateCheckInput Include="$(MSBuildThisFileDirectory)**/*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\" />

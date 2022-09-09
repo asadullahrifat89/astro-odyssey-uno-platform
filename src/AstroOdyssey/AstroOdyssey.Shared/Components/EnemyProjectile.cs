@@ -46,19 +46,19 @@ namespace AstroOdyssey
                             width += 5;
                         }
                         break;
-                    case BossClass.PURPLE:
+                    case BossClass.CRIMSON:
                         {
-                            Background = new SolidColorBrush(Colors.Violet);
-                            BorderBrush = new SolidColorBrush(Colors.DarkViolet);
+                            Background = new SolidColorBrush(Colors.Crimson);
+                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
                             BorderThickness = new Thickness(3);
 
                             height += 5;
                         }
                         break;
-                    case BossClass.YELLOW:
+                    case BossClass.BLUE:
                         {
-                            Background = new SolidColorBrush(Colors.Goldenrod);
-                            BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+                            Background = new SolidColorBrush(Colors.SkyBlue);
+                            BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
                             BorderThickness = new Thickness(3);
                         }
                         break;
