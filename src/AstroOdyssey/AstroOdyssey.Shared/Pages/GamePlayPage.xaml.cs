@@ -98,7 +98,7 @@ namespace AstroOdyssey
 
         public double Rage { get; set; } = 0;
 
-        public GameScore GameScore { get; set; } = new GameScore();
+        public PlayerScore GameScore { get; set; } = new PlayerScore();
 
         public double PointerX { get; set; }
 
@@ -183,7 +183,7 @@ namespace AstroOdyssey
             Rage = 0;
             PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
-            GameScore = new GameScore();
+            GameScore = new PlayerScore();
             SetScoreBarCountText(25);
 
             PointerX = _windowWidth / 2;

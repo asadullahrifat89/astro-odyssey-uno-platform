@@ -38,7 +38,6 @@
     <_Globbed_Compile Remove="Helpers\StarHelper.cs" />
     <_Globbed_Compile Remove="Internals\EnemyProjectile.cs" />
     <_Globbed_Compile Remove="Models\Account.cs" />
-    <_Globbed_Compile Remove="Models\GameScore.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />
     <_Globbed_Compile Remove="Models\Language.cs" />
     <_Globbed_Compile Remove="Models\Ship.cs" />

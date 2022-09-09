@@ -1,11 +1,7 @@
 ﻿namespace AstroOdyssey
 {
-    public class GameScore
+    public class PlayerScore
     {
-        public string Id { get; set; }
-
-        public string AccountId { get; set; }
-
         public double Score { get; set; } = 0;
 
         public int EnemiesDestroyed { get; set; } = 0;

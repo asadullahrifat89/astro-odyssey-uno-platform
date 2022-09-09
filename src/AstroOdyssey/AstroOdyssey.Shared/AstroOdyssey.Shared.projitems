@@ -37,7 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PowerUpFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\AudioPlayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\EnemyProjectile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Ship.cs" />
+    <Compile Include="..\AstroOdyssey.Shared\Models\PlayerShip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml.cs">
       <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
@@ -45,8 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Factories\CelestialObjectFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Health.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\GameScore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\HighScore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerScore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\PlayerProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Meteor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
@@ -55,7 +54,6 @@
     <Compile Include="..\AstroOdyssey.Shared\Helpers\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Account.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
       <DependentUpon>GameOverPage.xaml</DependentUpon>
     </Compile>

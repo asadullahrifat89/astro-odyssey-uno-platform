@@ -70,11 +70,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public static GameScore GameScore { get; set; }
+        public static PlayerScore GameScore { get; set; }
 
-        public static Ship Ship { get; set; }
-
-        public static Account Account { get; set; }
+        public static PlayerShip Ship { get; set; }
 
         public static string CurrentCulture { get; set; }
 
@@ -196,7 +194,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void SetScore(GameScore gameScore)
+        public static void SetScore(PlayerScore gameScore)
         {
             GameScore = gameScore;
         }

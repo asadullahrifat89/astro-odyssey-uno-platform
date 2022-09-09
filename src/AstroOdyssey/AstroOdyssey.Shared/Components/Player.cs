@@ -130,7 +130,7 @@ namespace AstroOdyssey
 
         public void SetAttributes(
             double speed,
-            Ship ship,
+            PlayerShip ship,
             double scale = 1)
         {
             Speed = speed;

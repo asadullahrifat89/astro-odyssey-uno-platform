@@ -69,5 +69,6 @@
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Components\Collectible.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerShip.cs" />
 	</ItemGroup>
 </Project>
