@@ -26,6 +26,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\Contracts\IHttpService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Implementations\HttpService.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
@@ -70,6 +73,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

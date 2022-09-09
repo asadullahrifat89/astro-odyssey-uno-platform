@@ -22,14 +22,15 @@ namespace AstroOdyssey
 
         #region Events
 
-        private void LoginPage_Loaded(object sender, RoutedEventArgs e)
+        private async void LoginPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //App.EnterFullScreen(false);
+            SetLocalization();
+            await this.PlayPageLoadedTransition();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginButton.IsEnabled)
+            if (LoginPage_LoginButton.IsEnabled)
             {
                 Login();
             }
@@ -42,7 +43,7 @@ namespace AstroOdyssey
 
         private void PasswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter && LoginButton.IsEnabled)
+            if (e.Key == Windows.System.VirtualKey.Enter && LoginPage_LoginButton.IsEnabled)
                 Login();
         }
 
@@ -57,21 +58,26 @@ namespace AstroOdyssey
 
         private void Login()
         {
-            App.Account = new Account() { UserName = UserNameBox.Text, /*Password = PasswordBox.Password,*/ };
-
-            App.SetAccount();
-
+            //TODO: call api to get token
             App.NavigateToPage(typeof(GameStartPage));
         }
 
         private void EnableLoginButton()
         {
-            LoginButton.IsEnabled = !UserNameBox.Text.IsNullOrBlank() /* && !PasswordBox.Text.IsNullOrBlank()*/;
+            LoginPage_LoginButton.IsEnabled = !LoginPage_UserNameBox.Text.IsNullOrBlank() && !LoginPage_PasswordBox.Text.IsNullOrBlank();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SetLocalization()
+        {
+            LocalizationHelper.SetLocalizedResource(LoginPage_UserNameBox);
+            LocalizationHelper.SetLocalizedResource(LoginPage_PasswordBox);
+            LocalizationHelper.SetLocalizedResource(LoginPage_RegisterButton);
+            LocalizationHelper.SetLocalizedResource(LoginPage_LoginButton);
         }
 
         #endregion

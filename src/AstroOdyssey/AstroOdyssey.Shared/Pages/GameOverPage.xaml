@@ -22,7 +22,7 @@
             BorderThickness="0,3,0,3"
             CornerRadius="10">
             <StackPanel
-                Width="300"
+                Width="315"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -44,7 +44,7 @@
                     TextAlignment="Center" />
 
                 <!--  Score  -->
-                <StackPanel Margin="60,40,60,0">
+                <StackPanel Margin="60,20,60,0">
                     <TextBlock
                         x:Name="ScoreText"
                         FontSize="30"
@@ -126,9 +126,9 @@
                 </StackPanel>
 
                 <!--  Congratulations  -->
-                <StackPanel Margin="60,0,60,20">
+                <StackPanel Margin="60,0,60,10">
                     <Border
-                        Margin="10"
+                        Margin="5"
                         Background="Goldenrod"
                         BorderBrush="DarkGoldenrod"
                         BorderThickness="3"
@@ -146,7 +146,7 @@
                     x:Name="GameOverPage_PlayAgainButton"
                     x:Uid="GameOverPage_PlayAgainButton"
                     Height="50"
-                    Margin="30,20,30,5"
+                    Margin="30,10,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -160,6 +160,26 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False"
                     Tag="GameOverPage_PlayAgainButton.Content" />
+
+                <!--  Login button  -->
+                <Button
+                    x:Name="LoginPage_LoginButton"
+                    x:Uid="LoginPage_LoginButton"
+                    Height="50"
+                    Margin="30,5,30,30"
+                    HorizontalAlignment="Stretch"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    Click="LoginPage_LoginButton_Click"
+                    Content="Login"
+                    CornerRadius="50"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
+
             </StackPanel>
             <Border.Background>
                 <SolidColorBrush Color="#27223f" />

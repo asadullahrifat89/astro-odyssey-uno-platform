@@ -314,12 +314,7 @@ namespace AstroOdyssey
                 }
             }
         }
-
-        public static void SetAccount()
-        {
-            //_mainPage.SetAccount();
-        }
-
+        
         /// <summary>
         /// Navigate to provided page.
         /// </summary>

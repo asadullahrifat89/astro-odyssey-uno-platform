@@ -369,6 +369,38 @@ namespace AstroOdyssey
                 new ("de", "Wählen Sie ein Schiff aus"),
                 new ("fr", "Sélectionnez un navire"),
             }),
+
+            new LocalizationKey(key: "LoginPage_LoginButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Login"),
+                new ("bn", "প্রবেশ করুন"),
+                new ("de", "Anmeldung"),
+                new ("fr", "Connexion"),
+            }),
+
+            new LocalizationKey(key: "LoginPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Username or Email"),
+                new ("bn", "ব্যবহারকারী নাম বা ইমেল"),
+                new ("de", "Benutzername oder E-Mail-Adresse"),
+                new ("fr", "Nom d'utilisateur ou email"),
+            }),
+
+            new LocalizationKey(key: "LoginPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password"),
+                new ("bn", "পাসওয়ার্ড"),
+                new ("de", "Passwort"),
+                new ("fr", "Mot de passe"),
+            }),
+
+            new LocalizationKey(key: "LoginPage_RegisterButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "No account yet?"),
+                new ("bn", "এখনও কোন অ্যাকাউন্ট নেই?"),
+                new ("de", "Noch keinen Account?"),
+                new ("fr", "Pas encore de compte?"),
+            }),
         };
 
         #endregion
@@ -397,6 +429,10 @@ namespace AstroOdyssey
 
             if (uIElement is TextBlock textBlock)
                 textBlock.Text = value;
+            else if (uIElement is TextBox textBox)
+                textBox.Header = value;
+            else if (uIElement is PasswordBox passwordBox)
+                passwordBox.Header = value;
             else if (uIElement is Button button)
                 button.Content = value;
             else if (uIElement is HyperlinkButton hyperlinkButton)
