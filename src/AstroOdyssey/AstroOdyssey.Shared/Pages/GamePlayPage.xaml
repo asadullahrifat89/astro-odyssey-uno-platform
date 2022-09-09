@@ -241,7 +241,7 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Foreground="White"
-                    Text="🔥"
+                    Text="⚡"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords"
                     Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />

@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
 using static AstroOdyssey.Constants;
+using System.Threading;
 
 namespace AstroOdyssey
 {
@@ -92,7 +93,9 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public DispatcherTimer GameFrameTimer { get; set; }
+        //public DispatcherTimer GameFrameTimer { get; set; }
+
+        public PeriodicTimer GameFrameTimer { get; set; }
 
         public Stopwatch Stopwatch { get; set; }
 
@@ -389,7 +392,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
         /// </summary>
-        private void StartGame()
+        private async void StartGame()
         {
 #if !DEBUG
             FPSText.Visibility = Visibility.Collapsed;
@@ -418,9 +421,48 @@ namespace AstroOdyssey
             SetStars();
 
             Stopwatch = Stopwatch.StartNew();
-            GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
 
-            GameFrameTimer.Tick += (s, e) =>
+            #region Old
+
+            //GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
+
+            //GameFrameTimer.Tick += (s, e) =>
+            //{
+            //    _frameStartTime = Stopwatch.ElapsedMilliseconds;
+
+            //    RenderGameFrame();
+
+            //    CalculateFPS();
+
+            //    _frameEndTime = Stopwatch.ElapsedMilliseconds;
+
+            //    GetFrameDuration();
+
+            //    SetAnalytics();
+            //};
+
+            //GameFrameTimer.Start(); 
+
+            //WarpThroughSpace();
+            //AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+
+            #endregion
+
+            WarpThroughSpace();
+            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+
+            await RunGame();          
+        }
+
+        /// <summary>
+        /// Runs the game.
+        /// </summary>
+        /// <returns></returns>
+        private async Task RunGame()
+        {
+            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_frameTime));
+
+            while (await GameFrameTimer.WaitForNextTickAsync())
             {
                 _frameStartTime = Stopwatch.ElapsedMilliseconds;
 
@@ -433,11 +475,7 @@ namespace AstroOdyssey
                 GetFrameDuration();
 
                 SetAnalytics();
-            };
-
-            GameFrameTimer.Start();
-            WarpThroughSpace();
-            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+            }
         }
 
         /// <summary>
@@ -470,7 +508,7 @@ namespace AstroOdyssey
             if (StarView.IsWarpingThroughSpace)
                 _celestialObjectFactory.StopSpaceWarp();
 
-            GameFrameTimer.Stop();
+            GameFrameTimer.Dispose();
 
             AudioHelper.StopSound();
         }
@@ -510,8 +548,10 @@ namespace AstroOdyssey
         {
             InputView.Focus(FocusState.Programmatic);
 
-            GameFrameTimer?.Stop();
+            GameFrameTimer.Dispose();
+
             ShowInGameText($"👨‍🚀\n{LocalizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
+
             FiringProjectiles = false;
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
@@ -527,22 +567,26 @@ namespace AstroOdyssey
         /// <summary>
         /// Resumes the game.
         /// </summary>
-        private void ResumeGame()
+        private async void ResumeGame()
         {
             InputView.Focus(FocusState.Programmatic);
 
             HideInGameText();
-            GameFrameTimer?.Start();
+
+            //GameFrameTimer?.Start();            
+
             FiringProjectiles = true;
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
-
             AudioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
+
             if (GameView.IsBossEngaged)
                 AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
+
+            await RunGame();
         }
 
         /// <summary>
