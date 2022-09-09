@@ -212,7 +212,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Star\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Images\Planet\" />

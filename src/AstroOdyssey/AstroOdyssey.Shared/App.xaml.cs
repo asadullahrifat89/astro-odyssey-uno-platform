@@ -1,16 +1,13 @@
 ﻿#if DEBUG
 using Microsoft.Extensions.Logging;
-using Microsoft.UI;
 #endif
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;

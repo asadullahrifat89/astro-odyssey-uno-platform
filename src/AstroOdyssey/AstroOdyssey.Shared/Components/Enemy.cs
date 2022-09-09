@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -10,7 +11,11 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        //private readonly Grid _body = new Grid();
+
+        private readonly Image _ship = new Image() { Stretch = Stretch.Uniform };
+
+        //private readonly Image _engineThrust = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
 
@@ -25,7 +30,12 @@ namespace AstroOdyssey
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             IsDestructible = true;
-            Child = content;
+
+            //_body = new Grid();
+            //_body.Children.Add(_engineThrust);
+            //_body.Children.Add(_ship);
+
+            Child = _ship;
             YDirection = YDirection.DOWN;
 
             Background = new SolidColorBrush(Colors.Transparent);
@@ -113,27 +123,23 @@ namespace AstroOdyssey
                         break;
                 }
 
-                Uri uri = bossTemplate.AssetUri;
-                content.Source = new BitmapImage(uri);
-
-                //Height = (Height + (int)gameLevel / 3 + 0.25d) * scale;
-                //Width = (Width + (int)gameLevel / 3 + 0.25d) * scale;
-
                 Height = (height / 2.5) * scale;
                 Width = (width / 2.5) * scale;
 
-                HalfWidth = Width / 2;
                 Speed--;
                 ProjectileSpawnDelay -= (3 * (int)gameLevel);
 
                 Health = 50 * (int)gameLevel;
+
+                Uri uri = bossTemplate.AssetUri;
+                _ship.Source = new BitmapImage(uri);
             }
             else
             {
                 var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
                 var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
 
-                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
+                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;             
 
                 Uri uri = enemyTemplate.AssetUri;
                 Health = enemyTemplate.Health;
@@ -142,7 +148,7 @@ namespace AstroOdyssey
                 Height = size * scale;
                 Width = size * scale;
 
-                content.Source = new BitmapImage(uri);
+                _ship.Source = new BitmapImage(uri);
             }
 
             HalfWidth = Width / 2;
