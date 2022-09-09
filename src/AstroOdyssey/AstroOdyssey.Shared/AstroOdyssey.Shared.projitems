@@ -35,6 +35,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Responses\ServiceResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Responses\ErrorResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Responses\QueryRecordResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Responses\QueryRecordsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Contracts\IHttpService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Implementations\HttpService.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
@@ -238,6 +242,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\Implementations\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Requests\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\Implementations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
