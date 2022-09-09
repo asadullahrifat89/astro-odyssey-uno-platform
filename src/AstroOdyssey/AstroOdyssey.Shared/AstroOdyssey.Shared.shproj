@@ -29,6 +29,7 @@
     <_Globbed_Compile Remove="Helpers\Contracts\IHttpRequestHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyProjectileHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\GameApiHelper.cs" />
     <_Globbed_Compile Remove="Helpers\HealthHelper.cs" />
     <_Globbed_Compile Remove="Helpers\HttpRequestHelper.cs" />
     <_Globbed_Compile Remove="Helpers\LocalizationHelper.cs" />

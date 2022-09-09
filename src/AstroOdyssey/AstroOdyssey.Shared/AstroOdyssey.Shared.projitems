@@ -22,9 +22,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\AttachedUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\AuthToken.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\GameProfile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\GameScore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

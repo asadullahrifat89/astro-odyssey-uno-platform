@@ -57,7 +57,11 @@ namespace AstroOdyssey
         #region Methods
 
         private void Login()
-        {
+        { 
+            // Get a local instance of the container
+            var container = ((App)App.Current).Container;
+
+
             //TODO: call api to get token
             App.NavigateToPage(typeof(GameStartPage));
         }
