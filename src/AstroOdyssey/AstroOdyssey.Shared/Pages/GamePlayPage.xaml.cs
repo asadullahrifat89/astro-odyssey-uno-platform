@@ -14,9 +14,6 @@ using System.Threading;
 
 namespace AstroOdyssey
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class GamePlayPage : Page
     {
         #region Fields
@@ -92,8 +89,6 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
-
-        //public DispatcherTimer GameFrameTimer { get; set; }
 
         public PeriodicTimer GameFrameTimer { get; set; }
 
@@ -418,35 +413,7 @@ namespace AstroOdyssey
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
 
-            SetStars();
-
-            Stopwatch = Stopwatch.StartNew();
-
-            #region Old
-
-            //GameFrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
-
-            //GameFrameTimer.Tick += (s, e) =>
-            //{
-            //    _frameStartTime = Stopwatch.ElapsedMilliseconds;
-
-            //    RenderGameFrame();
-
-            //    CalculateFPS();
-
-            //    _frameEndTime = Stopwatch.ElapsedMilliseconds;
-
-            //    GetFrameDuration();
-
-            //    SetAnalytics();
-            //};
-
-            //GameFrameTimer.Start(); 
-
-            //WarpThroughSpace();
-            //AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
-
-            #endregion
+            SetStars();                   
 
             WarpThroughSpace();
             AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
@@ -460,6 +427,8 @@ namespace AstroOdyssey
         /// <returns></returns>
         private async Task RunGame()
         {
+            Stopwatch = Stopwatch.StartNew();
+
             GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_frameTime));
 
             while (await GameFrameTimer.WaitForNextTickAsync())
@@ -572,8 +541,6 @@ namespace AstroOdyssey
             InputView.Focus(FocusState.Programmatic);
 
             HideInGameText();
-
-            //GameFrameTimer?.Start();            
 
             FiringProjectiles = true;
             IsGamePaused = false;

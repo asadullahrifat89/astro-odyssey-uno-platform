@@ -61,8 +61,8 @@ namespace AstroOdyssey
         public static (Uri AssetUri, BossClass BossClass)[] BOSS_TEMPLATES = new (Uri AssetUri, BossClass BossClass)[]
         {
             (new Uri("ms-appx:///Assets/Images/Boss/boss1.png", UriKind.RelativeOrAbsolute), BossClass.GREEN),
-            (new Uri("ms-appx:///Assets/Images/Boss/boss2.png", UriKind.RelativeOrAbsolute), BossClass.PURPLE),
-            (new Uri("ms-appx:///Assets/Images/Boss/boss3.png", UriKind.RelativeOrAbsolute), BossClass.YELLOW),
+            (new Uri("ms-appx:///Assets/Images/Boss/boss2.png", UriKind.RelativeOrAbsolute), BossClass.CRIMSON),
+            (new Uri("ms-appx:///Assets/Images/Boss/boss3.png", UriKind.RelativeOrAbsolute), BossClass.BLUE),
         };
 
         public static DestructibleObjectTemplate[] METEOR_TEMPLATES = new DestructibleObjectTemplate[]

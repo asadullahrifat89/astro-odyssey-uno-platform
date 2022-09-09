@@ -67,7 +67,7 @@ namespace AstroOdyssey
                                 isOverPowered: enemy.IsOverPowered);
 
                             projectile.AddToGameEnvironment(
-                               top: enemy.GetY() + enemy.Height - (40 * scale) + projectile.Height / 2,
+                               top: enemy.GetY() + enemy.Height - (15 * scale) + projectile.Height / 2,
                                left: enemy.GetX() + enemy.HalfWidth - projectile.HalfWidth,
                                gameEnvironment: _gameEnvironment);
 
@@ -88,7 +88,7 @@ namespace AstroOdyssey
                                 projectile2.Speed--;
 
                                 projectile2.AddToGameEnvironment(
-                                    top: enemy.GetY() + enemy.Height - (10 * scale) + projectile2.Height / 2,
+                                    top: enemy.GetY() + enemy.Height - (15 * scale) + projectile2.Height / 2,
                                     left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
@@ -98,7 +98,7 @@ namespace AstroOdyssey
                             }
                         }
                         break;
-                    case BossClass.PURPLE:
+                    case BossClass.CRIMSON:
                         {
                             var projectile1 = new EnemyProjectile();
 
@@ -138,7 +138,7 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile3.AddToGameEnvironment(
-                                   top: enemy.GetY() + enemy.Height - (25 * scale) + projectile3.Height / 2,
+                                   top: enemy.GetY() + enemy.Height - (15 * scale) + projectile3.Height / 2,
                                    left: enemy.GetX() + (35 * scale) - projectile3.HalfWidth,
                                    gameEnvironment: _gameEnvironment);
 
@@ -150,7 +150,7 @@ namespace AstroOdyssey
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile4.AddToGameEnvironment(
-                                    top: enemy.GetY() + enemy.Height - (25 * scale) + projectile4.Height / 2,
+                                    top: enemy.GetY() + enemy.Height - (15 * scale) + projectile4.Height / 2,
                                     left: enemy.GetX() + enemy.Width - (35 * scale) - projectile4.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
@@ -159,7 +159,7 @@ namespace AstroOdyssey
                             }
                         }
                         break;
-                    case BossClass.YELLOW:
+                    case BossClass.BLUE:
                         {
                             var projectile = new EnemyProjectile();
 
