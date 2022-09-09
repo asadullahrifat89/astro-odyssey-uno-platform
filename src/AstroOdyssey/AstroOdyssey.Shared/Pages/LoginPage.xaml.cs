@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AstroOdysseyCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -68,14 +70,19 @@ namespace AstroOdyssey
 
         #region Methods
 
-        private void Login()
+        private async void Login()
         {
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-
-
             //TODO: call api to get token
-            App.NavigateToPage(typeof(GameStartPage));
+            ServiceResponse response = await _gameApiHelper.Authenticate(LoginPage_UserNameBox.Text, LoginPage_PasswordBox.Text);
+
+            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var result = response.Result as AuthToken;
+                Constants.ACCESS_TOKEN = result;
+
+                App.NavigateToPage(typeof(GameStartPage));
+            }
+
         }
 
         private void EnableLoginButton()

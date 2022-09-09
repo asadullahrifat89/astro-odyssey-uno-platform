@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroOdysseyCore;
+using System;
 using Windows.Foundation;
 
 namespace AstroOdyssey
@@ -30,7 +31,12 @@ namespace AstroOdyssey
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
 
+#if DEBUG
+        public const string GAME_API_BASEURL = "https://localhost:7238";
+#else
         public const string GAME_API_BASEURL = "https://astro-odyssey-web-api.herokuapp.com";
+#endif
+
 
         public const string Action_Ping = "/api/Query/Ping";
 
@@ -43,7 +49,7 @@ namespace AstroOdyssey
         public const string Action_GetGameScores = "/api/Query/GetGameScores";
         public const string Action_GetUser = "/api/Query/GetUser";
 
-        public static string ACCESS_TOKEN;
+        public static AuthToken ACCESS_TOKEN;
         #endregion
 
         #region Methods
