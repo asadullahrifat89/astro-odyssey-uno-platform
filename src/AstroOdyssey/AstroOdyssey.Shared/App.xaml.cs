@@ -1,4 +1,5 @@
 ﻿#if DEBUG
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 #endif
 using Microsoft.UI.Xaml;
@@ -40,6 +41,7 @@ namespace AstroOdyssey
             InitializeLogging();
 
             InitializeComponent();
+            Container = ConfigureDependencyInjection();
 
             Uno.UI.ApplicationHelper.RequestedCustomTheme = "Dark";
 
@@ -69,6 +71,8 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
+
+        public IServiceProvider Container { get; }
 
         public static PlayerScore GameScore { get; set; }
 
@@ -193,6 +197,21 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        IServiceProvider ConfigureDependencyInjection()
+        {
+            // Create new service collection which generates the IServiceProvider
+            var serviceCollection = new ServiceCollection();
+
+            // TODO - Register dependencies
+            // Register the MessageService with the container
+            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 2, retryWait: 1);
+            serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
+
+            // Build the IServiceProvider and return it
+            return serviceCollection.BuildServiceProvider();
+        }
+
 
         public static void SetScore(PlayerScore gameScore)
         {

@@ -23,11 +23,14 @@
     <_Globbed_Compile Remove="Components\Base\PlayerShipTemplate.cs" />
     <_Globbed_Compile Remove="Components\ComicBook.cs" />
     <_Globbed_Compile Remove="Constants.cs" />
+    <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\AudioHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\Contracts\IHttpRequestHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyHelper.cs" />
     <_Globbed_Compile Remove="Helpers\EnemyProjectileHelper.cs" />
     <_Globbed_Compile Remove="Helpers\HealthHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\HttpRequestHelper.cs" />
     <_Globbed_Compile Remove="Helpers\LocalizationHelper.cs" />
     <_Globbed_Compile Remove="Helpers\MeteorHelper.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
@@ -50,6 +53,8 @@
     <_Globbed_Compile Remove="Pages\LanguageSelectionPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\LoginPage.xaml.cs" />
     <_Globbed_Compile Remove="Services\AudioService.cs" />
+    <_Globbed_Compile Remove="Services\Contracts\IHttpService.cs" />
+    <_Globbed_Compile Remove="Services\HttpService.cs" />
   </ItemGroup>
   <ItemGroup>
     <_Globbed_Content Remove="Assets\10803965.jpg" />

@@ -30,6 +30,8 @@ namespace AstroOdyssey
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
 
+        public const string WebApiBaseUrl = "https://astro-odyssey-web-api.herokuapp.com/";
+
         #endregion
 
         #region Methods
