@@ -72,6 +72,9 @@ namespace AstroOdyssey
 
         private async void Login()
         {
+            LoginPage_ProgressBar.ShowError = false;
+            LoginPage_ProgressBar.ShowPaused = false;
+
             //TODO: call api to get token
             ServiceResponse response = await _gameApiHelper.Authenticate(LoginPage_UserNameBox.Text, LoginPage_PasswordBox.Text);
 
@@ -84,9 +87,13 @@ namespace AstroOdyssey
             }
             else
             {
+                LoginPage_ProgressBar.ShowPaused = true;
+                LoginPage_ProgressBar.ShowError = true;
 
+                var error  = response.ExternalError;
+                LoginPage_ErrorText.Text = error;
+                LoginPage_ErrorText.Visibility = Visibility.Visible;
             }
-
         }
 
         private void EnableLoginButton()
@@ -101,6 +108,7 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
+            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
             LocalizationHelper.SetLocalizedResource(LoginPage_UserNameBox);
             LocalizationHelper.SetLocalizedResource(LoginPage_PasswordBox);
             LocalizationHelper.SetLocalizedResource(LoginPage_RegisterButton);

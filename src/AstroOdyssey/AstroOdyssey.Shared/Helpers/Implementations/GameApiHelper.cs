@@ -20,7 +20,7 @@ namespace AstroOdyssey
 
         public async Task<ServiceResponse> Authenticate(string userNameOrEmail, string password)
         {
-            var response = await _httpRequestHelper.SendRequest<ServiceResponse, string>(
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
                 path: Constants.Action_Authenticate,
                 httpHeaders: new Dictionary<string, string>(),
@@ -33,7 +33,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = response.ErrorResponse };
+                : response.ErrorResponse;
         }
     }
 }

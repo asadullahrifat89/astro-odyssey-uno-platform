@@ -42,12 +42,12 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <TextBlock
+                <!--<TextBlock
                     Margin="10,10,10,50"
                     FontSize="25"
                     FontWeight="Bold"
                     Text="Login to begin"
-                    TextAlignment="Center" />
+                    TextAlignment="Center" />-->
 
                 <TextBox
                     x:Name="LoginPage_UserNameBox"
@@ -103,6 +103,25 @@
                     Content="No account yet?"
                     CornerRadius="50"
                     FontWeight="SemiBold" />
+
+                <TextBlock
+                    x:Name="LoginPage_ErrorText"
+                    x:Uid="LoginPage_ErrorText"
+                    Margin="5"
+                    FontWeight="SemiBold"
+                    Foreground="Crimson"
+                    Visibility="Collapsed" />
+
+                <!--  Progress bar  -->
+                <ProgressBar
+                    x:Name="LoginPage_ProgressBar"
+                    Height="5"
+                    Foreground="Goldenrod"
+                    IsFocusEngagementEnabled="False"
+                    IsIndeterminate="True"
+                    IsTabStop="False"
+                    ShowError="False"
+                    ShowPaused="True" />
 
             </StackPanel>
 
