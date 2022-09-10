@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using AstroOdysseyCore;
+using System.Threading.Tasks;
 
 namespace AstroOdyssey
 {
@@ -65,13 +66,13 @@ namespace AstroOdyssey
         private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameSignupPage_SignupButton.IsEnabled)
-                Signup();
+                PerformSignup();
         }
 
         private void SignupButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameSignupPage_SignupButton.IsEnabled)
-                Signup();
+                PerformSignup();
         }
 
 
@@ -79,49 +80,42 @@ namespace AstroOdyssey
 
         #region Methods
 
-        private async void Signup()
+        private async Task<bool> Signup()
         {
-            this.RunProgressBar(GameSignupPage_ProgressBar);
-
+            // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
                 userName: GameSignupPage_UserNameBox.Text,
                 email: GameSignupPage_UserEmailBox.Text,
                 password: GameSignupPage_PasswordBox.Text);
 
-            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
-            {
-                response = await _gameApiHelper.Authenticate(
-                    userNameOrEmail: GameSignupPage_UserNameBox.Text,
-                    password: GameSignupPage_PasswordBox.Text);
-
-                if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
-                    App.AuthToken = authToken;
-
-#if DEBUG
-                    Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
-#endif
-
-                    this.StopProgressBar(GameSignupPage_ProgressBar);
-
-                    await this.PlayPageUnLoadedTransition();
-                    //TODO: Navigate to gameScores page.
-                    App.NavigateToPage(typeof(GameStartPage));
-                }
-                else
-                {
-                    var error = response.ExternalError;
-                    this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
-                    this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
-                }
-            }
-            else
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
                 this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
                 this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
+
+                return false;
             }
+
+            // store game profile
+            var gameProfile = _gameApiHelper.ParseResult<GameProfile>(response.Result);
+            App.GameProfile = gameProfile;
+
+            return true;
+        }
+
+        private async void PerformSignup()
+        {
+            this.RunProgressBar(GameSignupPage_ProgressBar);
+
+            if (!await Signup())
+                return;            
+
+            this.StopProgressBar(GameSignupPage_ProgressBar);
+
+            // redirect to login page
+            await this.PlayPageUnLoadedTransition();            
+            App.NavigateToPage(typeof(GameLoginPage));
         }
 
         private void EnableSignupButton()
@@ -129,7 +123,7 @@ namespace AstroOdyssey
             GameSignupPage_SignupButton.IsEnabled = !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
                 && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
                 && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank();
-        }      
+        }
 
         private void SetLocalization()
         {

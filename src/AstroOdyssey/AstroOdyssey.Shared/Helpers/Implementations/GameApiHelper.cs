@@ -73,6 +73,68 @@ namespace AstroOdyssey
                 : response.ErrorResponse;
         }
 
+        public async Task<ServiceResponse> SubmitGameScore(double score)
+        {
+            await RefreshAuthToken();          
+
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_SubmitGameScore,
+                httpHeaders: new Dictionary<string, string>(),
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    User = new AttachedUser()
+                    {
+                        UserEmail = App.GameProfile.User.UserName,
+                        UserName = App.GameProfile.User.UserName,
+                        UserId = App.GameProfile.User.UserId,
+                    },
+                    Score = score,
+                    GameId = Constants.GAME_ID,
+                });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse;
+        }
+
+        public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordResponse<GameProfile>, QueryRecordResponse<GameProfile>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameProfile,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse
+                : response.ErrorResponse;
+        }
+
+        private async Task RefreshAuthToken()
+        {
+            // if token has expired or will expire in 30 secs, get a new token
+            if (App.AuthCredentials is not null && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(30) > App.AuthToken.LifeTime)
+            {
+                var response = await Authenticate(
+                    userNameOrEmail: App.AuthCredentials.UserName,
+                    password: App.AuthCredentials.Password);
+
+                if (response.HttpStatusCode == HttpStatusCode.OK)
+                {
+                    var authToken = ParseResult<AuthToken>(response.Result);
+                    App.AuthToken = authToken;
+                }
+            }
+        }
+
         #endregion
     }
 }

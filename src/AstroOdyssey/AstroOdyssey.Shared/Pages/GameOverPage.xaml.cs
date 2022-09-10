@@ -1,6 +1,9 @@
-﻿using Microsoft.UI.Xaml;
+﻿using AstroOdysseyCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -11,12 +14,22 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class GameOverPage : Page
     {
+        #region Fields
+
+        private readonly IGameApiHelper _gameApiHelper;
+
+        #endregion
+
         #region Ctor
 
         public GameOverPage()
         {
             InitializeComponent();
             Loaded += GameOverPage_Loaded;
+
+            // Get a local instance of the container
+            var container = ((App)App.Current).Container;
+            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
         }
 
         #endregion
@@ -52,6 +65,8 @@ namespace AstroOdyssey
             }
             else
             {
+                // submit score
+                await SubmitScore();
                 GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
                 GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
             }
@@ -72,6 +87,9 @@ namespace AstroOdyssey
 
         private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            // user logging in from gameover page so upon login or signup submit game score
+            App.GameScoreSubmissionPending = true;
+
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
@@ -92,6 +110,24 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        private async Task<bool> SubmitScore()
+        {
+            this.RunProgressBar(GameOverPage_ProgressBar);
+
+            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowErrorMessage(errorContainer: GameOverPage_ErrorText, error: error);
+                this.ShowErrorProgressBar(GameOverPage_ProgressBar);
+
+                return false;
+            }
+
+            return true;
+        }
 
         private void SetLocalization()
         {

@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerAuthCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml.cs">
       <DependentUpon>GameLoginPage.xaml</DependentUpon>
     </Compile>

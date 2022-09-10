@@ -73,11 +73,17 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public static AuthToken AuthToken { get; set; }
-
         public IServiceProvider Container { get; }
 
+        public static PlayerAuthCredentials AuthCredentials { get; set; }
+
+        public static GameProfile GameProfile { get; set; }
+
+        public static AuthToken AuthToken { get; set; }        
+
         public static PlayerScore GameScore { get; set; }
+
+        public static bool GameScoreSubmissionPending { get; set; }
 
         public static PlayerShip Ship { get; set; }
 

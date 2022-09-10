@@ -10,5 +10,9 @@ namespace AstroOdyssey
         Task<ServiceResponse> Authenticate(string userNameOrEmail, string password);
 
         Task<ServiceResponse> Signup(string userName, string email, string password);
+
+        Task<ServiceResponse> SubmitGameScore(double score);
+
+        Task<QueryRecordResponse<GameProfile>> GetGameProfile();
     }
 }

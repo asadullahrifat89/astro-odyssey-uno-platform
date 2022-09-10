@@ -45,6 +45,7 @@
     <_Globbed_Compile Remove="Models\Account.cs" />
     <_Globbed_Compile Remove="Models\HighScore.cs" />
     <_Globbed_Compile Remove="Models\Language.cs" />
+    <_Globbed_Compile Remove="Models\PlayerAuthCredentials.cs" />
     <_Globbed_Compile Remove="Models\Ship.cs" />
     <_Globbed_Compile Remove="Pages\ChooseShipPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage - Copy.xaml.cs" />

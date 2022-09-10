@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using System;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -40,7 +41,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
             await this.PlayPageLoadedTransition();
-        }      
+        }
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -55,49 +56,110 @@ namespace AstroOdyssey
         private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameLoginPage_LoginButton.IsEnabled)
-                Login();
+                PerformLogin();
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameLoginPage_LoginButton.IsEnabled)
-                Login();
+                PerformLogin();
         }
 
         #endregion
 
         #region Methods
 
-        private async void Login()
+        private async Task<bool> Authenticate()
         {
-            this.RunProgressBar(GameLoginPage_ProgressBar);
-
-            //TODO: call api to get token
+            // authenticate
             ServiceResponse response = await _gameApiHelper.Authenticate(
                 userNameOrEmail: GameLoginPage_UserNameBox.Text,
                 password: GameLoginPage_PasswordBox.Text);
 
-            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
-            {
-                var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
-                App.AuthToken = authToken;
-
-#if DEBUG
-                Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
-#endif
-
-                this.StopProgressBar(GameLoginPage_ProgressBar);
-
-                await this.PlayPageUnLoadedTransition();
-                //TODO: Navigate to gameScores page.
-                App.NavigateToPage(typeof(GameStartPage));
-            }
-            else
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
                 this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: error);
                 this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+
+                return false;
             }
+
+            // store auth token
+            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            App.AuthToken = authToken;
+
+            // store auth credentials
+            App.AuthCredentials = new PlayerAuthCredentials(
+                userName: GameLoginPage_UserNameBox.Text,
+                password: GameLoginPage_PasswordBox.Text);
+
+            return true;
+        }
+
+        private async Task<bool> GetGameProfile()
+        {
+            // get game profile
+            var recordResponse = await _gameApiHelper.GetGameProfile();
+
+            if (!recordResponse.IsSuccess)
+            {
+                var error = recordResponse.Errors.Errors;
+                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: string.Join("\n", error));
+                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+
+                return false;
+            }
+
+            // store game profile
+            var gameProfile = recordResponse.Result;
+            App.GameProfile = gameProfile;
+
+            return true;
+        }
+
+        private async Task<bool> SubmitScore()
+        {
+            this.RunProgressBar(GameLoginPage_ProgressBar);
+
+            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: error);
+                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private async void PerformLogin()
+        {
+            this.RunProgressBar(GameLoginPage_ProgressBar);
+
+            if (!await Authenticate())
+                return;
+
+            if (!await GetGameProfile())
+                return;
+
+            if (App.GameScoreSubmissionPending)
+            {
+                if (!await SubmitScore())
+                    return;
+
+                App.GameScoreSubmissionPending = false;
+            }
+
+            this.StopProgressBar(GameLoginPage_ProgressBar);
+
+            await this.PlayPageUnLoadedTransition();
+
+            //TODO: Navigate to gameScores page.
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         private void EnableLoginButton()

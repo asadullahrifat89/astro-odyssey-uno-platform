@@ -9,7 +9,7 @@ namespace AstroOdysseyCore
 
         public QueryResult<TRecord> Result { get; set; } = new QueryResult<TRecord>();
 
-        public bool IsSuccess => Errors.errors is null || Errors.errors.Count() == 0;
+        public bool IsSuccess => Errors.Errors is null || Errors.Errors.Count() == 0;
 
         public QueryRecordsResponse<TRecord> BuildSuccessResponse(
             long count,
