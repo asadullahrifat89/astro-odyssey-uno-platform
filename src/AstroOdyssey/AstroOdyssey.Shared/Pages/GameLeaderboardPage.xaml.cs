@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -30,6 +31,10 @@ namespace AstroOdyssey
 
         private int _pageIndex = 0;
         private int _pageSize = 10;
+        private long _totalPageCount = 0;
+        private bool _fetchingData = false;
+
+        public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
 
         #endregion
 
@@ -43,6 +48,8 @@ namespace AstroOdyssey
             // Get a local instance of the container
             var container = ((App)App.Current).Container;
             _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+
+            LeaderboardList.ItemsSource = GameProfiles;
         }
 
         #endregion
@@ -60,9 +67,8 @@ namespace AstroOdyssey
             if (!await GetGameProfile())
                 return;
 
-            // get game scores
-
-            await GetGameScores();
+            // get game profiles
+            await GetGameProfiles();
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -103,10 +109,12 @@ namespace AstroOdyssey
             return true;
         }
 
-        private async Task<bool> GetGameScores()
+        private async Task<bool> GetGameProfiles()
         {
+            _fetchingData = true;
+
             // get game scores
-            var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: _pageIndex, pageSize: _pageSize);
+            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: _pageIndex, pageSize: _pageSize);
 
             if (!recordsResponse.IsSuccess)
             {
@@ -114,13 +122,27 @@ namespace AstroOdyssey
                 this.ShowErrorMessage(errorContainer: GameLeaderboardPage_ErrorText, error: string.Join("\n", error));
                 this.ShowErrorProgressBar(GameLeaderboardPage_ProgressBar);
 
+                _fetchingData = false;
                 return false;
             }
-            
-            var result = recordsResponse.Result;
-            var records = result.Records;
 
-            //TODO: show game scores in UI           
+            var result = recordsResponse.Result;
+            var count = recordsResponse.Result.Count;
+
+            if (count > 0)
+            {
+                _totalPageCount = PaginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
+
+                var records = result.Records;
+
+                //TODO: show game profiles in UI
+                foreach (var record in records)
+                {
+                    GameProfiles.Add(record);
+                }
+            }
+
+            _fetchingData = false;
 
             return true;
         }

@@ -38,6 +38,7 @@
     <_Globbed_Compile Remove="Helpers\MeteorHelper.cs" />
     <_Globbed_Compile Remove="Helpers\NavigationSyncHelper.cs" />
     <_Globbed_Compile Remove="Helpers\PageTransitionHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\PaginationHelper.cs" />
     <_Globbed_Compile Remove="Helpers\PlayerHelper.cs" />
     <_Globbed_Compile Remove="Helpers\PowerUpHelper.cs" />
     <_Globbed_Compile Remove="Helpers\ProjectileHelper.cs" />

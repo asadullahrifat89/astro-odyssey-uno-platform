@@ -15,5 +15,7 @@ namespace AstroOdyssey
         Task<QueryRecordResponse<GameProfile>> GetGameProfile();
 
         Task<QueryRecordsResponse<GameScore>> GetGameScores(int pageIndex, int pageSize);
+
+        Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(int pageIndex, int pageSize);
     }
 }

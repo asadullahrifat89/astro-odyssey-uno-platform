@@ -115,6 +115,29 @@ namespace AstroOdyssey
                 : response.ErrorResponse;
         }
 
+        public async Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(
+            int pageIndex,
+            int pageSize)
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameProfile>, QueryRecordsResponse<GameProfile>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameProfiles,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     PageIndex = pageIndex,
+                     PageSize = pageSize,
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse
+                : response.ErrorResponse;
+        }
+
         public async Task<QueryRecordsResponse<GameScore>> GetGameScores(
             int pageIndex,
             int pageSize)
@@ -136,12 +159,12 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse
                 : response.ErrorResponse;
-        }
+        }   
 
         private async Task RefreshAuthToken()
         {
-            // if token has expired or will expire in 30 secs, get a new token
-            if (App.AuthCredentials is not null && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(30) > App.AuthToken.LifeTime)
+            // if token has expired or will expire in 10 secs, get a new token
+            if (App.AuthCredentials is not null && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.LifeTime)
             {
                 var response = await Authenticate(
                     userNameOrEmail: App.AuthCredentials.UserName,

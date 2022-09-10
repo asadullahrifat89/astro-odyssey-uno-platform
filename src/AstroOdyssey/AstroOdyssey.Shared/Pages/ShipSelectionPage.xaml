@@ -9,6 +9,22 @@
     IsTabStop="False"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="ShipsListDataTemplate">
+            <StackPanel Orientation="Vertical">
+                <Image
+                    Width="100"
+                    Height="100"
+                    Source="{Binding Path=ImageUrl, Mode=OneWay}" />
+                <TextBlock
+                    Margin="0,0,0,2"
+                    FontWeight="SemiBold"
+                    Text="{Binding Path=Name, Mode=OneWay}"
+                    TextAlignment="Center" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.Background>
@@ -54,23 +70,8 @@
                     x:Name="ShipsList"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    SelectionChanged="ShipsList_SelectionChanged">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <Image
-                                    Width="100"
-                                    Height="100"
-                                    Source="{Binding Path=ImageUrl, Mode=OneWay}" />
-                                <TextBlock
-                                    Margin="0,0,0,2"
-                                    FontWeight="SemiBold"
-                                    Text="{Binding Path=Name, Mode=OneWay}"
-                                    TextAlignment="Center" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                    ItemTemplate="{StaticResource ShipsListDataTemplate}"
+                    SelectionChanged="ShipsList_SelectionChanged" />
 
                 <!--  Instructions  -->
                 <TextBlock

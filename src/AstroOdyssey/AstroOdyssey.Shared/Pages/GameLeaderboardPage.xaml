@@ -9,6 +9,23 @@
     IsTabStop="False"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="LeaderboardListDataTemplate">
+            <StackPanel Orientation="Vertical">
+                <TextBlock
+                    Margin="0,0,0,2"
+                    FontWeight="SemiBold"
+                    Text="{Binding Path=User.UserName, Mode=OneWay}"
+                    TextAlignment="Left" />
+                <TextBlock
+                    Margin="0,0,0,2"
+                    FontWeight="SemiBold"
+                    Text="{Binding Path=PersonalBestScore, Mode=OneWay}"
+                    TextAlignment="Right" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.Background>
@@ -59,6 +76,7 @@
                 </StackPanel>
 
                 <!--  Leaderboard list  -->
+                <GridView x:Name="LeaderboardList" ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
 
                 <StackPanel Grid.Row="2">
 
