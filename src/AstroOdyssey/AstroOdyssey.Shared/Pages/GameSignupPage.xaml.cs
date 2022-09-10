@@ -33,6 +33,11 @@ namespace AstroOdyssey
         private async void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+
+            GameSignupPage_UserEmailBox.Text = null;
+            GameSignupPage_UserNameBox.Text = null;
+            GameSignupPage_PasswordBox.Text = null;
+
             await this.PlayPageLoadedTransition();
         }
 
@@ -76,7 +81,7 @@ namespace AstroOdyssey
 
         private async Task PerformSignup()
         {
-            this.RunProgressBar(GameSignupPage_ProgressBar);
+            this.RunProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
 
             if (!await Signup())
                 return;
@@ -84,7 +89,7 @@ namespace AstroOdyssey
             if (!await Authenticate())
                 return;
 
-            this.StopProgressBar(GameSignupPage_ProgressBar);
+            this.StopProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
 
             // redirect to login page
             await this.PlayPageUnLoadedTransition();
@@ -102,8 +107,11 @@ namespace AstroOdyssey
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameSignupPage_ProgressBar,
+                    errorContainer: GameSignupPage_ErrorText,
+                    error: error,
+                    actionButtons: GameSignupPage_SignupButton);
 
                 return false;
             }
@@ -125,8 +133,11 @@ namespace AstroOdyssey
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameSignupPage_ProgressBar,
+                    errorContainer: GameSignupPage_ErrorText,
+                    error: error,
+                    actionButtons: GameSignupPage_SignupButton);
 
                 return false;
             }
@@ -147,7 +158,13 @@ namespace AstroOdyssey
         {
             GameSignupPage_SignupButton.IsEnabled = !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
                 && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
-                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank();
+                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+                && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
+
+            if (GameSignupPage_SignupButton.IsEnabled)
+            {
+                GameSignupPage_UserNameBox.Text = GameSignupPage_UserEmailBox.Text.Trim().Split('@')[0];
+            }
         }
 
         private void SetLocalization()

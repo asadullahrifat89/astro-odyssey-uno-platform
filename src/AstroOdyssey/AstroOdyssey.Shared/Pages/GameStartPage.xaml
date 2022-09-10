@@ -148,7 +148,9 @@
                     Click="RegisterButton_Click"
                     Content="No account yet?"
                     CornerRadius="50"
-                    FontWeight="SemiBold" />
+                    FontWeight="SemiBold"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
 
                 <!--  Developer page  -->
                 <HyperlinkButton

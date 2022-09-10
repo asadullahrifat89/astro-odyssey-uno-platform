@@ -50,12 +50,17 @@ namespace AstroOdyssey
 
             await this.PlayPageLoadedTransition();
 
+            this.RunProgressBar(GameLeaderboardPage_ProgressBar, GameOverPage_PlayAgainButton);
+
             // get game profile
             if (!await GetGameProfile())
                 return;
 
             // get game profiles
-            await GetGameProfiles();
+            if (!await GetGameProfiles())
+                return;
+
+            this.StopProgressBar(GameLeaderboardPage_ProgressBar, GameOverPage_PlayAgainButton);
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -74,15 +79,17 @@ namespace AstroOdyssey
         #region Methods
 
         private async Task<bool> GetGameProfile()
-        {
-            // get game profile
+        {   
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
             {
                 var error = recordResponse.Errors.Errors;
-                this.ShowErrorMessage(errorContainer: GameLeaderboardPage_ErrorText, error: string.Join("\n", error));
-                this.ShowErrorProgressBar(GameLeaderboardPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameLeaderboardPage_ProgressBar,
+                    errorContainer: GameLeaderboardPage_ErrorText,
+                    error: string.Join("\n", error),
+                    actionButtons: GameOverPage_PlayAgainButton);
 
                 return false;
             }
@@ -91,23 +98,23 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            //TODO: show personal best in UI
+            //TODO: show personal best in UI           
 
             return true;
         }
 
         private async Task<bool> GetGameProfiles()
-        {
-            this.RunProgressBar(GameLeaderboardPage_ProgressBar);
-
-            // get game scores
+        {   
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: _pageIndex, pageSize: _pageSize);
 
             if (!recordsResponse.IsSuccess)
             {
                 var error = recordsResponse.Errors.Errors;
-                this.ShowErrorMessage(errorContainer: GameLeaderboardPage_ErrorText, error: string.Join("\n", error));
-                this.ShowErrorProgressBar(GameLeaderboardPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameLeaderboardPage_ProgressBar,
+                    errorContainer: GameLeaderboardPage_ErrorText,
+                    error: string.Join("\n", error),
+                    actionButtons: GameOverPage_PlayAgainButton);
 
                 return false;
             }
@@ -126,9 +133,7 @@ namespace AstroOdyssey
                 {
                     GameProfiles.Add(record);
                 }
-            }
-
-            this.StopProgressBar(GameLeaderboardPage_ProgressBar);
+            }            
 
             return true;
         }

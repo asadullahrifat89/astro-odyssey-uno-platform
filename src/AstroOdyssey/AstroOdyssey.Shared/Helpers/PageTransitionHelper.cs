@@ -7,6 +7,8 @@ namespace AstroOdyssey
 {
     public static class PageTransitionHelper
     {
+        #region Methods
+
         public async static Task PlayPageLoadedTransition(this Page page)
         {
             //var content = page.Content as Grid;
@@ -49,28 +51,60 @@ namespace AstroOdyssey
             }
         }
 
-        public static void RunProgressBar(this Page page, ProgressBar progressBar)
+        public static void ShowError(this Page page, ProgressBar progressBar, TextBlock errorContainer, string error, params Button[] actionButtons)
+        {
+            ShowErrorProgressBar(page, progressBar);
+            ShowErrorMessage(page, errorContainer, error);
+            foreach (var actionButton in actionButtons)
+            {
+                EnableActionButton(actionButton);
+            }
+        }
+
+        public static void RunProgressBar(this Page page, ProgressBar progressBar, params Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
+
+            foreach (var actionButton in actionButtons)
+            {
+                DisableActionButton(actionButton);
+            }
         }
 
-        public static void StopProgressBar(this Page page, ProgressBar progressBar)
-        {           
+        public static void StopProgressBar(this Page page, ProgressBar progressBar, params Button[] actionButtons)
+        {
             progressBar.ShowError = false;
             progressBar.ShowPaused = true;
+
+            foreach (var actionButton in actionButtons)
+            {
+                EnableActionButton(actionButton);
+            }
         }
 
-        public static void ShowErrorProgressBar(this Page page, ProgressBar progressBar)
+        private static void EnableActionButton(Button button)
+        {
+            button.IsEnabled = true;
+        }
+
+        private static void DisableActionButton(Button button)
+        {
+            button.IsEnabled = false;
+        }
+
+        private static void ShowErrorProgressBar(this Page page, ProgressBar progressBar)
         {
             progressBar.ShowPaused = true;
             progressBar.ShowError = true;
         }
 
-        public static void ShowErrorMessage(this Page page, TextBlock errorContainer, string error)
+        private static void ShowErrorMessage(this Page page, TextBlock errorContainer, string error)
         {
             errorContainer.Text = error;
             errorContainer.Visibility = Visibility.Visible;
         }
+
+        #endregion
     }
 }

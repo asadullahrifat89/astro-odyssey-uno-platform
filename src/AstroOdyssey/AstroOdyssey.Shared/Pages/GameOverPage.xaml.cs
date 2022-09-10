@@ -62,12 +62,24 @@ namespace AstroOdyssey
                 GameLoginPage_LoginButton.Visibility = Visibility.Visible;
                 GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             }
-            else
+            else // user has logged in so submit score
             {
+                this.RunProgressBar(
+                    progressBar: GameOverPage_ProgressBar,
+                    GameOverPage_PlayAgainButton,
+                    GameLoginPage_LoginButton,
+                    GameOverPage_LeaderboardButton);
+
                 // submit score
                 await SubmitScore();
                 GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
                 GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
+
+                this.StopProgressBar(
+                    progressBar: GameOverPage_ProgressBar,
+                    GameOverPage_PlayAgainButton,
+                    GameLoginPage_LoginButton,
+                    GameOverPage_LeaderboardButton);
             }
 
             await this.PlayPageLoadedTransition();
@@ -111,19 +123,23 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            this.RunProgressBar(GameOverPage_ProgressBar);
-
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameOverPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameOverPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameOverPage_ProgressBar,
+                    errorContainer: GameOverPage_ErrorText,
+                    error: error,
+                    GameOverPage_PlayAgainButton,
+                    GameLoginPage_LoginButton,
+                    GameOverPage_LeaderboardButton);
+                
 
                 return false;
             }
-
+        
             return true;
         }
 

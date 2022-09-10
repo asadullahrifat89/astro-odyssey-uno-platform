@@ -38,6 +38,14 @@ namespace AstroOdyssey
         private async void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+
+            // if user was already logged in or came here after sign up
+            if (App.AuthCredentials is not null)
+            {
+                GameLoginPage_UserNameBox.Text = App.AuthCredentials.UserName;
+                GameLoginPage_PasswordBox.Text = App.AuthCredentials.Password;
+            }
+
             await this.PlayPageLoadedTransition();
         }
 
@@ -69,7 +77,7 @@ namespace AstroOdyssey
 
         private async Task PerformLogin()
         {
-            this.RunProgressBar(GameLoginPage_ProgressBar);
+            this.RunProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
 
             if (!await Authenticate())
                 return;
@@ -85,7 +93,7 @@ namespace AstroOdyssey
                 App.GameScoreSubmissionPending = false;
             }
 
-            this.StopProgressBar(GameLoginPage_ProgressBar);
+            this.StopProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -102,8 +110,11 @@ namespace AstroOdyssey
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameLoginPage_ProgressBar,
+                    errorContainer: GameLoginPage_ErrorText,
+                    error: error,
+                    actionButtons: GameLoginPage_LoginButton);
 
                 return false;
             }
@@ -128,8 +139,11 @@ namespace AstroOdyssey
             if (!recordResponse.IsSuccess)
             {
                 var error = recordResponse.Errors.Errors;
-                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: string.Join("\n", error));
-                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+                this.ShowError(
+                  progressBar: GameLoginPage_ProgressBar,
+                  errorContainer: GameLoginPage_ErrorText,
+                  error: string.Join("\n", error),
+                  actionButtons: GameLoginPage_LoginButton);
 
                 return false;
             }
@@ -143,21 +157,24 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            this.RunProgressBar(GameLoginPage_ProgressBar);
+            this.RunProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
 
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
+                this.ShowError(
+                     progressBar: GameLoginPage_ProgressBar,
+                     errorContainer: GameLoginPage_ErrorText,
+                     error: error,
+                     actionButtons: GameLoginPage_LoginButton);
 
                 return false;
             }
 
             return true;
-        }       
+        }
 
         private void EnableLoginButton()
         {
