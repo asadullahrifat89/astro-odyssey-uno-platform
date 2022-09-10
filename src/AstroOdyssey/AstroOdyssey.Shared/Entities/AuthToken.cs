@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AstroOdysseyCore
+namespace AstroOdyssey
 {
     public class AuthToken
     {

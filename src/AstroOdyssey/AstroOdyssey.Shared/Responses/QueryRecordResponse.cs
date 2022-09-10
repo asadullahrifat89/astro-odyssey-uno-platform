@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace AstroOdysseyCore
+namespace AstroOdyssey
 {
     public class QueryRecordResponse<TRecord>
     {
