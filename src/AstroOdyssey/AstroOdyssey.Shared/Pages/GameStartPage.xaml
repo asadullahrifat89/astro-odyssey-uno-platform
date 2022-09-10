@@ -134,6 +134,22 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
+                <!--  Register Button  -->
+                <Button
+                    x:Name="GameLoginPage_RegisterButton"
+                    x:Uid="GameLoginPage_RegisterButton"
+                    Height="40"
+                    Margin="5,15,5,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="White"
+                    BorderThickness="0"
+                    Click="RegisterButton_Click"
+                    Content="No account yet?"
+                    CornerRadius="50"
+                    FontWeight="SemiBold" />
+
                 <!--  Developer page  -->
                 <HyperlinkButton
                     x:Name="GameStartPage_DeveloperProfileButton"

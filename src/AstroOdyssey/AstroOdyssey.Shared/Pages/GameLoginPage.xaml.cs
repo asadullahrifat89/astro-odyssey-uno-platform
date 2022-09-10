@@ -67,6 +67,31 @@ namespace AstroOdyssey
 
         #region Methods
 
+        private async Task PerformLogin()
+        {
+            this.RunProgressBar(GameLoginPage_ProgressBar);
+
+            if (!await Authenticate())
+                return;
+
+            if (!await GetGameProfile())
+                return;
+
+            if (App.GameScoreSubmissionPending)
+            {
+                if (!await SubmitScore())
+                    return;
+
+                App.GameScoreSubmissionPending = false;
+            }
+
+            this.StopProgressBar(GameLoginPage_ProgressBar);
+
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameLeaderboardPage));
+        }
+
         private async Task<bool> Authenticate()
         {
             // authenticate
@@ -132,33 +157,7 @@ namespace AstroOdyssey
             }
 
             return true;
-        }
-
-        private async Task PerformLogin()
-        {
-            this.RunProgressBar(GameLoginPage_ProgressBar);
-
-            if (!await Authenticate())
-                return;
-
-            if (!await GetGameProfile())
-                return;
-
-            if (App.GameScoreSubmissionPending)
-            {
-                if (!await SubmitScore())
-                    return;
-
-                App.GameScoreSubmissionPending = false;
-            }
-
-            this.StopProgressBar(GameLoginPage_ProgressBar);
-
-            await this.PlayPageUnLoadedTransition();
-
-            //TODO: Navigate to gameScores page.
-            App.NavigateToPage(typeof(GameStartPage));
-        }
+        }       
 
         private void EnableLoginButton()
         {

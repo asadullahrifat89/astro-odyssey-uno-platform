@@ -33,7 +33,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\PaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PlayerAuthCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLeaderboardPage.xaml.cs">
+      <DependentUpon>GameLeaderboardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml.cs">
       <DependentUpon>GameLoginPage.xaml</DependentUpon>
     </Compile>
@@ -88,6 +92,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameLeaderboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

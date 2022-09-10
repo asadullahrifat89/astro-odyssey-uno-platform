@@ -25,8 +25,6 @@ namespace AstroOdyssey
 
         public Player()
         {
-            //TODO: Player: fire additional bullet on pizza collection for a certain period of time
-
             Tag = PLAYER;
 
             Height = PLAYER_HEIGHT;

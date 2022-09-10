@@ -210,8 +210,7 @@ namespace AstroOdyssey
         {
             // Create new service collection which generates the IServiceProvider
             var serviceCollection = new ServiceCollection();
-
-            // TODO - Register dependencies
+            
             // Register the MessageService with the container
             serviceCollection.AddHttpService(lifeTime: 300, retryCount: 2, retryWait: 1);
             serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();

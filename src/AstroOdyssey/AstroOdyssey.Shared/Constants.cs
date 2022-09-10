@@ -45,7 +45,8 @@ namespace AstroOdyssey
         public const string Action_SubmitGameScore = "/api/Command/SubmitGameScore";
 
         public const string Action_GetGameProfile = "/api/Query/GetGameProfile";
-        public const string Action_GetGameScores = "/api/Query/GetGameScores";
+        public const string Action_GetGameProfiles = "/api/Query/GetGameProfiles";
+        public const string Action_GetGameScores = "/api/Query/GetGameScores";        
         public const string Action_GetUser = "/api/Query/GetUser";
        
         #endregion
@@ -69,7 +70,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public static string GetInitials(string name)
         {
-            string[] nameSplit = name.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] nameSplit = name.Split(new string[] { ",", ".", " " }, StringSplitOptions.RemoveEmptyEntries);
 
             string initials = "";
 
@@ -78,7 +79,7 @@ namespace AstroOdyssey
                 initials += item.Substring(0, 1).ToUpper();
             }
 
-            return initials;
+            return initials.ToUpperInvariant();
         }
 
         /// <summary>
