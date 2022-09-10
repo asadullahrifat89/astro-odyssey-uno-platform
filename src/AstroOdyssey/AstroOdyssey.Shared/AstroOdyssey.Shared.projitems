@@ -36,6 +36,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml.cs">
       <DependentUpon>GameLoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameSignupPage.xaml.cs">
+      <DependentUpon>GameSignupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Responses\ServiceResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responses\ErrorResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responses\QueryRecordResponse.cs" />
@@ -85,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameSignupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Threading.Tasks;
 
@@ -46,6 +47,30 @@ namespace AstroOdyssey
                         break;
                 }
             }
+        }
+
+        public static void RunProgressBar(this Page page, ProgressBar progressBar)
+        {
+            progressBar.ShowError = false;
+            progressBar.ShowPaused = false;
+        }
+
+        public static void StopProgressBar(this Page page, ProgressBar progressBar)
+        {           
+            progressBar.ShowError = false;
+            progressBar.ShowPaused = true;
+        }
+
+        public static void ShowErrorProgressBar(this Page page, ProgressBar progressBar)
+        {
+            progressBar.ShowPaused = true;
+            progressBar.ShowError = true;
+        }
+
+        public static void ShowErrorMessage(this Page page, TextBlock errorContainer, string error)
+        {
+            errorContainer.Text = error;
+            errorContainer.Visibility = Visibility.Visible;
         }
     }
 }

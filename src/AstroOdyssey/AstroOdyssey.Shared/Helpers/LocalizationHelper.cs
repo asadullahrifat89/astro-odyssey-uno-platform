@@ -401,6 +401,39 @@ namespace AstroOdyssey
                 new ("de", "Noch keinen Account?"),
                 new ("fr", "Pas encore de compte?"),
             }),
+
+            new LocalizationKey(key: "GameSignupPage_UserEmailBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enter email"),
+                new ("bn", "ইমেইল প্রদান করুন"),
+                new ("de", "Email eingeben"),
+                new ("fr", "Entrez l'e-mail"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Set a username"),
+                new ("bn", "একটি ব্যবহারকারীর নাম সেট করুন"),
+                new ("de", "Auf Benutzername setzen"),
+                new ("fr", "Définir sur nom d'utilisateur"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Set a password"),
+                new ("bn", "একটি পাসওয়ার্ড সেট করুন"),
+                new ("de", "Legen Sie ein Passwort fest"),
+                new ("fr", "Définir un mot de passe"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_SignupButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Signup"),
+                new ("bn", "নিবন্ধন করুন"),
+                new ("de", "Anmelden"),
+                new ("fr", "S'inscrire"),
+            }),
+
         };
 
         #endregion

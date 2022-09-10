@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,7 +29,6 @@ namespace AstroOdyssey
 
             // Get a local instance of the container
             var container = ((App)App.Current).Container;
-
             _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
         }
 
@@ -40,30 +40,28 @@ namespace AstroOdyssey
         {
             SetLocalization();
             await this.PlayPageLoadedTransition();
-        }
-
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (GameLoginPage_LoginButton.IsEnabled)
-            {
-                Login();
-            }
-        }
+        }      
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableLoginButton();
         }
 
-        private void PasswordBox_KeyDown(object sender, Microsoft.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableLoginButton();
+        }
+
+        private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameLoginPage_LoginButton.IsEnabled)
                 Login();
         }
 
-        private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            EnableLoginButton();
+            if (GameLoginPage_LoginButton.IsEnabled)
+                Login();
         }
 
         #endregion
@@ -72,51 +70,30 @@ namespace AstroOdyssey
 
         private async void Login()
         {
-            RunProgressBar();
+            this.RunProgressBar(GameLoginPage_ProgressBar);
 
             //TODO: call api to get token
-            ServiceResponse response = await _gameApiHelper.Authenticate(GameLoginPage_UserNameBox.Text, GameLoginPage_PasswordBox.Text);
+            ServiceResponse response = await _gameApiHelper.Authenticate(
+                userNameOrEmail: GameLoginPage_UserNameBox.Text,
+                password: GameLoginPage_PasswordBox.Text);
 
             if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
             {
-                var result = response.Result as AuthToken;
-                Constants.ACCESS_TOKEN = result;
+                var authToken = response.Result as AuthToken;
+                Constants.AUTH_TOKEN = authToken;
 
-                StopProgressBar();
+                this.StopProgressBar(GameLoginPage_ProgressBar);
 
+                await this.PlayPageUnLoadedTransition();
                 //TODO: Navigate to gameScores page.
                 App.NavigateToPage(typeof(GameStartPage));
             }
             else
-            {                
+            {
                 var error = response.ExternalError;
-                ShowErrorMessage(error);
-                ShowErrorProgressBar();
+                this.ShowErrorMessage(errorContainer: GameLoginPage_ErrorText, error: error);
+                this.ShowErrorProgressBar(GameLoginPage_ProgressBar);
             }
-        }
-
-        private void ShowErrorMessage(string error)
-        {
-            GameLoginPage_ErrorText.Text = error;
-            GameLoginPage_ErrorText.Visibility = Visibility.Visible;
-        }
-
-        private void RunProgressBar()
-        {
-            GameLoginPage_ProgressBar.ShowError = false;
-            GameLoginPage_ProgressBar.ShowPaused = false;
-        }
-
-        private void StopProgressBar()
-        {
-            GameLoginPage_ProgressBar.ShowError = false;
-            GameLoginPage_ProgressBar.ShowPaused = true;
-        }
-
-        private void ShowErrorProgressBar()
-        {
-            GameLoginPage_ProgressBar.ShowPaused = true;
-            GameLoginPage_ProgressBar.ShowError = true;
         }
 
         private void EnableLoginButton()
@@ -124,9 +101,10 @@ namespace AstroOdyssey
             GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
         }
 
-        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameSignupPage));
         }
 
         private void SetLocalization()

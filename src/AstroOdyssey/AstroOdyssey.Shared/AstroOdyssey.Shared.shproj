@@ -13,6 +13,7 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Pages\GameOverPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
+    <UpToDateCheckInput Remove="Pages\GameSignupPage.xaml" />
     <UpToDateCheckInput Remove="Pages\LanguageSelectionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,7 @@
     <_Globbed_Compile Remove="Pages\GameOverPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GamePage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\GameSignupPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameStartPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\LanguageSelectionPage.xaml.cs" />
@@ -307,6 +309,7 @@
   <ItemGroup>
     <_Globbled_Page Remove="Pages\GameOverPage - Copy.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />
+    <_Globbled_Page Remove="Pages\GameSignupPage.xaml" />
     <_Globbled_Page Remove="Pages\LanguageSelectionPage.xaml" />
   </ItemGroup>
 </Project>

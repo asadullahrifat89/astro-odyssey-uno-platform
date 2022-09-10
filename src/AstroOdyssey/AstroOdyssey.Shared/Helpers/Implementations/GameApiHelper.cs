@@ -11,12 +11,22 @@ namespace AstroOdyssey
 {
     public class GameApiHelper : IGameApiHelper
     {
+        #region Fields
+
         private readonly IHttpRequestHelper _httpRequestHelper;
+
+        #endregion
+
+        #region Ctor
 
         public GameApiHelper(IHttpRequestHelper httpRequestHelper)
         {
             _httpRequestHelper = httpRequestHelper;
         }
+
+        #endregion
+
+        #region Methods
 
         public async Task<ServiceResponse> Authenticate(string userNameOrEmail, string password)
         {
@@ -35,5 +45,27 @@ namespace AstroOdyssey
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
                 : response.ErrorResponse;
         }
+
+        public async Task<ServiceResponse> Signup(string userName, string email, string password)
+        {
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_SignUp,
+                 httpHeaders: new Dictionary<string, string>(),
+                 httpMethod: HttpMethod.Post,
+                 payload: new
+                 {
+                     Email = email,
+                     UserName = userName,
+                     Password = password,
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse;
+        }
+
+        #endregion
     }
 }

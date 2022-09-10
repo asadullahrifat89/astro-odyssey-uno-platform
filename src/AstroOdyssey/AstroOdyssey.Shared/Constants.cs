@@ -36,7 +36,7 @@ namespace AstroOdyssey
 #else
         public const string GAME_API_BASEURL = "https://astro-odyssey-web-api.herokuapp.com";
 #endif
-
+        public const string GAME_ID = "astro-odyssey";
 
         public const string Action_Ping = "/api/Query/Ping";
 
@@ -49,7 +49,7 @@ namespace AstroOdyssey
         public const string Action_GetGameScores = "/api/Query/GetGameScores";
         public const string Action_GetUser = "/api/Query/GetUser";
 
-        public static AuthToken ACCESS_TOKEN;
+        public static AuthToken AUTH_TOKEN;
         #endregion
 
         #region Methods
