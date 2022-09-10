@@ -86,7 +86,7 @@ namespace AstroOdyssey
                 {
                     User = new AttachedUser()
                     {
-                        UserEmail = App.GameProfile.User.UserName,
+                        UserEmail = App.GameProfile.User.UserEmail,
                         UserName = App.GameProfile.User.UserName,
                         UserId = App.GameProfile.User.UserId,
                     },
