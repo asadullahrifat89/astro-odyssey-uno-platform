@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public class Ship
+    public class PlayerShip
     {
         public string Id { get; set; }
 

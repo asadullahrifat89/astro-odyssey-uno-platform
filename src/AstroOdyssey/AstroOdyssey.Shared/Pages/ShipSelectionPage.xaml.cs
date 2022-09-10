@@ -14,7 +14,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private Ship selectedShip;
+        private PlayerShip selectedShip;
 
         #endregion
 
@@ -38,9 +38,9 @@ namespace AstroOdyssey
             App.Ship = null;
             ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            var ships = new Ship[] { };
+            var ships = new PlayerShip[] { };
 
-            ships = GameObjectTemplates.PLAYER_SHIP_TEMPLATES.Select(x => new Ship()
+            ships = GameObjectTemplates.PLAYER_SHIP_TEMPLATES.Select(x => new PlayerShip()
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = LocalizationHelper.GetLocalizedResource(x.Name),
@@ -75,7 +75,7 @@ namespace AstroOdyssey
 
         private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedShip = ShipsList.SelectedItem as Ship;
+            selectedShip = ShipsList.SelectedItem as PlayerShip;
             ShipSelectionPage_ChooseButton.IsEnabled = true;
         }
 

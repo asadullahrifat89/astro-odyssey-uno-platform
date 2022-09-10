@@ -369,6 +369,79 @@ namespace AstroOdyssey
                 new ("de", "Wählen Sie ein Schiff aus"),
                 new ("fr", "Sélectionnez un navire"),
             }),
+
+            new LocalizationKey(key: "GameLoginPage_LoginButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Login"),
+                new ("bn", "প্রবেশ করুন"),
+                new ("de", "Anmeldung"),
+                new ("fr", "Connexion"),
+            }),
+
+            new LocalizationKey(key: "GameLoginPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Username or Email"),
+                new ("bn", "ব্যবহারকারী নাম বা ইমেল"),
+                new ("de", "Benutzername oder E-Mail-Adresse"),
+                new ("fr", "Nom d'utilisateur ou email"),
+            }),
+
+            new LocalizationKey(key: "GameLoginPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password"),
+                new ("bn", "পাসওয়ার্ড"),
+                new ("de", "Passwort"),
+                new ("fr", "Mot de passe"),
+            }),
+
+            new LocalizationKey(key: "GameLoginPage_RegisterButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "No account yet?"),
+                new ("bn", "এখনও কোন অ্যাকাউন্ট নেই?"),
+                new ("de", "Noch keinen Account?"),
+                new ("fr", "Pas encore de compte?"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_UserEmailBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enter email"),
+                new ("bn", "ইমেইল প্রদান করুন"),
+                new ("de", "Email eingeben"),
+                new ("fr", "Entrez l'e-mail"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Set a username"),
+                new ("bn", "একটি ব্যবহারকারীর নাম সেট করুন"),
+                new ("de", "Auf Benutzername setzen"),
+                new ("fr", "Définir sur nom d'utilisateur"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Set a password"),
+                new ("bn", "একটি পাসওয়ার্ড সেট করুন"),
+                new ("de", "Legen Sie ein Passwort fest"),
+                new ("fr", "Définir un mot de passe"),
+            }),
+
+            new LocalizationKey(key: "GameSignupPage_SignupButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Signup"),
+                new ("bn", "নিবন্ধন করুন"),
+                new ("de", "Anmelden"),
+                new ("fr", "S'inscrire"),
+            }),
+
+              new LocalizationKey(key: "GameOverPage_LeaderboardButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Leaderboard"),
+                new ("bn", "লিডারবোর্ড"),
+                new ("de", "Bestenliste"),
+                new ("fr", "Classement"),
+            }),
+
         };
 
         #endregion
@@ -397,6 +470,10 @@ namespace AstroOdyssey
 
             if (uIElement is TextBlock textBlock)
                 textBlock.Text = value;
+            else if (uIElement is TextBox textBox)
+                textBox.Header = value;
+            else if (uIElement is PasswordBox passwordBox)
+                passwordBox.Header = value;
             else if (uIElement is Button button)
                 button.Content = value;
             else if (uIElement is HyperlinkButton hyperlinkButton)

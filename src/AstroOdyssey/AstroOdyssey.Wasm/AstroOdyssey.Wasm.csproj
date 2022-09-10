@@ -57,6 +57,8 @@
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.13" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />-->
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.7.22375.6" />
+		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.0-preview.7.22376.6" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0-preview.7.22375.6" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.7.22375.6" />
 		<PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
@@ -69,5 +71,6 @@
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Components\Collectible.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerShip.cs" />
 	</ItemGroup>
 </Project>

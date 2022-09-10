@@ -1,5 +1,9 @@
-﻿using Microsoft.UI.Xaml;
+﻿using AstroOdysseyCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -10,12 +14,22 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class GameOverPage : Page
     {
+        #region Fields
+
+        private readonly IGameApiHelper _gameApiHelper;
+
+        #endregion
+
         #region Ctor
 
         public GameOverPage()
         {
             InitializeComponent();
             Loaded += GameOverPage_Loaded;
+
+            // Get a local instance of the container
+            var container = ((App)App.Current).Container;
+            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
         }
 
         #endregion
@@ -26,7 +40,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;          
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;
 
             EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
             MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
@@ -39,7 +53,23 @@ namespace AstroOdyssey
                 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
                 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
 
-            
+#if DEBUG
+            Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
+#endif
+
+            // if user has not logged in
+            if (App.AuthToken is null || App.AuthToken.Token.IsNullOrBlank())
+            {
+                GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+                GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                // submit score
+                await SubmitScore();
+                GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+                GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
+            }
 
             await this.PlayPageLoadedTransition();
         }
@@ -51,19 +81,62 @@ namespace AstroOdyssey
             await this.PlayPageUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
+
             AudioHelper.PlaySound(SoundType.GAME_INTRO);
+        }
+
+        private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            // user logging in from gameover page so upon login or signup submit game score
+            App.GameScoreSubmissionPending = true;
+
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameLoginPage));
+        }
+
+        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
+            //TODO: go to leaderboard page
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         #endregion
 
         #region Methods
 
+        private async Task<bool> SubmitScore()
+        {
+            this.RunProgressBar(GameOverPage_ProgressBar);
+
+            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowErrorMessage(errorContainer: GameOverPage_ErrorText, error: error);
+                this.ShowErrorProgressBar(GameOverPage_ProgressBar);
+
+                return false;
+            }
+
+            return true;
+        }
+
         private void SetLocalization()
         {
             LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
             LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
+            LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            LocalizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
         }
 
-        #endregion
+        #endregion      
     }
 }

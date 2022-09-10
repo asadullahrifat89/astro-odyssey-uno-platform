@@ -1,4 +1,6 @@
 ﻿#if DEBUG
+using AstroOdysseyCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 #endif
 using Microsoft.UI.Xaml;
@@ -40,6 +42,7 @@ namespace AstroOdyssey
             InitializeLogging();
 
             InitializeComponent();
+            Container = ConfigureDependencyInjection();
 
             Uno.UI.ApplicationHelper.RequestedCustomTheme = "Dark";
 
@@ -70,11 +73,19 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public static GameScore GameScore { get; set; }
+        public IServiceProvider Container { get; }
 
-        public static Ship Ship { get; set; }
+        public static PlayerAuthCredentials AuthCredentials { get; set; }
 
-        public static Account Account { get; set; }
+        public static GameProfile GameProfile { get; set; }
+
+        public static AuthToken AuthToken { get; set; }        
+
+        public static PlayerScore GameScore { get; set; }
+
+        public static bool GameScoreSubmissionPending { get; set; }
+
+        public static PlayerShip Ship { get; set; }
 
         public static string CurrentCulture { get; set; }
 
@@ -196,7 +207,23 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public static void SetScore(GameScore gameScore)
+        IServiceProvider ConfigureDependencyInjection()
+        {
+            // Create new service collection which generates the IServiceProvider
+            var serviceCollection = new ServiceCollection();
+
+            // TODO - Register dependencies
+            // Register the MessageService with the container
+            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 2, retryWait: 1);
+            serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
+            serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
+
+            // Build the IServiceProvider and return it
+            return serviceCollection.BuildServiceProvider();
+        }
+
+
+        public static void SetScore(PlayerScore gameScore)
         {
             GameScore = gameScore;
         }
@@ -297,12 +324,7 @@ namespace AstroOdyssey
                 }
             }
         }
-
-        public static void SetAccount()
-        {
-            //_mainPage.SetAccount();
-        }
-
+        
         /// <summary>
         /// Navigate to provided page.
         /// </summary>
