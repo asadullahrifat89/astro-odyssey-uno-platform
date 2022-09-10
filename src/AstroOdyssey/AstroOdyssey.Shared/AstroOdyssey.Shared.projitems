@@ -182,7 +182,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\8-bit-powerup-6768.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\crag-hard-rock-14401.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\despair-metal-trailer-109943.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\frantic-15190.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\metal-dark-matter-111451.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\rage-15292.mp3" />
@@ -194,7 +193,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\hard-rock-21056.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\modern-fashion-promo-rock-18397.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\rockstar-trailer-109945.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
@@ -203,7 +201,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\asteroid-incoming-effect.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\alien-computer-program-deactivate_GkreEFV__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\halloween-impact-05-93808.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\halloween-impact-05-93808.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-blast-descend_Gy7C5dEO_NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-descend_GJPs9OE__NWM.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3" />

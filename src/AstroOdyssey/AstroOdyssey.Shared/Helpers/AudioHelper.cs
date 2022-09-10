@@ -45,18 +45,8 @@ namespace AstroOdyssey
             {
                 case SoundType.GAME_INTRO:
                     {
-                        var musicTrack = random.Next(1, 3);
-                        var src = "";
-
-                        var musicPath = "Assets/Sounds/Intro/";
-
-                        switch (musicTrack)
-                        {
-                            case 1: { src = musicPath + "fashion-hip-hop-rock-stylish-boy-111449.mp3"; } break;
-                            case 2: { src = musicPath + "inspiring-motivational-rock-inspire-mesenses-111448.mp3"; } break;
-                            default:
-                                break;
-                        }
+                        var musicTrack = random.Next(0, GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES.Length);
+                        var src = GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES[musicTrack];                      
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -113,20 +103,8 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
-                        var musicTrack = random.Next(1, 5);
-                        var src = "";
-
-                        var musicPath = "Assets/Sounds/Boss/";
-
-                        switch (musicTrack)
-                        {
-                            case 1: { src = musicPath + "despair-metal-trailer-109943.mp3"; } break;
-                            case 2: { src = musicPath + "frantic-15190.mp3"; } break;
-                            case 3: { src = musicPath + "metal-dark-matter-111451.mp3"; } break;
-                            case 4: { src = musicPath + "rage-15292.mp3"; } break;
-                            default:
-                                break;
-                        }
+                        var musicTrack = random.Next(0, GameObjectTemplates.BOSS_APPEARANCE_MUSIC_TEMPLATES.Length);
+                        var src = GameObjectTemplates.BOSS_APPEARANCE_MUSIC_TEMPLATES[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -150,7 +128,7 @@ namespace AstroOdyssey
                         if (BOSS_DESTRUCTION is null)
                         {
                             BOSS_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Boss/halloween-impact-05-93808.mp3"),
+                                source: string.Concat(baseUrl, "/", "Assets/Sounds/halloween-impact-05-93808.mp3"),
                                 volume: 1.0);
                         }
 
@@ -159,25 +137,8 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(1, 10);
-                        var src = "";
-
-                        var musicPath = "Assets/Sounds/Music/";
-
-                        switch (musicTrack)
-                        {
-                            case 1: { src = musicPath + "action-stylish-rock-dedication-15038.mp3"; } break;
-                            case 2: { src = musicPath + "electronic-rock-king-around-here-15045.mp3"; } break;                            
-                            case 3: { src = musicPath + "powerful-stylish-stomp-rock-lets-go-114255.mp3"; } break;
-                            case 4: { src = musicPath + "rockstar-trailer-109945.mp3"; } break;                            
-                            case 5: { src = musicPath + "stomping-rock-four-shots-111444.mp3"; } break;
-                            case 6: { src = musicPath + "stylish-rock-beat-trailer-116346.mp3"; } break;
-                            case 7: { src = musicPath + "modern-fashion-promo-rock-18397.mp3"; } break;
-                            case 8: { src = musicPath + "hard-rock-21056.mp3"; } break;
-                            case 9: { src = musicPath + "crag-hard-rock-14401.mp3"; } break;
-                            default:
-                                break;
-                        }
+                        var musicTrack = random.Next(0, GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES.Length);
+                        var src = GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES[musicTrack];                      
 
                         var source = string.Concat(baseUrl, "/", src);
 

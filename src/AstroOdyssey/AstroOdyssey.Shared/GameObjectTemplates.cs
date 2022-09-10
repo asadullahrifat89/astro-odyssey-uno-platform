@@ -4,6 +4,33 @@ namespace AstroOdyssey
 {
     public static class GameObjectTemplates
     {
+        public static string[] BACKGROUND_MUSIC_TEMPLATES = new string[] 
+        {
+            "Assets/Sounds/Music/action-stylish-rock-dedication-15038.mp3",
+            "Assets/Sounds/Music/electronic-rock-king-around-here-15045.mp3",
+            "Assets/Sounds/Music/powerful-stylish-stomp-rock-lets-go-114255.mp3",
+            "Assets/Sounds/Music/stomping-rock-four-shots-111444.mp3",
+            "Assets/Sounds/Music/stylish-rock-beat-trailer-116346.mp3",
+            "Assets/Sounds/Music/modern-fashion-promo-rock-18397.mp3",
+            "Assets/Sounds/Music/hard-rock-21056.mp3",
+            "Assets/Sounds/Music/crag-hard-rock-14401.mp3",
+            //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
+        };
+
+        public static string[] BOSS_APPEARANCE_MUSIC_TEMPLATES = new string[]
+        {
+            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
+            "Assets/Sounds/Boss/frantic-15190.mp3",
+            "Assets/Sounds/Boss/metal-dark-matter-111451.mp3",
+            "Assets/Sounds/Boss/rage-15292.mp3",
+        };
+
+        public static string[] GAME_INTRO_MUSIC_TEMPLATES = new string[]
+        {
+            "Assets/Sounds/Intro/fashion-hip-hop-rock-stylish-boy-111449.mp3",
+            "Assets/Sounds/Intro/inspiring-motivational-rock-inspire-mesenses-111448.mp3",
+        };
+
         public static (Uri AssetUri, ShipClass ShipClass)[] PLAYER_RAGE_TEMPLATES = new (Uri AssetUri, ShipClass ShipClass)[]
         {
              (new Uri("ms-appx:///Assets/Images/Rage/rage1.png", UriKind.RelativeOrAbsolute), ShipClass.DEFENDER),
