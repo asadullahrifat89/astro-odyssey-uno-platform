@@ -145,6 +145,12 @@ namespace AstroOdyssey
             }
         }
 
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameSignupPage));
+        }
+
         #endregion
 
         #region Methods
@@ -160,6 +166,7 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
             LocalizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
             LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
+            LocalizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
         }
 
         #endregion

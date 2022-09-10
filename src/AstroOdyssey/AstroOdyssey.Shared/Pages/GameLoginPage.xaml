@@ -84,7 +84,6 @@
                 <Button
                     x:Name="GameLoginPage_RegisterButton"
                     x:Uid="GameLoginPage_RegisterButton"
-                    Grid.Column="1"
                     Height="40"
                     Margin="5,15,5,5"
                     HorizontalAlignment="Center"

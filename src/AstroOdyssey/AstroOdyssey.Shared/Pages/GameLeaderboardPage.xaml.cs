@@ -1,20 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,7 +20,6 @@ namespace AstroOdyssey
         private int _pageIndex = 0;
         private int _pageSize = 10;
         private long _totalPageCount = 0;
-        private bool _fetchingData = false;
 
         public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
 
@@ -59,7 +46,7 @@ namespace AstroOdyssey
         private async void GameLeaderboardPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + (App.GameScore is null ? 0 : App.GameScore.Score);
 
             await this.PlayPageLoadedTransition();
 
@@ -112,7 +99,6 @@ namespace AstroOdyssey
         private async Task<bool> GetGameProfiles()
         {
             this.RunProgressBar(GameLeaderboardPage_ProgressBar);
-            _fetchingData = true;
 
             // get game scores
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: _pageIndex, pageSize: _pageSize);
@@ -123,7 +109,6 @@ namespace AstroOdyssey
                 this.ShowErrorMessage(errorContainer: GameLeaderboardPage_ErrorText, error: string.Join("\n", error));
                 this.ShowErrorProgressBar(GameLeaderboardPage_ProgressBar);
 
-                _fetchingData = false;
                 return false;
             }
 
@@ -144,7 +129,6 @@ namespace AstroOdyssey
             }
 
             this.StopProgressBar(GameLeaderboardPage_ProgressBar);
-            _fetchingData = false;
 
             return true;
         }

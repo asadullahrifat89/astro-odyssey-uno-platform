@@ -74,6 +74,23 @@ namespace AstroOdyssey
 
         #region Methods
 
+        private async Task PerformSignup()
+        {
+            this.RunProgressBar(GameSignupPage_ProgressBar);
+
+            if (!await Signup())
+                return;
+
+            if (!await Authenticate())
+                return;
+
+            this.StopProgressBar(GameSignupPage_ProgressBar);
+
+            // redirect to login page
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameLoginPage));
+        }
+
         private async Task<bool> Signup()
         {
             // sign up
@@ -98,18 +115,32 @@ namespace AstroOdyssey
             return true;
         }
 
-        private async Task PerformSignup()
+        private async Task<bool> Authenticate()
         {
-            this.RunProgressBar(GameSignupPage_ProgressBar);
+            // authenticate
+            ServiceResponse response = await _gameApiHelper.Authenticate(
+                userNameOrEmail: GameSignupPage_UserNameBox.Text,
+                password: GameSignupPage_PasswordBox.Text);
 
-            if (!await Signup())
-                return;
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
+                this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
 
-            this.StopProgressBar(GameSignupPage_ProgressBar);
+                return false;
+            }
 
-            // redirect to login page
-            await this.PlayPageUnLoadedTransition();
-            App.NavigateToPage(typeof(GameLoginPage));
+            // store auth token
+            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            App.AuthToken = authToken;
+
+            // store auth credentials
+            App.AuthCredentials = new PlayerAuthCredentials(
+                userName: GameSignupPage_UserNameBox.Text,
+                password: GameSignupPage_PasswordBox.Text);
+
+            return true;
         }
 
         private void EnableSignupButton()
