@@ -55,12 +55,12 @@ namespace AstroOdyssey
             AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
 
-        private async void LoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
 
-            App.NavigateToPage(typeof(LoginPage));
+            App.NavigateToPage(typeof(GameLoginPage));
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace AstroOdyssey
         {
             LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
             LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
-            LocalizationHelper.SetLocalizedResource(LoginPage_LoginButton);
+            LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
         }
 
         #endregion

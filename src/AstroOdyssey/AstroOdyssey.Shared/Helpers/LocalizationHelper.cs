@@ -370,7 +370,7 @@ namespace AstroOdyssey
                 new ("fr", "Sélectionnez un navire"),
             }),
 
-            new LocalizationKey(key: "LoginPage_LoginButton", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "GameLoginPage_LoginButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Login"),
                 new ("bn", "প্রবেশ করুন"),
@@ -378,7 +378,7 @@ namespace AstroOdyssey
                 new ("fr", "Connexion"),
             }),
 
-            new LocalizationKey(key: "LoginPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "GameLoginPage_UserNameBox", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Username or Email"),
                 new ("bn", "ব্যবহারকারী নাম বা ইমেল"),
@@ -386,7 +386,7 @@ namespace AstroOdyssey
                 new ("fr", "Nom d'utilisateur ou email"),
             }),
 
-            new LocalizationKey(key: "LoginPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "GameLoginPage_PasswordBox", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Password"),
                 new ("bn", "পাসওয়ার্ড"),
@@ -394,7 +394,7 @@ namespace AstroOdyssey
                 new ("fr", "Mot de passe"),
             }),
 
-            new LocalizationKey(key: "LoginPage_RegisterButton", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "GameLoginPage_RegisterButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "No account yet?"),
                 new ("bn", "এখনও কোন অ্যাকাউন্ট নেই?"),

@@ -14,7 +14,6 @@
     <UpToDateCheckInput Remove="Pages\GameOverPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
     <UpToDateCheckInput Remove="Pages\LanguageSelectionPage.xaml" />
-    <UpToDateCheckInput Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <_Globbed_Compile Remove="Components\Base\CelestialObjectTemplate.cs" />
@@ -309,6 +308,5 @@
     <_Globbled_Page Remove="Pages\GameOverPage - Copy.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />
     <_Globbled_Page Remove="Pages\LanguageSelectionPage.xaml" />
-    <_Globbled_Page Remove="Pages\LoginPage.xaml" />
   </ItemGroup>
 </Project>

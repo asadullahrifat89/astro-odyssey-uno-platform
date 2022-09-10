@@ -33,8 +33,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\HttpRequestHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml.cs">
+      <DependentUpon>GameLoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Responses\ServiceResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Responses\ErrorResponse.cs" />
@@ -84,7 +84,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\LoginPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
