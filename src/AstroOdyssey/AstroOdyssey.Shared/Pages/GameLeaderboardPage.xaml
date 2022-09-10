@@ -134,7 +134,7 @@
                     <ProgressBar
                         x:Name="GameLeaderboardPage_ProgressBar"
                         Height="5"
-                        Margin="30,0,0,5"
+                        Margin="30,0,30,5"
                         Foreground="Goldenrod"
                         IsFocusEngagementEnabled="False"
                         IsIndeterminate="True"

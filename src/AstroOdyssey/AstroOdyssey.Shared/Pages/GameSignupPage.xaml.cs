@@ -160,11 +160,6 @@ namespace AstroOdyssey
                 && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
                 && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
                 && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
-
-            if (GameSignupPage_SignupButton.IsEnabled)
-            {
-                GameSignupPage_UserNameBox.Text = GameSignupPage_UserEmailBox.Text.Trim().Split('@')[0];
-            }
         }
 
         private void SetLocalization()
