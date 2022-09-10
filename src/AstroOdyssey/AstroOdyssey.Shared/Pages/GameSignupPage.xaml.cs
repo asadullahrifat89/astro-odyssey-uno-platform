@@ -76,7 +76,7 @@ namespace AstroOdyssey
 
         private async Task PerformSignup()
         {
-            this.RunProgressBar(GameSignupPage_ProgressBar);
+            this.RunProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
 
             if (!await Signup())
                 return;
@@ -84,7 +84,7 @@ namespace AstroOdyssey
             if (!await Authenticate())
                 return;
 
-            this.StopProgressBar(GameSignupPage_ProgressBar);
+            this.StopProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
 
             // redirect to login page
             await this.PlayPageUnLoadedTransition();
@@ -102,8 +102,11 @@ namespace AstroOdyssey
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameSignupPage_ProgressBar,
+                    errorContainer: GameSignupPage_ErrorText,
+                    error: error,
+                    actionButtons: GameSignupPage_SignupButton);
 
                 return false;
             }
@@ -125,8 +128,11 @@ namespace AstroOdyssey
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
                 var error = response.ExternalError;
-                this.ShowErrorMessage(errorContainer: GameSignupPage_ErrorText, error: error);
-                this.ShowErrorProgressBar(GameSignupPage_ProgressBar);
+                this.ShowError(
+                    progressBar: GameSignupPage_ProgressBar,
+                    errorContainer: GameSignupPage_ErrorText,
+                    error: error,
+                    actionButtons: GameSignupPage_SignupButton);
 
                 return false;
             }
