@@ -6,7 +6,7 @@ namespace AstroOdyssey
     {
         public ErrorResponse Errors { get; set; } = new ErrorResponse();
 
-        public TRecord? Result { get; set; }
+        public TRecord Result { get; set; }
 
         public bool IsSuccess => Errors.Errors is null || Errors.Errors.Count() == 0;
 

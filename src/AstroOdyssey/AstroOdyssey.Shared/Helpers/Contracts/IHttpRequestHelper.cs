@@ -13,8 +13,8 @@ namespace AstroOdyssey
             Dictionary<string, string> httpHeaders,
             HttpMethod httpMethod,
             string contentType = "application/json",
-            object? payload = null,
-            IEnumerable<KeyValuePair<string, string>>? formUrlEncodedContent = null);
+            object payload = null,
+            IEnumerable<KeyValuePair<string, string>> formUrlEncodedContent = null);
 
         Task<HttpResponseMessage> SendAsync(HttpRequestMessage httpRequestMessage);
     }
