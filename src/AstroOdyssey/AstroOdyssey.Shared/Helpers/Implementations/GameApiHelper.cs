@@ -80,7 +80,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
                 path: Constants.Action_SubmitGameScore,
-                httpHeaders: new Dictionary<string, string>(),
+                httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
                 httpMethod: HttpMethod.Post,
                 payload: new
                 {

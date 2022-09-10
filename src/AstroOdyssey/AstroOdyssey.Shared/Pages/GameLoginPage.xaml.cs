@@ -53,16 +53,16 @@ namespace AstroOdyssey
             EnableLoginButton();
         }
 
-        private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameLoginPage_LoginButton.IsEnabled)
-                PerformLogin();
+                await PerformLogin();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameLoginPage_LoginButton.IsEnabled)
-                PerformLogin();
+                await PerformLogin();
         }
 
         #endregion
@@ -136,7 +136,7 @@ namespace AstroOdyssey
             return true;
         }
 
-        private async void PerformLogin()
+        private async Task PerformLogin()
         {
             this.RunProgressBar(GameLoginPage_ProgressBar);
 

@@ -63,16 +63,16 @@ namespace AstroOdyssey
             EnableSignupButton();
         }
 
-        private void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameSignupPage_SignupButton.IsEnabled)
-                PerformSignup();
+                await PerformSignup();
         }
 
-        private void SignupButton_Click(object sender, RoutedEventArgs e)
+        private async void SignupButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameSignupPage_SignupButton.IsEnabled)
-                PerformSignup();
+                await PerformSignup();
         }
 
 
@@ -104,17 +104,17 @@ namespace AstroOdyssey
             return true;
         }
 
-        private async void PerformSignup()
+        private async Task PerformSignup()
         {
             this.RunProgressBar(GameSignupPage_ProgressBar);
 
             if (!await Signup())
-                return;            
+                return;
 
             this.StopProgressBar(GameSignupPage_ProgressBar);
 
             // redirect to login page
-            await this.PlayPageUnLoadedTransition();            
+            await this.PlayPageUnLoadedTransition();
             App.NavigateToPage(typeof(GameLoginPage));
         }
 
