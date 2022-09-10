@@ -110,7 +110,7 @@ namespace AstroOdyssey
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage httpRequestMessage)
         {
             return await _httpService.SendAsync(httpRequestMessage);
-        }
+        }       
 
         #endregion
 

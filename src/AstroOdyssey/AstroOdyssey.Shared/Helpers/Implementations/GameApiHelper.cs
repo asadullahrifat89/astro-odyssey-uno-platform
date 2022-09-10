@@ -1,4 +1,5 @@
 ﻿using AstroOdysseyCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -27,6 +28,12 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        public T ParseResult<T>(object obj)
+        {
+            var result = JsonConvert.DeserializeObject<T>(obj.ToString(), new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return result;
+        }
 
         public async Task<ServiceResponse> Authenticate(string userNameOrEmail, string password)
         {

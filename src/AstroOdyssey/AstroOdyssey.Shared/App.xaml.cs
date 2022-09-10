@@ -1,4 +1,5 @@
 ﻿#if DEBUG
+using AstroOdysseyCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 #endif
@@ -71,6 +72,8 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
+
+        public static AuthToken AuthToken { get; set; }
 
         public IServiceProvider Container { get; }
 

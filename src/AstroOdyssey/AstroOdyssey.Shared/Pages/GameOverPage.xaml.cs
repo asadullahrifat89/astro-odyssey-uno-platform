@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,7 +27,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;          
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;
 
             EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
             MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
@@ -39,7 +40,21 @@ namespace AstroOdyssey
                 ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
                 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
 
-            
+#if DEBUG
+            Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
+#endif
+
+            // if user has not logged in
+            if (App.AuthToken is null || App.AuthToken.Token.IsNullOrBlank())
+            {
+                GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+                GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+                GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
+            }
 
             await this.PlayPageLoadedTransition();
         }
@@ -58,9 +73,20 @@ namespace AstroOdyssey
         private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayPageUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameLoginPage));
+        }
+
+        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
+            //TODO: go to leaderboard page
+            App.NavigateToPage(typeof(GameStartPage));
         }
 
         #endregion
@@ -72,10 +98,9 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
             LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
             LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            LocalizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
         }
 
-        #endregion
-
-      
+        #endregion      
     }
 }

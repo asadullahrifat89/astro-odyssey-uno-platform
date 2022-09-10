@@ -166,7 +166,7 @@
                     x:Name="GameLoginPage_LoginButton"
                     x:Uid="GameLoginPage_LoginButton"
                     Height="50"
-                    Margin="30,5,30,30"
+                    Margin="30,5,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -178,7 +178,28 @@
                     FontWeight="SemiBold"
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
-                    IsTabStop="False" />
+                    IsTabStop="False"
+                    Visibility="Collapsed" />
+
+                <!--  Leaderboard button  -->
+                <Button
+                    x:Name="GameOverPage_LeaderboardButton"
+                    x:Uid="GameOverPage_LeaderboardButton"
+                    Height="50"
+                    Margin="30,5,30,30"
+                    HorizontalAlignment="Stretch"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    Click="GameOverPage_LeaderboardButton_Click"
+                    Content="Leaderboard"
+                    CornerRadius="50"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False"
+                    Visibility="Collapsed" />
 
             </StackPanel>
             <Border.Background>

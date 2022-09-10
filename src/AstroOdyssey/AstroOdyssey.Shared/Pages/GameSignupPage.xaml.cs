@@ -96,8 +96,12 @@ namespace AstroOdyssey
 
                 if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    var authToken = response.Result as AuthToken;
-                    Constants.AUTH_TOKEN = authToken;
+                    var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+                    App.AuthToken = authToken;
+
+#if DEBUG
+                    Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
+#endif
 
                     this.StopProgressBar(GameSignupPage_ProgressBar);
 
