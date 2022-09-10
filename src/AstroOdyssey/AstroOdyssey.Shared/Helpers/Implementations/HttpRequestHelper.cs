@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AstroOdyssey
 {
-    public class HttpRequestHelper: IHttpRequestHelper
+    public class HttpRequestHelper : IHttpRequestHelper
     {
         private readonly IHttpService _httpService;
 
@@ -82,7 +82,7 @@ namespace AstroOdyssey
                     Console.WriteLine($"RequestUri: {httpRequestMessage.RequestUri}\n " +
                                   $"Payload = {(payload is null ? "NA" : JsonConvert.SerializeObject(payload, Formatting.Indented))}\n " +
                                   $"StatusCode:{httpResponseMessage.StatusCode}\n " +
-                                  $"ReasonPhrase:{httpResponseMessage.ReasonPhrase}"); 
+                                  $"ReasonPhrase:{httpResponseMessage.ReasonPhrase}");
 #endif
 
                     if (httpResponseMessage.IsSuccessStatusCode)
@@ -100,8 +100,7 @@ namespace AstroOdyssey
             catch (Exception ex)
             {
 #if DEBUG
-                Console.WriteLine($"RequestUri: {uri.OriginalString}\n" +
-                    $" Exception:{ex.Message}");
+                Console.WriteLine($"RequestUri: {uri.OriginalString}\n" + $" Exception:{ex.Message}");
 #endif
                 return (response, errResponse, HttpStatusCode.InternalServerError);
             }
@@ -110,7 +109,7 @@ namespace AstroOdyssey
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage httpRequestMessage)
         {
             return await _httpService.SendAsync(httpRequestMessage);
-        }       
+        }
 
         #endregion
 
