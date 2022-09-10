@@ -1,7 +1,4 @@
-﻿#if DEBUG
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-#endif
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Navigation;
 using System;
@@ -12,6 +9,9 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
+#if DEBUG
+using Microsoft.Extensions.Logging;
+#endif
 
 namespace AstroOdyssey
 {
