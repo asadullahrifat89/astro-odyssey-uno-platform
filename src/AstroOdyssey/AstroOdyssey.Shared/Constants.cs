@@ -70,7 +70,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public static string GetInitials(string name)
         {
-            string[] nameSplit = name.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+            string[] nameSplit = name.Split(new string[] { ",", ".", " " }, StringSplitOptions.RemoveEmptyEntries);
 
             string initials = "";
 
@@ -79,7 +79,7 @@ namespace AstroOdyssey
                 initials += item.Substring(0, 1).ToUpper();
             }
 
-            return initials;
+            return initials.ToUpperInvariant();
         }
 
         /// <summary>
