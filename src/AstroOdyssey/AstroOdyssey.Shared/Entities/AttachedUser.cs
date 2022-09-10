@@ -1,4 +1,4 @@
-﻿namespace AstroOdysseyCore
+﻿namespace AstroOdyssey
 {
     public class AttachedUser
     {

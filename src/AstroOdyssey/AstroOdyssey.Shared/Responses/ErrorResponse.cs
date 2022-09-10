@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace AstroOdysseyCore
+﻿namespace AstroOdyssey
 {
     public class ErrorResponse
     {

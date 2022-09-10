@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 
-namespace AstroOdysseyCore
+namespace AstroOdyssey
 {
     public class ServiceResponse
     {

@@ -1,5 +1,4 @@
-﻿using AstroOdysseyCore;
-using System;
+﻿using System;
 using Windows.Foundation;
 
 namespace AstroOdyssey
