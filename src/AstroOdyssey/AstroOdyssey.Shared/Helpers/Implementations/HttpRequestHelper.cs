@@ -28,8 +28,8 @@ namespace AstroOdyssey
             Dictionary<string, string> httpHeaders,
             HttpMethod httpMethod,
             string contentType = "application/json",
-            object? payload = null,
-            IEnumerable<KeyValuePair<string, string>>? formUrlEncodedContent = null)
+            object payload = null,
+            IEnumerable<KeyValuePair<string, string>> formUrlEncodedContent = null)
         {
             dynamic response = null;
             dynamic errResponse = null;
@@ -139,7 +139,7 @@ namespace AstroOdyssey
             return response;
         }
 
-        private string BuildQueryString(HttpMethod httpMethod, object? payload)
+        private string BuildQueryString(HttpMethod httpMethod, object payload)
         {
             var queryString = string.Empty;
 
