@@ -17,10 +17,16 @@
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
+		<!--AOT-->
+		<!--<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
 
 		<!-- Disable performance optimizations for faster builds -->
-		<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>
+		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
+		
+		<!--Interpreter-->
+		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+		<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>
+		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<ItemGroup>
 		<Content Include="Assets\SplashScreen.png" />
