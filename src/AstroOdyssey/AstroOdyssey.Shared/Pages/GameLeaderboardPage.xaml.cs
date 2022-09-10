@@ -111,6 +111,7 @@ namespace AstroOdyssey
 
         private async Task<bool> GetGameProfiles()
         {
+            this.RunProgressBar(GameLeaderboardPage_ProgressBar);
             _fetchingData = true;
 
             // get game scores
@@ -142,6 +143,7 @@ namespace AstroOdyssey
                 }
             }
 
+            this.StopProgressBar(GameLeaderboardPage_ProgressBar);
             _fetchingData = false;
 
             return true;
