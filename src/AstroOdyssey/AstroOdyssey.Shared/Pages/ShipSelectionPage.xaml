@@ -107,7 +107,7 @@
             </Border.Background>
         </Border>
 
-        <!--  This quits the game  -->
+        <!--  Take to previous page  -->
         <Button
             x:Name="GoBackButton"
             Width="50"

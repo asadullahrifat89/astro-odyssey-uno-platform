@@ -72,7 +72,7 @@ namespace AstroOdyssey
 
         public async Task<ServiceResponse> SubmitGameScore(double score)
         {
-            await RefreshAuthToken();          
+            await RefreshAuthToken();
 
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
@@ -107,6 +107,29 @@ namespace AstroOdyssey
                  httpMethod: HttpMethod.Get,
                  payload: new
                  {
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse
+                : response.ErrorResponse;
+        }
+
+        public async Task<QueryRecordsResponse<GameScore>> GetGameScores(
+            int pageIndex,
+            int pageSize)
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameScore>, QueryRecordsResponse<GameScore>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameScores,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     PageIndex = pageIndex,
+                     PageSize = pageSize,
                      GameId = Constants.GAME_ID,
                  });
 

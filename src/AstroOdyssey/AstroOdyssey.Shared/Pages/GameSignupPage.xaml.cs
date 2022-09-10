@@ -63,6 +63,12 @@ namespace AstroOdyssey
                 await PerformSignup();
         }
 
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameLoginPage));
+        }
 
         #endregion
 

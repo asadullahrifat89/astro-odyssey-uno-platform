@@ -101,9 +101,8 @@ namespace AstroOdyssey
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
-
-            //TODO: go to leaderboard page
-            App.NavigateToPage(typeof(GameStartPage));
+            
+            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         #endregion

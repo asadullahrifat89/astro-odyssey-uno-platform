@@ -156,8 +156,7 @@ namespace AstroOdyssey
 
             await this.PlayPageUnLoadedTransition();
 
-            //TODO: Navigate to gameScores page.
-            App.NavigateToPage(typeof(GameStartPage));
+            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         private void EnableLoginButton()
