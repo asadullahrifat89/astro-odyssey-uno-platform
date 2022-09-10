@@ -38,6 +38,14 @@ namespace AstroOdyssey
         private async void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+
+            // if user was already logged in or came here after sign up
+            if (App.AuthCredentials is not null)
+            {
+                GameLoginPage_UserNameBox.Text = App.AuthCredentials.UserName;
+                GameLoginPage_PasswordBox.Text = App.AuthCredentials.Password;
+            }
+
             await this.PlayPageLoadedTransition();
         }
 

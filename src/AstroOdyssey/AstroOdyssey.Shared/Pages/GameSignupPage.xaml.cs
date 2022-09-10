@@ -33,6 +33,11 @@ namespace AstroOdyssey
         private async void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+
+            GameSignupPage_UserEmailBox.Text = null;
+            GameSignupPage_UserNameBox.Text = null;
+            GameSignupPage_PasswordBox.Text = null;
+
             await this.PlayPageLoadedTransition();
         }
 
@@ -153,7 +158,13 @@ namespace AstroOdyssey
         {
             GameSignupPage_SignupButton.IsEnabled = !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
                 && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
-                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank();
+                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+                && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
+
+            if (GameSignupPage_SignupButton.IsEnabled)
+            {
+                GameSignupPage_UserNameBox.Text = GameSignupPage_UserEmailBox.Text.Trim().Split('@')[0];
+            }
         }
 
         private void SetLocalization()

@@ -10,6 +10,6 @@
 
         public string GameId { get; set; } = string.Empty;
 
-        public string Initials => Constants.GetInitials(User.UserName);
+        public string Initials => StringExtensions.GetInitials(User.UserName);
     }
 }
