@@ -17,6 +17,7 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly IAudioHelper _audioHelper;
 
         private int _pageIndex = 0;
         private int _pageSize = 15;
@@ -31,11 +32,10 @@ namespace AstroOdyssey
         public GameLeaderboardPage()
         {
             this.InitializeComponent();
-            Loaded += GameLeaderboardPage_Loaded;
+            Loaded += GameLeaderboardPage_Loaded;           
 
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _audioHelper = App.Container.GetService<IAudioHelper>();
 
             LeaderboardList.ItemsSource = GameProfiles;
         }
@@ -70,13 +70,9 @@ namespace AstroOdyssey
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
-
             App.NavigateToPage(typeof(ShipSelectionPage));
-
-            AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
 
         #endregion

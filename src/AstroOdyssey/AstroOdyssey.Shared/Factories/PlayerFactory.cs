@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml.Controls;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -23,6 +24,7 @@ namespace AstroOdyssey
 
         private XDirection _xDirectionLast = XDirection.NONE;
 
+        private readonly IAudioHelper _audioHelper;
 
         #endregion
 
@@ -31,6 +33,7 @@ namespace AstroOdyssey
         public PlayerFactory(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -225,7 +228,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
-                                AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
+                                _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
                             }
                             else
                             {
@@ -248,7 +251,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
-                                AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
+                                _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
                             }
                             else
                             {
@@ -333,7 +336,7 @@ namespace AstroOdyssey
         {
             player.LooseHealth();
 
-            AudioHelper.PlaySound(SoundType.HEALTH_LOSS);
+            _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
 
             // enter damage recovery state, prevent taking damage for a few milliseconds            
             player.IsRecoveringFromDamage = true;
@@ -364,7 +367,7 @@ namespace AstroOdyssey
         private void PlayerHealthGain(Player player, Health health)
         {
             player.GainHealth(health.Health);
-            AudioHelper.PlaySound(SoundType.HEALTH_GAIN);
+            _audioHelper.PlaySound(SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
@@ -373,7 +376,7 @@ namespace AstroOdyssey
         /// <param name="collectible"></param>
         private void PlayerCollectibleCollected(Player player, Collectible collectible)
         {
-            AudioHelper.PlaySound(SoundType.COLLECTIBLE_COLLECTED);
+            _audioHelper.PlaySound(SoundType.COLLECTIBLE_COLLECTED);
         }
 
         /// <summary>
@@ -383,7 +386,7 @@ namespace AstroOdyssey
         {
             _powerUpTriggerSpawnCounter = _powerUpTriggerDelay;
 
-            AudioHelper.PlaySound(SoundType.POWER_UP);
+            _audioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
         }
 
@@ -396,7 +399,7 @@ namespace AstroOdyssey
 
             if (_powerUpTriggerSpawnCounter <= 0)
             {
-                AudioHelper.PlaySound(SoundType.POWER_DOWN);
+                _audioHelper.PlaySound(SoundType.POWER_DOWN);
                 player.PowerUpCoolDown();
                 return (true, 0);
             }
@@ -429,7 +432,7 @@ namespace AstroOdyssey
                     break;
             }
 
-            AudioHelper.PlaySound(SoundType.RAGE_UP);
+            _audioHelper.PlaySound(SoundType.RAGE_UP);
         }
 
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
@@ -462,7 +465,7 @@ namespace AstroOdyssey
 
             if (_playerRageCoolDownCounter <= 0)
             {
-                AudioHelper.PlaySound(SoundType.RAGE_DOWN);
+                _audioHelper.PlaySound(SoundType.RAGE_DOWN);
                 return (true, 0);
             }
 

@@ -18,6 +18,7 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly IAudioHelper _audioHelper;
 
         #endregion
 
@@ -28,9 +29,8 @@ namespace AstroOdyssey
             InitializeComponent();
             Loaded += GameLoginPage_Loaded;
 
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -79,6 +79,13 @@ namespace AstroOdyssey
                 await PerformLogin();
         }
 
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameSignupPage));
+        }
+
         #endregion
 
         #region Methods
@@ -110,8 +117,8 @@ namespace AstroOdyssey
                 GameLoginPage_LoginButton,
                 GameLoginPage_RegisterButton);
 
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
-
             App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
@@ -201,14 +208,6 @@ namespace AstroOdyssey
         {
             GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
         }
-
-        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
-        {
-            await this.PlayPageUnLoadedTransition();
-            App.NavigateToPage(typeof(GameSignupPage));
-        }
-
-
 
         private void SetLocalization()
         {

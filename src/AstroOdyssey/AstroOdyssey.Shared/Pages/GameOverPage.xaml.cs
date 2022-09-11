@@ -16,6 +16,7 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly IAudioHelper _audioHelper;
 
         #endregion
 
@@ -26,9 +27,8 @@ namespace AstroOdyssey
             InitializeComponent();
             Loaded += GameOverPage_Loaded;
 
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -88,13 +88,11 @@ namespace AstroOdyssey
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
-
-            AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
 
         private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +100,7 @@ namespace AstroOdyssey
             // user logging in from gameover page so upon login or signup submit game score
             App.GameScoreSubmissionPending = true;
 
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -111,7 +109,7 @@ namespace AstroOdyssey
 
         private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
             

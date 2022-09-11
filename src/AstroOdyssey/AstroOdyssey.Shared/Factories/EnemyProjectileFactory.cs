@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AstroOdyssey
 {
@@ -8,7 +9,7 @@ namespace AstroOdyssey
 
         private readonly GameEnvironment _gameEnvironment;
         private Random _random = new Random();
-
+        private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
@@ -16,6 +17,7 @@ namespace AstroOdyssey
         public EnemyProjectileFactory(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -223,7 +225,7 @@ namespace AstroOdyssey
                     gameEnvironment: _gameEnvironment);
             }
 
-            AudioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
+            _audioHelper.PlaySound(SoundType.ENEMY_ROUNDS_FIRE);
         }
 
         private void OverPowerProjectile(Enemy enemy, EnemyProjectile projectile)

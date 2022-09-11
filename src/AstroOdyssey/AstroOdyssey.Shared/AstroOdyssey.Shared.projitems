@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AuthCredentialsCacheHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IAudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IGameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\GameApiHelper.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\CollectibleFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Implementations\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PageTransitionHelper.cs" />

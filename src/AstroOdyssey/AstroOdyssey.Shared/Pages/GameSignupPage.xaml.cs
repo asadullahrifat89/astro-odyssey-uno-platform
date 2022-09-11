@@ -13,6 +13,7 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly IAudioHelper _audioHelper;
 
         #endregion
 
@@ -23,9 +24,8 @@ namespace AstroOdyssey
             this.InitializeComponent();
             Loaded += GameSignupPage_Loaded;
 
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -72,8 +72,8 @@ namespace AstroOdyssey
 
         private async void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
-
             App.NavigateToPage(typeof(GameStartPage));
         }
 
@@ -107,6 +107,7 @@ namespace AstroOdyssey
                 GameSignupPage_SignupButton,
                 GameSignupPage_LoginButton);
 
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             // redirect to login page
             await this.PlayPageUnLoadedTransition();
             App.NavigateToPage(typeof(GameLoginPage));
