@@ -17,7 +17,8 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly IAudioHelper _audioHelper; 
+        private readonly IAudioHelper _audioHelper;
+        private readonly IGameApiHelper _gameApiHelper;
 
         #endregion
 
@@ -26,8 +27,10 @@ namespace AstroOdyssey
         public GameStartPage()
         {
             InitializeComponent();
-            Loaded += StartPage_Loaded;            
+            Loaded += StartPage_Loaded;
+
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
         }
 
         #endregion
@@ -36,12 +39,46 @@ namespace AstroOdyssey
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
+            this.RunProgressBar(
+                progressBar: GameStartPage_ProgressBar,
+                errorContainer: GameStartPage_ErrorText,
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton,
+                GameStartPage_LogoutButton);
+
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayPageLoadedTransition();            
+
+            // check for session
+            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
+            {
+                await GetGameProfile();
+
+                // make logout button visible
+                GameStartPage_LogoutButton.Visibility = Visibility.Visible;
+                GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+                GameLoginPage_RegisterButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                // if session is not valid then remove it
+                AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+
+                // make login button visible
+                GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+                GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+                GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
+            }
+
+            this.StopProgressBar(
+                progressBar: GameStartPage_ProgressBar,
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton,
+                GameStartPage_LogoutButton);
 
             PreloadAssets();
         }
@@ -168,10 +205,61 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameLoginPage));
         }
 
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            // delete session
+            AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+            GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+            GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
+        }
+
 
         #endregion
 
         #region Methods
+
+        private async Task<bool> ValidateSession(Session session)
+        {
+            ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                return false;
+
+            // store auth token
+            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            App.AuthToken = authToken;
+
+            return true;
+        }
+
+        private async Task<bool> GetGameProfile()
+        {
+            // get game profile
+            var recordResponse = await _gameApiHelper.GetGameProfile();
+
+            if (!recordResponse.IsSuccess)
+            {
+                var error = recordResponse.Errors.Errors;
+                this.ShowError(
+                  progressBar: GameStartPage_ProgressBar,
+                  errorContainer: GameStartPage_ErrorText,
+                  error: string.Join("\n", error),
+                  GameLoginPage_LoginButton,
+                  GameLoginPage_RegisterButton,
+                  GameStartPage_LogoutButton);
+
+                return false;
+            }
+
+            // store game profile
+            var gameProfile = recordResponse.Result;
+            App.GameProfile = gameProfile;
+
+            return true;
+        }
 
         private void SetLocalization()
         {
@@ -186,6 +274,7 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
             LocalizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
             LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            LocalizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
         }
 
         #endregion

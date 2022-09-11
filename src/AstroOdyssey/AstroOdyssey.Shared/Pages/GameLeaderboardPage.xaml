@@ -49,7 +49,7 @@
         </Grid.Background>
 
         <Border
-            Margin="10"
+            Margin="20"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             BorderBrush="#4d437d"
@@ -76,10 +76,10 @@
                         TextAlignment="Center" />
 
                     <!--  Score  -->
-                    <StackPanel Margin="60,20,60,5">
+                    <StackPanel Margin="40,20,40,5">
                         <TextBlock
                             x:Name="ScoreText"
-                            FontSize="30"
+                            FontSize="25"
                             FontWeight="Bold"
                             TextAlignment="Center"
                             TextWrapping="WrapWholeWords" />
@@ -97,14 +97,15 @@
                 <ListView
                     x:Name="LeaderboardList"
                     Grid.Row="1"
-                    Margin="60,0,60,10"
+                    Margin="40,0,40,10"
                     ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
 
                 <StackPanel Grid.Row="2">
 
+                    <!--  Personal best score  -->
                     <TextBlock
                         x:Name="PersonalBestScoreText"
-                        FontSize="30"
+                        FontSize="25"
                         FontWeight="Bold"
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
@@ -159,6 +160,21 @@
             </Border.Background>
 
         </Border>
+
+        <!--  Take to previous page  -->
+        <Button
+            x:Name="GoBackButton"
+            Width="50"
+            Height="50"
+            Margin="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="GoBackButton_Click"
+            CornerRadius="100"
+            IsFocusEngagementEnabled="False"
+            IsTabStop="False">
+            <SymbolIcon Symbol="Back" />
+        </Button>
 
     </Grid>
 </Page>

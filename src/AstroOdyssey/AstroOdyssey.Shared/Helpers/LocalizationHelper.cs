@@ -485,6 +485,13 @@ namespace AstroOdyssey
                 new ("de", "Sie haben bereits ein Konto?"),
                 new ("fr", "Vous avez déjà un compte?"),
             }),
+            new LocalizationKey(key: "GameStartPage_LogoutButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Logout"),
+                new ("bn", "প্রস্থান"),
+                new ("de", "Ausloggen"),
+                new ("fr", "Se déconnecter"),
+            }),
 
         };
 

@@ -41,9 +41,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            var authCredentials = AuthCredentialsCacheHelper.GetCachedAuthCredentials();
-
-            if (authCredentials is not null && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            if (AuthCredentialsCacheHelper.GetCachedAuthCredentials() is PlayerAuthCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
@@ -102,6 +100,9 @@ namespace AstroOdyssey
                 return;
 
             if (!await GetGameProfile())
+                return;
+
+            if (!await GenerateSession())
                 return;
 
             if (App.GameScoreSubmissionPending)
@@ -200,6 +201,32 @@ namespace AstroOdyssey
 
                 return false;
             }
+
+            return true;
+        }
+
+        private async Task<bool> GenerateSession()
+        {
+            ServiceResponse response = await _gameApiHelper.GenerateSession(
+                gameId: Constants.GAME_ID,
+                userId: App.GameProfile.User.UserId);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowError(
+                    progressBar: GameLoginPage_ProgressBar,
+                    errorContainer: GameLoginPage_ErrorText,
+                    error: error,
+                    GameLoginPage_LoginButton,
+                    GameLoginPage_RegisterButton);
+
+                return false;
+            }
+
+            // store session
+            var session = _gameApiHelper.ParseResult<Session>(response.Result);
+            AuthCredentialsCacheHelper.SetCachedSession(session);
 
             return true;
         }

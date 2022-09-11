@@ -16,23 +16,6 @@ namespace AstroOdyssey
                 App.AuthCredentials.Password = App.AuthCredentials.Password.Decrypt();
                 return App.AuthCredentials;
             }
-            //else
-            //{
-            //    ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            //    var localValue = localSettings.Values["AuthCredentials"] as string;
-
-            //    if (!localValue.IsNullOrBlank())
-            //    {
-            //        var authCredentials = JsonConvert.DeserializeObject<PlayerAuthCredentials>(localValue);
-            //        if (authCredentials is not null)
-            //        {
-            //            authCredentials.Password = authCredentials.Password.Decrypt();
-            //            return authCredentials;
-            //        }
-            //    }
-            //}
-
-            //TODO: get cookie
 
             return null;
         }
@@ -43,12 +26,35 @@ namespace AstroOdyssey
             App.AuthCredentials = new PlayerAuthCredentials(
                 userName: userName,
                 password: password.Encrypt());
+        }
 
-            //TODO: set cookie
+        public static void RemoveCachedValue(string key)
+        {
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
-            //// save in browser cache
-            //ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            //localSettings.Values["AuthCredentials"] = JsonConvert.SerializeObject(App.AuthCredentials);
+            if (localSettings.Values.ContainsKey(key))
+                localSettings.Values.Remove(key);
+        }
+
+        public static Session GetCachedSession()
+        {
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var localValue = localSettings.Values["Session"] as string;
+
+            if (!localValue.IsNullOrBlank())
+            {
+                var session = JsonConvert.DeserializeObject<Session>(localValue);
+                return session;
+            }
+
+            return null;
+        }
+
+        public static void SetCachedSession(Session session)
+        {
+            // save in browser cache
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Session"] = JsonConvert.SerializeObject(session);
         }
     }
 }

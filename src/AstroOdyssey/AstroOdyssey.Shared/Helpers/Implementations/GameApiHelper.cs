@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Windows.Gaming.Input;
+using Windows.System;
 
 namespace AstroOdyssey
 {
@@ -77,7 +79,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
                 path: Constants.Action_SubmitGameScore,
-                httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
                 httpMethod: HttpMethod.Post,
                 payload: new
                 {
@@ -103,7 +105,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<QueryRecordResponse<GameProfile>, QueryRecordResponse<GameProfile>>(
                  baseUrl: Constants.GAME_API_BASEURL,
                  path: Constants.Action_GetGameProfile,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
                  httpMethod: HttpMethod.Get,
                  payload: new
                  {
@@ -124,7 +126,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameProfile>, QueryRecordsResponse<GameProfile>>(
                  baseUrl: Constants.GAME_API_BASEURL,
                  path: Constants.Action_GetGameProfiles,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
                  httpMethod: HttpMethod.Get,
                  payload: new
                  {
@@ -147,7 +149,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameScore>, QueryRecordsResponse<GameScore>>(
                  baseUrl: Constants.GAME_API_BASEURL,
                  path: Constants.Action_GetGameScores,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.Token}" } },
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
                  httpMethod: HttpMethod.Get,
                  payload: new
                  {
@@ -159,16 +161,52 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse
                 : response.ErrorResponse;
-        }   
+        }
+
+        public async Task<ServiceResponse> GenerateSession(string gameId, string userId)
+        {
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_GenerateSession,
+                httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    GameId = gameId,
+                    UserId = userId,
+                });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse;
+        }
+
+        public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
+        {
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_ValidateSession,
+                httpHeaders: new Dictionary<string, string>(),
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    GameId = gameId,
+                    SessionId = sessionId,
+                });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse;
+        }
 
         private async Task RefreshAuthToken()
         {
             // if token has expired or will expire in 10 secs, get a new token
-            if (App.AuthCredentials is not null && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.LifeTime)
+            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
             {
-                var response = await Authenticate(
-                    userNameOrEmail: App.AuthCredentials.UserName,
-                    password: App.AuthCredentials.Password);
+                var response = await ValidateSession(
+                    gameId: Constants.GAME_ID,
+                    sessionId: session.SessionId);
 
                 if (response.HttpStatusCode == HttpStatusCode.OK)
                 {
