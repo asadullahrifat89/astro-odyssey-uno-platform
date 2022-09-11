@@ -200,7 +200,7 @@ namespace AstroOdyssey
         private async Task RefreshAuthToken()
         {
             // if token has expired or will expire in 10 secs, get a new token
-            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
+            if (CacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
             {
                 var response = await ValidateSession(
                     gameId: Constants.GAME_ID,

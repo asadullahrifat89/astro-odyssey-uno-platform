@@ -78,5 +78,9 @@
 		<PackageReference Include="Uno.Wasm.Bootstrap" Version="4.0.0-dev.191" />
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="4.0.0-dev.191" />-->
 	</ItemGroup>
-	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />	
+	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
+	<ItemGroup>
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\Statics\CacheHelper.cs" />
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerCredentials.cs" />
+	</ItemGroup>	
 </Project>

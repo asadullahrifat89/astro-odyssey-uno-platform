@@ -74,7 +74,7 @@ namespace AstroOdyssey
 
         public static IServiceProvider Container { get; set; }
 
-        public static PlayerAuthCredentials AuthCredentials { get; set; }
+        public static PlayerCredentials AuthCredentials { get; set; }
 
         public static GameProfile GameProfile { get; set; }
 

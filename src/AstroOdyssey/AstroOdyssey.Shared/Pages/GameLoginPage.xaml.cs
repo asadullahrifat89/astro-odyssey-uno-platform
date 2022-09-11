@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -47,7 +48,8 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            if (AuthCredentialsCacheHelper.GetCachedAuthCredentials() is PlayerAuthCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            // if user was already logged in or came here after sign up
+            if (CacheHelper.GetCachedAuthCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
@@ -149,7 +151,7 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            AuthCredentialsCacheHelper.SetCachedAuthCredentials(
+            CacheHelper.SetCachedAuthCredentials(
                 userName: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
@@ -222,7 +224,7 @@ namespace AstroOdyssey
 
             // store session
             var session = _gameApiHelper.ParseResult<Session>(response.Result);
-            AuthCredentialsCacheHelper.SetCachedSession(session);
+            CacheHelper.SetCachedSession(session);
 
             return true;
         }

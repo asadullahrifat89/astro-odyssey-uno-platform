@@ -60,7 +60,7 @@ namespace AstroOdyssey
             await this.PlayPageLoadedTransition();
 
             // check for session
-            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
+            if (CacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
             {
                 await GetGameProfile();
 
@@ -72,7 +72,7 @@ namespace AstroOdyssey
             else
             {
                 // if session is not valid then remove it
-                AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+                CacheHelper.RemoveCachedValue("Session");
 
                 // make login button visible
                 GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
@@ -127,7 +127,7 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             // delete session
-            AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+            CacheHelper.RemoveCachedValue("Session");
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;

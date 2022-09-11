@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Windows.Storage;
 
 namespace AstroOdyssey
 {
-    public static class AuthCredentialsCacheHelper
+    public static class CacheHelper
     {
-        public static PlayerAuthCredentials GetCachedAuthCredentials()
-        {
-            // if user was already logged in or came here after sign up
+        public static PlayerCredentials GetCachedAuthCredentials()
+        {            
             if (App.AuthCredentials is not null)
             {
                 App.AuthCredentials.Password = App.AuthCredentials.Password.Decrypt();
@@ -19,10 +19,15 @@ namespace AstroOdyssey
 
         public static void SetCachedAuthCredentials(string userName, string password)
         {
-            // store auth credentials
-            App.AuthCredentials = new PlayerAuthCredentials(
+            App.AuthCredentials = new PlayerCredentials(
                 userName: userName,
                 password: password.Encrypt());
+        }
+
+        public static void SetCachedValue(string key, string value)
+        {
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values[key] = value;
         }
 
         public static void RemoveCachedValue(string key)

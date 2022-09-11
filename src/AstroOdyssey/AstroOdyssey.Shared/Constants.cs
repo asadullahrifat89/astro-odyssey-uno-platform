@@ -49,6 +49,8 @@
         public const string Action_GetGameScores = "/api/Query/GetGameScores";
         public const string Action_GetUser = "/api/Query/GetUser";
 
+        public const string CACHE_SESSION_KEY = "Session";
+
         #endregion
     }
 }
