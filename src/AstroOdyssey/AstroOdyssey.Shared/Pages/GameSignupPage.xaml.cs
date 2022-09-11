@@ -15,6 +15,10 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -26,6 +30,10 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+
+            _progressBar = GameSignupPage_ProgressBar;
+            _errorContainer = GameSignupPage_ErrorText;
+            _actionButtons = new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton };
         }
 
         #endregion
@@ -91,9 +99,9 @@ namespace AstroOdyssey
         private async Task PerformSignup()
         {
             this.RunProgressBar(
-                progressBar: GameSignupPage_ProgressBar,
-                errorContainer: GameSignupPage_ErrorText,
-                actionButtons: new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton });
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             if (!await Signup())
                 return;
@@ -102,8 +110,8 @@ namespace AstroOdyssey
                 return;
 
             this.StopProgressBar(
-                progressBar: GameSignupPage_ProgressBar,
-                actionButtons: new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton });
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
             // redirect to login page

@@ -20,6 +20,10 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -31,6 +35,10 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+
+            _progressBar = GameLoginPage_ProgressBar;
+            _errorContainer = GameLoginPage_ErrorText;
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton };
         }
 
         #endregion
@@ -91,9 +99,9 @@ namespace AstroOdyssey
         private async Task PerformLogin()
         {
             this.RunProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                errorContainer: GameLoginPage_ErrorText,
-                actionButtons: new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton });
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             if (!await Authenticate())
                 return;
@@ -106,15 +114,13 @@ namespace AstroOdyssey
 
             if (App.GameScoreSubmissionPending)
             {
-                if (!await SubmitScore())
-                    return;
-
-                App.GameScoreSubmissionPending = false;
+                if (await SubmitScore())
+                    App.GameScoreSubmissionPending = false;
             }
 
             this.StopProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                actionButtons: new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton });
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
@@ -179,11 +185,6 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            this.RunProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                errorContainer: GameLoginPage_ErrorText,
-                actionButtons: new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton });
-
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)

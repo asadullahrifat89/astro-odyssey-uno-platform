@@ -25,6 +25,10 @@ namespace AstroOdyssey
 
         public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -38,6 +42,10 @@ namespace AstroOdyssey
             _audioHelper = App.Container.GetService<IAudioHelper>();
 
             LeaderboardList.ItemsSource = GameProfiles;
+
+            _progressBar = GameLeaderboardPage_ProgressBar;
+            _errorContainer = GameLeaderboardPage_ErrorText;
+            _actionButtons = new[] { GameLeaderboardPage_PlayNowButton };
         }
 
         #endregion
@@ -51,9 +59,9 @@ namespace AstroOdyssey
             await this.PlayPageLoadedTransition();
 
             this.RunProgressBar(
-                progressBar: GameLeaderboardPage_ProgressBar,
-                errorContainer: GameLeaderboardPage_ErrorText,
-                actionButtons: new[] { GameLeaderboardPage_PlayNowButton });
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             // get game profile
             if (!await GetGameProfile())
@@ -64,8 +72,8 @@ namespace AstroOdyssey
                 return;
 
             this.StopProgressBar(
-                progressBar: GameLeaderboardPage_ProgressBar,
-                actionButtons: new[] { GameLeaderboardPage_PlayNowButton });
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
