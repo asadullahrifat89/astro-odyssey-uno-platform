@@ -8,6 +8,8 @@ namespace AstroOdyssey
     {
         #region Fields
 
+        public const double DEFAULT_FRAME_TIME = 18;
+
         public const double DESTRUCTIBLE_OBJECT_SIZE = 70;
         public const double COLLECTIBLE_OBJECT_SIZE = 90;
         public const double PICKUP_OBJECT_SIZE = 80;
