@@ -234,7 +234,7 @@ namespace AstroOdyssey
         {
             ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
                 return false;
 
             // store auth token

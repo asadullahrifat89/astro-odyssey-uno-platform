@@ -128,9 +128,9 @@ namespace AstroOdyssey
         {
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameOverPage_ProgressBar,
                     errorContainer: GameOverPage_ErrorText,

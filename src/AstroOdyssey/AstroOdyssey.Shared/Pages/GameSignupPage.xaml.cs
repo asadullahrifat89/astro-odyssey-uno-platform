@@ -125,9 +125,9 @@ namespace AstroOdyssey
                 email: GameSignupPage_UserEmailBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameSignupPage_ProgressBar,
                     errorContainer: GameSignupPage_ErrorText,
@@ -152,9 +152,9 @@ namespace AstroOdyssey
                 userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameSignupPage_ProgressBar,
                     errorContainer: GameSignupPage_ErrorText,

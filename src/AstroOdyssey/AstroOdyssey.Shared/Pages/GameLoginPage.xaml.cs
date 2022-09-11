@@ -134,9 +134,9 @@ namespace AstroOdyssey
                 userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameLoginPage_ProgressBar,
                     errorContainer: GameLoginPage_ErrorText,
@@ -187,9 +187,9 @@ namespace AstroOdyssey
         {
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                      progressBar: GameLoginPage_ProgressBar,
                      errorContainer: GameLoginPage_ErrorText,
@@ -209,9 +209,9 @@ namespace AstroOdyssey
                 gameId: Constants.GAME_ID,
                 userId: App.GameProfile.User.UserId);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameLoginPage_ProgressBar,
                     errorContainer: GameLoginPage_ErrorText,
