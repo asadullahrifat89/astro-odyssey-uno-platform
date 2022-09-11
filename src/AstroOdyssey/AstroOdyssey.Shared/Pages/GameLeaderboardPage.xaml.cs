@@ -32,7 +32,7 @@ namespace AstroOdyssey
         public GameLeaderboardPage()
         {
             this.InitializeComponent();
-            Loaded += GameLeaderboardPage_Loaded;           
+            Loaded += GameLeaderboardPage_Loaded;
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
@@ -53,7 +53,7 @@ namespace AstroOdyssey
             this.RunProgressBar(
                 progressBar: GameLeaderboardPage_ProgressBar,
                 errorContainer: GameLeaderboardPage_ErrorText,
-                actionButtons: GameLeaderboardPage_PlayNowButton);
+                actionButtons: new[] { GameLeaderboardPage_PlayNowButton });
 
             // get game profile
             if (!await GetGameProfile())
@@ -65,7 +65,7 @@ namespace AstroOdyssey
 
             this.StopProgressBar(
                 progressBar: GameLeaderboardPage_ProgressBar,
-                actionButtons: GameLeaderboardPage_PlayNowButton);
+                actionButtons: new[] { GameLeaderboardPage_PlayNowButton });
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -136,7 +136,7 @@ namespace AstroOdyssey
                 _totalPageCount = PaginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
 
                 var records = result.Records;
-                
+
                 foreach (var record in records)
                 {
                     GameProfiles.Add(record);

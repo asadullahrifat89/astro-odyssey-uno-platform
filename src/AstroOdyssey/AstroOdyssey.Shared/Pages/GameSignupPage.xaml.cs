@@ -93,8 +93,7 @@ namespace AstroOdyssey
             this.RunProgressBar(
                 progressBar: GameSignupPage_ProgressBar,
                 errorContainer: GameSignupPage_ErrorText,
-                GameSignupPage_SignupButton,
-                GameSignupPage_LoginButton);
+                actionButtons: new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton });
 
             if (!await Signup())
                 return;
@@ -104,8 +103,7 @@ namespace AstroOdyssey
 
             this.StopProgressBar(
                 progressBar: GameSignupPage_ProgressBar,
-                GameSignupPage_SignupButton,
-                GameSignupPage_LoginButton);
+                actionButtons: new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton });
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
             // redirect to login page

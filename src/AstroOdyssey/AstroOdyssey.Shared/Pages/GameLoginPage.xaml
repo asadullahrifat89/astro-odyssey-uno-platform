@@ -21,7 +21,9 @@
             BorderBrush="#4d437d"
             BorderThickness="0,3,0,3"
             CornerRadius="10">
+
             <StackPanel
+                x:Name="ActionStack"
                 Width="315"
                 Margin="10"
                 HorizontalAlignment="Center"

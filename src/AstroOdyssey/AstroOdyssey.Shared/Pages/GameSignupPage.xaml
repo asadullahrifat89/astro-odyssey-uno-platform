@@ -23,6 +23,7 @@
             CornerRadius="10">
 
             <StackPanel
+                x:Name="ActionStack"
                 Width="315"
                 Margin="10"
                 HorizontalAlignment="Center"

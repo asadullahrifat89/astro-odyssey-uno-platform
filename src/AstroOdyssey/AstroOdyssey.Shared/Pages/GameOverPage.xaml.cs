@@ -67,9 +67,7 @@ namespace AstroOdyssey
                 this.RunProgressBar(
                     progressBar: GameOverPage_ProgressBar,
                     errorContainer: GameOverPage_ErrorText,
-                    GameOverPage_PlayAgainButton,
-                    GameLoginPage_LoginButton,
-                    GameOverPage_LeaderboardButton);
+                    actionButtons: new[] { GameOverPage_PlayAgainButton, GameLoginPage_LoginButton, GameOverPage_LeaderboardButton });
 
                 // submit score
                 await SubmitScore();
@@ -78,9 +76,7 @@ namespace AstroOdyssey
 
                 this.StopProgressBar(
                     progressBar: GameOverPage_ProgressBar,
-                    GameOverPage_PlayAgainButton,
-                    GameLoginPage_LoginButton,
-                    GameOverPage_LeaderboardButton);
+                    actionButtons: new[] { GameOverPage_PlayAgainButton, GameLoginPage_LoginButton, GameOverPage_LeaderboardButton });
             }
 
             await this.PlayPageLoadedTransition();
@@ -112,7 +108,7 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
-            
+
             App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
@@ -134,11 +130,11 @@ namespace AstroOdyssey
                     GameOverPage_PlayAgainButton,
                     GameLoginPage_LoginButton,
                     GameOverPage_LeaderboardButton);
-                
+
 
                 return false;
             }
-        
+
             return true;
         }
 

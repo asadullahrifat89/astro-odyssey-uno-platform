@@ -20,6 +20,10 @@ namespace AstroOdyssey
         private readonly IAudioHelper _audioHelper;
         private readonly IGameApiHelper _gameApiHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -31,6 +35,10 @@ namespace AstroOdyssey
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+
+            _progressBar = GameStartPage_ProgressBar;
+            _errorContainer = GameStartPage_ErrorText;
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton };
         }
 
         #endregion
@@ -40,18 +48,16 @@ namespace AstroOdyssey
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.RunProgressBar(
-                progressBar: GameStartPage_ProgressBar,
-                errorContainer: GameStartPage_ErrorText,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton,
-                GameStartPage_LogoutButton);
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();            
+            await this.PlayPageLoadedTransition();
 
             // check for session
             if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
@@ -75,10 +81,8 @@ namespace AstroOdyssey
             }
 
             this.StopProgressBar(
-                progressBar: GameStartPage_ProgressBar,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton,
-                GameStartPage_LogoutButton);
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
 
             PreloadAssets();
         }
