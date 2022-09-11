@@ -202,12 +202,14 @@ namespace AstroOdyssey
             // if token expires in 20 secs or session expires in 1 min, get a new token
             if (CacheHelper.GetCachedSession() is Session session && (DateTime.UtcNow.AddSeconds(20) > App.AuthToken.ExpiresOn || DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn))
             {
+                // validate session and get new auth token
                 if (!await ValidateSession(session.SessionId))
                     return false;
 
                 // if current session expires in 1 min, request a new session
                 if (DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn)
                 {
+                    // with new auth token generate a new session and validate it, get new auth token for new session
                     if (!await GenerateAndValidateSession())
                         return false;
                 }
