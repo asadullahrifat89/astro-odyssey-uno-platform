@@ -47,7 +47,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse;
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
         }
 
         public async Task<ServiceResponse> Signup(string userName, string email, string password)
@@ -67,7 +67,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse;
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
         }
 
         public async Task<ServiceResponse> SubmitGameScore(double score)
@@ -93,72 +93,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse;
-        }
-
-        public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
-        {
-            await RefreshAuthToken();
-
-            var response = await _httpRequestHelper.SendRequest<QueryRecordResponse<GameProfile>, QueryRecordResponse<GameProfile>>(
-                 baseUrl: Constants.GAME_API_BASEURL,
-                 path: Constants.Action_GetGameProfile,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
-                 httpMethod: HttpMethod.Get,
-                 payload: new
-                 {
-                     GameId = Constants.GAME_ID,
-                 });
-
-            return response.StatusCode == HttpStatusCode.OK
-                ? response.SuccessResponse
-                : response.ErrorResponse;
-        }
-
-        public async Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(
-            int pageIndex,
-            int pageSize)
-        {
-            await RefreshAuthToken();
-
-            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameProfile>, QueryRecordsResponse<GameProfile>>(
-                 baseUrl: Constants.GAME_API_BASEURL,
-                 path: Constants.Action_GetGameProfiles,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
-                 httpMethod: HttpMethod.Get,
-                 payload: new
-                 {
-                     PageIndex = pageIndex,
-                     PageSize = pageSize,
-                     GameId = Constants.GAME_ID,
-                 });
-
-            return response.StatusCode == HttpStatusCode.OK
-                ? response.SuccessResponse
-                : response.ErrorResponse;
-        }
-
-        public async Task<QueryRecordsResponse<GameScore>> GetGameScores(
-            int pageIndex,
-            int pageSize)
-        {
-            await RefreshAuthToken();
-
-            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameScore>, QueryRecordsResponse<GameScore>>(
-                 baseUrl: Constants.GAME_API_BASEURL,
-                 path: Constants.Action_GetGameScores,
-                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
-                 httpMethod: HttpMethod.Get,
-                 payload: new
-                 {
-                     PageIndex = pageIndex,
-                     PageSize = pageSize,
-                     GameId = Constants.GAME_ID,
-                 });
-
-            return response.StatusCode == HttpStatusCode.OK
-                ? response.SuccessResponse
-                : response.ErrorResponse;
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
         }
 
         public async Task<ServiceResponse> GenerateSession(string gameId, string userId)
@@ -176,7 +111,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse;
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
         }
 
         public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
@@ -194,7 +129,68 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse;
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+        }
+
+        public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordResponse<GameProfile>, QueryRecordResponse<GameProfile>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameProfile,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new QueryRecordResponse<GameProfile>()
+                : response.ErrorResponse ?? new QueryRecordResponse<GameProfile>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
+        }
+
+        public async Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(int pageIndex, int pageSize)
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameProfile>, QueryRecordsResponse<GameProfile>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameProfiles,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     PageIndex = pageIndex,
+                     PageSize = pageSize,
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse
+                : response.ErrorResponse ?? new QueryRecordsResponse<GameProfile>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
+        }
+
+        public async Task<QueryRecordsResponse<GameScore>> GetGameScores(int pageIndex, int pageSize)
+        {
+            await RefreshAuthToken();
+
+            var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameScore>, QueryRecordsResponse<GameScore>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_GetGameScores,
+                 httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     PageIndex = pageIndex,
+                     PageSize = pageSize,
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse
+                : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
         }
 
         private async Task RefreshAuthToken()

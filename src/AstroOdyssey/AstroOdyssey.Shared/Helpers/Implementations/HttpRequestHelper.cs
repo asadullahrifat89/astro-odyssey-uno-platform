@@ -80,9 +80,9 @@ namespace AstroOdyssey
 
 #if DEBUG
                     Console.WriteLine($"RequestUri: {httpRequestMessage.RequestUri}\n " +
-                                  $"Payload = {(payload is null ? "NA" : JsonConvert.SerializeObject(payload, Formatting.Indented))}\n " +
-                                  $"StatusCode:{httpResponseMessage.StatusCode}\n " +
-                                  $"ReasonPhrase:{httpResponseMessage.ReasonPhrase}");
+                        $"Payload = {(payload is null ? "NA" : JsonConvert.SerializeObject(payload, Formatting.Indented))}\n " +
+                        $"StatusCode:{httpResponseMessage.StatusCode}\n " +
+                        $"ReasonPhrase:{httpResponseMessage.ReasonPhrase}");
 #endif
 
                     if (httpResponseMessage.IsSuccessStatusCode)
