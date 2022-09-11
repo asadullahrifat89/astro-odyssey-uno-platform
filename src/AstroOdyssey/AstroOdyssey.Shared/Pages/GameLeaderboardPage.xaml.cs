@@ -50,7 +50,10 @@ namespace AstroOdyssey
 
             await this.PlayPageLoadedTransition();
 
-            this.RunProgressBar(GameLeaderboardPage_ProgressBar, GameOverPage_PlayAgainButton);
+            this.RunProgressBar(
+                progressBar: GameLeaderboardPage_ProgressBar,
+                errorContainer: GameLeaderboardPage_ErrorText,
+                actionButtons: GameLeaderboardPage_PlayNowButton);
 
             // get game profile
             if (!await GetGameProfile())
@@ -60,7 +63,9 @@ namespace AstroOdyssey
             if (!await GetGameProfiles())
                 return;
 
-            this.StopProgressBar(GameLeaderboardPage_ProgressBar, GameOverPage_PlayAgainButton);
+            this.StopProgressBar(
+                progressBar: GameLeaderboardPage_ProgressBar,
+                actionButtons: GameLeaderboardPage_PlayNowButton);
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -89,7 +94,7 @@ namespace AstroOdyssey
                     progressBar: GameLeaderboardPage_ProgressBar,
                     errorContainer: GameLeaderboardPage_ErrorText,
                     error: string.Join("\n", error),
-                    actionButtons: GameOverPage_PlayAgainButton);
+                    actionButtons: GameLeaderboardPage_PlayNowButton);
 
                 return false;
             }
@@ -114,7 +119,7 @@ namespace AstroOdyssey
                     progressBar: GameLeaderboardPage_ProgressBar,
                     errorContainer: GameLeaderboardPage_ErrorText,
                     error: string.Join("\n", error),
-                    actionButtons: GameOverPage_PlayAgainButton);
+                    actionButtons: GameLeaderboardPage_PlayNowButton);
 
                 return false;
             }
@@ -141,7 +146,7 @@ namespace AstroOdyssey
         private void SetLocalization()
         {
             LocalizationHelper.SetLocalizedResource(GameLeaderboardPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
+            LocalizationHelper.SetLocalizedResource(GameLeaderboardPage_PlayNowButton);
         }
 
         #endregion

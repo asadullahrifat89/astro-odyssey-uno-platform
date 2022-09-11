@@ -102,8 +102,8 @@
 
                     <!--  Play again button  -->
                     <Button
-                        x:Name="GameOverPage_PlayAgainButton"
-                        x:Uid="GameOverPage_PlayAgainButton"
+                        x:Name="GameLeaderboardPage_PlayNowButton"
+                        x:Uid="GameLeaderboardPage_PlayNowButton"
                         Width="180"
                         Height="50"
                         Margin="30,10,30,30"
@@ -112,7 +112,7 @@
                         BorderBrush="White"
                         BorderThickness="3"
                         Click="PlayAgainButton_Click"
-                        Content="PLAY AGAIN"
+                        Content="PLAY NOW"
                         CornerRadius="50"
                         FontSize="24"
                         FontWeight="SemiBold"

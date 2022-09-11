@@ -72,6 +72,13 @@ namespace AstroOdyssey
         {
             await this.PlayPageUnLoadedTransition();
 
+            App.NavigateToPage(typeof(GameStartPage));
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e) 
+        {
+            await this.PlayPageUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameLoginPage));
         }
 
@@ -81,7 +88,10 @@ namespace AstroOdyssey
 
         private async Task PerformSignup()
         {
-            this.RunProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
+            this.RunProgressBar(
+                progressBar: GameSignupPage_ProgressBar,
+                errorContainer: GameSignupPage_ErrorText,
+                actionButtons: GameSignupPage_SignupButton);
 
             if (!await Signup())
                 return;
@@ -89,7 +99,9 @@ namespace AstroOdyssey
             if (!await Authenticate())
                 return;
 
-            this.StopProgressBar(GameSignupPage_ProgressBar, GameSignupPage_SignupButton);
+            this.StopProgressBar(
+                progressBar: GameSignupPage_ProgressBar,
+                actionButtons: GameSignupPage_SignupButton);
 
             // redirect to login page
             await this.PlayPageUnLoadedTransition();
@@ -169,6 +181,7 @@ namespace AstroOdyssey
             LocalizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
             LocalizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
             LocalizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
+            LocalizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
         }
 
         #endregion

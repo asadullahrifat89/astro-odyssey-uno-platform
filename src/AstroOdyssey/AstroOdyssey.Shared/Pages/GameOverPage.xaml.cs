@@ -66,6 +66,7 @@ namespace AstroOdyssey
             {
                 this.RunProgressBar(
                     progressBar: GameOverPage_ProgressBar,
+                    errorContainer: GameOverPage_ErrorText,
                     GameOverPage_PlayAgainButton,
                     GameLoginPage_LoginButton,
                     GameOverPage_LeaderboardButton);

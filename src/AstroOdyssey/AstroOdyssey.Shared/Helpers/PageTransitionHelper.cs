@@ -11,8 +11,6 @@ namespace AstroOdyssey
 
         public async static Task PlayPageLoadedTransition(this Page page)
         {
-            //var content = page.Content as Grid;
-
             if (page is not null)
             {
                 page.Opacity = 0;
@@ -32,8 +30,6 @@ namespace AstroOdyssey
 
         public async static Task PlayPageUnLoadedTransition(this Page page)
         {
-            //var content = page.Content as Grid;            
-
             if (page is not null)
             {
                 page.Opacity = 1;
@@ -51,20 +47,36 @@ namespace AstroOdyssey
             }
         }
 
-        public static void ShowError(this Page page, ProgressBar progressBar, TextBlock errorContainer, string error, params Button[] actionButtons)
+        public static void ShowError(
+            this Page page,
+            ProgressBar progressBar,
+            TextBlock errorContainer,
+            string error,
+            params Button[] actionButtons)
         {
-            ShowErrorProgressBar(page, progressBar);
-            ShowErrorMessage(page, errorContainer, error);
+            progressBar.ShowPaused = true;
+            progressBar.ShowError = true;
+
+            errorContainer.Text = error;
+            errorContainer.Visibility = Visibility.Visible;
+
             foreach (var actionButton in actionButtons)
             {
                 EnableActionButton(actionButton);
             }
         }
 
-        public static void RunProgressBar(this Page page, ProgressBar progressBar, params Button[] actionButtons)
+        public static void RunProgressBar(
+            this Page page,
+            ProgressBar progressBar,
+            TextBlock errorContainer, 
+            params Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
+
+            errorContainer.Text = "";
+            errorContainer.Visibility= Visibility.Collapsed;
 
             foreach (var actionButton in actionButtons)
             {
@@ -72,7 +84,10 @@ namespace AstroOdyssey
             }
         }
 
-        public static void StopProgressBar(this Page page, ProgressBar progressBar, params Button[] actionButtons)
+        public static void StopProgressBar(
+            this Page page,
+            ProgressBar progressBar,
+            params Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = true;
@@ -91,18 +106,6 @@ namespace AstroOdyssey
         private static void DisableActionButton(Button button)
         {
             button.IsEnabled = false;
-        }
-
-        private static void ShowErrorProgressBar(this Page page, ProgressBar progressBar)
-        {
-            progressBar.ShowPaused = true;
-            progressBar.ShowError = true;
-        }
-
-        private static void ShowErrorMessage(this Page page, TextBlock errorContainer, string error)
-        {
-            errorContainer.Text = error;
-            errorContainer.Visibility = Visibility.Visible;
         }
 
         #endregion
