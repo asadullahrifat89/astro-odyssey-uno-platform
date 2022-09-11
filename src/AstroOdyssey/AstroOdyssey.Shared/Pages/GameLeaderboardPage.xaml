@@ -69,6 +69,7 @@
                     <TextBlock
                         x:Name="GameLeaderboardPage_Tagline"
                         x:Uid="GameLeaderboardPage_Tagline"
+                        Margin="5"
                         FontSize="45"
                         FontWeight="Bold"
                         Text="Leaderboard"
