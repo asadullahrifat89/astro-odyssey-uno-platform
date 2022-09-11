@@ -2,42 +2,42 @@
 
 namespace AstroOdyssey
 {
-    public static class AudioHelper
+    public class AudioHelper: IAudioHelper
     {
         #region Fields        
 
-        private static Random random = new Random();
+        private Random random = new Random();
 
-        private static AudioPlayer GAME_INTRO = null;
-        private static AudioPlayer MENU_SELECT = null;
-        private static AudioPlayer BACKGROUND_MUSIC = null;
-        private static AudioPlayer PLAYER_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_PLASMA_BOMB_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_BEAM_CANNON_ROUNDS_FIRE = null;
-        private static AudioPlayer PLAYER_SONIC_BLAST_ROUNDS_FIRE = null;
-        private static AudioPlayer ENEMY_ROUNDS_FIRE = null;
-        private static AudioPlayer ENEMY_DESTRUCTION = null;
-        private static AudioPlayer METEOR_DESTRUCTION = null;
-        private static AudioPlayer BOSS_APPEARANCE = null;
-        private static AudioPlayer BOSS_DESTRUCTION = null;
-        private static AudioPlayer ROUNDS_HIT = null;
-        private static AudioPlayer POWER_UP = null;
-        private static AudioPlayer POWER_DOWN = null;
-        private static AudioPlayer RAGE_UP = null;
-        private static AudioPlayer RAGE_DOWN = null;
-        private static AudioPlayer LEVEL_UP = null;
-        private static AudioPlayer HEALTH_GAIN = null;
-        private static AudioPlayer HEALTH_LOSS = null;
-        private static AudioPlayer COLLECTIBLE_COLLECTED = null;
-        private static AudioPlayer GAME_START = null;
-        private static AudioPlayer GAME_OVER = null;
+        private AudioPlayer GAME_INTRO = null;
+        private AudioPlayer MENU_SELECT = null;
+        private AudioPlayer BACKGROUND_MUSIC = null;
+        private AudioPlayer PLAYER_ROUNDS_FIRE = null;
+        private AudioPlayer PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = null;
+        private AudioPlayer PLAYER_PLASMA_BOMB_ROUNDS_FIRE = null;
+        private AudioPlayer PLAYER_BEAM_CANNON_ROUNDS_FIRE = null;
+        private AudioPlayer PLAYER_SONIC_BLAST_ROUNDS_FIRE = null;
+        private AudioPlayer ENEMY_ROUNDS_FIRE = null;
+        private AudioPlayer ENEMY_DESTRUCTION = null;
+        private AudioPlayer METEOR_DESTRUCTION = null;
+        private AudioPlayer BOSS_APPEARANCE = null;
+        private AudioPlayer BOSS_DESTRUCTION = null;
+        private AudioPlayer ROUNDS_HIT = null;
+        private AudioPlayer POWER_UP = null;
+        private AudioPlayer POWER_DOWN = null;
+        private AudioPlayer RAGE_UP = null;
+        private AudioPlayer RAGE_DOWN = null;
+        private AudioPlayer LEVEL_UP = null;
+        private AudioPlayer HEALTH_GAIN = null;
+        private AudioPlayer HEALTH_LOSS = null;
+        private AudioPlayer COLLECTIBLE_COLLECTED = null;
+        private AudioPlayer GAME_START = null;
+        private AudioPlayer GAME_OVER = null;
 
         #endregion     
 
         #region Methods
 
-        public static void PlaySound(SoundType soundType)
+        public void PlaySound(SoundType soundType)
         {
             var baseUrl = App.GetBaseUrl();
 
@@ -46,7 +46,7 @@ namespace AstroOdyssey
                 case SoundType.GAME_INTRO:
                     {
                         var musicTrack = random.Next(0, GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES.Length);
-                        var src = GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES[musicTrack];                      
+                        var src = GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -138,7 +138,7 @@ namespace AstroOdyssey
                 case SoundType.BACKGROUND_MUSIC:
                     {
                         var musicTrack = random.Next(0, GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES.Length);
-                        var src = GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES[musicTrack];                      
+                        var src = GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -228,7 +228,7 @@ namespace AstroOdyssey
 
                         ENEMY_ROUNDS_FIRE.Play();
                     }
-                    break;              
+                    break;
                 case SoundType.METEOR_DESTRUCTION:
                     {
                         if (METEOR_DESTRUCTION is null)
@@ -241,7 +241,7 @@ namespace AstroOdyssey
                         METEOR_DESTRUCTION.Play();
                     }
                     break;
-              
+
                 case SoundType.ROUNDS_HIT:
                     {
                         if (ROUNDS_HIT is null)
@@ -361,7 +361,7 @@ namespace AstroOdyssey
 
                         HEALTH_LOSS.Play();
                     }
-                    break;                
+                    break;
                 default:
                     {
                         // App.PlaySound(baseUrl, soundType);
@@ -370,12 +370,7 @@ namespace AstroOdyssey
             }
         }
 
-        private static void BACKGROUND_MUSIC_onended(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void StopSound()
+        public void StopSound()
         {
             if (GAME_INTRO is not null)
             {
@@ -393,7 +388,7 @@ namespace AstroOdyssey
             }
         }
 
-        public static void PauseSound(SoundType soundType)
+        public void PauseSound(SoundType soundType)
         {
             switch (soundType)
             {
@@ -452,7 +447,7 @@ namespace AstroOdyssey
             }
         }
 
-        public static void ResumeSound(SoundType soundType)
+        public void ResumeSound(SoundType soundType)
         {
             switch (soundType)
             {
@@ -509,6 +504,11 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+        }
+
+        private void BACKGROUND_MUSIC_onended(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

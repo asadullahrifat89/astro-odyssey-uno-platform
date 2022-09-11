@@ -76,7 +76,7 @@
                         TextAlignment="Center" />
 
                     <!--  Score  -->
-                    <StackPanel Margin="60,20,60,0">
+                    <StackPanel Margin="60,20,60,5">
                         <TextBlock
                             x:Name="ScoreText"
                             FontSize="30"
@@ -90,6 +90,7 @@
                             BorderThickness="3"
                             CornerRadius="50" />
                     </StackPanel>
+
                 </StackPanel>
 
                 <!--  Leaderboard list  -->
@@ -100,6 +101,13 @@
                     ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
 
                 <StackPanel Grid.Row="2">
+
+                    <TextBlock
+                        x:Name="PersonalBestScoreText"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
 
                     <!--  Play again button  -->
                     <Button

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AstroOdyssey
-{    
+{
     public sealed partial class ShipSelectionPage : Page
     {
         #region Fields
 
         private PlayerShip selectedShip;
+        private readonly IAudioHelper _audioHelper;
 
         #endregion
 
@@ -21,6 +23,8 @@ namespace AstroOdyssey
         {
             InitializeComponent();
             Loaded += ShipSelectionPage_Loaded;
+
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -54,7 +58,7 @@ namespace AstroOdyssey
         {
             if (selectedShip is not null)
             {
-                AudioHelper.PlaySound(SoundType.MENU_SELECT);
+                _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
 
                 await this.PlayPageUnLoadedTransition();
@@ -89,5 +93,5 @@ namespace AstroOdyssey
         }
 
         #endregion
-    } 
+    }
 }

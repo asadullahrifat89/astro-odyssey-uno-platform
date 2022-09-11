@@ -72,13 +72,13 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public IServiceProvider Container { get; }
+        public static IServiceProvider Container { get; set; }
 
         public static PlayerAuthCredentials AuthCredentials { get; set; }
 
         public static GameProfile GameProfile { get; set; }
 
-        public static AuthToken AuthToken { get; set; }        
+        public static AuthToken AuthToken { get; set; }
 
         public static PlayerScore GameScore { get; set; }
 
@@ -206,15 +206,16 @@ namespace AstroOdyssey
 
         #region Methods
 
-        IServiceProvider ConfigureDependencyInjection()
+        private IServiceProvider ConfigureDependencyInjection()
         {
             // Create new service collection which generates the IServiceProvider
             var serviceCollection = new ServiceCollection();
-            
+
             // Register the MessageService with the container
             serviceCollection.AddHttpService(lifeTime: 300, retryCount: 2, retryWait: 1);
             serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
             serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
+            serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();
@@ -322,7 +323,7 @@ namespace AstroOdyssey
                 }
             }
         }
-        
+
         /// <summary>
         /// Navigate to provided page.
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace AstroOdyssey
 {
@@ -20,13 +21,15 @@ namespace AstroOdyssey
         private double _meteorSpawnDelay = 55;
         private double _meteorSpeed = 1.5;
 
+        private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
 
         public MeteorFactory(GameEnvironment gameEnvironment)
         {
-            _gameEnvironment = gameEnvironment;
+            _gameEnvironment = gameEnvironment; 
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -139,7 +142,7 @@ namespace AstroOdyssey
         public void DestroyMeteor(Meteor meteor)
         {
             meteor.IsMarkedForFadedDestruction = true;
-            AudioHelper.PlaySound(SoundType.METEOR_DESTRUCTION);
+            _audioHelper.PlaySound(SoundType.METEOR_DESTRUCTION);
         }
 
         /// <summary>

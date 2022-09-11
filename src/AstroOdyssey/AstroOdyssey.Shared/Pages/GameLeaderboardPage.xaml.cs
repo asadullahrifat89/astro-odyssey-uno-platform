@@ -17,9 +17,10 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly IAudioHelper _audioHelper;
 
         private int _pageIndex = 0;
-        private int _pageSize = 10;
+        private int _pageSize = 15;
         private long _totalPageCount = 0;
 
         public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
@@ -31,11 +32,10 @@ namespace AstroOdyssey
         public GameLeaderboardPage()
         {
             this.InitializeComponent();
-            Loaded += GameLeaderboardPage_Loaded;
+            Loaded += GameLeaderboardPage_Loaded;           
 
-            // Get a local instance of the container
-            var container = ((App)App.Current).Container;
-            _gameApiHelper = (IGameApiHelper)ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(GameApiHelper));
+            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _audioHelper = App.Container.GetService<IAudioHelper>();
 
             LeaderboardList.ItemsSource = GameProfiles;
         }
@@ -47,7 +47,6 @@ namespace AstroOdyssey
         private async void GameLeaderboardPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + (App.GameScore is null ? 0 : App.GameScore.Score);
 
             await this.PlayPageLoadedTransition();
 
@@ -71,13 +70,9 @@ namespace AstroOdyssey
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
-
             App.NavigateToPage(typeof(ShipSelectionPage));
-
-            AudioHelper.PlaySound(SoundType.GAME_INTRO);
         }
 
         #endregion
@@ -104,7 +99,8 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            //TODO: show personal best in UI           
+            PersonalBestScoreText.Text = LocalizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
+            ScoreText.Text = LocalizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
 
             return true;
         }
@@ -140,9 +136,11 @@ namespace AstroOdyssey
                     GameProfiles.Add(record);
                 }
 
+                // king of the ring
                 GameProfiles[0].Emoji = "👑";
 
-                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName) is GameProfile gameProfile)
+                // indicate current player
+                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName || x.User.UserEmail == App.AuthCredentials.UserName) is GameProfile gameProfile)
                 {
                     gameProfile.Emoji = "👨‍🚀";
                 }

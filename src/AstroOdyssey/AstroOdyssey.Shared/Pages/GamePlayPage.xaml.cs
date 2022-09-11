@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
 using static AstroOdyssey.Constants;
 using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AstroOdyssey
 {
@@ -57,6 +58,7 @@ namespace AstroOdyssey
         private readonly PlayerProjectileFactory _playerProjectileFactory;
         private readonly EnemyProjectileFactory _enemyProjectileFactory;
 
+        private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
@@ -84,6 +86,8 @@ namespace AstroOdyssey
             _playerFactory = new PlayerFactory(GameView);
             _playerProjectileFactory = new PlayerProjectileFactory(GameView);
             _enemyProjectileFactory = new EnemyProjectileFactory(GameView);
+
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -260,7 +264,7 @@ namespace AstroOdyssey
             }
             else
             {
-                AudioHelper.PlaySound(SoundType.MENU_SELECT);
+                _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 IsGameQuitting = true;
                 ShowInGameText($"🛸\n{LocalizationHelper.GetLocalizedResource("QUIT_GAME")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
 
@@ -393,9 +397,9 @@ namespace AstroOdyssey
             FPSText.Visibility = Visibility.Collapsed;
             ObjectsCountText.Visibility = Visibility.Collapsed;
 #endif
-            AudioHelper.StopSound();
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            AudioHelper.PlaySound(SoundType.GAME_START);
+            _audioHelper.StopSound();
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.GAME_START);
 
             SpawnPlayer();
 
@@ -413,12 +417,12 @@ namespace AstroOdyssey
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
 
-            SetStars();                   
+            SetStars();
 
             WarpThroughSpace();
-            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+            _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
 
-            await RunGame();          
+            await RunGame();
         }
 
         /// <summary>
@@ -479,7 +483,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Dispose();
 
-            AudioHelper.StopSound();
+            _audioHelper.StopSound();
         }
 
         /// <summary>
@@ -526,11 +530,11 @@ namespace AstroOdyssey
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Visible;
 
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            AudioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
+            _audioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
             if (GameView.IsBossEngaged)
-                AudioHelper.PauseSound(SoundType.BOSS_APPEARANCE);
+                _audioHelper.PauseSound(SoundType.BOSS_APPEARANCE);
         }
 
         /// <summary>
@@ -547,11 +551,11 @@ namespace AstroOdyssey
             PauseGameButton.Visibility = Visibility.Visible;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            AudioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
 
             if (GameView.IsBossEngaged)
-                AudioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
+                _audioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
 
             await RunGame();
         }
@@ -1105,7 +1109,7 @@ namespace AstroOdyssey
         {
             StopGame();
 
-            AudioHelper.PlaySound(SoundType.GAME_OVER);
+            _audioHelper.PlaySound(SoundType.GAME_OVER);
 
             App.SetScore(GameScore);
 
@@ -1429,8 +1433,8 @@ namespace AstroOdyssey
                 {
                     WarpThroughSpace();
                     ShowInGameText($"👊 {LocalizationHelper.GetLocalizedResource("ENEMY_APPROACHES")}");
-                    AudioHelper.PlaySound(SoundType.ENEMY_INCOMING);
-                    AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+                    _audioHelper.PlaySound(SoundType.ENEMY_INCOMING);
+                    _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                     SetGameLevelText();
                 }
             }

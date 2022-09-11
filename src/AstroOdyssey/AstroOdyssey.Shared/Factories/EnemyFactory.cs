@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.ComponentModel;
 
 namespace AstroOdyssey
 {
@@ -31,6 +33,7 @@ namespace AstroOdyssey
         private double _enemySpawnDelay = 48;
         private double _enemySpeed = 2;
 
+        private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
@@ -38,6 +41,7 @@ namespace AstroOdyssey
         public EnemyFactory(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -86,8 +90,8 @@ namespace AstroOdyssey
 
             _gameEnvironment.IsBossEngaged = true;
 
-            AudioHelper.StopSound();
-            AudioHelper.PlaySound(SoundType.BOSS_APPEARANCE);
+            _audioHelper.StopSound();
+            _audioHelper.PlaySound(SoundType.BOSS_APPEARANCE);
 
             return enemy;
         }
@@ -98,9 +102,9 @@ namespace AstroOdyssey
         public void DisengageBossEnemy()
         {
             _gameEnvironment.IsBossEngaged = false;
-            AudioHelper.StopSound();
-            AudioHelper.PlaySound(SoundType.BOSS_DESTRUCTION);
-            AudioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+            _audioHelper.StopSound();
+            _audioHelper.PlaySound(SoundType.BOSS_DESTRUCTION);
+            _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
         }
 
         /// <summary>
@@ -312,7 +316,7 @@ namespace AstroOdyssey
         public void DestroyEnemy(Enemy enemy)
         {
             enemy.IsMarkedForFadedDestruction = true;
-            AudioHelper.PlaySound(SoundType.ENEMY_DESTRUCTION);
+            _audioHelper.PlaySound(SoundType.ENEMY_DESTRUCTION);
         }
 
         /// <summary>

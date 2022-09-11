@@ -1,4 +1,5 @@
-﻿using static AstroOdyssey.Constants;
+﻿using Microsoft.Extensions.DependencyInjection;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -30,6 +31,7 @@ namespace AstroOdyssey
 
         private int _xSide = 15;
 
+        private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
@@ -37,6 +39,7 @@ namespace AstroOdyssey
         public PlayerProjectileFactory(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -140,20 +143,20 @@ namespace AstroOdyssey
                 switch (powerUpType)
                 {
                     case PowerUpType.NONE:
-                        AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
+                        _audioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
                         break;
                     case PowerUpType.BLAZE_BLITZ:
-                        AudioHelper.PlaySound(SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE);
+                        _audioHelper.PlaySound(SoundType.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE);
                         _xSide = _xSide * -1;
                         break;
                     case PowerUpType.PLASMA_BOMB:
-                        AudioHelper.PlaySound(SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE);
+                        _audioHelper.PlaySound(SoundType.PLAYER_PLASMA_BOMB_ROUNDS_FIRE);
                         break;
                     case PowerUpType.BEAM_CANNON:
-                        AudioHelper.PlaySound(SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE);
+                        _audioHelper.PlaySound(SoundType.PLAYER_BEAM_CANNON_ROUNDS_FIRE);
                         break;
                     case PowerUpType.SONIC_BLAST:
-                        AudioHelper.PlaySound(SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE);
+                        _audioHelper.PlaySound(SoundType.PLAYER_SONIC_BLAST_ROUNDS_FIRE);
                         break;
                     default:
                         break;
@@ -161,7 +164,7 @@ namespace AstroOdyssey
             }
             else
             {
-                AudioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
+                _audioHelper.PlaySound(SoundType.PLAYER_ROUNDS_FIRE);
             }
         }
 
@@ -274,7 +277,7 @@ namespace AstroOdyssey
                     destructible.LooseHealth();
                 }
 
-                AudioHelper.PlaySound(SoundType.ROUNDS_HIT);
+                _audioHelper.PlaySound(SoundType.ROUNDS_HIT);
 
                 switch (destructible.Tag)
                 {

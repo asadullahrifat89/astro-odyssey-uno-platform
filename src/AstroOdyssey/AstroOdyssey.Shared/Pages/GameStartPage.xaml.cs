@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -14,12 +15,19 @@ namespace AstroOdyssey
     /// </summary>
     public sealed partial class GameStartPage : Page
     {
+        #region Fields
+
+        private readonly IAudioHelper _audioHelper; 
+
+        #endregion
+
         #region Ctor
 
         public GameStartPage()
         {
             InitializeComponent();
-            Loaded += StartPage_Loaded;
+            Loaded += StartPage_Loaded;            
+            _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
@@ -28,7 +36,8 @@ namespace AstroOdyssey
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.GAME_INTRO);
+            _audioHelper.StopSound();
+            _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             SetLocalization();
 
@@ -128,7 +137,7 @@ namespace AstroOdyssey
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -147,14 +156,15 @@ namespace AstroOdyssey
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
             App.NavigateToPage(typeof(GameSignupPage));
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
-
             App.NavigateToPage(typeof(GameLoginPage));
         }
 
