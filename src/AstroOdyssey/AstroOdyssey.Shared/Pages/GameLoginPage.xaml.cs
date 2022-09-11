@@ -146,11 +146,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                    progressBar: GameLoginPage_ProgressBar,
-                    errorContainer: GameLoginPage_ErrorText,
-                    error: error,
-                    GameLoginPage_LoginButton,
-                    GameLoginPage_RegisterButton);
+                     progressBar: _progressBar,
+                     errorContainer: _errorContainer,
+                     error: error,
+                     actionButtons: _actionButtons);
 
                 return false;
             }
@@ -175,11 +174,10 @@ namespace AstroOdyssey
             {
                 var error = recordResponse.Errors.Errors;
                 this.ShowError(
-                  progressBar: GameLoginPage_ProgressBar,
-                  errorContainer: GameLoginPage_ErrorText,
-                  error: string.Join("\n", error),
-                  GameLoginPage_LoginButton,
-                  GameLoginPage_RegisterButton);
+                   progressBar: _progressBar,
+                   errorContainer: _errorContainer,
+                   error: string.Join("\n", error),
+                   actionButtons: _actionButtons);
 
                 return false;
             }
@@ -199,11 +197,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                     progressBar: GameLoginPage_ProgressBar,
-                     errorContainer: GameLoginPage_ErrorText,
+                     progressBar: _progressBar,
+                     errorContainer: _errorContainer,
                      error: error,
-                     GameLoginPage_LoginButton,
-                     GameLoginPage_RegisterButton);
+                     actionButtons: _actionButtons);
 
                 return false;
             }
@@ -221,11 +218,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                    progressBar: GameLoginPage_ProgressBar,
-                    errorContainer: GameLoginPage_ErrorText,
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
                     error: error,
-                    GameLoginPage_LoginButton,
-                    GameLoginPage_RegisterButton);
+                    actionButtons: _actionButtons);
 
                 return false;
             }

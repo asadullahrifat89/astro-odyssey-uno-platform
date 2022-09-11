@@ -132,13 +132,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                    progressBar: GameOverPage_ProgressBar,
-                    errorContainer: GameOverPage_ErrorText,
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
                     error: error,
-                    GameOverPage_PlayAgainButton,
-                    GameLoginPage_LoginButton,
-                    GameOverPage_LeaderboardButton);
-
+                    actionButtons: _actionButtons);
 
                 return false;
             }

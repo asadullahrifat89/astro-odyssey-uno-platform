@@ -63,7 +63,7 @@ namespace AstroOdyssey
             await this.PlayPageLoadedTransition();
 
             // check for session
-            if (CacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
+            if (CacheHelper.GetCachedSession() is Session session && session.ExpiresOn > DateTime.UtcNow && await ValidateSession(session))
             {
                 await GetGameProfile();
 
@@ -122,6 +122,7 @@ namespace AstroOdyssey
 
             // delete session
             CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+            App.AuthToken = null;
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
@@ -246,19 +247,16 @@ namespace AstroOdyssey
 
         private async Task<bool> GetGameProfile()
         {
-            // get game profile
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
             {
                 var error = recordResponse.Errors.Errors;
                 this.ShowError(
-                  progressBar: GameStartPage_ProgressBar,
-                  errorContainer: GameStartPage_ErrorText,
+                  progressBar: _progressBar,
+                  errorContainer: _errorContainer,
                   error: string.Join("\n", error),
-                  GameLoginPage_LoginButton,
-                  GameLoginPage_RegisterButton,
-                  GameStartPage_LogoutButton);
+                  actionButtons: _actionButtons);
 
                 return false;
             }
