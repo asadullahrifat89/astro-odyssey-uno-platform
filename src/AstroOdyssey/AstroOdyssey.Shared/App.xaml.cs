@@ -110,7 +110,7 @@ namespace AstroOdyssey
             _window = new Window();
             _window.Activate();
 #else
-            _window = Microsoft.UI.Xaml.Window.Current;
+            _window = Window.Current;
 #endif
             var rootFrame = _window.Content as Frame;
 

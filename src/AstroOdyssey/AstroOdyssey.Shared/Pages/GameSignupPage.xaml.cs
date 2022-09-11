@@ -168,7 +168,7 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            CacheHelper.SetCachedAuthCredentials(
+            CacheHelper.SetCachedPlayerCredentials(
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
