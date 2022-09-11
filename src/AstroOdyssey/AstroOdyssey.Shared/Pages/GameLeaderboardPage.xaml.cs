@@ -136,9 +136,11 @@ namespace AstroOdyssey
                     GameProfiles.Add(record);
                 }
 
+                // king of the ring
                 GameProfiles[0].Emoji = "👑";
 
-                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName) is GameProfile gameProfile)
+                // indicate current player
+                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName || x.User.UserEmail == App.AuthCredentials.UserName) is GameProfile gameProfile)
                 {
                     gameProfile.Emoji = "👨‍🚀";
                 }
