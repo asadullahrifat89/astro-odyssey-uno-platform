@@ -28,7 +28,7 @@
                     Margin="2,0"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
-                    Text="{Binding Path=User.UserName, Mode=OneWay}"
+                    Text="{Binding Path=DisplayName, Mode=OneWay}"
                     TextAlignment="Left" />
                 <TextBlock
                     Grid.Column="2"

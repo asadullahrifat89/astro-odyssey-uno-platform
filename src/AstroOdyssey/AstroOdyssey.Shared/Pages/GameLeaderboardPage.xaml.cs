@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -84,7 +85,7 @@ namespace AstroOdyssey
         #region Methods
 
         private async Task<bool> GetGameProfile()
-        {   
+        {
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -109,7 +110,7 @@ namespace AstroOdyssey
         }
 
         private async Task<bool> GetGameProfiles()
-        {   
+        {
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: _pageIndex, pageSize: _pageSize);
 
             if (!recordsResponse.IsSuccess)
@@ -138,7 +139,14 @@ namespace AstroOdyssey
                 {
                     GameProfiles.Add(record);
                 }
-            }            
+
+                GameProfiles[0].Emoji = "👑";
+
+                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName) is GameProfile gameProfile)
+                {
+                    gameProfile.Emoji = "👨‍🚀";
+                }
+            }
 
             return true;
         }
