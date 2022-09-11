@@ -3,8 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Windows.Storage;
 
 namespace AstroOdyssey
 {

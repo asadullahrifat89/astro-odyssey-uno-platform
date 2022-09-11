@@ -1,8 +1,4 @@
-﻿using System;
-using System.Net.Mail;
-using Windows.Foundation;
-
-namespace AstroOdyssey
+﻿namespace AstroOdyssey
 {
     public static class Constants
     {

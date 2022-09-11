@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Windows.Gaming.Input;
-using Windows.System;
 
 namespace AstroOdyssey
 {
