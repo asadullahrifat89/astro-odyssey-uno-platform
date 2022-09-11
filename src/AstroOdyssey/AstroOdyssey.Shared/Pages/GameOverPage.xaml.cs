@@ -39,7 +39,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + App.GameScore.Score;
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
 
             EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
             MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;

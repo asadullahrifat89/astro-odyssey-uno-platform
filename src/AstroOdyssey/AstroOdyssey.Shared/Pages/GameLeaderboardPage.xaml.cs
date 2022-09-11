@@ -19,7 +19,7 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
 
         private int _pageIndex = 0;
-        private int _pageSize = 10;
+        private int _pageSize = 15;
         private long _totalPageCount = 0;
 
         public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
@@ -47,7 +47,6 @@ namespace AstroOdyssey
         private async void GameLeaderboardPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} " + (App.GameScore is null ? 0 : App.GameScore.Score);
 
             await this.PlayPageLoadedTransition();
 
@@ -104,7 +103,8 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            //TODO: show personal best in UI           
+            PersonalBestScoreText.Text = LocalizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
+            ScoreText.Text = LocalizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
 
             return true;
         }

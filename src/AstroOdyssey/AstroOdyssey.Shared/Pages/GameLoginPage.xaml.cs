@@ -80,7 +80,8 @@ namespace AstroOdyssey
             this.RunProgressBar(
                 progressBar: GameLoginPage_ProgressBar,
                 errorContainer: GameLoginPage_ErrorText,
-                actionButtons: GameLoginPage_LoginButton);
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton);
 
             if (!await Authenticate())
                 return;
@@ -98,7 +99,8 @@ namespace AstroOdyssey
 
             this.StopProgressBar(
                 progressBar: GameLoginPage_ProgressBar,
-                actionButtons: GameLoginPage_LoginButton);
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -119,7 +121,8 @@ namespace AstroOdyssey
                     progressBar: GameLoginPage_ProgressBar,
                     errorContainer: GameLoginPage_ErrorText,
                     error: error,
-                    actionButtons: GameLoginPage_LoginButton);
+                    GameLoginPage_LoginButton,
+                    GameLoginPage_RegisterButton);
 
                 return false;
             }
@@ -148,7 +151,8 @@ namespace AstroOdyssey
                   progressBar: GameLoginPage_ProgressBar,
                   errorContainer: GameLoginPage_ErrorText,
                   error: string.Join("\n", error),
-                  actionButtons: GameLoginPage_LoginButton);
+                  GameLoginPage_LoginButton,
+                  GameLoginPage_RegisterButton);
 
                 return false;
             }
@@ -165,7 +169,8 @@ namespace AstroOdyssey
             this.RunProgressBar(
                 progressBar: GameLoginPage_ProgressBar,
                 errorContainer: GameLoginPage_ErrorText,
-                actionButtons: GameLoginPage_LoginButton);
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton);
 
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
@@ -176,7 +181,8 @@ namespace AstroOdyssey
                      progressBar: GameLoginPage_ProgressBar,
                      errorContainer: GameLoginPage_ErrorText,
                      error: error,
-                     actionButtons: GameLoginPage_LoginButton);
+                     GameLoginPage_LoginButton,
+                     GameLoginPage_RegisterButton);
 
                 return false;
             }

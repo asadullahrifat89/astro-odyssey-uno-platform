@@ -91,7 +91,8 @@ namespace AstroOdyssey
             this.RunProgressBar(
                 progressBar: GameSignupPage_ProgressBar,
                 errorContainer: GameSignupPage_ErrorText,
-                actionButtons: GameSignupPage_SignupButton);
+                GameSignupPage_SignupButton,
+                GameSignupPage_LoginButton);
 
             if (!await Signup())
                 return;
@@ -101,7 +102,8 @@ namespace AstroOdyssey
 
             this.StopProgressBar(
                 progressBar: GameSignupPage_ProgressBar,
-                actionButtons: GameSignupPage_SignupButton);
+                GameSignupPage_SignupButton,
+                GameSignupPage_LoginButton);
 
             // redirect to login page
             await this.PlayPageUnLoadedTransition();
@@ -123,7 +125,8 @@ namespace AstroOdyssey
                     progressBar: GameSignupPage_ProgressBar,
                     errorContainer: GameSignupPage_ErrorText,
                     error: error,
-                    actionButtons: GameSignupPage_SignupButton);
+                    GameSignupPage_SignupButton,
+                    GameSignupPage_LoginButton);
 
                 return false;
             }
