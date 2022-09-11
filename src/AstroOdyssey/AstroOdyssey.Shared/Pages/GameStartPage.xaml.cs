@@ -39,22 +39,25 @@ namespace AstroOdyssey
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
+            this.RunProgressBar(
+                progressBar: GameStartPage_ProgressBar,
+                errorContainer: GameStartPage_ErrorText,
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton,
+                GameStartPage_LogoutButton);
+
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayPageLoadedTransition();            
 
-            PreloadAssets();
-
-#if DEBUG
-            Console.WriteLine(App.AuthToken?.AccessToken);
-#endif
-
-            //TODO: check for session
+            // check for session
             if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
             {
+                await GetGameProfile();
+
                 // make logout button visible
                 GameStartPage_LogoutButton.Visibility = Visibility.Visible;
                 GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
@@ -62,11 +65,22 @@ namespace AstroOdyssey
             }
             else
             {
+                // if session is not valid then remove it
+                AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+
                 // make login button visible
                 GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
                 GameLoginPage_LoginButton.Visibility = Visibility.Visible;
                 GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
             }
+
+            this.StopProgressBar(
+                progressBar: GameStartPage_ProgressBar,
+                GameLoginPage_LoginButton,
+                GameLoginPage_RegisterButton,
+                GameStartPage_LogoutButton);
+
+            PreloadAssets();
         }
 
         private async void PreloadAssets()
@@ -217,6 +231,32 @@ namespace AstroOdyssey
             // store auth token
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
+
+            return true;
+        }
+
+        private async Task<bool> GetGameProfile()
+        {
+            // get game profile
+            var recordResponse = await _gameApiHelper.GetGameProfile();
+
+            if (!recordResponse.IsSuccess)
+            {
+                var error = recordResponse.Errors.Errors;
+                this.ShowError(
+                  progressBar: GameStartPage_ProgressBar,
+                  errorContainer: GameStartPage_ErrorText,
+                  error: string.Join("\n", error),
+                  GameLoginPage_LoginButton,
+                  GameLoginPage_RegisterButton,
+                  GameStartPage_LogoutButton);
+
+                return false;
+            }
+
+            // store game profile
+            var gameProfile = recordResponse.Result;
+            App.GameProfile = gameProfile;
 
             return true;
         }

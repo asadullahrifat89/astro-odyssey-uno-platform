@@ -207,7 +207,9 @@ namespace AstroOdyssey
 
         private async Task<bool> GenerateSession()
         {
-            ServiceResponse response = await _gameApiHelper.GenerateSession(Constants.GAME_ID, App.GameProfile.User.UserId);
+            ServiceResponse response = await _gameApiHelper.GenerateSession(
+                gameId: Constants.GAME_ID,
+                userId: App.GameProfile.User.UserId);
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {

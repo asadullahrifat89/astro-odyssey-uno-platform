@@ -75,6 +75,13 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(ShipSelectionPage));
         }
 
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
+        }
+
         #endregion
 
         #region Methods
@@ -129,8 +136,7 @@ namespace AstroOdyssey
                 _totalPageCount = PaginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
 
                 var records = result.Records;
-
-                //TODO: show game profiles in UI
+                
                 foreach (var record in records)
                 {
                     GameProfiles.Add(record);

@@ -163,23 +163,6 @@ namespace AstroOdyssey
                 : response.ErrorResponse;
         }
 
-        private async Task RefreshAuthToken()
-        {
-            // if token has expired or will expire in 10 secs, get a new token
-            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
-            {
-                var response = await ValidateSession(
-                    gameId: Constants.GAME_ID,
-                    sessionId: session.SessionId);
-
-                if (response.HttpStatusCode == HttpStatusCode.OK)
-                {
-                    var authToken = ParseResult<AuthToken>(response.Result);
-                    App.AuthToken = authToken;
-                }
-            }
-        }
-
         public async Task<ServiceResponse> GenerateSession(string gameId, string userId)
         {
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
@@ -201,19 +184,36 @@ namespace AstroOdyssey
         public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
         {
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
-            baseUrl: Constants.GAME_API_BASEURL,
-            path: Constants.Action_ValidateSession,
-            httpHeaders: new Dictionary<string, string>(),
-            httpMethod: HttpMethod.Post,
-            payload: new
-            {
-                GameId = gameId,
-                SessionId = sessionId,
-            });
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_ValidateSession,
+                httpHeaders: new Dictionary<string, string>(),
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    GameId = gameId,
+                    SessionId = sessionId,
+                });
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
                 : response.ErrorResponse;
+        }
+
+        private async Task RefreshAuthToken()
+        {
+            // if token has expired or will expire in 10 secs, get a new token
+            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
+            {
+                var response = await ValidateSession(
+                    gameId: Constants.GAME_ID,
+                    sessionId: session.SessionId);
+
+                if (response.HttpStatusCode == HttpStatusCode.OK)
+                {
+                    var authToken = ParseResult<AuthToken>(response.Result);
+                    App.AuthToken = authToken;
+                }
+            }
         }
 
         #endregion
