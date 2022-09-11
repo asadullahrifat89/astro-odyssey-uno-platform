@@ -20,6 +20,10 @@ namespace AstroOdyssey
         private readonly IAudioHelper _audioHelper;
         private readonly IGameApiHelper _gameApiHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -31,6 +35,10 @@ namespace AstroOdyssey
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+
+            _progressBar = GameStartPage_ProgressBar;
+            _errorContainer = GameStartPage_ErrorText;
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton };
         }
 
         #endregion
@@ -40,21 +48,22 @@ namespace AstroOdyssey
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.RunProgressBar(
-                progressBar: GameStartPage_ProgressBar,
-                errorContainer: GameStartPage_ErrorText,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton,
-                GameStartPage_LogoutButton);
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
+            if (CacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
+                App.CurrentCulture = language;
+
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();            
+            await this.PlayPageLoadedTransition();
 
             // check for session
-            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
+            if (CacheHelper.GetCachedSession() is Session session && await ValidateSession(session))
             {
                 await GetGameProfile();
 
@@ -66,7 +75,7 @@ namespace AstroOdyssey
             else
             {
                 // if session is not valid then remove it
-                AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+                CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
 
                 // make login button visible
                 GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
@@ -75,10 +84,8 @@ namespace AstroOdyssey
             }
 
             this.StopProgressBar(
-                progressBar: GameStartPage_ProgressBar,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton,
-                GameStartPage_LogoutButton);
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
 
             PreloadAssets();
         }
@@ -91,15 +98,6 @@ namespace AstroOdyssey
 
             App.NavigateToPage(typeof(ShipSelectionPage));
             App.EnterFullScreen(true);
-        }
-
-        private void LanguageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as Button)?.Tag is string tag)
-            {
-                App.CurrentCulture = tag;
-                SetLocalization();
-            }
         }
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -123,12 +121,21 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             // delete session
-            AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+            CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
         }
 
+        private void LanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as Button)?.Tag is string tag)
+            {
+                App.CurrentCulture = tag;
+                SetLocalization();
+                CacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
+            }
+        }
 
         #endregion
 
@@ -227,7 +234,7 @@ namespace AstroOdyssey
         {
             ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
                 return false;
 
             // store auth token

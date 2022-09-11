@@ -1,16 +1,13 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json.Linq;
 using Windows.Storage;
 
 namespace AstroOdyssey
 {
-    public static class AuthCredentialsCacheHelper
+    public static class CacheHelper
     {
-        public static PlayerAuthCredentials GetCachedAuthCredentials()
-        {
-            // if user was already logged in or came here after sign up
+        public static PlayerCredentials GetCachedPlayerCredentials()
+        {            
             if (App.AuthCredentials is not null)
             {
                 App.AuthCredentials.Password = App.AuthCredentials.Password.Decrypt();
@@ -20,17 +17,29 @@ namespace AstroOdyssey
             return null;
         }
 
-        public static void SetCachedAuthCredentials(string userName, string password)
+        public static void SetCachedPlayerCredentials(string userName, string password)
         {
-            // store auth credentials
-            App.AuthCredentials = new PlayerAuthCredentials(
+            App.AuthCredentials = new PlayerCredentials(
                 userName: userName,
                 password: password.Encrypt());
         }
 
+        public static string GetCachedValue(string key)
+        {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            var localValue = localSettings.Values[key] as string;
+            return localValue;
+        }
+
+        public static void SetCachedValue(string key, string value)
+        {
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values[key] = value;
+        }
+
         public static void RemoveCachedValue(string key)
         {
-            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
             if (localSettings.Values.ContainsKey(key))
                 localSettings.Values.Remove(key);
@@ -38,7 +47,7 @@ namespace AstroOdyssey
 
         public static Session GetCachedSession()
         {
-            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values["Session"] as string;
 
             if (!localValue.IsNullOrBlank())
@@ -53,7 +62,7 @@ namespace AstroOdyssey
         public static void SetCachedSession(Session session)
         {
             // save in browser cache
-            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values["Session"] = JsonConvert.SerializeObject(session);
         }
     }

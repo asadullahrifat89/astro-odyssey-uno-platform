@@ -70,7 +70,7 @@ namespace AstroOdyssey
             this Page page,
             ProgressBar progressBar,
             TextBlock errorContainer, 
-            params Button[] actionButtons)
+            Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
@@ -87,7 +87,7 @@ namespace AstroOdyssey
         public static void StopProgressBar(
             this Page page,
             ProgressBar progressBar,
-            params Button[] actionButtons)
+            Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = true;

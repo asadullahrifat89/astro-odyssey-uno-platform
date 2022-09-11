@@ -100,7 +100,8 @@
                     Margin="40,0,40,10"
                     ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
 
-                <StackPanel Grid.Row="2">
+                <!--  personal best score, play now  -->
+                <StackPanel x:Name="ActionStack" Grid.Row="2">
 
                     <!--  Personal best score  -->
                     <TextBlock
@@ -110,7 +111,7 @@
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
 
-                    <!--  Play again button  -->
+                    <!--  Play now button  -->
                     <Button
                         x:Name="GameLeaderboardPage_PlayNowButton"
                         x:Uid="GameLeaderboardPage_PlayNowButton"

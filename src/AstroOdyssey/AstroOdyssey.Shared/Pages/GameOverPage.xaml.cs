@@ -18,6 +18,10 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -29,6 +33,10 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+
+            _progressBar = GameOverPage_ProgressBar;
+            _errorContainer = GameOverPage_ErrorText;
+            _actionButtons = new[] { GameOverPage_PlayAgainButton, GameLoginPage_LoginButton, GameOverPage_LeaderboardButton };
         }
 
         #endregion
@@ -65,11 +73,9 @@ namespace AstroOdyssey
             else // user has logged in so submit score
             {
                 this.RunProgressBar(
-                    progressBar: GameOverPage_ProgressBar,
-                    errorContainer: GameOverPage_ErrorText,
-                    GameOverPage_PlayAgainButton,
-                    GameLoginPage_LoginButton,
-                    GameOverPage_LeaderboardButton);
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
+                    actionButtons: _actionButtons);
 
                 // submit score
                 await SubmitScore();
@@ -77,10 +83,8 @@ namespace AstroOdyssey
                 GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
 
                 this.StopProgressBar(
-                    progressBar: GameOverPage_ProgressBar,
-                    GameOverPage_PlayAgainButton,
-                    GameLoginPage_LoginButton,
-                    GameOverPage_LeaderboardButton);
+                    progressBar: _progressBar,
+                    actionButtons: _actionButtons);
             }
 
             await this.PlayPageLoadedTransition();
@@ -112,7 +116,7 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
-            
+
             App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
@@ -124,9 +128,9 @@ namespace AstroOdyssey
         {
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameOverPage_ProgressBar,
                     errorContainer: GameOverPage_ErrorText,
@@ -134,11 +138,11 @@ namespace AstroOdyssey
                     GameOverPage_PlayAgainButton,
                     GameLoginPage_LoginButton,
                     GameOverPage_LeaderboardButton);
-                
+
 
                 return false;
             }
-        
+
             return true;
         }
 

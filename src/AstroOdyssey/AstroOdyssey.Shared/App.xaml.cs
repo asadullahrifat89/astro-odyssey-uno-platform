@@ -74,7 +74,7 @@ namespace AstroOdyssey
 
         public static IServiceProvider Container { get; set; }
 
-        public static PlayerAuthCredentials AuthCredentials { get; set; }
+        public static PlayerCredentials AuthCredentials { get; set; }
 
         public static GameProfile GameProfile { get; set; }
 
@@ -110,7 +110,7 @@ namespace AstroOdyssey
             _window = new Window();
             _window.Activate();
 #else
-            _window = Microsoft.UI.Xaml.Window.Current;
+            _window = Window.Current;
 #endif
             var rootFrame = _window.Content as Frame;
 

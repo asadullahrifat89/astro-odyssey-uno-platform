@@ -43,7 +43,6 @@ namespace AstroOdyssey
         private int _showInGameImagePanelSpawnCounter = 110;
         private int _showInGameImagePanelDelay = 110;
 
-        private double _defaultFrameTime = 17;
         private double _frameTime;
 
         private double _windowWidth, _windowHeight;
@@ -495,7 +494,7 @@ namespace AstroOdyssey
             StarView.SetSize(_windowHeight, _windowWidth);
             PlanetView.SetSize(_windowHeight, _windowWidth);
 
-            _frameTime = _defaultFrameTime /*+ (_windowWidth <= 500 ? 2 : 0)*/; // run a little slower on phones as phones have a faster timer
+            _frameTime = DEFAULT_FRAME_TIME;
 
             // resize player size
             if (IsGameRunning)

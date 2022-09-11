@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using Windows.Storage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -20,6 +19,10 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
 
+        private readonly ProgressBar _progressBar;
+        private readonly TextBlock _errorContainer;
+        private readonly Button[] _actionButtons;
+
         #endregion
 
         #region Ctor
@@ -31,6 +34,10 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+
+            _progressBar = GameLoginPage_ProgressBar;
+            _errorContainer = GameLoginPage_ErrorText;
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton };
         }
 
         #endregion
@@ -41,7 +48,8 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            if (AuthCredentialsCacheHelper.GetCachedAuthCredentials() is PlayerAuthCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            // if user was already logged in or came here after sign up
+            if (CacheHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
@@ -84,6 +92,14 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameSignupPage));
         }
 
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameStartPage));
+        }
+
+
         #endregion
 
         #region Methods
@@ -91,10 +107,9 @@ namespace AstroOdyssey
         private async Task PerformLogin()
         {
             this.RunProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                errorContainer: GameLoginPage_ErrorText,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton);
+                progressBar: _progressBar,
+                errorContainer: _errorContainer,
+                actionButtons: _actionButtons);
 
             if (!await Authenticate())
                 return;
@@ -107,16 +122,13 @@ namespace AstroOdyssey
 
             if (App.GameScoreSubmissionPending)
             {
-                if (!await SubmitScore())
-                    return;
-
-                App.GameScoreSubmissionPending = false;
+                if (await SubmitScore())
+                    App.GameScoreSubmissionPending = false;
             }
 
             this.StopProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton);
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayPageUnLoadedTransition();
@@ -130,9 +142,9 @@ namespace AstroOdyssey
                 userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameLoginPage_ProgressBar,
                     errorContainer: GameLoginPage_ErrorText,
@@ -147,7 +159,7 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            AuthCredentialsCacheHelper.SetCachedAuthCredentials(
+            CacheHelper.SetCachedPlayerCredentials(
                 userName: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
@@ -181,17 +193,11 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            this.RunProgressBar(
-                progressBar: GameLoginPage_ProgressBar,
-                errorContainer: GameLoginPage_ErrorText,
-                GameLoginPage_LoginButton,
-                GameLoginPage_RegisterButton);
-
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                      progressBar: GameLoginPage_ProgressBar,
                      errorContainer: GameLoginPage_ErrorText,
@@ -211,9 +217,9 @@ namespace AstroOdyssey
                 gameId: Constants.GAME_ID,
                 userId: App.GameProfile.User.UserId);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
-                var error = response.ExternalError;
+                var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: GameLoginPage_ProgressBar,
                     errorContainer: GameLoginPage_ErrorText,
@@ -226,7 +232,7 @@ namespace AstroOdyssey
 
             // store session
             var session = _gameApiHelper.ParseResult<Session>(response.Result);
-            AuthCredentialsCacheHelper.SetCachedSession(session);
+            CacheHelper.SetCachedSession(session);
 
             return true;
         }

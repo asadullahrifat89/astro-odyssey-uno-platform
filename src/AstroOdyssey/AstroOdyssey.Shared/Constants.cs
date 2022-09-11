@@ -1,12 +1,10 @@
-﻿using System;
-using System.Net.Mail;
-using Windows.Foundation;
-
-namespace AstroOdyssey
+﻿namespace AstroOdyssey
 {
     public static class Constants
     {
         #region Fields
+
+        public const double DEFAULT_FRAME_TIME = 18;
 
         public const double DESTRUCTIBLE_OBJECT_SIZE = 70;
         public const double COLLECTIBLE_OBJECT_SIZE = 90;
@@ -50,6 +48,9 @@ namespace AstroOdyssey
         public const string Action_GetGameProfiles = "/api/Query/GetGameProfiles";
         public const string Action_GetGameScores = "/api/Query/GetGameScores";
         public const string Action_GetUser = "/api/Query/GetUser";
+
+        public const string CACHE_SESSION_KEY = "Session";
+        public const string CACHE_LANGUAGE_KEY = "Language";
 
         #endregion
     }
