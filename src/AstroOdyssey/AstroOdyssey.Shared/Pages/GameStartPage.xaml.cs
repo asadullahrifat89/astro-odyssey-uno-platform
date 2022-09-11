@@ -83,6 +83,57 @@ namespace AstroOdyssey
             PreloadAssets();
         }
 
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayPageUnLoadedTransition();
+
+            App.NavigateToPage(typeof(ShipSelectionPage));
+            App.EnterFullScreen(true);
+        }
+
+        private void LanguageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as Button)?.Tag is string tag)
+            {
+                App.CurrentCulture = tag;
+                SetLocalization();
+            }
+        }
+
+        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameSignupPage));
+            App.EnterFullScreen(true);
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            await this.PlayPageUnLoadedTransition();
+            App.NavigateToPage(typeof(GameLoginPage));
+            App.EnterFullScreen(true);
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            // delete session
+            AuthCredentialsCacheHelper.RemoveCachedValue("Session");
+            GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+            GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
+        }
+
+
+        #endregion
+
+        #region Methods
+
         private async void PreloadAssets()
         {
             if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
@@ -171,55 +222,6 @@ namespace AstroOdyssey
                 AssetsPreloadGrid.Children.Add(gameOver);
             }
         }
-
-        private async void PlayButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayPageUnLoadedTransition();
-
-            App.NavigateToPage(typeof(ShipSelectionPage));
-            App.EnterFullScreen(true);
-        }
-
-        private void LanguageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if ((sender as Button)?.Tag is string tag)
-            {
-                App.CurrentCulture = tag;
-                SetLocalization();
-            }
-        }
-
-        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
-            App.NavigateToPage(typeof(GameSignupPage));
-        }
-
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
-            App.NavigateToPage(typeof(GameLoginPage));
-        }
-
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            // delete session
-            AuthCredentialsCacheHelper.RemoveCachedValue("Session");
-            GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
-            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
-            GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
-        }
-
-
-        #endregion
-
-        #region Methods
 
         private async Task<bool> ValidateSession(Session session)
         {
