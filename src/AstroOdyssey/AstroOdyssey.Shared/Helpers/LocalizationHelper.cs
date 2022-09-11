@@ -184,10 +184,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "SCORE", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Score"),
-                new ("bn", "স্কোর"),
-                new ("de", "Punktzahl"),
-                new ("fr", "Score"),
+                new ("en", "Your score"),
+                new ("bn", "আপনার ফলাফল"),
+                new ("de", "Ihr Ergebnis"),
+                new ("fr", "Ton score"),
             }),
             new LocalizationKey(key: "DESTROYED", cultureValues: new (string Culture, string Value)[]
             {
