@@ -24,6 +24,7 @@
     <_Globbed_Compile Remove="Components\Base\PlayerShipTemplate.cs" />
     <_Globbed_Compile Remove="Components\ComicBook.cs" />
     <_Globbed_Compile Remove="Constants.cs" />
+    <_Globbed_Compile Remove="Entities\Session.cs" />
     <_Globbed_Compile Remove="Extensions\GameObjectExtensions.cs" />
     <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />

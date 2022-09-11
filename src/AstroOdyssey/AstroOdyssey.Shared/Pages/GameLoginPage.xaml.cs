@@ -104,6 +104,9 @@ namespace AstroOdyssey
             if (!await GetGameProfile())
                 return;
 
+            if (!await GenerateSession())
+                return;
+
             if (App.GameScoreSubmissionPending)
             {
                 if (!await SubmitScore())
@@ -200,6 +203,30 @@ namespace AstroOdyssey
 
                 return false;
             }
+
+            return true;
+        }
+
+        private async Task<bool> GenerateSession()
+        {
+            ServiceResponse response = await _gameApiHelper.GenerateSession(Constants.GAME_ID, App.GameProfile.User.UserId);
+
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            {
+                var error = response.ExternalError;
+                this.ShowError(
+                    progressBar: GameLoginPage_ProgressBar,
+                    errorContainer: GameLoginPage_ErrorText,
+                    error: error,
+                    GameLoginPage_LoginButton,
+                    GameLoginPage_RegisterButton);
+
+                return false;
+            }
+
+            // store session
+            var session = _gameApiHelper.ParseResult<Session>(response.Result);
+            AuthCredentialsCacheHelper.SetCachedSession(session);
 
             return true;
         }

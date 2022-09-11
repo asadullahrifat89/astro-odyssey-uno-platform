@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\GameProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\GameScore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GameObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />

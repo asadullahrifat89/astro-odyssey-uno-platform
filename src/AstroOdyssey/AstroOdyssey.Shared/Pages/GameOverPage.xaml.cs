@@ -53,11 +53,11 @@ namespace AstroOdyssey
                 ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
 
 #if DEBUG
-            Console.WriteLine("AuthToken:" + App.AuthToken?.Token);
+            Console.WriteLine("AuthToken:" + App.AuthToken?.AccessToken);
 #endif
 
             // if user has not logged in
-            if (App.AuthToken is null || App.AuthToken.Token.IsNullOrBlank())
+            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank())
             {
                 GameLoginPage_LoginButton.Visibility = Visibility.Visible;
                 GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;

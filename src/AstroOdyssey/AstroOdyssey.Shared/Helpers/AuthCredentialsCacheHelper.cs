@@ -32,8 +32,6 @@ namespace AstroOdyssey
             //    }
             //}
 
-            //TODO: get cookie
-
             return null;
         }
 
@@ -44,11 +42,30 @@ namespace AstroOdyssey
                 userName: userName,
                 password: password.Encrypt());
 
-            //TODO: set cookie
-
             //// save in browser cache
             //ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             //localSettings.Values["AuthCredentials"] = JsonConvert.SerializeObject(App.AuthCredentials);
         }
+
+        public static Session GetCachedSession()
+        {
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            var localValue = localSettings.Values["Session"] as string;
+
+            if (!localValue.IsNullOrBlank())
+            {
+                var session = JsonConvert.DeserializeObject<Session>(localValue);
+                return session;
+            }
+
+            return null;
+        }
+
+        public static void SetCachedSession(Session session)
+        {
+            // save in browser cache
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["Session"] = JsonConvert.SerializeObject(session);
+        }       
     }
 }
