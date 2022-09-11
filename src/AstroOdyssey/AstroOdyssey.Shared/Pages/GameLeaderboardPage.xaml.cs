@@ -102,10 +102,10 @@ namespace AstroOdyssey
             {
                 var error = recordResponse.Errors.Errors;
                 this.ShowError(
-                    progressBar: GameLeaderboardPage_ProgressBar,
-                    errorContainer: GameLeaderboardPage_ErrorText,
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
                     error: string.Join("\n", error),
-                    actionButtons: GameLeaderboardPage_PlayNowButton);
+                    actionButtons: _actionButtons);
 
                 return false;
             }
@@ -128,10 +128,10 @@ namespace AstroOdyssey
             {
                 var error = recordsResponse.Errors.Errors;
                 this.ShowError(
-                    progressBar: GameLeaderboardPage_ProgressBar,
-                    errorContainer: GameLeaderboardPage_ErrorText,
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
                     error: string.Join("\n", error),
-                    actionButtons: GameLeaderboardPage_PlayNowButton);
+                    actionButtons: _actionButtons);
 
                 return false;
             }

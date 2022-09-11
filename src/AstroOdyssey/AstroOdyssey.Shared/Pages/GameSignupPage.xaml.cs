@@ -129,11 +129,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                    progressBar: GameSignupPage_ProgressBar,
-                    errorContainer: GameSignupPage_ErrorText,
-                    error: error,
-                    GameSignupPage_SignupButton,
-                    GameSignupPage_LoginButton);
+                     progressBar: _progressBar,
+                     errorContainer: _errorContainer,
+                     error: error,
+                     actionButtons: _actionButtons);
 
                 return false;
             }
@@ -156,10 +155,10 @@ namespace AstroOdyssey
             {
                 var error = response?.ExternalError;
                 this.ShowError(
-                    progressBar: GameSignupPage_ProgressBar,
-                    errorContainer: GameSignupPage_ErrorText,
+                    progressBar: _progressBar,
+                    errorContainer: _errorContainer,
                     error: error,
-                    actionButtons: GameSignupPage_SignupButton);
+                    actionButtons: _actionButtons);
 
                 return false;
             }

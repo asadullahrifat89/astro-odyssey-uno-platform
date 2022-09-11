@@ -72,7 +72,8 @@ namespace AstroOdyssey
 
         public async Task<ServiceResponse> SubmitGameScore(double score)
         {
-            await RefreshAuthToken();
+            if (!await RefreshAuthToken())
+                return new ServiceResponse() { HttpStatusCode = HttpStatusCode.Conflict, ExternalError = "Failed to refresh token." };
 
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
@@ -134,7 +135,8 @@ namespace AstroOdyssey
 
         public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
         {
-            await RefreshAuthToken();
+            if (!await RefreshAuthToken())
+                new QueryRecordResponse<GameProfile>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "Failed to refresh token." } });
 
             var response = await _httpRequestHelper.SendRequest<QueryRecordResponse<GameProfile>, QueryRecordResponse<GameProfile>>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -153,7 +155,8 @@ namespace AstroOdyssey
 
         public async Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(int pageIndex, int pageSize)
         {
-            await RefreshAuthToken();
+            if (!await RefreshAuthToken())
+                new QueryRecordsResponse<GameProfile>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "Failed to refresh token." } });
 
             var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameProfile>, QueryRecordsResponse<GameProfile>>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -174,7 +177,8 @@ namespace AstroOdyssey
 
         public async Task<QueryRecordsResponse<GameScore>> GetGameScores(int pageIndex, int pageSize)
         {
-            await RefreshAuthToken();
+            if (!await RefreshAuthToken())
+                new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "Failed to refresh token." } });
 
             var response = await _httpRequestHelper.SendRequest<QueryRecordsResponse<GameScore>, QueryRecordsResponse<GameScore>>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -193,21 +197,57 @@ namespace AstroOdyssey
                 : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
         }
 
-        private async Task RefreshAuthToken()
+        private async Task<bool> RefreshAuthToken()
         {
-            // if token has expired or will expire in 10 secs, get a new token
-            if (CacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
+            // if token expires in 20 secs or session expires in 1 min, get a new token
+            if (CacheHelper.GetCachedSession() is Session session && (DateTime.UtcNow.AddSeconds(20) > App.AuthToken.ExpiresOn || DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn))
             {
-                var response = await ValidateSession(
-                    gameId: Constants.GAME_ID,
-                    sessionId: session.SessionId);
+                // validate session and get new auth token
+                if (!await ValidateSession(session.SessionId))
+                    return false;
 
-                if (response.HttpStatusCode == HttpStatusCode.OK)
+                // if current session expires in 1 min, request a new session
+                if (DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn)
                 {
-                    var authToken = ParseResult<AuthToken>(response.Result);
-                    App.AuthToken = authToken;
+                    // with new auth token generate a new session and validate it, get new auth token for new session
+                    if (!await GenerateAndValidateSession())
+                        return false;
                 }
             }
+
+            return true;
+        }
+
+        private async Task<bool> GenerateAndValidateSession()
+        {
+            var response = await GenerateSession(gameId: Constants.GAME_ID, userId: App.GameProfile.User.UserId);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                var newSession = ParseResult<Session>(response.Result);
+                CacheHelper.SetCachedSession(newSession);
+
+                return await ValidateSession(newSession.SessionId);
+            }
+
+            return false;
+        }
+
+        private async Task<bool> ValidateSession(string sessionId)
+        {
+            var response = await ValidateSession(
+                gameId: Constants.GAME_ID,
+                sessionId: sessionId);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                var authToken = ParseResult<AuthToken>(response.Result);
+                App.AuthToken = authToken;
+
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

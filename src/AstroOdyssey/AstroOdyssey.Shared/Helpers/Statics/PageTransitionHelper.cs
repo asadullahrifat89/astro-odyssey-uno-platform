@@ -69,8 +69,8 @@ namespace AstroOdyssey
         public static void RunProgressBar(
             this Page page,
             ProgressBar progressBar,
-            TextBlock errorContainer, 
-            Button[] actionButtons)
+            TextBlock errorContainer,
+            params Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
@@ -87,7 +87,7 @@ namespace AstroOdyssey
         public static void StopProgressBar(
             this Page page,
             ProgressBar progressBar,
-            Button[] actionButtons)
+            params Button[] actionButtons)
         {
             progressBar.ShowError = false;
             progressBar.ShowPaused = true;
