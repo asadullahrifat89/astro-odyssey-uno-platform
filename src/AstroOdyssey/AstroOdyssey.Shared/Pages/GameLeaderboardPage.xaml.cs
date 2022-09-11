@@ -140,7 +140,7 @@ namespace AstroOdyssey
                 GameProfiles[0].Emoji = "👑";
 
                 // indicate current player
-                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.AuthCredentials.UserName || x.User.UserEmail == App.AuthCredentials.UserName) is GameProfile gameProfile)
+                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameProfile gameProfile)
                 {
                     gameProfile.Emoji = "👨‍🚀";
                 }

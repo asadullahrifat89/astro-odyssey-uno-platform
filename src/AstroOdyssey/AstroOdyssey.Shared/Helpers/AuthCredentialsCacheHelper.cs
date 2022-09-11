@@ -16,21 +16,6 @@ namespace AstroOdyssey
                 App.AuthCredentials.Password = App.AuthCredentials.Password.Decrypt();
                 return App.AuthCredentials;
             }
-            //else
-            //{
-            //    ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            //    var localValue = localSettings.Values["AuthCredentials"] as string;
-
-            //    if (!localValue.IsNullOrBlank())
-            //    {
-            //        var authCredentials = JsonConvert.DeserializeObject<PlayerAuthCredentials>(localValue);
-            //        if (authCredentials is not null)
-            //        {
-            //            authCredentials.Password = authCredentials.Password.Decrypt();
-            //            return authCredentials;
-            //        }
-            //    }
-            //}
 
             return null;
         }
@@ -41,10 +26,14 @@ namespace AstroOdyssey
             App.AuthCredentials = new PlayerAuthCredentials(
                 userName: userName,
                 password: password.Encrypt());
+        }
 
-            //// save in browser cache
-            //ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            //localSettings.Values["AuthCredentials"] = JsonConvert.SerializeObject(App.AuthCredentials);
+        public static void RemoveCachedValue(string key)
+        {
+            ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+            if (localSettings.Values.ContainsKey(key))
+                localSettings.Values.Remove(key);
         }
 
         public static Session GetCachedSession()
@@ -66,6 +55,6 @@ namespace AstroOdyssey
             // save in browser cache
             ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["Session"] = JsonConvert.SerializeObject(session);
-        }       
+        }
     }
 }

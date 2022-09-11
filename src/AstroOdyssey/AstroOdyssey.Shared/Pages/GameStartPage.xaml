@@ -115,30 +115,12 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <!--  Login Button  -->
-                <Button
-                    x:Name="GameLoginPage_LoginButton"
-                    x:Uid="GameLoginPage_LoginButton"
-                    Height="50"
-                    Margin="30,15,30,5"
-                    HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    Click="LoginButton_Click"
-                    Content="Login"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False" />
-
                 <!--  Start game button  -->
                 <Button
                     x:Name="GameStartPage_PlayButton"
                     x:Uid="GameStartPage_PlayButton"
                     Height="50"
-                    Margin="30,5,30,5"
+                    Margin="30,15,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -151,6 +133,43 @@
                     Foreground="White"
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
+
+                <!--  Login Button  -->
+                <Button
+                    x:Name="GameLoginPage_LoginButton"
+                    x:Uid="GameLoginPage_LoginButton"
+                    Height="50"
+                    Margin="30,5,30,5"
+                    HorizontalAlignment="Stretch"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    Click="LoginButton_Click"
+                    Content="Login"
+                    CornerRadius="50"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
+
+                <!--  Logout Button  -->
+                <Button
+                    x:Name="GameStartPage_LogoutButton"
+                    x:Uid="GameStartPage_LogoutButton"
+                    Height="50"
+                    Margin="30,5,30,5"
+                    HorizontalAlignment="Stretch"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    Click="LogoutButton_Click"
+                    Content="Logout"
+                    CornerRadius="50"
+                    FontSize="24"
+                    FontWeight="SemiBold"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False"
+                    Visibility="Collapsed" />
 
                 <!--  Register Button  -->
                 <Button
@@ -183,6 +202,26 @@
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False"
                     NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
+
+                <!--  Error text  -->
+                <TextBlock
+                    x:Name="GameStartPage_ErrorText"
+                    x:Uid="GameStartPage_ErrorText"
+                    Margin="5"
+                    FontWeight="SemiBold"
+                    Foreground="Crimson"
+                    Visibility="Collapsed" />
+
+                <!--  Progress bar  -->
+                <ProgressBar
+                    x:Name="GameStartPage_ProgressBar"
+                    Height="5"
+                    Foreground="Goldenrod"
+                    IsFocusEngagementEnabled="False"
+                    IsIndeterminate="True"
+                    IsTabStop="False"
+                    ShowError="False"
+                    ShowPaused="True" />
 
             </StackPanel>
             <Border.Background>

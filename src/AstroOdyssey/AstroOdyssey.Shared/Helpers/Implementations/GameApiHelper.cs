@@ -166,11 +166,11 @@ namespace AstroOdyssey
         private async Task RefreshAuthToken()
         {
             // if token has expired or will expire in 10 secs, get a new token
-            if (App.AuthCredentials is not null && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
+            if (AuthCredentialsCacheHelper.GetCachedSession() is Session session && App.AuthToken is not null && DateTime.UtcNow.AddSeconds(10) > App.AuthToken.ExpiresOn)
             {
-                var response = await Authenticate(
-                    userNameOrEmail: App.AuthCredentials.UserName,
-                    password: App.AuthCredentials.Password);
+                var response = await ValidateSession(
+                    gameId: Constants.GAME_ID,
+                    sessionId: session.SessionId);
 
                 if (response.HttpStatusCode == HttpStatusCode.OK)
                 {
@@ -185,7 +185,7 @@ namespace AstroOdyssey
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                 baseUrl: Constants.GAME_API_BASEURL,
                 path: Constants.Action_GenerateSession,
-                httpHeaders: new Dictionary<string, string>(),
+                httpHeaders: new Dictionary<string, string>() { { "Authorization", $"bearer {App.AuthToken.AccessToken}" } },
                 httpMethod: HttpMethod.Post,
                 payload: new
                 {

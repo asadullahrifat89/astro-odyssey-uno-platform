@@ -41,9 +41,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            var authCredentials = AuthCredentialsCacheHelper.GetCachedAuthCredentials();
-
-            if (authCredentials is not null && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            if (AuthCredentialsCacheHelper.GetCachedAuthCredentials() is PlayerAuthCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
