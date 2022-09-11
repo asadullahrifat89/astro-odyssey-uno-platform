@@ -3,6 +3,8 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Windows.Storage;
 
 namespace AstroOdyssey
 {
@@ -34,9 +36,9 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            GameSignupPage_UserEmailBox.Text = null;
-            GameSignupPage_UserNameBox.Text = null;
-            GameSignupPage_PasswordBox.Text = null;
+            GameSignupPage_UserEmailBox.Text = " ";
+            GameSignupPage_UserNameBox.Text = " ";
+            GameSignupPage_PasswordBox.Text = "";
 
             await this.PlayPageLoadedTransition();
         }
@@ -75,7 +77,7 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameStartPage));
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e) 
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             await this.PlayPageUnLoadedTransition();
 
@@ -114,9 +116,9 @@ namespace AstroOdyssey
         {
             // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
-                userName: GameSignupPage_UserNameBox.Text,
-                email: GameSignupPage_UserEmailBox.Text,
-                password: GameSignupPage_PasswordBox.Text);
+                userName: GameSignupPage_UserNameBox.Text.Trim(),
+                email: GameSignupPage_UserEmailBox.Text.Trim(),
+                password: GameSignupPage_PasswordBox.Text.Trim());
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -142,8 +144,8 @@ namespace AstroOdyssey
         {
             // authenticate
             ServiceResponse response = await _gameApiHelper.Authenticate(
-                userNameOrEmail: GameSignupPage_UserNameBox.Text,
-                password: GameSignupPage_PasswordBox.Text);
+                userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
+                password: GameSignupPage_PasswordBox.Text.Trim());
 
             if (response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -161,10 +163,9 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            // store auth credentials
-            App.AuthCredentials = new PlayerAuthCredentials(
-                userName: GameSignupPage_UserNameBox.Text,
-                password: GameSignupPage_PasswordBox.Text);
+            AuthCredentialsCacheHelper.SetCachedAuthCredentials(
+                userName: GameSignupPage_UserNameBox.Text.Trim(),
+                password: GameSignupPage_PasswordBox.Text.Trim());
 
             return true;
         }

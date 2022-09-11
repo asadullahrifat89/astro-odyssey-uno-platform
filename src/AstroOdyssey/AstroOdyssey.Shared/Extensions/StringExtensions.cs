@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using System.IO;
 
 namespace AstroOdyssey
 {
     public static class StringExtensions
     {
+        private static readonly string encryptionKey1 = "ASDWU&*^%JHJOOI)()^&HJ*^*^&KLJ:KLHJH";
+        private static readonly string encryptionKey2 = "IYUHKJ(*&(*%^*GKHJGJHRTU%*^(*&YHOUIH";
+
         /// <summary>
         /// Checks if the provided string is null or empty or white space.
         /// </summary>
@@ -47,6 +50,34 @@ namespace AstroOdyssey
             }
 
             return initials.ToUpperInvariant();
+        }
+
+        public static string Encrypt(this string plainText)
+        {
+            if (plainText.IsNullOrBlank())
+            {
+                return plainText;
+            }
+
+            byte[] clearBytes = Encoding.Unicode.GetBytes(plainText);
+            plainText = Convert.ToBase64String(clearBytes);
+            plainText = encryptionKey1 + plainText + encryptionKey2;
+
+            return plainText;
+        }
+
+        public static string Decrypt(this string encodedData)
+        {
+            if (encodedData.IsNullOrBlank())
+            {
+                return encodedData;
+            }
+
+            encodedData = encodedData.Replace(encryptionKey1, "").Replace(encryptionKey2, "");
+            byte[] cipherBytes = Convert.FromBase64String(encodedData);
+            encodedData = Encoding.Unicode.GetString(cipherBytes);
+
+            return encodedData;
         }
     }
 }
