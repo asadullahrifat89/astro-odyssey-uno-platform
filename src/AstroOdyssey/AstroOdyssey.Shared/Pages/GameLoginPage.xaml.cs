@@ -77,7 +77,10 @@ namespace AstroOdyssey
 
         private async Task PerformLogin()
         {
-            this.RunProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
+            this.RunProgressBar(
+                progressBar: GameLoginPage_ProgressBar,
+                errorContainer: GameLoginPage_ErrorText,
+                actionButtons: GameLoginPage_LoginButton);
 
             if (!await Authenticate())
                 return;
@@ -93,7 +96,9 @@ namespace AstroOdyssey
                 App.GameScoreSubmissionPending = false;
             }
 
-            this.StopProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
+            this.StopProgressBar(
+                progressBar: GameLoginPage_ProgressBar,
+                actionButtons: GameLoginPage_LoginButton);
 
             await this.PlayPageUnLoadedTransition();
 
@@ -157,7 +162,10 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            this.RunProgressBar(GameLoginPage_ProgressBar, GameLoginPage_LoginButton);
+            this.RunProgressBar(
+                progressBar: GameLoginPage_ProgressBar,
+                errorContainer: GameLoginPage_ErrorText,
+                actionButtons: GameLoginPage_LoginButton);
 
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
 

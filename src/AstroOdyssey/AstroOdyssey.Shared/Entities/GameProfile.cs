@@ -10,6 +10,10 @@
 
         public string GameId { get; set; } = string.Empty;
 
+        public string Emoji { get; set; } = string.Empty;
+
         public string Initials => StringExtensions.GetInitials(User.UserName);
+
+        public string DisplayName => User.UserName + " " + Emoji;
     }
 }

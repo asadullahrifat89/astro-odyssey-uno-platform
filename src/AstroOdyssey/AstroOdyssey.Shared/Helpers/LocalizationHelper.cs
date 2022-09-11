@@ -449,6 +449,20 @@ namespace AstroOdyssey
                 new ("de", "Bestenliste"),
                 new ("fr", "Classement"),
             }),
+            new LocalizationKey(key: "GameLeaderboardPage_PlayNowButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Play now"),
+                new ("bn", "এখনই খেলুন"),
+                new ("de", "Joue maintenant"),
+                new ("fr", "Classement"),
+            }),
+            new LocalizationKey(key: "GameSignupPage_LoginButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Already have an account?"),
+                new ("bn", "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?"),
+                new ("de", "Sie haben bereits ein Konto?"),
+                new ("fr", "Vous avez déjà un compte?"),
+            }),
 
         };
 
