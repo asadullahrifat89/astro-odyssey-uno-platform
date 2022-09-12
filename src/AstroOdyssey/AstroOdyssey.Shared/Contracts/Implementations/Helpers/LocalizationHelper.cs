@@ -198,17 +198,17 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "PERSONAL_BEST_SCORE", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Personal Best Score"),
-                new ("bn", "ব্যক্তিগত সেরা স্কোর"),
-                new ("de", "Persönliche Beste Punktzahl"),
-                new ("fr", "Meilleur Score personnel"),
+                new ("en", "🤘 Personal Best Score"),
+                new ("bn", "🤘 ব্যক্তিগত সেরা স্কোর"),
+                new ("de", "🤘 Persönliche Beste Punktzahl"),
+                new ("fr", "🤘 Meilleur Score personnel"),
             }),
             new LocalizationKey(key: "LAST_GAME_SCORE", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Last Game Score"),
-                new ("bn", "শেষ গেম স্কোর"),
-                new ("de", "Letzter Spielpunkt"),
-                new ("fr", "Score du dernier match"),
+                new ("en", "🎲 Last Game Score"),
+                new ("bn", "🎲 শেষ গেম স্কোর"),
+                new ("de", "🎲 Letzter Spielpunkt"),
+                new ("fr", "🎲 Score du dernier match"),
             }),
 
             new LocalizationKey(key: "DESTROYED", cultureValues: new (string Culture, string Value)[]

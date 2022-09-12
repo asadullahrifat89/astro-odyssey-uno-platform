@@ -182,7 +182,7 @@
                     Margin="2" />
                 <TextBlock
                     x:Name="Page_UserName"
-                    Margin="5"
+                    Margin="0,5,5,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
