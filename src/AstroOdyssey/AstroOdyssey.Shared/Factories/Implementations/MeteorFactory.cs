@@ -3,11 +3,11 @@ using System;
 
 namespace AstroOdyssey
 {
-    public class MeteorFactory
+    public class MeteorFactory : IMeteorFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private readonly Random _random = new Random();
 
@@ -26,15 +26,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public MeteorFactory(GameEnvironment gameEnvironment)
+        public MeteorFactory(IAudioHelper audioHelper)
         {
-            _gameEnvironment = gameEnvironment; 
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a meteor.
@@ -88,6 +92,51 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Destroys a meteor. Removes from game environment, increases player score, plays sound effect.
+        /// </summary>
+        /// <param name="meteor"></param>
+        public void DestroyMeteor(Meteor meteor)
+        {
+            meteor.IsMarkedForFadedDestruction = true;
+            _audioHelper.PlaySound(SoundType.METEOR_DESTRUCTION);
+        }
+
+        /// <summary>
+        /// Updates an meteor. Moves the meteor inside game environment and removes from it when applicable.
+        /// </summary>
+        /// <param name="meteor"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateMeteor(Meteor meteor, out bool destroyed)
+        {
+            destroyed = false;
+
+            meteor.CoolDownProjectileImpactEffect();
+
+            // move meteor down
+            meteor.Rotate();
+            meteor.MoveY();
+            meteor.MoveX();
+
+            // if the object is marked for lazy destruction then do not destroy immidiately
+            if (meteor.IsMarkedForFadedDestruction)
+                return;
+
+            // if meteor or meteor object has gone beyond game view
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
+        }
+
+        /// <summary>
+        /// Levels up meteors.
+        /// </summary>
+        public void LevelUp()
+        {
+            var scale = _gameEnvironment.GetGameObjectScale();
+            var delayScale = 2 + scale;
+            _meteorSpawnDelay -= delayScale;
+            _meteorSpeed += (1 * scale);
+        }
+
+        /// <summary>
         /// Generates a meteor that is overpowered. Slower but stronger and bigger meteors.
         /// </summary>
         /// <param name="meteor"></param>
@@ -133,51 +182,6 @@ namespace AstroOdyssey
 
             // randomize next x flying meteor pop up
             _rotatedMeteorSpawnDelay = _random.Next(5, 15);
-        }
-
-        /// <summary>
-        /// Destroys a meteor. Removes from game environment, increases player score, plays sound effect.
-        /// </summary>
-        /// <param name="meteor"></param>
-        public void DestroyMeteor(Meteor meteor)
-        {
-            meteor.IsMarkedForFadedDestruction = true;
-            _audioHelper.PlaySound(SoundType.METEOR_DESTRUCTION);
-        }
-
-        /// <summary>
-        /// Updates an meteor. Moves the meteor inside game environment and removes from it when applicable.
-        /// </summary>
-        /// <param name="meteor"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateMeteor(Meteor meteor, out bool destroyed)
-        {
-            destroyed = false;
-
-            meteor.CoolDownProjectileImpactEffect();
-
-            // move meteor down
-            meteor.Rotate();
-            meteor.MoveY();
-            meteor.MoveX();
-
-            // if the object is marked for lazy destruction then do not destroy immidiately
-            if (meteor.IsMarkedForFadedDestruction)
-                return;
-
-            // if meteor or meteor object has gone beyond game view
-            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
-        }
-
-        /// <summary>
-        /// Levels up meteors.
-        /// </summary>
-        public void LevelUp()
-        {
-            var scale = _gameEnvironment.GetGameObjectScale();
-            var delayScale = 2 + scale;
-            _meteorSpawnDelay -= delayScale;
-            _meteorSpeed += (1 * scale);
         }
 
         #endregion

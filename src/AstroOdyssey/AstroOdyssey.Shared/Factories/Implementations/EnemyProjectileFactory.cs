@@ -3,26 +3,32 @@ using System;
 
 namespace AstroOdyssey
 {
-    public class EnemyProjectileFactory
+    public class EnemyProjectileFactory : IEnemyProjectileFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private Random _random = new Random();
         private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
 
-        public EnemyProjectileFactory(GameEnvironment gameEnvironment)
+        public EnemyProjectileFactory(IAudioHelper audioHelper)
         {
-            _gameEnvironment = gameEnvironment;
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a projectile.
@@ -44,6 +50,34 @@ namespace AstroOdyssey
                 //enemy.SetRecoilEffect();
             }
         }
+
+        /// <summary>
+        /// Updates a projectile.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
+        {
+            destroyed = false;
+
+            // move projectile down                
+            projectile.MoveY();
+            projectile.MoveX();
+
+            if (projectile.IsOverPowered)
+                projectile.Lengthen();
+
+            // remove projectile if outside game canvas
+            if (projectile.GetY() > _gameEnvironment.Height)
+            {
+                _gameEnvironment.AddDestroyableGameObject(projectile);
+                destroyed = true;
+            }
+        }
+
+        #endregion
+
+        #region Private
 
         /// <summary>
         /// Generates a projectile.
@@ -244,29 +278,7 @@ namespace AstroOdyssey
             }
         }
 
-        /// <summary>
-        /// Updates a projectile.
-        /// </summary>
-        /// <param name="projectile"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
-        {
-            destroyed = false;
-
-            // move projectile down                
-            projectile.MoveY();
-            projectile.MoveX();
-
-            if (projectile.IsOverPowered)
-                projectile.Lengthen();
-
-            // remove projectile if outside game canvas
-            if (projectile.GetY() > _gameEnvironment.Height)
-            {
-                _gameEnvironment.AddDestroyableGameObject(projectile);
-                destroyed = true;
-            }
-        }
+        #endregion
 
         #endregion
     }

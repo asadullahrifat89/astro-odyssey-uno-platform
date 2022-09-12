@@ -2,12 +2,12 @@
 
 namespace AstroOdyssey
 {
-    public class CelestialObjectFactory
+    public class CelestialObjectFactory : ICelestialObjectFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _starView;
-        private readonly GameEnvironment _planetView;
+        private GameEnvironment _starView;
+        private GameEnvironment _planetView;
 
         private readonly Random _random = new Random();
 
@@ -31,15 +31,22 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public CelestialObjectFactory(GameEnvironment starView, GameEnvironment planetView)
+        public CelestialObjectFactory()
+        {
+
+        }
+
+        #endregion
+
+        #region Methods
+
+        #region Public
+
+        public void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView)
         {
             _starView = starView;
             _planetView = planetView;
         }
-
-        #endregion       
-
-        #region Methods
 
         /// <summary>
         /// Starts the space warp effect.
@@ -209,7 +216,9 @@ namespace AstroOdyssey
             var scale = _starView.GetGameObjectScale();
             _starSpawnDelay -= (10 * scale);
             _starSpeed += (0.1d * scale);
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

@@ -4,11 +4,11 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class PlayerFactory
+    public class PlayerFactory: IPlayerFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private int _playerDamageRecoveryCounter;
         private readonly int _playerDamageRecoveryDelay = 120;
@@ -30,15 +30,21 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerFactory(GameEnvironment gameEnvironment)
+        public PlayerFactory(IAudioHelper audioHelper)
         {
-            _gameEnvironment = gameEnvironment;
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns the player.
@@ -187,22 +193,87 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Sets the x axis position of the player on game canvas.
+        /// Triggers the powered up state off.
         /// </summary>
-        /// <param name="left"></param>
-        private void SetPlayerX(Player player, double left)
+        public (bool PowerDown, double PowerRemaining) PowerUpCoolDown(Player player)
         {
-            player.SetX(left);
+            _powerUpTriggerSpawnCounter -= 1;
+
+            if (_powerUpTriggerSpawnCounter <= 0)
+            {
+                _audioHelper.PlaySound(SoundType.POWER_DOWN);
+                player.PowerUpCoolDown();
+                return (true, 0);
+            }
+
+            var remainingPower = (double)((double)_powerUpTriggerSpawnCounter / (double)_powerUpTriggerDelay) * POWER_UP_METER;
+            return (false, remainingPower);
         }
 
-        /// <summary>
-        /// Sets the y axis position of the player on game canvas.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="top"></param>
-        private void SetPlayerY(Player player, double top)
+        public void RageUp(Player player)
         {
-            player.SetY(top);
+            _playerRageCoolDownCounter = _playerRageCoolDownDelay;
+            switch (player.ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    {
+                        player.IsShieldUp = true;
+                    }
+                    break;
+                case ShipClass.BERSERKER:
+                    {
+                        player.IsFirePowerUp = true;
+                    }
+                    break;
+                case ShipClass.SPECTRE:
+                    {
+                        player.IsCloakUp = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            _audioHelper.PlaySound(SoundType.RAGE_UP);
+        }
+
+        public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
+        {
+            _playerRageCoolDownCounter--;
+
+            switch (player.ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    {
+                        if (_playerRageCoolDownCounter <= 0)
+                            player.IsShieldUp = false;
+                    }
+                    break;
+                case ShipClass.BERSERKER:
+                    {
+                        if (_playerRageCoolDownCounter <= 0)
+                            player.IsFirePowerUp = false;
+                    }
+                    break;
+                case ShipClass.SPECTRE:
+                    {
+                        if (_playerRageCoolDownCounter <= 0)
+                            player.IsCloakUp = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (_playerRageCoolDownCounter <= 0)
+            {
+                _audioHelper.PlaySound(SoundType.RAGE_DOWN);
+                return (true, 0);
+            }
+
+            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownDelay) * RAGE_THRESHOLD;
+
+            return (false, remainingRage);
         }
 
         /// <summary>
@@ -330,21 +401,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Makes the player loose health.
-        /// </summary>
-        private void PlayerHealthLoss(Player player)
-        {
-            player.LooseHealth();
-
-            _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
-
-            // enter damage recovery state, prevent taking damage for a few milliseconds            
-            player.IsRecoveringFromDamage = true;
-
-            _playerDamageRecoveryCounter = _playerDamageRecoveryDelay;
-        }
-
-        /// <summary>
         /// Handles the opacity of the player upon taking damage.
         /// </summary>
         public void DamageRecoveryCoolDown(Player player)
@@ -358,6 +414,44 @@ namespace AstroOdyssey
                     player.IsRecoveringFromDamage = false;
                 }
             }
+        } 
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Sets the x axis position of the player on game canvas.
+        /// </summary>
+        /// <param name="left"></param>
+        private void SetPlayerX(Player player, double left)
+        {
+            player.SetX(left);
+        }
+
+        /// <summary>
+        /// Sets the y axis position of the player on game canvas.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="top"></param>
+        private void SetPlayerY(Player player, double top)
+        {
+            player.SetY(top);
+        }
+
+        /// <summary>
+        /// Makes the player loose health.
+        /// </summary>
+        private void PlayerHealthLoss(Player player)
+        {
+            player.LooseHealth();
+
+            _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
+
+            // enter damage recovery state, prevent taking damage for a few milliseconds            
+            player.IsRecoveringFromDamage = true;
+
+            _playerDamageRecoveryCounter = _playerDamageRecoveryDelay;
         }
 
         /// <summary>
@@ -388,91 +482,9 @@ namespace AstroOdyssey
 
             _audioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
-        }
+        } 
 
-        /// <summary>
-        /// Triggers the powered up state off.
-        /// </summary>
-        public (bool PowerDown, double PowerRemaining) PowerUpCoolDown(Player player)
-        {
-            _powerUpTriggerSpawnCounter -= 1;
-
-            if (_powerUpTriggerSpawnCounter <= 0)
-            {
-                _audioHelper.PlaySound(SoundType.POWER_DOWN);
-                player.PowerUpCoolDown();
-                return (true, 0);
-            }
-
-            var remainingPower = (double)((double)_powerUpTriggerSpawnCounter / (double)_powerUpTriggerDelay) * POWER_UP_METER;
-            return (false, remainingPower);
-        }
-
-        public void RageUp(Player player)
-        {
-            _playerRageCoolDownCounter = _playerRageCoolDownDelay;
-            switch (player.ShipClass)
-            {
-                case ShipClass.DEFENDER:
-                    {
-                        player.IsShieldUp = true;
-                    }
-                    break;
-                case ShipClass.BERSERKER:
-                    {
-                        player.IsFirePowerUp = true;
-                    }
-                    break;
-                case ShipClass.SPECTRE:
-                    {
-                        player.IsCloakUp = true;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            _audioHelper.PlaySound(SoundType.RAGE_UP);
-        }
-
-        public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
-        {
-            _playerRageCoolDownCounter--;
-
-            switch (player.ShipClass)
-            {
-                case ShipClass.DEFENDER:
-                    {
-                        if (_playerRageCoolDownCounter <= 0)
-                            player.IsShieldUp = false;
-                    }
-                    break;
-                case ShipClass.BERSERKER:
-                    {
-                        if (_playerRageCoolDownCounter <= 0)
-                            player.IsFirePowerUp = false;
-                    }
-                    break;
-                case ShipClass.SPECTRE:
-                    {
-                        if (_playerRageCoolDownCounter <= 0)
-                            player.IsCloakUp = false;
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            if (_playerRageCoolDownCounter <= 0)
-            {
-                _audioHelper.PlaySound(SoundType.RAGE_DOWN);
-                return (true, 0);
-            }
-
-            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownDelay) * RAGE_THRESHOLD;
-
-            return (false, remainingRage);
-        }
+        #endregion
 
         #endregion
     }

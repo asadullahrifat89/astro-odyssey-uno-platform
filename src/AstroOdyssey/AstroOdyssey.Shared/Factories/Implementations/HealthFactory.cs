@@ -2,11 +2,11 @@
 
 namespace AstroOdyssey
 {
-    public class HealthFactory
+    public class HealthFactory : IHealthFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private readonly Random _random = new Random();
 
         private int _healthSpawnCounter;
@@ -17,14 +17,21 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public HealthFactory(GameEnvironment gameEnvironment)
+        public HealthFactory()
         {
-            _gameEnvironment = gameEnvironment;
+
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a Health.
@@ -81,6 +88,8 @@ namespace AstroOdyssey
             var scale = _gameEnvironment.GetGameObjectScale();
             _healthSpeed += (1 * scale);
         }
+
+        #endregion
 
         #endregion
     }

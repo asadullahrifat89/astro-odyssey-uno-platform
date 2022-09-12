@@ -47,15 +47,15 @@ namespace AstroOdyssey
 
         private double _windowWidth, _windowHeight;
 
-        private readonly CelestialObjectFactory _celestialObjectFactory;
-        private readonly MeteorFactory _meteorFactory;
-        private readonly EnemyFactory _enemyFactory;
-        private readonly HealthFactory _healthFactory;
-        private readonly PowerUpFactory _powerUpFactory;
-        private readonly CollectibleFactory _collectibleFactory;
-        private readonly PlayerFactory _playerFactory;
-        private readonly PlayerProjectileFactory _playerProjectileFactory;
-        private readonly EnemyProjectileFactory _enemyProjectileFactory;
+        private readonly ICelestialObjectFactory _celestialObjectFactory;
+        private readonly IMeteorFactory _meteorFactory;
+        private readonly IEnemyFactory _enemyFactory;
+        private readonly IHealthFactory _healthFactory;
+        private readonly IPowerUpFactory _powerUpFactory;
+        private readonly ICollectibleFactory _collectibleFactory;
+        private readonly IPlayerFactory _playerFactory;
+        private readonly IPlayerProjectileFactory _playerProjectileFactory;
+        private readonly IEnemyProjectileFactory _enemyProjectileFactory;
 
         private readonly IAudioHelper _audioHelper;
         #endregion
@@ -76,15 +76,32 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _celestialObjectFactory = new CelestialObjectFactory(StarView, PlanetView);
-            _meteorFactory = new MeteorFactory(GameView);
-            _enemyFactory = new EnemyFactory(GameView);
-            _healthFactory = new HealthFactory(GameView);
-            _powerUpFactory = new PowerUpFactory(GameView);
-            _collectibleFactory = new CollectibleFactory(GameView);
-            _playerFactory = new PlayerFactory(GameView);
-            _playerProjectileFactory = new PlayerProjectileFactory(GameView);
-            _enemyProjectileFactory = new EnemyProjectileFactory(GameView);
+            _celestialObjectFactory = new CelestialObjectFactory();
+            _celestialObjectFactory.SetGameEnvironments(StarView, PlanetView);
+
+            _meteorFactory = App.Container.GetService<IMeteorFactory>();
+            _meteorFactory.SetGameEnvironment(GameView);
+
+            _enemyFactory = App.Container.GetService<IEnemyFactory>();
+            _enemyFactory.SetGameEnvironment(GameView);
+
+            _healthFactory = App.Container.GetService<IHealthFactory>();
+            _healthFactory.SetGameEnvironment(GameView);
+
+            _powerUpFactory = App.Container.GetService<IPowerUpFactory>();
+            _powerUpFactory.SetGameEnvironment(GameView);
+
+            _collectibleFactory = App.Container.GetService<ICollectibleFactory>();
+            _collectibleFactory.SetGameEnvironment(GameView);
+
+            _playerFactory = App.Container.GetService<IPlayerFactory>();
+            _playerFactory.SetGameEnvironment(GameView);
+
+            _playerProjectileFactory = App.Container.GetService<IPlayerProjectileFactory>();
+            _playerProjectileFactory.SetGameEnvironment(GameView);
+
+            _enemyProjectileFactory = App.Container.GetService<IEnemyProjectileFactory>();
+            _enemyProjectileFactory.SetGameEnvironment(GameView);
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
@@ -151,9 +168,9 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods
+        #region Events
 
-        #region Window Events
+        #region Window
 
         async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -244,7 +261,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region UI Events
+        #region Game
 
         private void PauseGameButton_Click(object sender, RoutedEventArgs e)
         {
@@ -273,7 +290,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Input Events       
+        #region Input       
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -385,7 +402,11 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Game Methods
+        #endregion
+
+        #region Methods
+
+        #region Game
 
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
@@ -1178,7 +1199,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Frame Methods
+        #region Frame
 
         /// <summary>
         /// Sets the frame time.
@@ -1208,7 +1229,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Player Methods
+        #region Player
 
         /// <summary>
         /// Spawns the player.
@@ -1281,7 +1302,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Boss Methods
+        #region Boss
 
         /// <summary>
         /// Engages a boss.
@@ -1331,7 +1352,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Difficulty Methods
+        #region Difficulty
 
         /// <summary>
         /// Sets the game level according to score; 

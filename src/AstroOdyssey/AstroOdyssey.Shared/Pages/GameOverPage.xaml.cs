@@ -46,41 +46,28 @@ namespace AstroOdyssey
         private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+            SetGameResults();
 
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
-
-            EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
-            MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
-            BossesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
-            CollectiblesCollectedText.Text = $"{LocalizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.GameScore.CollectiblesCollected;
-
-            CongratulationsText.Text = (App.GameScore.Score == 0
-                ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
-                ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
-                ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
-                ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
-
-#if DEBUG
-            Console.WriteLine("AuthToken:" + App.AuthToken?.AccessToken);
-#endif
-
-            // if user has not logged in
-            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank())
-            {
-                GameLoginPage_LoginButton.Visibility = Visibility.Visible;
-                GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
+            // if user has not logged in or session has expired
+            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank() || CacheHelper.HasSessionExpired())
+            {                
+                MakeLoginControlsVisible();
             }
-            else // user has logged in so submit score
+            else
             {
                 this.RunProgressBar(
                     progressBar: _progressBar,
                     errorContainer: _errorContainer,
                     actionButtons: _actionButtons);
-
-                // submit score
-                await SubmitScore();
-                GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
-                GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
+                                
+                if (await SubmitScore())
+                {
+                    MakeLeaderboardControlsVisible(); // if score submission was successful make leaderboard button visible
+                }
+                else
+                {
+                    MakeLoginControlsVisible();
+                }
 
                 this.StopProgressBar(
                     progressBar: _progressBar,
@@ -101,9 +88,6 @@ namespace AstroOdyssey
 
         private async void GameLoginPage_LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // user logging in from gameover page so upon login or signup submit game score
-            App.GameScoreSubmissionPending = true;
-
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             await this.PlayPageUnLoadedTransition();
@@ -123,6 +107,37 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        private void MakeLeaderboardControlsVisible()
+        {
+            GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+            GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
+        }
+
+        private void MakeLoginControlsVisible()
+        {
+            // submit score on user login, or signup then login
+            App.GameScoreSubmissionPending = true;
+
+            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+            GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void SetGameResults()
+        {
+            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
+
+            EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
+            MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
+            BossesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
+            CollectiblesCollectedText.Text = $"{LocalizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.GameScore.CollectiblesCollected;
+
+            CongratulationsText.Text = (App.GameScore.Score == 0
+                ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
+                ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
+                ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
+                ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+        }
 
         private async Task<bool> SubmitScore()
         {

@@ -26,11 +26,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public T ParseResult<T>(object obj)
-        {
-            var result = JsonConvert.DeserializeObject<T>(obj.ToString(), new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            return result;
-        }
+        #region Commands
 
         public async Task<ServiceResponse> Authenticate(string userNameOrEmail, string password)
         {
@@ -47,7 +43,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> Signup(string userName, string email, string password)
@@ -67,7 +63,25 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
+        }
+
+        public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
+        {
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_ValidateSession,
+                httpHeaders: new Dictionary<string, string>(),
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    GameId = gameId,
+                    SessionId = sessionId,
+                });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> SubmitGameScore(double score)
@@ -94,7 +108,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> GenerateSession(string gameId, string userId)
@@ -112,26 +126,12 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
-        }
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
+        } 
 
-        public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
-        {
-            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
-                baseUrl: Constants.GAME_API_BASEURL,
-                path: Constants.Action_ValidateSession,
-                httpHeaders: new Dictionary<string, string>(),
-                httpMethod: HttpMethod.Post,
-                payload: new
-                {
-                    GameId = gameId,
-                    SessionId = sessionId,
-                });
+        #endregion
 
-            return response.StatusCode == HttpStatusCode.OK
-                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
-        }
+        #region Queries
 
         public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
         {
@@ -195,23 +195,33 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse
                 : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
+        } 
+
+        #endregion
+
+        public T ParseResult<T>(object obj)
+        {
+            var result = JsonConvert.DeserializeObject<T>(obj.ToString(), new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return result;
         }
 
         private async Task<bool> RefreshAuthToken()
         {
-            // if token expires in 20 secs or session expires in 1 min, get a new token
-            if (CacheHelper.GetCachedSession() is Session session && (DateTime.UtcNow.AddSeconds(20) > App.AuthToken.ExpiresOn || DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn))
+            // taking in account that user has already logged in and a session and auth token exists
+            if (CacheHelper.WillSessionExpireSoon() || CacheHelper.WillAuthTokenExpireSoon())
             {
-                // validate session and get new auth token
-                if (!await ValidateSession(session.SessionId))
-                    return false;
-
-                // if current session expires in 1 min, request a new session
-                if (DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn)
+                if (CacheHelper.GetCachedSession() is Session session)
                 {
-                    // with new auth token generate a new session and validate it, get new auth token for new session
-                    if (!await GenerateAndValidateSession())
+                    // validate session and get new auth token
+                    if (!await ValidateSession(session.SessionId))
                         return false;
+
+                    if (CacheHelper.WillSessionExpireSoon())
+                    {
+                        // with new auth token generate a new session and validate it, get new auth token for new session
+                        if (!await GenerateAndValidateSession())
+                            return false;
+                    }
                 }
             }
 
@@ -222,15 +232,13 @@ namespace AstroOdyssey
         {
             var response = await GenerateSession(gameId: Constants.GAME_ID, userId: App.GameProfile.User.UserId);
 
-            if (response.HttpStatusCode == HttpStatusCode.OK)
-            {
-                var newSession = ParseResult<Session>(response.Result);
-                CacheHelper.SetCachedSession(newSession);
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                return false;
 
-                return await ValidateSession(newSession.SessionId);
-            }
+            var session = ParseResult<Session>(response.Result);
+            CacheHelper.SetCachedSession(session);
 
-            return false;
+            return await ValidateSession(session.SessionId);
         }
 
         private async Task<bool> ValidateSession(string sessionId)
@@ -239,15 +247,13 @@ namespace AstroOdyssey
                 gameId: Constants.GAME_ID,
                 sessionId: sessionId);
 
-            if (response.HttpStatusCode == HttpStatusCode.OK)
-            {
-                var authToken = ParseResult<AuthToken>(response.Result);
-                App.AuthToken = authToken;
+            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+                return false;
 
-                return true;
-            }
+            var authToken = ParseResult<AuthToken>(response.Result);
+            App.AuthToken = authToken;
 
-            return false;
+            return true;
         }
 
         #endregion

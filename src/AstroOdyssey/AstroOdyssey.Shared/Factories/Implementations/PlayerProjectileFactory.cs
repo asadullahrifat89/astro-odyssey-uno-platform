@@ -3,11 +3,11 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class PlayerProjectileFactory
+    public class PlayerProjectileFactory : IPlayerProjectileFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private double _projectileSpawnCounter;
         private double _projectileSpawnDelay = 14;
@@ -36,15 +36,21 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerProjectileFactory(GameEnvironment gameEnvironment)
+        public PlayerProjectileFactory(IAudioHelper audioHelper)
         {
-            _gameEnvironment = gameEnvironment;
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Increases projectile power.
@@ -100,7 +106,7 @@ namespace AstroOdyssey
                     player: player,
                     gameLevel: gameLevel,
                     powerUpType: powerUpType);
-                
+
                 //}
 
                 _projectileSpawnCounter = _projectileSpawnDelay;
@@ -471,6 +477,8 @@ namespace AstroOdyssey
                     break;
             }
         }
+
+        #endregion
 
         #endregion
     }

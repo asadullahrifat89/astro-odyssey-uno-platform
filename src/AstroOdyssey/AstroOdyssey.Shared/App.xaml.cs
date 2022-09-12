@@ -88,6 +88,8 @@ namespace AstroOdyssey
 
         public static string CurrentCulture { get; set; }
 
+        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank();
+
         #endregion
 
         #region Events
@@ -212,10 +214,13 @@ namespace AstroOdyssey
             var serviceCollection = new ServiceCollection();
 
             // Register the MessageService with the container
-            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 2, retryWait: 1);
+            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
+
             serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
             serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
             serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
+
+            serviceCollection.AddFactories();            
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();

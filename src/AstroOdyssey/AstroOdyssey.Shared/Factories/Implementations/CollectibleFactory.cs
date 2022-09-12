@@ -2,11 +2,11 @@
 
 namespace AstroOdyssey
 {
-    public class CollectibleFactory
+    public class CollectibleFactory: ICollectibleFactory
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private readonly Random _random = new Random();
 
@@ -18,14 +18,21 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public CollectibleFactory(GameEnvironment gameEnvironment)
+        public CollectibleFactory()
         {
-            _gameEnvironment = gameEnvironment;
+
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a Collectible.
@@ -78,7 +85,9 @@ namespace AstroOdyssey
         {
             var scale = _gameEnvironment.GetGameObjectScale();
             _collectibleSpeed += (1 * scale);
-        }
+        } 
+
+        #endregion
 
         #endregion
     }
