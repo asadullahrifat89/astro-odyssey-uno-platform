@@ -62,7 +62,7 @@ namespace AstroOdyssey
 
         public static CelestialObjectTemplate[] PLANET_TEMPLATES = new CelestialObjectTemplate[]
         {
-            new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/Planet/black-hole2.png", UriKind.RelativeOrAbsolute), size: 1400),
+            //new CelestialObjectTemplate(assetUri: new Uri("ms-appx:///Assets/Images/Planet/black-hole2.png", UriKind.RelativeOrAbsolute), size: 1400),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Planet/planet1.png", UriKind.RelativeOrAbsolute), size : 1400),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Planet/planet2.png", UriKind.RelativeOrAbsolute), size : 700),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Planet/planet3.png", UriKind.RelativeOrAbsolute), size : 700),
