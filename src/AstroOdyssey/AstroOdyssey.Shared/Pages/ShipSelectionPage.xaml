@@ -110,6 +110,39 @@
             </Border.Background>
         </Border>
 
+        <!--  This shows the player's name  -->
+        <Border
+            x:Name="PlayerNameHolder"
+            Margin="5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            BorderBrush="#4d437d"
+            BorderThickness="3"
+            CornerRadius="25"
+            Visibility="Collapsed">
+
+            <StackPanel Orientation="Horizontal">
+                <PersonPicture
+                    x:Name="Page_UserPicture"
+                    Grid.Column="0"
+                    Width="40"
+                    Height="40"
+                    Margin="2" />
+                <TextBlock
+                    x:Name="Page_UserName"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="SemiBold"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Border.Background>
+                <SolidColorBrush Color="#27223f" />
+            </Border.Background>
+
+        </Border>
+
         <!--  Take to previous page  -->
         <Button
             x:Name="GoBackButton"

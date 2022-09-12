@@ -54,6 +54,8 @@ namespace AstroOdyssey
             ShipsList.ItemsSource = ships.ToList();
 
             await this.PlayLoadedTransition();
+
+            ShowUserName();
         }
 
         private async void ChooseButton_Click(object sender, RoutedEventArgs e)
@@ -85,6 +87,20 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        private void ShowUserName()
+        {
+            if (App.HasUserLoggedIn)
+            {
+                Page_UserName.Text = App.GameProfile.User.UserName;
+                Page_UserPicture.Initials = App.GameProfile.Initials;
+                PlayerNameHolder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlayerNameHolder.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private void SetLocalization()
         {

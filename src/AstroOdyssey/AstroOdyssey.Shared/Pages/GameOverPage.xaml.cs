@@ -47,9 +47,10 @@ namespace AstroOdyssey
         {
             SetLocalization();
             SetGameResults();
+            ShowUserName();
 
             // if user has not logged in or session has expired
-            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank() || _cacheHelper.HasSessionExpired())
+            if (!App.HasUserLoggedIn || _cacheHelper.HasSessionExpired())
             {                
                 MakeLoginControlsVisible();
             }
@@ -58,7 +59,7 @@ namespace AstroOdyssey
                 this.RunProgressBar(
                     progressBar: _progressBar,
                     errorContainer: _errorContainer,
-                    actionButtons: _actionButtons);
+                    actionButtons: _actionButtons);              
                                 
                 if (await SubmitScore())
                 {
@@ -156,6 +157,20 @@ namespace AstroOdyssey
             }
 
             return true;
+        }
+
+        private void ShowUserName()
+        {
+            if (App.HasUserLoggedIn)
+            {
+                Page_UserName.Text = App.GameProfile.User.UserName;
+                Page_UserPicture.Initials = App.GameProfile.Initials;
+                PlayerNameHolder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlayerNameHolder.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SetLocalization()

@@ -75,10 +75,13 @@ namespace AstroOdyssey
             if (!await GetGameProfiles())
                 return;
 
+            ShowUserName();
+
             this.StopProgressBar(
                 progressBar: _progressBar,
                 actionButtons: _actionButtons);
         }
+     
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
@@ -96,7 +99,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods
+        #region Methods      
 
         private async Task<bool> GetGameProfile()
         {
@@ -119,7 +122,7 @@ namespace AstroOdyssey
             App.GameProfile = gameProfile;
 
             PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
-            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
+            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;          
 
             return true;
         }
@@ -165,6 +168,20 @@ namespace AstroOdyssey
             }
 
             return true;
+        }
+
+        private void ShowUserName()
+        {
+            if (App.HasUserLoggedIn)
+            {
+                Page_UserName.Text = App.GameProfile.User.UserName;
+                Page_UserPicture.Initials = App.GameProfile.Initials;
+                PlayerNameHolder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlayerNameHolder.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void SetLocalization()
