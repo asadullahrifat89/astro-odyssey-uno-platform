@@ -208,28 +208,66 @@ namespace AstroOdyssey
 
         #region Methods
 
-        private IServiceProvider ConfigureDependencyInjection()
-        {
-            // Create new service collection which generates the IServiceProvider
-            var serviceCollection = new ServiceCollection();
-
-            // Register the MessageService with the container
-            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
-
-            serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
-            serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
-            serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
-
-            serviceCollection.AddFactories();            
-
-            // Build the IServiceProvider and return it
-            return serviceCollection.BuildServiceProvider();
-        }
-
-
         public static void SetScore(PlayerScore gameScore)
         {
             GameScore = gameScore;
+        }
+
+        public static void SetIsBusy(bool isBusy)
+        {
+            var rootFrame = _window.Content as Frame;
+            rootFrame.IsEnabled = !isBusy;
+            rootFrame.Opacity = isBusy ? 0.6 : 1;
+        }
+
+        /// <summary>
+        /// Toggle fullscreen mode.
+        /// </summary>
+        /// <param name="value"></param>
+        public static void EnterFullScreen(bool value)
+        {
+            var view = ApplicationView.GetForCurrentView();
+
+            if (view is not null)
+            {
+                if (value)
+                {
+                    view.TryEnterFullScreenMode();
+                }
+                else
+                {
+                    view.ExitFullScreenMode();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Navigate to provided page.
+        /// </summary>
+        /// <param name="pageType"></param>
+        /// <param name="parameter"></param>
+        public static void NavigateToPage(Type pageType, object parameter = null)
+        {
+            var rootFrame = _window.Content as Frame;
+            rootFrame.Navigate(pageType, parameter);
+        }
+
+        /// <summary>
+        /// Get base url for the app.
+        /// </summary>
+        public static string GetBaseUrl()
+        {
+            if (_baseUrl.IsNullOrBlank())
+            {
+                var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
+                var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
+                _baseUrl = $"{indexUrl}{appPackage}";
+
+#if DEBUG
+                Console.WriteLine(_baseUrl);
+#endif 
+            }
+            return _baseUrl;
         }
 
         /// <summary>
@@ -301,61 +339,18 @@ namespace AstroOdyssey
 #endif
         }
 
-        public static void SetIsBusy(bool isBusy)
+        private IServiceProvider ConfigureDependencyInjection()
         {
-            var rootFrame = _window.Content as Frame;
-            rootFrame.IsEnabled = !isBusy;
-            rootFrame.Opacity = isBusy ? 0.6 : 1;
-        }
+            // Create new service collection which generates the IServiceProvider
+            var serviceCollection = new ServiceCollection();
 
-        /// <summary>
-        /// Toggle fullscreen mode.
-        /// </summary>
-        /// <param name="value"></param>
-        public static void EnterFullScreen(bool value)
-        {
-            var view = ApplicationView.GetForCurrentView();
+            // Register the MessageService with the container
+            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
+            serviceCollection.AddFactories();
+            serviceCollection.AddHelpers();
 
-            if (view is not null)
-            {
-                if (value)
-                {
-                    view.TryEnterFullScreenMode();
-                }
-                else
-                {
-                    view.ExitFullScreenMode();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Navigate to provided page.
-        /// </summary>
-        /// <param name="pageType"></param>
-        /// <param name="parameter"></param>
-        public static void NavigateToPage(Type pageType, object parameter = null)
-        {
-            var rootFrame = _window.Content as Frame;
-            rootFrame.Navigate(pageType, parameter);
-        }
-
-        /// <summary>
-        /// Get base url for the app.
-        /// </summary>
-        public static string GetBaseUrl()
-        {
-            if (_baseUrl.IsNullOrBlank())
-            {
-                var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
-                var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-                _baseUrl = $"{indexUrl}{appPackage}";
-
-#if DEBUG
-                Console.WriteLine(_baseUrl);
-#endif 
-            }
-            return _baseUrl;
+            // Build the IServiceProvider and return it
+            return serviceCollection.BuildServiceProvider();
         }
 
         #endregion

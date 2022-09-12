@@ -12,14 +12,16 @@ namespace AstroOdyssey
         #region Fields
 
         private readonly IHttpRequestHelper _httpRequestHelper;
+        private readonly ICacheHelper _cacheHelper;
 
         #endregion
 
         #region Ctor
 
-        public GameApiHelper(IHttpRequestHelper httpRequestHelper)
+        public GameApiHelper(IHttpRequestHelper httpRequestHelper, ICacheHelper cacheHelper)
         {
             _httpRequestHelper = httpRequestHelper;
+            _cacheHelper = cacheHelper;
         }
 
         #endregion
@@ -208,15 +210,15 @@ namespace AstroOdyssey
         private async Task<bool> RefreshAuthToken()
         {
             // taking in account that user has already logged in and a session and auth token exists
-            if (CacheHelper.WillSessionExpireSoon() || CacheHelper.WillAuthTokenExpireSoon())
+            if (_cacheHelper.WillSessionExpireSoon() || _cacheHelper.WillAuthTokenExpireSoon())
             {
-                if (CacheHelper.GetCachedSession() is Session session)
+                if (_cacheHelper.GetCachedSession() is Session session)
                 {
                     // validate session and get new auth token
                     if (!await ValidateSession(session.SessionId))
                         return false;
 
-                    if (CacheHelper.WillSessionExpireSoon())
+                    if (_cacheHelper.WillSessionExpireSoon())
                     {
                         // with new auth token generate a new session and validate it, get new auth token for new session
                         if (!await GenerateAndValidateSession())
@@ -236,7 +238,7 @@ namespace AstroOdyssey
                 return false;
 
             var session = ParseResult<Session>(response.Result);
-            CacheHelper.SetCachedSession(session);
+            _cacheHelper.SetCachedSession(session);
 
             return await ValidateSession(session.SessionId);
         }
