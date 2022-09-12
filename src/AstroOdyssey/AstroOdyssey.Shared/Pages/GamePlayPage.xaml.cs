@@ -840,6 +840,9 @@ namespace AstroOdyssey
                         if (StarView.IsWarpingThroughSpace)
                             return;
 
+                        if (projectile.IsMarkedForFadedDestruction)
+                            return;
+
                         // check if enemy projectile collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
                         {
@@ -858,6 +861,9 @@ namespace AstroOdyssey
                             return;
 
                         if (StarView.IsWarpingThroughSpace)
+                            return;
+
+                        if (enemy.IsMarkedForFadedDestruction)
                             return;
 
                         // check if enemy collides with player
@@ -883,6 +889,9 @@ namespace AstroOdyssey
                             return;
 
                         if (StarView.IsWarpingThroughSpace)
+                            return;
+
+                        if (meteor.IsMarkedForFadedDestruction)
                             return;
 
                         // check if meteor collides with player

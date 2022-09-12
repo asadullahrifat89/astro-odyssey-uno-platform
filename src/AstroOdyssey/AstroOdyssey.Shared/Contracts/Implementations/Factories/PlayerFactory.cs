@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class PlayerFactory: IPlayerFactory
+    public class PlayerFactory : IPlayerFactory
     {
         #region Fields
 
@@ -299,7 +298,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
-                                _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
+                                _audioHelper.PlaySound(SoundType.ROUNDS_HIT);
                             }
                             else
                             {
@@ -322,7 +321,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
-                                _audioHelper.PlaySound(SoundType.HEALTH_LOSS);
+                                _audioHelper.PlaySound(SoundType.ROUNDS_HIT);
                             }
                             else
                             {
@@ -349,6 +348,7 @@ namespace AstroOdyssey
                             else if (player.IsShieldUp) // if shield is up then player takes no damage but the object gets destroyed
                             {
                                 gameObject.IsMarkedForFadedDestruction = true;
+                                _audioHelper.PlaySound(SoundType.ROUNDS_HIT);
                             }
                             else
                             {
@@ -365,7 +365,7 @@ namespace AstroOdyssey
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             _gameEnvironment.AddDestroyableGameObject(gameObject);
-                            PlayerHealthGain(player, gameObject as Health);
+                            PlayerHealthGain(player);
 
                             return true;
                         }
@@ -376,7 +376,7 @@ namespace AstroOdyssey
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
                             _gameEnvironment.AddDestroyableGameObject(gameObject);
-                            PlayerCollectibleCollected(player, gameObject as Collectible);
+                            PlayerCollectibleCollected();
 
                             return true;
                         }
@@ -414,7 +414,7 @@ namespace AstroOdyssey
                     player.IsRecoveringFromDamage = false;
                 }
             }
-        } 
+        }
 
         #endregion
 
@@ -457,18 +457,17 @@ namespace AstroOdyssey
         /// <summary>
         /// Makes the player gain health.
         /// </summary>
-        /// <param name="health"></param>
-        private void PlayerHealthGain(Player player, Health health)
+        /// <param name="player"></param>
+        private void PlayerHealthGain(Player player)
         {
-            player.GainHealth(health.Health);
+            player.GainHealth(player.HitPoint);
             _audioHelper.PlaySound(SoundType.HEALTH_GAIN);
         }
 
         /// <summary>
         /// Makes the player collect collectible.
         /// </summary>
-        /// <param name="collectible"></param>
-        private void PlayerCollectibleCollected(Player player, Collectible collectible)
+        private void PlayerCollectibleCollected()
         {
             _audioHelper.PlaySound(SoundType.COLLECTIBLE_COLLECTED);
         }
@@ -482,7 +481,7 @@ namespace AstroOdyssey
 
             _audioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);
-        } 
+        }
 
         #endregion
 

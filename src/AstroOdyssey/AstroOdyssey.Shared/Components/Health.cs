@@ -39,8 +39,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            var uri = new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute);
-            Health = 10;
+            var uri = new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute);            
 
             content.Source = new BitmapImage(uri);
 
