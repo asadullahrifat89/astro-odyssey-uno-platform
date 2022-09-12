@@ -220,15 +220,7 @@ namespace AstroOdyssey
             serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
             serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
 
-            serviceCollection.AddSingleton<ICelestialObjectFactory, CelestialObjectFactory>();
-            serviceCollection.AddSingleton<ICollectibleFactory, CollectibleFactory>();
-            serviceCollection.AddSingleton<IEnemyFactory, EnemyFactory>();
-            serviceCollection.AddSingleton<IEnemyProjectileFactory, EnemyProjectileFactory>();
-            serviceCollection.AddSingleton<IHealthFactory, HealthFactory>();
-            serviceCollection.AddSingleton<IMeteorFactory, MeteorFactory>();
-            serviceCollection.AddSingleton<IPlayerFactory, PlayerFactory>();
-            serviceCollection.AddSingleton<IPlayerProjectileFactory, PlayerProjectileFactory>();
-            serviceCollection.AddSingleton<IPowerUpFactory, PowerUpFactory>();
+            serviceCollection.AddFactories();            
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();

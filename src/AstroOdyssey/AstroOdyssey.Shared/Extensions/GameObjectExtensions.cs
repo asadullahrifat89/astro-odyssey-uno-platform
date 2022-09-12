@@ -4,7 +4,6 @@ namespace AstroOdyssey
 {
     public static class GameObjectExtensions
     {
-
         #region Methods      
 
         /// <summary>

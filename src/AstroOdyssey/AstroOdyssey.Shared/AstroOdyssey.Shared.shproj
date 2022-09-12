@@ -27,6 +27,7 @@
     <_Globbed_Compile Remove="Entities\Session.cs" />
     <_Globbed_Compile Remove="Extensions\GameObjectExtensions.cs" />
     <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
+    <_Globbed_Compile Remove="Extensions\ServiceCollectionExtensions.cs" />
     <_Globbed_Compile Remove="Factories\Contracts\ICelestialObjectFactory.cs" />
     <_Globbed_Compile Remove="Factories\Contracts\ICollectibleFactory.cs" />
     <_Globbed_Compile Remove="Factories\Contracts\IEnemyFactory.cs" />

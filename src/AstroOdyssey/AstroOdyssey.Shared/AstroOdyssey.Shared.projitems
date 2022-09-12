@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GameObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ServiceCollectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\ICelestialObjectFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\ICollectibleFactory.cs" />
