@@ -346,7 +346,6 @@ namespace AstroOdyssey
 
             // Register the MessageService with the container
             serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
-
             serviceCollection.AddFactories();
             serviceCollection.AddHelpers();
 
