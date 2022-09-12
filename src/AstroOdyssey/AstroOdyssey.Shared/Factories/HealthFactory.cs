@@ -6,7 +6,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private readonly Random _random = new Random();
 
         private int _healthSpawnCounter;
@@ -17,14 +17,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public HealthFactory(GameEnvironment gameEnvironment)
+        public HealthFactory()
         {
-            _gameEnvironment = gameEnvironment;
+            
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a Health.

@@ -6,8 +6,8 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _starView;
-        private readonly GameEnvironment _planetView;
+        private GameEnvironment _starView;
+        private GameEnvironment _planetView;
 
         private readonly Random _random = new Random();
 
@@ -31,15 +31,20 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public CelestialObjectFactory(GameEnvironment starView, GameEnvironment planetView)
+        public CelestialObjectFactory()
         {
-            _starView = starView;
-            _planetView = planetView;
+            
         }
 
         #endregion       
 
         #region Methods
+
+        public void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView) 
+        {
+            _starView = starView;
+            _planetView = planetView;
+        }
 
         /// <summary>
         /// Starts the space warp effect.

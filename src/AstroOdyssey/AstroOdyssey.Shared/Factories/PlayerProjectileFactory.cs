@@ -7,7 +7,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private double _projectileSpawnCounter;
         private double _projectileSpawnDelay = 14;
@@ -36,15 +36,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerProjectileFactory(GameEnvironment gameEnvironment)
+        public PlayerProjectileFactory()
         {
-            _gameEnvironment = gameEnvironment;
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Increases projectile power.
@@ -100,7 +104,7 @@ namespace AstroOdyssey
                     player: player,
                     gameLevel: gameLevel,
                     powerUpType: powerUpType);
-                
+
                 //}
 
                 _projectileSpawnCounter = _projectileSpawnDelay;

@@ -6,7 +6,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private readonly Random _random = new Random();
 
@@ -18,14 +18,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public CollectibleFactory(GameEnvironment gameEnvironment)
+        public CollectibleFactory()
         {
-            _gameEnvironment = gameEnvironment;
+
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a Collectible.

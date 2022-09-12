@@ -76,15 +76,32 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _celestialObjectFactory = new CelestialObjectFactory(StarView, PlanetView);
-            _meteorFactory = new MeteorFactory(GameView);
-            _enemyFactory = new EnemyFactory(GameView);
-            _healthFactory = new HealthFactory(GameView);
-            _powerUpFactory = new PowerUpFactory(GameView);
-            _collectibleFactory = new CollectibleFactory(GameView);
-            _playerFactory = new PlayerFactory(GameView);
-            _playerProjectileFactory = new PlayerProjectileFactory(GameView);
-            _enemyProjectileFactory = new EnemyProjectileFactory(GameView);
+            _celestialObjectFactory = new CelestialObjectFactory();
+            _celestialObjectFactory.SetGameEnvironments(StarView, PlanetView);
+
+            _meteorFactory = new MeteorFactory();
+            _meteorFactory.SetGameEnvironment(GameView);
+
+            _enemyFactory = new EnemyFactory();
+            _enemyFactory.SetGameEnvironment(GameView);
+
+            _healthFactory = new HealthFactory();
+            _healthFactory.SetGameEnvironment(GameView);
+
+            _powerUpFactory = new PowerUpFactory();
+            _powerUpFactory.SetGameEnvironment(GameView);
+
+            _collectibleFactory = new CollectibleFactory();
+            _collectibleFactory.SetGameEnvironment(GameView);
+
+            _playerFactory = new PlayerFactory();
+            _playerFactory.SetGameEnvironment(GameView);
+
+            _playerProjectileFactory = new PlayerProjectileFactory();
+            _playerProjectileFactory.SetGameEnvironment(GameView);
+
+            _enemyProjectileFactory = new EnemyProjectileFactory();
+            _enemyProjectileFactory.SetGameEnvironment(GameView);
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }

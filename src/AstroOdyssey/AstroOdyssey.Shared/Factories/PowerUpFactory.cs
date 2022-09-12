@@ -6,7 +6,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private readonly Random _random = new Random();
 
         private int _powerUpSpawnCounter = 1500;
@@ -17,14 +17,18 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PowerUpFactory(GameEnvironment gameEnvironment)
+        public PowerUpFactory()
         {
-            _gameEnvironment = gameEnvironment;
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a PowerUp.

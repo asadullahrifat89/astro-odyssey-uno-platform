@@ -7,7 +7,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private readonly Random _random = new Random();
 
         private int _xFlyingEnemySpawnCounter = 10;
@@ -37,15 +37,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyFactory(GameEnvironment gameEnvironment)
+        public EnemyFactory()
         {
-            _gameEnvironment = gameEnvironment;
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Engages a boss.

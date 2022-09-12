@@ -7,22 +7,26 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
         private Random _random = new Random();
         private readonly IAudioHelper _audioHelper;
         #endregion
 
         #region Ctor
 
-        public EnemyProjectileFactory(GameEnvironment gameEnvironment)
+        public EnemyProjectileFactory()
         {
-            _gameEnvironment = gameEnvironment;
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a projectile.

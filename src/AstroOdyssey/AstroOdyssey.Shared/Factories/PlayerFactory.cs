@@ -8,7 +8,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private int _playerDamageRecoveryCounter;
         private readonly int _playerDamageRecoveryDelay = 120;
@@ -30,15 +30,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerFactory(GameEnvironment gameEnvironment)
+        public PlayerFactory()
         {
-            _gameEnvironment = gameEnvironment;
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns the player.

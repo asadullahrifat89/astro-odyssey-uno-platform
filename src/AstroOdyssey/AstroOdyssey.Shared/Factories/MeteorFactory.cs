@@ -7,7 +7,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly GameEnvironment _gameEnvironment;
+        private GameEnvironment _gameEnvironment;
 
         private readonly Random _random = new Random();
 
@@ -26,15 +26,19 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public MeteorFactory(GameEnvironment gameEnvironment)
-        {
-            _gameEnvironment = gameEnvironment; 
+        public MeteorFactory()
+        {           
             _audioHelper = App.Container.GetService<IAudioHelper>();
         }
 
         #endregion
 
         #region Methods
+
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
 
         /// <summary>
         /// Spawns a meteor.
