@@ -72,6 +72,9 @@ namespace AstroOdyssey
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
 
+            if (localValue.IsNullOrBlank())
+                return true;
+
             var session = JsonConvert.DeserializeObject<Session>(localValue);
             if (DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn)
                 return true;
