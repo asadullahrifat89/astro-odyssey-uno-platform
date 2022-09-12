@@ -88,7 +88,7 @@ namespace AstroOdyssey
 
         public static string CurrentCulture { get; set; }
 
-        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank();
+        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank() && !GameProfile.User.UserName.IsNullOrBlank();
 
         #endregion
 
@@ -208,6 +208,8 @@ namespace AstroOdyssey
 
         #region Methods
 
+        #region Public
+
         public static void SetScore(PlayerScore gameScore)
         {
             GameScore = gameScore;
@@ -269,6 +271,10 @@ namespace AstroOdyssey
             }
             return _baseUrl;
         }
+
+        #endregion
+
+        #region Private
 
         /// <summary>
         /// Configures global Uno Platform logging
@@ -351,7 +357,9 @@ namespace AstroOdyssey
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

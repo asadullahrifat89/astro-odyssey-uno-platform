@@ -241,7 +241,7 @@ namespace AstroOdyssey
             };
             _bossClearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute));
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
         }
 
         void GamePage_Unloaded(object sender, RoutedEventArgs e)
@@ -840,6 +840,9 @@ namespace AstroOdyssey
                         if (StarView.IsWarpingThroughSpace)
                             return;
 
+                        if (projectile.IsMarkedForFadedDestruction)
+                            return;
+
                         // check if enemy projectile collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
                         {
@@ -858,6 +861,9 @@ namespace AstroOdyssey
                             return;
 
                         if (StarView.IsWarpingThroughSpace)
+                            return;
+
+                        if (enemy.IsMarkedForFadedDestruction)
                             return;
 
                         // check if enemy collides with player
@@ -883,6 +889,9 @@ namespace AstroOdyssey
                             return;
 
                         if (StarView.IsWarpingThroughSpace)
+                            return;
+
+                        if (meteor.IsMarkedForFadedDestruction)
                             return;
 
                         // check if meteor collides with player
@@ -1136,7 +1145,7 @@ namespace AstroOdyssey
 
             App.SetScore(GameScore);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameOverPage));
         }

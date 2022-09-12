@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using static AstroOdyssey.Constants;
+﻿using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {

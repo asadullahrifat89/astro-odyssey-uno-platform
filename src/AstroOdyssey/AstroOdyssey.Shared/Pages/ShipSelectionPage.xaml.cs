@@ -53,7 +53,9 @@ namespace AstroOdyssey
 
             ShipsList.ItemsSource = ships.ToList();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
+
+            ShowUserName();
         }
 
         private async void ChooseButton_Click(object sender, RoutedEventArgs e)
@@ -63,7 +65,7 @@ namespace AstroOdyssey
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
 
-                await this.PlayPageUnLoadedTransition();
+                await this.PlayUnLoadedTransition();
 
                 App.NavigateToPage(typeof(GamePlayPage));
             }
@@ -71,7 +73,7 @@ namespace AstroOdyssey
 
         private async void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameStartPage));
         }
@@ -85,6 +87,20 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        private void ShowUserName()
+        {
+            if (App.HasUserLoggedIn)
+            {
+                Page_UserName.Text = App.GameProfile.User.UserName;
+                Page_UserPicture.Initials = App.GameProfile.Initials;
+                PlayerNameHolder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PlayerNameHolder.Visibility = Visibility.Collapsed;
+            }
+        }
 
         private void SetLocalization()
         {

@@ -232,8 +232,38 @@
             </Border.Background>
         </Border>
 
+        <!--  Welcome back toast  -->
+        <Border
+            x:Name="WelcomeBackToast"
+            Margin="10,50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            BorderBrush="#4d437d"
+            BorderThickness="3"
+            CornerRadius="10"
+            Opacity="0">
+
+            <StackPanel Margin="10" Orientation="Horizontal">
+                <TextBlock
+                    x:Name="GameStartPage_WelcomeBackText"
+                    Margin="5,0"
+                    FontWeight="SemiBold"
+                    Text="Welcome back!"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    x:Name="GameStartPage_UserName"
+                    FontWeight="SemiBold"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Border.Background>
+                <SolidColorBrush Color="#27223f" />
+            </Border.Background>
+
+        </Border>
+
         <!--  Asset credits  -->
-        <HyperlinkButton
+        <!--<HyperlinkButton
             x:Name="GameStartPage_AssetsCreditButton"
             x:Uid="GameStartPage_AssetsCreditButton"
             Margin="10"
@@ -244,7 +274,7 @@
             Foreground="White"
             IsFocusEngagementEnabled="False"
             IsTabStop="False"
-            NavigateUri="http://www.redfoc.com" />
+            NavigateUri="http://www.redfoc.com" />-->
     </Grid>
 
 </Page>

@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Threading.Tasks;
+using Page = Microsoft.UI.Xaml.Controls.Page;
 
 namespace AstroOdyssey
 {
@@ -9,12 +10,13 @@ namespace AstroOdyssey
     {
         #region Methods
 
-        #region Public
+        #region Public      
 
-        public async static Task PlayPageLoadedTransition(this Page page)
+        public async static Task PlayLoadedTransition(this UIElement page)
         {
             if (page is not null)
             {
+                var timeSpan = TimeSpan.FromMilliseconds(18);
                 page.Opacity = 0;
                 var skipAnimation = 100;
 
@@ -22,7 +24,7 @@ namespace AstroOdyssey
                 {
                     skipAnimation--;
                     page.Opacity += 0.1d;
-                    await Task.Delay(TimeSpan.FromMilliseconds(18));
+                    await Task.Delay(timeSpan);
 
                     if (page.Opacity >= 1)
                         break;
@@ -30,10 +32,11 @@ namespace AstroOdyssey
             }
         }
 
-        public async static Task PlayPageUnLoadedTransition(this Page page)
+        public async static Task PlayUnLoadedTransition(this UIElement page)
         {
             if (page is not null)
             {
+                var timeSpan = TimeSpan.FromMilliseconds(18);
                 page.Opacity = 1;
                 var skipAnimation = 100;
 
@@ -41,7 +44,7 @@ namespace AstroOdyssey
                 {
                     skipAnimation--;
                     page.Opacity -= 0.1d;
-                    await Task.Delay(TimeSpan.FromMilliseconds(18));
+                    await Task.Delay(timeSpan);
 
                     if (page.Opacity <= 0)
                         break;
