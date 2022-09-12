@@ -160,7 +160,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\pizza4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\pizza5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\pizza6.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Planet\black-hole2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\gas_star2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage2.png" />
