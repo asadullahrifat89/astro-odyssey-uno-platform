@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace AstroOdyssey
 {
-    public static class PageTransitionHelper
+    public static class PageExtensions
     {
         #region Methods
+
+        #region Public
 
         public async static Task PlayPageLoadedTransition(this Page page)
         {
@@ -76,7 +78,7 @@ namespace AstroOdyssey
             progressBar.ShowPaused = false;
 
             errorContainer.Text = "";
-            errorContainer.Visibility= Visibility.Collapsed;
+            errorContainer.Visibility = Visibility.Collapsed;
 
             foreach (var actionButton in actionButtons)
             {
@@ -98,6 +100,10 @@ namespace AstroOdyssey
             }
         }
 
+        #endregion
+
+        #region Private
+
         private static void EnableActionButton(Button button)
         {
             button.IsEnabled = true;
@@ -106,7 +112,9 @@ namespace AstroOdyssey
         private static void DisableActionButton(Button button)
         {
             button.IsEnabled = false;
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

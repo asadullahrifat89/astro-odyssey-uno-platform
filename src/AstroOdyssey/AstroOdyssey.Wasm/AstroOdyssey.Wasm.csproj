@@ -80,6 +80,7 @@
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
+	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Contracts\Implementations\Statics\PageExtensions.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\Statics\CacheHelper.cs" />
 	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerCredentials.cs" />
 	</ItemGroup>	

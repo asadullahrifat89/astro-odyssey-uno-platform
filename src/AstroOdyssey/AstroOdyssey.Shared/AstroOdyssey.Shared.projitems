@@ -74,7 +74,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\EnemyFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\LocalizationHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Statics\PageTransitionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\PageExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\EnemyProjectileFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\HealthFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\MeteorFactory.cs" />
@@ -96,7 +96,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\PowerUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\CelestialObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Statics\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
@@ -265,7 +264,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Statics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Global\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
