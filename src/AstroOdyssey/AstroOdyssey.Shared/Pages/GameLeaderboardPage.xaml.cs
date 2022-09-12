@@ -19,6 +19,7 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
+        private readonly IPaginationHelper _paginationHelper;
 
         private int _pageIndex = 0;
         private int _pageSize = 15;
@@ -42,6 +43,7 @@ namespace AstroOdyssey
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _paginationHelper = App.Container.GetService<IPaginationHelper>();
 
             LeaderboardList.ItemsSource = GameProfiles;
 
@@ -143,7 +145,7 @@ namespace AstroOdyssey
 
             if (count > 0)
             {
-                _totalPageCount = PaginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
+                _totalPageCount = _paginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
 
                 var records = result.Records;
 

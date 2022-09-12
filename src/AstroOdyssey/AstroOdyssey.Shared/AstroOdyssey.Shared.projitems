@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ICacheHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ILocalizationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IPaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\AttachedUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\AuthToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\EntityBase.cs" />
@@ -50,7 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IHttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\HttpRequestHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Statics\PaginationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\PaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLeaderboardPage.xaml.cs">
       <DependentUpon>GameLeaderboardPage.xaml</DependentUpon>

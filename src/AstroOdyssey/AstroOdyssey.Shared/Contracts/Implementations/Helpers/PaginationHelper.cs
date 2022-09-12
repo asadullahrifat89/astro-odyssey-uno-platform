@@ -2,15 +2,15 @@
 
 namespace AstroOdyssey
 {
-    public static class PaginationHelper
+    public class PaginationHelper : IPaginationHelper
     {
-        public static long GetTotalPageCount(int pageSize, long dataCount)
+        public long GetTotalPageCount(int pageSize, long dataCount)
         {
             var totalPageCount = dataCount < pageSize ? 1 : (long)Math.Ceiling(dataCount / (decimal)pageSize);
             return totalPageCount;
         }
 
-        public static int GetNextPageNumber(
+        public int GetNextPageNumber(
             long totalPageCount,
             int pageIndex)
         {
@@ -24,7 +24,7 @@ namespace AstroOdyssey
             return pageIndex;
         }
 
-        public static int GetPreviousPageNumber(int pageIndex)
+        public int GetPreviousPageNumber(int pageIndex)
         {
             pageIndex--;
 

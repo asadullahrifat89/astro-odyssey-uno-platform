@@ -352,6 +352,7 @@ namespace AstroOdyssey
             serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
             serviceCollection.AddSingleton<ILocalizationHelper, LocalizationHelper>();
             serviceCollection.AddSingleton<ICacheHelper, CacheHelper>();
+            serviceCollection.AddSingleton<IPaginationHelper, PaginationHelper>();
 
             serviceCollection.AddFactories();
 

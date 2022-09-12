@@ -26,6 +26,7 @@
     <_Globbed_Compile Remove="Constants.cs" />
     <_Globbed_Compile Remove="Contracts\Declarations\Helpers\ICacheHelper.cs" />
     <_Globbed_Compile Remove="Contracts\Declarations\Helpers\ILocalizationHelper.cs" />
+    <_Globbed_Compile Remove="Contracts\Declarations\Helpers\IPaginationHelper.cs" />
     <_Globbed_Compile Remove="Entities\Session.cs" />
     <_Globbed_Compile Remove="Extensions\GameObjectExtensions.cs" />
     <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
