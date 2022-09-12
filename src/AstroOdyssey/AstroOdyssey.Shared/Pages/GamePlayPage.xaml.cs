@@ -151,9 +151,9 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Methods
+        #region Events
 
-        #region Window Events
+        #region Window
 
         async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -244,7 +244,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region UI Events
+        #region Game
 
         private void PauseGameButton_Click(object sender, RoutedEventArgs e)
         {
@@ -273,7 +273,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Input Events       
+        #region Input       
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -385,7 +385,11 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Game Methods
+        #endregion
+
+        #region Methods
+
+        #region Game
 
         /// <summary>
         /// Starts the game. Spawns the player and starts game and projectile loops.
@@ -1178,7 +1182,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Frame Methods
+        #region Frame
 
         /// <summary>
         /// Sets the frame time.
@@ -1208,7 +1212,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Player Methods
+        #region Player
 
         /// <summary>
         /// Spawns the player.
@@ -1281,7 +1285,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Boss Methods
+        #region Boss
 
         /// <summary>
         /// Engages a boss.
@@ -1331,7 +1335,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Difficulty Methods
+        #region Difficulty
 
         /// <summary>
         /// Sets the game level according to score; 

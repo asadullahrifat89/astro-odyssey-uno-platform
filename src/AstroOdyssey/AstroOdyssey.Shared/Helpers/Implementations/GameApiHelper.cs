@@ -26,11 +26,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public T ParseResult<T>(object obj)
-        {
-            var result = JsonConvert.DeserializeObject<T>(obj.ToString(), new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-            return result;
-        }
+        #region Commands
 
         public async Task<ServiceResponse> Authenticate(string userNameOrEmail, string password)
         {
@@ -64,6 +60,24 @@ namespace AstroOdyssey
                      Password = password,
                      GameId = Constants.GAME_ID,
                  });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
+        }
+
+        public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
+        {
+            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
+                baseUrl: Constants.GAME_API_BASEURL,
+                path: Constants.Action_ValidateSession,
+                httpHeaders: new Dictionary<string, string>(),
+                httpMethod: HttpMethod.Post,
+                payload: new
+                {
+                    GameId = gameId,
+                    SessionId = sessionId,
+                });
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
@@ -113,25 +127,11 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
                 : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
-        }
+        } 
 
-        public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
-        {
-            var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
-                baseUrl: Constants.GAME_API_BASEURL,
-                path: Constants.Action_ValidateSession,
-                httpHeaders: new Dictionary<string, string>(),
-                httpMethod: HttpMethod.Post,
-                payload: new
-                {
-                    GameId = gameId,
-                    SessionId = sessionId,
-                });
+        #endregion
 
-            return response.StatusCode == HttpStatusCode.OK
-                ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
-        }
+        #region Queries
 
         public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
         {
@@ -195,10 +195,19 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse
                 : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
+        } 
+
+        #endregion
+
+        public T ParseResult<T>(object obj)
+        {
+            var result = JsonConvert.DeserializeObject<T>(obj.ToString(), new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return result;
         }
 
         private async Task<bool> RefreshAuthToken()
         {
+            // taking in account that user has already logged in and a session and auth token exists
             if (CacheHelper.WillSessionExpireSoon() || CacheHelper.WillAuthTokenExpireSoon())
             {
                 if (CacheHelper.GetCachedSession() is Session session)
