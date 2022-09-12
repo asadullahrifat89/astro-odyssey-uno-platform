@@ -104,11 +104,19 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             // delete session
-            _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
-            App.AuthToken = null;
+            PerformLogout();
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
+        }
+
+        private void PerformLogout()
+        {
+            _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+            App.AuthToken = null;
+            App.GameProfile = null;
+            App.GameScore = null;
+            App.Ship = null;
         }
 
         private void LanguageButton_Click(object sender, RoutedEventArgs e)

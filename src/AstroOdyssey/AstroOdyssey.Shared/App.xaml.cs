@@ -157,6 +157,11 @@ namespace AstroOdyssey
             _systemNavigationManager.BackRequested += OnBackRequested;
         }
 
+        /// <summary>
+        /// Invoked when a going back navigation is requested.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             var rootFrame = _window.Content as Frame;
