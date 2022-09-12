@@ -347,14 +347,8 @@ namespace AstroOdyssey
             // Register the MessageService with the container
             serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
 
-            serviceCollection.AddSingleton<IHttpRequestHelper, HttpRequestHelper>();
-            serviceCollection.AddSingleton<IGameApiHelper, GameApiHelper>();
-            serviceCollection.AddSingleton<IAudioHelper, AudioHelper>();
-            serviceCollection.AddSingleton<ILocalizationHelper, LocalizationHelper>();
-            serviceCollection.AddSingleton<ICacheHelper, CacheHelper>();
-            serviceCollection.AddSingleton<IPaginationHelper, PaginationHelper>();
-
             serviceCollection.AddFactories();
+            serviceCollection.AddHelpers();
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();
