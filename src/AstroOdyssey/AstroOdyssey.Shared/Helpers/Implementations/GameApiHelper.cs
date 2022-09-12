@@ -47,7 +47,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> Signup(string userName, string email, string password)
@@ -67,7 +67,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> SubmitGameScore(double score)
@@ -94,7 +94,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> GenerateSession(string gameId, string userId)
@@ -112,7 +112,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<ServiceResponse> ValidateSession(string gameId, string sessionId)
@@ -130,7 +130,7 @@ namespace AstroOdyssey
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
-                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError };
+                : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
         public async Task<QueryRecordResponse<GameProfile>> GetGameProfile()
