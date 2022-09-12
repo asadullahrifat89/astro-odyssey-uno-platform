@@ -56,7 +56,7 @@ namespace AstroOdyssey
                 {
                     case PowerUpType.BLAZE_BLITZ:
                         {
-                            height = 35; width = 10; // medium and faster rounds
+                            height = 35 + projectilePower; width = 10; // medium and faster rounds
 
                             Background = new SolidColorBrush(Colors.Goldenrod);
                             BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
@@ -66,7 +66,7 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.PLASMA_BOMB:
                         {
-                            height = 25; width = 25; // larger and slower rounds
+                            height = 25 + projectilePower; width = 25; // larger and slower rounds
 
                             Background = new SolidColorBrush(Colors.Cyan);
                             BorderBrush = new SolidColorBrush(Colors.DarkCyan);
@@ -76,7 +76,7 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.BEAM_CANNON:
                         {
-                            height = 300; width = 20; // larger and longer and faster piercing rounds
+                            height = 300; width = 20 + projectilePower; // larger and longer and faster piercing rounds
 
                             Background = new SolidColorBrush(Colors.SlateBlue);
                             BorderBrush = new SolidColorBrush(Colors.DarkSlateBlue);
@@ -88,7 +88,7 @@ namespace AstroOdyssey
                         break;
                     case PowerUpType.SONIC_BLAST:
                         {
-                            height = 3; width = 80; // wider and thiner and slower piercing rounds
+                            height = 3; width = 80 + projectilePower; // wider and thiner and slower piercing rounds
 
                             Background = new SolidColorBrush(Colors.SkyBlue);
                             BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
@@ -110,17 +110,17 @@ namespace AstroOdyssey
                     case ShipClass.DEFENDER:
                         {
                             height = 20; width = 5 + projectilePower; BorderThickness = new Thickness(2, 3, 2, 1);
-                        }                        
+                        }
                         break;
                     case ShipClass.BERSERKER:
                         {
                             height = 15 + projectilePower; width = 15; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
-                        }                        
+                        }
                         break;
                     case ShipClass.SPECTRE:
                         {
                             height = 5; width = 20 + projectilePower; BorderThickness = new Thickness(1); CornerRadius = new CornerRadius(5);
-                        }                        
+                        }
                         break;
                     default:
                         break;
