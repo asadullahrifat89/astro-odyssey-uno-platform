@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class CelestialObjectFactory
+    public class CelestialObjectFactory : ICelestialObjectFactory
     {
         #region Fields
 
@@ -33,14 +33,16 @@ namespace AstroOdyssey
 
         public CelestialObjectFactory()
         {
-            
+
         }
 
-        #endregion       
+        #endregion
 
         #region Methods
 
-        public void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView) 
+        #region Public
+
+        public void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView)
         {
             _starView = starView;
             _planetView = planetView;
@@ -214,7 +216,9 @@ namespace AstroOdyssey
             var scale = _starView.GetGameObjectScale();
             _starSpawnDelay -= (10 * scale);
             _starSpeed += (0.1d * scale);
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

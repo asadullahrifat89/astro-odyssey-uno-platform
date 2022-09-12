@@ -27,6 +27,15 @@
     <_Globbed_Compile Remove="Entities\Session.cs" />
     <_Globbed_Compile Remove="Extensions\GameObjectExtensions.cs" />
     <_Globbed_Compile Remove="Extensions\HttpServiceExtensions.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\ICelestialObjectFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\ICollectibleFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IEnemyFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IEnemyProjectileFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IHealthFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IMeteorFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IPlayerFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IPlayerProjectileFactory.cs" />
+    <_Globbed_Compile Remove="Factories\Contracts\IPowerUpFactory.cs" />
     <_Globbed_Compile Remove="GameObjects\Enemy.cs" />
     <_Globbed_Compile Remove="Helpers\AudioHelper.cs" />
     <_Globbed_Compile Remove="Helpers\AuthCredentialsCacheHelper.cs" />

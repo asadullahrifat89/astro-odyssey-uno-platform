@@ -3,7 +3,7 @@ using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
-    public class PlayerProjectileFactory
+    public class PlayerProjectileFactory : IPlayerProjectileFactory
     {
         #region Fields
 
@@ -36,14 +36,16 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public PlayerProjectileFactory()
+        public PlayerProjectileFactory(IAudioHelper audioHelper)
         {
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -475,6 +477,8 @@ namespace AstroOdyssey
                     break;
             }
         }
+
+        #endregion
 
         #endregion
     }

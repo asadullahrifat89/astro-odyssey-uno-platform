@@ -47,15 +47,15 @@ namespace AstroOdyssey
 
         private double _windowWidth, _windowHeight;
 
-        private readonly CelestialObjectFactory _celestialObjectFactory;
-        private readonly MeteorFactory _meteorFactory;
-        private readonly EnemyFactory _enemyFactory;
-        private readonly HealthFactory _healthFactory;
-        private readonly PowerUpFactory _powerUpFactory;
-        private readonly CollectibleFactory _collectibleFactory;
-        private readonly PlayerFactory _playerFactory;
-        private readonly PlayerProjectileFactory _playerProjectileFactory;
-        private readonly EnemyProjectileFactory _enemyProjectileFactory;
+        private readonly ICelestialObjectFactory _celestialObjectFactory;
+        private readonly IMeteorFactory _meteorFactory;
+        private readonly IEnemyFactory _enemyFactory;
+        private readonly IHealthFactory _healthFactory;
+        private readonly IPowerUpFactory _powerUpFactory;
+        private readonly ICollectibleFactory _collectibleFactory;
+        private readonly IPlayerFactory _playerFactory;
+        private readonly IPlayerProjectileFactory _playerProjectileFactory;
+        private readonly IEnemyProjectileFactory _enemyProjectileFactory;
 
         private readonly IAudioHelper _audioHelper;
         #endregion
@@ -79,28 +79,28 @@ namespace AstroOdyssey
             _celestialObjectFactory = new CelestialObjectFactory();
             _celestialObjectFactory.SetGameEnvironments(StarView, PlanetView);
 
-            _meteorFactory = new MeteorFactory();
+            _meteorFactory = App.Container.GetService<IMeteorFactory>();
             _meteorFactory.SetGameEnvironment(GameView);
 
-            _enemyFactory = new EnemyFactory();
+            _enemyFactory = App.Container.GetService<IEnemyFactory>();
             _enemyFactory.SetGameEnvironment(GameView);
 
-            _healthFactory = new HealthFactory();
+            _healthFactory = App.Container.GetService<IHealthFactory>();
             _healthFactory.SetGameEnvironment(GameView);
 
-            _powerUpFactory = new PowerUpFactory();
+            _powerUpFactory = App.Container.GetService<IPowerUpFactory>();
             _powerUpFactory.SetGameEnvironment(GameView);
 
-            _collectibleFactory = new CollectibleFactory();
+            _collectibleFactory = App.Container.GetService<ICollectibleFactory>();
             _collectibleFactory.SetGameEnvironment(GameView);
 
-            _playerFactory = new PlayerFactory();
+            _playerFactory = App.Container.GetService<IPlayerFactory>();
             _playerFactory.SetGameEnvironment(GameView);
 
-            _playerProjectileFactory = new PlayerProjectileFactory();
+            _playerProjectileFactory = App.Container.GetService<IPlayerProjectileFactory>();
             _playerProjectileFactory.SetGameEnvironment(GameView);
 
-            _enemyProjectileFactory = new EnemyProjectileFactory();
+            _enemyProjectileFactory = App.Container.GetService<IEnemyProjectileFactory>();
             _enemyProjectileFactory.SetGameEnvironment(GameView);
 
             _audioHelper = App.Container.GetService<IAudioHelper>();

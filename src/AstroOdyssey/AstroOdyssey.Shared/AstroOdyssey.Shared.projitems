@@ -31,6 +31,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GameObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\ICelestialObjectFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\ICollectibleFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IEnemyFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IEnemyProjectileFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IHealthFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IMeteorFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IPlayerFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IPlayerProjectileFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Factories\Contracts\IPowerUpFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="..\AstroOdyssey.Shared\Helpers\Statics\CacheHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Contracts\IAudioHelper.cs" />
@@ -247,7 +256,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Factories\Contracts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Factories\Implementations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\Implementations\" />
     <Folder Include="$(MSBuildThisFileDirectory)Helpers\Statics\" />

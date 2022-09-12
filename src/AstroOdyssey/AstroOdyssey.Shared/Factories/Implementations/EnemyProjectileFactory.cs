@@ -3,7 +3,7 @@ using System;
 
 namespace AstroOdyssey
 {
-    public class EnemyProjectileFactory
+    public class EnemyProjectileFactory : IEnemyProjectileFactory
     {
         #region Fields
 
@@ -14,14 +14,16 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyProjectileFactory()
+        public EnemyProjectileFactory(IAudioHelper audioHelper)
         {
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -48,6 +50,34 @@ namespace AstroOdyssey
                 //enemy.SetRecoilEffect();
             }
         }
+
+        /// <summary>
+        /// Updates a projectile.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
+        {
+            destroyed = false;
+
+            // move projectile down                
+            projectile.MoveY();
+            projectile.MoveX();
+
+            if (projectile.IsOverPowered)
+                projectile.Lengthen();
+
+            // remove projectile if outside game canvas
+            if (projectile.GetY() > _gameEnvironment.Height)
+            {
+                _gameEnvironment.AddDestroyableGameObject(projectile);
+                destroyed = true;
+            }
+        }
+
+        #endregion
+
+        #region Private
 
         /// <summary>
         /// Generates a projectile.
@@ -248,29 +278,7 @@ namespace AstroOdyssey
             }
         }
 
-        /// <summary>
-        /// Updates a projectile.
-        /// </summary>
-        /// <param name="projectile"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
-        {
-            destroyed = false;
-
-            // move projectile down                
-            projectile.MoveY();
-            projectile.MoveX();
-
-            if (projectile.IsOverPowered)
-                projectile.Lengthen();
-
-            // remove projectile if outside game canvas
-            if (projectile.GetY() > _gameEnvironment.Height)
-            {
-                _gameEnvironment.AddDestroyableGameObject(projectile);
-                destroyed = true;
-            }
-        }
+        #endregion
 
         #endregion
     }

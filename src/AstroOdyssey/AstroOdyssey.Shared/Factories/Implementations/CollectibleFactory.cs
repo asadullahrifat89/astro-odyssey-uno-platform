@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class CollectibleFactory
+    public class CollectibleFactory: ICollectibleFactory
     {
         #region Fields
 
@@ -26,6 +26,8 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -83,7 +85,9 @@ namespace AstroOdyssey
         {
             var scale = _gameEnvironment.GetGameObjectScale();
             _collectibleSpeed += (1 * scale);
-        }
+        } 
+
+        #endregion
 
         #endregion
     }

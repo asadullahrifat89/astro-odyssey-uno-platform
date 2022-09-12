@@ -3,7 +3,7 @@ using System;
 
 namespace AstroOdyssey
 {
-    public class EnemyFactory
+    public class EnemyFactory : IEnemyFactory
     {
         #region Fields
 
@@ -37,14 +37,16 @@ namespace AstroOdyssey
 
         #region Ctor
 
-        public EnemyFactory()
+        public EnemyFactory(IAudioHelper audioHelper)
         {
-            _audioHelper = App.Container.GetService<IAudioHelper>();
+            _audioHelper = audioHelper;
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -206,6 +208,99 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Destroys a Enemy. Removes from game environment, increases player score, plays sound effect.
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void DestroyEnemy(Enemy enemy)
+        {
+            enemy.IsMarkedForFadedDestruction = true;
+            _audioHelper.PlaySound(SoundType.ENEMY_DESTRUCTION);
+        }
+
+        /// <summary>
+        /// Updates an enemy. Moves the enemy inside game environment and removes from it when applicable.
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="destroyed"></param>
+        public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
+        {
+            destroyed = false;
+
+            enemy.CoolDownProjectileImpactEffect();
+
+            if (enemy.IsBoss)
+            {
+                // move boss down upto a certain point
+                if (enemy.GetY() + enemy.HalfWidth <= _gameEnvironment.Height / 4)
+                {
+                    enemy.MoveY();
+                }
+            }
+            else
+            {
+                // move enemy down
+                enemy.MoveY();
+            }
+
+            // player colliding enemies
+            if (enemy.IsPlayerColliding)
+            {
+                var enemyX = enemy.GetX();
+
+                var enemyWidthHalf = enemy.HalfWidth;
+
+                // move right
+                if (pointerX - enemyWidthHalf > enemyX + enemy.Speed)
+                {
+                    if (enemyX + enemyWidthHalf < _gameEnvironment.Width)
+                    {
+                        SetEnemyX(enemy: enemy, left: enemyX + enemy.Speed);
+                    }
+                }
+
+                // move left
+                if (pointerX - enemyWidthHalf < enemyX - enemy.Speed)
+                {
+                    SetEnemyX(enemy: enemy, left: enemyX - enemy.Speed);
+                }
+            }
+            else
+            {
+                enemy.MoveX();
+
+                // hovering enemies x direction change
+                if (enemy.IsHovering)
+                {
+                    // change direction of x axis movement
+                    if (enemy.GetX() + enemy.Width >= _gameEnvironment.Width - 25 || enemy.GetX() <= 25)
+                        enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
+                }
+            }
+
+            // if the object is marked for lazy destruction then do not destroy immidiately
+            if (enemy.IsMarkedForFadedDestruction)
+                return;
+
+            // if object has gone beyond game view
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
+        }
+
+        /// <summary>
+        /// Levels up enemies.
+        /// </summary>
+        public void LevelUp()
+        {
+            var scale = _gameEnvironment.GetGameObjectScale();
+            var delayScale = 2 + scale;
+            _enemySpawnDelay -= delayScale;
+            _enemySpeed += (1 * scale);
+        }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
         /// Generates an enemy that hovers across the screen.
         /// </summary>
         /// <param name="enemy"></param>
@@ -313,84 +408,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Destroys a Enemy. Removes from game environment, increases player score, plays sound effect.
-        /// </summary>
-        /// <param name="enemy"></param>
-        public void DestroyEnemy(Enemy enemy)
-        {
-            enemy.IsMarkedForFadedDestruction = true;
-            _audioHelper.PlaySound(SoundType.ENEMY_DESTRUCTION);
-        }
-
-        /// <summary>
-        /// Updates an enemy. Moves the enemy inside game environment and removes from it when applicable.
-        /// </summary>
-        /// <param name="enemy"></param>
-        /// <param name="destroyed"></param>
-        public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
-        {
-            destroyed = false;
-
-            enemy.CoolDownProjectileImpactEffect();
-
-            if (enemy.IsBoss)
-            {
-                // move boss down upto a certain point
-                if (enemy.GetY() + enemy.HalfWidth <= _gameEnvironment.Height / 4)
-                {
-                    enemy.MoveY();
-                }
-            }
-            else
-            {
-                // move enemy down
-                enemy.MoveY();
-            }
-
-            // player colliding enemies
-            if (enemy.IsPlayerColliding)
-            {
-                var enemyX = enemy.GetX();
-
-                var enemyWidthHalf = enemy.HalfWidth;
-
-                // move right
-                if (pointerX - enemyWidthHalf > enemyX + enemy.Speed)
-                {
-                    if (enemyX + enemyWidthHalf < _gameEnvironment.Width)
-                    {
-                        SetEnemyX(enemy: enemy, left: enemyX + enemy.Speed);
-                    }
-                }
-
-                // move left
-                if (pointerX - enemyWidthHalf < enemyX - enemy.Speed)
-                {
-                    SetEnemyX(enemy: enemy, left: enemyX - enemy.Speed);
-                }
-            }
-            else
-            {
-                enemy.MoveX();
-
-                // hovering enemies x direction change
-                if (enemy.IsHovering)
-                {
-                    // change direction of x axis movement
-                    if (enemy.GetX() + enemy.Width >= _gameEnvironment.Width - 25 || enemy.GetX() <= 25)
-                        enemy.XDirection = enemy.XDirection == XDirection.LEFT ? XDirection.RIGHT : XDirection.LEFT;
-                }
-            }
-
-            // if the object is marked for lazy destruction then do not destroy immidiately
-            if (enemy.IsMarkedForFadedDestruction)
-                return;
-
-            // if object has gone beyond game view
-            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
-        }
-
-        /// <summary>
         /// Sets X axis position of an enemy.
         /// </summary>
         /// <param name="enemy"></param>
@@ -400,16 +417,7 @@ namespace AstroOdyssey
             enemy.SetX(left);
         }
 
-        /// <summary>
-        /// Levels up enemies.
-        /// </summary>
-        public void LevelUp()
-        {
-            var scale = _gameEnvironment.GetGameObjectScale();
-            var delayScale = 2 + scale;
-            _enemySpawnDelay -= delayScale;
-            _enemySpeed += (1 * scale);
-        }
+        #endregion
 
         #endregion
     }

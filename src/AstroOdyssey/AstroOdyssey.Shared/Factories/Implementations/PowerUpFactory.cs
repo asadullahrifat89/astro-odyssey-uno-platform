@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class PowerUpFactory
+    public class PowerUpFactory : IPowerUpFactory
     {
         #region Fields
 
@@ -24,6 +24,8 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -82,6 +84,8 @@ namespace AstroOdyssey
             var scale = _gameEnvironment.GetGameObjectScale();
             _powerUpSpeed += (1 * scale);
         }
+
+        #endregion
 
         #endregion
     }

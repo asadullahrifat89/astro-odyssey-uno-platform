@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class HealthFactory
+    public class HealthFactory : IHealthFactory
     {
         #region Fields
 
@@ -19,12 +19,14 @@ namespace AstroOdyssey
 
         public HealthFactory()
         {
-            
+
         }
 
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -86,6 +88,8 @@ namespace AstroOdyssey
             var scale = _gameEnvironment.GetGameObjectScale();
             _healthSpeed += (1 * scale);
         }
+
+        #endregion
 
         #endregion
     }
