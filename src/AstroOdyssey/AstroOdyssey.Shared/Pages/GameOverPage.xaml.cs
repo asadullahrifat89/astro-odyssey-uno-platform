@@ -17,6 +17,8 @@ namespace AstroOdyssey
 
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
+        private readonly ICacheHelper _cacheHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -33,6 +35,8 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _cacheHelper = App.Container.GetService<ICacheHelper>();
 
             _progressBar = GameOverPage_ProgressBar;
             _errorContainer = GameOverPage_ErrorText;
@@ -49,7 +53,7 @@ namespace AstroOdyssey
             SetGameResults();
 
             // if user has not logged in or session has expired
-            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank() || CacheHelper.HasSessionExpired())
+            if (App.AuthToken is null || App.AuthToken.AccessToken.IsNullOrBlank() || _cacheHelper.HasSessionExpired())
             {                
                 MakeLoginControlsVisible();
             }
@@ -125,18 +129,18 @@ namespace AstroOdyssey
 
         private void SetGameResults()
         {
-            ScoreText.Text = $"{LocalizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
+            ScoreText.Text = $"{_localizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
 
-            EnemiesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
-            MeteorsDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
-            BossesDestroyedText.Text = $"{LocalizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
-            CollectiblesCollectedText.Text = $"{LocalizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.GameScore.CollectiblesCollected;
+            EnemiesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
+            MeteorsDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
+            BossesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
+            CollectiblesCollectedText.Text = $"{_localizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.GameScore.CollectiblesCollected;
 
             CongratulationsText.Text = (App.GameScore.Score == 0
-                ? LocalizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
-                ? LocalizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
-                ? LocalizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
-                ? LocalizationHelper.GetLocalizedResource("FANTASTIC_GAME") : LocalizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+                ? _localizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
+                ? _localizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
+                ? _localizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
+                ? _localizationHelper.GetLocalizedResource("FANTASTIC_GAME") : _localizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
         }
 
         private async Task<bool> SubmitScore()
@@ -160,10 +164,10 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(GameOverPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
-            LocalizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
+            _localizationHelper.SetLocalizedResource(GameOverPage_Tagline);
+            _localizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
         }
 
         #endregion      

@@ -19,6 +19,8 @@ namespace AstroOdyssey
 
         private readonly IAudioHelper _audioHelper;
         private readonly IGameApiHelper _gameApiHelper;
+        private readonly ILocalizationHelper _localizationHelper;
+        private readonly ICacheHelper _cacheHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -35,6 +37,8 @@ namespace AstroOdyssey
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _cacheHelper = App.Container.GetService<ICacheHelper>();
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
@@ -100,7 +104,7 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             // delete session
-            CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+            _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
             App.AuthToken = null;
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
@@ -113,7 +117,7 @@ namespace AstroOdyssey
             {
                 App.CurrentCulture = tag;
                 SetLocalization();
-                CacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
+                _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
             }
         }
 
@@ -123,7 +127,7 @@ namespace AstroOdyssey
 
         private void CheckCachedLocalization()
         {
-            if (CacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
+            if (_cacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
                 App.CurrentCulture = language;
         }
 
@@ -131,9 +135,9 @@ namespace AstroOdyssey
         {
             if (App.HasUserLoggedIn)
             {
-                if (CacheHelper.HasSessionExpired())
+                if (_cacheHelper.HasSessionExpired())
                 {
-                    CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
                     MakeLoginControlsVisible();
                 }
                 else
@@ -143,14 +147,14 @@ namespace AstroOdyssey
             }
             else
             {
-                if (CacheHelper.HasSessionExpired())
+                if (_cacheHelper.HasSessionExpired())
                 {
-                    CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
                     MakeLoginControlsVisible();
                 }
                 else // if a non expired session exists then validate it, get a new auth token, and get game profile
                 {
-                    if (CacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
+                    if (_cacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
                     {
                         MakeLogoutControlsVisible();
                     }
@@ -306,18 +310,18 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
-            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
-            LocalizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
+            _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
+            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
         }
 
         #endregion

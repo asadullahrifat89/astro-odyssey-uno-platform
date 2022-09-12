@@ -18,6 +18,7 @@ namespace AstroOdyssey
 
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
 
         private int _pageIndex = 0;
         private int _pageSize = 15;
@@ -40,6 +41,7 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
 
             LeaderboardList.ItemsSource = GameProfiles;
 
@@ -114,8 +116,8 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            PersonalBestScoreText.Text = LocalizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
-            ScoreText.Text = LocalizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
+            PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
+            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
 
             return true;
         }
@@ -165,8 +167,8 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(GameLeaderboardPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(GameLeaderboardPage_PlayNowButton);
+            _localizationHelper.SetLocalizedResource(GameLeaderboardPage_Tagline);
+            _localizationHelper.SetLocalizedResource(GameLeaderboardPage_PlayNowButton);
         }
 
         #endregion

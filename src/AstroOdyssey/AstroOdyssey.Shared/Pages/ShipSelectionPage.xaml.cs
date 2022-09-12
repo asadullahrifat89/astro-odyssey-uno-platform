@@ -14,6 +14,7 @@ namespace AstroOdyssey
 
         private PlayerShip selectedShip;
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace AstroOdyssey
             Loaded += ShipSelectionPage_Loaded;
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
         }
 
         #endregion
@@ -44,7 +46,7 @@ namespace AstroOdyssey
             ships = GameObjectTemplates.PLAYER_SHIP_TEMPLATES.Select(x => new PlayerShip()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = LocalizationHelper.GetLocalizedResource(x.Name),
+                Name = _localizationHelper.GetLocalizedResource(x.Name),
                 ImageUrl = x.AssetUri,
                 ShipClass = x.ShipClass,
             }).ToArray();
@@ -86,10 +88,10 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
-            LocalizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
-            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
+            _localizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
+            _localizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
+            _localizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
+            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
         }
 
         #endregion

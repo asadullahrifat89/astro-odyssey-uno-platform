@@ -58,6 +58,8 @@ namespace AstroOdyssey
         private readonly IEnemyProjectileFactory _enemyProjectileFactory;
 
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
+
         #endregion
 
         #region Ctor
@@ -104,6 +106,7 @@ namespace AstroOdyssey
             _enemyProjectileFactory.SetGameEnvironment(GameView);
 
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
         }
 
         #endregion
@@ -211,7 +214,7 @@ namespace AstroOdyssey
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
-            ShowInGameText("👆\n" + LocalizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
+            ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
 
             _powerUpImage = new Image
@@ -282,7 +285,7 @@ namespace AstroOdyssey
             {
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 IsGameQuitting = true;
-                ShowInGameText($"🛸\n{LocalizationHelper.GetLocalizedResource("QUIT_GAME")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
+                ShowInGameText($"🛸\n{_localizationHelper.GetLocalizedResource("QUIT_GAME")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
 
                 InputView.Focus(FocusState.Programmatic);
             }
@@ -543,7 +546,7 @@ namespace AstroOdyssey
 
             GameFrameTimer.Dispose();
 
-            ShowInGameText($"👨‍🚀\n{LocalizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
+            ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
             FiringProjectiles = false;
             IsGamePaused = true;
@@ -702,7 +705,7 @@ namespace AstroOdyssey
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
-                                ShowInGameContent(_powerUpImage, $"{LocalizationHelper.GetLocalizedResource("POWER_DOWN")}");
+                                ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
                             }
                         }
 
@@ -722,13 +725,13 @@ namespace AstroOdyssey
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
                                         break;
                                     default:
                                         break;
@@ -778,13 +781,13 @@ namespace AstroOdyssey
                                 switch (Player.ShipClass)
                                 {
                                     case ShipClass.DEFENDER:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_UP")}");
                                         break;
                                     case ShipClass.BERSERKER:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
                                         break;
                                     case ShipClass.SPECTRE:
-                                        ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("CLOAK_UP")}");
+                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_UP")}");
                                         break;
                                     default:
                                         break;
@@ -906,7 +909,7 @@ namespace AstroOdyssey
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
                         {
                             SetPlayerHealthBar();
-                            ShowInGameContent(_healthImage, $"‍{LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
+                            ShowInGameContent(_healthImage, $"‍{_localizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
                         }
                     }
                     break;
@@ -931,7 +934,7 @@ namespace AstroOdyssey
                             GameScore.CollectiblesCollected++;
 
                             SetGameLevel(); // check game level on score change
-                            //ShowInGameText($"‍💫 {LocalizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
+                            //ShowInGameText($"‍💫 {_localizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
                         }
                     }
                     break;
@@ -955,7 +958,7 @@ namespace AstroOdyssey
                             IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
 
-                            ShowInGameContent(_powerUpImage, $"‍{LocalizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+                            ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
 
                             _playerProjectileFactory.PowerUp(PowerUpType);
                         }
@@ -1309,7 +1312,7 @@ namespace AstroOdyssey
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameContent(image: _bossAppearedImage, text: $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
+            ShowInGameContent(image: _bossAppearedImage, text: $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("BOSS")}");
 
             var boss = _enemyFactory.EngageBossEnemy(GameLevel);
             Bosses.Add(boss);
@@ -1335,7 +1338,7 @@ namespace AstroOdyssey
         private void DisengageBoss(Enemy boss)
         {
             WarpThroughSpace();
-            ShowInGameContent(_bossClearedImage, $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
+            ShowInGameContent(_bossClearedImage, $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("COMPLETE")}");
 
             _enemyFactory.DisengageBossEnemy();
 
@@ -1436,7 +1439,7 @@ namespace AstroOdyssey
             if (GameScore.Score > 2000)
             {
                 GameLevel = GameLevel.Level_13;
-                ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/MAX";
+                ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/MAX";
             }
 
             // when difficulty changes show level up
@@ -1452,7 +1455,7 @@ namespace AstroOdyssey
                 else
                 {
                     WarpThroughSpace();
-                    ShowInGameText($"👊 {LocalizationHelper.GetLocalizedResource("ENEMY_APPROACHES")}");
+                    ShowInGameText($"👊 {_localizationHelper.GetLocalizedResource("ENEMY_APPROACHES")}");
                     _audioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
                     SetGameLevelText();
@@ -1466,7 +1469,7 @@ namespace AstroOdyssey
         /// <param name="capacity"></param>
         private void SetScoreBarCountText(int capacity)
         {
-            ScoreBarCount.Text = $"{LocalizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/{capacity}";
+            ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/{capacity}";
         }
 
         /// <summary>
@@ -1474,7 +1477,7 @@ namespace AstroOdyssey
         /// </summary>
         private void SetGameLevelText()
         {
-            GameLevelText.Text = $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel + 1}";
+            GameLevelText.Text = $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel + 1}";
         }
 
         /// <summary>

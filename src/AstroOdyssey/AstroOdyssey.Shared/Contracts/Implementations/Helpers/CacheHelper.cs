@@ -5,9 +5,9 @@ using Windows.Storage;
 
 namespace AstroOdyssey
 {
-    public static class CacheHelper
+    public class CacheHelper : ICacheHelper
     {
-        public static PlayerCredentials GetCachedPlayerCredentials()
+        public PlayerCredentials GetCachedPlayerCredentials()
         {
             if (App.AuthCredentials is not null)
             {
@@ -18,27 +18,27 @@ namespace AstroOdyssey
             return null;
         }
 
-        public static void SetCachedPlayerCredentials(string userName, string password)
+        public void SetCachedPlayerCredentials(string userName, string password)
         {
             App.AuthCredentials = new PlayerCredentials(
                 userName: userName,
                 password: password.Encrypt());
         }
 
-        public static string GetCachedValue(string key)
+        public string GetCachedValue(string key)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values[key] as string;
             return localValue;
         }
 
-        public static void SetCachedValue(string key, string value)
+        public void SetCachedValue(string key, string value)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values[key] = value;
         }
 
-        public static void RemoveCachedValue(string key)
+        public void RemoveCachedValue(string key)
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
@@ -46,7 +46,7 @@ namespace AstroOdyssey
                 localSettings.Values.Remove(key);
         }
 
-        public static Session GetCachedSession()
+        public Session GetCachedSession()
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
@@ -60,7 +60,7 @@ namespace AstroOdyssey
             return null;
         }
 
-        public static bool WillAuthTokenExpireSoon()
+        public bool WillAuthTokenExpireSoon()
         {
             if (DateTime.UtcNow.AddSeconds(20) > App.AuthToken.ExpiresOn)
                 return true;
@@ -68,7 +68,7 @@ namespace AstroOdyssey
             return false;
         }
 
-        public static bool WillSessionExpireSoon()
+        public bool WillSessionExpireSoon()
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
@@ -80,7 +80,7 @@ namespace AstroOdyssey
             return false;
         }
 
-        public static bool HasSessionExpired()
+        public bool HasSessionExpired()
         {
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
             var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
@@ -95,7 +95,7 @@ namespace AstroOdyssey
             return false;
         }
 
-        public static void SetCachedSession(Session session)
+        public void SetCachedSession(Session session)
         {
             // save in browser cache
             ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;

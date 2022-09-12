@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace AstroOdyssey
 {
-    public static class LocalizationHelper
+    public class LocalizationHelper: ILocalizationHelper
     {
         #region Fields
 
-        private static LocalizationKey[] LOCALIZATION_KEYS = new LocalizationKey[]
+        private LocalizationKey[] LOCALIZATION_KEYS = new LocalizationKey[]
         {
             new LocalizationKey(key: "ApplicationName_Header", cultureValues: new (string Culture, string Value)[]
             {
@@ -503,7 +503,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="resourceKey"></param>
         /// <returns></returns>
-        public static string GetLocalizedResource(string resourceKey)
+        public string GetLocalizedResource(string resourceKey)
         {
             var localizationTemplate = LOCALIZATION_KEYS.FirstOrDefault(x => x.Key == resourceKey);
             return localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
@@ -513,7 +513,7 @@ namespace AstroOdyssey
         /// Sets a localized value on the provided ui element.
         /// </summary>
         /// <param name="uIElement"></param>
-        public static void SetLocalizedResource(UIElement uIElement)
+        public void SetLocalizedResource(UIElement uIElement)
         {
             var localizationTemplate = LOCALIZATION_KEYS.FirstOrDefault(x => x.Key == uIElement.Name);
 

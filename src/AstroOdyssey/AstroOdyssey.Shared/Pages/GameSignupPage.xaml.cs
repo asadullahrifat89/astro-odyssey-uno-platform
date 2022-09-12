@@ -12,6 +12,8 @@ namespace AstroOdyssey
 
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
+        private readonly ICacheHelper _cacheHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -28,6 +30,8 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _cacheHelper = App.Container.GetService<ICacheHelper>();
 
             _progressBar = GameSignupPage_ProgressBar;
             _errorContainer = GameSignupPage_ErrorText;
@@ -167,7 +171,7 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            CacheHelper.SetCachedPlayerCredentials(
+            _cacheHelper.SetCachedPlayerCredentials(
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
@@ -184,12 +188,12 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
-            LocalizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
-            LocalizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
-            LocalizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
-            LocalizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
-            LocalizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
+            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
         }
 
         #endregion

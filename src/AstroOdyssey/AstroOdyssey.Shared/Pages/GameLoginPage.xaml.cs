@@ -18,6 +18,8 @@ namespace AstroOdyssey
 
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
+        private readonly ILocalizationHelper _localizationHelper;
+        private readonly ICacheHelper _cacheHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -34,6 +36,8 @@ namespace AstroOdyssey
 
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
+            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _cacheHelper = App.Container.GetService<ICacheHelper>();
 
             _progressBar = GameLoginPage_ProgressBar;
             _errorContainer = GameLoginPage_ErrorText;
@@ -49,7 +53,7 @@ namespace AstroOdyssey
             SetLocalization();
 
             // if user was already logged in or came here after sign up
-            if (CacheHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            if (_cacheHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
@@ -158,7 +162,7 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            CacheHelper.SetCachedPlayerCredentials(
+            _cacheHelper.SetCachedPlayerCredentials(
                 userName: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
@@ -228,7 +232,7 @@ namespace AstroOdyssey
 
             // store session
             var session = _gameApiHelper.ParseResult<Session>(response.Result);
-            CacheHelper.SetCachedSession(session);
+            _cacheHelper.SetCachedSession(session);
 
             return true;
         }
@@ -240,11 +244,11 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            LocalizationHelper.SetLocalizedResource(ApplicationName_Header);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_UserNameBox);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_PasswordBox);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
-            LocalizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
+            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_UserNameBox);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_PasswordBox);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
+            _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
         }
 
         #endregion
