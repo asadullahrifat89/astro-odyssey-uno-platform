@@ -157,7 +157,6 @@ namespace AstroOdyssey
                     if (_cacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
                     {
                         MakeLogoutControlsVisible();
-                        //TODO: show welcome back message
                         ShowWelcomeBackToast();
                     }
                     else
