@@ -241,7 +241,7 @@ namespace AstroOdyssey
             };
             _bossClearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute));
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
         }
 
         void GamePage_Unloaded(object sender, RoutedEventArgs e)
@@ -1145,7 +1145,7 @@ namespace AstroOdyssey
 
             App.SetScore(GameScore);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameOverPage));
         }

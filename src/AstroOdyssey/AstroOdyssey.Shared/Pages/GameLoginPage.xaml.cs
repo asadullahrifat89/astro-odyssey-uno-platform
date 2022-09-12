@@ -60,7 +60,7 @@ namespace AstroOdyssey
                 GameLoginPage_PasswordBox.Text = null;
             }
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
         }
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,13 +88,13 @@ namespace AstroOdyssey
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(GameSignupPage));
         }
 
         private async void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameStartPage));
         }
@@ -131,7 +131,7 @@ namespace AstroOdyssey
                 actionButtons: _actionButtons);
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 

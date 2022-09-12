@@ -74,14 +74,14 @@ namespace AstroOdyssey
                     actionButtons: _actionButtons);
             }
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
         }
@@ -90,7 +90,7 @@ namespace AstroOdyssey
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameLoginPage));
         }
@@ -99,7 +99,7 @@ namespace AstroOdyssey
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameLeaderboardPage));
         }

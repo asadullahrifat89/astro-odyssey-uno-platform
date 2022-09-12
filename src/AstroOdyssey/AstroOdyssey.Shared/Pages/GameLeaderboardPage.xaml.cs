@@ -60,7 +60,7 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
 
             this.RunProgressBar(
                 progressBar: _progressBar,
@@ -83,13 +83,13 @@ namespace AstroOdyssey
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(ShipSelectionPage));
         }
 
         private async void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameStartPage));
         }

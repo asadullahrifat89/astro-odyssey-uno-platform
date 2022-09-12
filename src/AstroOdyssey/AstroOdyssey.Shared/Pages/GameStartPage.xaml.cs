@@ -62,7 +62,7 @@ namespace AstroOdyssey
             CheckCachedLocalization();
             SetLocalization();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
 
             await SetLoginControls();
 
@@ -77,7 +77,7 @@ namespace AstroOdyssey
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
             App.EnterFullScreen(true);
@@ -86,7 +86,7 @@ namespace AstroOdyssey
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(GameSignupPage));
             App.EnterFullScreen(true);
         }
@@ -94,7 +94,7 @@ namespace AstroOdyssey
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(GameLoginPage));
             App.EnterFullScreen(true);
         }
@@ -157,6 +157,8 @@ namespace AstroOdyssey
                     if (_cacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
                     {
                         MakeLogoutControlsVisible();
+                        //TODO: show welcome back message
+                        ShowWelcomeBackToast();
                     }
                     else
                     {
@@ -164,6 +166,14 @@ namespace AstroOdyssey
                     }
                 }
             }
+        }
+
+        private async void ShowWelcomeBackToast()
+        {
+            GameStartPage_UserName.Text = App.GameProfile.User.UserName;
+            await WelcomeBackToast.PlayLoadedTransition();
+            await Task.Delay(TimeSpan.FromSeconds(5));
+            await WelcomeBackToast.PlayUnLoadedTransition();
         }
 
         private void MakeLogoutControlsVisible()
@@ -317,11 +327,12 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
             _localizationHelper.SetLocalizedResource(ApplicationName_Header);
             _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
             _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_WelcomeBackText);
+            //_localizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
         }
 
         #endregion

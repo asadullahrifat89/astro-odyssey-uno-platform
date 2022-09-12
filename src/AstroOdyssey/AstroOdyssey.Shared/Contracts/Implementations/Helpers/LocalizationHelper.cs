@@ -492,6 +492,15 @@ namespace AstroOdyssey
                 new ("de", "Ausloggen"),
                 new ("fr", "Se déconnecter"),
             }),
+            new LocalizationKey(key: "GameStartPage_WelcomeBackText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "👋 Welcome back!"),
+                new ("bn", "👋 ফিরে আসার জন্য স্বাগতম!"),
+                new ("de", "👋 Willkommen zurück!"),
+                new ("fr", "👋 Content de te revoir!"),
+            }),
+
+            //GameStartPage_WelcomeBackText
 
         };
 

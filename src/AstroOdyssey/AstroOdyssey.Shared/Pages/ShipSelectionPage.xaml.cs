@@ -53,7 +53,7 @@ namespace AstroOdyssey
 
             ShipsList.ItemsSource = ships.ToList();
 
-            await this.PlayPageLoadedTransition();
+            await this.PlayLoadedTransition();
         }
 
         private async void ChooseButton_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace AstroOdyssey
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 App.Ship = selectedShip;
 
-                await this.PlayPageUnLoadedTransition();
+                await this.PlayUnLoadedTransition();
 
                 App.NavigateToPage(typeof(GamePlayPage));
             }
@@ -71,7 +71,7 @@ namespace AstroOdyssey
 
         private async void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayPageUnLoadedTransition();
+            await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameStartPage));
         }
