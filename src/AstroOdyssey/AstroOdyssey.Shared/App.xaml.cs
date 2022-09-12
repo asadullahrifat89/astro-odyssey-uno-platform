@@ -88,6 +88,8 @@ namespace AstroOdyssey
 
         public static string CurrentCulture { get; set; }
 
+        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank();
+
         #endregion
 
         #region Events

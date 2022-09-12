@@ -55,33 +55,12 @@ namespace AstroOdyssey
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
-            if (CacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
-                App.CurrentCulture = language;
-
+            CheckCachedLocalization();
             SetLocalization();
 
             await this.PlayPageLoadedTransition();
 
-            // check for session
-            if (CacheHelper.GetCachedSession() is Session session && session.ExpiresOn > DateTime.UtcNow && await ValidateSession(session))
-            {
-                await GetGameProfile();
-
-                // make logout button visible
-                GameStartPage_LogoutButton.Visibility = Visibility.Visible;
-                GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
-                GameLoginPage_RegisterButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                // if session is not valid then remove it
-                CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
-
-                // make login button visible
-                GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
-                GameLoginPage_LoginButton.Visibility = Visibility.Visible;
-                GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
-            }
+            await SetLoginControls();
 
             this.StopProgressBar(
                 progressBar: _progressBar,
@@ -141,6 +120,63 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        private void CheckCachedLocalization()
+        {
+            if (CacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
+                App.CurrentCulture = language;
+        }
+
+        private async Task SetLoginControls()
+        {
+            if (App.HasUserLoggedIn)
+            {
+                if (CacheHelper.HasSessionExpired())
+                {
+                    CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    MakeLoginControlsVisible();
+                }
+                else
+                {
+                    MakeLogoutControlsVisible();
+                }
+            }
+            else
+            {
+                if (CacheHelper.HasSessionExpired())
+                {
+                    CacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    MakeLoginControlsVisible();
+                }
+                else // if a non expired session exists then validate it, get a new auth token, and get game profile
+                {
+                    if (CacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
+                    {
+                        MakeLogoutControlsVisible();
+                    }
+                    else
+                    {
+                        MakeLoginControlsVisible();
+                    }
+                }
+            }
+        }
+
+        private void MakeLogoutControlsVisible()
+        {
+            // make logout button visible
+            GameStartPage_LogoutButton.Visibility = Visibility.Visible;
+            GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+            GameLoginPage_RegisterButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void MakeLoginControlsVisible()
+        {
+            // make login button visible
+            GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+            GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
+        }
 
         private async void PreloadAssets()
         {
