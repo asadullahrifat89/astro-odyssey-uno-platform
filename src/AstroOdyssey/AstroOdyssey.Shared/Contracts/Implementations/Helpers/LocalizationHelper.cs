@@ -598,7 +598,7 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_CollectiblesText2", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Collect them to enforce powerful weapons."),
+                new ("en", "Collect them to slightly increase your firepower."),
                 new ("bn", "আপনার ফায়ারপাওয়ারটি কিছুটা বাড়ানোর জন্য এগুলি সংগ্রহ করুন।"),
                 new ("de", "Sammeln Sie sie, um Ihre Feuerkraft leicht zu erhöhen."),
                 new ("fr", "Collectez-les pour augmenter légèrement votre puissance de feu."),
