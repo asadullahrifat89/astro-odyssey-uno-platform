@@ -260,11 +260,14 @@
             </StackPanel>
         </Border>
 
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
 
             <!--  This shows rage images  -->
             <Grid
-                x:Name="RageImagePanel"
+                x:Name="InGameImagePanel"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"

@@ -1088,12 +1088,12 @@ namespace AstroOdyssey
         {
             var scale = GameView.GetGameObjectScale();
 
-            image.Height = 150 * scale;
-            image.Width = 150 * scale;
+            image.Height = 100 * scale;
+            image.Width = 100 * scale;
 
-            RageImagePanel.Children.Clear();
-            RageImagePanel.Children.Add(image);
-            RageImagePanel.Visibility = Visibility.Visible;
+            InGameImagePanel.Children.Clear();
+            InGameImagePanel.Children.Add(image);
+            InGameImagePanel.Visibility = Visibility.Visible;
             _showInGameImagePanelSpawnCounter = _showInGameImagePanelDelay;
         }
 
@@ -1102,7 +1102,7 @@ namespace AstroOdyssey
         /// </summary>
         private void HandleInGameImagePanel()
         {
-            if (RageImagePanel.Visibility == Visibility.Visible)
+            if (InGameImagePanel.Visibility == Visibility.Visible)
             {
                 _showInGameImagePanelSpawnCounter -= 1;
 
@@ -1118,7 +1118,7 @@ namespace AstroOdyssey
         /// </summary>
         private void HideInGameImagePanel()
         {
-            RageImagePanel.Visibility = Visibility.Collapsed;
+            InGameImagePanel.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>

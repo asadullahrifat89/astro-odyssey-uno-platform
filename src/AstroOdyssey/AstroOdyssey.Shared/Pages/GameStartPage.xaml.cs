@@ -42,7 +42,7 @@ namespace AstroOdyssey
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
-            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton };
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton, GameStartPage_PlayButton };
         }
 
         #endregion
@@ -99,6 +99,14 @@ namespace AstroOdyssey
             App.EnterFullScreen(true);
         }
 
+        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            await this.PlayUnLoadedTransition();
+            App.NavigateToPage(typeof(GameLeaderboardPage));
+            App.EnterFullScreen(true);
+        }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
@@ -128,15 +136,6 @@ namespace AstroOdyssey
                 SetLocalization();
                 _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
             }
-        }
-
-        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         #endregion
