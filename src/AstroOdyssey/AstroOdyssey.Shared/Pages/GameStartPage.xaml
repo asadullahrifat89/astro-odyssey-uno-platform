@@ -16,12 +16,12 @@
         </Grid.Background>
 
         <!--  Pre-load-images  -->
-        <Grid
+        <!--<Grid
             x:Name="AssetsPreloadGrid"
             Width="1"
             Height="1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top" />-->
 
         <!--  Language selection buttons  -->
         <StackPanel

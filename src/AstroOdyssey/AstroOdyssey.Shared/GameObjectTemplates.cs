@@ -4,32 +4,7 @@ namespace AstroOdyssey
 {
     public static class GameObjectTemplates
     {
-        public static string[] BACKGROUND_MUSIC_TEMPLATES = new string[] 
-        {
-            "Assets/Sounds/Music/action-stylish-rock-dedication-15038.mp3",
-            "Assets/Sounds/Music/electronic-rock-king-around-here-15045.mp3",
-            "Assets/Sounds/Music/powerful-stylish-stomp-rock-lets-go-114255.mp3",
-            "Assets/Sounds/Music/stomping-rock-four-shots-111444.mp3",
-            "Assets/Sounds/Music/stylish-rock-beat-trailer-116346.mp3",
-            "Assets/Sounds/Music/modern-fashion-promo-rock-18397.mp3",
-            "Assets/Sounds/Music/hard-rock-21056.mp3",
-            "Assets/Sounds/Music/crag-hard-rock-14401.mp3",
-            //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
-        };
-
-        public static string[] BOSS_APPEARANCE_MUSIC_TEMPLATES = new string[]
-        {
-            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
-            "Assets/Sounds/Boss/frantic-15190.mp3",
-            "Assets/Sounds/Boss/metal-dark-matter-111451.mp3",
-            "Assets/Sounds/Boss/rage-15292.mp3",
-        };
-
-        public static string[] GAME_INTRO_MUSIC_TEMPLATES = new string[]
-        {
-            "Assets/Sounds/Intro/fashion-hip-hop-rock-stylish-boy-111449.mp3",
-            "Assets/Sounds/Intro/inspiring-motivational-rock-inspire-mesenses-111448.mp3",
-        };
+        #region Images
 
         public static (Uri AssetUri, ShipClass ShipClass)[] PLAYER_RAGE_TEMPLATES = new (Uri AssetUri, ShipClass ShipClass)[]
         {
@@ -122,5 +97,80 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/Collectible/pizza5.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/Collectible/pizza6.png", UriKind.RelativeOrAbsolute),
         };
+
+        public static Uri[] GAME_MISC_IMAGE_TEMPLATES = new Uri[]
+        {
+            new Uri("ms-appx:///Assets/Images/boss_appeared.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/gameOver.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute),
+        };
+
+        #endregion
+
+        #region Sounds
+
+        public static string[] GAME_INTRO_MUSIC_URLS = new string[]
+        {
+            "Assets/Sounds/Intro/intro1.mp3",
+            "Assets/Sounds/Intro/intro2.mp3",
+        };
+
+        public static string GAME_START_MUSIC_URL = "Assets/Sounds/Game/game_start.mp3";
+        public static string GAME_OVER_MUSIC_URL = "Assets/Sounds/Game/game_over.mp3";
+        public static string MENU_SELECT_MUSIC_URL = "Assets/Sounds/menu_select.mp3";
+
+        public static string[] BOSS_APPEARANCE_MUSIC_URLS = new string[]
+        {
+            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
+            "Assets/Sounds/Boss/boss1.mp3",
+            "Assets/Sounds/Boss/boss2.mp3",
+            "Assets/Sounds/Boss/boss3.mp3",
+        };
+
+        public static string BOSS_DESTRUCTION_MUSIC_URL = "Assets/Sounds/Boss/boss-destruction.mp3";
+
+        public static string[] BACKGROUND_MUSIC_URLS = new string[]
+        {
+            "Assets/Sounds/Music/action-stylish-rock-dedication-15038.mp3",
+            "Assets/Sounds/Music/electronic-rock-king-around-here-15045.mp3",
+            "Assets/Sounds/Music/powerful-stylish-stomp-rock-lets-go-114255.mp3",
+            "Assets/Sounds/Music/stomping-rock-four-shots-111444.mp3",
+            "Assets/Sounds/Music/stylish-rock-beat-trailer-116346.mp3",
+            "Assets/Sounds/Music/modern-fashion-promo-rock-18397.mp3",
+            "Assets/Sounds/Music/hard-rock-21056.mp3",
+            "Assets/Sounds/Music/crag-hard-rock-14401.mp3",
+           //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
+        };
+
+        public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_rounds_fire.mp3";
+        public static string PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_blaze_blitz.mp3";
+        public static string PLAYER_PLASMA_BOMB_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_plasma_bomb.mp3";
+        public static string PLAYER_BEAM_CANNON_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_beam_cannon.mp3";
+        public static string PLAYER_SONIC_BLAST_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_sonic_blast.mp3";
+
+        public static string ENEMY_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/enemy_rounds_fire.mp3";
+
+        public static string METEOR_DESTRUCTION_MUSIC_URL = "Assets/Sounds/meteor_destruction.mp3";
+
+        public static string ROUNDS_HIT_MUSIC_URL = "Assets/Sounds/rounds_hit.mp3";
+
+        public static string POWER_UP_MUSIC_URL = "Assets/Sounds/Power/power_up.mp3";
+        public static string POWER_DOWN_MUSIC_URL = "Assets/Sounds/Power/power_down.mp3";
+
+        public static string RAGE_UP_MUSIC_URL = "Assets/Sounds/Rage/rage_up.mp3";
+        public static string RAGE_DOWN_MUSIC_URL = "Assets/Sounds/Rage/rage_down.mp3";
+
+        public static string ENEMY_INCOMING_MUSIC_URL = "Assets/Sounds/Enemy/enemy_incoming.mp3";
+        public static string ENEMY_DESTRUCTION_MUSIC_URL = "Assets/Sounds/meteor_destruction.mp3";
+
+        public static string HEALTH_GAIN_MUSIC_URL = "Assets/Sounds/Health/health_gain.mp3";
+        public static string HEALTH_LOSS_MUSIC_URL = "Assets/Sounds/Health/health_loss.mp3";
+
+        public static string COLLECTIBLE_COLLECTED_MUSIC_URL = "Assets/Sounds/Collectible/collectible.mp3";
+        
+
+        #endregion
     }
 }

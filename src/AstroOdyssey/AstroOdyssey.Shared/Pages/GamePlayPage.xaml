@@ -134,43 +134,7 @@
                 TextAlignment="Center"
                 TextWrapping="WrapWholeWords" />
 
-        </StackPanel>
-
-        <!--  This shows moving left and right indicators  -->
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Border
-                x:Name="MoveLeftFeed"
-                Grid.Column="0"
-                Width="15"
-                Height="15"
-                Margin="10"
-                HorizontalAlignment="Left"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                CornerRadius="50"
-                Visibility="Collapsed" />
-
-            <Border
-                x:Name="MoveRightFeed"
-                Grid.Column="1"
-                Width="15"
-                Height="15"
-                Margin="10"
-                HorizontalAlignment="Right"
-                Background="Red"
-                BorderBrush="DarkRed"
-                BorderThickness="3"
-                CornerRadius="50"
-                Visibility="Collapsed" />
-
-        </Grid>
+        </StackPanel>       
 
         <!--  This shows the player health, rage, power bar  -->
         <Border
