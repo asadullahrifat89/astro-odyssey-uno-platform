@@ -379,10 +379,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "ShipSelectionPage_ControlInstructions", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Press or touch left or right arrow keys or edges on your keyboard or screen to move the ship."),
-                new ("bn", "জাহাজটি নিয়ন্ত্রন করতে আপনার কীবোর্ড বা স্ক্রিনের বাম বা ডান তীর কী বা প্রান্তগুলি টিপুন বা স্পর্শ করুন৷"),
-                new ("de", "Drücke oder berühre die linke oder rechte Pfeiltaste oder die Kanten auf deiner Tastatur oder deinem Bildschirm, um das Schiff zu bewegen."),
-                new ("fr", "Appuyez ou touchez les touches fléchées gauche ou droite ou les bords de votre clavier ou de votre écran pour déplacer le navire."),
+                new ("en", "Each one offers a different gameplay experience."),
+                new ("bn", "প্রত্যেকে একটি আলাদা গেমপ্লে অভিজ্ঞতা দেয়৷"),
+                new ("de", "Jeder bietet ein anderes Spielerlebnis."),
+                new ("fr", "Chacun offre une expérience de gameplay différente."),
             }),
             new LocalizationKey(key: "ShipSelectionPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
