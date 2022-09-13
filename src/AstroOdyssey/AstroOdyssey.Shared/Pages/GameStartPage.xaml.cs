@@ -4,7 +4,10 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +28,7 @@ namespace AstroOdyssey
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
         private readonly Button[] _actionButtons;
+        private readonly List<StorageFile> _storageFiles;
 
         #endregion
 
@@ -39,6 +43,8 @@ namespace AstroOdyssey
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
             _cacheHelper = App.Container.GetService<ICacheHelper>();
+
+            _storageFiles = new List<StorageFile>();
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
@@ -213,90 +219,83 @@ namespace AstroOdyssey
 
         private async void PreloadAssets()
         {
-            if (AssetsPreloadGrid.Children is null || AssetsPreloadGrid.Children.Count == 0)
+            if (_storageFiles.Count == 0)
             {
+                foreach (var asset in GameObjectTemplates.PLAYER_RAGE_TEMPLATES)
+                {
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
+                }
+
+                await Task.Delay(500);
+
                 foreach (var asset in GameObjectTemplates.STAR_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.PLANET_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.ENEMY_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.METEOR_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.PLAYER_SHIP_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(new Uri(asset.AssetUri, UriKind.RelativeOrAbsolute));
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(new Uri(asset.AssetUri, UriKind.RelativeOrAbsolute));
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.COLLECTIBLE_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset);
-                    AssetsPreloadGrid.Children.Add(content);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.PLAYER_RAGE_TEMPLATES)
-                {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset);
+                    _storageFiles.Add(file);
                 }
 
                 await Task.Delay(500);
 
                 foreach (var asset in GameObjectTemplates.BOSS_TEMPLATES)
                 {
-                    Image content = new Image() { Stretch = Stretch.Uniform };
-                    content.Source = new BitmapImage(asset.AssetUri);
-                    AssetsPreloadGrid.Children.Add(content);
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
+                    _storageFiles.Add(file);
                 }
 
-                Image gameOver = new Image() { Stretch = Stretch.Uniform };
-                gameOver.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/gameOver.png", UriKind.RelativeOrAbsolute));
-                AssetsPreloadGrid.Children.Add(gameOver);
+                foreach (var asset in GameObjectTemplates.GAME_MISC_IMAGE_TEMPLATES)
+                {
+                    var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(asset);
+                    _storageFiles.Add(file);
+                }
             }
         }
 
