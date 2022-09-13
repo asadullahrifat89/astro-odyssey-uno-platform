@@ -53,6 +53,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\HttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\PaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\GameInstructionsPage.xaml.cs">
+      <DependentUpon>GameInstructionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameLeaderboardPage.xaml.cs">
       <DependentUpon>GameLeaderboardPage.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\GameInstructionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\GameLeaderboardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

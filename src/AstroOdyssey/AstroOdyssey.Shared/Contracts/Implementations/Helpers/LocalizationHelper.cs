@@ -499,6 +499,20 @@ namespace AstroOdyssey
                 new ("de", "👋 Willkommen zurück!"),
                 new ("fr", "👋 Content de te revoir!"),
             }),
+            new LocalizationKey(key: "GameInstructionsPage_Tagline", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "HOW TO PLAY"),
+                new ("bn", "কিভাবে খেলতে হবে"),
+                new ("de", "SPIELANLEITUNG"),
+                new ("fr", "COMMENT JOUER"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_PlayButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "👍 Got it"),
+                new ("bn", "👍 বুঝেছি"),
+                new ("de", "👍 Ich habs"),
+                new ("fr", "👍 J'ai compris"),
+            }),
 
             //GameStartPage_WelcomeBackText
 
