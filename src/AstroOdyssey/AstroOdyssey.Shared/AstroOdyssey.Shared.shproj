@@ -11,6 +11,7 @@
   <Import Project="AstroOdyssey.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\GameInstructionsPage.xaml" />
     <UpToDateCheckInput Remove="Pages\GameLeaderboardPage.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage - Copy.xaml" />
     <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
@@ -67,6 +68,7 @@
     <_Globbed_Compile Remove="Models\PlayerAuthCredentials.cs" />
     <_Globbed_Compile Remove="Models\Ship.cs" />
     <_Globbed_Compile Remove="Pages\ChooseShipPage.xaml.cs" />
+    <_Globbed_Compile Remove="Pages\GameInstructionsPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameLeaderboardPage.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage - Copy.xaml.cs" />
     <_Globbed_Compile Remove="Pages\GameOverPage.xaml.cs" />
@@ -328,6 +330,7 @@
     <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbled_Page Remove="Pages\GameInstructionsPage.xaml" />
     <_Globbled_Page Remove="Pages\GameLeaderboardPage.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage - Copy.xaml" />
     <_Globbled_Page Remove="Pages\GameOverPage.xaml" />

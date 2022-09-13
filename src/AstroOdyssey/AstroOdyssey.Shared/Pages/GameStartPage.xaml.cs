@@ -187,6 +187,7 @@ namespace AstroOdyssey
 
         private async void ShowWelcomeBackToast()
         {
+            _audioHelper.PlaySound(SoundType.POWER_UP);
             GameStartPage_UserName.Text = App.GameProfile.User.UserName;
             await WelcomeBackToast.PlayLoadedTransition();
             await Task.Delay(TimeSpan.FromSeconds(5));

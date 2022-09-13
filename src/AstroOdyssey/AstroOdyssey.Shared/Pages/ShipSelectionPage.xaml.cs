@@ -67,7 +67,7 @@ namespace AstroOdyssey
 
                 await this.PlayUnLoadedTransition();
 
-                App.NavigateToPage(typeof(GamePlayPage));
+                App.NavigateToPage(typeof(GameInstructionsPage));
             }
         }
 
