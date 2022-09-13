@@ -34,7 +34,7 @@ namespace AstroOdyssey
             Loaded += GameInstructionsPage_Loaded;
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
-        } 
+        }
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace AstroOdyssey
             await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GamePlayPage));
-        } 
+        }
 
         #endregion
 
@@ -75,7 +75,25 @@ namespace AstroOdyssey
         {
             _localizationHelper.SetLocalizedResource(GameInstructionsPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameInstructionsPage_PlayButton);
-        } 
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText2);
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText2);
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText2);
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText2);
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText2);
+
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
+            _localizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
+        }
 
         #endregion
     }

@@ -514,8 +514,95 @@ namespace AstroOdyssey
                 new ("fr", "👍 J'ai compris"),
             }),
 
-            //GameStartPage_WelcomeBackText
+            new LocalizationKey(key: "GameInstructionsPage_ControlsText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Controls"),
+                new ("bn", "নিয়ন্ত্রণ"),
+                new ("de", "Kontrollen"),
+                new ("fr", "Les contrôles"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_ControlsText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by touching the edges of your 📱."),
+                new ("bn", "আপনার ⌨ এ তীর কীগুলি টিপে বা আপনার 📱 এর প্রান্তগুলি স্পর্শ করে ⬅ বা ➡ সরান।"),
+                new ("de", "Bewegen Sie ⬅️ oder ➡️, indem Sie die Pfeiltasten auf Ihrem ⌨️ oder durch Berühren der Kanten Ihres 📱 📱 drücken."),
+                new ("fr", "Déplacez ⬅️ ou ➡️ en appuyant sur les touches de flèche sur votre ⌨️ ou en touchant les bords de votre 📱."),
+            }),
 
+            new LocalizationKey(key: "GameInstructionsPage_EnemiesText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enemies & meteors"),
+                new ("bn", "শত্রু ও উল্কা"),
+                new ("de", "Feinde & Meteore"),
+                new ("fr", "Ennemis et météores"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_EnemiesText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Shoot them and avoid collision."),
+                new ("bn", "তাদের গুলি করুন এবং সংঘর্ষ এড়ানো।"),
+                new ("de", "Schießen Sie sie und vermeiden Sie Kollision."),
+                new ("fr", "Tirez-les et évitez la collision."),
+            }),
+
+            new LocalizationKey(key: "GameInstructionsPage_BossesText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Bosses"),
+                new ("bn", "বস"),
+                new ("de", "Chefs"),
+                new ("fr", "Patrons"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_BossesText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Must defeat them to advance to the next level."),
+                new ("bn", "পরবর্তী স্তরে অগ্রসর হতে তাদের অবশ্যই পরাজিত করতে হবে।"),
+                new ("de", "Muss sie besiegen, um zum nächsten Level voranzukommen."),
+                new ("fr", "Doit les vaincre pour passer au niveau supérieur."),
+            }),
+
+            new LocalizationKey(key: "GameInstructionsPage_HealthText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Healths"),
+                new ("bn", "স্বাস্থ্য"),
+                new ("de", "Gesundheit"),
+                new ("fr", "Santé"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_HealthText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Collect them to repair your ship."),
+                new ("bn", "আপনার জাহাজটি মেরামত করতে এগুলি সংগ্রহ করুন।"),
+                new ("de", "Sammeln Sie sie, um Ihr Schiff zu reparieren."),
+                new ("fr", "Collectez-les pour réparer votre navire."),
+            }),
+
+            new LocalizationKey(key: "GameInstructionsPage_PowerupText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Powerups"),
+                new ("bn", "শক্তি বৃদ্ধি"),
+                new ("de", "Einschalten"),
+                new ("fr", "Mises sous tension"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_PowerupText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Collect them to enforce powerful weapons."),
+                new ("bn", "শক্তিশালী অস্ত্র প্রয়োগ করতে এগুলি সংগ্রহ করুন।"),
+                new ("de", "Sammeln Sie sie, um mächtige Waffen durchzusetzen."),
+                new ("fr", "Les récupérer pour appliquer des armes puissantes."),
+            }),
+
+            new LocalizationKey(key: "GameInstructionsPage_CollectiblesText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Collectibles"),
+                new ("bn", "সংগ্রহযোগ্য"),
+                new ("de", "Sammlerstücke"),
+                new ("fr", "Objets de collection"),
+            }),
+            new LocalizationKey(key: "GameInstructionsPage_CollectiblesText2", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Collect them to enforce powerful weapons."),
+                new ("bn", "আপনার ফায়ারপাওয়ারটি কিছুটা বাড়ানোর জন্য এগুলি সংগ্রহ করুন।"),
+                new ("de", "Sammeln Sie sie, um Ihre Feuerkraft leicht zu erhöhen."),
+                new ("fr", "Collectez-les pour augmenter légèrement votre puissance de feu."),
+            }),
         };
 
         #endregion
@@ -540,18 +627,21 @@ namespace AstroOdyssey
         {
             var localizationTemplate = LOCALIZATION_KEYS.FirstOrDefault(x => x.Key == uIElement.Name);
 
-            var value = localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
+            if (localizationTemplate is not null)
+            {
+                var value = localizationTemplate?.CultureValues.FirstOrDefault(x => x.Culture == App.CurrentCulture).Value;
 
-            if (uIElement is TextBlock textBlock)
-                textBlock.Text = value;
-            else if (uIElement is TextBox textBox)
-                textBox.Header = value;
-            else if (uIElement is PasswordBox passwordBox)
-                passwordBox.Header = value;
-            else if (uIElement is Button button)
-                button.Content = value;
-            else if (uIElement is HyperlinkButton hyperlinkButton)
-                hyperlinkButton.Content = value;
+                if (uIElement is TextBlock textBlock)
+                    textBlock.Text = value;
+                else if (uIElement is TextBox textBox)
+                    textBox.Header = value;
+                else if (uIElement is PasswordBox passwordBox)
+                    passwordBox.Header = value;
+                else if (uIElement is Button button)
+                    button.Content = value;
+                else if (uIElement is HyperlinkButton hyperlinkButton)
+                    hyperlinkButton.Content = value; 
+            }
         }
 
         #endregion        

@@ -88,7 +88,7 @@
                                 x:Name="GameInstructionsPage_ControlsText2"
                                 Margin="5"
                                 FontWeight="SemiBold"
-                                Text="Move left or right by pressing the arrow keys on your ⌨️ or by touching the edges of your 📱."
+                                Text="Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by touching the edges of your 📱."
                                 TextAlignment="Left"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
@@ -101,11 +101,6 @@
                                     Height="35"
                                     Margin="5"
                                     Source="ms-appx:///Assets/Images/Enemy/enemy_3.png" />
-                                <Image
-                                    Width="35"
-                                    Height="35"
-                                    Margin="5"
-                                    Source="ms-appx:///Assets/Images/Meteor/rock1.png" />
                                 <TextBlock
                                     x:Name="GameInstructionsPage_EnemiesText"
                                     Margin="5"
@@ -114,12 +109,17 @@
                                     Text="Enemies 'n meteors"
                                     TextAlignment="Center"
                                     TextWrapping="WrapWholeWords" />
+                                <Image
+                                    Width="35"
+                                    Height="35"
+                                    Margin="5"
+                                    Source="ms-appx:///Assets/Images/Meteor/rock1.png" />
                             </StackPanel>
                             <TextBlock
                                 x:Name="GameInstructionsPage_EnemiesText2"
                                 Margin="5"
                                 FontWeight="SemiBold"
-                                Text="Shoot them and avoid colliding."
+                                Text="Shoot them and avoid collision."
                                 TextAlignment="Left"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
@@ -150,6 +150,32 @@
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
 
+                        <!--  Healths  -->
+                        <StackPanel Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="35"
+                                    Height="35"
+                                    Margin="5"
+                                    Source="ms-appx:///Assets/Images/health.png" />
+                                <TextBlock
+                                    x:Name="GameInstructionsPage_HealthText"
+                                    Margin="5"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Text="Healths"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWholeWords" />
+                            </StackPanel>
+                            <TextBlock
+                                x:Name="GameInstructionsPage_HealthText2"
+                                Margin="5"
+                                FontWeight="SemiBold"
+                                Text="Collect them to repair your ship."
+                                TextAlignment="Left"
+                                TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+
                         <!--  Powerups  -->
                         <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
@@ -163,7 +189,7 @@
                                     Margin="5"
                                     FontSize="20"
                                     FontWeight="Bold"
-                                    Text="Power ups"
+                                    Text="Powerups"
                                     TextAlignment="Center"
                                     TextWrapping="WrapWholeWords" />
                             </StackPanel>
@@ -213,7 +239,7 @@
                         x:Uid="GameInstructionsPage_PlayButton"
                         Width="200"
                         Height="50"
-                        Margin="10"
+                        Margin="10,10,10,20"
                         HorizontalAlignment="Center"
                         Background="Goldenrod"
                         BorderBrush="White"
