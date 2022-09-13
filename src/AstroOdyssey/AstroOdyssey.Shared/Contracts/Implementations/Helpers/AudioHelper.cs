@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public class AudioHelper: IAudioHelper
+    public class AudioHelper : IAudioHelper
     {
         #region Fields        
 
@@ -186,7 +186,7 @@ namespace AstroOdyssey
                         if (PLAYER_PLASMA_BOMB_ROUNDS_FIRE is null)
                         {
                             PLAYER_PLASMA_BOMB_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/magnetic-destroy-shot_fkxD6SV__NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.PLAYER_PLASMA_BOMB_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.3);
                         }
 
@@ -198,7 +198,7 @@ namespace AstroOdyssey
                         if (PLAYER_BEAM_CANNON_ROUNDS_FIRE is null)
                         {
                             PLAYER_BEAM_CANNON_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/punchy-laser-shot_f11BarNO_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.PLAYER_BEAM_CANNON_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.3);
                         }
 
@@ -210,7 +210,7 @@ namespace AstroOdyssey
                         if (PLAYER_SONIC_BLAST_ROUNDS_FIRE is null)
                         {
                             PLAYER_SONIC_BLAST_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/plasmablaster-37114.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.PLAYER_SONIC_BLAST_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.5);
                         }
 
@@ -222,7 +222,7 @@ namespace AstroOdyssey
                         if (ENEMY_ROUNDS_FIRE is null)
                         {
                             ENEMY_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/laser-descend_GJPs9OE__NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.ENEMY_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.1);
                         }
 
@@ -234,7 +234,7 @@ namespace AstroOdyssey
                         if (METEOR_DESTRUCTION is null)
                         {
                             METEOR_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.METEOR_DESTRUCTION_MUSIC_URL),
                                 volume: 0.3);
                         }
 
@@ -247,7 +247,7 @@ namespace AstroOdyssey
                         if (ROUNDS_HIT is null)
                         {
                             ROUNDS_HIT = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/explosion-firework-boom-single_GkGH0sE__NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.ROUNDS_HIT_MUSIC_URL),
                                 volume: 0.3);
                         }
 
@@ -259,7 +259,7 @@ namespace AstroOdyssey
                         if (POWER_UP is null)
                         {
                             POWER_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Power/spellcast-46164.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.POWER_UP_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -271,7 +271,7 @@ namespace AstroOdyssey
                         if (POWER_DOWN is null)
                         {
                             POWER_DOWN = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Power/power-down-7103.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.POWER_DOWN_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -283,7 +283,7 @@ namespace AstroOdyssey
                         if (RAGE_UP is null)
                         {
                             RAGE_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Rage/audioblocks-hi-tech-metal-whoosh_HZs-SOQFvI_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.RAGE_UP_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -295,7 +295,7 @@ namespace AstroOdyssey
                         if (RAGE_DOWN is null)
                         {
                             RAGE_DOWN = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Rage/audioblocks-hi-tech-metal-whoosh-2_rZh-HuQFwI_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.RAGE_DOWN_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -307,7 +307,7 @@ namespace AstroOdyssey
                         if (LEVEL_UP is null)
                         {
                             LEVEL_UP = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Enemy/asteroid-incoming-effect.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.ENEMY_INCOMING_MUSIC_URL),
                                 volume: 0.8);
                         }
 
@@ -319,7 +319,7 @@ namespace AstroOdyssey
                         if (ENEMY_DESTRUCTION is null)
                         {
                             ENEMY_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.ENEMY_DESTRUCTION_MUSIC_URL),
                                 volume: 0.4);
                         }
 
@@ -331,11 +331,23 @@ namespace AstroOdyssey
                         if (HEALTH_GAIN is null)
                         {
                             HEALTH_GAIN = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Health/scale-e6-14577.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.HEALTH_GAIN_MUSIC_URL),
                                 volume: 1.0);
                         }
 
                         HEALTH_GAIN.Play();
+                    }
+                    break;
+                case SoundType.HEALTH_LOSS:
+                    {
+                        if (HEALTH_LOSS is null)
+                        {
+                            HEALTH_LOSS = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.HEALTH_LOSS_MUSIC_URL),
+                                volume: 1.0);
+                        }
+
+                        HEALTH_LOSS.Play();
                     }
                     break;
                 case SoundType.COLLECTIBLE_COLLECTED:
@@ -349,19 +361,7 @@ namespace AstroOdyssey
 
                         COLLECTIBLE_COLLECTED.Play();
                     }
-                    break;
-                case SoundType.HEALTH_LOSS:
-                    {
-                        if (HEALTH_LOSS is null)
-                        {
-                            HEALTH_LOSS = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Health/rocket-missile-launcher_MyHKjH4__NWM.mp3"),
-                                volume: 1.0);
-                        }
-
-                        HEALTH_LOSS.Play();
-                    }
-                    break;
+                    break;       
                 default:
                     {
                         // App.PlaySound(baseUrl, soundType);

@@ -208,7 +208,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss1.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss2.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss3.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\menu-select.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\menu_select.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\action-stylish-rock-dedication-15038.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\electronic-rock-king-around-here-15045.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\intro1.mp3" />
@@ -218,24 +218,24 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\powerful-stylish-stomp-rock-lets-go-114255.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stomping-rock-four-shots-111444.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\stylish-rock-beat-trailer-116346.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\plasmablaster-37114.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh-2_rZh-HuQFwI_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\audioblocks-hi-tech-metal-whoosh_HZs-SOQFvI_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\asteroid-incoming-effect.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player-blaze-blitz.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\explosion-firework-boom-single_GkGH0sE__NWM.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_sonic_blast.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\rage_down.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\rage_up.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Enemy\enemy_incoming.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_blaze_blitz.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\rounds_hit.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss-destruction.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player-rounds-fire.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\laser-descend_GJPs9OE__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magical-impact-small-fast-projectile_z1rrOFEd_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\magnetic-destroy-shot_fkxD6SV__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\power-down-7103.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\punchy-laser-shot_f11BarNO_NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\rocket-missile-launcher_MyHKjH4__NWM.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\scale-e6-14577.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Game\game-start.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\spellcast-46164.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Game\game-over.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_rounds_fire.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\enemy_rounds_fire.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\meteor_destruction.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_plasma_bomb.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\power_down.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_beam_cannon.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\health_loss.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Health\health_gain.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Game\game_start.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Power\power_up.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Game\game_over.mp3" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

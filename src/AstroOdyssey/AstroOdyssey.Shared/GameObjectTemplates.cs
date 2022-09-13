@@ -117,9 +117,9 @@ namespace AstroOdyssey
             "Assets/Sounds/Intro/intro2.mp3",
         };
 
-        public static string GAME_START_MUSIC_URL = "Assets/Sounds/Game/game-start.mp3";
-        public static string GAME_OVER_MUSIC_URL = "Assets/Sounds/Game/game-over.mp3";
-        public static string MENU_SELECT_MUSIC_URL = "Assets/Sounds/menu-select.mp3";
+        public static string GAME_START_MUSIC_URL = "Assets/Sounds/Game/game_start.mp3";
+        public static string GAME_OVER_MUSIC_URL = "Assets/Sounds/Game/game_over.mp3";
+        public static string MENU_SELECT_MUSIC_URL = "Assets/Sounds/menu_select.mp3";
 
         public static string[] BOSS_APPEARANCE_MUSIC_URLS = new string[]
         {
@@ -144,9 +144,29 @@ namespace AstroOdyssey
            //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
         };
 
-        public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player-rounds-fire.mp3";
-        public static string PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player-blaze-blitz.mp3";
+        public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_rounds_fire.mp3";
+        public static string PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_blaze_blitz.mp3";
+        public static string PLAYER_PLASMA_BOMB_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_plasma_bomb.mp3";
+        public static string PLAYER_BEAM_CANNON_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_beam_cannon.mp3";
+        public static string PLAYER_SONIC_BLAST_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_sonic_blast.mp3";
 
+        public static string ENEMY_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/enemy_rounds_fire.mp3";
+
+        public static string METEOR_DESTRUCTION_MUSIC_URL = "Assets/Sounds/meteor_destruction.mp3";
+
+        public static string ROUNDS_HIT_MUSIC_URL = "Assets/Sounds/rounds_hit.mp3";
+
+        public static string POWER_UP_MUSIC_URL = "Assets/Sounds/Power/power_up.mp3";
+        public static string POWER_DOWN_MUSIC_URL = "Assets/Sounds/Power/power_down.mp3";
+
+        public static string RAGE_UP_MUSIC_URL = "Assets/Sounds/Rage/rage_up.mp3";
+        public static string RAGE_DOWN_MUSIC_URL = "Assets/Sounds/Rage/rage_down.mp3";
+
+        public static string ENEMY_INCOMING_MUSIC_URL = "Assets/Sounds/Enemy/enemy_incoming.mp3";
+        public static string ENEMY_DESTRUCTION_MUSIC_URL = "Assets/Sounds/meteor_destruction.mp3";
+
+        public static string HEALTH_GAIN_MUSIC_URL = "Assets/Sounds/Health/health_gain.mp3";
+        public static string HEALTH_LOSS_MUSIC_URL = "Assets/Sounds/Health/health_loss.mp3";
 
         public static string COLLECTIBLE_COLLECTED_MUSIC_URL = "Assets/Sounds/Collectible/collectible.mp3";
         
