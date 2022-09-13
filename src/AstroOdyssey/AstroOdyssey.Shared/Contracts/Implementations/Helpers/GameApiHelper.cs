@@ -234,7 +234,7 @@ namespace AstroOdyssey
         {
             var response = await GenerateSession(gameId: Constants.GAME_ID, userId: App.GameProfile.User.UserId);
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != HttpStatusCode.OK)
                 return false;
 
             var session = ParseResult<Session>(response.Result);
@@ -249,7 +249,7 @@ namespace AstroOdyssey
                 gameId: Constants.GAME_ID,
                 sessionId: sessionId);
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (response is null || response.HttpStatusCode != HttpStatusCode.OK)
                 return false;
 
             var authToken = ParseResult<AuthToken>(response.Result);
