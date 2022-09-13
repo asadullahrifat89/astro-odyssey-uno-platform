@@ -143,27 +143,9 @@ namespace AstroOdyssey
 
         private bool IsPoweredUp { get; set; }
 
-        private bool _moveLeft;
-        public bool MoveLeft
-        {
-            get { return _moveLeft; }
-            set
-            {
-                _moveLeft = value;
-                MoveLeftFeed.Visibility = _moveLeft ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
+        public bool MoveLeft { get; set; }
 
-        private bool _moveRight;
-        public bool MoveRight
-        {
-            get { return _moveRight; }
-            set
-            {
-                _moveRight = value;
-                MoveRightFeed.Visibility = _moveRight ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
+        public bool MoveRight { get; set; }      
 
         public List<Enemy> Bosses { get; set; }
 

@@ -29,6 +29,9 @@
 		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<ItemGroup>
+		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB"/>
+	</ItemGroup>
+	<ItemGroup>
 		<Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
