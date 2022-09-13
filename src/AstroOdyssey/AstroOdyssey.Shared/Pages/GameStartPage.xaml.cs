@@ -42,7 +42,7 @@ namespace AstroOdyssey
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
-            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton };
+            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton, GameStartPage_PlayButton };
         }
 
         #endregion
