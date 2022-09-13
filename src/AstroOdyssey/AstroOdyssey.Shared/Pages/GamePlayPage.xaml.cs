@@ -359,20 +359,6 @@ namespace AstroOdyssey
                     MoveRight = true;
                     MoveLeft = false;
                 }
-
-                //// move up
-                //if (point.Position.Y < windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveUp = true;
-                //    MoveDown = false;
-                //} // move down
-                //else if (point.Position.Y > windowHeight / 2)
-                //{
-                //    FiringProjectiles = true;
-                //    MoveDown = true;
-                //    MoveUp = false;
-                //}
             }
         }
 
@@ -670,19 +656,13 @@ namespace AstroOdyssey
             {
                 case PLAYER:
                     {
-                        if (MoveLeft || MoveRight /*|| MoveUp || MoveDown*/)
+                        if (MoveLeft || MoveRight)
                         {
                             var pointerX = _playerFactory.UpdatePlayer(
                                 player: Player,
-                                pointerX: PointerX,
-                                //pointerY: PointerY,
+                                pointerX: PointerX,                              
                                 moveLeft: MoveLeft,
-                                moveRight: MoveRight/*,*/
-                                //moveUp: MoveUp,
-                                /*moveDown: MoveDown*/);
-
-                            //PointerX = pointer.PointerX;
-                            //PointerY = pointer.PointerY;
+                                moveRight: MoveRight);
 
                             PointerX = pointerX;
                         }

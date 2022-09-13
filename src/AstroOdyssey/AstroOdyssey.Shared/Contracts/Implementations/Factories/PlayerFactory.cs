@@ -84,7 +84,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Moves the player to last pointer pressed position by x axis.
         /// </summary>
-        public /*(double PointerX, double PointerY)*/ double UpdatePlayer(Player player, double pointerX, /*double pointerY,*/ bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/)
+        public double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight)
         {
             var playerX = player.GetX();
 
@@ -92,9 +92,7 @@ namespace AstroOdyssey
 
             // if direction was changed reset acceleration
             if (xDirectionNow != _xDirectionLast)
-                _accelerationCounter = 0;
-
-            //var playerY = player.GetY();         
+                _accelerationCounter = 0;  
 
             var playerSpeed = _accelerationCounter >= player.Speed ? player.Speed : _accelerationCounter / 1.3;
 
@@ -114,16 +112,6 @@ namespace AstroOdyssey
                 _xDirectionLast = XDirection.RIGHT;
             }
 
-            //if (moveUp && playerY > player.Height)
-            //{
-            //    pointerY -= playerSpeed;
-            //}
-
-            //if (moveDown && playerY < gameEnvironment.Height - player.Height)
-            //{
-            //    pointerY += playerSpeed;
-            //}
-
             // move right
             if (pointerX - player.HalfWidth > playerX + playerSpeed)
             {
@@ -136,23 +124,6 @@ namespace AstroOdyssey
             {
                 SetPlayerX(player: player, left: playerX - playerSpeed);
             }
-
-            //// move up
-            //if (pointerY - player.Height / 2 < playerY - playerSpeed)
-            //{
-            //    SetPlayerY(player: player, top: playerY - playerSpeed);
-            //}
-
-            //// move down
-            //if (pointerY - player.Height / 2 > playerY + playerSpeed)
-            //{
-            //    if (playerY + player.Height / 2 < gameEnvironment.Height)
-            //    {
-            //        SetPlayerY(player: player, top: playerY + playerSpeed);
-            //    }
-            //}
-
-            //return (pointerX, pointerY);
 
             return pointerX;
         }

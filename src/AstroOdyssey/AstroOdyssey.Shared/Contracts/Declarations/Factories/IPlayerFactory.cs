@@ -8,7 +8,7 @@
 
         double GetOptimalPlayerY(Player player);
 
-        double UpdatePlayer(Player player, double pointerX, /*double pointerY,*/ bool moveLeft, bool moveRight/*, bool moveUp, bool moveDown*/);
+        double UpdatePlayer(Player player, double pointerX, bool moveLeft, bool moveRight);
 
         double UpdateAcceleration(Player player, double pointerX);
 
