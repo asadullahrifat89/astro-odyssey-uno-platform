@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using System;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -18,7 +19,7 @@ namespace AstroOdyssey
         private int _playerRageCoolDownCounter;
         private readonly int _playerRageCoolDownDelay = 1000;
 
-        private double _playerSpeed = 12;
+        private double _playerSpeed = 10;
         private double _accelerationCounter = 0;
 
         private XDirection _xDirectionLast = XDirection.NONE;
@@ -54,7 +55,16 @@ namespace AstroOdyssey
 
             var scale = _gameEnvironment.GetGameObjectScale();
 
-            player.SetAttributes(speed: _playerSpeed * scale, ship: ship, scale: scale);
+            var speed = _playerSpeed * scale;
+
+#if DEBUG
+            Console.WriteLine("Player speed: " + speed);
+#endif
+
+            player.SetAttributes(
+                speed: speed,
+                ship: ship,
+                scale: scale);
 
             var left = pointerX - player.HalfWidth;
             double top = GetOptimalPlayerY(player);

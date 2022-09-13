@@ -47,7 +47,8 @@
                         FontSize="45"
                         FontWeight="Bold"
                         Text="How to play"
-                        TextAlignment="Center" />
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
 
                     <Border
                         Margin="10"

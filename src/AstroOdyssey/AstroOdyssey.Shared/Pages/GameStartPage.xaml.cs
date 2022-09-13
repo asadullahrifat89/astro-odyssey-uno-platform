@@ -99,6 +99,14 @@ namespace AstroOdyssey
             App.EnterFullScreen(true);
         }
 
+        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            await this.PlayUnLoadedTransition();
+            App.NavigateToPage(typeof(GameLeaderboardPage));
+            App.EnterFullScreen(true);
+        }
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
@@ -128,15 +136,6 @@ namespace AstroOdyssey
                 SetLocalization();
                 _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
             }
-        }
-
-        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
-        {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         #endregion

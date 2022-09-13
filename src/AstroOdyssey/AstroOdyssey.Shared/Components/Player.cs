@@ -171,12 +171,12 @@ namespace AstroOdyssey
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            Speed += 1;
+            //Speed += 1;
         }
 
         public void PowerUpCoolDown()
         {
-            Speed -= 1;
+            //Speed -= 1;
         }
 
         /// <summary>
