@@ -45,8 +45,8 @@ namespace AstroOdyssey
             {
                 case SoundType.GAME_INTRO:
                     {
-                        var musicTrack = random.Next(0, GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES.Length);
-                        var src = GameObjectTemplates.GAME_INTRO_MUSIC_TEMPLATES[musicTrack];
+                        var musicTrack = random.Next(0, GameObjectTemplates.GAME_INTRO_MUSIC_URLS.Length);
+                        var src = GameObjectTemplates.GAME_INTRO_MUSIC_URLS[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -70,7 +70,7 @@ namespace AstroOdyssey
                         if (GAME_START is null)
                         {
                             GAME_START = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Game/space-jet-flyby_MkgS2BVu_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.GAME_START_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -82,7 +82,7 @@ namespace AstroOdyssey
                         if (GAME_OVER is null)
                         {
                             GAME_OVER = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Game/videogame-death-sound-43894.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.GAME_OVER_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -94,7 +94,7 @@ namespace AstroOdyssey
                         if (MENU_SELECT is null)
                         {
                             MENU_SELECT = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/game-start-6104.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.MENU_SELECT_MUSIC_URL),
                                 volume: 1);
                         }
 
@@ -103,8 +103,8 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BOSS_APPEARANCE:
                     {
-                        var musicTrack = random.Next(0, GameObjectTemplates.BOSS_APPEARANCE_MUSIC_TEMPLATES.Length);
-                        var src = GameObjectTemplates.BOSS_APPEARANCE_MUSIC_TEMPLATES[musicTrack];
+                        var musicTrack = random.Next(0, GameObjectTemplates.BOSS_APPEARANCE_MUSIC_URLS.Length);
+                        var src = GameObjectTemplates.BOSS_APPEARANCE_MUSIC_URLS[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -128,7 +128,7 @@ namespace AstroOdyssey
                         if (BOSS_DESTRUCTION is null)
                         {
                             BOSS_DESTRUCTION = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/halloween-impact-05-93808.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.BOSS_DESTRUCTION_MUSIC_URL),
                                 volume: 1.0);
                         }
 
@@ -137,8 +137,8 @@ namespace AstroOdyssey
                     break;
                 case SoundType.BACKGROUND_MUSIC:
                     {
-                        var musicTrack = random.Next(0, GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES.Length);
-                        var src = GameObjectTemplates.BACKGROUND_MUSIC_TEMPLATES[musicTrack];
+                        var musicTrack = random.Next(0, GameObjectTemplates.BACKGROUND_MUSIC_URLS.Length);
+                        var src = GameObjectTemplates.BACKGROUND_MUSIC_URLS[musicTrack];
 
                         var source = string.Concat(baseUrl, "/", src);
 
@@ -162,7 +162,7 @@ namespace AstroOdyssey
                         if (PLAYER_ROUNDS_FIRE is null)
                         {
                             PLAYER_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/laser-blast-descend_Gy7C5dEO_NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.PLAYER_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.1);
                         }
 
@@ -174,7 +174,7 @@ namespace AstroOdyssey
                         if (PLAYER_BLAZE_BLITZ_ROUNDS_FIRE is null)
                         {
                             PLAYER_BLAZE_BLITZ_ROUNDS_FIRE = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/alien-computer-program-deactivate_GkreEFV__NWM.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL),
                                 volume: 0.2);
                         }
 
@@ -343,7 +343,7 @@ namespace AstroOdyssey
                         if (COLLECTIBLE_COLLECTED is null)
                         {
                             COLLECTIBLE_COLLECTED = new AudioPlayer(
-                                source: string.Concat(baseUrl, "/", "Assets/Sounds/Collectible/8-bit-powerup-6768.mp3"),
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.COLLECTIBLE_COLLECTED_MUSIC_URL),
                                 volume: 0.4);
                         }
 

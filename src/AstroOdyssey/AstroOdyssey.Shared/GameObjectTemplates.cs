@@ -111,7 +111,27 @@ namespace AstroOdyssey
 
         #region Sounds
 
-        public static string[] BACKGROUND_MUSIC_TEMPLATES = new string[]
+        public static string[] GAME_INTRO_MUSIC_URLS = new string[]
+        {
+            "Assets/Sounds/Intro/intro1.mp3",
+            "Assets/Sounds/Intro/intro2.mp3",
+        };
+
+        public static string GAME_START_MUSIC_URL = "Assets/Sounds/Game/game-start.mp3";
+        public static string GAME_OVER_MUSIC_URL = "Assets/Sounds/Game/game-over.mp3";
+        public static string MENU_SELECT_MUSIC_URL = "Assets/Sounds/menu-select.mp3";
+
+        public static string[] BOSS_APPEARANCE_MUSIC_URLS = new string[]
+        {
+            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
+            "Assets/Sounds/Boss/boss1.mp3",
+            "Assets/Sounds/Boss/boss2.mp3",
+            "Assets/Sounds/Boss/boss3.mp3",
+        };
+
+        public static string BOSS_DESTRUCTION_MUSIC_URL = "Assets/Sounds/Boss/boss-destruction.mp3";
+
+        public static string[] BACKGROUND_MUSIC_URLS = new string[]
         {
             "Assets/Sounds/Music/action-stylish-rock-dedication-15038.mp3",
             "Assets/Sounds/Music/electronic-rock-king-around-here-15045.mp3",
@@ -124,19 +144,12 @@ namespace AstroOdyssey
            //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
         };
 
-        public static string[] BOSS_APPEARANCE_MUSIC_TEMPLATES = new string[]
-        {
-            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
-            "Assets/Sounds/Boss/frantic-15190.mp3",
-            "Assets/Sounds/Boss/metal-dark-matter-111451.mp3",
-            "Assets/Sounds/Boss/rage-15292.mp3",
-        };
+        public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player-rounds-fire.mp3";
+        public static string PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player-blaze-blitz.mp3";
 
-        public static string[] GAME_INTRO_MUSIC_TEMPLATES = new string[]
-        {
-            "Assets/Sounds/Intro/fashion-hip-hop-rock-stylish-boy-111449.mp3",
-            "Assets/Sounds/Intro/inspiring-motivational-rock-inspire-mesenses-111448.mp3",
-        }; 
+
+        public static string COLLECTIBLE_COLLECTED_MUSIC_URL = "Assets/Sounds/Collectible/collectible.mp3";
+        
 
         #endregion
     }
