@@ -128,7 +128,7 @@ namespace AstroOdyssey
                 Speed--;
                 ProjectileSpawnDelay -= (3 * (int)gameLevel);
 
-                Health = 50 * (int)gameLevel;
+                Health = 30 * (int)gameLevel;
 
                 Uri uri = bossTemplate.AssetUri;
                 _ship.Source = new BitmapImage(uri);

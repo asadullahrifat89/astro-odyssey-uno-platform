@@ -106,6 +106,7 @@ namespace AstroOdyssey
             // delete session
             PerformLogout();
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+            GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
         }
@@ -127,6 +128,15 @@ namespace AstroOdyssey
                 SetLocalization();
                 _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
             }
+        }
+
+        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            await this.PlayUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         #endregion
@@ -187,6 +197,7 @@ namespace AstroOdyssey
         {
             // make logout button visible
             GameStartPage_LogoutButton.Visibility = Visibility.Visible;
+            GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
             GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
             GameLoginPage_RegisterButton.Visibility = Visibility.Collapsed;
         }
@@ -195,6 +206,7 @@ namespace AstroOdyssey
         {
             // make login button visible
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
+            GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
         }
@@ -339,6 +351,7 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_WelcomeBackText);
+            _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
             //_localizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
         }
 
