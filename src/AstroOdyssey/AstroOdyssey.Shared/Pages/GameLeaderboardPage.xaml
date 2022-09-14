@@ -79,7 +79,7 @@
                     <StackPanel Margin="40,20,40,5">
                         <TextBlock
                             x:Name="ScoreText"
-                            FontSize="25"
+                            FontSize="20"
                             FontWeight="Bold"
                             TextAlignment="Center"
                             TextWrapping="WrapWholeWords" />
@@ -101,12 +101,22 @@
                     ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
 
                 <!--  personal best score, play now  -->
-                <StackPanel x:Name="ActionStack" Grid.Row="2">
+                <StackPanel
+                    x:Name="ActionStack"
+                    Grid.Row="2"
+                    Margin="40,0,40,5">
+
+                    <Border
+                        Margin="10"
+                        Background="Goldenrod"
+                        BorderBrush="DarkGoldenrod"
+                        BorderThickness="3"
+                        CornerRadius="50" />
 
                     <!--  Personal best score  -->
-                    <TextBlock Margin="20,0,20,0"
+                    <TextBlock
                         x:Name="PersonalBestScoreText"
-                        FontSize="25"
+                        FontSize="20"
                         FontWeight="Bold"
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
@@ -145,7 +155,7 @@
                     <ProgressBar
                         x:Name="GameLeaderboardPage_ProgressBar"
                         Height="5"
-                        Margin="30,0,30,5"
+                        Margin="5,0"
                         Foreground="Goldenrod"
                         IsFocusEngagementEnabled="False"
                         IsIndeterminate="True"
