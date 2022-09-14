@@ -11,7 +11,8 @@
   ],
   "name": "Astro Odyssey",
   "short_name": "Astro Odyssey",
-  "start_url": "/Astro-Odyssey-Uno-Platform/index.html",
+  "start_url": "./index.html",
   "theme_color": "#070a25",
-  "scope": "/"
+  "scope": "./",
+  "id": "/Astro-Odyssey-Uno-Platform/index.html"
 }
