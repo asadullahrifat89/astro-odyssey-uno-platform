@@ -40,6 +40,9 @@
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Remove="manifest.json" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
