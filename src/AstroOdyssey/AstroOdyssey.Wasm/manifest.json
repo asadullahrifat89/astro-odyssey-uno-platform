@@ -11,8 +11,7 @@
   ],
   "name": "Astro Odyssey",
   "short_name": "Astro Odyssey",
-  "start_url": "./index.html",
+  "start_url": "https://asadullahrifat89.github.io/Astro-Odyssey-Uno-Platform/",
   "theme_color": "#070a25",
-  "scope": "./",
-  "id": "/Astro-Odyssey-Uno-Platform/index.html"
+  "scope": "./"  
 }
