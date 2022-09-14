@@ -65,7 +65,7 @@ namespace AstroOdyssey
                progressBar: _progressBar,
                actionButtons: _actionButtons);
 
-            await _assetHelper.PreloadAssets();           
+            _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);           
         }
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
