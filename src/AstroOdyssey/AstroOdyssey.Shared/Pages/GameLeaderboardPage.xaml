@@ -104,7 +104,7 @@
                 <StackPanel x:Name="ActionStack" Grid.Row="2">
 
                     <!--  Personal best score  -->
-                    <TextBlock
+                    <TextBlock Margin="20,0,20,0"
                         x:Name="PersonalBestScoreText"
                         FontSize="25"
                         FontWeight="Bold"
