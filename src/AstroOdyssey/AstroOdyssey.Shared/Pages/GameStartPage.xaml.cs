@@ -1,21 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using Windows.Storage;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AstroOdyssey
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class GameStartPage : Page
     {
         #region Fields
@@ -24,11 +14,11 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly ILocalizationHelper _localizationHelper;
         private readonly ICacheHelper _cacheHelper;
+        private readonly IAssetHelper _assetHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
         private readonly Button[] _actionButtons;
-        private readonly List<StorageFile> _storageFiles;
 
         #endregion
 
@@ -43,8 +33,7 @@ namespace AstroOdyssey
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
             _cacheHelper = App.Container.GetService<ICacheHelper>();
-
-            _storageFiles = new List<StorageFile>();
+            _assetHelper = App.Container.GetService<IAssetHelper>();
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
@@ -59,7 +48,7 @@ namespace AstroOdyssey
         {
             this.RunProgressBar(
                 progressBar: _progressBar,
-                errorContainer: _errorContainer,
+                messageBlock: _errorContainer,
                 actionButtons: _actionButtons);
 
             _audioHelper.StopSound();
@@ -73,10 +62,10 @@ namespace AstroOdyssey
             await SetLoginControls();
 
             this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
+               progressBar: _progressBar,
+               actionButtons: _actionButtons);
 
-            PreloadAssets();
+            _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);           
         }
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -239,10 +228,10 @@ namespace AstroOdyssey
             {
                 var error = recordResponse.Errors.Errors;
                 this.ShowError(
-                  progressBar: _progressBar,
-                  errorContainer: _errorContainer,
-                  error: string.Join("\n", error),
-                  actionButtons: _actionButtons);
+                    progressBar: _progressBar,
+                    messageBlock: _errorContainer,
+                    message: string.Join("\n", error),
+                    actionButtons: _actionButtons);
 
                 return false;
             }
@@ -252,150 +241,6 @@ namespace AstroOdyssey
             App.GameProfile = gameProfile;
 
             return true;
-        }
-
-        private async void PreloadAssets()
-        {
-            if (_storageFiles.Count == 0)
-            {
-                #region Images
-
-                foreach (var asset in GameObjectTemplates.PLAYER_RAGE_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.STAR_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.PLANET_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.ENEMY_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.METEOR_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.PLAYER_SHIP_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(asset.AssetUri, UriKind.RelativeOrAbsolute));
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.COLLECTIBLE_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset);
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                foreach (var asset in GameObjectTemplates.BOSS_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset.AssetUri);
-                    _storageFiles.Add(file);
-                }
-
-                foreach (var asset in GameObjectTemplates.GAME_MISC_IMAGE_TEMPLATES)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(asset);
-                    _storageFiles.Add(file);
-                }
-
-                #endregion
-
-                #region Sounds
-
-                foreach (var asset in GameObjectTemplates.GAME_INTRO_MUSIC_URLS)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + asset, UriKind.RelativeOrAbsolute));
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.GAME_START_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.GAME_OVER_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.MENU_SELECT_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                foreach (var asset in GameObjectTemplates.BOSS_APPEARANCE_MUSIC_URLS)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + asset, UriKind.RelativeOrAbsolute));
-                    _storageFiles.Add(file);
-                }
-
-                await Task.Delay(500);
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.BOSS_DESTRUCTION_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.PLAYER_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.PLAYER_BLAZE_BLITZ_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.PLAYER_PLASMA_BOMB_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.PLAYER_BEAM_CANNON_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.PLAYER_SONIC_BLAST_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.ENEMY_ROUNDS_FIRE_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.METEOR_DESTRUCTION_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.ROUNDS_HIT_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.POWER_UP_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.POWER_DOWN_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.RAGE_UP_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.RAGE_DOWN_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.ENEMY_INCOMING_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.ENEMY_DESTRUCTION_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.HEALTH_GAIN_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.HEALTH_LOSS_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                _storageFiles.Add(await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + GameObjectTemplates.COLLECTIBLE_COLLECTED_MUSIC_URL, UriKind.RelativeOrAbsolute)));
-
-                foreach (var asset in GameObjectTemplates.BACKGROUND_MUSIC_URLS)
-                {
-                    var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///" + asset, UriKind.RelativeOrAbsolute));
-                    _storageFiles.Add(file);
-                }
-
-                #endregion
-            }
         }
 
         private void SetLocalization()
@@ -413,7 +258,6 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_WelcomeBackText);
             _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
-            //_localizationHelper.SetLocalizedResource(GameStartPage_AssetsCreditButton);
         }
 
         #endregion

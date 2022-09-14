@@ -1,5 +1,7 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using System;
 using System.Threading.Tasks;
 using Page = Microsoft.UI.Xaml.Controls.Page;
@@ -55,15 +57,16 @@ namespace AstroOdyssey
         public static void ShowError(
             this Page page,
             ProgressBar progressBar,
-            TextBlock errorContainer,
-            string error,
+            TextBlock messageBlock,
+            string message,
             params Button[] actionButtons)
         {
             progressBar.ShowPaused = true;
             progressBar.ShowError = true;
 
-            errorContainer.Text = error;
-            errorContainer.Visibility = Visibility.Visible;
+            messageBlock.Foreground = new SolidColorBrush(Colors.Crimson);
+            messageBlock.Text = message;
+            messageBlock.Visibility = Visibility.Visible;
 
             foreach (var actionButton in actionButtons)
             {
@@ -74,14 +77,17 @@ namespace AstroOdyssey
         public static void RunProgressBar(
             this Page page,
             ProgressBar progressBar,
-            TextBlock errorContainer,
+            TextBlock messageBlock,
+            string message = null,
             params Button[] actionButtons)
         {
+            progressBar.IsIndeterminate = true;
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
 
-            errorContainer.Text = "";
-            errorContainer.Visibility = Visibility.Collapsed;
+            messageBlock.Foreground = new SolidColorBrush(Colors.White);
+            messageBlock.Text = message;
+            messageBlock.Visibility = Visibility.Collapsed;
 
             foreach (var actionButton in actionButtons)
             {
@@ -115,7 +121,7 @@ namespace AstroOdyssey
         private static void DisableActionButton(Button button)
         {
             button.IsEnabled = false;
-        } 
+        }
 
         #endregion
 

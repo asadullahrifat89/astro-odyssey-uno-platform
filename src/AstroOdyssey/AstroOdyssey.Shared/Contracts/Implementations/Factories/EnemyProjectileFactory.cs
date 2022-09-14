@@ -39,14 +39,10 @@ namespace AstroOdyssey
             // each frame progress decreases this counter
             enemy.ProjectileSpawnCounter -= 1;
 
-            //enemy.CoolDownRecoilEffect();
-
             if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy);
                 enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
-
-                //enemy.SetRecoilEffect();
             }
         }
 

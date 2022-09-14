@@ -28,7 +28,9 @@ namespace AstroOdyssey
 
         public void SetAttributes(Enemy enemy, double scale = 1, bool isOverPowered = false)
         {
-            Speed = enemy.IsBoss ? enemy.Speed * 1.50 : enemy.Speed * 1.65;
+            Speed = enemy.IsBoss 
+                ? enemy.Speed * 1.50 
+                : enemy.Speed * 1.65;
 
             double height = 12;
             double width = 12;
@@ -41,16 +43,16 @@ namespace AstroOdyssey
                         {
                             Background = new SolidColorBrush(Colors.LightGreen);
                             BorderBrush = new SolidColorBrush(Colors.Green);
-                            BorderThickness = new Thickness(3);
+                            BorderThickness = new Thickness(3 * scale);
 
                             width += 5;
                         }
                         break;
                     case BossClass.CRIMSON:
                         {
-                            Background = new SolidColorBrush(Colors.Crimson);
-                            BorderBrush = new SolidColorBrush(Colors.DarkRed);
-                            BorderThickness = new Thickness(3);
+                            Background = new SolidColorBrush(Colors.Orange);
+                            BorderBrush = new SolidColorBrush(Colors.OrangeRed);
+                            BorderThickness = new Thickness(3 * scale);
 
                             height += 5;
                         }
@@ -59,7 +61,7 @@ namespace AstroOdyssey
                         {
                             Background = new SolidColorBrush(Colors.SkyBlue);
                             BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
-                            BorderThickness = new Thickness(3);
+                            BorderThickness = new Thickness(3 * scale);
                         }
                         break;
                     default:
@@ -72,7 +74,7 @@ namespace AstroOdyssey
                 {
                     Background = new SolidColorBrush(Colors.Violet);
                     BorderBrush = new SolidColorBrush(Colors.DarkViolet);
-                    BorderThickness = new Thickness(3);
+                    BorderThickness = new Thickness(3 * scale);
                 }
                 else
                 {
@@ -80,23 +82,23 @@ namespace AstroOdyssey
                     {
                         case EnemyClass.RED:
                             {
-                                Background = new SolidColorBrush(Colors.Crimson);
-                                BorderBrush = new SolidColorBrush(Colors.DarkRed);
-                                BorderThickness = new Thickness(2);
+                                Background = new SolidColorBrush(Colors.Orange);
+                                BorderBrush = new SolidColorBrush(Colors.OrangeRed);
+                                BorderThickness = new Thickness(2 * scale);
                             }
                             break;
                         case EnemyClass.GREEN:
                             {
                                 Background = new SolidColorBrush(Colors.LightGreen);
                                 BorderBrush = new SolidColorBrush(Colors.Green);
-                                BorderThickness = new Thickness(2);
+                                BorderThickness = new Thickness(2 * scale);
                             }
                             break;
                         default:
                             break;
-                    }                 
+                    }
                 }
-            }           
+            }
 
             Height = height * scale * (isOverPowered ? 1.5 : 1);
             Width = width * scale * (isOverPowered ? 1.5 : 1);
