@@ -145,7 +145,7 @@ namespace AstroOdyssey
 
         public bool MoveLeft { get; set; }
 
-        public bool MoveRight { get; set; }      
+        public bool MoveRight { get; set; }
 
         public List<Enemy> Bosses { get; set; }
 
@@ -642,7 +642,7 @@ namespace AstroOdyssey
                         {
                             var pointerX = _playerFactory.UpdatePlayer(
                                 player: Player,
-                                pointerX: PointerX,                              
+                                pointerX: PointerX,
                                 moveLeft: MoveLeft,
                                 moveRight: MoveRight);
 
@@ -1105,7 +1105,7 @@ namespace AstroOdyssey
 
             _audioHelper.PlaySound(SoundType.GAME_OVER);
 
-            App.SetScore(GameScore);
+            App.GameScore = GameScore;
 
             await this.PlayUnLoadedTransition();
 
