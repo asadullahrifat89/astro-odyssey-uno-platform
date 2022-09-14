@@ -97,7 +97,13 @@ namespace AstroOdyssey
 
                 return (response, errResponse, statusCode);
             }
-            catch (Exception ex)
+            catch (
+#if DEBUG
+            Exception ex
+#else
+            Exception
+#endif
+            )
             {
 #if DEBUG
                 Console.WriteLine($"RequestUri: {uri.OriginalString}\n" + $" Exception:{ex.Message}");
