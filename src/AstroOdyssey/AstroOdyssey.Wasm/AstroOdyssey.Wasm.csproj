@@ -27,7 +27,7 @@
 		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 		<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>
 		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
-		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
+		<!--<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>-->
 	</PropertyGroup>	
 	<ItemGroup>
 		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB" />
