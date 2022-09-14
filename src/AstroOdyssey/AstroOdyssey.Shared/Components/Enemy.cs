@@ -126,7 +126,7 @@ namespace AstroOdyssey
                 Width = (width / 2.5) * scale;
 
                 Speed--;
-                ProjectileSpawnDelay -= (3 * (int)gameLevel);
+                ProjectileSpawnDelay = ProjectileSpawnDelay - (4 * (int)gameLevel);
 
                 Health = Constants.BOSS_BASE_HEALTH * (double)gameLevel;
 
@@ -138,7 +138,7 @@ namespace AstroOdyssey
                 var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
                 var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
 
-                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;             
+                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
 
                 Uri uri = enemyTemplate.AssetUri;
                 Health = enemyTemplate.Health;
