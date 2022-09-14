@@ -169,7 +169,7 @@ namespace AstroOdyssey
         public static string HEALTH_LOSS_MUSIC_URL = "Assets/Sounds/Health/health_loss.mp3";
 
         public static string COLLECTIBLE_COLLECTED_MUSIC_URL = "Assets/Sounds/Collectible/collectible.mp3";
-        
+
 
         #endregion
     }

@@ -58,7 +58,7 @@ namespace AstroOdyssey
             {
                 this.RunProgressBar(
                     progressBar: _progressBar,
-                    errorContainer: _errorContainer,
+                    messageBlock: _errorContainer,
                     actionButtons: _actionButtons);              
                                 
                 if (await SubmitScore())
@@ -149,8 +149,8 @@ namespace AstroOdyssey
                 var error = response?.ExternalError;
                 this.ShowError(
                     progressBar: _progressBar,
-                    errorContainer: _errorContainer,
-                    error: error,
+                    messageBlock: _errorContainer,
+                    message: error,
                     actionButtons: _actionButtons);
 
                 return false;

@@ -64,7 +64,7 @@ namespace AstroOdyssey
 
             this.RunProgressBar(
                 progressBar: _progressBar,
-                errorContainer: _errorContainer,
+                messageBlock: _errorContainer,
                 actionButtons: _actionButtons);
 
             // get game profile
@@ -110,8 +110,8 @@ namespace AstroOdyssey
                 var error = recordResponse.Errors.Errors;
                 this.ShowError(
                     progressBar: _progressBar,
-                    errorContainer: _errorContainer,
-                    error: string.Join("\n", error),
+                    messageBlock: _errorContainer,
+                    message: string.Join("\n", error),
                     actionButtons: _actionButtons);
 
                 return false;
@@ -136,8 +136,8 @@ namespace AstroOdyssey
                 var error = recordsResponse.Errors.Errors;
                 this.ShowError(
                     progressBar: _progressBar,
-                    errorContainer: _errorContainer,
-                    error: string.Join("\n", error),
+                    messageBlock: _errorContainer,
+                    message: string.Join("\n", error),
                     actionButtons: _actionButtons);
 
                 return false;

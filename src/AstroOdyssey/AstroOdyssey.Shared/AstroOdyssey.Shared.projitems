@@ -22,9 +22,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IAssetHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ICacheHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ILocalizationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IPaginationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\AssetHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\AttachedUser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\AuthToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\EntityBase.cs" />
@@ -268,7 +270,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\Global\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
