@@ -105,6 +105,7 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/gameOver.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/gameIntro.gif", UriKind.RelativeOrAbsolute),
         };
 
         #endregion
