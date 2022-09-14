@@ -22,23 +22,27 @@
 
 		<!-- Disable performance optimizations for faster builds -->
 		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
-		
+
 		<!--Interpreter-->
 		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 		<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>
 		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
 	</PropertyGroup>
+	<PropertyGroup>
+		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
+	</PropertyGroup>
 	<ItemGroup>
 		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB" />
 	</ItemGroup>
 	<ItemGroup>
+		<Content Include="Assets\Icon192x192.png" />
 		<Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Assets\SplashScreen.png" />
+		<None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
@@ -57,7 +61,7 @@
 		<None Include="LinkerConfig.xml" />
 		<None Include="wwwroot\web.config" />
 	</ItemGroup>
-	<ItemGroup>		
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.9" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" Condition="'$(Configuration)'=='Debug'" />
@@ -83,8 +87,8 @@
 	</ItemGroup>
 	<Import Project="..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems" Label="Shared" Condition="Exists('..\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems')" />
 	<ItemGroup>
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Contracts\Implementations\Statics\PageExtensions.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\Statics\CacheHelper.cs" />
-	  <_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerCredentials.cs" />
-	</ItemGroup>	
+		<_Globbed_Compile Remove="..\AstroOdyssey.Shared\Contracts\Implementations\Statics\PageExtensions.cs" />
+		<_Globbed_Compile Remove="..\AstroOdyssey.Shared\Helpers\Statics\CacheHelper.cs" />
+		<_Globbed_Compile Remove="..\AstroOdyssey.Shared\Models\PlayerCredentials.cs" />
+	</ItemGroup>
 </Project>
