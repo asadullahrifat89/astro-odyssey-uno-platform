@@ -41,6 +41,10 @@ namespace AstroOdyssey
 
         #region Public
 
+        /// <summary>
+        /// Sets the game environment.
+        /// </summary>
+        /// <param name="gameEnvironment"></param>
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
@@ -190,6 +194,10 @@ namespace AstroOdyssey
             return (false, remainingPower);
         }
 
+        /// <summary>
+        /// Triggers player rage.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageUp(Player player)
         {
             _playerRageCoolDownCounter = _playerRageCoolDownAfter;
@@ -217,6 +225,11 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.RAGE_UP);
         }
 
+        /// <summary>
+        /// Cools down player rage.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
         {
             _playerRageCoolDownCounter--;
@@ -251,7 +264,7 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownAfter) * RAGE_THRESHOLD;
+            var remainingRage = (double)(_playerRageCoolDownCounter / (double)_playerRageCoolDownAfter) * RAGE_THRESHOLD;
 
             return (false, remainingRage);
         }

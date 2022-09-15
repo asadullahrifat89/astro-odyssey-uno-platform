@@ -141,13 +141,13 @@ namespace AstroOdyssey
             switch (ShipClass)
             {
                 case ShipClass.DEFENDER:
-                    HitPoint = 5;
+                    HitPoint = 20;
                     break;
                 case ShipClass.BERSERKER:
-                    HitPoint = 15;
+                    HitPoint = 33.33;
                     break;
                 case ShipClass.SPECTRE:
-                    HitPoint = 10;
+                    HitPoint = 25;
                     break;
                 default:
                     break;
