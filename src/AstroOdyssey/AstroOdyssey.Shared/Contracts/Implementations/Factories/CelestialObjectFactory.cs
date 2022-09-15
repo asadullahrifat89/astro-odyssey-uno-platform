@@ -12,18 +12,18 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private double _starSpawnCounter;
-        private double _starSpawnDelay = 250;
+        private double _starSpawnAfter = 250;
         private double _starSpeed = 0.2d;
 
         private int _spaceWarpDurationCounter;
-        private int _spaceWarpDurationDelay = 100;
+        private int _spaceWarpDurationAfter = 100;
 
         private int _planetSpawnCounter;
-        private int _planetSpawnDelay = 2500;
+        private int _planetSpawnAfter = 2500;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
-        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
-        private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
+        private readonly int SPACE_WARP_STAR_SPAWN_After_DECREASE = 249;
+        private readonly int SPACE_WARP_PLANET_SPAWN_After_DECREASE = 1998;
 
         private double _lastStarSpeed;
 
@@ -55,16 +55,16 @@ namespace AstroOdyssey
         {
             _lastStarSpeed = _starSpeed;
 
-            _starSpawnDelay -= SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
+            _starSpawnAfter -= SPACE_WARP_STAR_SPAWN_After_DECREASE;
 
             _starSpeed += SPACE_WARP_STAR_SPEED_INCREASE;
 
-            _starSpawnCounter = _starSpawnDelay;
+            _starSpawnCounter = _starSpawnAfter;
 
-            _planetSpawnDelay -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
-            _planetSpawnCounter = _planetSpawnDelay;
+            _planetSpawnAfter -= SPACE_WARP_PLANET_SPAWN_After_DECREASE;
+            _planetSpawnCounter = _planetSpawnAfter;
 
-            _spaceWarpDurationCounter = _spaceWarpDurationDelay;
+            _spaceWarpDurationCounter = _spaceWarpDurationAfter;
 
             _starView.IsWarpingThroughSpace = true;
             _planetView.IsWarpingThroughSpace = true;
@@ -76,11 +76,11 @@ namespace AstroOdyssey
         public void StopSpaceWarp()
         {
             _starSpeed = _lastStarSpeed;
-            _starSpawnDelay += SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
-            _starSpawnCounter = _starSpawnDelay;
+            _starSpawnAfter += SPACE_WARP_STAR_SPAWN_After_DECREASE;
+            _starSpawnCounter = _starSpawnAfter;
 
-            _planetSpawnDelay += SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
-            _planetSpawnCounter = _planetSpawnDelay;
+            _planetSpawnAfter += SPACE_WARP_PLANET_SPAWN_After_DECREASE;
+            _planetSpawnCounter = _planetSpawnAfter;
 
             _starView.IsWarpingThroughSpace = false;
             _planetView.IsWarpingThroughSpace = false;
@@ -119,7 +119,7 @@ namespace AstroOdyssey
             if (_starSpawnCounter < 0)
             {
                 GenerateStar();
-                _starSpawnCounter = _starSpawnDelay;
+                _starSpawnCounter = _starSpawnAfter;
             }
 
             _planetSpawnCounter--;
@@ -128,8 +128,8 @@ namespace AstroOdyssey
             {
                 GeneratePlanet();
 
-                _planetSpawnDelay = _random.Next(2500, 3500);
-                _planetSpawnCounter = _planetSpawnDelay;
+                _planetSpawnAfter = _random.Next(2500, 3500);
+                _planetSpawnCounter = _planetSpawnAfter;
             }
         }
 
@@ -214,7 +214,7 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             var scale = _starView.GetGameObjectScale();
-            _starSpawnDelay -= (10 * scale);
+            _starSpawnAfter -= (10 * scale);
             _starSpeed += (0.1d * scale);
         } 
 

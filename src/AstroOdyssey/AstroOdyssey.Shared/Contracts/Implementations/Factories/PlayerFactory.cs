@@ -11,13 +11,13 @@ namespace AstroOdyssey
         private GameEnvironment _gameEnvironment;
 
         private int _playerDamageRecoveryCounter;
-        private readonly int _playerDamageRecoveryDelay = 120;
+        private readonly int _playerDamageRecoveryAfter = 120;
 
         private int _powerUpTriggerSpawnCounter;
-        private readonly int _powerUpTriggerDelay = 1050;
+        private readonly int _powerUpTriggerAfter = 1050;
 
         private int _playerRageCoolDownCounter;
-        private readonly int _playerRageCoolDownDelay = 1000;
+        private readonly int _playerRageCoolDownAfter = 1000;
 
         private double _playerSpeed = 10;
         private double _accelerationCounter = 0;
@@ -186,13 +186,13 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var remainingPower = (double)((double)_powerUpTriggerSpawnCounter / (double)_powerUpTriggerDelay) * POWER_UP_METER;
+            var remainingPower = (double)((double)_powerUpTriggerSpawnCounter / (double)_powerUpTriggerAfter) * POWER_UP_METER;
             return (false, remainingPower);
         }
 
         public void RageUp(Player player)
         {
-            _playerRageCoolDownCounter = _playerRageCoolDownDelay;
+            _playerRageCoolDownCounter = _playerRageCoolDownAfter;
             switch (player.ShipClass)
             {
                 case ShipClass.DEFENDER:
@@ -251,7 +251,7 @@ namespace AstroOdyssey
                 return (true, 0);
             }
 
-            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownDelay) * RAGE_THRESHOLD;
+            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownAfter) * RAGE_THRESHOLD;
 
             return (false, remainingRage);
         }
@@ -268,7 +268,7 @@ namespace AstroOdyssey
 
             switch (tag)
             {
-                case METEOR:
+                case METEOR_TAG:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -291,7 +291,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case ENEMY:
+                case ENEMY_TAG:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -318,7 +318,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case ENEMY_PROJECTILE:
+                case ENEMY_PROJECTILE_TAG:
                     {
                         if (!gameObject.IsMarkedForFadedDestruction && player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -341,7 +341,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case HEALTH:
+                case HEALTH_TAG:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -352,7 +352,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case COLLECTIBLE:
+                case COLLECTIBLE_TAG:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -363,7 +363,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case POWERUP:
+                case POWERUP_TAG:
                     {
                         if (player.GetRect().Intersects(gameObject.GetRect()))
                         {
@@ -432,7 +432,7 @@ namespace AstroOdyssey
             // enter damage recovery state, prevent taking damage for a few milliseconds            
             player.IsRecoveringFromDamage = true;
 
-            _playerDamageRecoveryCounter = _playerDamageRecoveryDelay;
+            _playerDamageRecoveryCounter = _playerDamageRecoveryAfter;
         }
 
         /// <summary>
@@ -458,7 +458,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUp(Player player, PowerUpType powerUpType)
         {
-            _powerUpTriggerSpawnCounter = _powerUpTriggerDelay;
+            _powerUpTriggerSpawnCounter = _powerUpTriggerAfter;
 
             _audioHelper.PlaySound(SoundType.POWER_UP);
             player.TriggerPowerUp(powerUpType);

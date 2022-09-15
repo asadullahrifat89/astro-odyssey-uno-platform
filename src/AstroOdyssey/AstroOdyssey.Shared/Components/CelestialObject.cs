@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public CelestialObject()
         {
-            Tag = Constants.STAR;
+            Tag = Constants.STAR_TAG;
             Child = content;
             YDirection = YDirection.DOWN;
         }
@@ -83,8 +83,9 @@ namespace AstroOdyssey
 
             content.Source = new BitmapImage(uri);
 
-            Height = size * scale;
-            Width = size * scale;
+            var scaledSize = size * scale;
+            Height = scaledSize;
+            Width = scaledSize;
 
             HalfWidth = Width / 2;
         }

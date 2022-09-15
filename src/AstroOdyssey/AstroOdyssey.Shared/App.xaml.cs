@@ -215,18 +215,6 @@ namespace AstroOdyssey
 
         #region Public
 
-        public static void SetScore(PlayerScore gameScore)
-        {
-            GameScore = gameScore;
-        }
-
-        public static void SetIsBusy(bool isBusy)
-        {
-            var rootFrame = _window.Content as Frame;
-            rootFrame.IsEnabled = !isBusy;
-            rootFrame.Opacity = isBusy ? 0.6 : 1;
-        }
-
         /// <summary>
         /// Toggle fullscreen mode.
         /// </summary>
@@ -350,6 +338,10 @@ namespace AstroOdyssey
 #endif
         }
 
+        /// <summary>
+        /// Configures service container and registration of services.
+        /// </summary>
+        /// <returns></returns>
         private IServiceProvider ConfigureDependencyInjection()
         {
             // Create new service collection which generates the IServiceProvider
@@ -362,7 +354,7 @@ namespace AstroOdyssey
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();
-        } 
+        }
 
         #endregion
 

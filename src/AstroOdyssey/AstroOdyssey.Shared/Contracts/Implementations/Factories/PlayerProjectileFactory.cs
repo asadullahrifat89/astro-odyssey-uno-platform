@@ -9,23 +9,23 @@ namespace AstroOdyssey
         private GameEnvironment _gameEnvironment;
 
         private double _projectileSpawnCounter;
-        private double _projectileSpawnDelay = 14;
+        private double _projectileSpawnAfter = 14;
         private double _projectileSpeed = 18;
         private double _projectilePower = 0;
 
-        private readonly int BLAZE_BLITZ_ROUNDS_DELAY_DECREASE = 2;
+        private readonly int BLAZE_BLITZ_ROUNDS_After_DECREASE = 2;
         private readonly int BLAZE_BLITZ_ROUNDS_SPEED_INCREASE = 1;
 
-        private readonly int PLASMA_BOMB_ROUNDS_DELAY_INCREASE = 20;
+        private readonly int PLASMA_BOMB_ROUNDS_After_INCREASE = 20;
         private readonly int PLASMA_BOMB_ROUNDS_SPEED_DECREASE = 5;
 
-        private readonly int BEAM_CANNON_ROUNDS_DELAY_INCREASE = 25;
+        private readonly int BEAM_CANNON_ROUNDS_After_INCREASE = 25;
         private readonly int BEAM_CANNON_ROUNDS_SPEED_INCREASE = 20;
 
-        private readonly int SONIC_BLAST_ROUNDS_DELAY_INCREASE = 15;
+        private readonly int SONIC_BLAST_ROUNDS_After_INCREASE = 15;
         private readonly int SONIC_BLAST_ROUNDS_SPEED_INCREASE = 3;
 
-        private readonly int RAGE_UP_ROUNDS_DELAY_DECREASE = 2;
+        private readonly int RAGE_UP_ROUNDS_After_DECREASE = 2;
         private readonly int RAGE_UP_ROUNDS_SPEED_INCREASE = 3;
 
         private int _xSide = 15;
@@ -108,7 +108,7 @@ namespace AstroOdyssey
 
                 //}
 
-                _projectileSpawnCounter = _projectileSpawnDelay;
+                _projectileSpawnCounter = _projectileSpawnAfter;
 
                 //player.SetRecoilEffect();
             }
@@ -286,7 +286,7 @@ namespace AstroOdyssey
 
                 switch (destructible.Tag)
                 {
-                    case ENEMY:
+                    case ENEMY_TAG:
                         {
                             var enemy = destructible as Enemy;
 
@@ -315,7 +315,7 @@ namespace AstroOdyssey
                             }
                         }
                         break;
-                    case METEOR:
+                    case METEOR_TAG:
                         {
                             var meteor = destructible as Meteor;
 
@@ -357,25 +357,25 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.BLAZE_BLITZ:
                     {
-                        _projectileSpawnDelay -= BLAZE_BLITZ_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        _projectileSpawnAfter -= BLAZE_BLITZ_ROUNDS_After_DECREASE; // fast firing rate
                         _projectileSpeed += BLAZE_BLITZ_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.PLASMA_BOMB:
                     {
-                        _projectileSpawnDelay += PLASMA_BOMB_ROUNDS_DELAY_INCREASE; // slow firing rate
+                        _projectileSpawnAfter += PLASMA_BOMB_ROUNDS_After_INCREASE; // slow firing rate
                         _projectileSpeed -= PLASMA_BOMB_ROUNDS_SPEED_DECREASE; // slow projectile
                     }
                     break;
                 case PowerUpType.BEAM_CANNON:
                     {
-                        _projectileSpawnDelay += BEAM_CANNON_ROUNDS_DELAY_INCREASE; // slow firing rate
+                        _projectileSpawnAfter += BEAM_CANNON_ROUNDS_After_INCREASE; // slow firing rate
                         _projectileSpeed += BEAM_CANNON_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
                 case PowerUpType.SONIC_BLAST:
                     {
-                        _projectileSpawnDelay += SONIC_BLAST_ROUNDS_DELAY_INCREASE; // medium firing rate
+                        _projectileSpawnAfter += SONIC_BLAST_ROUNDS_After_INCREASE; // medium firing rate
                         _projectileSpeed += SONIC_BLAST_ROUNDS_SPEED_INCREASE; // medium projectile
                     }
                     break;
@@ -395,25 +395,25 @@ namespace AstroOdyssey
                     break;
                 case PowerUpType.BLAZE_BLITZ:
                     {
-                        _projectileSpawnDelay += BLAZE_BLITZ_ROUNDS_DELAY_DECREASE;
+                        _projectileSpawnAfter += BLAZE_BLITZ_ROUNDS_After_DECREASE;
                         _projectileSpeed -= BLAZE_BLITZ_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.PLASMA_BOMB:
                     {
-                        _projectileSpawnDelay -= PLASMA_BOMB_ROUNDS_DELAY_INCREASE;
+                        _projectileSpawnAfter -= PLASMA_BOMB_ROUNDS_After_INCREASE;
                         _projectileSpeed += PLASMA_BOMB_ROUNDS_SPEED_DECREASE;
                     }
                     break;
                 case PowerUpType.BEAM_CANNON:
                     {
-                        _projectileSpawnDelay -= BEAM_CANNON_ROUNDS_DELAY_INCREASE;
+                        _projectileSpawnAfter -= BEAM_CANNON_ROUNDS_After_INCREASE;
                         _projectileSpeed -= BEAM_CANNON_ROUNDS_SPEED_INCREASE;
                     }
                     break;
                 case PowerUpType.SONIC_BLAST:
                     {
-                        _projectileSpawnDelay -= SONIC_BLAST_ROUNDS_DELAY_INCREASE;
+                        _projectileSpawnAfter -= SONIC_BLAST_ROUNDS_After_INCREASE;
                         _projectileSpeed -= SONIC_BLAST_ROUNDS_SPEED_INCREASE;
                     }
                     break;
@@ -428,7 +428,7 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             var scale = _gameEnvironment.GetGameObjectScale();
-            _projectileSpawnDelay -= (1 * scale);
+            _projectileSpawnAfter -= (1 * scale);
         }
 
         /// <summary>
@@ -443,7 +443,7 @@ namespace AstroOdyssey
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        _projectileSpawnDelay -= RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        _projectileSpawnAfter -= RAGE_UP_ROUNDS_After_DECREASE; // fast firing rate
                         _projectileSpeed += RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;
@@ -466,7 +466,7 @@ namespace AstroOdyssey
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        _projectileSpawnDelay += RAGE_UP_ROUNDS_DELAY_DECREASE; // fast firing rate
+                        _projectileSpawnAfter += RAGE_UP_ROUNDS_After_DECREASE; // fast firing rate
                         _projectileSpeed -= RAGE_UP_ROUNDS_SPEED_INCREASE; // fast projectile
                     }
                     break;

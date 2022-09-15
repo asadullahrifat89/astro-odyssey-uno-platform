@@ -11,7 +11,7 @@ namespace AstroOdyssey
 
         public EnemyProjectile()
         {
-            Tag = ENEMY_PROJECTILE;
+            Tag = ENEMY_PROJECTILE_TAG;
 
             Height = 10;
             Width = 5;

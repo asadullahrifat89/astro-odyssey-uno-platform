@@ -25,7 +25,7 @@ namespace AstroOdyssey
 
         public Player()
         {
-            Tag = PLAYER;
+            Tag = PLAYER_TAG;
 
             Height = PLAYER_HEIGHT;
             Width = DESTRUCTIBLE_OBJECT_SIZE;

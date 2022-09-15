@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public Meteor()
         {
-            Tag = Constants.METEOR;
+            Tag = Constants.METEOR_TAG;
             Height = Constants.DESTRUCTIBLE_OBJECT_SIZE;
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
@@ -55,8 +55,9 @@ namespace AstroOdyssey
             var size = meteorTemplate.Size;
             size -= random.Next(1, 15);
 
-            Height = size * scale;
-            Width = size * scale;
+            var scaledSize = size * scale;
+            Height = scaledSize;
+            Width = scaledSize;
 
             content.Source = new BitmapImage(uri);
 
