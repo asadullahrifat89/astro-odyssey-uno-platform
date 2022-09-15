@@ -11,7 +11,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _collectibleSpawnCounter;
-        private int _collectibleSpawnDelay = 600;
+        private int _collectibleSpawnAfter = 600;
         private double _collectibleSpeed = 2;
 
         #endregion
@@ -46,8 +46,8 @@ namespace AstroOdyssey
             if (_collectibleSpawnCounter < 0)
             {
                 GenerateCollectible();
-                _collectibleSpawnCounter = _collectibleSpawnDelay;
-                _collectibleSpawnDelay = _random.Next(500, 700);
+                _collectibleSpawnCounter = _collectibleSpawnAfter;
+                _collectibleSpawnAfter = _random.Next(500, 700);
             }
         }
 

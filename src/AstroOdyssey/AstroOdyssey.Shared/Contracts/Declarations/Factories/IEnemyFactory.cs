@@ -4,9 +4,9 @@
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 
-        Enemy EngageBossEnemy(GameLevel gameLevel);
+        Enemy EngageBoss(GameLevel gameLevel);
 
-        void DisengageBossEnemy();
+        void DisengageBoss();
 
         void SpawnEnemy(GameLevel gameLevel);
 

@@ -17,7 +17,7 @@ namespace AstroOdyssey
 
         public Health()
         {
-            Tag = Constants.HEALTH;
+            Tag = Constants.HEALTH_TAG;
             Height = Constants.PICKUP_OBJECT_SIZE;
             Width = Constants.PICKUP_OBJECT_SIZE;
             Child = content;
@@ -43,8 +43,9 @@ namespace AstroOdyssey
 
             content.Source = new BitmapImage(uri);
 
-            Height = Constants.PICKUP_OBJECT_SIZE * scale;
-            Width = Constants.PICKUP_OBJECT_SIZE * scale;
+            var scaledSize = Constants.PICKUP_OBJECT_SIZE * scale;
+            Height = scaledSize;
+            Width = scaledSize;
 
             HalfWidth = Width / 2;
         }

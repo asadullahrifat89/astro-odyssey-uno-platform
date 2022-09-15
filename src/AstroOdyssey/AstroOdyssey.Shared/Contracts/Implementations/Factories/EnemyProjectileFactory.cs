@@ -42,7 +42,7 @@ namespace AstroOdyssey
             if (enemy.ProjectileSpawnCounter <= 0)
             {
                 GenerateProjectile(enemy);
-                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnDelay;
+                enemy.ProjectileSpawnCounter = enemy.ProjectileSpawnAfter;
             }
         }
 
@@ -124,8 +124,7 @@ namespace AstroOdyssey
                                     gameEnvironment: _gameEnvironment);
 
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                                
                             }
                         }
                         break;
@@ -185,8 +184,7 @@ namespace AstroOdyssey
                                     left: enemy.GetX() + enemy.Width - (35 * scale) - projectile4.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                                
                             }
                         }
                         break;
@@ -228,8 +226,7 @@ namespace AstroOdyssey
                                     gameEnvironment: _gameEnvironment);
 
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                                enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                             
                             }
                         }
                         break;
@@ -267,8 +264,7 @@ namespace AstroOdyssey
                 {
                     projectile.OverPower();
 
-                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnDelay;
-                    enemy.OverPoweredProjectileSpawnDelay = _random.Next(4, 7);
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter;                    
                 }
             }
         }

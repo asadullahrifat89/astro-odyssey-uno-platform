@@ -33,15 +33,15 @@ namespace AstroOdyssey
 
 #if DEBUG
         private int _frameStatUpdateSpawnCounter;
-        private int _frameStatUpdateDelay = 5;
+        private int _frameStatUpdateAfter = 5;
         private double _frameDuration;
 #endif
 
         private int _showInGameTextSpawnCounter = 110;
-        private int _showInGameTextDelay = 110;
+        private int _showInGameTextAfter = 110;
 
         private int _showInGameImagePanelSpawnCounter = 110;
-        private int _showInGameImagePanelDelay = 110;
+        private int _showInGameImagePanelAfter = 110;
 
         private double _frameTime;
 
@@ -636,7 +636,7 @@ namespace AstroOdyssey
 
             switch (tag)
             {
-                case PLAYER:
+                case PLAYER_TAG:
                     {
                         if (MoveLeft || MoveRight)
                         {
@@ -702,7 +702,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case PLAYER_PROJECTILE:
+                case PLAYER_PROJECTILE_TAG:
                     {
                         var projectile = gameObject as PlayerProjectile;
 
@@ -764,7 +764,7 @@ namespace AstroOdyssey
                         {
                             switch (destroyedObject.Tag)
                             {
-                                case ENEMY:
+                                case ENEMY_TAG:
                                     {
                                         var enemy = destroyedObject as Enemy;
 
@@ -778,7 +778,7 @@ namespace AstroOdyssey
                                         }
                                     }
                                     break;
-                                case METEOR:
+                                case METEOR_TAG:
                                     {
                                         _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
                                         GameScore.MeteorsDestroyed++;
@@ -790,7 +790,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case ENEMY_PROJECTILE:
+                case ENEMY_PROJECTILE_TAG:
                     {
                         var projectile = gameObject as EnemyProjectile;
 
@@ -813,7 +813,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case ENEMY:
+                case ENEMY_TAG:
                     {
                         var enemy = gameObject as Enemy;
 
@@ -841,7 +841,7 @@ namespace AstroOdyssey
                             _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
                     }
                     break;
-                case METEOR:
+                case METEOR_TAG:
                     {
                         var meteor = gameObject as Meteor;
 
@@ -864,7 +864,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case HEALTH:
+                case HEALTH_TAG:
                     {
                         var health = gameObject as Health;
 
@@ -884,7 +884,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case COLLECTIBLE:
+                case COLLECTIBLE_TAG:
                     {
                         var collectible = gameObject as Collectible;
 
@@ -909,7 +909,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case POWERUP:
+                case POWERUP_TAG:
                     {
                         var powerUp = gameObject as PowerUp;
 
@@ -935,7 +935,7 @@ namespace AstroOdyssey
                         }
                     }
                     break;
-                case STAR:
+                case STAR_TAG:
                     {
                         var star = gameObject as CelestialObject;
 
@@ -986,23 +986,27 @@ namespace AstroOdyssey
 
             if (_frameStatUpdateSpawnCounter < 0)
             {
-                var enemies = GameView.Children.OfType<Enemy>().Count();
-                var meteors = GameView.Children.OfType<Meteor>().Count();
-                var powerUps = GameView.Children.OfType<PowerUp>().Count();
-                var healths = GameView.Children.OfType<Health>().Count();
+                var gameObjects = GameView.Children.OfType<GameObject>();
+                var starObjects = StarView.Children.OfType<GameObject>();
+                var planetObjects = PlanetView.Children.OfType<GameObject>();
 
-                var playerProjectiles = GameView.Children.OfType<PlayerProjectile>().Count();
-                var enemyProjectiles = GameView.Children.OfType<EnemyProjectile>().Count();
+                var fpsText = $"FPS: {_fpsCount} | FRAME_TIME: {_frameTime} | FRAME_DURATION: {(int)_frameDuration}";
+                FPSText.Text = fpsText;
 
-                var stars = StarView.Children.OfType<CelestialObject>().Count();
-                var planets = PlanetView.Children.OfType<CelestialObject>().Count();
+                var objectsCountText =
+                    $"ENEMIES: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
+                    $"| METEORS : {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
+                    $"| POWERUPS : {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
+                    $"| ENEMY_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
+                    $"| PLAYER_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
+                    $"| STARS : {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
+                    $"| PLANETS : {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
 
-                var total = GameView.Children.Count + StarView.Children.Count + PlanetView.Children.Count;
+                var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
+                var totalText = $"TOTAL: {total}";
 
-                FPSText.Text = "{ FPS: " + _fpsCount + ", Frame: { Time: " + _frameTime + ", Duration: " + (int)_frameDuration + " }}";
-                ObjectsCountText.Text = "{ Enemies: " + enemies + ",  Meteors: " + meteors + ",  Power Ups: " + powerUps + ",  Healths: " + healths + ",  Projectiles: { Player: " + playerProjectiles + ",  Enemy: " + enemyProjectiles + "},  Stars: " + stars + ", Planets: " + planets + " }\n{ Total: " + total + " }";
-
-                _frameStatUpdateSpawnCounter = _frameStatUpdateDelay;
+                ObjectsCountText.Text = objectsCountText + "\n" + totalText;
+                _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
             }
 #endif
         }
@@ -1014,7 +1018,7 @@ namespace AstroOdyssey
         {
             InGameText.Visibility = Visibility.Visible;
             InGameText.Text = text;
-            _showInGameTextSpawnCounter = _showInGameTextDelay;
+            _showInGameTextSpawnCounter = _showInGameTextAfter;
         }
 
         /// <summary>
@@ -1056,7 +1060,7 @@ namespace AstroOdyssey
             InGameImagePanel.Children.Clear();
             InGameImagePanel.Children.Add(image);
             InGameImagePanel.Visibility = Visibility.Visible;
-            _showInGameImagePanelSpawnCounter = _showInGameImagePanelDelay;
+            _showInGameImagePanelSpawnCounter = _showInGameImagePanelAfter;
         }
 
         /// <summary>
@@ -1285,7 +1289,7 @@ namespace AstroOdyssey
         {
             ShowInGameContent(image: _bossAppearedImage, text: $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("BOSS")}");
 
-            var boss = _enemyFactory.EngageBossEnemy(GameLevel);
+            var boss = _enemyFactory.EngageBoss(GameLevel);
             Bosses.Add(boss);
 
             BossHealthBarPanel.Visibility = Visibility.Visible;
@@ -1311,7 +1315,7 @@ namespace AstroOdyssey
             WarpThroughSpace();
             ShowInGameContent(_bossClearedImage, $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("COMPLETE")}");
 
-            _enemyFactory.DisengageBossEnemy();
+            _enemyFactory.DisengageBoss();
 
             Bosses.Remove(boss);
 

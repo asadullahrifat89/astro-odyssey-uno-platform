@@ -11,13 +11,13 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _rotatedMeteorSpawnCounter = 10;
-        private int _rotatedMeteorSpawnDelay = 10;
+        private int _rotatedMeteorSpawnAfter = 10;
 
         private int _overPoweredMeteorSpawnCounter = 15;
-        private int _overPoweredMeteorSpawnDelay = 15;
+        private int _overPoweredMeteorSpawnAfter = 15;
 
         private double _meteorSpawnCounter;
-        private double _meteorSpawnDelay = 55;
+        private double _meteorSpawnAfter = 55;
         private double _meteorSpeed = 1.5;
 
         private readonly IAudioHelper _audioHelper;
@@ -33,6 +33,8 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        #region Public
 
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
@@ -51,7 +53,7 @@ namespace AstroOdyssey
             if (_meteorSpawnCounter < 0)
             {
                 GenerateMeteor(gameLevel);
-                _meteorSpawnCounter = _meteorSpawnDelay;
+                _meteorSpawnCounter = _meteorSpawnAfter;
             }
         }
 
@@ -130,10 +132,13 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             var scale = _gameEnvironment.GetGameObjectScale();
-            var delayScale = 2 + scale;
-            _meteorSpawnDelay -= delayScale;
+            _meteorSpawnAfter -= (5 * scale);
             _meteorSpeed += (1 * scale);
         }
+
+        #endregion
+
+        #region Private
 
         /// <summary>
         /// Generates a meteor that is overpowered. Slower but stronger and bigger meteors.
@@ -141,9 +146,9 @@ namespace AstroOdyssey
         /// <param name="meteor"></param>
         private void SetOverPoweredMeteor(Meteor meteor)
         {
-            _overPoweredMeteorSpawnCounter = _overPoweredMeteorSpawnDelay;
+            _overPoweredMeteorSpawnCounter = _overPoweredMeteorSpawnAfter;
             meteor.OverPower();
-            _overPoweredMeteorSpawnDelay = _random.Next(10, 20);
+            _overPoweredMeteorSpawnAfter = _random.Next(10, 20);
         }
 
         /// <summary>
@@ -155,7 +160,7 @@ namespace AstroOdyssey
         private void SetSideWaysMovingMeteor(Meteor meteor, ref double left, ref double top)
         {
             meteor.XDirection = (XDirection)_random.Next(1, Enum.GetNames<XDirection>().Length);
-            _rotatedMeteorSpawnCounter = _rotatedMeteorSpawnDelay;
+            _rotatedMeteorSpawnCounter = _rotatedMeteorSpawnAfter;
 
             switch (meteor.XDirection)
             {
@@ -180,8 +185,10 @@ namespace AstroOdyssey
             meteor.Rotate();
 
             // randomize next x flying meteor pop up
-            _rotatedMeteorSpawnDelay = _random.Next(5, 15);
+            _rotatedMeteorSpawnAfter = _random.Next(5, 15);
         }
+
+        #endregion
 
         #endregion
     }

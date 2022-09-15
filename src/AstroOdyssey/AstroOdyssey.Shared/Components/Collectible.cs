@@ -18,7 +18,7 @@ namespace AstroOdyssey
 
         public Collectible()
         {
-            Tag = Constants.COLLECTIBLE;
+            Tag = Constants.COLLECTIBLE_TAG;
             Height = Constants.COLLECTIBLE_OBJECT_SIZE;
             Width = Constants.COLLECTIBLE_OBJECT_SIZE;
             Child = content;
@@ -40,8 +40,9 @@ namespace AstroOdyssey
 
             content.Source = new BitmapImage(uri);
 
-            Height = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
-            Width = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
+            var scaledSize = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
+            Height = scaledSize;
+            Width = scaledSize;
 
             HalfWidth = Width / 2;
         }

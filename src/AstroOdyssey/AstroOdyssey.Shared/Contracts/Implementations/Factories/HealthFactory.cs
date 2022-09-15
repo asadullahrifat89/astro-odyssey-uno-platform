@@ -10,7 +10,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _healthSpawnCounter;
-        private int _healthSpawnDelay = 1000;
+        private int _healthSpawnAfter = 1000;
         private double _healthSpeed = 2;
 
         #endregion
@@ -47,8 +47,8 @@ namespace AstroOdyssey
                 if (_healthSpawnCounter < 0)
                 {
                     GenerateHealth();
-                    _healthSpawnCounter = _healthSpawnDelay;
-                    _healthSpawnDelay = _random.Next(900, 1001);
+                    _healthSpawnCounter = _healthSpawnAfter;
+                    _healthSpawnAfter = _random.Next(900, 1001);
                 }
             }
         }

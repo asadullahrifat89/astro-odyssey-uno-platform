@@ -10,7 +10,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _powerUpSpawnCounter = 1500;
-        private int _powerUpSpawnDelay = 1500;
+        private int _powerUpSpawnAfter = 1500;
         private double _powerUpSpeed = 2;
 
         #endregion
@@ -44,8 +44,8 @@ namespace AstroOdyssey
             if (_powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                _powerUpSpawnCounter = _powerUpSpawnDelay;
-                _powerUpSpawnDelay = _random.Next(1400, 1501);
+                _powerUpSpawnCounter = _powerUpSpawnAfter;
+                _powerUpSpawnAfter = _random.Next(1400, 1501);
             }
         }
 

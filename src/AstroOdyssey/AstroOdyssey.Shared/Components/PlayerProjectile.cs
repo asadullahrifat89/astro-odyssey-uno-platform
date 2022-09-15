@@ -11,7 +11,7 @@ namespace AstroOdyssey
 
         public PlayerProjectile()
         {
-            Tag = PLAYER_PROJECTILE;
+            Tag = PLAYER_PROJECTILE_TAG;
 
             Height = 20;
             Width = 5;

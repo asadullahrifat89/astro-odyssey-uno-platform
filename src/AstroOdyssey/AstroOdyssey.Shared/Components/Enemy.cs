@@ -24,7 +24,7 @@ namespace AstroOdyssey
 
         public Enemy()
         {
-            Tag = Constants.ENEMY;
+            Tag = Constants.ENEMY_TAG;
             Height = Constants.DESTRUCTIBLE_OBJECT_SIZE;
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
@@ -46,13 +46,13 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public int ProjectileSpawnCounter { get; set; }
+        public double ProjectileSpawnCounter { get; set; }
 
-        public int ProjectileSpawnDelay { get; set; } = 60;
+        public double ProjectileSpawnAfter { get; set; } = 60;
 
-        public int OverPoweredProjectileSpawnCounter { get; set; }
+        public double OverPoweredProjectileSpawnCounter { get; set; }
 
-        public int OverPoweredProjectileSpawnDelay { get; set; } = 5;
+        public double OverPoweredProjectileSpawnAfter { get; set; } = 5;
 
         public bool IsPlayerColliding { get; set; }
 
@@ -126,7 +126,7 @@ namespace AstroOdyssey
                 Width = (width / 2.5) * scale;
 
                 Speed--;
-                ProjectileSpawnDelay = ProjectileSpawnDelay - (4 * (int)gameLevel);
+                ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
 
                 Health = Constants.BOSS_BASE_HEALTH * (double)gameLevel;
 
@@ -143,9 +143,12 @@ namespace AstroOdyssey
                 Uri uri = enemyTemplate.AssetUri;
                 Health = enemyTemplate.Health;
 
-                var size = enemyTemplate.Size;
-                Height = size * scale;
-                Width = size * scale;
+                var scaledSize = scale * enemyTemplate.Size;
+
+                Height = scaledSize;
+                Width = scaledSize;
+
+                ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
 
                 _ship.Source = new BitmapImage(uri);
             }

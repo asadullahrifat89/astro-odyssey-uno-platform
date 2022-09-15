@@ -19,7 +19,7 @@ namespace AstroOdyssey
 
         public PowerUp()
         {
-            Tag = Constants.POWERUP;
+            Tag = Constants.POWERUP_TAG;
             Height = Constants.PICKUP_OBJECT_SIZE;
             Width = Constants.PICKUP_OBJECT_SIZE;
             Child = content;
@@ -55,8 +55,10 @@ namespace AstroOdyssey
             var uri = new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute);
             content.Source = new BitmapImage(uri);
 
-            Height = Constants.PICKUP_OBJECT_SIZE * scale;
-            Width = Constants.PICKUP_OBJECT_SIZE * scale;
+            var scaledSize = Constants.PICKUP_OBJECT_SIZE * scale;
+
+            Height = scaledSize;
+            Width = scaledSize;
 
             HalfWidth = Width / 2;
         }

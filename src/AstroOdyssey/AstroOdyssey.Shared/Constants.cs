@@ -13,19 +13,19 @@
         public const double PLAYER_HEIGHT = 80;
         public const double BOSS_BASE_HEALTH = 25;
 
-        public const string PLAYER = "player";
+        public const string PLAYER_TAG = "player";
 
-        public const string ENEMY = "enemy";
-        public const string METEOR = "meteor";
+        public const string ENEMY_TAG = "enemy";
+        public const string METEOR_TAG = "meteor";
 
-        public const string HEALTH = "health";
-        public const string POWERUP = "powerup";
-        public const string COLLECTIBLE = "collectible";
+        public const string HEALTH_TAG = "health";
+        public const string POWERUP_TAG = "powerup";
+        public const string COLLECTIBLE_TAG = "collectible";
 
-        public const string PLAYER_PROJECTILE = "player_projectile";
-        public const string ENEMY_PROJECTILE = "enemy_projectile";
+        public const string PLAYER_PROJECTILE_TAG = "player_projectile";
+        public const string ENEMY_PROJECTILE_TAG = "enemy_projectile";
 
-        public const string STAR = "star";
+        public const string STAR_TAG = "star";
 
         public const double RAGE_THRESHOLD = 25;
         public const double POWER_UP_METER = 100;
