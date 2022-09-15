@@ -655,7 +655,7 @@ namespace AstroOdyssey
 
                             if (coolDown.PowerDown)
                             {
-                                _playerProjectileFactory.PowerDown(PowerUpType);
+                                _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
                                 IsPoweredUp = false;
                                 PowerUpType = PowerUpType.NONE;
@@ -800,7 +800,7 @@ namespace AstroOdyssey
                         // check if enemy projectile collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
                         {
-                            _playerProjectileFactory.DecreaseProjectilePower();
+                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                             SetPlayerHealthBar();
                         }
                     }
@@ -823,7 +823,7 @@ namespace AstroOdyssey
                         // check if enemy collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
                         {
-                            _playerProjectileFactory.DecreaseProjectilePower();
+                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                             SetPlayerHealthBar();
                             return;
                         }
@@ -851,7 +851,7 @@ namespace AstroOdyssey
                         // check if meteor collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
                         {
-                            _playerProjectileFactory.DecreaseProjectilePower();
+                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                             SetPlayerHealthBar();
                         }
                     }
@@ -891,7 +891,7 @@ namespace AstroOdyssey
                         // check if collectible collides with player
                         if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
                         {
-                            _playerProjectileFactory.IncreaseProjectilePower();
+                            _playerProjectileFactory.IncreaseProjectilePower(player: Player);
 
                             GameScore.Score++;
                             GameScore.CollectiblesCollected++;
@@ -923,7 +923,7 @@ namespace AstroOdyssey
 
                             ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
 
-                            _playerProjectileFactory.PowerUp(PowerUpType);
+                            _playerProjectileFactory.PowerUp(PowerUpType, player: Player);
                         }
                     }
                     break;
@@ -1462,7 +1462,7 @@ namespace AstroOdyssey
                         _powerUpFactory.LevelUp();
                         _collectibleFactory.LevelUp();
                         _celestialObjectFactory.LevelUp();
-                        _playerProjectileFactory.LevelUp();
+                        _playerProjectileFactory.LevelUp(player: Player);
                     }
                     break;
             }
