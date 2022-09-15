@@ -287,7 +287,11 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             var scale = _gameEnvironment.GetGameObjectScale();
-            _enemySpawnAfter -= (5 * scale);
+
+            // increase enemy spwan rate
+            if (_enemySpawnAfter > 2)
+                _enemySpawnAfter -= 7 * scale;
+
             _enemySpeed += (1 * scale);
         }
 

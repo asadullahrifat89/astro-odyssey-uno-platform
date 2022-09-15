@@ -132,7 +132,8 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             var scale = _gameEnvironment.GetGameObjectScale();
-            _meteorSpawnAfter -= (5 * scale);
+            if (_meteorSpawnAfter > 2)
+                _meteorSpawnAfter -= 7 * scale;
             _meteorSpeed += (1 * scale);
         }
 
