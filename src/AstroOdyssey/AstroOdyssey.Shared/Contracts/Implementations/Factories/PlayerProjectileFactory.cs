@@ -200,7 +200,7 @@ namespace AstroOdyssey
             }
 
             // remove projectile if outside game canvas
-            if (projectile.GetY() < 10)
+            if (projectile.GetY() + projectile.Height < 0)
             {
                 _gameEnvironment.AddDestroyableGameObject(projectile);
                 destroyed = true;

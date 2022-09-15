@@ -56,6 +56,8 @@ namespace AstroOdyssey
 
         public bool IsRageUp { get; set; } = false;
 
+        public bool IsPoweredUp { get; set; } = false;
+
         public double Rage { get; set; } = 0;
 
         public double RageThreashold { get; set; }
@@ -195,12 +197,12 @@ namespace AstroOdyssey
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            //Speed += 1;
+            IsPoweredUp = true;
         }
 
         public void PowerUpCoolDown()
         {
-            //Speed -= 1;
+            IsPoweredUp = false;
         }
 
         /// <summary>

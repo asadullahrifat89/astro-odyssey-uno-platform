@@ -49,6 +49,8 @@ namespace AstroOdyssey
             SetGameResults();
             ShowUserName();
 
+            await this.PlayLoadedTransition();
+
             // if user has not logged in or session has expired
             if (!App.HasUserLoggedIn || _cacheHelper.HasSessionExpired())
             {                
@@ -73,9 +75,7 @@ namespace AstroOdyssey
                 this.StopProgressBar(
                     progressBar: _progressBar,
                     actionButtons: _actionButtons);
-            }
-
-            await this.PlayLoadedTransition();
+            }            
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)

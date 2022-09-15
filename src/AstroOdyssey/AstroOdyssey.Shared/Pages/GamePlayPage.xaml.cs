@@ -137,7 +137,6 @@ namespace AstroOdyssey
 
         private bool FiringProjectiles { get; set; } = false;
 
-        private bool IsPoweredUp { get; set; }
 
         public bool MoveLeft { get; set; }
 
@@ -175,7 +174,6 @@ namespace AstroOdyssey
             GameLevel = GameLevel.Level_1;
             SetGameLevelText();
 
-            IsPoweredUp = false;
             PowerUpType = PowerUpType.NONE;
             PlayerPowerBar.Maximum = POWER_UP_METER;
             PlayerPowerBar.Value = POWER_UP_METER;
@@ -647,7 +645,7 @@ namespace AstroOdyssey
                             PointerX = pointerX;
                         }
 
-                        if (IsPoweredUp)
+                        if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
                         {
                             var coolDown = _playerFactory.PowerUpCoolDown(Player);
 
@@ -657,13 +655,13 @@ namespace AstroOdyssey
                             {
                                 _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
                                 PlayerPowerBar.Visibility = Visibility.Collapsed;
-                                IsPoweredUp = false;
+
                                 PowerUpType = PowerUpType.NONE;
                                 ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
                             }
                         }
 
-                        if (Player.IsRageUp)
+                        if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
                         {
                             var coolDown = _playerFactory.RageUpCoolDown(Player);
 
@@ -918,12 +916,11 @@ namespace AstroOdyssey
                         {
                             PlayerPowerBar.Visibility = Visibility.Visible;
 
-                            IsPoweredUp = true;
                             PowerUpType = powerUp.PowerUpType;
 
                             ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
 
-                            _playerProjectileFactory.PowerUp(PowerUpType, player: Player);
+                            _playerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
                         }
                     }
                     break;
@@ -960,7 +957,7 @@ namespace AstroOdyssey
                 _collectibleFactory.SpawnCollectible(GameLevel);
 
                 _playerProjectileFactory.SpawnProjectile(
-                    isPoweredUp: IsPoweredUp,
+                    isPoweredUp: Player.IsPoweredUp,
                     firingProjectiles: FiringProjectiles,
                     player: Player,
                     gameLevel: GameLevel,
