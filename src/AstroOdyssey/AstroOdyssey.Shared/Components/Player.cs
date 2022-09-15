@@ -4,7 +4,6 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using static AstroOdyssey.Constants;
 using System.Linq;
 
 namespace AstroOdyssey
@@ -25,10 +24,10 @@ namespace AstroOdyssey
 
         public Player()
         {
-            Tag = PLAYER_TAG;
+            Tag = Constants.PLAYER_TAG;
 
-            Height = PLAYER_HEIGHT;
-            Width = DESTRUCTIBLE_OBJECT_SIZE;
+            Height = Constants.PLAYER_HEIGHT;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             Health = 100;
             HitPoint = 10;
@@ -54,6 +53,12 @@ namespace AstroOdyssey
         #region Properties
 
         public ShipClass ShipClass { get; set; }
+
+        public bool IsRageUp { get; set; }
+
+        public double Rage { get; set; }
+
+        public double RageThreashold { get; set; }
 
 
         private bool _isRecoveringFromDamage;
@@ -136,18 +141,29 @@ namespace AstroOdyssey
             _ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
             ShipClass = ship.ShipClass;
 
+            IsRageUp = false;
+
             Uri engineThrustUri = GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
 
             switch (ShipClass)
             {
                 case ShipClass.DEFENDER:
-                    HitPoint = 20;
+                    {
+                        HitPoint = 100 / 5; // 5 lives
+                        RageThreashold = 25;
+                    }
                     break;
                 case ShipClass.BERSERKER:
-                    HitPoint = 33.33;
+                    {
+                        HitPoint = 100 / 3; // 3 lives
+                        RageThreashold = 15;
+                    }
                     break;
                 case ShipClass.SPECTRE:
-                    HitPoint = 25;
+                    {
+                        HitPoint = 100 / 4; // 4 lives
+                        RageThreashold = 20;
+                    }
                     break;
                 default:
                     break;
@@ -157,16 +173,16 @@ namespace AstroOdyssey
             _engineThrust.Width = _body.Width;
             _engineThrust.Height = _body.Height;
 
-            Height = PLAYER_HEIGHT * scale;
-            Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
+            Height = Constants.PLAYER_HEIGHT * scale;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
 
             HalfWidth = Width / 2;
         }
 
         public void ReAdjustScale(double scale)
         {
-            Height = PLAYER_HEIGHT * scale;
-            Width = DESTRUCTIBLE_OBJECT_SIZE * scale;
+            Height = Constants.PLAYER_HEIGHT * scale;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
         }
 
         public void TriggerPowerUp(PowerUpType powerUpType)

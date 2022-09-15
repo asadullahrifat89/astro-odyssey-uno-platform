@@ -117,10 +117,6 @@ namespace AstroOdyssey
 
         public Stopwatch Stopwatch { get; set; }
 
-        public bool IsRageUp { get; set; }
-
-        public double Rage { get; set; } = 0;
-
         public PlayerScore GameScore { get; set; } = new PlayerScore();
 
         public double PointerX { get; set; }
@@ -183,10 +179,6 @@ namespace AstroOdyssey
             PowerUpType = PowerUpType.NONE;
             PlayerPowerBar.Maximum = POWER_UP_METER;
             PlayerPowerBar.Value = POWER_UP_METER;
-
-            IsRageUp = false;
-            Rage = 0;
-            PlayerRageBar.Maximum = RAGE_THRESHOLD;
 
             GameScore = new PlayerScore();
             SetScoreBarCountText(25);
@@ -671,7 +663,7 @@ namespace AstroOdyssey
                             }
                         }
 
-                        if (IsRageUp)
+                        if (Player.IsRageUp)
                         {
                             var coolDown = _playerFactory.RageUpCoolDown(Player);
 
@@ -680,9 +672,9 @@ namespace AstroOdyssey
                             if (coolDown.RageDown)
                             {
                                 _playerProjectileFactory.RageDown(Player);
-                                IsRageUp = false;
-                                Rage = 0;
-                                PlayerRageBar.Value = Rage;
+
+                                PlayerRageBar.Value = Player.Rage;
+                                PlayerRageIcon.Text = "😡";
 
                                 switch (Player.ShipClass)
                                 {
@@ -727,16 +719,16 @@ namespace AstroOdyssey
 
                         if (score > 0)
                         {
-                            if (!IsRageUp)
+                            if (!Player.IsRageUp)
                             {
-                                Rage++;
-                                PlayerRageBar.Value = Rage;
+                                Player.Rage++;
+                                PlayerRageBar.Value = Player.Rage;
                             }
 
-                            // trigger rage after each 25 kills
-                            if (!IsRageUp && Rage >= RAGE_THRESHOLD)
+                            // trigger rage after rage threashold kills
+                            if (!Player.IsRageUp && Player.Rage >= Player.RageThreashold)
                             {
-                                IsRageUp = true;
+                                PlayerRageIcon.Text = "🤬";
                                 _playerFactory.RageUp(Player);
                                 _playerProjectileFactory.RageUp(Player);
 
@@ -1248,9 +1240,7 @@ namespace AstroOdyssey
                     break;
             }
 
-#if DEBUG
-            Console.WriteLine($"Render Scale: {scale}");
-#endif
+            PlayerRageBar.Maximum = Player.RageThreashold;
         }
 
         /// <summary>

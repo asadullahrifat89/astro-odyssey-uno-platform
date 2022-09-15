@@ -26,8 +26,7 @@
         public const string ENEMY_PROJECTILE_TAG = "enemy_projectile";
 
         public const string STAR_TAG = "star";
-
-        public const double RAGE_THRESHOLD = 25;
+                
         public const double POWER_UP_METER = 100;
 
 #if DEBUG
