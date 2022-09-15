@@ -22,8 +22,8 @@ namespace AstroOdyssey
         private int _planetSpawnAfter = 2500;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
-        private readonly int SPACE_WARP_STAR_SPAWN_After_DECREASE = 249;
-        private readonly int SPACE_WARP_PLANET_SPAWN_After_DECREASE = 1998;
+        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
+        private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
 
         private double _lastStarSpeed;
 
@@ -55,13 +55,13 @@ namespace AstroOdyssey
         {
             _lastStarSpeed = _starSpeed;
 
-            _starSpawnAfter -= SPACE_WARP_STAR_SPAWN_After_DECREASE;
+            _starSpawnAfter -= SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
 
             _starSpeed += SPACE_WARP_STAR_SPEED_INCREASE;
 
             _starSpawnCounter = _starSpawnAfter;
 
-            _planetSpawnAfter -= SPACE_WARP_PLANET_SPAWN_After_DECREASE;
+            _planetSpawnAfter -= SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
             _planetSpawnCounter = _planetSpawnAfter;
 
             _spaceWarpDurationCounter = _spaceWarpDurationAfter;
@@ -76,10 +76,10 @@ namespace AstroOdyssey
         public void StopSpaceWarp()
         {
             _starSpeed = _lastStarSpeed;
-            _starSpawnAfter += SPACE_WARP_STAR_SPAWN_After_DECREASE;
+            _starSpawnAfter += SPACE_WARP_STAR_SPAWN_DELAY_DECREASE;
             _starSpawnCounter = _starSpawnAfter;
 
-            _planetSpawnAfter += SPACE_WARP_PLANET_SPAWN_After_DECREASE;
+            _planetSpawnAfter += SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE;
             _planetSpawnCounter = _planetSpawnAfter;
 
             _starView.IsWarpingThroughSpace = false;

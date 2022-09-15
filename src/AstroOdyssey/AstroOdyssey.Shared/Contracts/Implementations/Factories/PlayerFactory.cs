@@ -41,6 +41,10 @@ namespace AstroOdyssey
 
         #region Public
 
+        /// <summary>
+        /// Sets the game environment.
+        /// </summary>
+        /// <param name="gameEnvironment"></param>
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
@@ -92,7 +96,7 @@ namespace AstroOdyssey
 
             // if direction was changed reset acceleration
             if (xDirectionNow != _xDirectionLast)
-                _accelerationCounter = 0;  
+                _accelerationCounter = 0;
 
             var playerSpeed = _accelerationCounter >= player.Speed ? player.Speed : _accelerationCounter / 1.3;
 
@@ -190,9 +194,15 @@ namespace AstroOdyssey
             return (false, remainingPower);
         }
 
+        /// <summary>
+        /// Triggers player rage.
+        /// </summary>
+        /// <param name="player"></param>
         public void RageUp(Player player)
         {
+            player.IsRageUp = true;
             _playerRageCoolDownCounter = _playerRageCoolDownAfter;
+
             switch (player.ShipClass)
             {
                 case ShipClass.DEFENDER:
@@ -217,6 +227,11 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.RAGE_UP);
         }
 
+        /// <summary>
+        /// Cools down player rage.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public (bool RageDown, double RageRemaining) RageUpCoolDown(Player player)
         {
             _playerRageCoolDownCounter--;
@@ -247,11 +262,14 @@ namespace AstroOdyssey
 
             if (_playerRageCoolDownCounter <= 0)
             {
+                player.IsRageUp = false;
+                player.Rage = 0;
+
                 _audioHelper.PlaySound(SoundType.RAGE_DOWN);
                 return (true, 0);
             }
 
-            var remainingRage = (double)((double)_playerRageCoolDownCounter / (double)_playerRageCoolDownAfter) * RAGE_THRESHOLD;
+            var remainingRage = (double)(_playerRageCoolDownCounter / (double)_playerRageCoolDownAfter) * player.RageThreashold;
 
             return (false, remainingRage);
         }
