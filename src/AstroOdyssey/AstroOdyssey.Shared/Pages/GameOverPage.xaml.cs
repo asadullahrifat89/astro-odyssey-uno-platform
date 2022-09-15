@@ -126,23 +126,23 @@ namespace AstroOdyssey
 
         private void SetGameResults()
         {
-            ScoreText.Text = $"{_localizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.GameScore.Score;
+            ScoreText.Text = $"{_localizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.PlayerScore.Score;
 
-            EnemiesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.GameScore.EnemiesDestroyed;
-            MeteorsDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.GameScore.MeteorsDestroyed;
-            BossesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.GameScore.BossesDestroyed;
-            CollectiblesCollectedText.Text = $"{_localizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.GameScore.CollectiblesCollected;
+            EnemiesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.PlayerScore.EnemiesDestroyed;
+            MeteorsDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.PlayerScore.MeteorsDestroyed;
+            BossesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.PlayerScore.BossesDestroyed;
+            CollectiblesCollectedText.Text = $"{_localizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.PlayerScore.CollectiblesCollected;
 
-            CongratulationsText.Text = (App.GameScore.Score == 0
-                ? _localizationHelper.GetLocalizedResource("NO_LUCK") : App.GameScore.Score <= 400
-                ? _localizationHelper.GetLocalizedResource("GOOD_GAME") : App.GameScore.Score <= 800
-                ? _localizationHelper.GetLocalizedResource("GREAT_GAME") : App.GameScore.Score <= 1400
+            CongratulationsText.Text = (App.PlayerScore.Score == 0
+                ? _localizationHelper.GetLocalizedResource("NO_LUCK") : App.PlayerScore.Score <= 400
+                ? _localizationHelper.GetLocalizedResource("GOOD_GAME") : App.PlayerScore.Score <= 800
+                ? _localizationHelper.GetLocalizedResource("GREAT_GAME") : App.PlayerScore.Score <= 1400
                 ? _localizationHelper.GetLocalizedResource("FANTASTIC_GAME") : _localizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
         }
 
         private async Task<bool> SubmitScore()
         {
-            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
+            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {

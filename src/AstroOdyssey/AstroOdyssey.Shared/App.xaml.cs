@@ -58,15 +58,7 @@ namespace AstroOdyssey
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
 
             CurrentCulture = "en";
-        }
-
-        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
-        {
-#if DEBUG
-            Console.WriteLine(e.Message);
-#endif
-            e.Handled = true;
-        }
+        }        
 
         #endregion
 
@@ -80,7 +72,7 @@ namespace AstroOdyssey
 
         public static AuthToken AuthToken { get; set; }
 
-        public static PlayerScore GameScore { get; set; }
+        public static PlayerScore PlayerScore { get; set; }
 
         public static bool GameScoreSubmissionPending { get; set; }
 
@@ -93,6 +85,14 @@ namespace AstroOdyssey
         #endregion
 
         #region Events
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+#if DEBUG
+            Console.WriteLine(e.Message);
+#endif
+            e.Handled = true;
+        }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

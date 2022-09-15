@@ -191,7 +191,7 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.GameScore.Score);
+            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {

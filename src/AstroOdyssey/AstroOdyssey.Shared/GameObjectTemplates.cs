@@ -134,15 +134,14 @@ namespace AstroOdyssey
 
         public static string[] BACKGROUND_MUSIC_URLS = new string[]
         {
-            "Assets/Sounds/Music/action-stylish-rock-dedication-15038.mp3",
-            "Assets/Sounds/Music/electronic-rock-king-around-here-15045.mp3",
-            "Assets/Sounds/Music/powerful-stylish-stomp-rock-lets-go-114255.mp3",
-            "Assets/Sounds/Music/stomping-rock-four-shots-111444.mp3",
-            "Assets/Sounds/Music/stylish-rock-beat-trailer-116346.mp3",
-            "Assets/Sounds/Music/modern-fashion-promo-rock-18397.mp3",
-            "Assets/Sounds/Music/hard-rock-21056.mp3",
-            "Assets/Sounds/Music/crag-hard-rock-14401.mp3",
-           //"Assets/Sounds/Music/rockstar-trailer-109945.mp3",
+            "Assets/Sounds/Music/music1.mp3",
+            "Assets/Sounds/Music/music2.mp3",
+            "Assets/Sounds/Music/music3.mp3",
+            "Assets/Sounds/Music/music4.mp3",
+            "Assets/Sounds/Music/music5.mp3",
+            "Assets/Sounds/Music/music6.mp3",
+            "Assets/Sounds/Music/music7.mp3",
+            "Assets/Sounds/Music/music8.mp3",
         };
 
         public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_rounds_fire.mp3";

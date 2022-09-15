@@ -167,19 +167,6 @@ namespace AstroOdyssey
             }
         }
 
-        //public void SetRecoilEffect()
-        //{
-        //    BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: 0, bottom: 4);
-        //}
-
-        //public void CoolDownRecoilEffect()
-        //{
-        //    if (BorderThickness.Bottom != 0)
-        //    {
-        //        BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: 0, bottom: BorderThickness.Bottom - 1);
-        //    }
-        //}
-
         public void SetProjectileImpactEffect()
         {
             var effect = random.Next(0, 2);

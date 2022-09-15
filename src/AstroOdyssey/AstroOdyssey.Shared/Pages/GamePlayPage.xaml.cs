@@ -117,7 +117,7 @@ namespace AstroOdyssey
 
         public Stopwatch Stopwatch { get; set; }
 
-        public PlayerScore GameScore { get; set; } = new PlayerScore();
+        public PlayerScore PlayerScore { get; set; } = new PlayerScore();
 
         public double PointerX { get; set; }
 
@@ -180,7 +180,7 @@ namespace AstroOdyssey
             PlayerPowerBar.Maximum = POWER_UP_METER;
             PlayerPowerBar.Value = POWER_UP_METER;
 
-            GameScore = new PlayerScore();
+            PlayerScore = new PlayerScore();
             SetScoreBarCountText(25);
 
             PointerX = _windowWidth / 2;
@@ -748,7 +748,7 @@ namespace AstroOdyssey
                                 }
                             }
 
-                            GameScore.Score += score;
+                            PlayerScore.Score += score;
                             SetGameLevel(); // check game level on score change
                         }
 
@@ -761,19 +761,19 @@ namespace AstroOdyssey
                                         var enemy = destroyedObject as Enemy;
 
                                         _enemyFactory.DestroyEnemy(enemy);
-                                        GameScore.EnemiesDestroyed++;
+                                        PlayerScore.EnemiesDestroyed++;
 
                                         if (enemy.IsBoss)
                                         {
                                             DisengageBoss(enemy);
-                                            GameScore.BossesDestroyed++;
+                                            PlayerScore.BossesDestroyed++;
                                         }
                                     }
                                     break;
                                 case METEOR_TAG:
                                     {
                                         _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
-                                        GameScore.MeteorsDestroyed++;
+                                        PlayerScore.MeteorsDestroyed++;
                                     }
                                     break;
                                 default:
@@ -893,8 +893,8 @@ namespace AstroOdyssey
                         {
                             _playerProjectileFactory.IncreaseProjectilePower(player: Player);
 
-                            GameScore.Score++;
-                            GameScore.CollectiblesCollected++;
+                            PlayerScore.Score++;
+                            PlayerScore.CollectiblesCollected++;
 
                             SetGameLevel(); // check game level on score change
                             //ShowInGameText($"‍💫 {_localizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
@@ -1101,7 +1101,7 @@ namespace AstroOdyssey
 
             _audioHelper.PlaySound(SoundType.GAME_OVER);
 
-            App.GameScore = GameScore;
+            App.PlayerScore = PlayerScore;
 
             await this.PlayUnLoadedTransition();
 
@@ -1282,6 +1282,21 @@ namespace AstroOdyssey
             var boss = _enemyFactory.EngageBoss(GameLevel);
             Bosses.Add(boss);
 
+            switch (boss.BossClass)
+            {
+                case BossClass.GREEN:
+                    BossHealthBar.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                case BossClass.CRIMSON:
+                    BossHealthBar.Foreground = new SolidColorBrush(Colors.Orange);
+                    break;
+                case BossClass.BLUE:
+                    BossHealthBar.Foreground = new SolidColorBrush(Colors.SkyBlue);
+                    break;
+                default:
+                    break;
+            }
+
             BossHealthBarPanel.Visibility = Visibility.Visible;
             BossTotalHealth = Bosses.Sum(x => x.Health);
 
@@ -1329,82 +1344,82 @@ namespace AstroOdyssey
         {
             var lastGameLevel = GameLevel;
 
-            if (GameScore.Score >= 0)
+            if (PlayerScore.Score >= 0)
             {
                 GameLevel = GameLevel.Level_1;
-                ScoreBar.Value = GameScore.Score / 25 * 100;
+                ScoreBar.Value = PlayerScore.Score / 25 * 100;
                 SetScoreBarCountText(25);
             }
-            if (GameScore.Score > 25)
+            if (PlayerScore.Score > 25)
             {
                 GameLevel = GameLevel.Level_2;
-                ScoreBar.Value = GameScore.Score / 100 * 100;
+                ScoreBar.Value = PlayerScore.Score / 100 * 100;
                 SetScoreBarCountText(100);
             }
-            if (GameScore.Score > 100)
+            if (PlayerScore.Score > 100)
             {
                 GameLevel = GameLevel.Level_3;
-                ScoreBar.Value = GameScore.Score / 200 * 100;
+                ScoreBar.Value = PlayerScore.Score / 200 * 100;
                 SetScoreBarCountText(200);
             }
-            if (GameScore.Score > 200)
+            if (PlayerScore.Score > 200)
             {
                 GameLevel = GameLevel.Level_4;
-                ScoreBar.Value = GameScore.Score / 400 * 100;
+                ScoreBar.Value = PlayerScore.Score / 400 * 100;
                 SetScoreBarCountText(400);
             }
-            if (GameScore.Score > 400)
+            if (PlayerScore.Score > 400)
             {
                 GameLevel = GameLevel.Level_5;
-                ScoreBar.Value = GameScore.Score / 600 * 100;
+                ScoreBar.Value = PlayerScore.Score / 600 * 100;
                 SetScoreBarCountText(600);
             }
-            if (GameScore.Score > 600)
+            if (PlayerScore.Score > 600)
             {
                 GameLevel = GameLevel.Level_6;
-                ScoreBar.Value = GameScore.Score / 800 * 100;
+                ScoreBar.Value = PlayerScore.Score / 800 * 100;
                 SetScoreBarCountText(800);
             }
-            if (GameScore.Score > 800)
+            if (PlayerScore.Score > 800)
             {
                 GameLevel = GameLevel.Level_7;
-                ScoreBar.Value = GameScore.Score / 1000 * 100;
+                ScoreBar.Value = PlayerScore.Score / 1000 * 100;
                 SetScoreBarCountText(1000);
             }
-            if (GameScore.Score > 1000)
+            if (PlayerScore.Score > 1000)
             {
                 GameLevel = GameLevel.Level_8;
-                ScoreBar.Value = GameScore.Score / 1200 * 100;
+                ScoreBar.Value = PlayerScore.Score / 1200 * 100;
                 SetScoreBarCountText(1200);
             }
-            if (GameScore.Score > 1200)
+            if (PlayerScore.Score > 1200)
             {
                 GameLevel = GameLevel.Level_9;
-                ScoreBar.Value = GameScore.Score / 1400 * 100;
+                ScoreBar.Value = PlayerScore.Score / 1400 * 100;
                 SetScoreBarCountText(1400);
             }
-            if (GameScore.Score > 1400)
+            if (PlayerScore.Score > 1400)
             {
                 GameLevel = GameLevel.Level_10;
-                ScoreBar.Value = GameScore.Score / 1600 * 100;
+                ScoreBar.Value = PlayerScore.Score / 1600 * 100;
                 SetScoreBarCountText(1600);
             }
-            if (GameScore.Score > 1600)
+            if (PlayerScore.Score > 1600)
             {
                 GameLevel = GameLevel.Level_11;
-                ScoreBar.Value = GameScore.Score / 1800 * 100;
+                ScoreBar.Value = PlayerScore.Score / 1800 * 100;
                 SetScoreBarCountText(1800);
             }
-            if (GameScore.Score > 1800)
+            if (PlayerScore.Score > 1800)
             {
                 GameLevel = GameLevel.Level_12;
-                ScoreBar.Value = GameScore.Score / 2000 * 100;
+                ScoreBar.Value = PlayerScore.Score / 2000 * 100;
                 SetScoreBarCountText(2000);
             }
-            if (GameScore.Score > 2000)
+            if (PlayerScore.Score > 2000)
             {
                 GameLevel = GameLevel.Level_13;
-                ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/MAX";
+                ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {PlayerScore.Score}/MAX";
             }
 
             // when difficulty changes show level up
@@ -1434,7 +1449,7 @@ namespace AstroOdyssey
         /// <param name="capacity"></param>
         private void SetScoreBarCountText(int capacity)
         {
-            ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {GameScore.Score}/{capacity}";
+            ScoreBarCount.Text = $"{_localizationHelper.GetLocalizedResource("SCORE")} {PlayerScore.Score}/{capacity}";
         }
 
         /// <summary>
