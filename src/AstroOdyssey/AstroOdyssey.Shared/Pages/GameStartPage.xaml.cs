@@ -119,7 +119,7 @@ namespace AstroOdyssey
             _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
             App.AuthToken = null;
             App.GameProfile = null;
-            App.GameScore = null;
+            App.PlayerScore = null;
             App.Ship = null;
         }
 

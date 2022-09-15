@@ -4,9 +4,9 @@
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 
-        void IncreaseProjectilePower();
+        void IncreaseProjectilePower(Player player);
 
-        void DecreaseProjectilePower();
+        void DecreaseProjectilePower(Player player);
 
         void SpawnProjectile(
             bool isPoweredUp,
@@ -28,11 +28,11 @@
             out double score,
             out GameObject destroyedObject);
 
-        void PowerUp(PowerUpType powerUpType);
+        void PowerUp(PowerUpType powerUpType, Player player);
 
-        void PowerDown(PowerUpType powerUpType);
+        void PowerDown(PowerUpType powerUpType, Player player);
 
-        void LevelUp();
+        void LevelUp(Player player);
 
         void RageUp(Player player);
 

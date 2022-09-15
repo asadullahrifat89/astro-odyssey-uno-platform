@@ -54,11 +54,21 @@ namespace AstroOdyssey
 
         public ShipClass ShipClass { get; set; }
 
-        public bool IsRageUp { get; set; }
+        public bool IsRageUp { get; set; } = false;
 
-        public double Rage { get; set; }
+        public bool IsPoweredUp { get; set; } = false;
+
+        public double Rage { get; set; } = 0;
 
         public double RageThreashold { get; set; }
+
+        public double ProjectileSpawnCounter { get; set; } = 0;
+
+        public double ProjectileSpawnAfter { get; set; } = 14;
+
+        public double ProjectileSpeed { get; set; } = 18;
+
+        public double ProjectilePower { get; set; } = 0;
 
 
         private bool _isRecoveringFromDamage;
@@ -187,12 +197,12 @@ namespace AstroOdyssey
 
         public void TriggerPowerUp(PowerUpType powerUpType)
         {
-            //Speed += 1;
+            IsPoweredUp = true;
         }
 
         public void PowerUpCoolDown()
         {
-            //Speed -= 1;
+            IsPoweredUp = false;
         }
 
         /// <summary>
