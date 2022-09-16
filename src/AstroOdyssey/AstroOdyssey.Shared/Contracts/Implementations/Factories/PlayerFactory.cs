@@ -39,7 +39,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        #region Public
+        #region Public     
 
         /// <summary>
         /// Sets the game environment.

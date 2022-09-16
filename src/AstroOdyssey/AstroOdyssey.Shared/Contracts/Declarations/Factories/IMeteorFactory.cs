@@ -13,5 +13,7 @@
         void UpdateMeteor(Meteor meteor, out bool destroyed);
 
         void LevelUp();
+
+        void Reset();
     }
 }

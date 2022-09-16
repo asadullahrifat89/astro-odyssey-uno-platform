@@ -27,6 +27,13 @@ namespace AstroOdyssey
 
         #region Public
 
+        public void Reset()
+        {
+            _powerUpSpawnCounter = 1500;
+            _powerUpSpawnAfter = 1500;
+            _powerUpSpeed = 2;
+        }
+
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;

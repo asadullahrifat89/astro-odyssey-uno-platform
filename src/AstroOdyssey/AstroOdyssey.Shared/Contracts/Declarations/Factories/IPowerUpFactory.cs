@@ -12,5 +12,7 @@
 
         void LevelUp();
 
+        void Reset();
+
     }
 }

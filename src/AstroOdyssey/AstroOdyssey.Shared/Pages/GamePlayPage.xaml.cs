@@ -78,7 +78,7 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _celestialObjectFactory = new CelestialObjectFactory();
+            _celestialObjectFactory = App.Container.GetService<ICelestialObjectFactory>();
             _celestialObjectFactory.SetGameEnvironments(StarView, PlanetView);
 
             _meteorFactory = App.Container.GetService<IMeteorFactory>();
@@ -390,6 +390,8 @@ namespace AstroOdyssey
 
             HideInGameText();
 
+            ResetFactories();
+
             IsGameRunning = true;
 
             PauseGameButton.Visibility = Visibility.Visible;
@@ -465,6 +467,16 @@ namespace AstroOdyssey
             GameFrameTimer.Dispose();
 
             _audioHelper.StopSound();
+        }
+
+        private void ResetFactories()
+        {
+            _celestialObjectFactory.Reset();
+            _meteorFactory.Reset();
+            _enemyFactory.Reset();
+            _healthFactory.Reset();
+            _powerUpFactory.Reset();
+            _collectibleFactory.Reset();
         }
 
         /// <summary>

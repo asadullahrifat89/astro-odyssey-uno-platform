@@ -42,6 +42,14 @@ namespace AstroOdyssey
 
         #region Public
 
+        public void Reset() 
+        {
+            _starSpawnAfter = 250;
+            _starSpeed = 0.2d;
+            _spaceWarpDurationAfter = 100;
+            _planetSpawnAfter = 2500;
+        }
+
         public void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView)
         {
             _starView = starView;

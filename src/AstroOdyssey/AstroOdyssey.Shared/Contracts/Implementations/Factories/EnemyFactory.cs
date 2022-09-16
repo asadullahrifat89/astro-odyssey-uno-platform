@@ -47,6 +47,30 @@ namespace AstroOdyssey
 
         #region Public
 
+        public void Reset()
+        {
+            _xFlyingEnemySpawnCounter = 10;
+            _xFlyingEnemySpawnAfter = 10;
+
+            _overPoweredEnemySpawnCounter = 15;
+            _overPoweredEnemySpawnAfter = 15;
+
+            _evadingEnemySpawnCounter = 3;
+            _evadingEnemySpawnAfter = 3;
+
+            _firingEnemySpawnCounter = 7;
+            _firingEnemySpawnAfter = 7;
+
+            _targetingEnemySpawnAfter = 10;
+            _targetingEnemySpawnCounter = 10;
+
+            _hoveringEnemySpawnAfter = 12;
+            _hoveringEnemySpawnCounter = 12;
+
+            _enemySpawnAfter = 48;
+            _enemySpeed = 2;
+        }
+
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;
