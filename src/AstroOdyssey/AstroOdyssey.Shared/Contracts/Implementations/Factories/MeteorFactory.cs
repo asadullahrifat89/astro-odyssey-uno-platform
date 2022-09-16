@@ -36,6 +36,18 @@ namespace AstroOdyssey
 
         #region Public
 
+        public void Reset()
+        {
+            _rotatedMeteorSpawnCounter = 10;
+            _rotatedMeteorSpawnAfter = 10;
+
+            _overPoweredMeteorSpawnCounter = 15;
+            _overPoweredMeteorSpawnAfter = 15;
+
+            _meteorSpawnAfter = 55;
+            _meteorSpeed = 1.5;
+        }
+
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;

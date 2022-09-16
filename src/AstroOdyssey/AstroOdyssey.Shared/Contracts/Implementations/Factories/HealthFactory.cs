@@ -28,6 +28,12 @@ namespace AstroOdyssey
 
         #region Public
 
+        public void Reset()
+        {
+            _healthSpawnAfter = 1000;
+            _healthSpeed = 2;
+        }
+
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;

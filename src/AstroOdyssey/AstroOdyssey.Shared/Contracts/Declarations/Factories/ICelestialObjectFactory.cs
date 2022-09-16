@@ -17,5 +17,7 @@
         void UpdateCelestialObject(CelestialObject celestialObject, out bool destroyed);
 
         void LevelUp();
+
+        void Reset();
     }
 }

@@ -159,19 +159,19 @@ namespace AstroOdyssey
             {
                 case ShipClass.DEFENDER:
                     {
-                        HitPoint = 100 / 5; // 5 lives
+                        HitPoint = 100 / 6;
                         RageThreashold = 25;
                     }
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        HitPoint = 100 / 3; // 3 lives
+                        HitPoint = 100 / 4;
                         RageThreashold = 15;
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
-                        HitPoint = 100 / 4; // 4 lives
+                        HitPoint = 100 / 5;
                         RageThreashold = 20;
                     }
                     break;

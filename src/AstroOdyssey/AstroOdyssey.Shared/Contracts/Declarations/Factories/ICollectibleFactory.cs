@@ -11,5 +11,7 @@
         void UpdateCollectible(Collectible collectible, out bool destroyed);
 
         void LevelUp();
+
+        void Reset();
     }
 }

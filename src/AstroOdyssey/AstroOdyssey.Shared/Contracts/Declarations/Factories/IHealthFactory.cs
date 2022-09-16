@@ -11,5 +11,7 @@
         void UpdateHealth(Health health, out bool destroyed);
 
         void LevelUp();
+
+        void Reset();
     }
 }
