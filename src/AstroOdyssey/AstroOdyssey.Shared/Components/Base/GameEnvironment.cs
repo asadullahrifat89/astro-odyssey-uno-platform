@@ -41,15 +41,6 @@ namespace AstroOdyssey
         /// <returns></returns>
         public double GetGameObjectScale()
         {
-            //return Width >= 1400 ? 1.2 : Width >= 1000 ? 1 : (Width <= 300 ? 0.70 : (Width <= 500 ? 0.75 : (Width <= 700 ? 0.85 : (Width <= 900 ? 0.90 : 1))));
-
-            // wide screen - landscape
-            if (Width >= 1400)
-                return 1.2;
-            if (Width >= 1000)
-                return 1;
-
-            // phone screen - potrait
             if (Width <= 300)
                 return 0.70;
             if (Width <= 500)
@@ -58,8 +49,28 @@ namespace AstroOdyssey
                 return 0.85;
             if (Width <= 900)
                 return 0.90;
+            if (Width <= 1000)
+                return 1;
+            if (Width <= 1400)
+                return 1.1;
+            if (Width <= 2000)
+                return 1.2;
 
             return 1;
+        }
+
+        public double GetFrameTimeBuffer()
+        {
+            if (Width <= 400)
+                return 4;
+            if (Width <= 500)
+                return 3;
+            if (Width <= 700)
+                return 2;
+            if (Width <= 900)
+                return 1;
+
+            return 0;
         }
 
         public void SetSize(double height, double width)

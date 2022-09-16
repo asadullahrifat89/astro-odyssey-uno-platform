@@ -31,11 +31,9 @@ namespace AstroOdyssey
         private long _frameStartTime;
         private long _frameEndTime;
 
-#if DEBUG
         private int _frameStatUpdateSpawnCounter;
         private int _frameStatUpdateAfter = 5;
         private double _frameDuration;
-#endif
 
         private int _showInGameTextSpawnCounter = 110;
         private int _showInGameTextAfter = 110;
@@ -231,6 +229,9 @@ namespace AstroOdyssey
 
 #if DEBUG
             Console.WriteLine($"View Size: {_windowWidth} x {_windowHeight}");
+
+            var scale = GameView.GetGameObjectScale();
+            Console.WriteLine($"View Scale: {scale}");
 #endif
         }
 
@@ -423,14 +424,15 @@ namespace AstroOdyssey
                 _frameStartTime = Stopwatch.ElapsedMilliseconds;
 
                 RenderGameFrame();
-
+#if DEBUG
                 CalculateFPS();
-
+#endif
                 _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
                 GetFrameDuration();
-
+#if DEBUG
                 SetAnalytics();
+#endif
             }
         }
 
@@ -488,22 +490,28 @@ namespace AstroOdyssey
             StarView.SetSize(_windowHeight, _windowWidth);
             PlanetView.SetSize(_windowHeight, _windowWidth);
 
-            _frameTime = DEFAULT_FRAME_TIME;
+            _frameTime = DEFAULT_FRAME_TIME + GameView.GetFrameTimeBuffer();
 
-            // resize player size
+#if DEBUG
+            Console.WriteLine($"Frame Time : {_frameTime}");
+#endif
             if (IsGameRunning)
             {
+                PauseGame();
+
                 PointerX = _windowWidth / 2;
 
                 Player.SetX(PointerX - Player.HalfWidth);
 
-                SetPlayerY(); // windows size changed so reset y position               
+                SetPlayerY(); // windows size changed so reset y position
 
+                // resize player size
                 var scale = GameView.GetGameObjectScale();
                 Player.ReAdjustScale(scale: scale);
 #if DEBUG
                 Console.WriteLine($"View Scale: {scale}");
 #endif
+                return;
             }
         }
 
@@ -526,6 +534,7 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
             _audioHelper.PauseSound(SoundType.BACKGROUND_MUSIC);
+
             if (GameView.IsBossEngaged)
                 _audioHelper.PauseSound(SoundType.BOSS_APPEARANCE);
         }
@@ -982,7 +991,6 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
-#if DEBUG
             _frameStatUpdateSpawnCounter -= 1;
 
             if (_frameStatUpdateSpawnCounter < 0)
@@ -1009,7 +1017,6 @@ namespace AstroOdyssey
                 ObjectsCountText.Text = objectsCountText + "\n" + totalText;
                 _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
             }
-#endif
         }
 
         /// <summary>
