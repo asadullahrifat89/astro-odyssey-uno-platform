@@ -24,9 +24,7 @@
 		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
 
 		<!--Interpreter-->
-		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
-		<!--<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>-->
-		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
+		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>		
 		
 		<!--PWA-->
 		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
