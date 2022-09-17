@@ -1,12 +1,13 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AstroOdyssey
 {
     public sealed partial class GameInstructionsPage : Page
     {
-
         #region Fields
 
         private readonly IAudioHelper _audioHelper;
@@ -28,9 +29,11 @@ namespace AstroOdyssey
 
         #region Events
 
-        private void GameInstructionsPage_Loaded(object sender, RoutedEventArgs e)
+        private async void GameInstructionsPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
+            await this.PlayLoadedTransition();
+            InstructionDetailsStack.AnimateChildElements();
         }
 
         public async void GameInstructionsPage_PlayButton_Click(object sender, RoutedEventArgs e)
@@ -41,9 +44,17 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GamePlayPage));
         }
 
+        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await this.PlayUnLoadedTransition();
+
+            App.NavigateToPage(typeof(ShipSelectionPage));
+        }
+
+
         #endregion
 
-        #region Methods
+        #region Methods      
 
         private void ShowUserName()
         {

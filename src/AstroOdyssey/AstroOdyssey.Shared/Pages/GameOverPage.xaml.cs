@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System.Linq;
 using System.Threading.Tasks;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AstroOdyssey
-{    
+{
     public sealed partial class GameOverPage : Page
     {
         #region Fields
@@ -51,9 +52,11 @@ namespace AstroOdyssey
 
             await this.PlayLoadedTransition();
 
+            ScoreDetailsStack.AnimateChildElements();
+
             // if user has not logged in or session has expired
             if (!App.HasUserLoggedIn || _cacheHelper.HasSessionExpired())
-            {                
+            {
                 MakeLoginControlsVisible();
             }
             else
@@ -61,8 +64,8 @@ namespace AstroOdyssey
                 this.RunProgressBar(
                     progressBar: _progressBar,
                     messageBlock: _errorContainer,
-                    actionButtons: _actionButtons);              
-                                
+                    actionButtons: _actionButtons);
+
                 if (await SubmitScore())
                 {
                     MakeLeaderboardControlsVisible(); // if score submission was successful make leaderboard button visible
@@ -75,7 +78,7 @@ namespace AstroOdyssey
                 this.StopProgressBar(
                     progressBar: _progressBar,
                     actionButtons: _actionButtons);
-            }            
+            }
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)

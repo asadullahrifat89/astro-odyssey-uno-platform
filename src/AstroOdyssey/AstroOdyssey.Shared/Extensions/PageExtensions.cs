@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Page = Microsoft.UI.Xaml.Controls.Page;
 
@@ -12,46 +13,61 @@ namespace AstroOdyssey
     {
         #region Methods
 
-        #region Public      
+        #region Public
 
-        public async static Task PlayLoadedTransition(this UIElement page)
+        public async static Task PlayLoadedTransition(this UIElement uiElement)
         {
-            if (page is not null)
+            if (uiElement is not null)
             {
                 var timeSpan = TimeSpan.FromMilliseconds(18);
-                page.Opacity = 0;
+                uiElement.Opacity = 0;
                 var skipAnimation = 100;
 
                 while (skipAnimation > 0)
                 {
                     skipAnimation--;
-                    page.Opacity += 0.1d;
+                    uiElement.Opacity += 0.1d;
                     await Task.Delay(timeSpan);
 
-                    if (page.Opacity >= 1)
+                    if (uiElement.Opacity >= 1)
                         break;
                 }
             }
         }
 
-        public async static Task PlayUnLoadedTransition(this UIElement page)
+        public async static Task PlayUnLoadedTransition(this UIElement uiElement)
         {
-            if (page is not null)
+            if (uiElement is not null)
             {
                 var timeSpan = TimeSpan.FromMilliseconds(18);
-                page.Opacity = 1;
+                uiElement.Opacity = 1;
                 var skipAnimation = 100;
 
                 while (skipAnimation > 0)
                 {
                     skipAnimation--;
-                    page.Opacity -= 0.1d;
+                    uiElement.Opacity -= 0.1d;
                     await Task.Delay(timeSpan);
 
-                    if (page.Opacity <= 0)
+                    if (uiElement.Opacity <= 0)
                         break;
                 }
             }
+        }
+
+        public async static void AnimateChildElements(this StackPanel stackPanel)
+        {
+            foreach (var childElement in stackPanel.Children.OfType<StackPanel>())
+            {
+                childElement.Opacity = 0;
+            }
+
+            foreach (var childElement in stackPanel.Children.OfType<StackPanel>())
+            {
+                childElement.Opacity = 1;
+                await Task.Delay(75);
+            }
+
         }
 
         public static void ShowError(
