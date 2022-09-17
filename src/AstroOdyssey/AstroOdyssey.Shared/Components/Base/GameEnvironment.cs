@@ -62,13 +62,13 @@ namespace AstroOdyssey
         public double GetFrameTimeBuffer()
         {
             if (Width <= 400)
-                return 4;
+                return 5;
             if (Width <= 500)
-                return 3;
+                return 4;
             if (Width <= 700)
-                return 2;
+                return 3;
             if (Width <= 900)
-                return 1;
+                return 2;
 
             return 0;
         }
