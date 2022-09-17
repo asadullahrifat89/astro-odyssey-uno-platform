@@ -18,15 +18,17 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<!--AOT-->
-		<!--<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
+		<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
 
 		<!-- Disable performance optimizations for faster builds -->
-		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
+		<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>
 
 		<!--Interpreter-->
-		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+		<!--<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 		<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>
-		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
+		<WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>-->
+		
+		<!--PWA-->
 		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
 	</PropertyGroup>
 	<ItemGroup>
