@@ -60,6 +60,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -93,17 +94,53 @@
 
                 </StackPanel>
 
-                <!--  Leaderboard list  -->
-                <ListView
-                    x:Name="LeaderboardList"
+                <StackPanel
+                    x:Name="ScoreboardChoice"
                     Grid.Row="1"
-                    Margin="40,0,40,10"
-                    ItemTemplate="{StaticResource LeaderboardListDataTemplate}" />
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="GameLeaderboardPage_DailyScoreboardToggle"
+                        Background="Goldenrod"
+                        BorderBrush="White"
+                        BorderThickness="3"
+                        Content="Daily"
+                        CornerRadius="50"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False" />
+                    <Button
+                        x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
+                        Background="Goldenrod"
+                        BorderBrush="White"
+                        BorderThickness="3"
+                        Content="All Time"
+                        CornerRadius="50"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False" />
+                </StackPanel>
+
+                <!--  Leaderboard list  -->
+                <Grid Grid.Row="2" Margin="40,0,40,10">
+                    <ListView
+                        x:Name="GameLeaderboardPage_GameScores"
+                        ItemTemplate="{StaticResource LeaderboardListDataTemplate}"
+                        Visibility="Collapsed" />
+                    <ListView
+                        x:Name="GameLeaderboardPage_GameProfiles"
+                        ItemTemplate="{StaticResource LeaderboardListDataTemplate}"
+                        Visibility="Collapsed" />
+                </Grid>
 
                 <!--  personal best score, play now  -->
                 <StackPanel
                     x:Name="ActionStack"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     Margin="40,0,40,5">
 
                     <Border

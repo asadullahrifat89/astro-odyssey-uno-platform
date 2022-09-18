@@ -191,6 +191,7 @@ namespace AstroOdyssey
                  {
                      PageIndex = pageIndex,
                      PageSize = pageSize,
+                     ScoreDay = new DateTime(year: DateTime.UtcNow.Year, month: DateTime.UtcNow.Month, day: DateTime.UtcNow.Day),
                      GameId = Constants.GAME_ID,
                  });
 

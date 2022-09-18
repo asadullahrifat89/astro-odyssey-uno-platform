@@ -603,6 +603,21 @@ namespace AstroOdyssey
                 new ("de", "Sammeln Sie sie, um Ihre Feuerkraft zu erhöhen."),
                 new ("fr", "Collectez-les pour augmenter votre puissance de feu."),
             }),
+
+            new LocalizationKey(key: "GameLeaderboardPage_DailyScoreboardToggle", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Daily best"),
+                new ("bn", "দৈনিক সেরা"),
+                new ("de", "Täglich am besten"),
+                new ("fr", "Le meilleur quotidien"),
+            }),
+            new LocalizationKey(key: "GameLeaderboardPage_AllTimeScoreboardToggle", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "All time best"),
+                new ("bn", "সর্বকালের সেরা"),
+                new ("de", "Allzeit am besten"),
+                new ("fr", "Le meilleur de tous les temps"),
+            }),
         };
 
         #endregion
