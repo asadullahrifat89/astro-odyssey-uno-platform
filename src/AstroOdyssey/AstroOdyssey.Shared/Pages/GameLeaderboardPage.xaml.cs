@@ -64,32 +64,23 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
+            // by default all scoreboards are invisible
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Visible;
+
             await this.PlayLoadedTransition();
 
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-
             // get game profile
-            if (!await GetGameProfile())
-                return;
+            await GetGameProfile();
 
             ShowUserName();
 
-            // get game scores
-            if (!await GetGameScores())
-                return;
-
             // get game profiles
-            if (!await GetGameProfiles())
-                return;          
+            await GetGameProfiles();
 
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
+            // get game scores
+            await GetGameScores();
         }
-
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,12 +96,28 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameStartPage));
         }
 
+        private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Visible;
+            await GetGameScores();
+        }
+
+        private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Visible;
+            await GetGameProfiles();
+        }
+
         #endregion
 
         #region Methods      
 
         private async Task<bool> GetGameProfile()
         {
+            RunProgressBar();
+
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -132,11 +139,17 @@ namespace AstroOdyssey
             PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
             ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
 
+            StopProgressBar();
+
             return true;
-        }
+        }       
 
         private async Task<bool> GetGameProfiles()
         {
+            RunProgressBar();
+
+            GameProfiles.Clear();
+
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
 
             if (!recordsResponse.IsSuccess)
@@ -175,11 +188,17 @@ namespace AstroOdyssey
                 }
             }
 
+            StopProgressBar();
+
             return true;
         }
 
         private async Task<bool> GetGameScores()
         {
+            RunProgressBar();
+
+            GameScores.Clear();
+
             var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
 
             if (!recordsResponse.IsSuccess)
@@ -216,6 +235,8 @@ namespace AstroOdyssey
                 }
             }
 
+            StopProgressBar();
+
             return true;
         }
 
@@ -231,6 +252,21 @@ namespace AstroOdyssey
             {
                 PlayerNameHolder.Visibility = Visibility.Collapsed;
             }
+        }      
+
+        private void RunProgressBar()
+        {
+            this.RunProgressBar(
+                progressBar: _progressBar,
+                messageBlock: _errorContainer,
+                actionButtons: _actionButtons);
+        }
+
+        private void StopProgressBar()
+        {
+            this.StopProgressBar(
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
         }
 
         private void SetLocalization()
@@ -241,6 +277,6 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameLeaderboardPage_AllTimeScoreboardToggle);
         }
 
-        #endregion
+        #endregion      
     }
 }

@@ -61,11 +61,6 @@ namespace AstroOdyssey
             }
             else
             {
-                this.RunProgressBar(
-                    progressBar: _progressBar,
-                    messageBlock: _errorContainer,
-                    actionButtons: _actionButtons);
-
                 if (await SubmitScore())
                 {
                     MakeLeaderboardControlsVisible(); // if score submission was successful make leaderboard button visible
@@ -74,10 +69,6 @@ namespace AstroOdyssey
                 {
                     MakeLoginControlsVisible();
                 }
-
-                this.StopProgressBar(
-                    progressBar: _progressBar,
-                    actionButtons: _actionButtons);
             }
         }
 
@@ -145,6 +136,8 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
+            RunProgressBar();
+
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -158,6 +151,8 @@ namespace AstroOdyssey
 
                 return false;
             }
+
+            StopProgressBar();
 
             return true;
         }
@@ -174,6 +169,21 @@ namespace AstroOdyssey
             {
                 PlayerNameHolder.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void RunProgressBar()
+        {
+            this.RunProgressBar(
+                progressBar: _progressBar,
+                messageBlock: _errorContainer,
+                actionButtons: _actionButtons);
+        }
+
+        private void StopProgressBar()
+        {
+            this.StopProgressBar(
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
         }
 
         private void SetLocalization()

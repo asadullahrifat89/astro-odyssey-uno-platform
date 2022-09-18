@@ -606,17 +606,17 @@ namespace AstroOdyssey
 
             new LocalizationKey(key: "GameLeaderboardPage_DailyScoreboardToggle", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Daily best"),
-                new ("bn", "দৈনিক সেরা"),
-                new ("de", "Täglich am besten"),
-                new ("fr", "Le meilleur quotidien"),
+                new ("en", "Daily"),
+                new ("bn", "দৈনিক"),
+                new ("de", "Täglich"),
+                new ("fr", "du quotidien"),
             }),
             new LocalizationKey(key: "GameLeaderboardPage_AllTimeScoreboardToggle", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "All time best"),
-                new ("bn", "সর্বকালের সেরা"),
-                new ("de", "Allzeit am besten"),
-                new ("fr", "Le meilleur de tous les temps"),
+                new ("en", "All time"),
+                new ("bn", "সর্বকালে"),
+                new ("de", "Alle Zeit"),
+                new ("fr", "Tout le temps"),
             }),
         };
 
