@@ -1298,12 +1298,12 @@ namespace AstroOdyssey
 
             PointerPressedX = point.Position.X;
 
-            if ((PointerPressedX - Player.HalfWidth) < Player.GetX())  // move left
+            if ((PointerPressedX - Player.HalfWidth * GameView.GetGameObjectScale()) < Player.GetX())  // move left
             {
                 MoveLeft = true;
                 MoveRight = false;
             }
-            else if ((PointerPressedX + Player.HalfWidth) > Player.GetX()) // move right
+            else if ((PointerPressedX + Player.HalfWidth * GameView.GetGameObjectScale()) > Player.GetX()) // move right
             {
                 MoveRight = true;
                 MoveLeft = false;
@@ -1322,7 +1322,7 @@ namespace AstroOdyssey
                 }
                 else if (MoveRight)
                 {
-                    if (Player.GetX() >= PointerPressedX - (Player.Width + Player.HalfWidth * GameView.GetGameObjectScale()))
+                    if (Player.GetX() >= PointerPressedX - ((Player.Width + Player.HalfWidth) * GameView.GetGameObjectScale()))
                         MoveRight = false;
                 }
             }
