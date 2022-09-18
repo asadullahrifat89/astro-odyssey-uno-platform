@@ -230,7 +230,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
 
-            <!--  This shows rage images  -->
+            <!--  This shows in game images  -->
             <Grid
                 x:Name="InGameImagePanel"
                 Margin="10"

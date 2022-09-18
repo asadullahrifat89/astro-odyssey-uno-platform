@@ -100,8 +100,12 @@ namespace AstroOdyssey
 
         private async Task PerformSignup()
         {
+            RunProgressBar();
+
             if (await Signup() && await Authenticate())
             {
+                StopProgressBar();
+
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 await this.PlayUnLoadedTransition();
                 App.NavigateToPage(typeof(GameLoginPage));
@@ -110,8 +114,6 @@ namespace AstroOdyssey
 
         private async Task<bool> Signup()
         {
-            RunProgressBar();
-
             // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
@@ -134,15 +136,11 @@ namespace AstroOdyssey
             var gameProfile = _gameApiHelper.ParseResult<GameProfile>(response.Result);
             App.GameProfile = gameProfile;
 
-            StopProgressBar();
-
             return true;
         }
 
         private async Task<bool> Authenticate()
         {
-            RunProgressBar();
-
             // authenticate
             ServiceResponse response = await _gameApiHelper.Authenticate(
                 userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
@@ -167,8 +165,6 @@ namespace AstroOdyssey
             _cacheHelper.SetCachedPlayerCredentials(
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
-
-            StopProgressBar();
 
             return true;
         }

@@ -61,6 +61,8 @@ namespace AstroOdyssey
             }
             else
             {
+                RunProgressBar();
+
                 if (await SubmitScore())
                 {
                     MakeLeaderboardControlsVisible(); // if score submission was successful make leaderboard button visible
@@ -69,6 +71,8 @@ namespace AstroOdyssey
                 {
                     MakeLoginControlsVisible();
                 }
+
+                StopProgressBar();
             }
         }
 
@@ -136,8 +140,6 @@ namespace AstroOdyssey
 
         private async Task<bool> SubmitScore()
         {
-            RunProgressBar();
-
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -151,8 +153,6 @@ namespace AstroOdyssey
 
                 return false;
             }
-
-            StopProgressBar();
 
             return true;
         }

@@ -20,7 +20,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public async Task PreloadAssets(ProgressBar progressBar, TextBlock messageBlock)
+        public async void PreloadAssets(ProgressBar progressBar, TextBlock messageBlock)
         {
             progressBar.IsIndeterminate = false;
             progressBar.ShowPaused = false;
@@ -42,7 +42,6 @@ namespace AstroOdyssey
                     var array = value as dynamic;
 
                     maximum += array.Length;
-
                 }
                 else
                 {

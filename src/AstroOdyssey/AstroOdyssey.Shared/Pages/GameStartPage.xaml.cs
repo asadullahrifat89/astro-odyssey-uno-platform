@@ -46,6 +46,8 @@ namespace AstroOdyssey
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
+            RunProgressBar();
+
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
@@ -54,9 +56,11 @@ namespace AstroOdyssey
 
             await this.PlayLoadedTransition();
 
-            await CheckSession();
+            await CheckLoginSession();
 
-            await _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
+            StopProgressBar();
+
+            _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
         }
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -66,14 +70,18 @@ namespace AstroOdyssey
             await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
+
             App.EnterFullScreen(true);
         }
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameSignupPage));
+
             App.EnterFullScreen(true);
         }
 
@@ -102,7 +110,7 @@ namespace AstroOdyssey
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            
+
             PerformLogout();
 
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
@@ -141,7 +149,7 @@ namespace AstroOdyssey
                 App.CurrentCulture = language;
         }
 
-        private async Task CheckSession()
+        private async Task CheckLoginSession()
         {
             if (App.HasUserLoggedIn)
             {
@@ -210,8 +218,6 @@ namespace AstroOdyssey
 
         private async Task<bool> ValidateSession(Session session)
         {
-            RunProgressBar();
-
             ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -221,15 +227,11 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            StopProgressBar();
-
             return true;
         }
 
         private async Task<bool> GetGameProfile()
         {
-            RunProgressBar();
-
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -247,8 +249,6 @@ namespace AstroOdyssey
             // store game profile
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
-
-            StopProgressBar();
 
             return true;
         }

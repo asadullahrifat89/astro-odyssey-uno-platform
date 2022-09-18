@@ -70,16 +70,23 @@ namespace AstroOdyssey
 
             await this.PlayLoadedTransition();
 
+            RunProgressBar();
+
             // get game profile
-            await GetGameProfile();
+            if (!await GetGameProfile())
+                return;
 
             ShowUserName();
 
             // get game scores
-            await GetGameScores();
+            if (!await GetGameScores())
+                return;
 
             // get game profiles
-            await GetGameProfiles();
+            if (!await GetGameProfiles())
+                return;
+
+            StopProgressBar();
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -116,8 +123,6 @@ namespace AstroOdyssey
 
         private async Task<bool> GetGameProfile()
         {
-            RunProgressBar();
-
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -140,15 +145,11 @@ namespace AstroOdyssey
                 personalBestScore: App.GameProfile.PersonalBestScore,
                 lastGameScore: App.GameProfile.LastGameScore);
 
-            StopProgressBar();
-
             return true;
         }
 
         private async Task<bool> GetGameProfiles()
         {
-            RunProgressBar();
-
             GameProfiles.Clear();
 
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
@@ -189,15 +190,11 @@ namespace AstroOdyssey
                 }
             }
 
-            StopProgressBar();
-
             return true;
         }
 
         private async Task<bool> GetGameScores()
         {
-            RunProgressBar();
-
             GameScores.Clear();
 
             var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
@@ -233,10 +230,8 @@ namespace AstroOdyssey
                 if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
                 {
                     gameScore.Emoji = "👨‍🚀";
-                }               
+                }
             }
-
-            StopProgressBar();
 
             return true;
         }
