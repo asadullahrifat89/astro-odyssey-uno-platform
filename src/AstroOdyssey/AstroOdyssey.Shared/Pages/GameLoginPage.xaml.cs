@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AstroOdyssey
-{    
+{
     public sealed partial class GameLoginPage : Page
     {
         #region Fields
@@ -106,11 +106,6 @@ namespace AstroOdyssey
 
         private async Task PerformLogin()
         {
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-
             if (!await Authenticate())
                 return;
 
@@ -126,10 +121,6 @@ namespace AstroOdyssey
                     App.GameScoreSubmissionPending = false;
             }
 
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
-
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
             await this.PlayUnLoadedTransition();
             App.NavigateToPage(typeof(GameLeaderboardPage));
@@ -137,6 +128,8 @@ namespace AstroOdyssey
 
         private async Task<bool> Authenticate()
         {
+            RunProgressBar();
+
             // authenticate
             ServiceResponse response = await _gameApiHelper.Authenticate(
                 userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
@@ -162,11 +155,15 @@ namespace AstroOdyssey
                 userName: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
+            StopProgressBar();
+
             return true;
         }
 
         private async Task<bool> GetGameProfile()
         {
+            RunProgressBar();
+
             // get game profile
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
@@ -186,11 +183,15 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
+            StopProgressBar();
+
             return true;
         }
 
         private async Task<bool> SubmitScore()
         {
+            RunProgressBar();
+
             ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -205,11 +206,15 @@ namespace AstroOdyssey
                 return false;
             }
 
+            StopProgressBar();
+
             return true;
         }
 
         private async Task<bool> GenerateSession()
         {
+            RunProgressBar();
+
             ServiceResponse response = await _gameApiHelper.GenerateSession(
                 gameId: Constants.GAME_ID,
                 userId: App.GameProfile.User.UserId);
@@ -230,12 +235,29 @@ namespace AstroOdyssey
             var session = _gameApiHelper.ParseResult<Session>(response.Result);
             _cacheHelper.SetCachedSession(session);
 
+            StopProgressBar();
+
             return true;
         }
 
         private void EnableLoginButton()
         {
             GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
+        }
+
+        private void RunProgressBar()
+        {
+            this.RunProgressBar(
+                progressBar: _progressBar,
+                messageBlock: _errorContainer,
+                actionButtons: _actionButtons);
+        }
+
+        private void StopProgressBar()
+        {
+            this.StopProgressBar(
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
         }
 
         private void SetLocalization()

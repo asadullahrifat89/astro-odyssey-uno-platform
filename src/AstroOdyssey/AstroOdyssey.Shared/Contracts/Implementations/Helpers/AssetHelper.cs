@@ -20,7 +20,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public async void PreloadAssets(ProgressBar progressBar, TextBlock messageBlock)
+        public async Task PreloadAssets(ProgressBar progressBar, TextBlock messageBlock)
         {
             progressBar.IsIndeterminate = false;
             progressBar.ShowPaused = false;

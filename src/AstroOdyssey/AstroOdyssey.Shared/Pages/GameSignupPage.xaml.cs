@@ -100,29 +100,18 @@ namespace AstroOdyssey
 
         private async Task PerformSignup()
         {
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-
-            if (!await Signup())
-                return;
-
-            if (!await Authenticate())
-                return;
-
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
-
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            // redirect to login page
-            await this.PlayUnLoadedTransition();
-            App.NavigateToPage(typeof(GameLoginPage));
+            if (await Signup() && await Authenticate())
+            {
+                _audioHelper.PlaySound(SoundType.MENU_SELECT);
+                await this.PlayUnLoadedTransition();
+                App.NavigateToPage(typeof(GameLoginPage));
+            }
         }
 
         private async Task<bool> Signup()
         {
+            RunProgressBar();
+
             // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
@@ -145,11 +134,15 @@ namespace AstroOdyssey
             var gameProfile = _gameApiHelper.ParseResult<GameProfile>(response.Result);
             App.GameProfile = gameProfile;
 
+            StopProgressBar();
+
             return true;
         }
 
         private async Task<bool> Authenticate()
         {
+            RunProgressBar();
+
             // authenticate
             ServiceResponse response = await _gameApiHelper.Authenticate(
                 userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
@@ -175,6 +168,8 @@ namespace AstroOdyssey
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
+            StopProgressBar();
+
             return true;
         }
 
@@ -184,6 +179,21 @@ namespace AstroOdyssey
                 && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
                 && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
                 && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
+        }
+
+        private void RunProgressBar()
+        {
+            this.RunProgressBar(
+                progressBar: _progressBar,
+                messageBlock: _errorContainer,
+                actionButtons: _actionButtons);
+        }
+
+        private void StopProgressBar()
+        {
+            this.StopProgressBar(
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
         }
 
         private void SetLocalization()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,13 +20,7 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
-        private readonly IPaginationHelper _paginationHelper;
-
-        private int _pageIndex = 0;
-        private int _pageSize = 15;
-        private long _totalPageCount = 0;
-
-        public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
+        //private readonly IPaginationHelper _paginationHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -43,14 +38,23 @@ namespace AstroOdyssey
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
-            _paginationHelper = App.Container.GetService<IPaginationHelper>();
+            //_paginationHelper = App.Container.GetService<IPaginationHelper>();
 
-            LeaderboardList.ItemsSource = GameProfiles;
+            GameLeaderboardPage_GameProfiles.ItemsSource = GameProfiles;
+            GameLeaderboardPage_GameScores.ItemsSource = GameScores;
 
             _progressBar = GameLeaderboardPage_ProgressBar;
             _errorContainer = GameLeaderboardPage_ErrorText;
             _actionButtons = new[] { GameLeaderboardPage_PlayNowButton };
         }
+
+        #endregion
+
+        #region Properties
+
+        public ObservableCollection<GameProfile> GameProfiles { get; set; } = new ObservableCollection<GameProfile>();
+
+        public ObservableCollection<GameScore> GameScores { get; set; } = new ObservableCollection<GameScore>();
 
         #endregion
 
@@ -60,28 +64,23 @@ namespace AstroOdyssey
         {
             SetLocalization();
 
+            // by default all scoreboards are invisible
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Visible;
+
             await this.PlayLoadedTransition();
 
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-
             // get game profile
-            if (!await GetGameProfile())
-                return;
-
-            // get game profiles
-            if (!await GetGameProfiles())
-                return;
+            await GetGameProfile();
 
             ShowUserName();
 
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
+            // get game scores
+            await GetGameScores();
+
+            // get game profiles
+            await GetGameProfiles();
         }
-     
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
@@ -97,12 +96,28 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameStartPage));
         }
 
+        private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Visible;
+            await GetGameScores();
+        }
+
+        private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {
+            GameLeaderboardPage_GameScores.Visibility = Visibility.Collapsed;
+            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Visible;
+            await GetGameProfiles();
+        }
+
         #endregion
 
         #region Methods      
 
         private async Task<bool> GetGameProfile()
         {
+            RunProgressBar();
+
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -121,15 +136,22 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
-            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;          
+            SetGameScores(
+                personalBestScore: App.GameProfile.PersonalBestScore,
+                lastGameScore: App.GameProfile.LastGameScore);
+
+            StopProgressBar();
 
             return true;
         }
 
         private async Task<bool> GetGameProfiles()
         {
-            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: _pageIndex, pageSize: _pageSize);
+            RunProgressBar();
+
+            GameProfiles.Clear();
+
+            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
 
             if (!recordsResponse.IsSuccess)
             {
@@ -148,7 +170,7 @@ namespace AstroOdyssey
 
             if (count > 0)
             {
-                _totalPageCount = _paginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
+                //_totalPageCount = _paginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
 
                 var records = result.Records;
 
@@ -167,6 +189,55 @@ namespace AstroOdyssey
                 }
             }
 
+            StopProgressBar();
+
+            return true;
+        }
+
+        private async Task<bool> GetGameScores()
+        {
+            RunProgressBar();
+
+            GameScores.Clear();
+
+            var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
+
+            if (!recordsResponse.IsSuccess)
+            {
+                var error = recordsResponse.Errors.Errors;
+                this.ShowError(
+                    progressBar: _progressBar,
+                    messageBlock: _errorContainer,
+                    message: string.Join("\n", error),
+                    actionButtons: _actionButtons);
+
+                return false;
+            }
+
+            var result = recordsResponse.Result;
+            var count = recordsResponse.Result.Count;
+
+            if (count > 0)
+            {
+                var records = result.Records;
+
+                foreach (var record in records)
+                {
+                    GameScores.Add(record);
+                }
+
+                // king of the ring
+                GameScores[0].Emoji = "👑";
+
+                // indicate current player
+                if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
+                {
+                    gameScore.Emoji = "👨‍🚀";
+                }               
+            }
+
+            StopProgressBar();
+
             return true;
         }
 
@@ -184,12 +255,35 @@ namespace AstroOdyssey
             }
         }
 
+        private void SetGameScores(double personalBestScore, double lastGameScore)
+        {
+            PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + personalBestScore;
+            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + lastGameScore;
+        }
+
+        private void RunProgressBar()
+        {
+            this.RunProgressBar(
+                progressBar: _progressBar,
+                messageBlock: _errorContainer,
+                actionButtons: _actionButtons);
+        }
+
+        private void StopProgressBar()
+        {
+            this.StopProgressBar(
+                progressBar: _progressBar,
+                actionButtons: _actionButtons);
+        }
+
         private void SetLocalization()
         {
             _localizationHelper.SetLocalizedResource(GameLeaderboardPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameLeaderboardPage_PlayNowButton);
+            _localizationHelper.SetLocalizedResource(GameLeaderboardPage_DailyScoreboardToggle);
+            _localizationHelper.SetLocalizedResource(GameLeaderboardPage_AllTimeScoreboardToggle);
         }
 
-        #endregion
+        #endregion      
     }
 }
