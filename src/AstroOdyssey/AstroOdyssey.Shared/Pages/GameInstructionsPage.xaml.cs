@@ -33,7 +33,6 @@ namespace AstroOdyssey
         {
             SetLocalization();
             await this.PlayLoadedTransition();
-            InstructionDetailsStack.AnimateChildElements();
         }
 
         public async void GameInstructionsPage_PlayButton_Click(object sender, RoutedEventArgs e)

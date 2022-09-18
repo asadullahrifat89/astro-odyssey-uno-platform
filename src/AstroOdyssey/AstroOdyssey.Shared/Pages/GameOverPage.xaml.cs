@@ -52,8 +52,6 @@ namespace AstroOdyssey
 
             await this.PlayLoadedTransition();
 
-            ScoreDetailsStack.AnimateChildElements();
-
             // if user has not logged in or session has expired
             if (!App.HasUserLoggedIn || _cacheHelper.HasSessionExpired())
             {
