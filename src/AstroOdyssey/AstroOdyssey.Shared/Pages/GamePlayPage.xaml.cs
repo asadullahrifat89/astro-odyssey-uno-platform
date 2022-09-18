@@ -1319,12 +1319,12 @@ namespace AstroOdyssey
                 //TODO: stop movement on pointer x reach
                 if (MoveLeft)
                 {
-                    if (Player.GetX() <= PointerPressedX - Player.HalfWidth)
+                    if (Player.GetX() <= PointerPressedX + Player.HalfWidth)
                         MoveLeft = false;
                 }
                 else if (MoveRight)
                 {
-                    if (Player.GetX() >= PointerPressedX - Player.Width)
+                    if (Player.GetX() + Player.Width + 25 >= PointerPressedX)
                         MoveRight = false;
                 }
             }
