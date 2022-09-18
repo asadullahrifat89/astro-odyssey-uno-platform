@@ -75,11 +75,11 @@ namespace AstroOdyssey
 
             ShowUserName();
 
-            // get game profiles
-            await GetGameProfiles();
-
             // get game scores
             await GetGameScores();
+
+            // get game profiles
+            await GetGameProfiles();
         }
 
         private async void PlayAgainButton_Click(object sender, RoutedEventArgs e)
@@ -136,13 +136,14 @@ namespace AstroOdyssey
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
 
-            PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + App.GameProfile.PersonalBestScore;
-            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + App.GameProfile.LastGameScore;
+            SetGameScores(
+                personalBestScore: App.GameProfile.PersonalBestScore,
+                lastGameScore: App.GameProfile.LastGameScore);
 
             StopProgressBar();
 
             return true;
-        }       
+        }
 
         private async Task<bool> GetGameProfiles()
         {
@@ -232,7 +233,7 @@ namespace AstroOdyssey
                 if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
                 {
                     gameScore.Emoji = "👨‍🚀";
-                }
+                }               
             }
 
             StopProgressBar();
@@ -252,7 +253,13 @@ namespace AstroOdyssey
             {
                 PlayerNameHolder.Visibility = Visibility.Collapsed;
             }
-        }      
+        }
+
+        private void SetGameScores(double personalBestScore, double lastGameScore)
+        {
+            PersonalBestScoreText.Text = _localizationHelper.GetLocalizedResource("PERSONAL_BEST_SCORE") + ": " + personalBestScore;
+            ScoreText.Text = _localizationHelper.GetLocalizedResource("LAST_GAME_SCORE") + ": " + lastGameScore;
+        }
 
         private void RunProgressBar()
         {
