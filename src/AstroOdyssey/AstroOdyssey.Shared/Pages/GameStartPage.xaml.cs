@@ -49,7 +49,7 @@ namespace AstroOdyssey
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
-            CheckCachedLocalization();
+            CheckLocalizationCache();
             SetLocalization();
 
             await this.PlayLoadedTransition();
@@ -80,25 +80,31 @@ namespace AstroOdyssey
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameLoginPage));
+
             App.EnterFullScreen(true);
         }
 
         private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameLeaderboardPage));
+
             App.EnterFullScreen(true);
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            // delete session
+            
             PerformLogout();
+
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
@@ -108,6 +114,7 @@ namespace AstroOdyssey
         private void PerformLogout()
         {
             _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+
             App.AuthToken = null;
             App.GameProfile = null;
             App.PlayerScore = null;
@@ -128,7 +135,7 @@ namespace AstroOdyssey
 
         #region Methods
 
-        private void CheckCachedLocalization()
+        private void CheckLocalizationCache()
         {
             if (_cacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
                 App.CurrentCulture = language;
