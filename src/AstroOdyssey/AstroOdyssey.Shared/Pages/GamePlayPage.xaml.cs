@@ -1295,7 +1295,7 @@ namespace AstroOdyssey
         private void StartPlayerMovement(PointerRoutedEventArgs e)
         {
             var point = e.GetCurrentPoint(GameView);
-          
+
             PointerPressedX = point.Position.X;
 
             if ((PointerPressedX - Player.HalfWidth) < Player.GetX())  // move left
@@ -1317,7 +1317,7 @@ namespace AstroOdyssey
                 //TODO: stop movement on pointer x reach
                 if (MoveLeft)
                 {
-                    if (Player.GetX() <= PointerPressedX + Player.HalfWidth * GameView.GetGameObjectScale())
+                    if (Player.GetX() <= PointerPressedX + (Player.HalfWidth * GameView.GetGameObjectScale()))
                         MoveLeft = false;
                 }
                 else if (MoveRight)

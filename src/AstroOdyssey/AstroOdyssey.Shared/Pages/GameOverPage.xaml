@@ -175,45 +175,45 @@
                     IsTabStop="False"
                     Tag="GameOverPage_PlayAgainButton.Content" />
 
-                <!--  Login button  -->
-                <Button
-                    x:Name="GameLoginPage_LoginButton"
-                    x:Uid="GameLoginPage_LoginButton"
-                    Height="50"
-                    Margin="30,5,30,5"
-                    HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    Click="GameLoginPage_LoginButton_Click"
-                    Content="Login"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    Foreground="White"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
-                    Visibility="Collapsed" />
+                <StackPanel Margin="30,5,30,30">
+                    <!--  Login button  -->
+                    <Button
+                        x:Name="GameLoginPage_LoginButton"
+                        x:Uid="GameLoginPage_LoginButton"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        Background="Goldenrod"
+                        BorderBrush="White"
+                        BorderThickness="3"
+                        Click="GameLoginPage_LoginButton_Click"
+                        Content="Login"
+                        CornerRadius="50"
+                        FontSize="24"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False"
+                        Visibility="Collapsed" />
 
-                <!--  Leaderboard button  -->
-                <Button
-                    x:Name="GameOverPage_LeaderboardButton"
-                    x:Uid="GameOverPage_LeaderboardButton"
-                    Height="50"
-                    Margin="30,5,30,30"
-                    HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    Click="GameOverPage_LeaderboardButton_Click"
-                    Content="Leaderboard"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    Foreground="White"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
-                    Visibility="Collapsed" />
+                    <!--  Leaderboard button  -->
+                    <Button
+                        x:Name="GameOverPage_LeaderboardButton"
+                        x:Uid="GameOverPage_LeaderboardButton"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        Background="Goldenrod"
+                        BorderBrush="White"
+                        BorderThickness="3"
+                        Click="GameOverPage_LeaderboardButton_Click"
+                        Content="Leaderboard"
+                        CornerRadius="50"
+                        FontSize="24"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False"
+                        Visibility="Collapsed" />
+                </StackPanel>
 
                 <!--  Error text  -->
                 <TextBlock
