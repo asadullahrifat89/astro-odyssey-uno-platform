@@ -60,6 +60,8 @@ namespace AstroOdyssey
 
             StopProgressBar();
 
+            await Task.Delay(500);
+
             _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
         }
 
@@ -70,6 +72,8 @@ namespace AstroOdyssey
             await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
+
+            await Task.Delay(1000);
 
             App.EnterFullScreen(true);
         }
@@ -82,6 +86,8 @@ namespace AstroOdyssey
 
             App.NavigateToPage(typeof(GameSignupPage));
 
+            await Task.Delay(1000);
+
             App.EnterFullScreen(true);
         }
 
@@ -93,6 +99,8 @@ namespace AstroOdyssey
 
             App.NavigateToPage(typeof(GameLoginPage));
 
+            await Task.Delay(1000);
+
             App.EnterFullScreen(true);
         }
 
@@ -103,6 +111,8 @@ namespace AstroOdyssey
             await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(GameLeaderboardPage));
+
+            await Task.Delay(1000);
 
             App.EnterFullScreen(true);
         }

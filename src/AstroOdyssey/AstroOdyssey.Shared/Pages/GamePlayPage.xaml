@@ -270,6 +270,7 @@
             Background="Transparent"
             KeyDown="InputView_KeyDown"
             KeyUp="InputView_KeyUp"
+            PointerMoved="InputView_PointerMoved"
             PointerPressed="InputView_PointerPressed"
             PointerReleased="InputView_PointerReleased" />
 

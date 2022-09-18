@@ -144,9 +144,142 @@ namespace AstroOdyssey
 
         private double BossTotalHealth { get; set; }
 
+        public bool IsPointerPressed { get; set; }
+
+        public double PointerPressedX { get; set; }
+
         #endregion
 
         #region Events
+
+        #region Input       
+
+        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left:
+                    {
+                        MoveLeft = true;
+                        MoveRight = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Right:
+                    {
+                        MoveRight = true;
+                        MoveLeft = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Windows.System.VirtualKey.Left:
+                    {
+                        MoveLeft = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Right:
+                    {
+                        MoveRight = false;
+                    }
+                    break;
+                case Windows.System.VirtualKey.Escape:
+                    {
+                        if (IsGamePaused)
+                            ResumeGame();
+                        else
+                            PauseGame();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsGameRunning)
+            {
+                IsPointerPressed = true;
+
+                StartPlayerMovement(e);
+            }
+        }
+
+        private void InputView_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsGameRunning && IsPointerPressed)
+            {
+                StartPlayerMovement(e);
+            }
+        }
+
+        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsGameQuitting)
+            {
+                QuitGame();
+                return;
+            }
+
+            if (IsGameRunning)
+            {
+                if (IsGamePaused)
+                    ResumeGame();
+
+                if (IsPointerPressed)
+                    IsPointerPressed = false;
+
+                if (MoveLeft)
+                    MoveLeft = false;
+
+                if (MoveRight)
+                    MoveRight = false;
+            }
+            else
+            {
+                InputView.Focus(FocusState.Programmatic);
+                StartGame();
+                FiringProjectiles = true;
+            }
+        }
+
+        #endregion        
+
+        #region Game
+
+        private void PauseGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsGamePaused)
+                ResumeGame();
+            else
+                PauseGame();
+        }
+
+        private void QuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsGameQuitting)
+            {
+                IsGameQuitting = false;
+                PauseGame();
+            }
+            else
+            {
+                _audioHelper.PlaySound(SoundType.MENU_SELECT);
+                IsGameQuitting = true;
+                ShowInGameText($"🛸\n{_localizationHelper.GetLocalizedResource("QUIT_GAME")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
+
+                InputView.Focus(FocusState.Programmatic);
+            }
+        }
+
+        #endregion        
 
         #region Window
 
@@ -233,133 +366,6 @@ namespace AstroOdyssey
             var scale = GameView.GetGameObjectScale();
             Console.WriteLine($"View Scale: {scale}");
 #endif
-        }
-
-        #endregion
-
-        #region Game
-
-        private void PauseGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsGamePaused)
-                ResumeGame();
-            else
-                PauseGame();
-        }
-
-        private void QuitGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (IsGameQuitting)
-            {
-                IsGameQuitting = false;
-                PauseGame();
-            }
-            else
-            {
-                _audioHelper.PlaySound(SoundType.MENU_SELECT);
-                IsGameQuitting = true;
-                ShowInGameText($"🛸\n{_localizationHelper.GetLocalizedResource("QUIT_GAME")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
-
-                InputView.Focus(FocusState.Programmatic);
-            }
-        }
-
-        #endregion
-
-        #region Input       
-
-        private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left:
-                    {
-                        MoveLeft = true;
-                        MoveRight = false;
-                    }
-                    break;
-                case Windows.System.VirtualKey.Right:
-                    {
-                        MoveRight = true;
-                        MoveLeft = false;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void InputView_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Windows.System.VirtualKey.Left:
-                    {
-                        MoveLeft = false;
-                    }
-                    break;
-                case Windows.System.VirtualKey.Right:
-                    {
-                        MoveRight = false;
-                    }
-                    break;
-                case Windows.System.VirtualKey.Escape:
-                    {
-                        if (IsGamePaused)
-                            ResumeGame();
-                        else
-                            PauseGame();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            if (IsGameRunning)
-            {
-                var point = e.GetCurrentPoint(GameView);
-
-                if (point.Position.X < _windowWidth / 2)  // move left
-                {
-                    MoveLeft = true;
-                    MoveRight = false;
-                }
-                else if (point.Position.X > _windowWidth / 2) // move right
-                {
-                    MoveRight = true;
-                    MoveLeft = false;
-                }
-            }
-        }
-
-        private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            if (IsGameQuitting)
-            {
-                QuitGame();
-                return;
-            }
-
-            if (IsGameRunning)
-            {
-                if (IsGamePaused)
-                    ResumeGame();
-
-                if (MoveLeft)
-                    MoveLeft = false;
-
-                if (MoveRight)
-                    MoveRight = false;
-            }
-            else
-            {
-                InputView.Focus(FocusState.Programmatic);
-                StartGame();
-                FiringProjectiles = true;
-            }
         }
 
         #endregion
@@ -658,6 +664,8 @@ namespace AstroOdyssey
                                 moveRight: MoveRight);
 
                             PointerX = pointerX;
+
+                            StopPlayerMovement();
                         }
                         else
                         {
@@ -1282,6 +1290,44 @@ namespace AstroOdyssey
         private void DamageRecoveryCoolDown()
         {
             _playerFactory.DamageRecoveryCoolDown(Player);
+        }
+
+        private void StartPlayerMovement(PointerRoutedEventArgs e)
+        {
+            var point = e.GetCurrentPoint(GameView);
+
+            //TODO: Store pointer x
+
+            PointerPressedX = point.Position.X;
+
+            if (PointerPressedX + Player.HalfWidth < Player.GetX())  // move left
+            {
+                MoveLeft = true;
+                MoveRight = false;
+            }
+            else if (PointerPressedX - Player.HalfWidth > Player.GetX()) // move right
+            {
+                MoveRight = true;
+                MoveLeft = false;
+            }
+        }
+
+        private void StopPlayerMovement()
+        {
+            if (IsPointerPressed)
+            {
+                //TODO: stop movement on pointer x reach
+                if (MoveLeft)
+                {
+                    if (Player.GetX() <= PointerPressedX - Player.HalfWidth)
+                        MoveLeft = false;
+                }
+                else if (MoveRight)
+                {
+                    if (Player.GetX() >= PointerPressedX - Player.Width)
+                        MoveRight = false;
+                }
+            }
         }
 
         #endregion
