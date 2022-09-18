@@ -9,9 +9,9 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
-using static AstroOdyssey.Constants;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -1322,7 +1322,7 @@ namespace AstroOdyssey
                 }
                 else if (MoveRight)
                 {
-                    if (Player.GetX() >= PointerPressedX - ((Player.Width + Player.HalfWidth) * GameView.GetGameObjectScale()))
+                    if (Player.GetX() >= PointerPressedX - (Player.Width + Player.HalfWidth * GameView.GetGameObjectScale()))
                         MoveRight = false;
                 }
             }
