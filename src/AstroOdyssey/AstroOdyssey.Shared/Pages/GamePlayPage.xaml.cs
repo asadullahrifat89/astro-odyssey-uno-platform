@@ -1295,28 +1295,15 @@ namespace AstroOdyssey
         private void StartPlayerMovement(PointerRoutedEventArgs e)
         {
             var point = e.GetCurrentPoint(GameView);
-
-            //TODO: Store pointer x
-
-            //if (point.Position.X < _windowWidth / 2)  // move left
-            //{
-            //    MoveLeft = true;
-            //    MoveRight = false;
-            //}
-            //else if (point.Position.X > _windowWidth / 2) // move right
-            //{
-            //    MoveRight = true;
-            //    MoveLeft = false;
-            //}
-
+          
             PointerPressedX = point.Position.X;
 
-            if (PointerPressedX + Player.HalfWidth < Player.GetX())  // move left
+            if ((PointerPressedX - Player.HalfWidth) < Player.GetX())  // move left
             {
                 MoveLeft = true;
                 MoveRight = false;
             }
-            else if (PointerPressedX - Player.HalfWidth > Player.GetX()) // move right
+            else if ((PointerPressedX + Player.HalfWidth) > Player.GetX()) // move right
             {
                 MoveRight = true;
                 MoveLeft = false;
@@ -1330,12 +1317,12 @@ namespace AstroOdyssey
                 //TODO: stop movement on pointer x reach
                 if (MoveLeft)
                 {
-                    if (Player.GetX() <= PointerPressedX + Player.HalfWidth)
+                    if (Player.GetX() <= PointerPressedX + Player.HalfWidth * GameView.GetGameObjectScale())
                         MoveLeft = false;
                 }
                 else if (MoveRight)
                 {
-                    if (Player.GetX() + Player.Width + 25 >= PointerPressedX)
+                    if (Player.GetX() >= PointerPressedX - ((Player.Width + Player.HalfWidth) * GameView.GetGameObjectScale()))
                         MoveRight = false;
                 }
             }
