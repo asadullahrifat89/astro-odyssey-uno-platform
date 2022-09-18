@@ -1298,12 +1298,22 @@ namespace AstroOdyssey
 
             PointerPressedX = point.Position.X;
 
-            if ((PointerPressedX - Player.HalfWidth) < Player.GetX())  // move left
+            /* Left corner
+             * ->x|  w  |
+             *    |  w  |
+             */
+
+            /* Right corner
+             * |  w  |x<-
+             * |  w  |
+             */
+
+            if (PointerPressedX < Player.GetX())  // move left
             {
                 MoveLeft = true;
                 MoveRight = false;
             }
-            else if ((PointerPressedX + Player.HalfWidth) > Player.GetX()) // move right
+            else if (PointerPressedX > Player.GetX() + Player.Width) // move right
             {
                 MoveRight = true;
                 MoveLeft = false;
@@ -1314,14 +1324,24 @@ namespace AstroOdyssey
         {
             if (IsPointerPressed)
             {
+                /* Left corner with half width
+                * ->x...|  w  |
+                *       |  w  |
+                */
+
+                /* Right corner with half width
+                * |  w  |...x<-
+                * |  w  |
+                */
+
                 if (MoveLeft)
                 {
-                    if (Player.GetX() <= (PointerPressedX + Player.HalfWidth))
+                    if (Player.GetX() - Player.HalfWidth <= PointerPressedX)
                         MoveLeft = false;
                 }
                 else if (MoveRight)
                 {
-                    if (Player.GetX() >= (PointerPressedX - Player.Width - Player.HalfWidth))
+                    if (Player.GetX() + Player.Width + Player.HalfWidth >= PointerPressedX)
                         MoveRight = false;
                 }
             }
