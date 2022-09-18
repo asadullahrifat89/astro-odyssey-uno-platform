@@ -46,17 +46,21 @@ namespace AstroOdyssey
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
+            RunProgressBar();
+
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
-            CheckCachedLocalization();
+            CheckLocalizationCache();
             SetLocalization();
 
             await this.PlayLoadedTransition();
 
-            await CheckSession();
+            await CheckLoginSession();
 
-            await _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
+            StopProgressBar();
+
+            _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
         }
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -66,30 +70,40 @@ namespace AstroOdyssey
             await this.PlayUnLoadedTransition();
 
             App.NavigateToPage(typeof(ShipSelectionPage));
+
             App.EnterFullScreen(true);
         }
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameSignupPage));
+
             App.EnterFullScreen(true);
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameLoginPage));
+
             App.EnterFullScreen(true);
         }
 
         private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
             await this.PlayUnLoadedTransition();
+
             App.NavigateToPage(typeof(GameLeaderboardPage));
+
             App.EnterFullScreen(true);
         }
 
@@ -97,8 +111,8 @@ namespace AstroOdyssey
         {
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
 
-            // delete session
             PerformLogout();
+
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
@@ -108,6 +122,7 @@ namespace AstroOdyssey
         private void PerformLogout()
         {
             _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+
             App.AuthToken = null;
             App.GameProfile = null;
             App.PlayerScore = null;
@@ -128,13 +143,13 @@ namespace AstroOdyssey
 
         #region Methods
 
-        private void CheckCachedLocalization()
+        private void CheckLocalizationCache()
         {
             if (_cacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
                 App.CurrentCulture = language;
         }
 
-        private async Task CheckSession()
+        private async Task CheckLoginSession()
         {
             if (App.HasUserLoggedIn)
             {
@@ -203,8 +218,6 @@ namespace AstroOdyssey
 
         private async Task<bool> ValidateSession(Session session)
         {
-            RunProgressBar();
-
             ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -214,15 +227,11 @@ namespace AstroOdyssey
             var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
-            StopProgressBar();
-
             return true;
         }
 
         private async Task<bool> GetGameProfile()
         {
-            RunProgressBar();
-
             var recordResponse = await _gameApiHelper.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
@@ -240,8 +249,6 @@ namespace AstroOdyssey
             // store game profile
             var gameProfile = recordResponse.Result;
             App.GameProfile = gameProfile;
-
-            StopProgressBar();
 
             return true;
         }

@@ -41,36 +41,46 @@ namespace AstroOdyssey
         /// <returns></returns>
         public double GetGameObjectScale()
         {
-            if (Width <= 300)
-                return 0.70;
-            if (Width <= 500)
-                return 0.75;
-            if (Width <= 700)
-                return 0.85;
-            if (Width <= 900)
-                return 0.90;
-            if (Width <= 1000)
-                return 1;
-            if (Width <= 1400)
-                return 1.1;
-            if (Width <= 2000)
-                return 1.2;
-
-            return 1;
+            switch (Width)
+            {
+                case <= 300:
+                    return 0.70;
+                case <= 500:
+                    return 0.75;
+                case <= 700:
+                    return 0.85;
+                case <= 900:
+                    return 0.90;
+                case <= 1000:
+                    return 1;
+                case <= 1400:
+                    return 1.1;
+                case <= 2000:
+                    return 1.2;
+                default:
+                    return 1;
+            }
         }
 
+        /// <summary>
+        /// Get frame time buffer according to game view width.
+        /// </summary>
+        /// <returns></returns>
         public double GetFrameTimeBuffer()
         {
-            if (Width <= 400)
-                return 5;
-            if (Width <= 500)
-                return 4;
-            if (Width <= 700)
-                return 3;
-            if (Width <= 900)
-                return 2;
-
-            return 0;
+            switch (Width)
+            {
+                case <= 400:
+                    return 4;
+                case <= 500:
+                    return 3;
+                case <= 700:
+                    return 2;
+                case <= 900:
+                    return 1;
+                default:
+                    return 0;
+            }
         }
 
         public void SetSize(double height, double width)

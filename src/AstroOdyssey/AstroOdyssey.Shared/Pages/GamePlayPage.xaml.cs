@@ -1236,8 +1236,8 @@ namespace AstroOdyssey
             {
                 case ShipClass.DEFENDER:
                     {
-                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Goldenrod);
-                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Yellow);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
                     }
                     break;
                 case ShipClass.BERSERKER:

@@ -77,6 +77,7 @@ namespace AstroOdyssey
             string message,
             params Button[] actionButtons)
         {
+            progressBar.Tag = false;
             progressBar.ShowPaused = true;
             progressBar.ShowError = true;
 
@@ -97,6 +98,11 @@ namespace AstroOdyssey
             string message = null,
             params Button[] actionButtons)
         {
+            if (progressBar.Tag is bool flag && flag)
+                return;
+
+            progressBar.Tag = true;
+
             progressBar.IsIndeterminate = true;
             progressBar.ShowError = false;
             progressBar.ShowPaused = false;
@@ -105,9 +111,12 @@ namespace AstroOdyssey
             messageBlock.Text = message;
             messageBlock.Visibility = Visibility.Collapsed;
 
-            foreach (var actionButton in actionButtons)
+            if (actionButtons.Any(x => x.IsEnabled))
             {
-                DisableActionButton(actionButton);
+                foreach (var actionButton in actionButtons)
+                {
+                    DisableActionButton(actionButton);
+                }
             }
         }
 
@@ -116,6 +125,7 @@ namespace AstroOdyssey
             ProgressBar progressBar,
             params Button[] actionButtons)
         {
+            progressBar.Tag = false;
             progressBar.ShowError = false;
             progressBar.ShowPaused = true;
 

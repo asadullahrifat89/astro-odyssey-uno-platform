@@ -5,6 +5,6 @@ namespace AstroOdyssey
 {
     public interface IAssetHelper
     {
-        Task PreloadAssets(ProgressBar progressBar, TextBlock messageBlock);
+        void PreloadAssets(ProgressBar progressBar, TextBlock messageBlock);
     }
 }

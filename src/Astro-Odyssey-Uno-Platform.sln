@@ -7,6 +7,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AstroOdyssey.Shared", "Astr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroOdyssey.Wasm", "AstroOdyssey\AstroOdyssey.Wasm\AstroOdyssey.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{6F90D4A1-76C8-4892-B84F-A2E12483515C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC} = {6F90D4A1-76C8-4892-B84F-A2E12483515C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {633360BA-A180-42B0-8CAD-A99A4CB7FF2A}
