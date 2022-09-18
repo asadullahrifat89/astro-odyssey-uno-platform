@@ -1298,6 +1298,17 @@ namespace AstroOdyssey
 
             //TODO: Store pointer x
 
+            //if (point.Position.X < _windowWidth / 2)  // move left
+            //{
+            //    MoveLeft = true;
+            //    MoveRight = false;
+            //}
+            //else if (point.Position.X > _windowWidth / 2) // move right
+            //{
+            //    MoveRight = true;
+            //    MoveLeft = false;
+            //}
+
             PointerPressedX = point.Position.X;
 
             if (PointerPressedX + Player.HalfWidth < Player.GetX())  // move left
