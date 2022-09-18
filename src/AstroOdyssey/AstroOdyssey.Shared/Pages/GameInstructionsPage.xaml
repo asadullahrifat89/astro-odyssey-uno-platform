@@ -67,7 +67,7 @@
                     <StackPanel x:Name="InstructionDetailsStack" HorizontalAlignment="Left">
 
                         <!--  Control  -->
-                        <StackPanel Margin="5,10,5,5" Opacity="0">
+                        <StackPanel Margin="5,10,5,5">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -95,7 +95,7 @@
                         </StackPanel>
 
                         <!--  Enemy ships 'n meteors  -->
-                        <StackPanel Margin="5,10,5,5" Opacity="0">
+                        <StackPanel Margin="5,10,5,5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
@@ -126,7 +126,7 @@
                         </StackPanel>
 
                         <!--  Bosses  -->
-                        <StackPanel Margin="5" Opacity="0">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
@@ -152,7 +152,7 @@
                         </StackPanel>
 
                         <!--  Healths  -->
-                        <StackPanel Margin="5" Opacity="0">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
@@ -178,7 +178,7 @@
                         </StackPanel>
 
                         <!--  Powerups  -->
-                        <StackPanel Margin="5" Opacity="0">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
@@ -204,7 +204,7 @@
                         </StackPanel>
 
                         <!--  Collectibles  -->
-                        <StackPanel Margin="5" Opacity="0">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
