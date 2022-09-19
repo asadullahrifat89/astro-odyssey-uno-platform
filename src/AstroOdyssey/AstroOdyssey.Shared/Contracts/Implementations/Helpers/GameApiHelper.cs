@@ -129,7 +129,7 @@ namespace AstroOdyssey
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.OK }
                 : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
-        } 
+        }
 
         #endregion
 
@@ -191,14 +191,14 @@ namespace AstroOdyssey
                  {
                      PageIndex = pageIndex,
                      PageSize = pageSize,
-                     ScoreDay = new DateTime(year: DateTime.UtcNow.Year, month: DateTime.UtcNow.Month, day: DateTime.UtcNow.Day),
+                     ScoreDay = DateTime.Today.Date,
                      GameId = Constants.GAME_ID,
                  });
 
             return response.StatusCode == HttpStatusCode.OK
                 ? response.SuccessResponse
                 : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
-        } 
+        }
 
         #endregion
 
