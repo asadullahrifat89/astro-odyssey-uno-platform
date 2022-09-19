@@ -54,7 +54,7 @@ namespace AstroOdyssey
                 {
                     GenerateHealth();
                     _healthSpawnCounter = _healthSpawnAfter;
-                    _healthSpawnAfter = _random.Next(900, 1001);
+                    // _healthSpawnAfter = _random.Next(900, 1001);
                 }
             }
         }
@@ -91,7 +91,8 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
-            var scale = _gameEnvironment.GetGameObjectScale();
+            _healthSpawnAfter -= 50;
+            var scale = _gameEnvironment.GetGameObjectScale();            
             _healthSpeed += (1 * scale);
         }
 
