@@ -24,17 +24,18 @@ namespace AstroOdyssey
         private Image _healthImage;
         private Image _bossAppearedImage;
         private Image _bossClearedImage;
-
+#if DEBUG
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
         private float _lastFpsTime = 0;
-        private long _frameStartTime;
-        private long _frameEndTime;
 
         private int _frameStatUpdateSpawnCounter;
         private int _frameStatUpdateAfter = 5;
-        private double _frameDuration;
 
+        private long _frameStartTime;
+        private long _frameEndTime;
+        private double _frameDuration;
+#endif
         private int _showInGameTextSpawnCounter = 110;
         private int _showInGameTextAfter = 110;
 
@@ -152,7 +153,7 @@ namespace AstroOdyssey
 
         #region Events
 
-        #region Input
+        #region Pointer & Keyboard
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -252,7 +253,7 @@ namespace AstroOdyssey
 
         #endregion        
 
-        #region Game
+        #region Pause & Quit
 
         private void PauseGameButton_Click(object sender, RoutedEventArgs e)
         {
@@ -281,7 +282,7 @@ namespace AstroOdyssey
 
         #endregion        
 
-        #region Page
+        #region Page Load, Unload, Size Change
 
         /// <summary>
         /// Invoked when the page is leaded.
@@ -391,6 +392,8 @@ namespace AstroOdyssey
 
         #region Game
 
+        #region Start, Run, Stop, Pause, Resume, Over, & Quit
+
         /// <summary>
         /// Starts the game.
         /// </summary>
@@ -436,106 +439,26 @@ namespace AstroOdyssey
         /// <returns></returns>
         private async Task RunGame()
         {
+#if DEBUG
             Stopwatch = Stopwatch.StartNew();
-
+#endif
             GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_frameTime));
 
             while (await GameFrameTimer.WaitForNextTickAsync())
             {
+#if DEBUG
                 _frameStartTime = Stopwatch.ElapsedMilliseconds;
-
-                RenderGameFrame();
+#endif
+                UpdateFrame();
 #if DEBUG
                 CalculateFPS();
-#endif
-                _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
+                _frameEndTime = Stopwatch.ElapsedMilliseconds;
+#endif
                 GetFrameDuration();
 #if DEBUG
                 SetAnalytics();
 #endif
-            }
-        }
-
-        /// <summary>
-        /// Add stars to game environemnt randomly.
-        /// </summary>
-        private void SetStars()
-        {
-            Random random = new Random();
-
-            for (int i = 0; i < 20; i++)
-            {
-                var star = new CelestialObject();
-
-                star.SetAttributes(speed: 0.1d, scale: StarView.GetGameObjectScale());
-
-                var top = random.Next(10, (int)StarView.Height - 10);
-                var left = random.Next(10, (int)StarView.Width - 10);
-
-                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
-            }
-        }
-
-        /// <summary>
-        /// Stops the game.
-        /// </summary>
-        private void StopGame()
-        {
-            IsGameRunning = false;
-
-            if (StarView.IsWarpingThroughSpace)
-                _celestialObjectFactory.StopSpaceWarp();
-
-            GameFrameTimer.Dispose();
-
-            _audioHelper.StopSound();
-        }
-
-        /// <summary>
-        /// Reset all factories to default value.
-        /// </summary>
-        private void ResetFactories()
-        {
-            _celestialObjectFactory.Reset();
-            _meteorFactory.Reset();
-            _enemyFactory.Reset();
-            _healthFactory.Reset();
-            _powerUpFactory.Reset();
-            _collectibleFactory.Reset();
-        }
-
-        /// <summary>
-        /// Sets the game and star view sizes according to current window size.
-        /// </summary>
-        private void AdjustView()
-        {
-            GameView.SetSize(_windowHeight, _windowWidth);
-            StarView.SetSize(_windowHeight, _windowWidth);
-            PlanetView.SetSize(_windowHeight, _windowWidth);
-
-            _frameTime = DEFAULT_FRAME_TIME + GameView.GetFrameTimeBuffer();
-
-#if DEBUG
-            Console.WriteLine($"Frame Time : {_frameTime}");
-#endif
-            if (IsGameRunning)
-            {
-                PauseGame();
-
-                PointerX = _windowWidth / 2;
-
-                Player.SetX(PointerX - Player.HalfWidth);
-
-                SetPlayerY(); // windows size changed so reset y position
-
-                // resize player size
-                var scale = GameView.GetGameObjectScale();
-                Player.ReAdjustScale(scale: scale);
-#if DEBUG
-                Console.WriteLine($"View Scale: {scale}");
-#endif
-                return;
             }
         }
 
@@ -587,13 +510,65 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Renders a frame in the game.
+        /// Stops the game.
         /// </summary>
-        private void RenderGameFrame()
+        private void StopGame()
+        {
+            IsGameRunning = false;
+
+            if (StarView.IsWarpingThroughSpace)
+                _celestialObjectFactory.StopSpaceWarp();
+
+            GameFrameTimer.Dispose();
+
+            _audioHelper.StopSound();
+        }
+
+        /// <summary>
+        /// Check if game if over.
+        /// </summary>
+        private void GameOver()
+        {
+            if (Player.HasNoHealth)
+            {
+                PlayerHealthBar.Width = 0;
+
+                QuitGame();
+            }
+        }
+
+        /// <summary>
+        /// Quits the current game.
+        /// </summary>
+        private async void QuitGame()
+        {
+            StopGame();
+
+            _audioHelper.PlaySound(SoundType.GAME_OVER);
+
+            App.PlayerScore = PlayerScore;
+
+            await this.PlayUnLoadedTransition();
+
+            App.NavigateToPage(typeof(GameOverPage));
+        }
+
+        #endregion
+
+        #region Game Objects Update
+
+        /// <summary>
+        /// Updates a frame in the game.
+        /// </summary>
+        private void UpdateFrame()
         {
             GameOver();
 
-            UpdateGameObjects();
+            UpdateGameViewObjects();
+
+            UpdateStarViewObjects();
+
+            UpdatePlanetViewObjects();
 
             SpawnGameObjects();
 
@@ -602,16 +577,6 @@ namespace AstroOdyssey
             HandleInGameImagePanel();
 
             DamageRecoveryCoolDown();
-        }
-
-        /// <summary>
-        /// Updates meteors, enemies, projectiles in the game view. Advances game objects in the frame.
-        /// </summary>
-        private void UpdateGameObjects()
-        {
-            UpdateGameViewObjects();
-            UpdateStarViewObjects();
-            UpdatePlanetViewObjects();
         }
 
         /// <summary>
@@ -624,7 +589,7 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(planetObjects, gameObject =>
             {
-                UpdateGameObject(gameObject);
+                UpdateCelestialObject(gameObject);
 
             }).IsCompleted)
             {
@@ -643,7 +608,7 @@ namespace AstroOdyssey
             // update game view objects
             if (Parallel.ForEach(starObjects, gameObject =>
             {
-                UpdateGameObject(gameObject);
+                UpdateCelestialObject(gameObject);
 
             }).IsCompleted)
             {
@@ -674,72 +639,56 @@ namespace AstroOdyssey
                     }
                 }
 
-                UpdateGameObject(gameObject);
+                switch (gameObject.Tag)
+                {
+                    case PLAYER_TAG:
+                        {
+                            UpdatePlayer();
+                        }
+                        break;
+                    case PLAYER_PROJECTILE_TAG:
+                        {
+                            UpdatePlayerProjectile(gameObject);
+                        }
+                        break;
+                    case ENEMY_PROJECTILE_TAG:
+                        {
+                            UpdateEnemyProjectile(gameObject);
+                        }
+                        break;
+                    case ENEMY_TAG:
+                        {
+                            UpdateEnemy(gameObject);
+                        }
+                        break;
+                    case METEOR_TAG:
+                        {
+                            UpdateMeteor(gameObject);
+                        }
+                        break;
+                    case HEALTH_TAG:
+                        {
+                            UpdateHealth(gameObject);
+                        }
+                        break;
+                    case COLLECTIBLE_TAG:
+                        {
+                            UpdateCollectible(gameObject);
+                        }
+                        break;
+                    case POWERUP_TAG:
+                        {
+                            UpdatePowerUp(gameObject);
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
             }).IsCompleted)
             {
                 // clean removable objects from game view
                 GameView.RemoveDestroyableGameObjects();
-            }
-        }
-
-        /// <summary>
-        /// Updates a game object.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        private void UpdateGameObject(GameObject gameObject)
-        {
-            var tag = gameObject.Tag;
-
-            switch (tag)
-            {
-                case PLAYER_TAG:
-                    {
-                        UpdatePlayer();
-                    }
-                    break;
-                case PLAYER_PROJECTILE_TAG:
-                    {
-                        UpdatePlayerProjectile(gameObject);
-                    }
-                    break;
-                case ENEMY_PROJECTILE_TAG:
-                    {
-                        UpdateEnemyProjectile(gameObject);
-                    }
-                    break;
-                case ENEMY_TAG:
-                    {
-                        UpdateEnemy(gameObject);
-                    }
-                    break;
-                case METEOR_TAG:
-                    {
-                        UpdateMeteor(gameObject);
-                    }
-                    break;
-                case HEALTH_TAG:
-                    {
-                        UpdateHealth(gameObject);
-                    }
-                    break;
-                case COLLECTIBLE_TAG:
-                    {
-                        UpdateCollectible(gameObject);
-                    }
-                    break;
-                case POWERUP_TAG:
-                    {
-                        UpdatePowerUp(gameObject);
-                    }
-                    break;
-                case STAR_TAG:
-                    {
-                        UpdateStar(gameObject);
-                    }
-                    break;
-                default:
-                    break;
             }
         }
 
@@ -772,37 +721,19 @@ namespace AstroOdyssey
             }
         }
 
+        #endregion
+
+        #region In Game Text & Image
+
         /// <summary>
-        /// Sets analytics of fps, frame time and objects currently in view.
+        /// Shows in game content.
         /// </summary>
-        private void SetAnalytics()
+        /// <param name="image"></param>
+        /// <param name="text"></param>
+        private void ShowInGameContent(Image image, string text)
         {
-            _frameStatUpdateSpawnCounter -= 1;
-
-            if (_frameStatUpdateSpawnCounter < 0)
-            {
-                var gameObjects = GameView.Children.OfType<GameObject>();
-                var starObjects = StarView.Children.OfType<GameObject>();
-                var planetObjects = PlanetView.Children.OfType<GameObject>();
-
-                var fpsText = $"FPS: {_fpsCount} | FRAME_TIME: {_frameTime} | FRAME_DURATION: {(int)_frameDuration}";
-                FPSText.Text = fpsText;
-
-                var objectsCountText =
-                    $"ENEMIES: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
-                    $"| METEORS : {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
-                    $"| POWERUPS : {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
-                    $"| ENEMY_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
-                    $"| PLAYER_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
-                    $"| STARS : {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
-                    $"| PLANETS : {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
-
-                var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
-                var totalText = $"TOTAL: {total}";
-
-                ObjectsCountText.Text = objectsCountText + "\n" + totalText;
-                _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
-            }
+            ShowInGameImagePanel(image);
+            ShowInGameText(text);
         }
 
         /// <summary>
@@ -881,34 +812,9 @@ namespace AstroOdyssey
             InGameImagePanel.Visibility = Visibility.Collapsed;
         }
 
-        /// <summary>
-        /// Check if game if over.
-        /// </summary>
-        private void GameOver()
-        {
-            if (Player.HasNoHealth)
-            {
-                PlayerHealthBar.Width = 0;
+        #endregion
 
-                QuitGame();
-            }
-        }
-
-        /// <summary>
-        /// Quits the current game.
-        /// </summary>
-        private async void QuitGame()
-        {
-            StopGame();
-
-            _audioHelper.PlaySound(SoundType.GAME_OVER);
-
-            App.PlayerScore = PlayerScore;
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameOverPage));
-        }
+        #region Misc View Functionality
 
         /// <summary>
         /// Warps the player through space.
@@ -959,19 +865,111 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Shows in game content.
+        /// Add stars to game environemnt randomly.
         /// </summary>
-        /// <param name="image"></param>
-        /// <param name="text"></param>
-        private void ShowInGameContent(Image image, string text)
+        private void SetStars()
         {
-            ShowInGameImagePanel(image);
-            ShowInGameText(text);
+            Random random = new Random();
+
+            for (int i = 0; i < 20; i++)
+            {
+                var star = new CelestialObject();
+
+                star.SetAttributes(speed: 0.1d, scale: StarView.GetGameObjectScale());
+
+                var top = random.Next(10, (int)StarView.Height - 10);
+                var left = random.Next(10, (int)StarView.Width - 10);
+
+                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
+            }
+        }
+
+        /// <summary>
+        /// Sets the game and star view sizes according to current window size.
+        /// </summary>
+        private void AdjustView()
+        {
+            GameView.SetSize(_windowHeight, _windowWidth);
+            StarView.SetSize(_windowHeight, _windowWidth);
+            PlanetView.SetSize(_windowHeight, _windowWidth);
+
+            _frameTime = DEFAULT_FRAME_TIME + GameView.GetFrameTimeBuffer();
+
+#if DEBUG
+            Console.WriteLine($"Frame Time : {_frameTime}");
+#endif
+            if (IsGameRunning)
+            {
+                PauseGame();
+
+                PointerX = _windowWidth / 2;
+
+                Player.SetX(PointerX - Player.HalfWidth);
+
+                SetPlayerY(); // windows size changed so reset y position
+
+                // resize player size
+                var scale = GameView.GetGameObjectScale();
+                Player.ReAdjustScale(scale: scale);
+#if DEBUG
+                Console.WriteLine($"View Scale: {scale}");
+#endif
+                return;
+            }
         }
 
         #endregion
 
-        #region Frame
+        #region Misc Game Functionality
+
+        /// <summary>
+        /// Reset all factories to default value.
+        /// </summary>
+        private void ResetFactories()
+        {
+            _celestialObjectFactory.Reset();
+            _meteorFactory.Reset();
+            _enemyFactory.Reset();
+            _healthFactory.Reset();
+            _powerUpFactory.Reset();
+            _collectibleFactory.Reset();
+        }
+
+        /// <summary>
+        /// Sets analytics of fps, frame time and objects currently in view.
+        /// </summary>
+        private void SetAnalytics()
+        {
+
+#if DEBUG
+            _frameStatUpdateSpawnCounter -= 1;
+
+            if (_frameStatUpdateSpawnCounter < 0)
+            {
+                var gameObjects = GameView.Children.OfType<GameObject>();
+                var starObjects = StarView.Children.OfType<GameObject>();
+                var planetObjects = PlanetView.Children.OfType<GameObject>();
+
+                var fpsText = $"FPS: {_fpsCount} | FRAME_TIME: {_frameTime} | FRAME_DURATION: {(int)_frameDuration}";
+                FPSText.Text = fpsText;
+
+                var objectsCountText =
+                    $"ENEMIES: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
+                    $"| METEORS : {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
+                    $"| POWERUPS : {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
+                    $"| ENEMY_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
+                    $"| PLAYER_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
+                    $"| STARS : {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
+                    $"| PLANETS : {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
+
+                var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
+                var totalText = $"TOTAL: {total}";
+
+                ObjectsCountText.Text = objectsCountText + "\n" + totalText;
+                _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
+            }
+#endif
+        }
 
         /// <summary>
         /// Sets the frame time.
@@ -988,6 +986,7 @@ namespace AstroOdyssey
         /// </summary>
         private void CalculateFPS()
         {
+#if DEBUG
             // calculate FPS
             if (_lastFpsTime + 1000 < _frameStartTime)
             {
@@ -997,7 +996,10 @@ namespace AstroOdyssey
             }
 
             _fpsSpawnCounter++;
-        }
+#endif
+        } 
+
+        #endregion
 
         #endregion
 
@@ -1554,13 +1556,13 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Star
+        #region Star & Planet
 
         /// <summary>
         /// Update a star in the game view.
         /// </summary>
         /// <param name="gameObject"></param>
-        private void UpdateStar(GameObject gameObject)
+        private void UpdateCelestialObject(GameObject gameObject)
         {
             var star = gameObject as CelestialObject;
 
