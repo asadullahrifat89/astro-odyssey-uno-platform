@@ -161,8 +161,9 @@
                         <TextBlock
                             x:Name="ScoreMultiplierCountText"
                             Margin="0,3,10,3"
-                            VerticalAlignment="Bottom"
-                            FontSize="15"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
                             FontWeight="SemiBold"
                             TextAlignment="Right" />
 
@@ -184,7 +185,6 @@
                     Value="0" />
 
             </StackPanel>
-
 
             <!--  Fps, frame time, object counts  -->
             <StackPanel

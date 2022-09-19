@@ -496,10 +496,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "HOW TO PLAY"),
+                new ("en", "How to play"),
                 new ("bn", "কিভাবে খেলতে হবে"),
-                new ("de", "SPIELANLEITUNG"),
-                new ("fr", "COMMENT JOUER"),
+                new ("de", "Spielanleitung"),
+                new ("fr", "Comment jouer"),
             }),
             new LocalizationKey(key: "GameInstructionsPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
