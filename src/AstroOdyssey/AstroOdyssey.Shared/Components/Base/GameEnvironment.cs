@@ -71,7 +71,7 @@ namespace AstroOdyssey
             switch (Width)
             {
                 case <= 400:
-                    return 4;
+                    return 3.5;
                 case <= 500:
                     return 3;
                 case <= 700:
