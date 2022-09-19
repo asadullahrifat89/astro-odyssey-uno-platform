@@ -12,16 +12,16 @@
 
     <Grid x:Name="RootGrid">
 
-        <!--  This redenders stars  -->
+        <!--  Stars  -->
         <GameEnvironment x:Name="StarView" Background="Transparent" />
 
-        <!--  This redenders planets  -->
+        <!--  Planets  -->
         <GameEnvironment x:Name="PlanetView" Background="Transparent" />
 
-        <!--  This redenders player, enemies, meteors, healths, and projectiles  -->
+        <!--  Player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
-        <!--  This shows score, level bar, boss health  -->
+        <!--  Score, level bar, boss health  -->
         <StackPanel
             x:Name="TopPanel"
             Margin="5"
@@ -29,7 +29,7 @@
             VerticalAlignment="Top"
             Orientation="Vertical">
 
-            <!--  This shows current score, level bar  -->
+            <!--  Current score, level bar  -->
             <StackPanel
                 x:Name="ScoreBarPanel"
                 Margin="5"
@@ -85,7 +85,7 @@
 
             </StackPanel>
 
-            <!--  This shows the health bar of boss  -->
+            <!--  Boss health bar  -->
             <StackPanel
                 x:Name="BossHealthBarPanel"
                 HorizontalAlignment="Center"
@@ -117,7 +117,39 @@
 
             </StackPanel>
 
-            <!--  This shows fps, frame time, object counts  -->
+            <!--  Score multiplier  -->
+            <StackPanel
+                x:Name="ScoreMultiplierPanel"
+                Margin="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Collapsed">
+                <Grid Width="45" Height="45">
+                    <!--  Collectible image  -->
+                    <Image Source="ms-appx:///Assets/Images/Collectible/pizza5.png" />
+                    <!--  Collectible count  -->
+                    <TextBlock
+                        x:Name="ScoreMultiplierCountText"
+                        VerticalAlignment="Bottom"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        TextAlignment="Right" />
+                </Grid>
+                <!--  Multiplier bar  -->
+                <ProgressBar
+                    x:Name="ScoreMultiplierBar"
+                    Width="45"
+                    Height="5"
+                    Margin="0,5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Goldenrod"
+                    Maximum="8"
+                    Minimum="0"
+                    Value="0" />
+            </StackPanel>
+
+            <!--  Fps, frame time, object counts  -->
             <StackPanel x:Name="GameAnalyticsPanel" Visibility="Collapsed">
                 <!--  This shows fps  -->
                 <TextBlock
@@ -138,30 +170,9 @@
                     TextWrapping="WrapWholeWords" />
             </StackPanel>
 
-            <!--  This shows score multiplier  -->
-            <StackPanel
-                x:Name="ScoreMultiplierPanel"
-                Margin="5"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Orientation="Horizontal"
-                Visibility="Collapsed">
-                <Image
-                    Width="50"
-                    Height="50"
-                    Source="ms-appx:///Assets/Images/Collectible/pizza6.png" />
-                <TextBlock
-                    x:Name="ScoreMultiplierCountText"
-                    Margin="-10,0,0,0"
-                    VerticalAlignment="Bottom"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    TextAlignment="Right" />
-            </StackPanel>
-
         </StackPanel>
 
-        <!--  This shows the player health, rage, power bar  -->
+        <!--  Player health, rage, power bar  -->
         <Border
             x:Name="PlayerHealthBarPanel"
             Margin="5"
@@ -286,7 +297,7 @@
             </Border>
         </StackPanel>
 
-        <!--  This is for capturing input  -->
+        <!--  Pointer + keyboard input capture  -->
         <Border
             x:Name="InputView"
             Grid.Column="1"
@@ -299,35 +310,36 @@
             PointerPressed="InputView_PointerPressed"
             PointerReleased="InputView_PointerReleased" />
 
-        <!--  This pauses the game  -->
-        <Button
-            x:Name="PauseGameButton"
-            Width="50"
-            Height="50"
-            Margin="5"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="PauseGameButton_Click"
-            CornerRadius="100"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False">
-            <SymbolIcon Symbol="Pause" />
-        </Button>
+        <!--  Pause and quit game  -->
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
 
-        <!--  This quits the game  -->
-        <Button
-            x:Name="QuitGameButton"
-            Width="50"
-            Height="50"
-            Margin="5"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="QuitGameButton_Click"
-            CornerRadius="100"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False">
-            <SymbolIcon Symbol="Undo" />
-        </Button>
+            <!--  Pause game  -->
+            <Button
+                x:Name="PauseGameButton"
+                Width="50"
+                Height="50"
+                Margin="5"
+                Click="PauseGameButton_Click"
+                CornerRadius="100"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False">
+                <SymbolIcon Symbol="Pause" />
+            </Button>
+
+            <!--  Quits game  -->
+            <Button
+                x:Name="QuitGameButton"
+                Width="50"
+                Height="50"
+                Margin="5"
+                Click="QuitGameButton_Click"
+                CornerRadius="100"
+                IsFocusEngagementEnabled="False"
+                IsTabStop="False">
+                <SymbolIcon Symbol="Undo" />
+            </Button>
+
+        </StackPanel>
 
     </Grid>
 

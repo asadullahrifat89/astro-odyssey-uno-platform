@@ -43,8 +43,8 @@ namespace AstroOdyssey
         private int _showInGameImagePanelSpawnCounter = 110;
         private int _showInGameImagePanelAfter = 110;
 
-        private int _scoreMultiplierCoolDownCounter;
-        private readonly int _scoreMultiplierCoolDownAfter = 1000;
+        private double _scoreMultiplierCoolDownCounter;
+        private readonly double _scoreMultiplierCoolDownAfter = 1000;
 
         private double _frameTime;
 
@@ -154,7 +154,7 @@ namespace AstroOdyssey
 
         public int ScoreMultiplierCount { get; set; }
 
-        public int Score2xThreashold { get; set; } = 8;
+        public double ScoreMultiplierThreashold { get; set; } = 8;
 
         #endregion
 
@@ -1474,7 +1474,7 @@ namespace AstroOdyssey
                 AddScore(1);
                 AddScoreMultiplier();
 
-                if (ScoreMultiplierCount >= Score2xThreashold)
+                if (ScoreMultiplierCount >= ScoreMultiplierThreashold)
                     ActivateScoreMultiplier();
 
                 SetGameLevel(); // check game level on score change                                
@@ -1811,6 +1811,7 @@ namespace AstroOdyssey
                 _scoreMultiplierCoolDownCounter--;
 
                 // TODO: decrease multiplier progress bar
+                ScoreMultiplierBar.Value = _scoreMultiplierCoolDownCounter / _scoreMultiplierCoolDownAfter * ScoreMultiplierThreashold;
 
                 if (_scoreMultiplierCoolDownCounter <= 0)
                 {
@@ -1824,6 +1825,7 @@ namespace AstroOdyssey
         private void SetScoreMultiplierCountText()
         {
             ScoreMultiplierCountText.Text = $"x{ScoreMultiplierCount}";
+            ScoreMultiplierBar.Value = ScoreMultiplierCount;
         }
 
         /// <summary>

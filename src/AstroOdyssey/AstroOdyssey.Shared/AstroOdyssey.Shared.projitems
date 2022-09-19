@@ -165,6 +165,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_appeared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\boss_cleared.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.png" />
@@ -209,9 +210,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\rock4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Player\space_thrust1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\gameIntro.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\score_multiplier_off.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\score_multiplier_on.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\score_multiplier_off.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\collectible.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music2.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss1.mp3" />

@@ -518,10 +518,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_ControlsText2", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by touching the edges of your 📱."),
-                new ("bn", "আপনার ⌨ এ তীর কীগুলি টিপে বা আপনার 📱 এর প্রান্তগুলি স্পর্শ করে ⬅ বা ➡ সরান।"),
-                new ("de", "Bewegen Sie ⬅️ oder ➡️, indem Sie die Pfeiltasten auf Ihrem ⌨️ oder durch Berühren der Kanten Ihres 📱 📱 drücken."),
-                new ("fr", "Déplacez ⬅️ ou ➡️ en appuyant sur les touches de flèche sur votre ⌨️ ou en touchant les bords de votre 📱."),
+                new ("en", "Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by using the touch screen of your 📱."),
+                new ("bn", "আপনার ⌨ এ তীর কীগুলি টিপে বা আপনার 📱 এর টাচ স্ক্রিন ব্যবহার করে ⬅️ বা ➡ সরান 📱"),
+                new ("de", "Bewegen Sie ⬅️ oder ➡️, indem Sie die Pfeiltasten auf Ihrem ⌨️ oder mit dem Touchscreen Ihres 📱 📱 drücken."),
+                new ("fr", "Déplacez ⬅️ ou ➡️ en appuyant sur les touches de flèche sur votre ⌨️ ou en utilisant l'écran tactile de votre 📱."),
             }),
 
             new LocalizationKey(key: "GameInstructionsPage_EnemiesText", cultureValues: new (string Culture, string Value)[]
@@ -593,10 +593,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_CollectiblesText2", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Collect them to increase your firepower."),
-                new ("bn", "আপনার ফায়ারপাওয়ারটি বাড়ানোর জন্য এগুলি সংগ্রহ করুন।"),
-                new ("de", "Sammeln Sie sie, um Ihre Feuerkraft zu erhöhen."),
-                new ("fr", "Collectez-les pour augmenter votre puissance de feu."),
+                new ("en", "Collect them to increase your firepower and activate 2x score."),
+                new ("bn", "আপনার ফায়ারপাওয়ার বাড়াতে এবং 2x স্কোর সক্রিয় করতে এগুলি সংগ্রহ করুন।"),
+                new ("de", "Sammeln Sie sie, um Ihre Feuerkraft zu erhöhen und 2x Score zu aktivieren."),
+                new ("fr", "Collectez-les pour augmenter votre puissance de feu et activez le score 2x."),
             }),
 
             new LocalizationKey(key: "GameLeaderboardPage_DailyScoreboardToggle", cultureValues: new (string Culture, string Value)[]

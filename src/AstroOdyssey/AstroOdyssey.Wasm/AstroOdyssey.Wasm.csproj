@@ -35,13 +35,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Assets\Icon192x192.png" />
-		<Content Include="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="..\AstroOdyssey.Shared\**\*.xaml" />
-	</ItemGroup>
-	<ItemGroup>
-		<None Remove="Assets\SplashScreen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
