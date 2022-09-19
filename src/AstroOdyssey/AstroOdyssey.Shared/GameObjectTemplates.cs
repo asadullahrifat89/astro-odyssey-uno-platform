@@ -106,6 +106,7 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/gameIntro.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/score_multiplier.gif", UriKind.RelativeOrAbsolute),
         };
 
         #endregion
@@ -169,6 +170,9 @@ namespace AstroOdyssey
         public static string HEALTH_LOSS_MUSIC_URL = "Assets/Sounds/Health/health_loss.mp3";
 
         public static string COLLECTIBLE_COLLECTED_MUSIC_URL = "Assets/Sounds/Collectible/collectible.mp3";
+
+        public static string SCORE_MULTIPLIER_ON_MUSIC_URL = "Assets/Sounds/Collectible/score_multiplier_on.mp3";
+        public static string SCORE_MULTIPLIER_OFF_MUSIC_URL = "Assets/Sounds/Collectible/score_multiplier_off.mp3";
 
 
         #endregion

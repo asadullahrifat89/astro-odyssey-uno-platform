@@ -255,13 +255,7 @@ namespace AstroOdyssey
                 new ("de", "SCHIFF REPARIERT"),
                 new ("fr", "NAVIRE RÉPARÉ"),
             }),
-            //new LocalizationTemplate(key: "COLLECTIBLE_COLLECTED", cultureValues: new (string Culture, string Value)[]
-            //{
-            //    new ("en", "COMIC BOOK COLLECTED"),
-            //    new ("bn", "কমিক বই সংগৃহীত"),
-            //    new ("de", "COMIC-BUCH GESAMMELT"),
-            //    new ("fr", "BD COLLECTIONNÉE"),
-            //}),
+           
             new LocalizationKey(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "SONIC BLAST"),
@@ -524,10 +518,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_ControlsText2", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by touching the edges of your 📱."),
-                new ("bn", "আপনার ⌨ এ তীর কীগুলি টিপে বা আপনার 📱 এর প্রান্তগুলি স্পর্শ করে ⬅ বা ➡ সরান।"),
-                new ("de", "Bewegen Sie ⬅️ oder ➡️, indem Sie die Pfeiltasten auf Ihrem ⌨️ oder durch Berühren der Kanten Ihres 📱 📱 drücken."),
-                new ("fr", "Déplacez ⬅️ ou ➡️ en appuyant sur les touches de flèche sur votre ⌨️ ou en touchant les bords de votre 📱."),
+                new ("en", "Move ⬅️ or ➡️ by pressing the arrow keys on your ⌨️ or by using the touch screen of your 📱."),
+                new ("bn", "আপনার ⌨ এ তীর কীগুলি টিপে বা আপনার 📱 এর টাচ স্ক্রিন ব্যবহার করে ⬅️ বা ➡ সরান 📱"),
+                new ("de", "Bewegen Sie ⬅️ oder ➡️, indem Sie die Pfeiltasten auf Ihrem ⌨️ oder mit dem Touchscreen Ihres 📱 📱 drücken."),
+                new ("fr", "Déplacez ⬅️ ou ➡️ en appuyant sur les touches de flèche sur votre ⌨️ ou en utilisant l'écran tactile de votre 📱."),
             }),
 
             new LocalizationKey(key: "GameInstructionsPage_EnemiesText", cultureValues: new (string Culture, string Value)[]
@@ -599,10 +593,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameInstructionsPage_CollectiblesText2", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Collect them to increase your firepower."),
-                new ("bn", "আপনার ফায়ারপাওয়ারটি বাড়ানোর জন্য এগুলি সংগ্রহ করুন।"),
-                new ("de", "Sammeln Sie sie, um Ihre Feuerkraft zu erhöhen."),
-                new ("fr", "Collectez-les pour augmenter votre puissance de feu."),
+                new ("en", "Collect them to increase your firepower and activate 2x score."),
+                new ("bn", "আপনার ফায়ারপাওয়ার বাড়াতে এবং 2x স্কোর সক্রিয় করতে এগুলি সংগ্রহ করুন।"),
+                new ("de", "Sammeln Sie sie, um Ihre Feuerkraft zu erhöhen und 2x Score zu aktivieren."),
+                new ("fr", "Collectez-les pour augmenter votre puissance de feu et activez le score 2x."),
             }),
 
             new LocalizationKey(key: "GameLeaderboardPage_DailyScoreboardToggle", cultureValues: new (string Culture, string Value)[]
@@ -618,6 +612,21 @@ namespace AstroOdyssey
                 new ("bn", "সর্বকালে"),
                 new ("de", "Alle Zeit"),
                 new ("fr", "Tout le temps"),
+            }),
+
+            new LocalizationKey(key: "SCORE_MULTIPLIER_ON", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "2x SCORE ON"),
+                new ("bn", "2x স্কোর চালু"),
+                new ("de", "2x Punktzahl auf"),
+                new ("fr", "2x score sur"),
+            }),
+            new LocalizationKey(key: "SCORE_MULTIPLIER_OFF", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "COLLECT MORE PIZZA SLICES"),
+                new ("bn", "আরও পিজ্জা স্লাইস সংগ্রহ করুন"),
+                new ("de", "SAMMELN SIE MEHR PIZZASCHEIBEN"),
+                new ("fr", "RECUEILLIR PLUS DE TRANCHES DE PIZZA"),
             }),
         };
 

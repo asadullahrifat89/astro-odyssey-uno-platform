@@ -52,7 +52,7 @@ namespace AstroOdyssey
             {
                 GeneratePowerUp();
                 _powerUpSpawnCounter = _powerUpSpawnAfter;
-                _powerUpSpawnAfter = _random.Next(1400, 1501);
+                // _powerUpSpawnAfter = _random.Next(1400, 1501);
             }
         }
 
@@ -88,6 +88,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
+            _powerUpSpawnAfter -= 50;
             var scale = _gameEnvironment.GetGameObjectScale();
             _powerUpSpeed += (1 * scale);
         }

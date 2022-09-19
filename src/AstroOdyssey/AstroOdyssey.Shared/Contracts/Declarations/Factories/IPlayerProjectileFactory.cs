@@ -10,7 +10,6 @@
 
         void SpawnProjectile(
             bool isPoweredUp,
-            bool firingProjectiles,
             Player player,
             GameLevel gameLevel,
             PowerUpType powerUpType);
