@@ -117,28 +117,29 @@
             <!--  Score multiplier  -->
             <StackPanel
                 x:Name="ScoreMultiplierPanel"
-                Margin="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal">
+                <Grid Margin="5">
                     <!--  Collectible image  -->
                     <!--<Image Source="ms-appx:///Assets/Images/Collectible/pizza5.png" />-->
-                    <TextBlock FontSize="30" Text="🍕" />
+                    <TextBlock
+                        FontSize="40"
+                        Text="🍕"
+                        TextAlignment="Center" />
                     <!--  Collectible count  -->
                     <TextBlock
                         x:Name="ScoreMultiplierCountText"
                         VerticalAlignment="Bottom"
-                        FontSize="16"
+                        FontSize="15"
                         FontWeight="SemiBold"
                         TextAlignment="Right" />
-                </StackPanel>
+                </Grid>
                 <!--  Multiplier bar  -->
                 <ProgressBar
                     x:Name="ScoreMultiplierBar"
                     Width="45"
                     Height="5"
-                    Margin="0,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Foreground="Goldenrod"
