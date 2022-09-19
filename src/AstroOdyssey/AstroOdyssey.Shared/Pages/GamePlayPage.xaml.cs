@@ -152,7 +152,7 @@ namespace AstroOdyssey
 
         #region Events
 
-        #region Input       
+        #region Input
 
         private void InputView_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -281,9 +281,14 @@ namespace AstroOdyssey
 
         #endregion        
 
-        #region Window
+        #region Page
 
-        async void GamePage_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Invoked when the page is leaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
 
@@ -347,12 +352,22 @@ namespace AstroOdyssey
             await this.PlayLoadedTransition();
         }
 
-        void GamePage_Unloaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Invoked when the page is unloaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void GamePage_Unloaded(object sender, RoutedEventArgs e)
         {
             SizeChanged -= GamePage_SizeChanged;
             StopGame();
         }
 
+        /// <summary>
+        /// Invoked when the size of the page changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
         {
             _windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
@@ -377,7 +392,7 @@ namespace AstroOdyssey
         #region Game
 
         /// <summary>
-        /// Starts the game. Spawns the player and starts game and projectile loops.
+        /// Starts the game.
         /// </summary>
         private async void StartGame()
         {
@@ -477,6 +492,9 @@ namespace AstroOdyssey
             _audioHelper.StopSound();
         }
 
+        /// <summary>
+        /// Reset all factories to default value.
+        /// </summary>
         private void ResetFactories()
         {
             _celestialObjectFactory.Reset();
@@ -591,6 +609,54 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdateGameObjects()
         {
+            UpdateGameViewObjects();
+            UpdateStarViewObjects();
+            UpdatePlanetViewObjects();
+        }
+
+        /// <summary>
+        /// Updates objects in the planet view.
+        /// </summary>
+        private void UpdatePlanetViewObjects()
+        {
+            var planetObjects = PlanetView.GetGameObjects<GameObject>();
+
+            // update game view objects
+            if (Parallel.ForEach(planetObjects, gameObject =>
+            {
+                UpdateGameObject(gameObject);
+
+            }).IsCompleted)
+            {
+                // clean removable objects from game view
+                PlanetView.RemoveDestroyableGameObjects();
+            }
+        }
+
+        /// <summary>
+        /// Updates objects in the star view.
+        /// </summary>
+        private void UpdateStarViewObjects()
+        {
+            var starObjects = StarView.GetGameObjects<GameObject>();
+
+            // update game view objects
+            if (Parallel.ForEach(starObjects, gameObject =>
+            {
+                UpdateGameObject(gameObject);
+
+            }).IsCompleted)
+            {
+                // clean removable objects from game view
+                StarView.RemoveDestroyableGameObjects();
+            }
+        }
+
+        /// <summary>
+        /// Updates objects in the game view.
+        /// </summary>
+        private void UpdateGameViewObjects()
+        {
             var gameObjects = GameView.GetGameObjects<GameObject>();
 
             // update game view objects
@@ -615,32 +681,6 @@ namespace AstroOdyssey
                 // clean removable objects from game view
                 GameView.RemoveDestroyableGameObjects();
             }
-
-            var starObjects = StarView.GetGameObjects<GameObject>();
-
-            // update game view objects
-            if (Parallel.ForEach(starObjects, gameObject =>
-            {
-                UpdateGameObject(gameObject);
-
-            }).IsCompleted)
-            {
-                // clean removable objects from game view
-                StarView.RemoveDestroyableGameObjects();
-            }
-
-            var planetObjects = PlanetView.GetGameObjects<GameObject>();
-
-            // update game view objects
-            if (Parallel.ForEach(planetObjects, gameObject =>
-            {
-                UpdateGameObject(gameObject);
-
-            }).IsCompleted)
-            {
-                // clean removable objects from game view
-                PlanetView.RemoveDestroyableGameObjects();
-            }
         }
 
         /// <summary>
@@ -655,309 +695,47 @@ namespace AstroOdyssey
             {
                 case PLAYER_TAG:
                     {
-                        if (MoveLeft || MoveRight)
-                        {
-                            var pointerX = _playerFactory.UpdatePlayer(
-                                player: Player,
-                                pointerX: PointerX,
-                                moveLeft: MoveLeft,
-                                moveRight: MoveRight);
-
-                            PointerX = pointerX;
-
-                            StopPlayerMovement();
-                        }
-                        else
-                        {
-                            var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
-
-                            PointerX = pointerX;
-                        }
-
-                        if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
-                        {
-                            var coolDown = _playerFactory.PowerUpCoolDown(Player);
-
-                            PlayerPowerBar.Value = coolDown.PowerRemaining;
-
-                            if (coolDown.PowerDown)
-                            {
-                                _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
-                                PlayerPowerBar.Visibility = Visibility.Collapsed;
-
-                                PowerUpType = PowerUpType.NONE;
-                                ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
-                            }
-                        }
-
-                        if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
-                        {
-                            var coolDown = _playerFactory.RageUpCoolDown(Player);
-
-                            PlayerRageBar.Value = coolDown.RageRemaining;
-
-                            if (coolDown.RageDown)
-                            {
-                                _playerProjectileFactory.RageDown(Player);
-
-                                PlayerRageBar.Value = Player.Rage;
-                                PlayerRageIcon.Text = "😡";
-
-                                switch (Player.ShipClass)
-                                {
-                                    case ShipClass.DEFENDER:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
-                                        break;
-                                    case ShipClass.BERSERKER:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
-                                        break;
-                                    case ShipClass.SPECTRE:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
+                        UpdatePlayer();
                     }
                     break;
                 case PLAYER_PROJECTILE_TAG:
                     {
-                        var projectile = gameObject as PlayerProjectile;
-
-                        // move the projectile up and check if projectile has gone beyond the game view
-                        _playerProjectileFactory.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        if (projectile.IsMarkedForFadedDestruction)
-                            return;
-
-                        _playerProjectileFactory.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
-
-                        if (GameView.IsBossEngaged)
-                        {
-                            SetBossHealthBar(); // set boss health bar on projectile hit
-                        }
-
-                        if (score > 0)
-                        {
-                            if (!Player.IsRageUp)
-                            {
-                                Player.Rage++;
-                                PlayerRageBar.Value = Player.Rage;
-                            }
-
-                            // trigger rage after rage threashold kills
-                            if (!Player.IsRageUp && Player.Rage >= Player.RageThreashold)
-                            {
-                                PlayerRageIcon.Text = "🤬";
-                                _playerFactory.RageUp(Player);
-                                _playerProjectileFactory.RageUp(Player);
-
-                                switch (Player.ShipClass)
-                                {
-                                    case ShipClass.DEFENDER:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_UP")}");
-                                        break;
-                                    case ShipClass.BERSERKER:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
-                                        break;
-                                    case ShipClass.SPECTRE:
-                                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_UP")}");
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-
-                            PlayerScore.Score += score;
-                            SetGameLevel(); // check game level on score change
-                        }
-
-                        if (destroyedObject is not null)
-                        {
-                            switch (destroyedObject.Tag)
-                            {
-                                case ENEMY_TAG:
-                                    {
-                                        var enemy = destroyedObject as Enemy;
-
-                                        _enemyFactory.DestroyEnemy(enemy);
-                                        PlayerScore.EnemiesDestroyed++;
-
-                                        if (enemy.IsBoss)
-                                        {
-                                            DisengageBoss(enemy);
-                                            PlayerScore.BossesDestroyed++;
-                                        }
-                                    }
-                                    break;
-                                case METEOR_TAG:
-                                    {
-                                        _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
-                                        PlayerScore.MeteorsDestroyed++;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
+                        UpdatePlayerProjectile(gameObject);
                     }
                     break;
                 case ENEMY_PROJECTILE_TAG:
                     {
-                        var projectile = gameObject as EnemyProjectile;
-
-                        _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        if (projectile.IsMarkedForFadedDestruction)
-                            return;
-
-                        // check if enemy projectile collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
-                        {
-                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
-                            SetPlayerHealthBar();
-                        }
+                        UpdateEnemyProjectile(gameObject);
                     }
                     break;
                 case ENEMY_TAG:
                     {
-                        var enemy = gameObject as Enemy;
-
-                        _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        if (enemy.IsMarkedForFadedDestruction)
-                            return;
-
-                        // check if enemy collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
-                        {
-                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
-                            SetPlayerHealthBar();
-                            return;
-                        }
-
-                        // fire projectiles if at a legitimate distance from player
-                        if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
-                            _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+                        UpdateEnemy(gameObject);
                     }
                     break;
                 case METEOR_TAG:
                     {
-                        var meteor = gameObject as Meteor;
-
-                        _meteorFactory.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        if (meteor.IsMarkedForFadedDestruction)
-                            return;
-
-                        // check if meteor collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
-                        {
-                            _playerProjectileFactory.DecreaseProjectilePower(player: Player);
-                            SetPlayerHealthBar();
-                        }
+                        UpdateMeteor(gameObject);
                     }
                     break;
                 case HEALTH_TAG:
                     {
-                        var health = gameObject as Health;
-
-                        _healthFactory.UpdateHealth(health: health, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        // check if health collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
-                        {
-                            SetPlayerHealthBar();
-                            ShowInGameContent(_healthImage, $"‍{_localizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
-                        }
+                        UpdateHealth(gameObject);
                     }
                     break;
                 case COLLECTIBLE_TAG:
                     {
-                        var collectible = gameObject as Collectible;
-
-                        _collectibleFactory.UpdateCollectible(collectible: collectible, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        // check if collectible collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
-                        {
-                            _playerProjectileFactory.IncreaseProjectilePower(player: Player);
-
-                            PlayerScore.Score++;
-                            PlayerScore.CollectiblesCollected++;
-
-                            SetGameLevel(); // check game level on score change
-                            //ShowInGameText($"‍💫 {_localizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
-                        }
+                        UpdateCollectible(gameObject);
                     }
                     break;
                 case POWERUP_TAG:
                     {
-                        var powerUp = gameObject as PowerUp;
-
-                        _powerUpFactory.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
-
-                        if (destroyed)
-                            return;
-
-                        if (StarView.IsWarpingThroughSpace)
-                            return;
-
-                        // check if power up collides with player
-                        if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
-                        {
-                            PlayerPowerBar.Visibility = Visibility.Visible;
-
-                            PowerUpType = powerUp.PowerUpType;
-
-                            ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
-
-                            _playerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
-                        }
+                        UpdatePowerUp(gameObject);
                     }
                     break;
                 case STAR_TAG:
                     {
-                        var star = gameObject as CelestialObject;
-
-                        _celestialObjectFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
+                        UpdateStar(gameObject);
                     }
                     break;
                 default:
@@ -1223,6 +1001,70 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Enemy
+
+        /// <summary>
+        /// Update an enemy in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateEnemy(GameObject gameObject)
+        {
+            var enemy = gameObject as Enemy;
+
+            _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (enemy.IsMarkedForFadedDestruction)
+                return;
+
+            // check if enemy collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
+            {
+                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
+                SetPlayerHealthBar();
+                return;
+            }
+
+            // fire projectiles if at a legitimate distance from player
+            if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
+                _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+        }
+
+
+        /// <summary>
+        /// Update an enemy projectile in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateEnemyProjectile(GameObject gameObject)
+        {
+            var projectile = gameObject as EnemyProjectile;
+
+            _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (projectile.IsMarkedForFadedDestruction)
+                return;
+
+            // check if enemy projectile collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
+            {
+                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
+                SetPlayerHealthBar();
+            }
+        }
+
+        #endregion
+
         #region Player
 
         /// <summary>
@@ -1292,6 +1134,10 @@ namespace AstroOdyssey
             _playerFactory.DamageRecoveryCoolDown(Player);
         }
 
+        /// <summary>
+        /// Start player movement on pointer press.
+        /// </summary>
+        /// <param name="e"></param>
         private void StartPlayerMovement(PointerRoutedEventArgs e)
         {
             var point = e.GetCurrentPoint(GameView);
@@ -1320,6 +1166,9 @@ namespace AstroOdyssey
             }
         }
 
+        /// <summary>
+        /// Stops player movement on reaching pointer.
+        /// </summary>
         private void StopPlayerMovement()
         {
             if (IsPointerPressed)
@@ -1343,6 +1192,170 @@ namespace AstroOdyssey
                 {
                     if (Player.GetX() + Player.Width + Player.HalfWidth >= PointerPressedX)
                         MoveRight = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update player in the game view.
+        /// </summary>
+        private void UpdatePlayer()
+        {
+            if (MoveLeft || MoveRight)
+            {
+                var pointerX = _playerFactory.UpdatePlayer(
+                    player: Player,
+                    pointerX: PointerX,
+                    moveLeft: MoveLeft,
+                    moveRight: MoveRight);
+
+                PointerX = pointerX;
+
+                StopPlayerMovement();
+            }
+            else
+            {
+                var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
+
+                PointerX = pointerX;
+            }
+
+            if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
+            {
+                var coolDown = _playerFactory.PowerUpCoolDown(Player);
+
+                PlayerPowerBar.Value = coolDown.PowerRemaining;
+
+                if (coolDown.PowerDown)
+                {
+                    _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
+                    PlayerPowerBar.Visibility = Visibility.Collapsed;
+
+                    PowerUpType = PowerUpType.NONE;
+                    ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
+                }
+            }
+
+            if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
+            {
+                var coolDown = _playerFactory.RageUpCoolDown(Player);
+
+                PlayerRageBar.Value = coolDown.RageRemaining;
+
+                if (coolDown.RageDown)
+                {
+                    _playerProjectileFactory.RageDown(Player);
+
+                    PlayerRageBar.Value = Player.Rage;
+                    PlayerRageIcon.Text = "😡";
+
+                    switch (Player.ShipClass)
+                    {
+                        case ShipClass.DEFENDER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                            break;
+                        case ShipClass.BERSERKER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
+                            break;
+                        case ShipClass.SPECTRE:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Update a player projectile in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdatePlayerProjectile(GameObject gameObject)
+        {
+            var projectile = gameObject as PlayerProjectile;
+
+            // move the projectile up and check if projectile has gone beyond the game view
+            _playerProjectileFactory.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (projectile.IsMarkedForFadedDestruction)
+                return;
+
+            _playerProjectileFactory.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+
+            if (GameView.IsBossEngaged)
+            {
+                SetBossHealthBar(); // set boss health bar on projectile hit
+            }
+
+            if (score > 0)
+            {
+                if (!Player.IsRageUp)
+                {
+                    Player.Rage++;
+                    PlayerRageBar.Value = Player.Rage;
+                }
+
+                // trigger rage after rage threashold kills
+                if (!Player.IsRageUp && Player.Rage >= Player.RageThreashold)
+                {
+                    PlayerRageIcon.Text = "🤬";
+                    _playerFactory.RageUp(Player);
+                    _playerProjectileFactory.RageUp(Player);
+
+                    switch (Player.ShipClass)
+                    {
+                        case ShipClass.DEFENDER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_UP")}");
+                            break;
+                        case ShipClass.BERSERKER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
+                            break;
+                        case ShipClass.SPECTRE:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_UP")}");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                PlayerScore.Score += score;
+                SetGameLevel(); // check game level on score change
+            }
+
+            if (destroyedObject is not null)
+            {
+                switch (destroyedObject.Tag)
+                {
+                    case ENEMY_TAG:
+                        {
+                            var enemy = destroyedObject as Enemy;
+
+                            _enemyFactory.DestroyEnemy(enemy);
+                            PlayerScore.EnemiesDestroyed++;
+
+                            if (enemy.IsBoss)
+                            {
+                                DisengageBoss(enemy);
+                                PlayerScore.BossesDestroyed++;
+                            }
+                        }
+                        break;
+                    case METEOR_TAG:
+                        {
+                            _meteorFactory.DestroyMeteor(destroyedObject as Meteor);
+                            PlayerScore.MeteorsDestroyed++;
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -1410,6 +1423,148 @@ namespace AstroOdyssey
             }
 
             SetGameLevelText();
+        }
+
+        #endregion
+
+        #region Meteor
+
+        /// <summary>
+        /// Update a meteor in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateMeteor(GameObject gameObject)
+        {
+            var meteor = gameObject as Meteor;
+
+            _meteorFactory.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (meteor.IsMarkedForFadedDestruction)
+                return;
+
+            // check if meteor collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
+            {
+                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
+                SetPlayerHealthBar();
+            }
+        }
+
+
+        #endregion
+
+        #region Health
+
+        /// <summary>
+        /// Update a health in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateHealth(GameObject gameObject)
+        {
+            var health = gameObject as Health;
+
+            _healthFactory.UpdateHealth(health: health, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            // check if health collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
+            {
+                SetPlayerHealthBar();
+                ShowInGameContent(_healthImage, $"‍{_localizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
+            }
+        }
+
+        #endregion
+
+        #region Collectible
+
+        /// <summary>
+        /// Update a collectible in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateCollectible(GameObject gameObject)
+        {
+            var collectible = gameObject as Collectible;
+
+            _collectibleFactory.UpdateCollectible(collectible: collectible, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            // check if collectible collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
+            {
+                _playerProjectileFactory.IncreaseProjectilePower(player: Player);
+
+                PlayerScore.Score++;
+                PlayerScore.CollectiblesCollected++;
+
+                SetGameLevel(); // check game level on score change
+                                //ShowInGameText($"‍💫 {_localizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
+            }
+        }
+
+        #endregion
+
+        #region PowerUp
+
+        /// <summary>
+        /// Update a powerup in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdatePowerUp(GameObject gameObject)
+        {
+
+            var powerUp = gameObject as PowerUp;
+
+            _powerUpFactory.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            // check if power up collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
+            {
+                PlayerPowerBar.Visibility = Visibility.Visible;
+
+                PowerUpType = powerUp.PowerUpType;
+
+                ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+
+                _playerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
+            }
+        }
+
+        #endregion
+
+        #region Star
+
+        /// <summary>
+        /// Update a star in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateStar(GameObject gameObject)
+        {
+            var star = gameObject as CelestialObject;
+
+            _celestialObjectFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
         }
 
         #endregion
