@@ -129,13 +129,13 @@
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
-                    <Button
+                    <ToggleButton
                         x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
                         Margin="5,0"
                         Background="Goldenrod"
                         BorderBrush="White"
                         BorderThickness="3"
-                        Click="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
+                        Checked="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
                         Content="All Time"
                         CornerRadius="50"
                         FontSize="20"
@@ -143,12 +143,12 @@
                         Foreground="White"
                         IsFocusEngagementEnabled="False"
                         IsTabStop="False" />
-                    <Button
+                    <ToggleButton
                         x:Name="GameLeaderboardPage_DailyScoreboardToggle"
                         Background="Goldenrod"
                         BorderBrush="White"
                         BorderThickness="3"
-                        Click="GameLeaderboardPage_DailyScoreboardToggle_Click"
+                        Checked="GameLeaderboardPage_DailyScoreboardToggle_Click"
                         Content="Daily"
                         CornerRadius="50"
                         FontSize="20"
@@ -160,8 +160,16 @@
 
                 <!--  Leaderboard list  -->
                 <Grid Grid.Row="2" Margin="40,0,40,10">
-                    <ListView x:Name="GameLeaderboardPage_GameScores" ItemTemplate="{StaticResource GameLeaderboardPage_GameScores_DataTemplate}" />
-                    <ListView x:Name="GameLeaderboardPage_GameProfiles" ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}" />
+                    <!--  All time  -->
+                    <ListView
+                        x:Name="GameLeaderboardPage_GameProfiles"
+                        ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}"
+                        Visibility="{x:Bind Path=GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked, Mode=OneWay}" />
+                    <!--  Daily  -->
+                    <ListView
+                        x:Name="GameLeaderboardPage_GameScores"
+                        ItemTemplate="{StaticResource GameLeaderboardPage_GameScores_DataTemplate}"
+                        Visibility="{x:Bind Path=GameLeaderboardPage_DailyScoreboardToggle.IsChecked, Mode=OneWay}" />
                 </Grid>
 
                 <!--  personal best score, play now  -->

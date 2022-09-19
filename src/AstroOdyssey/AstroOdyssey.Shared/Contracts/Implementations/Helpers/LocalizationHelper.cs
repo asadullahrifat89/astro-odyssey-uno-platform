@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using System.Linq;
+using Microsoft.UI.Xaml.Controls.Primitives;
 
 namespace AstroOdyssey
 {
@@ -654,6 +655,8 @@ namespace AstroOdyssey
                     passwordBox.Header = value;
                 else if (uIElement is Button button)
                     button.Content = value;
+                else if (uIElement is ToggleButton toggleButton)
+                    toggleButton.Content = value;
                 else if (uIElement is HyperlinkButton hyperlinkButton)
                     hyperlinkButton.Content = value; 
             }
