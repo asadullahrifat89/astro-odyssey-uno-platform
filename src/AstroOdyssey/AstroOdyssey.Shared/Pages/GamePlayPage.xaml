@@ -125,13 +125,18 @@
 
                     <!--  Collectible image  -->
                     <TextBlock
-                        FontSize="40"
+                        FontSize="35"
                         Text="🍕"
-                        TextAlignment="Center" />
+                        TextAlignment="Left" />
+                    <!--<Image
+                        Width="35"
+                        Height="35"
+                        Source="ms-appx:///Assets/Images/Collectible/pizza6.png" />-->
 
                     <!--  Collectible count  -->
                     <TextBlock
                         x:Name="ScoreMultiplierCountText"
+                        Margin="5,0"
                         VerticalAlignment="Bottom"
                         FontSize="15"
                         FontWeight="SemiBold"

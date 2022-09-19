@@ -25,10 +25,6 @@ namespace AstroOdyssey
 
         public GameObject()
         {
-#if DEBUG
-            //BorderBrush = new SolidColorBrush(Colors.White);
-            //BorderThickness = new Microsoft.UI.Xaml.Thickness(1);
-#endif
             RenderTransformOrigin = new Point(0.5, 0.5);
             RenderTransform = compositeTransform;
 
