@@ -568,7 +568,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Game Objects Update
+        #region Game Objects
 
         /// <summary>
         /// Updates a frame in the game.
@@ -717,15 +717,15 @@ namespace AstroOdyssey
             // only generate game objects if not warping thorugh space
             if (!StarView.IsWarpingThroughSpace)
             {
-                _meteorFactory.SpawnMeteor(GameLevel);
+                _meteorFactory.SpawnMeteor(gameLevel: GameLevel);
 
-                _enemyFactory.SpawnEnemy(GameLevel);
+                _enemyFactory.SpawnEnemy(gameLevel: GameLevel);
 
-                _healthFactory.SpawnHealth(Player);
+                _healthFactory.SpawnHealth(player: Player);
 
                 _powerUpFactory.SpawnPowerUp();
 
-                _collectibleFactory.SpawnCollectible(GameLevel);
+                _collectibleFactory.SpawnCollectible(gameLevel: GameLevel);
 
                 _playerProjectileFactory.SpawnProjectile(
                     isPoweredUp: Player.IsPoweredUp,
@@ -833,45 +833,18 @@ namespace AstroOdyssey
         /// </summary>
         private void WarpThroughSpace()
         {
-            var destructibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible);
+            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible || x.IsProjectile || x.IsPickup || x.IsCollectible);
 
-            if (destructibles is not null)
+            if (gameObjects is not null)
             {
-                Parallel.ForEach(destructibles, destructible =>
+                Parallel.ForEach(gameObjects, gameObject =>
                 {
-                    destructible.IsMarkedForFadedDestruction = true;
+                    if (gameObject.IsDestructible || gameObject.IsProjectile)
+                        gameObject.IsMarkedForFadedDestruction = true;
+                    else
+                        GameView.AddDestroyableGameObject(gameObject);
                 });
-            }
-
-            var projectiles = GameView.GetGameObjects<GameObject>().Where(x => x.IsProjectile);
-
-            if (projectiles is not null)
-            {
-                Parallel.ForEach(projectiles, projectile =>
-                {
-                    GameView.AddDestroyableGameObject(projectile);
-                });
-            }
-
-            var pickups = GameView.GetGameObjects<GameObject>().Where(x => x.IsPickup);
-
-            if (pickups is not null)
-            {
-                Parallel.ForEach(pickups, pickup =>
-                {
-                    GameView.AddDestroyableGameObject(pickup);
-                });
-            }
-
-            var collectibles = GameView.GetGameObjects<GameObject>().Where(x => x.IsCollectible);
-
-            if (collectibles is not null)
-            {
-                Parallel.ForEach(collectibles, collectible =>
-                {
-                    GameView.AddDestroyableGameObject(collectible);
-                });
-            }
+            }           
 
             _celestialObjectFactory.StartSpaceWarp();
         }
@@ -1175,15 +1148,8 @@ namespace AstroOdyssey
                 PointerX = pointerX;
             }
 
-            if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
-            {
-                PowerUpCoolDown();
-            }
-
-            if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
-            {
-                RageCoolDown();
-            }
+            PowerUpCoolDown();
+            RageCoolDown();
         }
 
         /// <summary>
@@ -1377,20 +1343,20 @@ namespace AstroOdyssey
         /// <param name="boss"></param>
         private void DisengageBoss(Enemy boss)
         {
-            WarpThroughSpace();
-            ShowInGameContent(_bossClearedImage, $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("COMPLETE")}");
-
-            _enemyFactory.DisengageBoss();
-
             Bosses.Remove(boss);
 
             if (Bosses.Count == 0)
             {
+                WarpThroughSpace();
+                ShowInGameContent(_bossClearedImage, $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("COMPLETE")}");
+
+                _enemyFactory.DisengageBoss();
+
                 BossHealthBarPanel.Visibility = Visibility.Collapsed;
                 BossTotalHealth = 0;
-            }
 
-            SetGameLevelText();
+                SetGameLevelText();
+            }
         }
 
         #endregion
@@ -1532,30 +1498,33 @@ namespace AstroOdyssey
         /// </summary>
         private void RageCoolDown()
         {
-            var coolDown = _playerFactory.RageUpCoolDown(Player);
-
-            PlayerRageBar.Value = coolDown.RageRemaining;
-
-            if (coolDown.RageDown)
+            if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
             {
-                _playerProjectileFactory.RageDown(Player);
+                var coolDown = _playerFactory.RageUpCoolDown(Player);
 
-                PlayerRageBar.Value = Player.Rage;
-                PlayerRageIcon.Text = "😡";
+                PlayerRageBar.Value = coolDown.RageRemaining;
 
-                switch (Player.ShipClass)
+                if (coolDown.RageDown)
                 {
-                    case ShipClass.DEFENDER:
-                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
-                        break;
-                    case ShipClass.BERSERKER:
-                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
-                        break;
-                    case ShipClass.SPECTRE:
-                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
-                        break;
-                    default:
-                        break;
+                    _playerProjectileFactory.RageDown(Player);
+
+                    PlayerRageBar.Value = Player.Rage;
+                    PlayerRageIcon.Text = "😡";
+
+                    switch (Player.ShipClass)
+                    {
+                        case ShipClass.DEFENDER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                            break;
+                        case ShipClass.BERSERKER:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
+                            break;
+                        case ShipClass.SPECTRE:
+                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -1609,17 +1578,20 @@ namespace AstroOdyssey
         /// </summary>
         private void PowerUpCoolDown()
         {
-            var coolDown = _playerFactory.PowerUpCoolDown(Player);
-
-            PlayerPowerBar.Value = coolDown.PowerRemaining;
-
-            if (coolDown.PowerDown)
+            if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
             {
-                _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
-                PlayerPowerBar.Visibility = Visibility.Collapsed;
+                var coolDown = _playerFactory.PowerUpCoolDown(Player);
 
-                PowerUpType = PowerUpType.NONE;
-                ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
+                PlayerPowerBar.Value = coolDown.PowerRemaining;
+
+                if (coolDown.PowerDown)
+                {
+                    _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
+                    PlayerPowerBar.Visibility = Visibility.Collapsed;
+
+                    PowerUpType = PowerUpType.NONE;
+                    ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
+                }
             }
         }
 
@@ -1813,7 +1785,7 @@ namespace AstroOdyssey
 
         private void ScoreMultiplierCoolDown()
         {
-            if (IsScoreMultiplierActivated)
+            if (IsScoreMultiplierActivated && !StarView.IsWarpingThroughSpace)
             {
                 _scoreMultiplierCoolDownCounter--;
 
