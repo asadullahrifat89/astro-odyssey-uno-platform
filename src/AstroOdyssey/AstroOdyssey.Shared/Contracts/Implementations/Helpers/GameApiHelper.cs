@@ -191,7 +191,7 @@ namespace AstroOdyssey
                  {
                      PageIndex = pageIndex,
                      PageSize = pageSize,
-                     ScoreDay = DateTime.Today.Date,
+                     ScoreDay = DateTime.Now.ToString("dd-MMM-yyyy"),
                      GameId = Constants.GAME_ID,
                  });
 
