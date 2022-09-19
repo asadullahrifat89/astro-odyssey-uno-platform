@@ -78,13 +78,7 @@ namespace AstroOdyssey
 
             ShowUserName();
 
-            // get game scores
-            if (!await GetGameScores())
-                return;
-
-            // get game profiles
-            if (!await GetGameProfiles())
-                return;
+            GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked = true;
 
             StopProgressBar();
         }
@@ -103,19 +97,17 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameStartPage));
         }
 
-        private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
-        {
-            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Collapsed;
-            GameLeaderboardPage_GameScores.Visibility = Visibility.Visible;
-            await GetGameScores();
-        }
-
         private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
         {
-            GameLeaderboardPage_GameScores.Visibility = Visibility.Collapsed;
-            GameLeaderboardPage_GameProfiles.Visibility = Visibility.Visible;
+            GameLeaderboardPage_DailyScoreboardToggle.IsChecked = false;
             await GetGameProfiles();
         }
+
+        private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {            
+            GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked = false;
+            await GetGameScores();
+        }      
 
         #endregion
 
