@@ -159,6 +159,10 @@ namespace AstroOdyssey
 
             await GetFileAsync(new Uri(prefix + GameObjectTemplates.COLLECTIBLE_COLLECTED_MUSIC_URL, UriKind.RelativeOrAbsolute), progressBar);
 
+            await GetFileAsync(new Uri(prefix + GameObjectTemplates.SCORE_MULTIPLIER_ON_MUSIC_URL, UriKind.RelativeOrAbsolute), progressBar);
+
+            await GetFileAsync(new Uri(prefix + GameObjectTemplates.SCORE_MULTIPLIER_OFF_MUSIC_URL, UriKind.RelativeOrAbsolute), progressBar);
+
             foreach (var asset in GameObjectTemplates.GAME_INTRO_MUSIC_URLS)
             {
                 await GetFileAsync(new Uri(prefix + asset, UriKind.RelativeOrAbsolute), progressBar);

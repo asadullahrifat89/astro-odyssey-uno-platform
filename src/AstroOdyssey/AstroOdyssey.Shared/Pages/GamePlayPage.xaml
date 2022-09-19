@@ -23,6 +23,7 @@
 
         <!--  This shows score, level bar, boss health  -->
         <StackPanel
+            x:Name="TopPanel"
             Margin="5"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
@@ -116,23 +117,47 @@
 
             </StackPanel>
 
-            <!--  This shows fps  -->
-            <TextBlock
-                x:Name="FPSText"
-                Margin="5"
-                FontWeight="Bold"
-                Foreground="White"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+            <!--  This shows fps, frame time, object counts  -->
+            <StackPanel x:Name="GameAnalyticsPanel" Visibility="Collapsed">
+                <!--  This shows fps  -->
+                <TextBlock
+                    x:Name="FPSText"
+                    Margin="5"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
 
-            <!--  This shows current objects count in game canvas  -->
-            <TextBlock
-                x:Name="ObjectsCountText"
+                <!--  This shows current objects count in game canvas  -->
+                <TextBlock
+                    x:Name="ObjectsCountText"
+                    Margin="5"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+            </StackPanel>
+
+            <!--  This shows score multiplier  -->
+            <StackPanel
+                x:Name="ScoreMultiplierPanel"
                 Margin="5"
-                FontWeight="Bold"
-                Foreground="White"
-                TextAlignment="Center"
-                TextWrapping="WrapWholeWords" />
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Horizontal"
+                Visibility="Collapsed">
+                <Image
+                    Width="50"
+                    Height="50"
+                    Source="ms-appx:///Assets/Images/Collectible/pizza6.png" />
+                <TextBlock
+                    x:Name="ScoreMultiplierCountText"
+                    Margin="-10,0,0,0"
+                    VerticalAlignment="Bottom"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    TextAlignment="Right" />
+            </StackPanel>
 
         </StackPanel>
 

@@ -24,6 +24,7 @@ namespace AstroOdyssey
         private Image _healthImage;
         private Image _bossAppearedImage;
         private Image _bossClearedImage;
+        private Image _scoreMultiplierImage;
 #if DEBUG
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
@@ -41,6 +42,9 @@ namespace AstroOdyssey
 
         private int _showInGameImagePanelSpawnCounter = 110;
         private int _showInGameImagePanelAfter = 110;
+
+        private int _scoreMultiplierCoolDownCounter;
+        private readonly int _scoreMultiplierCoolDownAfter = 1000;
 
         private double _frameTime;
 
@@ -112,9 +116,8 @@ namespace AstroOdyssey
 
         #region Properties
 #if DEBUG
-        public Stopwatch Stopwatch { get; set; } 
+        public Stopwatch Stopwatch { get; set; }
 #endif
-
         public PeriodicTimer GameFrameTimer { get; set; }
 
         public Player Player { get; set; }
@@ -146,7 +149,12 @@ namespace AstroOdyssey
         public bool MoveLeft { get; set; }
 
         public bool MoveRight { get; set; }
-        
+
+        public bool IsScoreMultiplierActivated { get; set; }
+
+        public int ScoreMultiplierCount { get; set; }
+
+        public int Score2xThreashold { get; set; } = 8;
 
         #endregion
 
@@ -245,7 +253,7 @@ namespace AstroOdyssey
             else
             {
                 InputView.Focus(FocusState.Programmatic);
-                StartGame();                
+                StartGame();
             }
         }
 
@@ -321,6 +329,11 @@ namespace AstroOdyssey
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
+            ScoreMultiplierCount = 0;
+            IsScoreMultiplierActivated = false;
+            SetScoreMultiplierCountText();
+            ScoreMultiplierPanel.Visibility = Visibility.Collapsed;
+
             ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
 
@@ -347,6 +360,12 @@ namespace AstroOdyssey
                 Stretch = Stretch.Uniform,
             };
             _bossClearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute));
+
+            _scoreMultiplierImage = new Image
+            {
+                Stretch = Stretch.Uniform,
+            };
+            _scoreMultiplierImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/score_multiplier.gif", UriKind.RelativeOrAbsolute));
 
             await this.PlayLoadedTransition();
         }
@@ -388,18 +407,15 @@ namespace AstroOdyssey
 
         #region Methods
 
-        #region Game
-
-        #region Start, Run, Stop, Pause, Resume, Over, & Quit
+        #region Game Start, Run, Stop, Pause, Resume, Over, & Quit
 
         /// <summary>
         /// Starts the game.
         /// </summary>
         private async void StartGame()
         {
-#if !DEBUG
-            FPSText.Visibility = Visibility.Collapsed;
-            ObjectsCountText.Visibility = Visibility.Collapsed;
+#if DEBUG
+            GameAnalyticsPanel.Visibility = Visibility.Visible;
 #endif
             _audioHelper.StopSound();
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
@@ -422,6 +438,7 @@ namespace AstroOdyssey
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
             ScoreBarPanel.Visibility = Visibility.Visible;
+            ScoreMultiplierPanel.Visibility = Visibility.Visible;
 
             SetStars();
 
@@ -470,7 +487,7 @@ namespace AstroOdyssey
             GameFrameTimer.Dispose();
 
             ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
-                        
+
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Visible;
@@ -491,7 +508,7 @@ namespace AstroOdyssey
             InputView.Focus(FocusState.Programmatic);
 
             HideInGameText();
-                        
+
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
             QuitGameButton.Visibility = Visibility.Collapsed;
@@ -568,11 +585,13 @@ namespace AstroOdyssey
 
             SpawnGameObjects();
 
-            HandleInGameText();
+            InGameTextCoolDown();
 
-            HandleInGameImagePanel();
+            InGameImagePanelCoolDown();
 
             DamageRecoveryCoolDown();
+
+            ScoreMultiplierCoolDown();
         }
 
         /// <summary>
@@ -742,31 +761,6 @@ namespace AstroOdyssey
         }
 
         /// <summary>
-        /// Hides the in game text.
-        /// </summary>
-        private void HideInGameText()
-        {
-            InGameText.Visibility = Visibility.Collapsed;
-            InGameText.Text = null;
-        }
-
-        /// <summary>
-        /// Hides the in game text after keeping it visible for a few frames.
-        /// </summary>
-        private void HandleInGameText()
-        {
-            if (!InGameText.Text.IsNullOrBlank())
-            {
-                _showInGameTextSpawnCounter -= 1;
-
-                if (_showInGameTextSpawnCounter <= 0)
-                {
-                    HideInGameText();
-                }
-            }
-        }
-
-        /// <summary>
         /// Shows in game image.
         /// </summary>
         /// <param name="image"></param>
@@ -784,9 +778,23 @@ namespace AstroOdyssey
         }
 
         /// <summary>
+        /// Hides the in game text after keeping it visible for a few frames.
+        /// </summary>
+        private void InGameTextCoolDown()
+        {
+            if (!InGameText.Text.IsNullOrBlank())
+            {
+                _showInGameTextSpawnCounter--;
+
+                if (_showInGameTextSpawnCounter <= 0)
+                    HideInGameText();
+            }
+        }
+
+        /// <summary>
         /// Hides the in game image after keeping it visible for a few frames.
         /// </summary>
-        private void HandleInGameImagePanel()
+        private void InGameImagePanelCoolDown()
         {
             if (InGameImagePanel.Visibility == Visibility.Visible)
             {
@@ -797,6 +805,15 @@ namespace AstroOdyssey
                     HideInGameImagePanel();
                 }
             }
+        }
+
+        /// <summary>
+        /// Hides the in game text.
+        /// </summary>
+        private void HideInGameText()
+        {
+            InGameText.Visibility = Visibility.Collapsed;
+            InGameText.Text = null;
         }
 
         /// <summary>
@@ -992,72 +1009,6 @@ namespace AstroOdyssey
 
             _fpsSpawnCounter++;
 #endif
-        } 
-
-        #endregion
-
-        #endregion
-
-        #region Enemy
-
-        /// <summary>
-        /// Update an enemy in the game view.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        private void UpdateEnemy(GameObject gameObject)
-        {
-            var enemy = gameObject as Enemy;
-
-            _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
-
-            if (destroyed)
-                return;
-
-            if (StarView.IsWarpingThroughSpace)
-                return;
-
-            if (enemy.IsMarkedForFadedDestruction)
-                return;
-
-            // check if enemy collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
-            {
-                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
-                SetPlayerHealthBar();
-                return;
-            }
-
-            // fire projectiles if at a legitimate distance from player
-            if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
-                _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
-        }
-
-
-        /// <summary>
-        /// Update an enemy projectile in the game view.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        private void UpdateEnemyProjectile(GameObject gameObject)
-        {
-            var projectile = gameObject as EnemyProjectile;
-
-            _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
-
-            if (destroyed)
-                return;
-
-            if (StarView.IsWarpingThroughSpace)
-                return;
-
-            if (projectile.IsMarkedForFadedDestruction)
-                return;
-
-            // check if enemy projectile collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
-            {
-                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
-                SetPlayerHealthBar();
-            }
         }
 
         #endregion
@@ -1213,57 +1164,19 @@ namespace AstroOdyssey
             else
             {
                 var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
-
                 PointerX = pointerX;
             }
 
             if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
             {
-                var coolDown = _playerFactory.PowerUpCoolDown(Player);
-
-                PlayerPowerBar.Value = coolDown.PowerRemaining;
-
-                if (coolDown.PowerDown)
-                {
-                    _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
-                    PlayerPowerBar.Visibility = Visibility.Collapsed;
-
-                    PowerUpType = PowerUpType.NONE;
-                    ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
-                }
+                PowerUpCoolDown();
             }
 
             if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
             {
-                var coolDown = _playerFactory.RageUpCoolDown(Player);
-
-                PlayerRageBar.Value = coolDown.RageRemaining;
-
-                if (coolDown.RageDown)
-                {
-                    _playerProjectileFactory.RageDown(Player);
-
-                    PlayerRageBar.Value = Player.Rage;
-                    PlayerRageIcon.Text = "😡";
-
-                    switch (Player.ShipClass)
-                    {
-                        case ShipClass.DEFENDER:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
-                            break;
-                        case ShipClass.BERSERKER:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
-                            break;
-                        case ShipClass.SPECTRE:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                RageCoolDown();
             }
         }
-
 
         /// <summary>
         /// Update a player projectile in the game view.
@@ -1274,7 +1187,9 @@ namespace AstroOdyssey
             var projectile = gameObject as PlayerProjectile;
 
             // move the projectile up and check if projectile has gone beyond the game view
-            _playerProjectileFactory.UpdateProjectile(projectile: projectile, destroyed: out bool destroyed);
+            _playerProjectileFactory.UpdateProjectile(
+                projectile: projectile,
+                destroyed: out bool destroyed);
 
             if (destroyed)
                 return;
@@ -1285,7 +1200,10 @@ namespace AstroOdyssey
             if (projectile.IsMarkedForFadedDestruction)
                 return;
 
-            _playerProjectileFactory.CollidePlayerProjectile(projectile: projectile, score: out double score, destroyedObject: out GameObject destroyedObject);
+            _playerProjectileFactory.CollidePlayerProjectile(
+                projectile: projectile,
+                score: out double score,
+                destroyedObject: out GameObject destroyedObject);
 
             if (GameView.IsBossEngaged)
             {
@@ -1296,34 +1214,16 @@ namespace AstroOdyssey
             {
                 if (!Player.IsRageUp)
                 {
-                    Player.Rage++;
-                    PlayerRageBar.Value = Player.Rage;
+                    AddRage();
                 }
 
                 // trigger rage after rage threashold kills
                 if (!Player.IsRageUp && Player.Rage >= Player.RageThreashold)
                 {
-                    PlayerRageIcon.Text = "🤬";
-                    _playerFactory.RageUp(Player);
-                    _playerProjectileFactory.RageUp(Player);
-
-                    switch (Player.ShipClass)
-                    {
-                        case ShipClass.DEFENDER:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_UP")}");
-                            break;
-                        case ShipClass.BERSERKER:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
-                            break;
-                        case ShipClass.SPECTRE:
-                            ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_UP")}");
-                            break;
-                        default:
-                            break;
-                    }
+                    ActivateRage();
                 }
 
-                PlayerScore.Score += score;
+                AddScore(score);
                 SetGameLevel(); // check game level on score change
             }
 
@@ -1354,6 +1254,69 @@ namespace AstroOdyssey
                     default:
                         break;
                 }
+            }
+        }
+
+        #endregion        
+
+        #region Enemy
+
+        /// <summary>
+        /// Update an enemy in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateEnemy(GameObject gameObject)
+        {
+            var enemy = gameObject as Enemy;
+
+            _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (enemy.IsMarkedForFadedDestruction)
+                return;
+
+            // check if enemy collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
+            {
+                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
+                SetPlayerHealthBar();
+                return;
+            }
+
+            // fire projectiles if at a legitimate distance from player
+            if (enemy.IsProjectileFiring && Player.GetY() - enemy.GetY() > 100)
+                _enemyProjectileFactory.SpawnProjectile(enemy: enemy, gameLevel: GameLevel);
+        }
+
+        /// <summary>
+        /// Update an enemy projectile in the game view.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        private void UpdateEnemyProjectile(GameObject gameObject)
+        {
+            var projectile = gameObject as EnemyProjectile;
+
+            _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
+
+            if (destroyed)
+                return;
+
+            if (StarView.IsWarpingThroughSpace)
+                return;
+
+            if (projectile.IsMarkedForFadedDestruction)
+                return;
+
+            // check if enemy projectile collides with player
+            if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
+            {
+                _playerProjectileFactory.DecreaseProjectilePower(player: Player);
+                SetPlayerHealthBar();
             }
         }
 
@@ -1506,12 +1469,86 @@ namespace AstroOdyssey
             if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
             {
                 _playerProjectileFactory.IncreaseProjectilePower(player: Player);
-
-                PlayerScore.Score++;
                 PlayerScore.CollectiblesCollected++;
 
-                SetGameLevel(); // check game level on score change
-                                //ShowInGameText($"‍💫 {_localizationHelper.GetLocalizedResource("COLLECTIBLE_COLLECTED")}");
+                AddScore(1);
+                AddScoreMultiplier();
+
+                if (ScoreMultiplierCount >= Score2xThreashold)
+                    ActivateScoreMultiplier();
+
+                SetGameLevel(); // check game level on score change                                
+            }
+        }
+
+        #endregion
+
+        #region Rage
+
+        /// <summary>
+        /// Adds rage.
+        /// </summary>
+        private void AddRage()
+        {
+            Player.Rage++;
+            PlayerRageBar.Value = Player.Rage;
+        }
+
+        /// <summary>
+        /// Activates rage.
+        /// </summary>
+        private void ActivateRage()
+        {
+            PlayerRageIcon.Text = "🤬";
+            _playerFactory.RageUp(Player);
+            _playerProjectileFactory.RageUp(Player);
+
+            switch (Player.ShipClass)
+            {
+                case ShipClass.DEFENDER:
+                    ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_UP")}");
+                    break;
+                case ShipClass.BERSERKER:
+                    ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_INCREASED")}");
+                    break;
+                case ShipClass.SPECTRE:
+                    ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_UP")}");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Cools down rage effect.
+        /// </summary>
+        private void RageCoolDown()
+        {
+            var coolDown = _playerFactory.RageUpCoolDown(Player);
+
+            PlayerRageBar.Value = coolDown.RageRemaining;
+
+            if (coolDown.RageDown)
+            {
+                _playerProjectileFactory.RageDown(Player);
+
+                PlayerRageBar.Value = Player.Rage;
+                PlayerRageIcon.Text = "😡";
+
+                switch (Player.ShipClass)
+                {
+                    case ShipClass.DEFENDER:
+                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
+                        break;
+                    case ShipClass.BERSERKER:
+                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("FIRING_RATE_DECREASED")}");
+                        break;
+                    case ShipClass.SPECTRE:
+                        ShowInGameContent(_rageImage, $"{_localizationHelper.GetLocalizedResource("CLOAK_DOWN")}");
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -1539,13 +1576,42 @@ namespace AstroOdyssey
             // check if power up collides with player
             if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
             {
-                PlayerPowerBar.Visibility = Visibility.Visible;
+                ActivatePowerUp(powerUp);
+            }
+        }
 
-                PowerUpType = powerUp.PowerUpType;
+        /// <summary>
+        /// Activates power up.
+        /// </summary>
+        /// <param name="powerUp"></param>
 
-                ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+        private void ActivatePowerUp(PowerUp powerUp)
+        {
+            PlayerPowerBar.Visibility = Visibility.Visible;
 
-                _playerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
+            PowerUpType = powerUp.PowerUpType;
+
+            ShowInGameContent(_powerUpImage, $"‍{_localizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+
+            _playerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
+        }
+
+        /// <summary>
+        /// Cools down power up effect.
+        /// </summary>
+        private void PowerUpCoolDown()
+        {
+            var coolDown = _playerFactory.PowerUpCoolDown(Player);
+
+            PlayerPowerBar.Value = coolDown.PowerRemaining;
+
+            if (coolDown.PowerDown)
+            {
+                _playerProjectileFactory.PowerDown(PowerUpType, player: Player);
+                PlayerPowerBar.Visibility = Visibility.Collapsed;
+
+                PowerUpType = PowerUpType.NONE;
+                ShowInGameContent(_powerUpImage, $"{_localizationHelper.GetLocalizedResource("POWER_DOWN")}");
             }
         }
 
@@ -1712,6 +1778,61 @@ namespace AstroOdyssey
                     }
                     break;
             }
+        }
+
+        #endregion
+
+        #region Score
+
+        private void AddScoreMultiplier()
+        {
+            ScoreMultiplierCount++;
+            SetScoreMultiplierCountText();
+
+            // TODO: increase multiplier progress bar
+        }
+
+
+        private void ActivateScoreMultiplier()
+        {
+            ScoreMultiplierCount = 0;
+            SetScoreMultiplierCountText();
+
+            _scoreMultiplierCoolDownCounter = _scoreMultiplierCoolDownAfter;
+            IsScoreMultiplierActivated = true;
+            _audioHelper.PlaySound(SoundType.SCORE_MULTIPLIER_ON);
+            ShowInGameContent(_scoreMultiplierImage, _localizationHelper.GetLocalizedResource("SCORE_MULTIPLIER_ON"));
+        }
+
+        private void ScoreMultiplierCoolDown()
+        {
+            if (IsScoreMultiplierActivated)
+            {
+                _scoreMultiplierCoolDownCounter--;
+
+                // TODO: decrease multiplier progress bar
+
+                if (_scoreMultiplierCoolDownCounter <= 0)
+                {
+                    IsScoreMultiplierActivated = false;
+                    _audioHelper.PlaySound(SoundType.SCORE_MULTIPLIER_OFF);
+                    ShowInGameContent(_scoreMultiplierImage, _localizationHelper.GetLocalizedResource("SCORE_MULTIPLIER_OFF"));
+                }
+            }
+        }
+
+        private void SetScoreMultiplierCountText()
+        {
+            ScoreMultiplierCountText.Text = $"x{ScoreMultiplierCount}";
+        }
+
+        /// <summary>
+        /// Adds the score.
+        /// </summary>
+        /// <param name="score"></param>
+        private void AddScore(double score)
+        {
+            PlayerScore.Score += IsScoreMultiplierActivated ? score * 2 : score;
         }
 
         #endregion

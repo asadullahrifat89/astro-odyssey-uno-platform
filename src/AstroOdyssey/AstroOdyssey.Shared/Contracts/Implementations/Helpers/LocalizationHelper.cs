@@ -255,13 +255,7 @@ namespace AstroOdyssey
                 new ("de", "SCHIFF REPARIERT"),
                 new ("fr", "NAVIRE RÉPARÉ"),
             }),
-            //new LocalizationTemplate(key: "COLLECTIBLE_COLLECTED", cultureValues: new (string Culture, string Value)[]
-            //{
-            //    new ("en", "COMIC BOOK COLLECTED"),
-            //    new ("bn", "কমিক বই সংগৃহীত"),
-            //    new ("de", "COMIC-BUCH GESAMMELT"),
-            //    new ("fr", "BD COLLECTIONNÉE"),
-            //}),
+           
             new LocalizationKey(key: "SONIC_BLAST", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "SONIC BLAST"),
@@ -618,6 +612,21 @@ namespace AstroOdyssey
                 new ("bn", "সর্বকালে"),
                 new ("de", "Alle Zeit"),
                 new ("fr", "Tout le temps"),
+            }),
+
+            new LocalizationKey(key: "SCORE_MULTIPLIER_ON", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "2x SCORE ON"),
+                new ("bn", "2x স্কোর চালু"),
+                new ("de", "2x Punktzahl auf"),
+                new ("fr", "2x score sur"),
+            }),
+            new LocalizationKey(key: "SCORE_MULTIPLIER_OFF", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "COLLECT MORE PIZZA SLICES"),
+                new ("bn", "আরও পিজ্জা স্লাইস সংগ্রহ করুন"),
+                new ("de", "SAMMELN SIE MEHR PIZZASCHEIBEN"),
+                new ("fr", "RECUEILLIR PLUS DE TRANCHES DE PIZZA"),
             }),
         };
 

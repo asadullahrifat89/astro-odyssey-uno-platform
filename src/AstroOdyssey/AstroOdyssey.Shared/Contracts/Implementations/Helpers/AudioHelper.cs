@@ -32,6 +32,8 @@ namespace AstroOdyssey
         private AudioPlayer COLLECTIBLE_COLLECTED = null;
         private AudioPlayer GAME_START = null;
         private AudioPlayer GAME_OVER = null;
+        private AudioPlayer SCORE_MULTIPLIER_ON = null;
+        private AudioPlayer SCORE_MULTIPLIER_OFF = null;
 
         #endregion     
 
@@ -361,7 +363,31 @@ namespace AstroOdyssey
 
                         COLLECTIBLE_COLLECTED.Play();
                     }
-                    break;       
+                    break;
+                case SoundType.SCORE_MULTIPLIER_ON:
+                    {
+                        if (SCORE_MULTIPLIER_ON is null)
+                        {
+                            SCORE_MULTIPLIER_ON = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.SCORE_MULTIPLIER_ON_MUSIC_URL),
+                                volume: 1.0);
+                        }
+
+                        SCORE_MULTIPLIER_ON.Play();
+                    }
+                    break;
+                case SoundType.SCORE_MULTIPLIER_OFF:
+                    {
+                        if (SCORE_MULTIPLIER_OFF is null)
+                        {
+                            SCORE_MULTIPLIER_OFF = new AudioPlayer(
+                                source: string.Concat(baseUrl, "/", GameObjectTemplates.SCORE_MULTIPLIER_OFF_MUSIC_URL),
+                                volume: 1.0);
+                        }
+
+                        SCORE_MULTIPLIER_OFF.Play();
+                    }
+                    break;
                 default:
                     {
                         // App.PlaySound(baseUrl, soundType);
@@ -540,5 +566,7 @@ namespace AstroOdyssey
         COLLECTIBLE_COLLECTED,
         GAME_START,
         GAME_OVER,
+        SCORE_MULTIPLIER_ON,
+        SCORE_MULTIPLIER_OFF
     }
 }

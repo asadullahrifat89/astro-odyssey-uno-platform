@@ -11,7 +11,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private int _collectibleSpawnCounter;
-        private int _collectibleSpawnAfter = 600;
+        private int _collectibleSpawnAfter = 500;
         private double _collectibleSpeed = 2;
 
         #endregion
@@ -31,7 +31,7 @@ namespace AstroOdyssey
 
         public void Reset()
         {
-            _collectibleSpawnAfter = 600;
+            _collectibleSpawnAfter = 500;
             _collectibleSpeed = 2;
         }
 
@@ -53,7 +53,7 @@ namespace AstroOdyssey
             {
                 GenerateCollectible();
                 _collectibleSpawnCounter = _collectibleSpawnAfter;
-                _collectibleSpawnAfter = _random.Next(500, 700);
+                //_collectibleSpawnAfter = _random.Next(500, 600);
             }
         }
 
@@ -89,6 +89,7 @@ namespace AstroOdyssey
         /// </summary>
         public void LevelUp()
         {
+            _collectibleSpawnAfter -= 15;
             var scale = _gameEnvironment.GetGameObjectScale();
             _collectibleSpeed += (1 * scale);
         }
