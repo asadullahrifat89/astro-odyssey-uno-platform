@@ -111,18 +111,15 @@ namespace AstroOdyssey
         #endregion
 
         #region Properties
+#if DEBUG
+        public Stopwatch Stopwatch { get; set; } 
+#endif
 
         public PeriodicTimer GameFrameTimer { get; set; }
 
-        public Stopwatch Stopwatch { get; set; }
+        public Player Player { get; set; }
 
         public PlayerScore PlayerScore { get; set; } = new PlayerScore();
-
-        public double PointerX { get; set; }
-
-        public double PointerY { get; set; }
-
-        public Player Player { get; set; }
 
         public GameLevel GameLevel { get; set; }
 
@@ -134,13 +131,6 @@ namespace AstroOdyssey
 
         public bool IsGameQuitting { get; set; }
 
-        private bool FiringProjectiles { get; set; } = false;
-
-
-        public bool MoveLeft { get; set; }
-
-        public bool MoveRight { get; set; }
-
         public List<Enemy> Bosses { get; set; }
 
         private double BossTotalHealth { get; set; }
@@ -148,6 +138,15 @@ namespace AstroOdyssey
         public bool IsPointerPressed { get; set; }
 
         public double PointerPressedX { get; set; }
+
+        public double PointerX { get; set; }
+
+        public double PointerY { get; set; }
+
+        public bool MoveLeft { get; set; }
+
+        public bool MoveRight { get; set; }
+        
 
         #endregion
 
@@ -246,8 +245,7 @@ namespace AstroOdyssey
             else
             {
                 InputView.Focus(FocusState.Programmatic);
-                StartGame();
-                FiringProjectiles = true;
+                StartGame();                
             }
         }
 
@@ -472,8 +470,7 @@ namespace AstroOdyssey
             GameFrameTimer.Dispose();
 
             ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
-
-            FiringProjectiles = false;
+                        
             IsGamePaused = true;
             PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Visible;
@@ -494,8 +491,7 @@ namespace AstroOdyssey
             InputView.Focus(FocusState.Programmatic);
 
             HideInGameText();
-
-            FiringProjectiles = true;
+                        
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
             QuitGameButton.Visibility = Visibility.Collapsed;
@@ -714,7 +710,6 @@ namespace AstroOdyssey
 
                 _playerProjectileFactory.SpawnProjectile(
                     isPoweredUp: Player.IsPoweredUp,
-                    firingProjectiles: FiringProjectiles,
                     player: Player,
                     gameLevel: GameLevel,
                     powerUpType: PowerUpType);
