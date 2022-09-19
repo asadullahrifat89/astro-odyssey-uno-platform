@@ -962,22 +962,30 @@ namespace AstroOdyssey
                 var starObjects = StarView.Children.OfType<GameObject>();
                 var planetObjects = PlanetView.Children.OfType<GameObject>();
 
-                var fpsText = $"FPS: {_fpsCount}\nframe_time: {_frameTime}\nframe_duration: {(int)_frameDuration}";
+                var fpsText = $"FPS: {_fpsCount}" +
+                    "\n----" +
+                    $"\nframe time: {_frameTime}" +
+                    $"\nframe duration: {(int)_frameDuration}" +
+                    "\n----";
+
                 FPSText.Text = fpsText;
 
-                var objectsCountText =
-                    $"enemies: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
-                    $"\nmeteors: {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
-                    $"\npowerups: {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
-                    $"\nenemy_projectiles: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
-                    $"\nplayer_projectiles: {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
-                    $"\nstars: {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
-                    $"\nplanets: {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
-
                 var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
-                var totalText = $"TOTAL: {total}";
 
-                ObjectsCountText.Text = objectsCountText + "\n" + totalText;
+                var objectsCountText =
+                    $"enemy: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
+                    $"\nmeteor: {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
+                    $"\npowerup: {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
+                    $"\nhealth: {gameObjects.Count(x => (string)x.Tag == Constants.HEALTH_TAG)} " +
+                    $"\nenemy projectile: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
+                    $"\nplayer projectile: {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
+                    $"\nstar: {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
+                    $"\nplanet: {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
+                    "\n----" +
+                    $"\nTOTAL: {total}";
+
+                ObjectsCountText.Text = objectsCountText;
+
                 _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
             }
 #endif
@@ -1035,18 +1043,18 @@ namespace AstroOdyssey
                 case ShipClass.DEFENDER:
                     {
                         PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Goldenrod);
-                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+                        PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
                     }
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Silver);
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Goldenrod);
                         PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.Red);
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
-                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.MediumPurple);
+                        PlayerHealthBarPanel.Background = new SolidColorBrush(Colors.Goldenrod);
                         PlayerHealthBarPanel.BorderBrush = new SolidColorBrush(Colors.Purple);
                     }
                     break;

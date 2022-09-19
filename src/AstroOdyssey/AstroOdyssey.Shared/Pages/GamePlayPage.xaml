@@ -46,22 +46,22 @@
                         <TextBlock
                             x:Name="GameLevelText"
                             Margin="15,3"
-                            HorizontalAlignment="Center"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="20"
                             FontWeight="Bold"
                             Foreground="White"
-                            TextAlignment="Center"
+                            TextAlignment="Left"
                             TextWrapping="WrapWholeWords" />
                         <TextBlock
                             x:Name="ScoreBarCount"
                             Margin="15,3"
-                            HorizontalAlignment="Center"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontSize="20"
                             FontWeight="Bold"
                             Foreground="White"
-                            TextAlignment="Center"
+                            TextAlignment="Right"
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>
 
@@ -120,13 +120,15 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Visibility="Collapsed">
+
                 <Grid Margin="5">
+
                     <!--  Collectible image  -->
-                    <!--<Image Source="ms-appx:///Assets/Images/Collectible/pizza5.png" />-->
                     <TextBlock
                         FontSize="40"
                         Text="🍕"
                         TextAlignment="Center" />
+
                     <!--  Collectible count  -->
                     <TextBlock
                         x:Name="ScoreMultiplierCountText"
@@ -134,7 +136,9 @@
                         FontSize="15"
                         FontWeight="SemiBold"
                         TextAlignment="Right" />
+
                 </Grid>
+
                 <!--  Multiplier bar  -->
                 <ProgressBar
                     x:Name="ScoreMultiplierBar"
@@ -153,6 +157,7 @@
                 x:Name="GameAnalyticsPanel"
                 HorizontalAlignment="Right"
                 Visibility="Collapsed">
+
                 <!--  This shows fps  -->
                 <TextBlock
                     x:Name="FPSText"
@@ -193,7 +198,7 @@
 
                 <!--  Health  -->
                 <TextBlock
-                    Margin="5,0"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
                     FontWeight="Bold"
