@@ -962,17 +962,17 @@ namespace AstroOdyssey
                 var starObjects = StarView.Children.OfType<GameObject>();
                 var planetObjects = PlanetView.Children.OfType<GameObject>();
 
-                var fpsText = $"FPS: {_fpsCount} | FRAME_TIME: {_frameTime} | FRAME_DURATION: {(int)_frameDuration}";
+                var fpsText = $"FPS: {_fpsCount}\nframe_time: {_frameTime}\nframe_duration: {(int)_frameDuration}";
                 FPSText.Text = fpsText;
 
                 var objectsCountText =
-                    $"ENEMIES: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
-                    $"| METEORS : {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
-                    $"| POWERUPS : {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
-                    $"| ENEMY_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
-                    $"| PLAYER_PROJECTILES : {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
-                    $"| STARS : {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
-                    $"| PLANETS : {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
+                    $"enemies: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_TAG)} " +
+                    $"\nmeteors: {gameObjects.Count(x => (string)x.Tag == Constants.METEOR_TAG)} " +
+                    $"\npowerups: {gameObjects.Count(x => (string)x.Tag == Constants.POWERUP_TAG)} " +
+                    $"\nenemy_projectiles: {gameObjects.Count(x => (string)x.Tag == Constants.ENEMY_PROJECTILE_TAG)} " +
+                    $"\nplayer_projectiles: {gameObjects.Count(x => (string)x.Tag == Constants.PLAYER_PROJECTILE_TAG)} " +
+                    $"\nstars: {starObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} " +
+                    $"\nplanets: {planetObjects.Count(x => (string)x.Tag == Constants.STAR_TAG)} ";
 
                 var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
                 var totalText = $"TOTAL: {total}";
@@ -1791,7 +1791,6 @@ namespace AstroOdyssey
 
             // TODO: increase multiplier progress bar
         }
-
 
         private void ActivateScoreMultiplier()
         {

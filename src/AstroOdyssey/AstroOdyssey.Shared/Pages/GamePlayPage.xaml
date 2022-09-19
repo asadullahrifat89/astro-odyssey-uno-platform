@@ -23,27 +23,24 @@
 
         <!--  Score, level bar, boss health  -->
         <StackPanel
-            x:Name="TopPanel"
-            Margin="5"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Orientation="Vertical">
 
-            <!--  Current score, level bar  -->
+            <!--  Level + score text, level bar  -->
             <StackPanel
                 x:Name="ScoreBarPanel"
                 Margin="5"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Right"
                 Orientation="Vertical"
                 Visibility="Collapsed">
 
                 <Border
-                    Margin="3,0"
                     HorizontalAlignment="Center"
                     Background="Goldenrod"
                     BorderBrush="White"
                     BorderThickness="3"
-                    CornerRadius="50">
+                    CornerRadius="50,0,0,50">
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock
@@ -73,10 +70,10 @@
                 <!--  Level bar  -->
                 <ProgressBar
                     x:Name="ScoreBar"
-                    Width="250"
+                    Width="200"
                     Height="5"
-                    Margin="5"
-                    HorizontalAlignment="Center"
+                    Margin="5,5,0,5"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Foreground="Goldenrod"
                     Maximum="100"
@@ -88,7 +85,7 @@
             <!--  Boss health bar  -->
             <StackPanel
                 x:Name="BossHealthBarPanel"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Right"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
 
@@ -122,19 +119,20 @@
                 x:Name="ScoreMultiplierPanel"
                 Margin="5"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Visibility="Collapsed">
-                <Grid Width="45" Height="45">
+                <StackPanel Orientation="Horizontal">
                     <!--  Collectible image  -->
-                    <Image Source="ms-appx:///Assets/Images/Collectible/pizza5.png" />
+                    <!--<Image Source="ms-appx:///Assets/Images/Collectible/pizza5.png" />-->
+                    <TextBlock FontSize="30" Text="🍕" />
                     <!--  Collectible count  -->
                     <TextBlock
                         x:Name="ScoreMultiplierCountText"
                         VerticalAlignment="Bottom"
-                        FontSize="18"
+                        FontSize="16"
                         FontWeight="SemiBold"
                         TextAlignment="Right" />
-                </Grid>
+                </StackPanel>
                 <!--  Multiplier bar  -->
                 <ProgressBar
                     x:Name="ScoreMultiplierBar"
@@ -150,23 +148,26 @@
             </StackPanel>
 
             <!--  Fps, frame time, object counts  -->
-            <StackPanel x:Name="GameAnalyticsPanel" Visibility="Collapsed">
+            <StackPanel
+                x:Name="GameAnalyticsPanel"
+                HorizontalAlignment="Right"
+                Visibility="Collapsed">
                 <!--  This shows fps  -->
                 <TextBlock
                     x:Name="FPSText"
                     Margin="5"
-                    FontWeight="Bold"
+                    FontWeight="SemiBold"
                     Foreground="White"
-                    TextAlignment="Center"
+                    TextAlignment="Right"
                     TextWrapping="WrapWholeWords" />
 
                 <!--  This shows current objects count in game canvas  -->
                 <TextBlock
                     x:Name="ObjectsCountText"
                     Margin="5"
-                    FontWeight="Bold"
+                    FontWeight="SemiBold"
                     Foreground="White"
-                    TextAlignment="Center"
+                    TextAlignment="Right"
                     TextWrapping="WrapWholeWords" />
             </StackPanel>
 
@@ -176,12 +177,12 @@
         <Border
             x:Name="PlayerHealthBarPanel"
             Margin="5"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Background="Goldenrod"
             BorderBrush="White"
             BorderThickness="3"
-            CornerRadius="50"
+            CornerRadius="0,50,50,0"
             Visibility="Collapsed">
             <StackPanel
                 Margin="10,3"
@@ -203,7 +204,7 @@
                 <!--  Health bar  -->
                 <ProgressBar
                     x:Name="PlayerHealthBar"
-                    Width="100"
+                    Width="50"
                     Height="5"
                     Margin="5,0"
                     VerticalAlignment="Center"
