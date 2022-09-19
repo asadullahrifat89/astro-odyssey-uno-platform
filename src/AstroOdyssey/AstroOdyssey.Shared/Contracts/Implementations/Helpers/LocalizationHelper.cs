@@ -301,10 +301,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameOverPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "GAME OVER"),
+                new ("en", "Game Over"),
                 new ("bn", "খেলা শেষ"),
-                new ("de", "SPIEL IST AUS"),
-                new ("fr", "JEU TERMINÉ"),
+                new ("de", "Spiel Ist Aus"),
+                new ("fr", "Jeu Terminé"),
             }),
             new LocalizationKey(key: "GameStartPage_AssetsCreditButton", cultureValues: new (string Culture, string Value)[]
             {
@@ -485,28 +485,28 @@ namespace AstroOdyssey
                 new ("en", "Logout"),
                 new ("bn", "প্রস্থান"),
                 new ("de", "Ausloggen"),
-                new ("fr", "Se déconnecter"),
+                new ("fr", "Se Déconnecter"),
             }),
             new LocalizationKey(key: "GameStartPage_WelcomeBackText", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "👋 Welcome back!"),
+                new ("en", "👋 Welcome Back!"),
                 new ("bn", "👋 স্বাগতম!"),
-                new ("de", "👋 Willkommen zurück!"),
-                new ("fr", "👋 Content de te revoir!"),
+                new ("de", "👋 Willkommen Xurück!"),
+                new ("fr", "👋 Content De Te Revoir!"),
             }),
             new LocalizationKey(key: "GameInstructionsPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "HOW TO PLAY"),
+                new ("en", "How To Play"),
                 new ("bn", "কিভাবে খেলতে হবে"),
-                new ("de", "SPIELANLEITUNG"),
-                new ("fr", "COMMENT JOUER"),
+                new ("de", "Spielanleitung"),
+                new ("fr", "Comment Jouer"),
             }),
             new LocalizationKey(key: "GameInstructionsPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "👍 Got it"),
+                new ("en", "👍 Got It"),
                 new ("bn", "👍 বুঝেছি"),
-                new ("de", "👍 Ich habs"),
-                new ("fr", "👍 J'ai compris"),
+                new ("de", "👍 Ich Habs"),
+                new ("fr", "👍 J'ai Compris"),
             }),
 
             new LocalizationKey(key: "GameInstructionsPage_ControlsText", cultureValues: new (string Culture, string Value)[]
@@ -514,7 +514,7 @@ namespace AstroOdyssey
                 new ("en", "Controls"),
                 new ("bn", "নিয়ন্ত্রণ"),
                 new ("de", "Kontrollen"),
-                new ("fr", "Les contrôles"),
+                new ("fr", "Les Contrôles"),
             }),
             new LocalizationKey(key: "GameInstructionsPage_ControlsText2", cultureValues: new (string Culture, string Value)[]
             {
@@ -526,10 +526,10 @@ namespace AstroOdyssey
 
             new LocalizationKey(key: "GameInstructionsPage_EnemiesText", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Enemies & meteors"),
+                new ("en", "Enemies & Meteors"),
                 new ("bn", "শত্রু ও উল্কা"),
                 new ("de", "Feinde & Meteore"),
-                new ("fr", "Ennemis et météores"),
+                new ("fr", "Ennemis et Météores"),
             }),
             new LocalizationKey(key: "GameInstructionsPage_EnemiesText2", cultureValues: new (string Culture, string Value)[]
             {

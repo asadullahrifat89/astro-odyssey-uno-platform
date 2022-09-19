@@ -314,7 +314,7 @@ namespace AstroOdyssey
 
             // increase enemy spwan rate
             if (_enemySpawnAfter > 2)
-                _enemySpawnAfter -= 7 * scale;
+                _enemySpawnAfter -= 6 * scale;
 
             _enemySpeed += (1 * scale);
         }

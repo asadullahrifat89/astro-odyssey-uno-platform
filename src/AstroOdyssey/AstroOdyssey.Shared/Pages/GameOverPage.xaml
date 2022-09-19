@@ -40,7 +40,7 @@
                 <TextBlock
                     x:Name="GameOverPage_Tagline"
                     x:Uid="GameOverPage_Tagline"
-                    FontSize="45"
+                    FontSize="40"
                     FontWeight="Bold"
                     Text="GAME OVER"
                     TextAlignment="Center" />

@@ -35,17 +35,19 @@
                 Orientation="Vertical"
                 Visibility="Collapsed">
 
+                <!--  Level + score text  -->
                 <Border
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Right"
                     Background="Goldenrod"
                     BorderBrush="White"
                     BorderThickness="3"
                     CornerRadius="50,0,0,50">
 
                     <StackPanel Orientation="Horizontal">
+                        <!--  Game level  -->
                         <TextBlock
                             x:Name="GameLevelText"
-                            Margin="15,3"
+                            Margin="15,3,0,3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -53,9 +55,10 @@
                             Foreground="White"
                             TextAlignment="Left"
                             TextWrapping="WrapWholeWords" />
+                        <!--  Score  -->
                         <TextBlock
                             x:Name="ScoreBarCount"
-                            Margin="15,3"
+                            Margin="15,3,10,3"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -72,7 +75,7 @@
                     x:Name="ScoreBar"
                     Width="200"
                     Height="5"
-                    Margin="5,5,0,5"
+                    Margin="5,5,0,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Foreground="Goldenrod"
@@ -85,76 +88,102 @@
             <!--  Boss health bar  -->
             <StackPanel
                 x:Name="BossHealthBarPanel"
+                Margin="5"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
 
-                <TextBlock
-                    x:Name="BossHealthBarText"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
-                    Text="💀"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                <Border
+                    HorizontalAlignment="Right"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    CornerRadius="50,0,0,50">
 
-                <ProgressBar
-                    x:Name="BossHealthBar"
-                    Width="200"
-                    Height="5"
-                    Margin="5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Foreground="Purple"
-                    Maximum="100"
-                    Minimum="0"
-                    Value="100" />
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock
+                            x:Name="BossHealthBarText"
+                            Margin="15,3,5,3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="💀"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+
+                        <ProgressBar
+                            x:Name="BossHealthBar"
+                            Width="100"
+                            Height="5"
+                            Margin="0,3,5,3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="Purple"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="100" />
+
+                    </StackPanel>
+
+                </Border>
 
             </StackPanel>
 
             <!--  Score multiplier  -->
             <StackPanel
                 x:Name="ScoreMultiplierPanel"
+                Margin="5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Visibility="Collapsed">
 
-                <Grid Margin="5">
+                <!--  Collectible icon + count  -->
+                <Border
+                    HorizontalAlignment="Right"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    CornerRadius="50,0,0,50">
 
-                    <!--  Collectible image  -->
-                    <TextBlock
-                        FontSize="35"
-                        Text="🍕"
-                        TextAlignment="Left" />
-                    <!--<Image
-                        Width="35"
-                        Height="35"
-                        Source="ms-appx:///Assets/Images/Collectible/pizza6.png" />-->
+                    <StackPanel Orientation="Horizontal">
 
-                    <!--  Collectible count  -->
-                    <TextBlock
-                        x:Name="ScoreMultiplierCountText"
-                        Margin="5,0"
-                        VerticalAlignment="Bottom"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        TextAlignment="Right" />
+                        <!--  Collectible image  -->
+                        <TextBlock
+                            Margin="15,3,0,3"
+                            FontSize="20"
+                            Text="🍕"
+                            TextAlignment="Left" />
 
-                </Grid>
+                        <!--  Collectible count  -->
+                        <TextBlock
+                            x:Name="ScoreMultiplierCountText"
+                            Margin="0,3,10,3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            TextAlignment="Right" />
+
+                    </StackPanel>
+
+                </Border>
 
                 <!--  Multiplier bar  -->
                 <ProgressBar
                     x:Name="ScoreMultiplierBar"
                     Width="45"
                     Height="5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    Margin="5,5,0,5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
                     Foreground="Goldenrod"
                     Maximum="8"
                     Minimum="0"
                     Value="0" />
+
             </StackPanel>
 
             <!--  Fps, frame time, object counts  -->
@@ -206,8 +235,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
                     Text="❤️"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
@@ -230,8 +257,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
                     Text="😡"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
@@ -252,8 +277,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    FontWeight="Bold"
-                    Foreground="White"
                     Text="⚡"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords"

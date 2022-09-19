@@ -44,7 +44,7 @@
                     <TextBlock
                         x:Name="GameInstructionsPage_Tagline"
                         x:Uid="GameInstructionsPage_Tagline"
-                        FontSize="45"
+                        FontSize="40"
                         FontWeight="Bold"
                         Text="How to play"
                         TextAlignment="Center"

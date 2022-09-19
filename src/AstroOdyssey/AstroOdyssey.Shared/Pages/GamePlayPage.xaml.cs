@@ -1314,7 +1314,7 @@ namespace AstroOdyssey
                     BossHealthBar.Foreground = new SolidColorBrush(Colors.Green);
                     break;
                 case BossClass.CRIMSON:
-                    BossHealthBar.Foreground = new SolidColorBrush(Colors.Orange);
+                    BossHealthBar.Foreground = new SolidColorBrush(Colors.DarkRed);
                     break;
                 case BossClass.BLUE:
                     BossHealthBar.Foreground = new SolidColorBrush(Colors.SkyBlue);

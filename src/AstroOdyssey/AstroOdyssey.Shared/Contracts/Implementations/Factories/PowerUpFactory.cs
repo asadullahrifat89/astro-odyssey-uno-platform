@@ -51,8 +51,7 @@ namespace AstroOdyssey
             if (_powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                _powerUpSpawnCounter = _powerUpSpawnAfter;
-                // _powerUpSpawnAfter = _random.Next(1400, 1501);
+                _powerUpSpawnCounter = _powerUpSpawnAfter;                
             }
         }
 
