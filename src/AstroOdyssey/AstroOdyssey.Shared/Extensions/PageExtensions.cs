@@ -109,7 +109,7 @@ namespace AstroOdyssey
 
             messageBlock.Foreground = new SolidColorBrush(Colors.White);
             messageBlock.Text = message;
-            messageBlock.Visibility = Visibility.Collapsed;
+            messageBlock.Visibility = message.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
 
             if (actionButtons.Any(x => x.IsEnabled))
             {
