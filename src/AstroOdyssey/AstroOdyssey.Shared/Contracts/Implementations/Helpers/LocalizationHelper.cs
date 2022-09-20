@@ -18,6 +18,13 @@ namespace AstroOdyssey
                 new ("de", "Astro-Odyssee"),
                 new ("fr", "Astro Odyssée"),
             }),
+            new LocalizationKey(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "A classic rock metal ⚡ space shooter on WebAssembly."),
+                new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।"),
+                new ("de", "Ein klassischer Rock Metal ⚡ Weltraum-Shooter auf WebAssembly."),
+                new ("fr", "Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly."),
+            }),
 
             new LocalizationKey(key: "Antimony", cultureValues: new (string Culture, string Value)[]
             {
@@ -358,13 +365,7 @@ namespace AstroOdyssey
                 new ("de", "Spiel Beginnen"),
                 new ("fr", "Démarrer Jeu"),
             }),
-            new LocalizationKey(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
-            {
-                new ("en", "A classic rock metal ⚡ space shooter on WebAssembly."),
-                new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।"),
-                new ("de", "Ein klassischer Rock Metal ⚡ Weltraum-Shooter auf WebAssembly."),
-                new ("fr", "Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly."),
-            }),
+            
             new LocalizationKey(key: "ShipSelectionPage_ChooseButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Select"),
@@ -627,6 +628,21 @@ namespace AstroOdyssey
                 new ("bn", "আরও গিটার সংগ্রহ করুন"),
                 new ("de", "SAMMLE MEHR GITARREN"),
                 new ("fr", "RECUEILLIR PLUS DE GUITARES"),
+            }),
+
+            new LocalizationKey(key: "LOADING_DATA", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Loading data..."),
+                new ("bn", "তথ্য প্রস্তুত হচ্ছে..."),
+                new ("de", "Lade Daten..."),
+                new ("fr", "Chargement des données..."),
+            }),
+            new LocalizationKey(key: "NO_DATA_AVAILABLE", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "No data available."),
+                new ("bn", "কোন তথ্য নেই।"),
+                new ("de", "Keine Daten verfügbar."),
+                new ("fr", "Pas de données disponibles."),
             }),
         };
 

@@ -151,7 +151,7 @@ namespace AstroOdyssey
         private async Task<bool> GetGameProfiles()
         {
             GameProfiles.Clear();
-            SetListViewMessage("Loading all time high scorers...");
+            SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
 
@@ -194,7 +194,7 @@ namespace AstroOdyssey
             }
             else
             {
-                SetListViewMessage("No data available.");
+                SetListViewMessage(_localizationHelper.GetLocalizedResource("NO_DATA_AVAILABLE"));
             }
 
             return true;
@@ -203,7 +203,7 @@ namespace AstroOdyssey
         private async Task<bool> GetGameScores()
         {
             GameScores.Clear();
-            SetListViewMessage("Loading today's high scorers...");
+            SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
             var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
 
@@ -246,7 +246,7 @@ namespace AstroOdyssey
             }
             else
             {
-                SetListViewMessage("No data available.");
+                SetListViewMessage(_localizationHelper.GetLocalizedResource("NO_DATA_AVAILABLE"));
             }
 
             return true;
