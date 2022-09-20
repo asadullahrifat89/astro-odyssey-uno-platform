@@ -169,9 +169,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\guitar2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\guitar3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\guitar4.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\guitar5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_game.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\health.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\gas_star2.png" />

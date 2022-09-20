@@ -85,9 +85,9 @@
 
                 <!--  Logo game  -->
                 <Image
-                    Width="150"
-                    Height="150"
-                    Source="ms-appx:///Assets/Images/logo_game.png" />
+                    Width="100"
+                    Height="100"
+                    Source="ms-appx:///Assets/Images/Player/player_ship1.png" />
 
                 <!--  Game name  -->
                 <TextBlock

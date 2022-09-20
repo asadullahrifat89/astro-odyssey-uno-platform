@@ -154,7 +154,7 @@ namespace AstroOdyssey
 
         public int ScoreMultiplierCount { get; set; }
 
-        public double ScoreMultiplierThreashold { get; set; } = 8;
+        public double ScoreMultiplierThreashold { get; set; } = 7;
 
         #endregion
 
@@ -365,7 +365,7 @@ namespace AstroOdyssey
             {
                 Stretch = Stretch.Uniform,
             };
-            _scoreMultiplierImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/score_multiplier.gif", UriKind.RelativeOrAbsolute));
+            _scoreMultiplierImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/score_multiplier.png", UriKind.RelativeOrAbsolute));
 
             await this.PlayLoadedTransition();
         }
