@@ -18,6 +18,19 @@
         <!--  Planets  -->
         <GameEnvironment x:Name="PlanetView" Background="Transparent" />
 
+        <!--  Gradient  -->
+        <Border
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Visibility="{x:Bind Path=PlayerHealthBarPanel.Visibility, Mode=OneWay}">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.15" StartPoint="1,0.5" EndPoint="0,0.5">
+                    <GradientStop Offset="0.00" Color="SkyBlue" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
         <!--  Player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
@@ -296,6 +309,7 @@
             </StackPanel>
         </Border>
 
+        <!--  In game message content  -->
         <StackPanel
             Margin="10"
             HorizontalAlignment="Center"
@@ -330,6 +344,7 @@
                     <SolidColorBrush Opacity="0.5" Color="Gray" />
                 </Border.Background>
             </Border>
+
         </StackPanel>
 
         <!--  Pointer + keyboard input capture  -->
