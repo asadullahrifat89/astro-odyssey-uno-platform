@@ -99,15 +99,23 @@ namespace AstroOdyssey
 
         private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
         {
+            RunProgressBar();
+
             GameLeaderboardPage_DailyScoreboardToggle.IsChecked = false;
             await GetGameProfiles();
+
+            StopProgressBar();
         }
 
         private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+            RunProgressBar();
+
             GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked = false;
             await GetGameScores();
-        }      
+
+            StopProgressBar();
+        }
 
         #endregion
 
@@ -143,11 +151,14 @@ namespace AstroOdyssey
         private async Task<bool> GetGameProfiles()
         {
             GameProfiles.Clear();
+            SetListViewMessage("Loading all time high scorers...");
 
             var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
 
             if (!recordsResponse.IsSuccess)
             {
+                SetListViewMessage();
+
                 var error = recordsResponse.Errors.Errors;
                 this.ShowError(
                     progressBar: _progressBar,
@@ -163,7 +174,7 @@ namespace AstroOdyssey
 
             if (count > 0)
             {
-                //_totalPageCount = _paginationHelper.GetTotalPageCount(pageSize: _pageSize, dataCount: count);
+                SetListViewMessage();
 
                 var records = result.Records;
 
@@ -179,20 +190,27 @@ namespace AstroOdyssey
                 if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameProfile gameProfile)
                 {
                     gameProfile.Emoji = "👨‍🚀";
-                }
+                }                
+            }
+            else
+            {
+                SetListViewMessage("No data available.");
             }
 
             return true;
-        }
+        }       
 
         private async Task<bool> GetGameScores()
         {
             GameScores.Clear();
+            SetListViewMessage("Loading today's high scorers...");
 
             var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
 
             if (!recordsResponse.IsSuccess)
             {
+                SetListViewMessage();
+
                 var error = recordsResponse.Errors.Errors;
                 this.ShowError(
                     progressBar: _progressBar,
@@ -208,6 +226,8 @@ namespace AstroOdyssey
 
             if (count > 0)
             {
+                SetListViewMessage();
+
                 var records = result.Records;
 
                 foreach (var record in records)
@@ -222,7 +242,11 @@ namespace AstroOdyssey
                 if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
                 {
                     gameScore.Emoji = "👨‍🚀";
-                }
+                }               
+            }
+            else
+            {
+                SetListViewMessage("No data available.");
             }
 
             return true;
@@ -261,6 +285,12 @@ namespace AstroOdyssey
             this.StopProgressBar(
                 progressBar: _progressBar,
                 actionButtons: _actionButtons);
+        }
+
+        private void SetListViewMessage(string message = null)
+        {
+            GameLeaderboardPage_ListViewMessage.Text = message;
+            GameLeaderboardPage_ListViewMessage.Visibility = message.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void SetLocalization()

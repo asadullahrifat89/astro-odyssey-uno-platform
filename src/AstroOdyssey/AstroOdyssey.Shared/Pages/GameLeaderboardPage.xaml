@@ -160,16 +160,29 @@
 
                 <!--  Leaderboard list  -->
                 <Grid Grid.Row="2" Margin="40,0,40,10">
+
+                    <!--  List view message  -->
+                    <TextBlock
+                        x:Name="GameLeaderboardPage_ListViewMessage"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Loading data..." />
+
                     <!--  All time  -->
                     <ListView
                         x:Name="GameLeaderboardPage_GameProfiles"
                         ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}"
                         Visibility="{x:Bind Path=GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked, Mode=OneWay}" />
+
                     <!--  Daily  -->
                     <ListView
                         x:Name="GameLeaderboardPage_GameScores"
                         ItemTemplate="{StaticResource GameLeaderboardPage_GameScores_DataTemplate}"
                         Visibility="{x:Bind Path=GameLeaderboardPage_DailyScoreboardToggle.IsChecked, Mode=OneWay}" />
+
                 </Grid>
 
                 <!--  personal best score, play now  -->
