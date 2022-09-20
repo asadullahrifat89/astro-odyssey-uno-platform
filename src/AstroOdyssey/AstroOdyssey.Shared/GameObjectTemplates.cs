@@ -90,12 +90,10 @@ namespace AstroOdyssey
 
         public static Uri[] COLLECTIBLE_TEMPLATES = new Uri[]
         {
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza1.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza2.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza3.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza4.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza5.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/pizza6.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar1.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar2.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar3.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar4.png", UriKind.RelativeOrAbsolute)
         };
 
         public static Uri[] GAME_MISC_IMAGE_TEMPLATES = new Uri[]

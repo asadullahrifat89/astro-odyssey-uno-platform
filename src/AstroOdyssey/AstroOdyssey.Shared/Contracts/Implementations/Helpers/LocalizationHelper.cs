@@ -623,10 +623,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "SCORE_MULTIPLIER_OFF", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "COLLECT MORE PIZZA SLICES"),
-                new ("bn", "আরও পিজ্জা স্লাইস সংগ্রহ করুন"),
-                new ("de", "SAMMELN SIE MEHR PIZZASCHEIBEN"),
-                new ("fr", "RECUEILLIR PLUS DE TRANCHES DE PIZZA"),
+                new ("en", "COLLECT MORE GUITARS"),
+                new ("bn", "আরও গিটার সংগ্রহ করুন"),
+                new ("de", "SAMMLE MEHR GITARREN"),
+                new ("fr", "RECUEILLIR PLUS DE GUITARES"),
             }),
         };
 

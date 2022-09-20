@@ -154,7 +154,7 @@
                         <TextBlock
                             Margin="15,3,0,3"
                             FontSize="20"
-                            Text="🍕"
+                            Text="🎸"
                             TextAlignment="Left" />
 
                         <!--  Collectible count  -->
