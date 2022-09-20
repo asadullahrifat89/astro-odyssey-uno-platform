@@ -15,14 +15,6 @@
             <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <!--  Pre-load-images  -->
-        <!--<Grid
-            x:Name="AssetsPreloadGrid"
-            Width="1"
-            Height="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top" />-->
-
         <!--  Language selection buttons  -->
         <StackPanel
             Margin="0,10"
@@ -85,21 +77,22 @@
 
             <StackPanel
                 x:Name="ActionStack"
-                MaxWidth="315"
+                Width="315"
                 Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
 
+                <!--  Logo game  -->
                 <Image
-                    Width="100"
-                    Height="100"
-                    Source="ms-appx:///Assets/Images/Player/player_ship1.png" />
+                    Width="150"
+                    Height="150"
+                    Source="ms-appx:///Assets/Images/logo_game.png" />
 
-                <!--  Logo  -->
+                <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,0,0,30"
+                    Margin="0,15,0,20"
                     FontSize="40"
                     FontWeight="Bold"
                     TextAlignment="Center"
@@ -109,7 +102,7 @@
                 <TextBlock
                     x:Name="GameStartPage_Tagline"
                     x:Uid="GameStartPage_Tagline"
-                    Margin="10"
+                    Margin="10,0,10,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
@@ -212,11 +205,11 @@
                     IsTabStop="False"
                     Visibility="Collapsed" />
 
-                <!--  Developer page  -->
+                <!--  Brand Tag line  -->
                 <HyperlinkButton
                     x:Name="GameStartPage_DeveloperProfileButton"
                     x:Uid="GameStartPage_DeveloperProfileButton"
-                    Margin="0,10"
+                    Margin="0,5,0,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Content="Made with ❤️ by Asadullah Rifat"
