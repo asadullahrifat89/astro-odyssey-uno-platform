@@ -93,7 +93,8 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/Collectible/guitar1.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/Collectible/guitar2.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/Collectible/guitar3.png", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/Collectible/guitar4.png", UriKind.RelativeOrAbsolute)
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar4.png", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/Collectible/guitar5.png", UriKind.RelativeOrAbsolute),
         };
 
         public static Uri[] GAME_MISC_IMAGE_TEMPLATES = new Uri[]
@@ -104,7 +105,7 @@ namespace AstroOdyssey
             new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute),
             new Uri("ms-appx:///Assets/Images/gameIntro.gif", UriKind.RelativeOrAbsolute),
-            new Uri("ms-appx:///Assets/Images/score_multiplier.gif", UriKind.RelativeOrAbsolute),
+            new Uri("ms-appx:///Assets/Images/score_multiplier.png", UriKind.RelativeOrAbsolute),
         };
 
         #endregion
