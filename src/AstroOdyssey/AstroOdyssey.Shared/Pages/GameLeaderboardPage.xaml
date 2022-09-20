@@ -129,6 +129,8 @@
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
+
+                    <!--  All time high score  -->
                     <ToggleButton
                         x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
                         Margin="5,0"
@@ -143,6 +145,8 @@
                         Foreground="White"
                         IsFocusEngagementEnabled="False"
                         IsTabStop="False" />
+
+                    <!--  Daily high score  -->
                     <ToggleButton
                         x:Name="GameLeaderboardPage_DailyScoreboardToggle"
                         Background="Goldenrod"
@@ -156,6 +160,7 @@
                         Foreground="White"
                         IsFocusEngagementEnabled="False"
                         IsTabStop="False" />
+
                 </StackPanel>
 
                 <!--  Leaderboard list  -->
@@ -169,7 +174,7 @@
                         FontSize="20"
                         FontWeight="SemiBold"
                         Foreground="White"
-                        Text="Loading data..." />
+                        Visibility="Collapsed" />
 
                     <!--  All time  -->
                     <ListView
