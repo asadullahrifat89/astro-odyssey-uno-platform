@@ -602,17 +602,17 @@ namespace AstroOdyssey
 
             new LocalizationKey(key: "GameLeaderboardPage_DailyScoreboardToggle", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "Daily"),
-                new ("bn", "দৈনিক"),
-                new ("de", "Täglich"),
-                new ("fr", "du quotidien"),
+                new ("en", "📅 Daily"),
+                new ("bn", "📅 দৈনিক"),
+                new ("de", "📅 Täglich"),
+                new ("fr", "📅 du quotidien"),
             }),
             new LocalizationKey(key: "GameLeaderboardPage_AllTimeScoreboardToggle", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "All time"),
-                new ("bn", "সর্বকালে"),
-                new ("de", "Alle Zeit"),
-                new ("fr", "Tout le temps"),
+                new ("en", "👑 All time"),
+                new ("bn", "👑 সর্বকালে"),
+                new ("de", "👑 Alle Zeit"),
+                new ("fr", "👑 Tout le temps"),
             }),
 
             new LocalizationKey(key: "SCORE_MULTIPLIER_ON", cultureValues: new (string Culture, string Value)[]
@@ -643,6 +643,14 @@ namespace AstroOdyssey
                 new ("bn", "কোন তথ্য নেই।"),
                 new ("de", "Keine Daten verfügbar."),
                 new ("fr", "Pas de données disponibles."),
+            }),
+
+            new LocalizationKey(key: "GameOverPage_SignupPromptText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "You could earn your place on the leaderboard if you login."),
+                new ("bn", "লগইন করলে আপনি লিডারবোর্ডে আপনার জায়গা অর্জন করতে পারেন।"),
+                new ("de", "Sie können sich Ihren Platz in der Rangliste verdienen, wenn Sie sich anmelden."),
+                new ("fr", "Vous pouvez gagner votre place dans le classement si vous vous connectez."),
             }),
         };
 
