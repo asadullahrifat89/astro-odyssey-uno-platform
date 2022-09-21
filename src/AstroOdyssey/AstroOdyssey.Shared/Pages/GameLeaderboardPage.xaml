@@ -95,7 +95,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
+                <!--  Last game score  -->
                 <StackPanel Grid.Row="0">
+
                     <!--  Tagline  -->
                     <TextBlock
                         x:Name="GameLeaderboardPage_Tagline"
@@ -107,7 +109,7 @@
                         TextAlignment="Center" />
 
                     <!--  Score  -->
-                    <StackPanel Margin="40,20,40,5">
+                    <StackPanel Margin="30,20,30,0">
                         <TextBlock
                             x:Name="ScoreText"
                             FontSize="20"
@@ -124,38 +126,33 @@
 
                 </StackPanel>
 
+                <!--  Leaderboard toggle buttons  -->
                 <StackPanel
                     x:Name="ScoreboardChoice"
                     Grid.Row="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
-                    <!--  All time high score  -->
+                    <!--  Daily high score  -->
                     <ToggleButton
-                        x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
-                        Margin="5,0"
-                        Background="Goldenrod"
-                        BorderBrush="White"
-                        BorderThickness="3"
-                        Checked="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
-                        Content="All Time"
+                        x:Name="GameLeaderboardPage_DailyScoreboardToggle"
+                        Checked="GameLeaderboardPage_DailyScoreboardToggle_Click"
+                        Content="Daily"
                         CornerRadius="50"
-                        FontSize="20"
+                        FontSize="15"
                         FontWeight="SemiBold"
                         Foreground="White"
                         IsFocusEngagementEnabled="False"
                         IsTabStop="False" />
 
-                    <!--  Daily high score  -->
+                    <!--  All time high score  -->
                     <ToggleButton
-                        x:Name="GameLeaderboardPage_DailyScoreboardToggle"
-                        Background="Goldenrod"
-                        BorderBrush="White"
-                        BorderThickness="3"
-                        Checked="GameLeaderboardPage_DailyScoreboardToggle_Click"
-                        Content="Daily"
+                        x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
+                        Margin="5,0"
+                        Checked="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
+                        Content="All Time"
                         CornerRadius="50"
-                        FontSize="20"
+                        FontSize="15"
                         FontWeight="SemiBold"
                         Foreground="White"
                         IsFocusEngagementEnabled="False"
@@ -164,7 +161,7 @@
                 </StackPanel>
 
                 <!--  Leaderboard list  -->
-                <Grid Grid.Row="2" Margin="40,0,40,10">
+                <Grid Grid.Row="2" Margin="40,5,40,5">
 
                     <!--  List view message  -->
                     <TextBlock
@@ -176,17 +173,17 @@
                         Foreground="White"
                         Visibility="Collapsed" />
 
-                    <!--  All time  -->
-                    <ListView
-                        x:Name="GameLeaderboardPage_GameProfiles"
-                        ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}"
-                        Visibility="{x:Bind Path=GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked, Mode=OneWay}" />
-
                     <!--  Daily  -->
                     <ListView
                         x:Name="GameLeaderboardPage_GameScores"
                         ItemTemplate="{StaticResource GameLeaderboardPage_GameScores_DataTemplate}"
                         Visibility="{x:Bind Path=GameLeaderboardPage_DailyScoreboardToggle.IsChecked, Mode=OneWay}" />
+
+                    <!--  All time  -->
+                    <ListView
+                        x:Name="GameLeaderboardPage_GameProfiles"
+                        ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}"
+                        Visibility="{x:Bind Path=GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked, Mode=OneWay}" />
 
                 </Grid>
 
@@ -194,8 +191,9 @@
                 <StackPanel
                     x:Name="ActionStack"
                     Grid.Row="3"
-                    Margin="40,0,40,5">
+                    Margin="30,0,30,5">
 
+                    <!--  Border before for personal best score  -->
                     <Border
                         Margin="10"
                         Background="Goldenrod"
@@ -252,6 +250,7 @@
                         IsTabStop="False"
                         ShowError="False"
                         ShowPaused="True" />
+
                 </StackPanel>
 
             </Grid>
@@ -311,4 +310,5 @@
         </Button>
 
     </Grid>
+
 </Page>

@@ -107,7 +107,7 @@ namespace AstroOdyssey
 
         private void MakeLeaderboardControlsVisible()
         {
-            GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
+            GameOverPage_SignupPromptPanel.Visibility = Visibility.Collapsed;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
         }
 
@@ -116,24 +116,25 @@ namespace AstroOdyssey
             // submit score on user login, or signup then login
             App.GameScoreSubmissionPending = true;
 
-            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
+            GameOverPage_SignupPromptPanel.Visibility = Visibility.Visible;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
         }
 
         private void SetGameResults()
         {
-            ScoreText.Text = $"{_localizationHelper.GetLocalizedResource("YOUR_SCORE")} " + App.PlayerScore.Score;
+            ScoreText.Text = _localizationHelper.GetLocalizedResource("YOUR_SCORE");
+            ScoreNumberText.Text = App.PlayerScore.Score.ToString();
 
             EnemiesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("ENEMIES_DESTROYED")} x " + App.PlayerScore.EnemiesDestroyed;
             MeteorsDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("METEORS_DESTROYED")} x " + App.PlayerScore.MeteorsDestroyed;
             BossesDestroyedText.Text = $"{_localizationHelper.GetLocalizedResource("BOSSES_DESTROYED")} x " + App.PlayerScore.BossesDestroyed;
             CollectiblesCollectedText.Text = $"{_localizationHelper.GetLocalizedResource("COLLECTIBLES_COLLECTED")} x " + App.PlayerScore.CollectiblesCollected;
 
-            CongratulationsText.Text = (App.PlayerScore.Score == 0
-                ? _localizationHelper.GetLocalizedResource("NO_LUCK") : App.PlayerScore.Score <= 400
-                ? _localizationHelper.GetLocalizedResource("GOOD_GAME") : App.PlayerScore.Score <= 800
-                ? _localizationHelper.GetLocalizedResource("GREAT_GAME") : App.PlayerScore.Score <= 1400
-                ? _localizationHelper.GetLocalizedResource("FANTASTIC_GAME") : _localizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
+            //CongratulationsText.Text = (App.PlayerScore.Score == 0
+            //    ? _localizationHelper.GetLocalizedResource("NO_LUCK") : App.PlayerScore.Score <= 400
+            //    ? _localizationHelper.GetLocalizedResource("GOOD_GAME") : App.PlayerScore.Score <= 800
+            //    ? _localizationHelper.GetLocalizedResource("GREAT_GAME") : App.PlayerScore.Score <= 1400
+            //    ? _localizationHelper.GetLocalizedResource("FANTASTIC_GAME") : _localizationHelper.GetLocalizedResource("SUPREME_GAME")) + "!";
         }
 
         private async Task<bool> SubmitScore()
@@ -190,6 +191,7 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameOverPage_PlayAgainButton);
             _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
             _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
+            _localizationHelper.SetLocalizedResource(GameOverPage_SignupPromptText);
         }
 
         #endregion      

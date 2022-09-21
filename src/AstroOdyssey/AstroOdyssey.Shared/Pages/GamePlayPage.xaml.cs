@@ -333,6 +333,8 @@ namespace AstroOdyssey
             IsScoreMultiplierActivated = false;
             SetScoreMultiplierCountText();
             ScoreMultiplierPanel.Visibility = Visibility.Collapsed;
+            ScoreMultiplierBar.Maximum = ScoreMultiplierThreashold;
+            ScoreMultiplierBar.Value = 0;
 
             ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);

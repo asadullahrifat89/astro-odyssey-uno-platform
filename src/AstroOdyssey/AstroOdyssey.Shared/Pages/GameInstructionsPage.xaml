@@ -210,7 +210,7 @@
                                     Width="35"
                                     Height="35"
                                     Margin="5"
-                                    Source="ms-appx:///Assets/Images/Collectible/guitar3.png" />
+                                    Source="ms-appx:///Assets/Images/Collectible/collectible3.png" />
                                 <TextBlock
                                     x:Name="GameInstructionsPage_CollectiblesText"
                                     Margin="5"

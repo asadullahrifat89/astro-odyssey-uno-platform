@@ -222,6 +222,7 @@
                     Foreground="White"
                     TextAlignment="Right"
                     TextWrapping="WrapWholeWords" />
+
             </StackPanel>
 
         </StackPanel>
@@ -237,6 +238,7 @@
             BorderThickness="3"
             CornerRadius="0,50,50,0"
             Visibility="Collapsed">
+
             <StackPanel
                 Margin="10,3"
                 HorizontalAlignment="Center"
@@ -307,6 +309,7 @@
                     Visibility="Collapsed" />
 
             </StackPanel>
+
         </Border>
 
         <!--  In game message content  -->
