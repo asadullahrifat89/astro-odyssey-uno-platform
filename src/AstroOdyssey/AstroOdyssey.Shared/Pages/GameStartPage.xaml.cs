@@ -286,7 +286,7 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_DeveloperProfileButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_BrandProfileButton);
             _localizationHelper.SetLocalizedResource(ApplicationName_Header);
             _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
             _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);

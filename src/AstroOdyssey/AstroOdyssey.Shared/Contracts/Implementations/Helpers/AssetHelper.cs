@@ -9,11 +9,17 @@ namespace AstroOdyssey
 {
     public class AssetHelper : IAssetHelper
     {
+        #region Fields
+
+        private readonly ILocalizationHelper _localizationHelper;
+
+        #endregion
+
         #region Ctor
 
-        public AssetHelper()
+        public AssetHelper(ILocalizationHelper localizationHelper)
         {
-
+            _localizationHelper = localizationHelper;
         }
 
         #endregion
@@ -29,7 +35,7 @@ namespace AstroOdyssey
 
             messageBlock.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             messageBlock.Foreground = new SolidColorBrush(Colors.White);
-            messageBlock.Text = "Loading game assets...";
+            messageBlock.Text = _localizationHelper.GetLocalizedResource("LOADING_GAME_ASSETS");
 
             var maximum = 0;
 

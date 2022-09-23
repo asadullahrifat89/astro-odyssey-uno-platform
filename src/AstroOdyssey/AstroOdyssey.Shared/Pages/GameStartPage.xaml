@@ -25,45 +25,45 @@
                 x:Name="GameStartPage_EnglishButton"
                 x:Uid="GameStartPage_EnglishButton"
                 Margin="2"
-                Background="Transparent"
                 Click="LanguageButton_Click"
                 Content="English"
                 CornerRadius="50"
                 IsFocusEngagementEnabled="False"
                 IsTabStop="False"
+                Style="{StaticResource DefaultButton}"
                 Tag="en" />
             <Button
                 x:Name="GameStartPage_FrenchButton"
                 x:Uid="GameStartPage_FrenchButton"
                 Margin="2"
-                Background="Transparent"
                 Click="LanguageButton_Click"
                 Content="French"
                 CornerRadius="50"
                 IsFocusEngagementEnabled="False"
                 IsTabStop="False"
+                Style="{StaticResource DefaultButton}"
                 Tag="fr" />
             <Button
                 x:Name="GameStartPage_DeutschButton"
                 x:Uid="GameStartPage_DeutschButton"
                 Margin="2"
-                Background="Transparent"
                 Click="LanguageButton_Click"
                 Content="Deutsch"
                 CornerRadius="50"
                 IsFocusEngagementEnabled="False"
                 IsTabStop="False"
+                Style="{StaticResource DefaultButton}"
                 Tag="de" />
             <Button
                 x:Name="GameStartPage_BanglaButton"
                 x:Uid="GameStartPage_BanglaButton"
                 Margin="2"
-                Background="Transparent"
                 Click="LanguageButton_Click"
                 Content="Bangla"
                 CornerRadius="50"
                 IsFocusEngagementEnabled="False"
                 IsTabStop="False"
+                Style="{StaticResource DefaultButton}"
                 Tag="bn" />
         </StackPanel>
 
@@ -71,9 +71,9 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            BorderBrush="#4d437d"
             BorderThickness="0,3,0,3"
-            CornerRadius="10">
+            CornerRadius="10"
+            Style="{StaticResource GameUIContainer}">
 
             <StackPanel
                 x:Name="ActionStack"
@@ -83,17 +83,14 @@
                 VerticalAlignment="Center"
                 Orientation="Vertical">
 
-                <!--  Logo game  -->
-                <Image
-                    Width="100"
-                    Height="100"
-                    Source="ms-appx:///Assets/Images/Player/player_ship1.png" />
+                <!--  Game logo  -->
+                <Image Height="100" Source="ms-appx:///Assets/Images/logo_game.png" />
 
                 <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
                     Margin="0,15,0,20"
-                    FontSize="40"
+                    FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
@@ -115,76 +112,69 @@
                     x:Name="GameStartPage_PlayButton"
                     x:Uid="GameStartPage_PlayButton"
                     Height="50"
-                    Margin="30,15,30,5"
+                    Margin="30,10,30,5"
                     HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
                     BorderThickness="3"
                     Click="PlayButton_Click"
                     Content="START GAME"
                     CornerRadius="50"
                     FontSize="24"
                     FontWeight="SemiBold"
-                    Foreground="White"
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
 
-                <!--  Leaderboard button  -->
-                <Button
-                    x:Name="GameOverPage_LeaderboardButton"
-                    x:Uid="GameOverPage_LeaderboardButton"
-                    Height="50"
-                    Margin="30,5,30,5"
-                    HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    Click="GameOverPage_LeaderboardButton_Click"
-                    Content="Leaderboard"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    Foreground="White"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
-                    Visibility="Collapsed" />
+                <StackPanel Margin="30,5,30,5">
 
-                <!--  Login Button  -->
-                <Button
-                    x:Name="GameLoginPage_LoginButton"
-                    x:Uid="GameLoginPage_LoginButton"
-                    Height="50"
-                    Margin="30,5,30,5"
-                    HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    Click="LoginButton_Click"
-                    Content="Login"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
-                    Visibility="Collapsed" />
+                    <!--  Leaderboard button  -->
+                    <Button
+                        x:Name="GameOverPage_LeaderboardButton"
+                        x:Uid="GameOverPage_LeaderboardButton"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        BorderThickness="3"
+                        Click="GameOverPage_LeaderboardButton_Click"
+                        Content="Leaderboard"
+                        CornerRadius="50"
+                        FontSize="24"
+                        FontWeight="SemiBold"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False"
+                        Visibility="Collapsed" />
 
-                <!--  Logout Button  -->
-                <Button
-                    x:Name="GameStartPage_LogoutButton"
-                    x:Uid="GameStartPage_LogoutButton"
-                    Height="40"
-                    Margin="5,5,5,5"
-                    HorizontalAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="White"
-                    BorderThickness="0"
-                    Click="LogoutButton_Click"
-                    Content="Logout"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
-                    Visibility="Collapsed" />
+                    <!--  Login Button  -->
+                    <Button
+                        x:Name="GameLoginPage_LoginButton"
+                        x:Uid="GameLoginPage_LoginButton"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        BorderThickness="3"
+                        Click="LoginButton_Click"
+                        Content="Login"
+                        CornerRadius="50"
+                        FontSize="24"
+                        FontWeight="SemiBold"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False"
+                        Visibility="Collapsed" />
+
+                    <!--  Logout Button  -->
+                    <Button
+                        x:Name="GameStartPage_LogoutButton"
+                        x:Uid="GameStartPage_LogoutButton"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        Background="Transparent"
+                        BorderBrush="White"
+                        BorderThickness="0"
+                        Click="LogoutButton_Click"
+                        Content="Logout"
+                        CornerRadius="50"
+                        FontWeight="SemiBold"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False"
+                        Visibility="Collapsed" />
+
+                </StackPanel>
 
                 <!--  Register Button  -->
                 <Button
@@ -207,8 +197,8 @@
 
                 <!--  Brand Tag line  -->
                 <HyperlinkButton
-                    x:Name="GameStartPage_DeveloperProfileButton"
-                    x:Uid="GameStartPage_DeveloperProfileButton"
+                    x:Name="GameStartPage_BrandProfileButton"
+                    x:Uid="GameStartPage_BrandProfileButton"
                     Margin="0,5,0,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -240,9 +230,7 @@
                     ShowPaused="True" />
 
             </StackPanel>
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
+
         </Border>
 
         <!--  Welcome back toast  -->
@@ -251,10 +239,10 @@
             Margin="10,50"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
-            BorderBrush="#4d437d"
             BorderThickness="3"
             CornerRadius="10"
-            Opacity="0">
+            Opacity="0"
+            Style="{StaticResource GameUIContainer}">
 
             <StackPanel Margin="10" Orientation="Horizontal">
                 <TextBlock
@@ -269,14 +257,10 @@
                     TextWrapping="Wrap" />
             </StackPanel>
 
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
-
         </Border>
 
         <!--  Asset credits  -->
-        <!--<HyperlinkButton
+        <HyperlinkButton
             x:Name="GameStartPage_AssetsCreditButton"
             x:Uid="GameStartPage_AssetsCreditButton"
             Margin="10"
@@ -287,7 +271,7 @@
             Foreground="White"
             IsFocusEngagementEnabled="False"
             IsTabStop="False"
-            NavigateUri="http://www.redfoc.com" />-->
+            NavigateUri="http://www.redfoc.com" />
     </Grid>
 
 </Page>

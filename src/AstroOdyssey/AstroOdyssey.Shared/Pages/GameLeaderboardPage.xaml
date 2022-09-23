@@ -82,9 +82,9 @@
             Margin="20,60,20,20"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            BorderBrush="#4d437d"
             BorderThickness="0,3,0,3"
-            CornerRadius="10">
+            CornerRadius="10"
+            Style="{StaticResource GameUIContainer}">
 
             <Grid>
 
@@ -255,10 +255,6 @@
 
             </Grid>
 
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
-
         </Border>
 
         <!--  This shows the player's name  -->
@@ -267,9 +263,9 @@
             Margin="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            BorderBrush="#4d437d"
             BorderThickness="3"
             CornerRadius="25"
+            Style="{StaticResource GameUIContainer}"
             Visibility="Collapsed">
 
             <StackPanel Orientation="Horizontal">
@@ -288,10 +284,6 @@
                     TextWrapping="Wrap" />
             </StackPanel>
 
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
-
         </Border>
 
         <!--  Take to previous page  -->
@@ -305,7 +297,8 @@
             Click="GoBackButton_Click"
             CornerRadius="100"
             IsFocusEngagementEnabled="False"
-            IsTabStop="False">
+            IsTabStop="False"
+            Style="{StaticResource DefaultButton}">
             <SymbolIcon Symbol="Back" />
         </Button>
 

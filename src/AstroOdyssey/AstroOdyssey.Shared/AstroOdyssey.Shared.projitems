@@ -171,6 +171,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_game.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_brand.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\powerup.png" />

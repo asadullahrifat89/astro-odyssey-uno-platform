@@ -18,9 +18,9 @@
         <Border
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            BorderBrush="#4d437d"
             BorderThickness="0,3,0,3"
-            CornerRadius="10">
+            CornerRadius="10"
+            Style="{StaticResource GameUIContainer}">
 
             <StackPanel
                 x:Name="ActionStack"
@@ -30,20 +30,19 @@
                 VerticalAlignment="Center"
                 Orientation="Vertical">
 
-                <Image
-                    Width="100"
-                    Height="100"
-                    Source="ms-appx:///Assets/Images/Player/player_ship1.png" />
+                <!--  Game logo  -->
+                <Image Height="100" Source="ms-appx:///Assets/Images/logo_brand.png" />
 
-                <!--  Logo  -->
+                <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,0,0,30"
-                    FontSize="40"
+                    Margin="0,15,0,20"
+                    FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
+                <!--  Email  -->
                 <TextBox
                     x:Name="GameSignupPage_UserEmailBox"
                     x:Uid="GameSignupPage_UserEmailBox"
@@ -53,6 +52,7 @@
                     Header="Enter email"
                     TextChanged="UserEmailBox_TextChanged" />
 
+                <!--  Username  -->
                 <TextBox
                     x:Name="GameSignupPage_UserNameBox"
                     x:Uid="GameSignupPage_UserNameBox"
@@ -62,6 +62,7 @@
                     Header="Set a username"
                     TextChanged="UserNameBox_TextChanged" />
 
+                <!--  Password  -->
                 <PasswordBox
                     x:Name="GameSignupPage_PasswordBox"
                     x:Uid="GameSignupPage_PasswordBox"
@@ -76,7 +77,7 @@
                     x:Name="GameSignupPage_SignupButton"
                     x:Uid="GameSignupPage_SignupButton"
                     Height="50"
-                    Margin="30,50,30,5"
+                    Margin="30,30,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -131,10 +132,6 @@
 
             </StackPanel>
 
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
-
         </Border>
 
         <!--  Take to previous page  -->
@@ -148,9 +145,11 @@
             Click="GoBackButton_Click"
             CornerRadius="100"
             IsFocusEngagementEnabled="False"
-            IsTabStop="False">
+            IsTabStop="False"
+            Style="{StaticResource DefaultButton}">
             <SymbolIcon Symbol="Back" />
         </Button>
 
     </Grid>
+
 </Page>

@@ -222,7 +222,6 @@
                     Foreground="White"
                     TextAlignment="Right"
                     TextWrapping="WrapWholeWords" />
-
             </StackPanel>
 
         </StackPanel>
@@ -238,7 +237,6 @@
             BorderThickness="3"
             CornerRadius="0,50,50,0"
             Visibility="Collapsed">
-
             <StackPanel
                 Margin="10,3"
                 HorizontalAlignment="Center"
@@ -309,7 +307,6 @@
                     Visibility="Collapsed" />
 
             </StackPanel>
-
         </Border>
 
         <!--  In game message content  -->
@@ -375,7 +372,8 @@
                 Click="PauseGameButton_Click"
                 CornerRadius="100"
                 IsFocusEngagementEnabled="False"
-                IsTabStop="False">
+                IsTabStop="False"
+                Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Pause" />
             </Button>
 
@@ -388,7 +386,8 @@
                 Click="QuitGameButton_Click"
                 CornerRadius="100"
                 IsFocusEngagementEnabled="False"
-                IsTabStop="False">
+                IsTabStop="False"
+                Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Undo" />
             </Button>
 

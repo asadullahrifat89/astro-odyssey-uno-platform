@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
+using Microsoft.UI.Xaml.Media;
 #if DEBUG
 using Microsoft.Extensions.Logging;
 #endif
@@ -123,7 +124,7 @@ namespace AstroOdyssey
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                rootFrame.Background = SolidColorBrushHelper.FromARGB(255, 7, 10, 37); // App.Current.Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
+                rootFrame.Background = App.Current.Resources["FrameBackgroundColor"] as SolidColorBrush; // App.Current.Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.IsNavigationStackEnabled = true;
