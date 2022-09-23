@@ -350,7 +350,7 @@ namespace AstroOdyssey
                 new ("fr", "Français"),
             }),
 
-            new LocalizationKey(key: "GameStartPage_DeveloperProfileButton", cultureValues: new (string Culture, string Value)[]
+            new LocalizationKey(key: "GameStartPage_BrandProfileButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Made with ❤️ by Asadullah Rifat"),
                 new ("bn", "আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি"),

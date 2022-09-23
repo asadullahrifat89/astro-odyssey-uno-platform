@@ -73,18 +73,14 @@
 
                 </StackPanel>
 
-                <!--<Border.Background>
-                    <SolidColorBrush Color="#27223f" />
-                </Border.Background>-->
-
             </Border>
 
             <!--  Scores, leaderboard, play again  -->
             <Border
                 Margin="5"
-                BorderBrush="#4d437d"
                 BorderThickness="0,3,0,3"
-                CornerRadius="10">
+                CornerRadius="10"
+                Style="{StaticResource GameUIContainer}">
 
                 <StackPanel
                     x:Name="ActionStack"
@@ -270,10 +266,6 @@
 
                 </StackPanel>
 
-                <Border.Background>
-                    <SolidColorBrush Color="#27223f" />
-                </Border.Background>
-
             </Border>
 
         </StackPanel>
@@ -284,9 +276,9 @@
             Margin="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            BorderBrush="#4d437d"
             BorderThickness="3"
             CornerRadius="25"
+            Style="{StaticResource GameUIContainer}"
             Visibility="Collapsed">
 
             <StackPanel Orientation="Horizontal">
@@ -304,10 +296,6 @@
                     FontWeight="SemiBold"
                     TextWrapping="Wrap" />
             </StackPanel>
-
-            <Border.Background>
-                <SolidColorBrush Color="#27223f" />
-            </Border.Background>
 
         </Border>
 
