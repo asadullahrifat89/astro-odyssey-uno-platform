@@ -8,7 +8,7 @@
 
         void GenerateCollectible();
 
-        void UpdateCollectible(Collectible collectible, out bool destroyed);
+        bool UpdateCollectible(Collectible collectible);
 
         void LevelUp();
 

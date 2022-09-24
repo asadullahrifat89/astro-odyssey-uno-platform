@@ -1,4 +1,5 @@
-﻿using static AstroOdyssey.Constants;
+﻿using System.Threading.Tasks;
+using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
 {
@@ -173,9 +174,9 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="projectile"></param>
         /// <param name="destroyed"></param>
-        public void UpdateProjectile(PlayerProjectile projectile, out bool destroyed)
+        public bool UpdateProjectile(PlayerProjectile projectile)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             // move projectile up                
             projectile.MoveY();
@@ -207,6 +208,8 @@ namespace AstroOdyssey
                 _gameEnvironment.AddDestroyableGameObject(projectile);
                 destroyed = true;
             }
+
+            return destroyed;
         }
 
         /// <summary>
@@ -215,18 +218,16 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CheckCollision(
-            PlayerProjectile projectile,
-            out double score,
-            out GameObject destroyedObject)
+        public (double Score, GameObject DestroyedObject) CheckCollision(PlayerProjectile projectile)
         {
-            score = 0;
-            destroyedObject = null;
+            double score = 0;
+            GameObject destroyedObject = null;
 
             // get the destructible objects which intersect with the current projectile
             var destructibles = _gameEnvironment.GetDestructibles(projectile.GetRect());
 
-            foreach (var destructible in destructibles)
+            //foreach (var destructible in destructibles)
+            Parallel.ForEach(destructibles, destructible =>
             {
                 // if projectile is powered up then execute over kill
                 if (projectile.IsPoweredUp)
@@ -338,7 +339,9 @@ namespace AstroOdyssey
                     default:
                         break;
                 }
-            }
+            });
+
+            return (score, destroyedObject);
         }
 
         /// <summary>

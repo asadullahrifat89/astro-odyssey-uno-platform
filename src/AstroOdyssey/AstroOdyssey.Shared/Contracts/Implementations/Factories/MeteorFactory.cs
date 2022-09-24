@@ -123,9 +123,9 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="meteor"></param>
         /// <param name="destroyed"></param>
-        public void UpdateMeteor(Meteor meteor, out bool destroyed)
+        public bool UpdateMeteor(Meteor meteor)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             meteor.CoolDownProjectileImpactEffect();
 
@@ -136,10 +136,12 @@ namespace AstroOdyssey
 
             // if the object is marked for lazy destruction then do not destroy immidiately
             if (meteor.IsMarkedForFadedDestruction)
-                return;
+                return false;
 
             // if meteor or meteor object has gone beyond game view
             destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(meteor);
+
+            return destroyed;
         }
 
         /// <summary>

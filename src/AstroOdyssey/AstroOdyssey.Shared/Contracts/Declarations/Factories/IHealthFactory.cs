@@ -8,7 +8,7 @@
 
         void GenerateHealth();
 
-        void UpdateHealth(Health health, out bool destroyed);
+        bool UpdateHealth(Health health);
 
         void LevelUp();
 

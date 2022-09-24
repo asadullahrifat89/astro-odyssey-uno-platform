@@ -26,8 +26,6 @@ namespace AstroOdyssey
 
         #region Methods
 
-        #region Public
-
         public void Reset()
         {
             _healthSpawnAfter = 1000;
@@ -78,15 +76,17 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="health"></param>
         /// <param name="destroyed"></param>
-        public void UpdateHealth(Health health, out bool destroyed)
+        public bool UpdateHealth(Health health)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             // move Health down
             health.MoveY();
 
             // if health or meteor object has gone beyond game view
             destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(health);
+
+            return destroyed;
         }
 
         /// <summary>
@@ -98,8 +98,6 @@ namespace AstroOdyssey
             var scale = _gameEnvironment.GetGameObjectScale();
             _healthSpeed += (1 * scale);
         }
-
-        #endregion
 
         #endregion
     }

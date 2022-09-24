@@ -55,9 +55,9 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="projectile"></param>
         /// <param name="destroyed"></param>
-        public void UpdateProjectile(EnemyProjectile projectile, out bool destroyed)
+        public bool UpdateProjectile(EnemyProjectile projectile)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             // move projectile down                
             projectile.MoveY();
@@ -72,6 +72,8 @@ namespace AstroOdyssey
                 _gameEnvironment.AddDestroyableGameObject(projectile);
                 destroyed = true;
             }
+
+            return destroyed;
         }
 
         #endregion

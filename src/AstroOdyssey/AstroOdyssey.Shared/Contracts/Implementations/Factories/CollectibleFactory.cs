@@ -77,15 +77,17 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="collectible"></param>
         /// <param name="destroyed"></param>
-        public void UpdateCollectible(Collectible collectible, out bool destroyed)
+        public bool UpdateCollectible(Collectible collectible)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             // move Collectible down
             collectible.MoveY();
 
             // if Collectible or meteor object has gone beyond game view
             destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(collectible);
+
+            return destroyed;
         }
 
         /// <summary>

@@ -75,15 +75,17 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="powerUp"></param>
         /// <param name="destroyed"></param>
-        public void UpdatePowerUp(PowerUp powerUp, out bool destroyed)
+        public bool UpdatePowerUp(PowerUp powerUp)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             // move PowerUp down
             powerUp.MoveY();
 
             // if powerUp or meteor object has gone beyond game view
             destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+
+            return destroyed;
         }
 
         /// <summary>

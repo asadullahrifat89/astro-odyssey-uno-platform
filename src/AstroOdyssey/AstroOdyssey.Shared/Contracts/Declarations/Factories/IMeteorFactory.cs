@@ -10,7 +10,7 @@
 
         void DestroyMeteor(Meteor meteor);
 
-        void UpdateMeteor(Meteor meteor, out bool destroyed);
+        bool UpdateMeteor(Meteor meteor);
 
         void LevelUp();
 

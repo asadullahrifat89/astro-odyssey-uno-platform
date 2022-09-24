@@ -14,7 +14,7 @@
 
         void GeneratePlanet();
 
-        void UpdateCelestialObject(CelestialObject celestialObject, out bool destroyed);
+        bool UpdateCelestialObject(CelestialObject celestialObject);
 
         void LevelUp();
 

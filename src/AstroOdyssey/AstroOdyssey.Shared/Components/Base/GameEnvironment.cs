@@ -73,7 +73,7 @@ namespace AstroOdyssey
                 case <= 400:
                     return 3.5;
                 case <= 500:
-                    return 3;
+                    return 2.5;
                 case <= 700:
                     return 2;
                 case <= 900:

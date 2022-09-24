@@ -246,9 +246,9 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="enemy"></param>
         /// <param name="destroyed"></param>
-        public void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed)
+        public bool UpdateEnemy(Enemy enemy, double pointerX)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             enemy.CoolDownProjectileImpactEffect();
 
@@ -303,10 +303,12 @@ namespace AstroOdyssey
 
             // if the object is marked for lazy destruction then do not destroy immidiately
             if (enemy.IsMarkedForFadedDestruction)
-                return;
+                return false;
 
             // if object has gone beyond game view
             destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(enemy);
+
+            return destroyed;
         }
 
         /// <summary>
