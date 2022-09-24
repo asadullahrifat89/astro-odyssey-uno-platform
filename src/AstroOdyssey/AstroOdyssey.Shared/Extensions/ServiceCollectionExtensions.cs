@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace AstroOdyssey
 {
-    public static class ServiceCollectionExtensions 
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddFactories(this IServiceCollection serviceCollection)
         {

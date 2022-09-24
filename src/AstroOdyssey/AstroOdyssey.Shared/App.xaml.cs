@@ -7,9 +7,9 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI.ViewManagement;
 #if DEBUG
 using Microsoft.Extensions.Logging;
 #endif
@@ -59,7 +59,7 @@ namespace AstroOdyssey
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
 
             CurrentCulture = "en";
-        }        
+        }
 
         #endregion
 

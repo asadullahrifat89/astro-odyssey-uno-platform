@@ -24,7 +24,7 @@ namespace AstroOdyssey
 #endif
         }
 
-        public void SetSource(string source) 
+        public void SetSource(string source)
         {
             this.ExecuteJavascript($"element.src = \"{source}\"; ");
         }

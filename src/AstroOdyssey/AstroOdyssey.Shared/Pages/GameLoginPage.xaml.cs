@@ -155,7 +155,7 @@ namespace AstroOdyssey
 
             _cacheHelper.SetCachedPlayerCredentials(
                 userName: GameLoginPage_UserNameBox.Text.Trim(),
-                password: GameLoginPage_PasswordBox.Text.Trim());            
+                password: GameLoginPage_PasswordBox.Text.Trim());
 
             return true;
         }

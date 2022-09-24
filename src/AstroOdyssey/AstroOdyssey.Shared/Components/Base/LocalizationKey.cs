@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public class LocalizationKey 
+    public class LocalizationKey
     {
         public LocalizationKey(string key, (string Culture, string Value)[] cultureValues)
         {

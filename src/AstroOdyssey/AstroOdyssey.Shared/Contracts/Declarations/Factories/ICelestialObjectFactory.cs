@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface ICelestialObjectFactory 
+    public interface ICelestialObjectFactory
     {
         void SetGameEnvironments(GameEnvironment starView, GameEnvironment planetView);
 

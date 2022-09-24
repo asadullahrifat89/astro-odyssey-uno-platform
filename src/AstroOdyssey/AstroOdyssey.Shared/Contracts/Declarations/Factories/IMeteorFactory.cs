@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface IMeteorFactory 
+    public interface IMeteorFactory
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 

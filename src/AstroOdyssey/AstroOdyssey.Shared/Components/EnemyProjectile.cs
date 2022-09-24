@@ -28,8 +28,8 @@ namespace AstroOdyssey
 
         public void SetAttributes(Enemy enemy, double scale = 1, bool isOverPowered = false)
         {
-            Speed = enemy.IsBoss 
-                ? enemy.Speed * 1.50 
+            Speed = enemy.IsBoss
+                ? enemy.Speed * 1.50
                 : enemy.Speed * 1.65;
 
             double height = 12;

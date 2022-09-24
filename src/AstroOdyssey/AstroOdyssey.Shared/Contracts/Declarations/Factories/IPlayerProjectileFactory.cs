@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface IPlayerProjectileFactory 
+    public interface IPlayerProjectileFactory
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 

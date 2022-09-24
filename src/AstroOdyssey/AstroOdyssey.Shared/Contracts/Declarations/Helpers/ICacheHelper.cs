@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface ICacheHelper 
+    public interface ICacheHelper
     {
         PlayerCredentials GetCachedPlayerCredentials();
 

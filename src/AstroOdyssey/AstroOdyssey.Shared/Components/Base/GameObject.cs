@@ -274,7 +274,7 @@ namespace AstroOdyssey
         }
 
         public void Lengthen()
-        {            
+        {
             Height += 0.6d;
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public class PlayerCredentials 
+    public class PlayerCredentials
     {
         public PlayerCredentials(string userName, string password)
         {

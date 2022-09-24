@@ -128,7 +128,7 @@ namespace AstroOdyssey
                                     gameEnvironment: _gameEnvironment);
 
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                                
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;
                             }
                         }
                         break;
@@ -188,7 +188,7 @@ namespace AstroOdyssey
                                     left: enemy.GetX() + enemy.Width - (35 * scale) - projectile4.HalfWidth,
                                     gameEnvironment: _gameEnvironment);
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                                
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;
                             }
                         }
                         break;
@@ -230,7 +230,7 @@ namespace AstroOdyssey
                                     gameEnvironment: _gameEnvironment);
 
 
-                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;                             
+                                enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;
                             }
                         }
                         break;
@@ -268,7 +268,7 @@ namespace AstroOdyssey
                 {
                     projectile.OverPower();
 
-                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter;                    
+                    enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter;
                 }
             }
         }
