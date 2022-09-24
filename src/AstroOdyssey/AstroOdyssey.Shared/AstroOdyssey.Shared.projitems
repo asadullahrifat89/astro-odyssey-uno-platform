@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\HttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\PaginationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Global\InGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameInstructionsPage.xaml.cs">
       <DependentUpon>GameInstructionsPage.xaml</DependentUpon>
@@ -277,7 +278,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Models\Global\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>

@@ -37,12 +37,6 @@ namespace AstroOdyssey
         private long _frameEndTime;
         private double _frameDuration;
 #endif
-        private int _showInGameTextSpawnCounter = 110;
-        private int _showInGameTextAfter = 110;
-
-        private int _showInGameImagePanelSpawnCounter = 110;
-        private int _showInGameImagePanelAfter = 110;
-
         private double _scoreMultiplierCoolDownCounter;
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
 
@@ -278,6 +272,7 @@ namespace AstroOdyssey
             }
             else
             {
+                HideInGameContent();
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
                 IsGameQuitting = true;
                 ShowInGameText($"🛸\n{_localizationHelper.GetLocalizedResource("QUIT_GAME")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
@@ -342,32 +337,32 @@ namespace AstroOdyssey
             _powerUpImage = new Image
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute))
             };
-            _powerUpImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/powerup.png", UriKind.RelativeOrAbsolute));
 
             _healthImage = new Image
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute))
             };
-            _healthImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute));
 
             _bossAppearedImage = new Image
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_appeared.png", UriKind.RelativeOrAbsolute))
             };
-            _bossAppearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_appeared.png", UriKind.RelativeOrAbsolute));
 
             _bossClearedImage = new Image
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute))
             };
-            _bossClearedImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/boss_cleared.png", UriKind.RelativeOrAbsolute));
 
             _scoreMultiplierImage = new Image
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/score_multiplier.png", UriKind.RelativeOrAbsolute))
             };
-            _scoreMultiplierImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/Images/score_multiplier.png", UriKind.RelativeOrAbsolute));
 
             await this.PlayLoadedTransition();
         }
@@ -429,7 +424,7 @@ namespace AstroOdyssey
 
             SetPlayerHealthBar(); // set player health bar at game start
 
-            HideInGameText();
+            HideInGameContent();
 
             ResetFactories();
 
@@ -484,6 +479,7 @@ namespace AstroOdyssey
         /// </summary>
         private void PauseGame()
         {
+            HideInGameContent();
             InputView.Focus(FocusState.Programmatic);
 
             GameFrameTimer.Dispose();
@@ -509,7 +505,7 @@ namespace AstroOdyssey
         {
             InputView.Focus(FocusState.Programmatic);
 
-            HideInGameText();
+            HideInGameContent();
 
             IsGamePaused = false;
             PauseGameButton.Visibility = Visibility.Visible;
@@ -588,9 +584,7 @@ namespace AstroOdyssey
 
             SpawnGameObjects();
 
-            InGameTextCoolDown();
-
-            InGameImagePanelCoolDown();
+            InGameContentCoolDown();
 
             DamageRecoveryCoolDown();
 
@@ -749,8 +743,8 @@ namespace AstroOdyssey
         /// <param name="text"></param>
         private void ShowInGameContent(Image image, string text)
         {
-            ShowInGameImagePanel(image);
-            ShowInGameText(text);
+            var scale = GameView.GetGameObjectScale();
+            InGameContentPanel.Children.Add(new InGameMessage(text, scale, image));
         }
 
         /// <summary>
@@ -758,73 +752,36 @@ namespace AstroOdyssey
         /// </summary>
         private void ShowInGameText(string text)
         {
-            InGameText.Visibility = Visibility.Visible;
-            InGameText.Text = text;
-            _showInGameTextSpawnCounter = _showInGameTextAfter;
-        }
-
-        /// <summary>
-        /// Shows in game image.
-        /// </summary>
-        /// <param name="image"></param>
-        private void ShowInGameImagePanel(Image image)
-        {
             var scale = GameView.GetGameObjectScale();
-
-            image.Height = 100 * scale;
-            image.Width = 100 * scale;
-
-            InGameImagePanel.Children.Clear();
-            InGameImagePanel.Children.Add(image);
-            InGameImagePanel.Visibility = Visibility.Visible;
-            _showInGameImagePanelSpawnCounter = _showInGameImagePanelAfter;
+            InGameContentPanel.Children.Add(new InGameMessage(text, scale));
         }
 
         /// <summary>
         /// Hides the in game text after keeping it visible for a few frames.
         /// </summary>
-        private void InGameTextCoolDown()
+        private void InGameContentCoolDown()
         {
-            if (!InGameText.Text.IsNullOrBlank())
-            {
-                _showInGameTextSpawnCounter--;
+            var removables = new List<InGameMessage>();
 
-                if (_showInGameTextSpawnCounter <= 0)
-                    HideInGameText();
+            foreach (InGameMessage content in InGameContentPanel.Children)
+            {
+                if (content.CoolDown())
+                    removables.Add(content);
             }
-        }
 
-        /// <summary>
-        /// Hides the in game image after keeping it visible for a few frames.
-        /// </summary>
-        private void InGameImagePanelCoolDown()
-        {
-            if (InGameImagePanel.Visibility == Visibility.Visible)
+            foreach (var removable in removables)
             {
-                _showInGameImagePanelSpawnCounter -= 1;
-
-                if (_showInGameImagePanelSpawnCounter <= 0)
-                {
-                    HideInGameImagePanel();
-                }
+                InGameContentPanel.Children.Remove(removable);
             }
         }
 
         /// <summary>
         /// Hides the in game text.
         /// </summary>
-        private void HideInGameText()
+        private void HideInGameContent()
         {
-            InGameText.Visibility = Visibility.Collapsed;
-            InGameText.Text = null;
-        }
-
-        /// <summary>
-        /// Hides in game image.
-        /// </summary>
-        private void HideInGameImagePanel()
-        {
-            InGameImagePanel.Visibility = Visibility.Collapsed;
+            
+            InGameContentPanel.Children.Clear();
         }
 
         #endregion
@@ -1010,9 +967,8 @@ namespace AstroOdyssey
             _rageImage = new Image()
             {
                 Stretch = Stretch.Uniform,
+                Source = new BitmapImage(GameObjectTemplates.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri)
             };
-
-            _rageImage.Source = new BitmapImage(GameObjectTemplates.PLAYER_RAGE_TEMPLATES.FirstOrDefault(x => x.ShipClass == Player.ShipClass).AssetUri);
 
             switch (Player.ShipClass)
             {
