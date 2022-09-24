@@ -2,7 +2,7 @@
 
 namespace AstroOdyssey
 {
-    public interface ILocalizationHelper 
+    public interface ILocalizationHelper
     {
         string GetLocalizedResource(string resourceKey);
 

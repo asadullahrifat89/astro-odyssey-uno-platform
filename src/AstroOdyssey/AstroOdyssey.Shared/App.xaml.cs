@@ -7,9 +7,9 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
 using Microsoft.UI.Xaml.Media;
+using Windows.UI.ViewManagement;
 #if DEBUG
 using Microsoft.Extensions.Logging;
 #endif
@@ -59,7 +59,7 @@ namespace AstroOdyssey
             _goBackPageRoutes = new List<(Type IfGoingBackTo, Type RouteTo)>() { (IfGoingBackTo: typeof(GameOverPage), RouteTo: typeof(GameStartPage)) };
 
             CurrentCulture = "en";
-        }        
+        }
 
         #endregion
 
@@ -258,8 +258,8 @@ namespace AstroOdyssey
             if (_baseUrl.IsNullOrBlank())
             {
                 var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
-                var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-                _baseUrl = $"{indexUrl}{appPackage}";
+                var appPackageId = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
+                _baseUrl = $"{indexUrl}{appPackageId}";
 
 #if DEBUG
                 Console.WriteLine(_baseUrl);

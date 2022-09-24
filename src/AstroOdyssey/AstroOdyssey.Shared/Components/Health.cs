@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 
 namespace AstroOdyssey
 {
@@ -39,7 +39,7 @@ namespace AstroOdyssey
         {
             Speed = speed;
 
-            var uri = new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute);            
+            var uri = new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute);
 
             content.Source = new BitmapImage(uri);
 

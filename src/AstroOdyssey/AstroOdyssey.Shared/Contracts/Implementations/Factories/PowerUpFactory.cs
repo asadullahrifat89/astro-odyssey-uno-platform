@@ -55,7 +55,7 @@ namespace AstroOdyssey
             if (_powerUpSpawnCounter < 0)
             {
                 GeneratePowerUp();
-                _powerUpSpawnCounter = _powerUpSpawnAfter;                
+                _powerUpSpawnCounter = _powerUpSpawnAfter;
             }
         }
 

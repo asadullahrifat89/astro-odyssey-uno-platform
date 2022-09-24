@@ -42,7 +42,7 @@ namespace AstroOdyssey
 
         #region Public
 
-        public void Reset() 
+        public void Reset()
         {
             _starSpawnAfter = 250;
             _starSpeed = 0.2d;
@@ -224,7 +224,7 @@ namespace AstroOdyssey
             var scale = _starView.GetGameObjectScale();
             _starSpawnAfter -= (10 * scale);
             _starSpeed += (0.1d * scale);
-        } 
+        }
 
         #endregion
 

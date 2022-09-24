@@ -24,15 +24,14 @@
 		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
 
 		<!--Interpreter-->
-		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>		
-		<WasmShellEmccLinkOptimization>true</WasmShellEmccLinkOptimization>
+		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 
 		<!--PWA-->
 		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
 	</PropertyGroup>
-	<ItemGroup>
+	<!--<ItemGroup>
 		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB" />
-	</ItemGroup>
+	</ItemGroup>-->
 	<ItemGroup>
 		<Content Include="Assets\Icon192x192.png" />
 	</ItemGroup>

@@ -16,7 +16,7 @@ namespace AstroOdyssey
         public static CelestialObjectTemplate[] STAR_TEMPLATES = new CelestialObjectTemplate[]
         {
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Star/star1.png", UriKind.RelativeOrAbsolute), size : 25),
-            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Star/star2.png", UriKind.RelativeOrAbsolute), size : 25),
+            new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Star/star2.png", UriKind.RelativeOrAbsolute), size : 25),            
             
             //new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Star/gas_star1.png", UriKind.RelativeOrAbsolute), size : 30),
             new CelestialObjectTemplate(assetUri : new Uri("ms-appx:///Assets/Images/Star/gas_star2.png", UriKind.RelativeOrAbsolute), size : 30),
@@ -124,7 +124,6 @@ namespace AstroOdyssey
 
         public static string[] BOSS_APPEARANCE_MUSIC_URLS = new string[]
         {
-            //"Assets/Sounds/Boss/despair-metal-trailer-109943.mp3",
             "Assets/Sounds/Boss/boss1.mp3",
             "Assets/Sounds/Boss/boss2.mp3",
             "Assets/Sounds/Boss/boss3.mp3",

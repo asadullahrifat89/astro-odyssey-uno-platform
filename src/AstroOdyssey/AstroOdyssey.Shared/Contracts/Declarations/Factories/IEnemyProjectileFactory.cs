@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface IEnemyProjectileFactory 
+    public interface IEnemyProjectileFactory
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 

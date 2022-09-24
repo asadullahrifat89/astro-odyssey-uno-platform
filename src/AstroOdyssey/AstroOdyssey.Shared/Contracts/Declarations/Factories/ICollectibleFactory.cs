@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public interface ICollectibleFactory 
+    public interface ICollectibleFactory
     {
         void SetGameEnvironment(GameEnvironment gameEnvironment);
 

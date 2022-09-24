@@ -1,6 +1,6 @@
 ﻿namespace AstroOdyssey
 {
-    public class PlayerShipTemplate 
+    public class PlayerShipTemplate
     {
         public PlayerShipTemplate(string name, string assetUri, ShipClass shipClass)
         {

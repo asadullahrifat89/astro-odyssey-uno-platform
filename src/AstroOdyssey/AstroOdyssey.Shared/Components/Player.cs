@@ -1,10 +1,10 @@
-﻿using System;
-using Windows.Foundation;
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 using System.Linq;
+using Windows.Foundation;
 
 namespace AstroOdyssey
 {
@@ -82,7 +82,7 @@ namespace AstroOdyssey
                 if (_isRecoveringFromDamage)
                     Opacity = 0.4d;
                 else
-                    Opacity = 1;
+                    Opacity = IsCloakUp ? 0.6d : 1;
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -190,7 +189,7 @@ namespace AstroOdyssey
                 if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameProfile gameProfile)
                 {
                     gameProfile.Emoji = "👨‍🚀";
-                }                
+                }
             }
             else
             {
@@ -198,7 +197,7 @@ namespace AstroOdyssey
             }
 
             return true;
-        }       
+        }
 
         private async Task<bool> GetGameScores()
         {
@@ -242,7 +241,7 @@ namespace AstroOdyssey
                 if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
                 {
                     gameScore.Emoji = "👨‍🚀";
-                }               
+                }
             }
             else
             {

@@ -95,7 +95,7 @@ namespace AstroOdyssey
         public void LevelUp()
         {
             _healthSpawnAfter -= 50;
-            var scale = _gameEnvironment.GetGameObjectScale();            
+            var scale = _gameEnvironment.GetGameObjectScale();
             _healthSpeed += (1 * scale);
         }
 
