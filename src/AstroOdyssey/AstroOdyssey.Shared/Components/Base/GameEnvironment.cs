@@ -159,7 +159,7 @@ namespace AstroOdyssey
         /// <returns></returns>
         public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds)
         {
-            return GetGameObjects<GameObject>().Where(destructible => destructible.IsDestructible && destructible.HasHealth && destructible.GetRect().Intersects(projectileBounds));
+            return GetGameObjects<GameObject>().Where(x => x.IsDestructible && x.HasHealth && !x.IsMarkedForFadedDestruction && x.GetRect().Intersects(projectileBounds));
         }
 
         #endregion

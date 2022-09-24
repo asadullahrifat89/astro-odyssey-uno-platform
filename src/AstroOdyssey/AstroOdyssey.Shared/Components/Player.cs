@@ -82,7 +82,7 @@ namespace AstroOdyssey
                 if (_isRecoveringFromDamage)
                     Opacity = 0.4d;
                 else
-                    Opacity = 1;
+                    Opacity = IsCloakUp ? 0.6d : 1;
             }
         }
 
