@@ -258,8 +258,8 @@ namespace AstroOdyssey
             if (_baseUrl.IsNullOrBlank())
             {
                 var indexUrl = Uno.Foundation.WebAssemblyRuntime.InvokeJS("window.location.href;");
-                var appPackage = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
-                _baseUrl = $"{indexUrl}{appPackage}";
+                var appPackageId = Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_APP_BASE");
+                _baseUrl = $"{indexUrl}{appPackageId}";
 
 #if DEBUG
                 Console.WriteLine(_baseUrl);
