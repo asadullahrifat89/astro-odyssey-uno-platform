@@ -18,7 +18,7 @@
 
         (bool RageDown, double RageRemaining) RageUpCoolDown(Player player);
 
-        bool PlayerCollision(Player player, GameObject gameObject);
+        bool CheckCollision(Player player, GameObject gameObject);
 
         void DamageRecoveryCoolDown(Player player);
     }

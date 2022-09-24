@@ -48,6 +48,10 @@ namespace AstroOdyssey
             _meteorSpeed = 1.5;
         }
 
+        /// <summary>
+        /// Sets the game environment.
+        /// </summary>
+        /// <param name="gameEnvironment"></param>
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;

@@ -35,6 +35,10 @@ namespace AstroOdyssey
             _collectibleSpeed = 2;
         }
 
+        /// <summary>
+        /// Sets the game environment.
+        /// </summary>
+        /// <param name="gameEnvironment"></param>
         public void SetGameEnvironment(GameEnvironment gameEnvironment)
         {
             _gameEnvironment = gameEnvironment;

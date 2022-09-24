@@ -516,10 +516,11 @@ namespace AstroOdyssey
             QuitGameButton.Visibility = Visibility.Collapsed;
 
             _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            _audioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
 
             if (GameView.IsBossEngaged)
                 _audioHelper.ResumeSound(SoundType.BOSS_APPEARANCE);
+            else
+                _audioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
 
             await RunGame();
         }
@@ -846,7 +847,7 @@ namespace AstroOdyssey
                     else
                         GameView.AddDestroyableGameObject(gameObject);
                 });
-            }           
+            }
 
             _celestialObjectFactory.StartSpaceWarp();
         }
@@ -1176,7 +1177,7 @@ namespace AstroOdyssey
             if (projectile.IsMarkedForFadedDestruction)
                 return;
 
-            _playerProjectileFactory.CollidePlayerProjectile(
+            _playerProjectileFactory.CheckCollision(
                 projectile: projectile,
                 score: out double score,
                 destroyedObject: out GameObject destroyedObject);
@@ -1257,7 +1258,7 @@ namespace AstroOdyssey
                 return;
 
             // check if enemy collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: enemy))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: enemy))
             {
                 _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                 SetPlayerHealthBar();
@@ -1289,7 +1290,7 @@ namespace AstroOdyssey
                 return;
 
             // check if enemy projectile collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: projectile))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: projectile))
             {
                 _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                 SetPlayerHealthBar();
@@ -1385,7 +1386,7 @@ namespace AstroOdyssey
                 return;
 
             // check if meteor collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: meteor))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: meteor))
             {
                 _playerProjectileFactory.DecreaseProjectilePower(player: Player);
                 SetPlayerHealthBar();
@@ -1414,7 +1415,7 @@ namespace AstroOdyssey
                 return;
 
             // check if health collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: health))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: health))
             {
                 SetPlayerHealthBar();
                 ShowInGameContent(_healthImage, $"‍{_localizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
@@ -1442,7 +1443,7 @@ namespace AstroOdyssey
                 return;
 
             // check if collectible collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: collectible))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: collectible))
             {
                 _playerProjectileFactory.IncreaseProjectilePower(player: Player);
                 PlayerScore.CollectiblesCollected++;
@@ -1553,7 +1554,7 @@ namespace AstroOdyssey
                 return;
 
             // check if power up collides with player
-            if (_playerFactory.PlayerCollision(player: Player, gameObject: powerUp))
+            if (_playerFactory.CheckCollision(player: Player, gameObject: powerUp))
             {
                 ActivatePowerUp(powerUp);
             }

@@ -22,7 +22,7 @@
 
         void UpdateProjectile(PlayerProjectile projectile, out bool destroyed);
 
-        void CollidePlayerProjectile(
+        void CheckCollision(
             PlayerProjectile projectile,
             out double score,
             out GameObject destroyedObject);
