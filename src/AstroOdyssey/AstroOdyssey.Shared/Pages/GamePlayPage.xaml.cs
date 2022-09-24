@@ -614,10 +614,6 @@ namespace AstroOdyssey
             {
                 UpdateCelestialObject(gameObject);
             }
-            //for (int i = 0; i < planetObjects.Length; i++)
-            //{
-            //    UpdateCelestialObject(planetObjects[i]);
-            //}
 
             // clean removable objects from game view
             PlanetView.RemoveDestroyableGameObjects();
@@ -630,11 +626,7 @@ namespace AstroOdyssey
         {
             var starObjects = StarView.GetGameObjects<GameObject>();
 
-            // update game view objects
-            //for (int i = 0; i < starObjects.Length; i++)
-            //{
-            //    UpdateCelestialObject(starObjects[i]);
-            //}
+            // update game view objects           
             foreach (var gameObject in starObjects)
             {
                 UpdateCelestialObject(gameObject);
@@ -665,10 +657,7 @@ namespace AstroOdyssey
             // update game view objects
             //if (Parallel.ForEach(gameObjects, gameObject =>
             foreach (var gameObject in gameObjects)
-            //for (int i = 0; i < gameObjects.Length; i++)
             {
-                //var gameObject = gameObjects[i];
-
                 // fade away objects marked to be destroyed
                 if (gameObject.IsMarkedForFadedDestruction)
                 {
@@ -677,7 +666,7 @@ namespace AstroOdyssey
                     if (gameObject.HasExploded)
                     {
                         GameView.AddDestroyableGameObject(gameObject);
-                        break;
+                        continue;
                     }
                 }
 
@@ -829,8 +818,7 @@ namespace AstroOdyssey
             if (gameObjects is not null)
             {
                 //Parallel.ForEach(gameObjects, gameObject =>
-                foreach (var gameObject in gameObjects)              
-                //for (int i = 0; i < gameObjects.Length; i++)
+                foreach (var gameObject in gameObjects)                
                 {
                     //var gameObject = gameObjects[i];
 

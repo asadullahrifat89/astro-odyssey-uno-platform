@@ -121,9 +121,9 @@ namespace AstroOdyssey
             //    ClearDestroyableGameObjects();
             //}
 
-            for (int i = 0; i < destroyableGameObjects.Count; i++)
+            foreach (var destroyable in destroyableGameObjects)
             {
-                RemoveGameObject(destroyableGameObjects[i]);
+                RemoveGameObject(destroyable);
             }
 
             ClearDestroyableGameObjects();

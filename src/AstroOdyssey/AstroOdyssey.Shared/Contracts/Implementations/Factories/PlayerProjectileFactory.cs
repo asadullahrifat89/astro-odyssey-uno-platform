@@ -228,11 +228,8 @@ namespace AstroOdyssey
             var destructibles = _gameEnvironment.GetDestructibles(projectile.GetRect());
 
             foreach (var destructible in destructibles)
-            //Parallel.ForEach(destructibles, destructible =>
-            //for (int i = 0; i < destructibles.Length; i++)
+            //Parallel.ForEach(destructibles, destructible =>            
             {
-                //var destructible = destructibles[i];
-
                 // if projectile is powered up then execute over kill
                 if (projectile.IsPoweredUp)
                 {
