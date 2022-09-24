@@ -34,10 +34,10 @@ namespace AstroOdyssey
 
                 var textBlock = new TextBlock()
                 {
-                    Margin = new Microsoft.UI.Xaml.Thickness(10),
+                    Margin = new Microsoft.UI.Xaml.Thickness(10 * scale),
                     HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
                     VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center,
-                    FontSize = 30,
+                    FontSize = 30 * scale,
                     FontWeight = FontWeights.Bold,
                     Foreground = new SolidColorBrush(Colors.White),
                     TextAlignment = Microsoft.UI.Xaml.TextAlignment.Center,
