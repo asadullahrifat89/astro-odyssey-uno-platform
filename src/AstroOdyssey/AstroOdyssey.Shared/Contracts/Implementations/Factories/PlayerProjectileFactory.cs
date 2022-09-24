@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using static AstroOdyssey.Constants;
 
 namespace AstroOdyssey
@@ -226,8 +227,8 @@ namespace AstroOdyssey
             // get the destructible objects which intersect with the current projectile
             var destructibles = _gameEnvironment.GetDestructibles(projectile.GetRect());
 
-            //foreach (var destructible in destructibles)
-            Parallel.ForEach(destructibles, destructible =>
+            foreach (var destructible in destructibles)
+            //Parallel.ForEach(destructibles, destructible =>            
             {
                 // if projectile is powered up then execute over kill
                 if (projectile.IsPoweredUp)
@@ -301,7 +302,7 @@ namespace AstroOdyssey
                                     score += _gameEnvironment.IsBossEngaged ? 1 : 2;
 
                                 destroyedObject = enemy;
-                                return;
+                                return (score, destroyedObject);
                             }
 
                             if (destructible.HasHealth)
@@ -325,7 +326,7 @@ namespace AstroOdyssey
                                     score++;
 
                                 destroyedObject = meteor;
-                                return;
+                                return (score, destroyedObject);
                             }
 
                             if (destructible.HasHealth)
@@ -339,7 +340,7 @@ namespace AstroOdyssey
                     default:
                         break;
                 }
-            });
+            }
 
             return (score, destroyedObject);
         }

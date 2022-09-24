@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -111,14 +112,21 @@ namespace AstroOdyssey
 
         public void RemoveDestroyableGameObjects()
         {
-            if (Parallel.ForEach(destroyableGameObjects, destroyable =>
+            //if (Parallel.ForEach(destroyableGameObjects, destroyable =>
+            //{
+            //    RemoveGameObject(destroyable);
+
+            //}).IsCompleted)
+            //{
+            //    ClearDestroyableGameObjects();
+            //}
+
+            foreach (var destroyable in destroyableGameObjects)
             {
                 RemoveGameObject(destroyable);
-
-            }).IsCompleted)
-            {
-                ClearDestroyableGameObjects();
             }
+
+            ClearDestroyableGameObjects();
         }
 
         public void RemoveGameObject(GameObject destroyable)
