@@ -212,7 +212,7 @@ namespace AstroOdyssey
         /// <param name="projectile"></param>
         /// <param name="score"></param>
         /// <param name="destroyedObject"></param>
-        public void CollidePlayerProjectile(
+        public void CheckCollision(
             PlayerProjectile projectile,
             out double score,
             out GameObject destroyedObject)

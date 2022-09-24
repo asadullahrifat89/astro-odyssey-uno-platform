@@ -277,10 +277,10 @@ namespace AstroOdyssey
         /// <summary>
         /// Checks and performs player collision.
         /// </summary>
+        /// <param name="player"></param>
         /// <param name="gameObject"></param>
-        /// 
         /// <returns></returns>
-        public bool PlayerCollision(Player player, GameObject gameObject)
+        public bool CheckCollision(Player player, GameObject gameObject)
         {
             var tag = gameObject.Tag;
 
