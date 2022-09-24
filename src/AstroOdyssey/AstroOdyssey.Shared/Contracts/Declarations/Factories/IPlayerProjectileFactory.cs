@@ -20,12 +20,9 @@
             GameLevel gameLevel,
             PowerUpType powerUpType);
 
-        void UpdateProjectile(PlayerProjectile projectile, out bool destroyed);
+        bool UpdateProjectile(PlayerProjectile projectile);
 
-        void CheckCollision(
-            PlayerProjectile projectile,
-            out double score,
-            out GameObject destroyedObject);
+        (double Score, GameObject DestroyedObject) CheckCollision(PlayerProjectile projectile);
 
         void PowerUp(PowerUpType powerUpType, Player player);
 

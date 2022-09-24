@@ -8,7 +8,7 @@
 
         void GeneratePowerUp();
 
-        void UpdatePowerUp(PowerUp powerUp, out bool destroyed);
+        bool UpdatePowerUp(PowerUp powerUp);
 
         void LevelUp();
 

@@ -780,7 +780,7 @@ namespace AstroOdyssey
         /// </summary>
         private void HideInGameContent()
         {
-            
+
             InGameContentPanel.Children.Clear();
         }
 
@@ -1120,9 +1120,7 @@ namespace AstroOdyssey
             var projectile = gameObject as PlayerProjectile;
 
             // move the projectile up and check if projectile has gone beyond the game view
-            _playerProjectileFactory.UpdateProjectile(
-                projectile: projectile,
-                destroyed: out bool destroyed);
+            bool destroyed = _playerProjectileFactory.UpdateProjectile(projectile: projectile);
 
             if (destroyed)
                 return;
@@ -1133,10 +1131,10 @@ namespace AstroOdyssey
             if (projectile.IsMarkedForFadedDestruction)
                 return;
 
-            _playerProjectileFactory.CheckCollision(
-                projectile: projectile,
-                score: out double score,
-                destroyedObject: out GameObject destroyedObject);
+            var collisionResult = _playerProjectileFactory.CheckCollision(projectile: projectile);
+
+            var score = collisionResult.Score;
+            var destroyedObject = collisionResult.DestroyedObject;
 
             if (GameView.IsBossEngaged)
             {
@@ -1202,7 +1200,7 @@ namespace AstroOdyssey
         {
             var enemy = gameObject as Enemy;
 
-            _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX, destroyed: out bool destroyed);
+            bool destroyed = _enemyFactory.UpdateEnemy(enemy: enemy, pointerX: PointerX);
 
             if (destroyed)
                 return;
@@ -1234,7 +1232,7 @@ namespace AstroOdyssey
         {
             var projectile = gameObject as EnemyProjectile;
 
-            _enemyProjectileFactory.UpdateProjectile(projectile, destroyed: out bool destroyed);
+            bool destroyed = _enemyProjectileFactory.UpdateProjectile(projectile);
 
             if (destroyed)
                 return;
@@ -1330,7 +1328,7 @@ namespace AstroOdyssey
         {
             var meteor = gameObject as Meteor;
 
-            _meteorFactory.UpdateMeteor(meteor: meteor, destroyed: out bool destroyed);
+            bool destroyed = _meteorFactory.UpdateMeteor(meteor: meteor);
 
             if (destroyed)
                 return;
@@ -1362,7 +1360,7 @@ namespace AstroOdyssey
         {
             var health = gameObject as Health;
 
-            _healthFactory.UpdateHealth(health: health, destroyed: out bool destroyed);
+            bool destroyed = _healthFactory.UpdateHealth(health: health);
 
             if (destroyed)
                 return;
@@ -1390,7 +1388,7 @@ namespace AstroOdyssey
         {
             var collectible = gameObject as Collectible;
 
-            _collectibleFactory.UpdateCollectible(collectible: collectible, destroyed: out bool destroyed);
+            bool destroyed = _collectibleFactory.UpdateCollectible(collectible: collectible);
 
             if (destroyed)
                 return;
@@ -1501,7 +1499,7 @@ namespace AstroOdyssey
 
             var powerUp = gameObject as PowerUp;
 
-            _powerUpFactory.UpdatePowerUp(powerUp: powerUp, destroyed: out bool destroyed);
+            bool destroyed = _powerUpFactory.UpdatePowerUp(powerUp: powerUp);
 
             if (destroyed)
                 return;
@@ -1566,7 +1564,7 @@ namespace AstroOdyssey
         {
             var star = gameObject as CelestialObject;
 
-            _celestialObjectFactory.UpdateCelestialObject(celestialObject: star, destroyed: out bool destroyed);
+            _celestialObjectFactory.UpdateCelestialObject(celestialObject: star);
         }
 
         #endregion

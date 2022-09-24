@@ -181,9 +181,9 @@ namespace AstroOdyssey
         /// Updates the celestial objects. Moves the stars, planets.
         /// </summary>
         /// <param name="celestialObject"></param>
-        public void UpdateCelestialObject(CelestialObject celestialObject, out bool destroyed)
+        public bool UpdateCelestialObject(CelestialObject celestialObject)
         {
-            destroyed = false;
+            bool destroyed = false;
 
             switch (celestialObject.CelestialObjectType)
             {
@@ -214,6 +214,8 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+
+            return destroyed;
         }
 
         /// <summary>

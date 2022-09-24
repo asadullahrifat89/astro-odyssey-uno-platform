@@ -14,7 +14,7 @@
 
         void DestroyEnemy(Enemy enemy);
 
-        void UpdateEnemy(Enemy enemy, double pointerX, out bool destroyed);
+        bool UpdateEnemy(Enemy enemy, double pointerX);
 
         void LevelUp();
 
