@@ -29,6 +29,7 @@ namespace AstroOdyssey
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
         private float _lastFpsTime = 0;
+        private List<double> _framesCount = new List<double>();
 
         private int _frameStatUpdateSpawnCounter;
         private int _frameStatUpdateAfter = 5;
@@ -36,6 +37,7 @@ namespace AstroOdyssey
         private long _frameStartTime;
         private long _frameEndTime;
         private double _frameDuration;
+        private double _maxFrameDuration = 0;
 #endif
         private double _scoreMultiplierCoolDownCounter;
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
@@ -365,6 +367,10 @@ namespace AstroOdyssey
             };
 
             await this.PlayLoadedTransition();
+
+#if DEBUG
+            _framesCount.Clear();
+#endif
         }
 
         /// <summary>
@@ -466,9 +472,9 @@ namespace AstroOdyssey
                 CalculateFPS();
 
                 _frameEndTime = Stopwatch.ElapsedMilliseconds;
-#endif
+
                 GetFrameDuration();
-#if DEBUG
+
                 SetAnalytics();
 #endif
             }
@@ -818,7 +824,7 @@ namespace AstroOdyssey
             if (gameObjects is not null)
             {
                 //Parallel.ForEach(gameObjects, gameObject =>
-                foreach (var gameObject in gameObjects)                
+                foreach (var gameObject in gameObjects)
                 {
                     //var gameObject = gameObjects[i];
 
@@ -909,7 +915,6 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
-
 #if DEBUG
             _frameStatUpdateSpawnCounter -= 1;
 
@@ -921,8 +926,10 @@ namespace AstroOdyssey
 
                 var fpsText = $"FPS: {_fpsCount}" +
                     "\n----" +
-                    $"\nframe time: {_frameTime}" +
-                    $"\nframe duration: {(int)_frameDuration}" +
+                    $"\nframe time: {_frameTime.ToString("0.00")}" +
+                    $"\nframe dur: {_frameDuration.ToString("0.00")}" +
+                    $"\navg. frame dur: {(_framesCount.Sum() / _framesCount.Count).ToString("0.00")}" +
+                    $"\nmax frame dur: {_maxFrameDuration.ToString("0.00")}" +
                     "\n----";
 
                 FPSText.Text = fpsText;
@@ -944,6 +951,12 @@ namespace AstroOdyssey
                 ObjectsCountText.Text = objectsCountText;
 
                 _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
+
+                if (_framesCount.Count > 5000)
+                {
+                    _framesCount.Clear();
+                    Console.WriteLine("AVG. FRAME DUR COUNTER RESET.");
+                }
             }
 #endif
         }
@@ -953,8 +966,12 @@ namespace AstroOdyssey
         /// </summary>
         private void GetFrameDuration()
         {
-#if DEBUG
+#if DEBUG            
+            _framesCount.Add(_frameDuration);
             _frameDuration = _frameEndTime - _frameStartTime;
+
+            if (_frameDuration > _maxFrameDuration)
+                _maxFrameDuration = _frameDuration;
 #endif
         }
 
