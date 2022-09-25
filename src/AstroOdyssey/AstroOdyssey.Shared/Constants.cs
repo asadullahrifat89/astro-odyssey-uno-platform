@@ -11,6 +11,7 @@
         public const double PICKUP_OBJECT_SIZE = 80;
 
         public const double PLAYER_HEIGHT = 80;
+        public const double PLAYER_SPEED = 11;
         public const double BOSS_BASE_HEALTH = 25;
         public const double SCORE_MULTIPLIER_THREASHOLD = 7;
 
