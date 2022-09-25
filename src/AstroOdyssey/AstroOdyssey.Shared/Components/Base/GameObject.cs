@@ -65,6 +65,8 @@ namespace AstroOdyssey
 
         public bool IsCollectible { get; set; }
 
+        public bool IsPlayer { get; set; }
+
         public double HalfWidth { get; set; }
 
         private bool _isMarkedForFadedDestruction;
