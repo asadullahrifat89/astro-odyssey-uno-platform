@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace AstroOdyssey
 
         private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
 
+        private event EventHandler<object> _timerAction;
+
+        private double _frameTime;
+
         #endregion
 
         #region Ctor
@@ -26,6 +31,8 @@ namespace AstroOdyssey
 
         #region Properties
 
+        public DispatcherTimer FrameTimer { get; set; }
+
         public bool IsWarpingThroughSpace { get; set; }
 
         public bool IsBossEngaged { get; set; }
@@ -35,6 +42,30 @@ namespace AstroOdyssey
         #endregion
 
         #region Methods
+
+        public void SetFrameAction(double frameTime, EventHandler<object> action)
+        {
+            _frameTime = frameTime;
+            _timerAction = action;
+
+            if (FrameTimer is null)
+            {
+                FrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };                
+            }
+
+            FrameTimer.Tick += _timerAction;
+        }
+
+        public void Start()
+        {
+            FrameTimer?.Start();
+        }
+
+        public void Stop()
+        {
+            FrameTimer?.Stop();
+            FrameTimer.Tick -= _timerAction;
+        }
 
         /// <summary>
         /// Gets scaling factor for a game object according to game view width.

@@ -113,12 +113,7 @@ namespace AstroOdyssey
         #region Properties
 #if DEBUG
         public Stopwatch Stopwatch { get; set; }
-#endif
-        public DispatcherTimer GameViewTimer { get; set; }
-
-        public DispatcherTimer StarViewTimer { get; set; }
-
-        public DispatcherTimer PlanetViewTimer { get; set; }
+#endif       
 
         public Player Player { get; set; }
 
@@ -153,8 +148,6 @@ namespace AstroOdyssey
         public bool IsScoreMultiplierActivated { get; set; }
 
         public int ScoreMultiplierCount { get; set; }
-
-        public double ScoreMultiplierThreashold { get; set; } = 7;
 
         #endregion
 
@@ -334,7 +327,7 @@ namespace AstroOdyssey
             IsScoreMultiplierActivated = false;
             SetScoreMultiplierCountText();
             ScoreMultiplierPanel.Visibility = Visibility.Collapsed;
-            ScoreMultiplierBar.Maximum = ScoreMultiplierThreashold;
+            ScoreMultiplierBar.Maximum = SCORE_MULTIPLIER_THREASHOLD;
             ScoreMultiplierBar.Value = 0;
 
             ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
@@ -464,25 +457,13 @@ namespace AstroOdyssey
 #if DEBUG
             Stopwatch = Stopwatch.StartNew();
 #endif
-            if (GameViewTimer is null)
-                GameViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
+            GameView.SetFrameAction(frameTime: _frameTime, action: GameViewTimer_Tick);
+            StarView.SetFrameAction(frameTime: _frameTime, action: StarViewTimer_Tick);
+            PlanetView.SetFrameAction(frameTime: _frameTime, action: PlanetViewTimer_Tick);
 
-            if (StarViewTimer is null)
-                StarViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
-
-            if (PlanetViewTimer is null)
-                PlanetViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
-
-            GameViewTimer.Tick += GameViewTimer_Tick;
-            GameViewTimer.Start();
-
-            StarViewTimer.Tick += StarViewTimer_Tick;
-            StarViewTimer.Start();
-
-            PlanetViewTimer.Tick += PlanetViewTimer_Tick;
-            PlanetViewTimer.Start();
-
-            //while (await PlanetViewTimer.WaitForNextTickAsync())
+            GameView.Start();
+            StarView.Start();
+            PlanetView.Start();
         }
 
         private void PlanetViewTimer_Tick(object sender, object e)
@@ -539,12 +520,9 @@ namespace AstroOdyssey
             HideInGameContent();
             InputView.Focus(FocusState.Programmatic);
 
-            GameViewTimer.Stop();
-            GameViewTimer.Tick -= GameViewTimer_Tick;
-            StarViewTimer.Stop();
-            StarViewTimer.Tick -= StarViewTimer_Tick;
-            PlanetViewTimer.Stop();
-            PlanetViewTimer.Tick -= PlanetViewTimer_Tick;
+            GameView.Stop();
+            StarView.Stop();
+            PlanetView.Stop();
 
             ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
@@ -593,12 +571,9 @@ namespace AstroOdyssey
             if (StarView.IsWarpingThroughSpace)
                 _celestialObjectFactory.StopSpaceWarp();
 
-            GameViewTimer.Stop();
-            GameViewTimer.Tick -= GameViewTimer_Tick;
-            StarViewTimer.Stop();
-            StarViewTimer.Tick -= StarViewTimer_Tick;
-            PlanetViewTimer.Stop();
-            PlanetViewTimer.Tick -= PlanetViewTimer_Tick;
+            GameView.Stop();
+            StarView.Stop();
+            PlanetView.Stop();
 
             _audioHelper.StopSound();
         }
@@ -1481,7 +1456,7 @@ namespace AstroOdyssey
                 AddScore(1);
                 AddScoreMultiplier();
 
-                if (ScoreMultiplierCount >= ScoreMultiplierThreashold)
+                if (ScoreMultiplierCount >= SCORE_MULTIPLIER_THREASHOLD)
                     ActivateScoreMultiplier();
 
                 SetGameLevel(); // check game level on score change                                
@@ -1824,7 +1799,7 @@ namespace AstroOdyssey
                 _scoreMultiplierCoolDownCounter--;
 
                 // TODO: decrease multiplier progress bar
-                ScoreMultiplierBar.Value = _scoreMultiplierCoolDownCounter / _scoreMultiplierCoolDownAfter * ScoreMultiplierThreashold;
+                ScoreMultiplierBar.Value = _scoreMultiplierCoolDownCounter / _scoreMultiplierCoolDownAfter * SCORE_MULTIPLIER_THREASHOLD;
 
                 if (_scoreMultiplierCoolDownCounter <= 0)
                 {
