@@ -462,21 +462,28 @@ namespace AstroOdyssey
 #endif
             GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_frameTime));
 
+            var isFrameRendering = false;
+
             while (await GameFrameTimer.WaitForNextTickAsync())
             {
+                if (!isFrameRendering)
+                {
+                    isFrameRendering = true;
 #if DEBUG
-                _frameStartTime = Stopwatch.ElapsedMilliseconds;
+                    _frameStartTime = Stopwatch.ElapsedMilliseconds;
 #endif
-                UpdateFrame();
+                    UpdateFrame();
 #if DEBUG
-                CalculateFPS();
+                    CalculateFPS();
 
-                _frameEndTime = Stopwatch.ElapsedMilliseconds;
+                    _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
-                GetFrameDuration();
+                    GetFrameDuration();
 
-                SetAnalytics();
-#endif
+                    SetAnalytics();
+#endif 
+                    isFrameRendering = false;
+                }
             }
         }
 
