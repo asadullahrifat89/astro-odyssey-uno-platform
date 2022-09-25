@@ -1093,16 +1093,55 @@ namespace AstroOdyssey
              * |  w  |
              */
 
-            if (PointerPressedX < Player.GetX())  // move left
+            if (PointerPressedX < Player.GetX() + Player.HalfWidth / 2)  // move left
             {
                 MoveLeft = true;
                 MoveRight = false;
             }
-            else if (PointerPressedX > Player.GetX() + Player.Width) // move right
+            else if (PointerPressedX > Player.GetX() + Player.Width - Player.HalfWidth / 2) // move right
             {
                 MoveRight = true;
                 MoveLeft = false;
             }
+        }
+
+        /// <summary>
+        /// Update player in the game view.
+        /// </summary>
+        private void UpdatePlayer()
+        {
+            if (MoveLeft || MoveRight)
+            {
+                var pointerX = _playerFactory.UpdatePlayer(
+                    player: Player,
+                    pointerX: PointerX,
+                    moveLeft: MoveLeft,
+                    moveRight: MoveRight);
+
+                PointerX = pointerX;
+
+                StopPlayerMovement();
+            }
+            else
+            {
+                if (IsPointerPressed)
+                {
+                    if (PointerPressedX < Player.GetX() + Player.HalfWidth || PointerPressedX > Player.GetX() + Player.HalfWidth)
+                    {
+                        var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
+                        PointerX = pointerX;
+                    }
+                }
+                else
+                {
+                    var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
+                    PointerX = pointerX;
+                }
+
+            }
+
+            PowerUpCoolDown();
+            RageCoolDown();
         }
 
         /// <summary>
@@ -1133,33 +1172,6 @@ namespace AstroOdyssey
                         MoveRight = false;
                 }
             }
-        }
-
-        /// <summary>
-        /// Update player in the game view.
-        /// </summary>
-        private void UpdatePlayer()
-        {
-            if (MoveLeft || MoveRight)
-            {
-                var pointerX = _playerFactory.UpdatePlayer(
-                    player: Player,
-                    pointerX: PointerX,
-                    moveLeft: MoveLeft,
-                    moveRight: MoveRight);
-
-                PointerX = pointerX;
-
-                StopPlayerMovement();
-            }
-            else
-            {
-                var pointerX = _playerFactory.UpdateAcceleration(player: Player, pointerX: PointerX);
-                PointerX = pointerX;
-            }
-
-            PowerUpCoolDown();
-            RageCoolDown();
         }
 
         /// <summary>

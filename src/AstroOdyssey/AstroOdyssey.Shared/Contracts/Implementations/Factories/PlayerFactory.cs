@@ -19,7 +19,6 @@ namespace AstroOdyssey
         private int _playerRageCoolDownCounter;
         private readonly int _playerRageCoolDownAfter = 1000;
 
-        private double _playerSpeed = 10;
         private double _accelerationCounter = 0;
 
         private XDirection _xDirectionLast = XDirection.NONE;
@@ -59,7 +58,7 @@ namespace AstroOdyssey
 
             var scale = _gameEnvironment.GetGameObjectScale();
 
-            var speed = _playerSpeed * scale;
+            var speed = PLAYER_SPEED * scale;
 
 #if DEBUG
             Console.WriteLine("Player speed: " + speed);
@@ -101,7 +100,8 @@ namespace AstroOdyssey
             var playerSpeed = _accelerationCounter >= player.Speed ? player.Speed : _accelerationCounter / 1.3;
 
             // increase acceleration and stop when player speed is reached
-            _accelerationCounter++;
+            if (_accelerationCounter <= player.Speed)
+                _accelerationCounter++;
 
             // adjust pointer x as per move direction
             if (moveLeft && playerX > 0)
