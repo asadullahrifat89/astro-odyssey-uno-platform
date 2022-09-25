@@ -29,6 +29,7 @@ namespace AstroOdyssey
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
         private float _lastFpsTime = 0;
+        private List<double> _framesCount = new List<double>();
 
         private int _frameStatUpdateSpawnCounter;
         private int _frameStatUpdateAfter = 5;
@@ -36,6 +37,7 @@ namespace AstroOdyssey
         private long _frameStartTime;
         private long _frameEndTime;
         private double _frameDuration;
+        private double _maxFrameDuration = 0;
 #endif
         private double _scoreMultiplierCoolDownCounter;
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
@@ -112,7 +114,11 @@ namespace AstroOdyssey
 #if DEBUG
         public Stopwatch Stopwatch { get; set; }
 #endif
-        public PeriodicTimer GameFrameTimer { get; set; }
+        public DispatcherTimer GameViewTimer { get; set; }
+
+        public DispatcherTimer StarViewTimer { get; set; }
+
+        public DispatcherTimer PlanetViewTimer { get; set; }
 
         public Player Player { get; set; }
 
@@ -365,6 +371,10 @@ namespace AstroOdyssey
             };
 
             await this.PlayLoadedTransition();
+
+#if DEBUG
+            _framesCount.Clear();
+#endif
         }
 
         /// <summary>
@@ -409,7 +419,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Starts the game.
         /// </summary>
-        private async void StartGame()
+        private void StartGame()
         {
 #if DEBUG
             GameAnalyticsPanel.Visibility = Visibility.Visible;
@@ -439,38 +449,85 @@ namespace AstroOdyssey
 
             SetStars();
 
-            WarpThroughSpace();
+            WarpThroughSpace(); // at the starting of the game
             _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
 
-            await RunGame();
+            RunGame();
         }
 
         /// <summary>
         /// Runs the game.
         /// </summary>
         /// <returns></returns>
-        private async Task RunGame()
+        private void RunGame()
         {
 #if DEBUG
             Stopwatch = Stopwatch.StartNew();
 #endif
-            GameFrameTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_frameTime));
+            if (GameViewTimer is null)
+                GameViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
 
-            while (await GameFrameTimer.WaitForNextTickAsync())
+            if (StarViewTimer is null)
+                StarViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
+
+            if (PlanetViewTimer is null)
+                PlanetViewTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };
+
+            GameViewTimer.Tick += GameViewTimer_Tick;
+            GameViewTimer.Start();
+
+            StarViewTimer.Tick += StarViewTimer_Tick;
+            StarViewTimer.Start();
+
+            PlanetViewTimer.Tick += PlanetViewTimer_Tick;
+            PlanetViewTimer.Start();
+
+            //while (await PlanetViewTimer.WaitForNextTickAsync())
+        }
+
+        private void PlanetViewTimer_Tick(object sender, object e)
+        {
+            UpdatePlanetViewObjects();
+        }
+
+        private void StarViewTimer_Tick(object sender, object e)
+        {
+            UpdateStarViewObjects();
+
+            _celestialObjectFactory.SpawnCelestialObject();
+        }
+
+        private void GameViewTimer_Tick(object sender, object e)
+        {
+            var isFrameRendering = false;
+
+            if (!isFrameRendering)
             {
+                isFrameRendering = true;
 #if DEBUG
                 _frameStartTime = Stopwatch.ElapsedMilliseconds;
 #endif
-                UpdateFrame();
+                CheckGameOver();
+
+                UpdateGameViewObjects();
+
+                SpawnGameViewObjects();
+
+                InGameContentCoolDown();
+
+                DamageRecoveryCoolDown();
+
+                ScoreMultiplierCoolDown();
 #if DEBUG
                 CalculateFPS();
 
                 _frameEndTime = Stopwatch.ElapsedMilliseconds;
-#endif
+
                 GetFrameDuration();
-#if DEBUG
+
                 SetAnalytics();
 #endif
+                isFrameRendering = false;
             }
         }
 
@@ -482,7 +539,12 @@ namespace AstroOdyssey
             HideInGameContent();
             InputView.Focus(FocusState.Programmatic);
 
-            GameFrameTimer.Dispose();
+            GameViewTimer.Stop();
+            GameViewTimer.Tick -= GameViewTimer_Tick;
+            StarViewTimer.Stop();
+            StarViewTimer.Tick -= StarViewTimer_Tick;
+            PlanetViewTimer.Stop();
+            PlanetViewTimer.Tick -= PlanetViewTimer_Tick;
 
             ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
@@ -501,7 +563,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Resumes the game.
         /// </summary>
-        private async void ResumeGame()
+        private void ResumeGame()
         {
             InputView.Focus(FocusState.Programmatic);
 
@@ -518,7 +580,7 @@ namespace AstroOdyssey
             else
                 _audioHelper.ResumeSound(SoundType.BACKGROUND_MUSIC);
 
-            await RunGame();
+            RunGame();
         }
 
         /// <summary>
@@ -531,7 +593,12 @@ namespace AstroOdyssey
             if (StarView.IsWarpingThroughSpace)
                 _celestialObjectFactory.StopSpaceWarp();
 
-            GameFrameTimer.Dispose();
+            GameViewTimer.Stop();
+            GameViewTimer.Tick -= GameViewTimer_Tick;
+            StarViewTimer.Stop();
+            StarViewTimer.Tick -= StarViewTimer_Tick;
+            PlanetViewTimer.Stop();
+            PlanetViewTimer.Tick -= PlanetViewTimer_Tick;
 
             _audioHelper.StopSound();
         }
@@ -539,7 +606,7 @@ namespace AstroOdyssey
         /// <summary>
         /// Check if game if over.
         /// </summary>
-        private void GameOver()
+        private void CheckGameOver()
         {
             if (Player.HasNoHealth)
             {
@@ -569,27 +636,6 @@ namespace AstroOdyssey
 
         #region Game Objects
 
-        /// <summary>
-        /// Updates a frame in the game.
-        /// </summary>
-        private void UpdateFrame()
-        {
-            GameOver();
-
-            UpdateGameViewObjects();
-
-            UpdateStarViewObjects();
-
-            UpdatePlanetViewObjects();
-
-            SpawnGameObjects();
-
-            InGameContentCoolDown();
-
-            DamageRecoveryCoolDown();
-
-            ScoreMultiplierCoolDown();
-        }
 
         /// <summary>
         /// Updates objects in the planet view.
@@ -727,10 +773,8 @@ namespace AstroOdyssey
         /// <summary>
         /// Spawns game objects.
         /// </summary>
-        private void SpawnGameObjects()
+        private void SpawnGameViewObjects()
         {
-            _celestialObjectFactory.SpawnCelestialObject();
-
             // only generate game objects if not warping thorugh space
             if (!StarView.IsWarpingThroughSpace)
             {
@@ -813,15 +857,13 @@ namespace AstroOdyssey
         /// </summary>
         private void WarpThroughSpace()
         {
-            var gameObjects = GameView.GetGameObjects<GameObject>().Where(x => x.IsDestructible || x.IsProjectile || x.IsPickup || x.IsCollectible);
+            _celestialObjectFactory.StartSpaceWarp();
 
-            if (gameObjects is not null)
+            if (GameView.GetGameObjects<GameObject>().Where(x => !x.IsPlayer) is IEnumerable<GameObject> gameObjects)
             {
                 //Parallel.ForEach(gameObjects, gameObject =>
-                foreach (var gameObject in gameObjects)                
+                foreach (var gameObject in gameObjects)
                 {
-                    //var gameObject = gameObjects[i];
-
                     if (gameObject.IsDestructible || gameObject.IsProjectile)
                         gameObject.IsMarkedForFadedDestruction = true;
                     else
@@ -830,7 +872,6 @@ namespace AstroOdyssey
                 //);
             }
 
-            _celestialObjectFactory.StartSpaceWarp();
         }
 
         /// <summary>
@@ -909,7 +950,6 @@ namespace AstroOdyssey
         /// </summary>
         private void SetAnalytics()
         {
-
 #if DEBUG
             _frameStatUpdateSpawnCounter -= 1;
 
@@ -921,8 +961,10 @@ namespace AstroOdyssey
 
                 var fpsText = $"FPS: {_fpsCount}" +
                     "\n----" +
-                    $"\nframe time: {_frameTime}" +
-                    $"\nframe duration: {(int)_frameDuration}" +
+                    $"\nframe time: {_frameTime.ToString("0.00")}" +
+                    $"\nframe dur: {_frameDuration.ToString("0.00")}" +
+                    $"\navg. frame dur: {(_framesCount.Sum() / _framesCount.Count).ToString("0.00")}" +
+                    $"\nmax frame dur: {_maxFrameDuration.ToString("0.00")}" +
                     "\n----";
 
                 FPSText.Text = fpsText;
@@ -944,6 +986,12 @@ namespace AstroOdyssey
                 ObjectsCountText.Text = objectsCountText;
 
                 _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
+
+                if (_framesCount.Count > 5000)
+                {
+                    _framesCount.Clear();
+                    Console.WriteLine("AVG. FRAME DUR COUNTER RESET.");
+                }
             }
 #endif
         }
@@ -953,8 +1001,12 @@ namespace AstroOdyssey
         /// </summary>
         private void GetFrameDuration()
         {
-#if DEBUG
+#if DEBUG            
+            _framesCount.Add(_frameDuration);
             _frameDuration = _frameEndTime - _frameStartTime;
+
+            if (_frameDuration > _maxFrameDuration)
+                _maxFrameDuration = _frameDuration;
 #endif
         }
 
@@ -1328,8 +1380,8 @@ namespace AstroOdyssey
 
             if (Bosses.Count == 0)
             {
-                WarpThroughSpace();
                 ShowInGameContent(_bossClearedImage, $"{_localizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {_localizationHelper.GetLocalizedResource("COMPLETE")}");
+                WarpThroughSpace(); // after defeating a boss                
 
                 _enemyFactory.DisengageBoss();
 
@@ -1691,10 +1743,12 @@ namespace AstroOdyssey
                 }
                 else
                 {
-                    WarpThroughSpace();
                     ShowInGameText($"👊 {_localizationHelper.GetLocalizedResource("ENEMY_APPROACHES")}");
+                    WarpThroughSpace(); // after first level clearing
+
                     _audioHelper.PlaySound(SoundType.ENEMY_INCOMING);
                     _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
+
                     SetGameLevelText();
                 }
             }

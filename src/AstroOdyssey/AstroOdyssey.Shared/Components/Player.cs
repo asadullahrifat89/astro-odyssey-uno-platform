@@ -29,6 +29,8 @@ namespace AstroOdyssey
             Height = Constants.PLAYER_HEIGHT;
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
+            IsPlayer = true;
+
             Health = 100;
             HitPoint = 10;
 
