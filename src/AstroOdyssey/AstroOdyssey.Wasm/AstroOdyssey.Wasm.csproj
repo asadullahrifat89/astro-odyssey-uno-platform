@@ -3,7 +3,7 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
 		<NoWarn>NU1701</NoWarn>
-		<LangVersion>10.0</LangVersion>		
+		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
@@ -17,17 +17,18 @@
 		<WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>
 		<!--AOT-->
-		<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
+		<!--<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
 
 		<!-- Disable performance optimizations for faster builds -->
-		<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>
+		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
 
 		<!--Interpreter-->
-		<!--<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>-->
+		<WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
 
 		<!--PWA-->
-		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>
+		<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>		
 	</PropertyGroup>
 	<!--<ItemGroup>
 		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB" />
