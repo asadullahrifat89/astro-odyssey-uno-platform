@@ -12,6 +12,7 @@
 
         public const double PLAYER_HEIGHT = 80;
         public const double BOSS_BASE_HEALTH = 25;
+        public const double SCORE_MULTIPLIER_THREASHOLD = 7;
 
         public const string PLAYER_TAG = "player";
 
