@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using System.Threading.Tasks;
 
 namespace AstroOdyssey
@@ -66,6 +68,48 @@ namespace AstroOdyssey
         private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableSignupButton();
+        }
+
+        private void ConfirmPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableSignupButton();
+
+            if (GameSignupPage_PasswordBox.Text == GameSignupPage_ConfirmPasswordBox.Text)
+            {
+                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED");
+                _errorContainer.Foreground = new SolidColorBrush(Colors.LightGreen);
+                _errorContainer.Text = message;
+                _errorContainer.Visibility = Visibility.Visible;
+            }
+        }
+
+        private bool DoPasswordsMatch()
+        {
+            if (GameSignupPage_PasswordBox.Text.IsNullOrBlank() || GameSignupPage_ConfirmPasswordBox.Text.IsNullOrBlank())
+                return false;
+
+            if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
+            {
+                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH");
+                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
+                _errorContainer.Text = message;
+                _errorContainer.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsStrongPassword()
+        {
+            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
+            var message = _localizationHelper.GetLocalizedResource(result.Message);
+            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson); ;
+            _errorContainer.Text = message;
+            _errorContainer.Visibility = Visibility.Visible;
+
+            return result.IsStrong;
         }
 
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -171,9 +215,8 @@ namespace AstroOdyssey
 
         private void EnableSignupButton()
         {
-            GameSignupPage_SignupButton.IsEnabled = !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
-                && !GameSignupPage_PasswordBox.Text.IsNullOrBlank()
-                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+            GameSignupPage_SignupButton.IsEnabled = IsStrongPassword() && DoPasswordsMatch()
+                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank() && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
                 && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
         }
 
@@ -198,6 +241,7 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_ConfirmPasswordBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
             _localizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
         }
