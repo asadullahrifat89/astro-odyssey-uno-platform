@@ -15,9 +15,9 @@ namespace AstroOdyssey
 
         private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
 
-        private event EventHandler<object> _timerAction;
+        private event Action frameAction;
 
-        private double _frameTime;
+        private double frameTime;
 
         private PeriodicTimer _frameTimer;
 
@@ -44,20 +44,20 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetFrameAction(double frameTime, EventHandler<object> action)
+        public void SetFrameAction(double frameTime, Action frameAction)
         {
-            _frameTime = frameTime;
-            _timerAction = action;         
+            this.frameTime = frameTime;
+            this.frameAction = frameAction;         
         }
 
         public async void Start()
         {
-            var interval = TimeSpan.FromMilliseconds(_frameTime);
+            var interval = TimeSpan.FromMilliseconds(frameTime);
             _frameTimer = new PeriodicTimer(interval);
 
             while (await _frameTimer.WaitForNextTickAsync())
             {
-                _timerAction?.Invoke(null, null);
+                frameAction();
             }
         }
 

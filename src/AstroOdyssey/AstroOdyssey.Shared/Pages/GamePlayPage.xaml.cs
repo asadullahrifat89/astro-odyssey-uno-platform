@@ -457,28 +457,28 @@ namespace AstroOdyssey
 #if DEBUG
             Stopwatch = Stopwatch.StartNew();
 #endif
-            GameView.SetFrameAction(frameTime: _frameTime, action: GameViewTimer_Tick);
-            StarView.SetFrameAction(frameTime: _frameTime, action: StarViewTimer_Tick);
-            PlanetView.SetFrameAction(frameTime: _frameTime, action: PlanetViewTimer_Tick);
+            GameView.SetFrameAction(frameTime: _frameTime, frameAction: GameViewFrameAction);
+            StarView.SetFrameAction(frameTime: _frameTime, frameAction: StarViewFrameAction);
+            PlanetView.SetFrameAction(frameTime: _frameTime, frameAction: PlanetViewFrameAction);
 
             GameView.Start();
             StarView.Start();
             PlanetView.Start();
         }
 
-        private void PlanetViewTimer_Tick(object sender, object e)
+        private void PlanetViewFrameAction()
         {
             UpdatePlanetViewObjects();
         }
 
-        private void StarViewTimer_Tick(object sender, object e)
+        private void StarViewFrameAction()
         {
             UpdateStarViewObjects();
 
             _celestialObjectFactory.SpawnCelestialObject();
         }
 
-        private void GameViewTimer_Tick(object sender, object e)
+        private void GameViewFrameAction()
         {
 #if DEBUG
             _frameStartTime = Stopwatch.ElapsedMilliseconds;
@@ -503,7 +503,6 @@ namespace AstroOdyssey
 
             SetAnalytics();
 #endif
-
         }
 
         /// <summary>
