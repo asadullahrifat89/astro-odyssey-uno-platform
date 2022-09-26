@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 
@@ -18,6 +19,8 @@ namespace AstroOdyssey
 
         private double _frameTime;
 
+        private PeriodicTimer _frameTimer;
+
         #endregion
 
         #region Ctor
@@ -29,9 +32,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Properties
-
-        public DispatcherTimer FrameTimer { get; set; }
+        #region Properties        
 
         public bool IsWarpingThroughSpace { get; set; }
 
@@ -46,25 +47,23 @@ namespace AstroOdyssey
         public void SetFrameAction(double frameTime, EventHandler<object> action)
         {
             _frameTime = frameTime;
-            _timerAction = action;
-
-            if (FrameTimer is null)
-            {
-                FrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };                
-            }
-
-            FrameTimer.Tick += _timerAction;
+            _timerAction = action;         
         }
 
-        public void Start()
+        public async void Start()
         {
-            FrameTimer?.Start();
+            var interval = TimeSpan.FromMilliseconds(_frameTime);
+            _frameTimer = new PeriodicTimer(interval);
+
+            while (await _frameTimer.WaitForNextTickAsync())
+            {
+                _timerAction?.Invoke(null, null);
+            }
         }
 
         public void Stop()
         {
-            FrameTimer?.Stop();
-            FrameTimer.Tick -= _timerAction;
+            _frameTimer?.Dispose();
         }
 
         /// <summary>

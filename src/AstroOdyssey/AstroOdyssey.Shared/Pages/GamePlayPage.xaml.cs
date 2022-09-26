@@ -480,36 +480,30 @@ namespace AstroOdyssey
 
         private void GameViewTimer_Tick(object sender, object e)
         {
-            var isFrameRendering = false;
-
-            if (!isFrameRendering)
-            {
-                isFrameRendering = true;
 #if DEBUG
-                _frameStartTime = Stopwatch.ElapsedMilliseconds;
+            _frameStartTime = Stopwatch.ElapsedMilliseconds;
 #endif
-                CheckGameOver();
+            CheckGameOver();
 
-                UpdateGameViewObjects();
+            UpdateGameViewObjects();
 
-                SpawnGameViewObjects();
+            SpawnGameViewObjects();
 
-                InGameContentCoolDown();
+            InGameContentCoolDown();
 
-                DamageRecoveryCoolDown();
+            DamageRecoveryCoolDown();
 
-                ScoreMultiplierCoolDown();
+            ScoreMultiplierCoolDown();
 #if DEBUG
-                CalculateFPS();
+            CalculateFPS();
 
-                _frameEndTime = Stopwatch.ElapsedMilliseconds;
+            _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
-                GetFrameDuration();
+            GetFrameDuration();
 
-                SetAnalytics();
+            SetAnalytics();
 #endif
-                isFrameRendering = false;
-            }
+
         }
 
         /// <summary>
