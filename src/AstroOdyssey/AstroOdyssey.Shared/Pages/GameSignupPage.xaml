@@ -72,6 +72,16 @@
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="PasswordBox_TextChanged" />
 
+                <!--  Confirm password  -->
+                <PasswordBox
+                    x:Name="GameSignupPage_ConfirmPasswordBox"
+                    x:Uid="GameSignupPage_ConfirmPasswordBox"
+                    Margin="5"
+                    CornerRadius="50"
+                    Header="Confirm password"
+                    KeyDown="PasswordBox_KeyDown"
+                    TextChanged="ConfirmPasswordBox_TextChanged" />
+
                 <!--  Signup button  -->
                 <Button
                     x:Name="GameSignupPage_SignupButton"

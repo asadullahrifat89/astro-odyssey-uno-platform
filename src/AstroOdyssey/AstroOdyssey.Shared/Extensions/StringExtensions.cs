@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Mail;
 using System.Text;
 
@@ -30,6 +31,33 @@ namespace AstroOdyssey
             {
                 return false;
             }
+        }
+
+        public static (bool IsStrong, string Message) IsStrongPassword(string passwd)
+        {
+            if (passwd.Length < 8)
+                return (false, "LENGTH_MUST_BE_GREATER_THAN_8_CHARS");
+
+            if (passwd.Length > 14)
+                return (false, "LENGTH_MUST_BE_LESS_THAN_14_CHARS");
+
+            if (!passwd.Any(char.IsUpper))
+                return (false, "MUST_CONTAIN_ONE_UPPERCASE_CHAR");
+
+            if (!passwd.Any(char.IsLower))
+                return (false, "MUST_CONTAIN_ONE_LOWERCASE_CHAR");
+
+            if (passwd.Contains(" "))
+                return (false, "MUST_NOT_CONTAIN_SPACE");
+
+            string specialCh = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
+            char[] specialChArray = specialCh.ToCharArray();
+            char[] passArray = passwd.ToCharArray();
+
+            if (!passArray.Any(x => specialChArray.Contains(x)))
+                return (false, "MUST_CONTAIN_ONE_SPECIAL_CHAR");
+
+            return (true, "PASSWORD_IS_STRONG");
         }
 
         /// <summary>

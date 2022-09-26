@@ -626,6 +626,14 @@ namespace AstroOdyssey
                 new ("fr", "Définir un mot de passe"),
             }),
 
+            new LocalizationKey(key: "GameSignupPage_ConfirmPasswordBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Confirm password"),
+                new ("bn", "পাসওয়ার্ড নিশ্চিত করুন"),
+                new ("de", "Passwort bestätigen"),
+                new ("fr", "Confirmez le mot de passe"),
+            }),
+
             new LocalizationKey(key: "GameSignupPage_SignupButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Signup"),
@@ -640,6 +648,78 @@ namespace AstroOdyssey
                 new ("bn", "আপনার ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?"),
                 new ("de", "Du hast bereits einen Account?"),
                 new ("fr", "Tu as déjà un compte ?"),
+            }),
+
+            new LocalizationKey(key: "PASSWORDS_DIDNT_MATCH", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Passwords didn't match"),
+                new ("bn", "পাসওয়ার্ড মেলে না"),
+                new ("de", "Passwörter stimmten nicht überein"),
+                new ("fr", "Les mots de passe ne correspondent pas"),
+            }),
+
+            new LocalizationKey(key: "PASSWORDS_MATCHED", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Passwords matched"),
+                new ("bn", "পাসওয়ার্ড মিলেছে"),
+                new ("de", "Passwörter übereinstimmen"),
+                new ("fr", "Mots de passe correspondants"),
+            }),
+
+            new LocalizationKey(key: "LENGTH_MUST_BE_GREATER_THAN_8_CHARS", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password must be at least eight characters"),
+                new ("bn", "পাসওয়ার্ড অবশ্যই কমপক্ষে আটটি অক্ষর হতে হবে"),
+                new ("de", "Das Passwort muss mindestens acht Zeichen betragen"),
+                new ("fr", "Le mot de passe doit comporter au moins huit caractères"),
+            }),
+
+            new LocalizationKey(key: "LENGTH_MUST_BE_LESS_THAN_14_CHARS", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password must be less than fourteen characters"),
+                new ("bn", "পাসওয়ার্ড অবশ্যই চৌদ্দ অক্ষরের চেয়ে কম হতে হবে"),
+                new ("de", "Das Passwort muss weniger als vierzehn Zeichen betragen"),
+                new ("fr", "Le mot de passe doit être inférieur à quatorze caractères"),
+            }),
+
+            new LocalizationKey(key: "MUST_CONTAIN_ONE_UPPERCASE_CHAR", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password must contain one uppercase character"),
+                new ("bn", "পাসওয়ার্ডে অবশ্যই একটি বড় হাতের অক্ষর থাকতে হবে"),
+                new ("de", "Passwort muss einen Großbuchstaben enthalten"),
+                new ("fr", "Le mot de passe doit contenir un caractère majuscule"),
+            }),
+
+            new LocalizationKey(key: "MUST_CONTAIN_ONE_LOWERCASE_CHAR", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password must contain one lowercase character"),
+                new ("bn", "পাসওয়ার্ডে অবশ্যই একটি ছোট হাতের অক্ষর থাকতে হবে"),
+                new ("de", "Das Passwort muss einen Kleinbuchstabencharakter enthalten"),
+                new ("fr", "Le mot de passe doit contenir un caractère minuscule"),
+            }),
+
+            new LocalizationKey(key: "MUST_NOT_CONTAIN_SPACE", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password cannot contain spaces"),
+                new ("bn", "পাসওয়ার্ডে স্পেস থাকতে পারবে না"),
+                new ("de", "Kennwort darf keine Leerzeichen enthalten"),
+                new ("fr", "Le mot de passe ne peut pas contenir d'espaces"),
+            }),
+
+            new LocalizationKey(key: "MUST_CONTAIN_ONE_SPECIAL_CHAR", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password must contain one special character"),
+                new ("bn", "পাসওয়ার্ডে অবশ্যই একটি বিশেষ অক্ষর থাকতে হবে"),
+                new ("de", "Das Passwort muss ein Sonderzeichen enthalten"),
+                new ("fr", "Le mot de passe doit contenir un caractère spécial"),
+            }),
+
+            new LocalizationKey(key: "PASSWORD_IS_STRONG", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Password is strong"),
+                new ("bn", "পাসওয়ার্ড শক্তিশালী"),
+                new ("de", "Das Passwort ist sicher"),
+                new ("fr", "Le mot de passe est fort"),
             }),
 
 	        #endregion
