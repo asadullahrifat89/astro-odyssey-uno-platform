@@ -457,59 +457,52 @@ namespace AstroOdyssey
 #if DEBUG
             Stopwatch = Stopwatch.StartNew();
 #endif
-            GameView.SetFrameAction(frameTime: _frameTime, action: GameViewTimer_Tick);
-            StarView.SetFrameAction(frameTime: _frameTime, action: StarViewTimer_Tick);
-            PlanetView.SetFrameAction(frameTime: _frameTime, action: PlanetViewTimer_Tick);
+            GameView.SetFrameAction(frameTime: _frameTime, frameAction: GameViewFrameAction);
+            StarView.SetFrameAction(frameTime: _frameTime, frameAction: StarViewFrameAction);
+            PlanetView.SetFrameAction(frameTime: _frameTime, frameAction: PlanetViewFrameAction);
 
             GameView.Start();
             StarView.Start();
             PlanetView.Start();
         }
 
-        private void PlanetViewTimer_Tick(object sender, object e)
+        private void PlanetViewFrameAction()
         {
             UpdatePlanetViewObjects();
         }
 
-        private void StarViewTimer_Tick(object sender, object e)
+        private void StarViewFrameAction()
         {
             UpdateStarViewObjects();
 
             _celestialObjectFactory.SpawnCelestialObject();
         }
 
-        private void GameViewTimer_Tick(object sender, object e)
+        private void GameViewFrameAction()
         {
-            var isFrameRendering = false;
-
-            if (!isFrameRendering)
-            {
-                isFrameRendering = true;
 #if DEBUG
-                _frameStartTime = Stopwatch.ElapsedMilliseconds;
+            _frameStartTime = Stopwatch.ElapsedMilliseconds;
 #endif
-                CheckGameOver();
+            CheckGameOver();
 
-                UpdateGameViewObjects();
+            UpdateGameViewObjects();
 
-                SpawnGameViewObjects();
+            SpawnGameViewObjects();
 
-                InGameContentCoolDown();
+            InGameContentCoolDown();
 
-                DamageRecoveryCoolDown();
+            DamageRecoveryCoolDown();
 
-                ScoreMultiplierCoolDown();
+            ScoreMultiplierCoolDown();
 #if DEBUG
-                CalculateFPS();
+            CalculateFPS();
 
-                _frameEndTime = Stopwatch.ElapsedMilliseconds;
+            _frameEndTime = Stopwatch.ElapsedMilliseconds;
 
-                GetFrameDuration();
+            GetFrameDuration();
 
-                SetAnalytics();
+            SetAnalytics();
 #endif
-                isFrameRendering = false;
-            }
         }
 
         /// <summary>

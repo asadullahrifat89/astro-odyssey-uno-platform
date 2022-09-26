@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Foundation;
 
@@ -14,9 +15,11 @@ namespace AstroOdyssey
 
         private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
 
-        private event EventHandler<object> _timerAction;
+        private event Action frameAction;
 
-        private double _frameTime;
+        private double frameTime;
+
+        private PeriodicTimer _frameTimer;
 
         #endregion
 
@@ -29,9 +32,7 @@ namespace AstroOdyssey
 
         #endregion
 
-        #region Properties
-
-        public DispatcherTimer FrameTimer { get; set; }
+        #region Properties        
 
         public bool IsWarpingThroughSpace { get; set; }
 
@@ -43,28 +44,26 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetFrameAction(double frameTime, EventHandler<object> action)
+        public void SetFrameAction(double frameTime, Action frameAction)
         {
-            _frameTime = frameTime;
-            _timerAction = action;
-
-            if (FrameTimer is null)
-            {
-                FrameTimer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(_frameTime) };                
-            }
-
-            FrameTimer.Tick += _timerAction;
+            this.frameTime = frameTime;
+            this.frameAction = frameAction;         
         }
 
-        public void Start()
+        public async void Start()
         {
-            FrameTimer?.Start();
+            var interval = TimeSpan.FromMilliseconds(frameTime);
+            _frameTimer = new PeriodicTimer(interval);
+
+            while (await _frameTimer.WaitForNextTickAsync())
+            {
+                frameAction();
+            }
         }
 
         public void Stop()
         {
-            FrameTimer?.Stop();
-            FrameTimer.Tick -= _timerAction;
+            _frameTimer?.Dispose();
         }
 
         /// <summary>
