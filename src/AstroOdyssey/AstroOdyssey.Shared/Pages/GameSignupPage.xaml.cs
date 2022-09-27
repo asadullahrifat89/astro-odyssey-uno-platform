@@ -55,6 +55,11 @@ namespace AstroOdyssey
             await this.PlayLoadedTransition();
         }
 
+        private void UserFullNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableSignupButton();
+        }
+
         private void UserEmailBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableSignupButton();
@@ -105,7 +110,7 @@ namespace AstroOdyssey
         {
             var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
             var message = _localizationHelper.GetLocalizedResource(result.Message);
-            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson); ;
+            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson);
             _errorContainer.Text = message;
             _errorContainer.Visibility = Visibility.Visible;
 
@@ -216,7 +221,7 @@ namespace AstroOdyssey
         private void EnableSignupButton()
         {
             GameSignupPage_SignupButton.IsEnabled = IsStrongPassword() && DoPasswordsMatch()
-                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank() && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank() && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank() && !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
                 && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
         }
 
@@ -238,6 +243,7 @@ namespace AstroOdyssey
         private void SetLocalization()
         {
             _localizationHelper.SetLocalizedResource(ApplicationName_Header);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_UserFullNameBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);

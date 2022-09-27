@@ -602,6 +602,14 @@ namespace AstroOdyssey
 
             #region Game Signup Page
 
+            new LocalizationKey(key: "GameSignupPage_UserFullNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enter full name"),
+                new ("bn", "পুরো নাম লিখুন"),
+                new ("de", "Geben Sie den vollständigen Namen ein"),
+                new ("fr", "Entrez le nom complet"),
+            }),
+
             new LocalizationKey(key: "GameSignupPage_UserEmailBox", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Enter email"),
