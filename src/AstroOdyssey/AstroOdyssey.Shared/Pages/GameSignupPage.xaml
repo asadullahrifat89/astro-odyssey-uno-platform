@@ -36,7 +36,7 @@
                 <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,15,0,20"
+                    Margin="0,10,0,15"
                     FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"
@@ -92,12 +92,21 @@
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="ConfirmPasswordBox_TextChanged" />
 
+                <!--  I agree  -->
+                <CheckBox
+                    x:Name="GameSignupPage_ConfirmCheckBox"
+                    x:Uid="GameSignupPage_ConfirmCheckBox"
+                    Margin="5"
+                    Checked="GameSignupPage_ConfirmCheckBox_Checked"
+                    Content="Yes, I agree to the conditions of participation."
+                    Unchecked="GameSignupPage_ConfirmCheckBox_Unchecked" />
+
                 <!--  Signup button  -->
                 <Button
                     x:Name="GameSignupPage_SignupButton"
                     x:Uid="GameSignupPage_SignupButton"
                     Height="50"
-                    Margin="30,25,30,5"
+                    Margin="30,15,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -117,7 +126,7 @@
                     x:Name="GameSignupPage_LoginButton"
                     x:Uid="GameSignupPage_LoginButton"
                     Height="40"
-                    Margin="5,10,5,5"
+                    Margin="5,5,5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"
