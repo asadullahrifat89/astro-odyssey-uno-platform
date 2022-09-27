@@ -42,6 +42,16 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
+                <!--  Fullname  -->
+                <TextBox
+                    x:Name="GameSignupPage_UserFullNameBox"
+                    x:Uid="GameSignupPage_UserFullNameBox"
+                    Margin="5"
+                    CornerRadius="50"
+                    FontWeight="SemiBold"
+                    Header="Enter your full name"
+                    TextChanged="UserFullNameBox_TextChanged" />
+
                 <!--  Email  -->
                 <TextBox
                     x:Name="GameSignupPage_UserEmailBox"
@@ -87,7 +97,7 @@
                     x:Name="GameSignupPage_SignupButton"
                     x:Uid="GameSignupPage_SignupButton"
                     Height="50"
-                    Margin="30,30,30,5"
+                    Margin="30,25,30,5"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -107,7 +117,7 @@
                     x:Name="GameSignupPage_LoginButton"
                     x:Uid="GameSignupPage_LoginButton"
                     Height="40"
-                    Margin="5,15,5,5"
+                    Margin="5,10,5,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"

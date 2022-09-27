@@ -250,10 +250,10 @@ namespace AstroOdyssey
 
             new LocalizationKey(key: "GameInstructionsPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "👍 Got It"),
-                new ("bn", "👍 আমি বুঝতে পেরেছি"),
-                new ("de", "👍 Ich Habs"),
-                new ("fr", "👍 J'ai Compris"),
+                new ("en", "👍 Okay"),
+                new ("bn", "👍 ঠিক আছে"),
+                new ("de", "👍 Okay"),
+                new ("fr", "👍 D'accord"),
             }),
 
 	        #endregion
@@ -602,6 +602,14 @@ namespace AstroOdyssey
 
             #region Game Signup Page
 
+            new LocalizationKey(key: "GameSignupPage_UserFullNameBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Enter full name"),
+                new ("bn", "পুরো নাম লিখুন"),
+                new ("de", "Geben Sie den vollständigen Namen ein"),
+                new ("fr", "Entrez le nom complet"),
+            }),
+
             new LocalizationKey(key: "GameSignupPage_UserEmailBox", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Enter email"),
@@ -720,6 +728,14 @@ namespace AstroOdyssey
                 new ("bn", "পাসওয়ার্ড শক্তিশালী"),
                 new ("de", "Das Passwort ist sicher"),
                 new ("fr", "Le mot de passe est fort"),
+            }),
+
+            new LocalizationKey(key: "INVALID_CHARACTERS_IN_FULLNAME", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Invalid characters in full name"),
+                new ("bn", "পুরো নামে অবৈধ অক্ষর"),
+                new ("de", "Ungültige Zeichen im vollständigen Namen"),
+                new ("fr", "Invalid characters in full name"),
             }),
 
 	        #endregion
