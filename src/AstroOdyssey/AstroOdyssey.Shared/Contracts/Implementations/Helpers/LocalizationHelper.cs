@@ -250,10 +250,10 @@ namespace AstroOdyssey
 
             new LocalizationKey(key: "GameInstructionsPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "👍 Got It"),
-                new ("bn", "👍 আমি বুঝতে পেরেছি"),
-                new ("de", "👍 Ich Habs"),
-                new ("fr", "👍 J'ai Compris"),
+                new ("en", "👍 Okay"),
+                new ("bn", "👍 ঠিক আছে"),
+                new ("de", "👍 Okay"),
+                new ("fr", "👍 D'accord"),
             }),
 
 	        #endregion
