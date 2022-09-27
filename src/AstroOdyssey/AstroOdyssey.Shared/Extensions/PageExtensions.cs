@@ -82,13 +82,24 @@ namespace AstroOdyssey
             progressBar.ShowError = true;
 
             messageBlock.Foreground = App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush;
-            messageBlock.Text = message;
+            messageBlock.Text = "⚠️ " + message;
             messageBlock.Visibility = Visibility.Visible;
 
             foreach (var actionButton in actionButtons)
             {
                 EnableActionButton(actionButton);
             }
+        }
+
+        public static void SetProgressBarMessage(
+            this Page page,
+            string message,
+            bool isError,
+            TextBlock messageBlock)
+        {
+            messageBlock.Foreground = isError ? App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush : App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
+            messageBlock.Text = (isError ? "⚠️ " : "👍 ") + message;
+            messageBlock.Visibility = Visibility.Visible;
         }
 
         public static void RunProgressBar(
@@ -108,7 +119,7 @@ namespace AstroOdyssey
             progressBar.ShowPaused = false;
 
             messageBlock.Foreground = new SolidColorBrush(Colors.White);
-            messageBlock.Text = message;
+            messageBlock.Text = "👍 " + message;
             messageBlock.Visibility = message.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
 
             if (actionButtons.Any(x => x.IsEnabled))

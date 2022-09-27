@@ -78,15 +78,22 @@ namespace AstroOdyssey
         private void ConfirmPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableSignupButton();
-
-            if (GameSignupPage_PasswordBox.Text == GameSignupPage_ConfirmPasswordBox.Text)
-                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
         }
 
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameSignupPage_SignupButton.IsEnabled)
                 await PerformSignup();
+        }
+
+        private void GameSignupPage_ConfirmCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            EnableSignupButton();
+        }
+
+        private void GameSignupPage_ConfirmCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            EnableSignupButton();
         }
 
         private async void SignupButton_Click(object sender, RoutedEventArgs e)
@@ -193,7 +200,8 @@ namespace AstroOdyssey
                 && DoPasswordsMatch()
                 && !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
                 && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
-                && IsValidEmail();
+                && IsValidEmail()
+                && GameSignupPage_ConfirmCheckBox.IsChecked == true;
         }
 
         private bool IsValidFullName()
@@ -206,7 +214,7 @@ namespace AstroOdyssey
                 _errorContainer.Visibility = Visibility.Collapsed;
 
             return result.IsValid;
-        }      
+        }
 
         private bool IsStrongPassword()
         {
@@ -226,6 +234,10 @@ namespace AstroOdyssey
                 SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
 
                 return false;
+            }
+            else
+            {
+                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
             }
 
             return true;
@@ -253,10 +265,10 @@ namespace AstroOdyssey
 
         private void SetProgressBarMessage(string message, bool isError)
         {
-            //TODO: get the colors from app.xaml
-            _errorContainer.Foreground = isError ? App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush : App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
-            _errorContainer.Text = message;
-            _errorContainer.Visibility = Visibility.Visible;
+            this.SetProgressBarMessage(
+                message: message,
+                isError: isError,
+                messageBlock: _errorContainer);
         }
 
         private void SetLocalization()
@@ -267,6 +279,7 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_ConfirmPasswordBox);
+            _localizationHelper.SetLocalizedResource(GameSignupPage_ConfirmCheckBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
             _localizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
         }

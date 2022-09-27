@@ -666,6 +666,14 @@ namespace AstroOdyssey
                 new ("fr", "Tu as déjà un compte ?"),
             }),
 
+            new LocalizationKey(key: "GameSignupPage_ConfirmCheckBox", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Yes, I agree to the conditions of participation."),
+                new ("bn", "হ্যাঁ, আমি অংশগ্রহণের শর্তে সম্মত।"),
+                new ("de", "Ja, ich stimme den Teilnahmebedingungen zu."),
+                new ("fr", "Oui, j'accepte les conditions de participation."),
+            }),
+
             new LocalizationKey(key: "PASSWORDS_DIDNT_MATCH", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Passwords didn't match"),
@@ -838,6 +846,8 @@ namespace AstroOdyssey
                     toggleButton.Content = value;
                 else if (uIElement is HyperlinkButton hyperlinkButton)
                     hyperlinkButton.Content = value;
+                else if (uIElement is CheckBox checkBox)
+                    checkBox.Content = value;
             }
         }
 
