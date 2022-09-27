@@ -81,7 +81,7 @@ namespace AstroOdyssey
             progressBar.ShowPaused = true;
             progressBar.ShowError = true;
 
-            messageBlock.Foreground = new SolidColorBrush(Colors.Crimson);
+            messageBlock.Foreground = App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush;
             messageBlock.Text = message;
             messageBlock.Visibility = Visibility.Visible;
 
