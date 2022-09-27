@@ -46,11 +46,20 @@
                 VerticalAlignment="Center"
                 Orientation="Vertical">
 
-                <!--  Logo  -->
+                <!--  Header  -->
+                <TextBlock
+                    x:Name="ShipSelectionPage_Header"
+                    Margin="0,10,0,0"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,10,0,0"
-                    FontSize="35"
+                    Margin="0,2,0,0"
+                    FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
@@ -93,7 +102,7 @@
                     x:Name="ShipSelectionPage_ChooseButton"
                     x:Uid="ShipSelectionPage_ChooseButton"
                     Height="50"
-                    Margin="30,10,30,50"
+                    Margin="30,10,30,20"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"

@@ -80,12 +80,7 @@ namespace AstroOdyssey
             EnableSignupButton();
 
             if (GameSignupPage_PasswordBox.Text == GameSignupPage_ConfirmPasswordBox.Text)
-            {
-                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED");
-                _errorContainer.Foreground = new SolidColorBrush(Colors.LightGreen);
-                _errorContainer.Text = message;
-                _errorContainer.Visibility = Visibility.Visible;
-            }
+                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
         }
 
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -134,7 +129,6 @@ namespace AstroOdyssey
 
         private async Task<bool> Signup()
         {
-            // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
                 fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
@@ -207,18 +201,19 @@ namespace AstroOdyssey
             var result = StringExtensions.IsValidFullName(GameSignupPage_UserFullNameBox.Text);
 
             if (!result.IsValid)
-            {
-                var message = _localizationHelper.GetLocalizedResource(result.Message);
-                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
-                _errorContainer.Text = message;
-                _errorContainer.Visibility = Visibility.Visible;
-            }
+                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource(result.Message), isError: true);
             else
-            {
                 _errorContainer.Visibility = Visibility.Collapsed;
-            }
 
             return result.IsValid;
+        }      
+
+        private bool IsStrongPassword()
+        {
+            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
+            SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource(result.Message), isError: !result.IsStrong);
+
+            return result.IsStrong;
         }
 
         private bool DoPasswordsMatch()
@@ -228,26 +223,12 @@ namespace AstroOdyssey
 
             if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
             {
-                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH");
-                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
-                _errorContainer.Text = message;
-                _errorContainer.Visibility = Visibility.Visible;
+                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
 
                 return false;
             }
 
             return true;
-        }
-
-        private bool IsStrongPassword()
-        {
-            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
-            var message = _localizationHelper.GetLocalizedResource(result.Message);
-            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson);
-            _errorContainer.Text = message;
-            _errorContainer.Visibility = Visibility.Visible;
-
-            return result.IsStrong;
         }
 
         private bool IsValidEmail()
@@ -268,6 +249,14 @@ namespace AstroOdyssey
             this.StopProgressBar(
                 progressBar: _progressBar,
                 actionButtons: _actionButtons);
+        }
+
+        private void SetProgressBarMessage(string message, bool isError)
+        {
+            //TODO: get the colors from app.xaml
+            _errorContainer.Foreground = isError ? App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush : App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
+            _errorContainer.Text = message;
+            _errorContainer.Visibility = Visibility.Visible;
         }
 
         private void SetLocalization()

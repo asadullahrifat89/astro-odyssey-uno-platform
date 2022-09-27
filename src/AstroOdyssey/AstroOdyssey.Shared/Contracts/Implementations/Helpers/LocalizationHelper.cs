@@ -122,6 +122,14 @@ namespace AstroOdyssey
                 new ("fr", "Rechercher"),
             }),
 
+            new LocalizationKey(key: "ShipSelectionPage_Header", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Welcome to"),
+                new ("bn", "স্বাগতম"),
+                new ("de", "Willkommen zu"),
+                new ("fr", "Bienvenue à"),
+            }),
+
             new LocalizationKey(key: "ShipSelectionPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Choose a spaceship"),

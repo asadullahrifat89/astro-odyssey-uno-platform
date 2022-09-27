@@ -104,6 +104,7 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
+            _localizationHelper.SetLocalizedResource(ShipSelectionPage_Header);
             _localizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
             _localizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
             _localizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
