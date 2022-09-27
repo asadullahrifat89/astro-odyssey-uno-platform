@@ -730,6 +730,14 @@ namespace AstroOdyssey
                 new ("fr", "Le mot de passe est fort"),
             }),
 
+            new LocalizationKey(key: "INVALID_CHARACTERS_IN_FULLNAME", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "Invalid characters in full name"),
+                new ("bn", "পুরো নামে অবৈধ অক্ষর"),
+                new ("de", "Ungültige Zeichen im vollständigen Namen"),
+                new ("fr", "Invalid characters in full name"),
+            }),
+
 	        #endregion
 
             #region Game Leaderboard Page

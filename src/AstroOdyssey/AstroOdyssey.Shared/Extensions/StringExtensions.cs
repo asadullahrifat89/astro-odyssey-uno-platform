@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AstroOdyssey
 {
@@ -31,6 +32,14 @@ namespace AstroOdyssey
             {
                 return false;
             }
+        }
+
+        public static (bool IsValid, string Message) IsValidFullName(string fullName)
+        {
+            if (!Regex.IsMatch(fullName, @"^[\p{L}\p{M}' \.\-]+$"))
+                return (false, "INVALID_CHARACTERS_IN_FULLNAME");
+
+            return (true, "OK");
         }
 
         public static (bool IsStrong, string Message) IsStrongPassword(string passwd)

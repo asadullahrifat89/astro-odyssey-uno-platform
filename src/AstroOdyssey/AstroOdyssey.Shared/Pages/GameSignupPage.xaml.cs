@@ -88,35 +88,6 @@ namespace AstroOdyssey
             }
         }
 
-        private bool DoPasswordsMatch()
-        {
-            if (GameSignupPage_PasswordBox.Text.IsNullOrBlank() || GameSignupPage_ConfirmPasswordBox.Text.IsNullOrBlank())
-                return false;
-
-            if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
-            {
-                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH");
-                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
-                _errorContainer.Text = message;
-                _errorContainer.Visibility = Visibility.Visible;
-
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool IsStrongPassword()
-        {
-            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
-            var message = _localizationHelper.GetLocalizedResource(result.Message);
-            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson);
-            _errorContainer.Text = message;
-            _errorContainer.Visibility = Visibility.Visible;
-
-            return result.IsStrong;
-        }
-
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && GameSignupPage_SignupButton.IsEnabled)
@@ -165,8 +136,9 @@ namespace AstroOdyssey
         {
             // sign up
             ServiceResponse response = await _gameApiHelper.Signup(
+                fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
-                email: GameSignupPage_UserEmailBox.Text.Trim(),
+                email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
@@ -220,9 +192,67 @@ namespace AstroOdyssey
 
         private void EnableSignupButton()
         {
-            GameSignupPage_SignupButton.IsEnabled = IsStrongPassword() && DoPasswordsMatch()
-                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank() && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank() && !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
-                && StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
+            GameSignupPage_SignupButton.IsEnabled =
+                !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
+                && IsValidFullName()
+                && IsStrongPassword()
+                && DoPasswordsMatch()
+                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
+                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+                && IsValidEmail();
+        }
+
+        private bool IsValidFullName()
+        {
+            var result = StringExtensions.IsValidFullName(GameSignupPage_UserFullNameBox.Text);
+
+            if (!result.IsValid)
+            {
+                var message = _localizationHelper.GetLocalizedResource(result.Message);
+                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
+                _errorContainer.Text = message;
+                _errorContainer.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _errorContainer.Visibility = Visibility.Collapsed;
+            }
+
+            return result.IsValid;
+        }
+
+        private bool DoPasswordsMatch()
+        {
+            if (GameSignupPage_PasswordBox.Text.IsNullOrBlank() || GameSignupPage_ConfirmPasswordBox.Text.IsNullOrBlank())
+                return false;
+
+            if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
+            {
+                var message = _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH");
+                _errorContainer.Foreground = new SolidColorBrush(Colors.Crimson);
+                _errorContainer.Text = message;
+                _errorContainer.Visibility = Visibility.Visible;
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsStrongPassword()
+        {
+            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
+            var message = _localizationHelper.GetLocalizedResource(result.Message);
+            _errorContainer.Foreground = result.IsStrong ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.Crimson);
+            _errorContainer.Text = message;
+            _errorContainer.Visibility = Visibility.Visible;
+
+            return result.IsStrong;
+        }
+
+        private bool IsValidEmail()
+        {
+            return StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
         }
 
         private void RunProgressBar()

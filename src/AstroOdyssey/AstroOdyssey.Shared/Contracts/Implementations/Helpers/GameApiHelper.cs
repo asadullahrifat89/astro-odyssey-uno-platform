@@ -48,7 +48,7 @@ namespace AstroOdyssey
                 : response.ErrorResponse ?? new ServiceResponse() { HttpStatusCode = HttpStatusCode.InternalServerError, ExternalError = "Internal server error." };
         }
 
-        public async Task<ServiceResponse> Signup(string userName, string email, string password)
+        public async Task<ServiceResponse> Signup(string fullName, string userName, string email, string password)
         {
             var response = await _httpRequestHelper.SendRequest<ServiceResponse, ServiceResponse>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -58,6 +58,7 @@ namespace AstroOdyssey
                  payload: new
                  {
                      Email = email,
+                     FullName = fullName,
                      UserName = userName,
                      Password = password,
                      GameId = Constants.GAME_ID,
