@@ -330,6 +330,8 @@ namespace AstroOdyssey
             ScoreMultiplierBar.Maximum = SCORE_MULTIPLIER_THREASHOLD;
             ScoreMultiplierBar.Value = 0;
 
+            RageGradientBorder.Visibility = Visibility.Collapsed;
+
             ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
 
