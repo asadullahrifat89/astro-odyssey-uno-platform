@@ -23,6 +23,7 @@
             <Style x:Key="DefaultButton" TargetType="Button" />
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="#27223f" />
             <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
+            <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
             <SolidColorBrush x:Key="ProgressBarOkColor" Color="LightGreen" />
         </ResourceDictionary>
     </Application.Resources>

@@ -244,7 +244,7 @@
                         x:Name="GameLeaderboardPage_ProgressBar"
                         Height="5"
                         Margin="5,0"
-                        Foreground="Goldenrod"
+                        Foreground="{StaticResource ProgressBarForegroundColor}"
                         IsFocusEngagementEnabled="False"
                         IsIndeterminate="True"
                         IsTabStop="False"

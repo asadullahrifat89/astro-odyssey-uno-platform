@@ -152,7 +152,7 @@
                 <ProgressBar
                     x:Name="GameSignupPage_ProgressBar"
                     Height="5"
-                    Foreground="Goldenrod"
+                    Foreground="{StaticResource ProgressBarForegroundColor}"
                     IsFocusEngagementEnabled="False"
                     IsIndeterminate="True"
                     IsTabStop="False"
