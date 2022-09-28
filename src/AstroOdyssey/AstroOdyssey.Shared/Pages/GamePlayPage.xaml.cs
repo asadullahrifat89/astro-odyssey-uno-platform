@@ -1488,7 +1488,7 @@ namespace AstroOdyssey
         /// </summary>
         private void ActivateRage()
         {
-            PlayerRageIcon.Text = "🤬";
+            PlayerRageIcon.Text = "😤";
             _playerFactory.RageUp(Player);
             _playerProjectileFactory.RageUp(Player);
 
