@@ -20,6 +20,7 @@
 
         <!--  Gradient  -->
         <Border
+            x:Name="GradientBorder"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Visibility="{x:Bind Path=PlayerHealthBarPanel.Visibility, Mode=OneWay}">
@@ -30,6 +31,13 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
+
+        <!--  In game message content  -->
+        <StackPanel
+            x:Name="InGameContentPanel"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
 
         <!--  Player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
@@ -308,13 +316,6 @@
 
             </StackPanel>
         </Border>
-
-        <!--  In game message content  -->
-        <StackPanel
-            x:Name="InGameContentPanel"
-            Margin="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" />
 
         <!--  Pointer + keyboard input capture  -->
         <Border
