@@ -100,13 +100,13 @@
                     <TextBlock
                         x:Name="GameOverPage_Tagline"
                         x:Uid="GameOverPage_Tagline"
-                        FontSize="40"
+                        FontSize="35"
                         FontWeight="Bold"
                         Text="GAME OVER"
                         TextAlignment="Center" />
 
                     <!--  Score  -->
-                    <StackPanel Margin="60,5,60,0">
+                    <StackPanel Margin="60,0">
 
                         <!--  Score numeric  -->
                         <TextBlock
@@ -136,7 +136,7 @@
 
                     <StackPanel x:Name="ScoreDetailsStack" HorizontalAlignment="Left">
                         <!--  Enemies  -->
-                        <StackPanel Margin="3" Orientation="Horizontal">
+                        <StackPanel Margin="2" Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
@@ -152,7 +152,7 @@
                         </StackPanel>
 
                         <!--  Meteors  -->
-                        <StackPanel Margin="3" Orientation="Horizontal">
+                        <StackPanel Margin="2" Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
@@ -168,7 +168,7 @@
                         </StackPanel>
 
                         <!--  Bosses  -->
-                        <StackPanel Margin="3" Orientation="Horizontal">
+                        <StackPanel Margin="2" Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
@@ -184,7 +184,7 @@
                         </StackPanel>
 
                         <!--  Collectibles  -->
-                        <StackPanel Margin="3" Orientation="Horizontal">
+                        <StackPanel Margin="2" Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
@@ -200,7 +200,7 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Margin="10,0,10,20">
+                    <StackPanel Margin="10,0,10,10">
 
                         <!--  Play again button  -->
                         <Button
@@ -285,12 +285,12 @@
                 <PersonPicture
                     x:Name="Page_UserPicture"
                     Grid.Column="0"
-                    Width="40"
-                    Height="40"
-                    Margin="2" />
+                    Width="35"
+                    Height="35"
+                    Margin="2,2,2,2" />
                 <TextBlock
                     x:Name="Page_UserName"
-                    Margin="0,5,5,5"
+                    Margin="5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"

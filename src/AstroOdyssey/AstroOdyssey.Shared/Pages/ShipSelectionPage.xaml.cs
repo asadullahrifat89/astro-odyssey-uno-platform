@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
 using System.Linq;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace AstroOdyssey
 {
@@ -39,22 +38,26 @@ namespace AstroOdyssey
 
             selectedShip = null;
             App.Ship = null;
+
             ShipSelectionPage_ChooseButton.IsEnabled = false;
 
-            var ships = new PlayerShip[] { };
+            var shipButtons = ShipsPanel.Children.OfType<ToggleButton>();
 
-            ships = GameObjectTemplates.PLAYER_SHIP_TEMPLATES.Select(x => new PlayerShip()
+            foreach (var playerShipTemplate in GameObjectTemplates.PLAYER_SHIP_TEMPLATES)
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = _localizationHelper.GetLocalizedResource(x.Name),
-                ImageUrl = x.AssetUri,
-                ShipClass = x.ShipClass,
-            }).ToArray();
+                var playerShip = new PlayerShip()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = _localizationHelper.GetLocalizedResource(playerShipTemplate.Name),
+                    ImageUrl = playerShipTemplate.AssetUri,
+                    ShipClass = playerShipTemplate.ShipClass,
+                };
 
-            ShipsList.ItemsSource = ships.ToList();
+                if (shipButtons.FirstOrDefault(x => x.Name == playerShipTemplate.Name) is ToggleButton shipButton)
+                    shipButton.DataContext = playerShip;
+            }
 
             await this.PlayLoadedTransition();
-
             ShowUserName();
         }
 
@@ -63,6 +66,7 @@ namespace AstroOdyssey
             if (selectedShip is not null)
             {
                 _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
                 App.Ship = selectedShip;
 
                 await this.PlayUnLoadedTransition();
@@ -78,10 +82,17 @@ namespace AstroOdyssey
             App.NavigateToPage(typeof(GameStartPage));
         }
 
-        private void ShipsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Ship_Selected(object sender, RoutedEventArgs e)
         {
-            selectedShip = ShipsList.SelectedItem as PlayerShip;
-            ShipSelectionPage_ChooseButton.IsEnabled = true;
+            var playerShipButton = sender as ToggleButton;
+            selectedShip = playerShipButton.DataContext as PlayerShip;
+
+            foreach (var item in ShipsPanel.Children.OfType<ToggleButton>().Where(x => x.Name != playerShipButton.Name))
+            {
+                item.IsChecked = false;
+            }
+
+            EnableChooseButton();
         }
 
         #endregion
@@ -109,6 +120,11 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
             _localizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
             _localizationHelper.SetLocalizedResource(ApplicationName_Header);
+        }
+
+        private void EnableChooseButton()
+        {
+            ShipSelectionPage_ChooseButton.IsEnabled = selectedShip is not null;
         }
 
         #endregion

@@ -13,8 +13,8 @@
         <DataTemplate x:Key="ShipsListDataTemplate">
             <StackPanel Orientation="Vertical">
                 <Image
-                    Width="100"
-                    Height="100"
+                    Width="80"
+                    Height="80"
                     Source="{Binding Path=ImageUrl, Mode=OneWay}" />
                 <TextBlock
                     Margin="0,0,0,2"
@@ -68,7 +68,7 @@
                 <TextBlock
                     x:Name="ShipSelectionPage_Tagline"
                     x:Uid="ShipSelectionPage_Tagline"
-                    Margin="0,20,0,0"
+                    Margin="0,20,0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="25"
@@ -77,13 +77,20 @@
                     TextWrapping="WrapWholeWords" />
 
                 <!--  Ships  -->
-                <GridView
-                    x:Name="ShipsList"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    ItemTemplate="{StaticResource ShipsListDataTemplate}"
-                    SelectionChanged="ShipsList_SelectionChanged" />
+                <StackPanel x:Name="ShipsPanel" Orientation="Horizontal">
+                    <ToggleButton
+                        x:Name="Antimony"
+                        Checked="Ship_Selected"
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                    <ToggleButton
+                        x:Name="Bismuth"
+                        Checked="Ship_Selected"
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                    <ToggleButton
+                        x:Name="Curium"
+                        Checked="Ship_Selected"
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                </StackPanel>
 
                 <!--  Message  -->
                 <TextBlock
@@ -102,7 +109,7 @@
                     x:Name="ShipSelectionPage_ChooseButton"
                     x:Uid="ShipSelectionPage_ChooseButton"
                     Height="50"
-                    Margin="30,10,30,20"
+                    Margin="30,10,30,15"
                     HorizontalAlignment="Stretch"
                     Background="Goldenrod"
                     BorderBrush="White"
@@ -133,12 +140,12 @@
                 <PersonPicture
                     x:Name="Page_UserPicture"
                     Grid.Column="0"
-                    Width="40"
-                    Height="40"
-                    Margin="2" />
+                    Width="35"
+                    Height="35"
+                    Margin="2,2,2,2" />
                 <TextBlock
                     x:Name="Page_UserName"
-                    Margin="0,5,5,5"
+                    Margin="5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
@@ -150,8 +157,8 @@
         <!--  Take to previous page  -->
         <Button
             x:Name="GoBackButton"
-            Width="50"
-            Height="50"
+            Width="45"
+            Height="45"
             Margin="5"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
