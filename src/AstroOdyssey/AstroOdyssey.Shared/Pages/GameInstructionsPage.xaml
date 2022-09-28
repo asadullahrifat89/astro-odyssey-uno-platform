@@ -52,7 +52,7 @@
                         TextWrapping="WrapWholeWords" />
 
                     <Border
-                        Margin="10"
+                        Margin="10,10,10,5"
                         Background="Goldenrod"
                         BorderBrush="DarkGoldenrod"
                         BorderThickness="3"
@@ -68,7 +68,7 @@
                     <StackPanel x:Name="InstructionDetailsStack" HorizontalAlignment="Left">
 
                         <!--  Control  -->
-                        <StackPanel Margin="5,10,5,5">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     Margin="5"
@@ -96,7 +96,7 @@
                         </StackPanel>
 
                         <!--  Enemy ships 'n meteors  -->
-                        <StackPanel Margin="5,10,5,5">
+                        <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">
                                 <Image
                                     Width="35"
