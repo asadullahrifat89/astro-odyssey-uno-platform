@@ -1507,6 +1507,7 @@ namespace AstroOdyssey
                     break;
             }
 
+            RageGradientBorder.Opacity = 1;
             RageGradientBorder.Visibility = Visibility.Visible;
         }
 
