@@ -1504,6 +1504,8 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+
+            RageGradientBorder.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -1516,6 +1518,12 @@ namespace AstroOdyssey
                 var coolDown = _playerFactory.RageUpCoolDown(Player);
 
                 PlayerRageBar.Value = coolDown.RageRemaining;
+
+                // slowly fade away rage
+                if (coolDown.RageRemaining < 10)
+                {
+                    RageGradientBorder.Opacity -= 0.1d;
+                }
 
                 if (coolDown.RageDown)
                 {
