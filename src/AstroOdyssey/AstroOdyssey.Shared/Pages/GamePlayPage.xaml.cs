@@ -330,6 +330,8 @@ namespace AstroOdyssey
             ScoreMultiplierBar.Maximum = SCORE_MULTIPLIER_THREASHOLD;
             ScoreMultiplierBar.Value = 0;
 
+            RageGradientBorder.Visibility = Visibility.Collapsed;
+
             ShowInGameText("👆\n" + _localizationHelper.GetLocalizedResource("TAP_ON_SCREEN_TO_BEGIN"));
             InputView.Focus(FocusState.Programmatic);
 
@@ -1486,7 +1488,7 @@ namespace AstroOdyssey
         /// </summary>
         private void ActivateRage()
         {
-            PlayerRageIcon.Text = "🤬";
+            PlayerRageIcon.Text = "😤";
             _playerFactory.RageUp(Player);
             _playerProjectileFactory.RageUp(Player);
 
@@ -1504,6 +1506,9 @@ namespace AstroOdyssey
                 default:
                     break;
             }
+
+            RageGradientBorder.Opacity = 1;
+            RageGradientBorder.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -1516,6 +1521,12 @@ namespace AstroOdyssey
                 var coolDown = _playerFactory.RageUpCoolDown(Player);
 
                 PlayerRageBar.Value = coolDown.RageRemaining;
+
+                // slowly fade away rage
+                if (coolDown.RageRemaining < 10)
+                {
+                    RageGradientBorder.Opacity -= 0.1d;
+                }
 
                 if (coolDown.RageDown)
                 {

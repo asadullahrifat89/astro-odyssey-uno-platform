@@ -20,6 +20,7 @@
 
         <!--  Gradient  -->
         <Border
+            x:Name="GradientBorder"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Visibility="{x:Bind Path=PlayerHealthBarPanel.Visibility, Mode=OneWay}">
@@ -30,6 +31,27 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
+
+        <!--  Rage gradient  -->
+        <Border
+            x:Name="RageGradientBorder"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Visibility="Collapsed">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.25" StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Offset="0.00" Color="Red" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <!--  In game message content  -->
+        <StackPanel
+            x:Name="InGameContentPanel"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
 
         <!--  Player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
@@ -308,13 +330,6 @@
 
             </StackPanel>
         </Border>
-
-        <!--  In game message content  -->
-        <StackPanel
-            x:Name="InGameContentPanel"
-            Margin="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" />
 
         <!--  Pointer + keyboard input capture  -->
         <Border

@@ -81,7 +81,7 @@ namespace AstroOdyssey
 
         public double GetOptimalPlayerY(Player player)
         {
-            return _gameEnvironment.Height - player.Height - 45;
+            return _gameEnvironment.Height - player.Height - player.HalfWidth - 45;
         }
 
         /// <summary>

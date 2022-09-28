@@ -433,10 +433,10 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "LAST_GAME_SCORE", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "🎲 Last Game Score"),
-                new ("bn", "🎲 শেষ গেম স্কোর"),
-                new ("de", "🎲 Letzter Spielpunkt"),
-                new ("fr", "🎲 Score du dernier match"),
+                new ("en", "🕹️ Last Game Score"),
+                new ("bn", "🕹️ শেষ গেম স্কোর"),
+                new ("de", "🕹️ Letzter Spielpunkt"),
+                new ("fr", "🕹️ Score du dernier match"),
             }),
 
             new LocalizationKey(key: "DESTROYED", cultureValues: new (string Culture, string Value)[]
