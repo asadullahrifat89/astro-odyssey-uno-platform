@@ -11,6 +11,9 @@
                 <!--  Add resource dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
 
+            <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
+            <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
+
             <Style x:Key="DefaultButton" TargetType="Button" />
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Goldenrod" />
