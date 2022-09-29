@@ -9,7 +9,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private LocalizationKey[] LOCALIZATION_KEYS = new LocalizationKey[]
+        private readonly LocalizationKey[] LOCALIZATION_KEYS = new LocalizationKey[]
         {
             #region Game Start Page
 
