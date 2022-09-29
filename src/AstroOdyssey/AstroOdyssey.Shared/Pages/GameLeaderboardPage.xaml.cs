@@ -249,21 +249,30 @@ namespace AstroOdyssey
 
         private void SetLeaderboardPlacements(dynamic leaderboardPlacements)
         {
-            // king of the ring
-            if (leaderboardPlacements[0] is LeaderboardPlacement firstPlacement)
+            if (leaderboardPlacements.Count > 0)
             {
-                firstPlacement.MedalEmoji = "🥇";
-                firstPlacement.Emoji = "🏆";
-            }
+                // king of the ring
+                if (leaderboardPlacements[0] is LeaderboardPlacement firstPlacement)
+                {
+                    firstPlacement.MedalEmoji = "🥇";
+                    firstPlacement.Emoji = "🏆";
+                }
 
-            if (leaderboardPlacements[1] is LeaderboardPlacement secondPlacement)
-            {
-                secondPlacement.MedalEmoji = "🥈";
-            }
+                if (leaderboardPlacements.Count > 1)
+                {
+                    if (leaderboardPlacements[1] is LeaderboardPlacement secondPlacement)
+                    {
+                        secondPlacement.MedalEmoji = "🥈";
+                    }
+                }
 
-            if (leaderboardPlacements[2] is LeaderboardPlacement thirdPlacement)
-            {
-                thirdPlacement.MedalEmoji = "🥉";
+                if (leaderboardPlacements.Count > 2)
+                {
+                    if (leaderboardPlacements[2] is LeaderboardPlacement thirdPlacement)
+                    {
+                        thirdPlacement.MedalEmoji = "🥉";
+                    }
+                }
             }
         }
 
