@@ -17,84 +17,62 @@ namespace AstroOdyssey
             {
                 new ("en", "Astro Odyssey"),
                 new ("bn", "অ্যাস্ট্রো ওডিসি"),
-                new ("de", "Astro-Odyssee"),
-                new ("fr", "Astro Odyssée"),
             }),
             new LocalizationKey(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "A classic rock metal ⚡ space shooter on WebAssembly."),
                 new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।"),
-                new ("de", "Ein klassischer Rock Metal ⚡ Weltraum-Shooter auf WebAssembly."),
-                new ("fr", "Un jeu de tir spatial classique rock métal ⚡ sur WebAssembly."),
             }),
 
             new LocalizationKey(key: "GameStartPage_BanglaButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Bangla"),
                 new ("bn", "বাংলা"),
-                new ("de", "Bangla"),
-                new ("fr", "Bangla"),
             }),
             new LocalizationKey(key: "GameStartPage_DeutschButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Deutsch"),
                 new ("bn", "ডয়েচ"),
-                new ("de", "Deutsch"),
-                new ("fr", "Deutsch"),
             }),
             new LocalizationKey(key: "GameStartPage_EnglishButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "English"),
                 new ("bn", "ইংরেজি"),
-                new ("de", "Englisch"),
-                new ("fr", "Anglais"),
             }),
             new LocalizationKey(key: "GameStartPage_FrenchButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "French"),
                 new ("bn", "ফরাসি"),
-                new ("de", "Französisch"),
-                new ("fr", "Français"),
             }),
 
             new LocalizationKey(key: "GameStartPage_PlayButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Start Game"),
                 new ("bn", "খেলা শুরু করুন"),
-                new ("de", "Spiel Beginnen"),
-                new ("fr", "Démarrer Jeu"),
             }),
 
             new LocalizationKey(key: "GameStartPage_LogoutButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Logout"),
                 new ("bn", "প্রস্থান"),
-                new ("de", "Ausloggen"),
-                new ("fr", "Se Déconnecter"),
             }),
 
             new LocalizationKey(key: "GameStartPage_BrandProfileButton", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Made with ❤️ by Asadullah Rifat"),
                 new ("bn", "আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি"),
-                new ("de", "Hergestellt mit ❤️ von Asadullah Rifat"),
-                new ("fr", "Fait avec ❤️ par Asadullah Rifat"),
             }),
 
             new LocalizationKey(key: "GameStartPage_WelcomeBackText", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "👋 Welcome Back!"),
                 new ("bn", "👋 স্বাগতম!"),
-                new ("de", "👋 Willkommen Xurück!"),
-                new ("fr", "👋 Content De Te Revoir!"),
             }),
 
             new LocalizationKey(key: "LOADING_GAME_ASSETS", cultureValues: new (string Culture, string Value)[]
             {
                 new ("en", "Loading game assets..."),
                 new ("bn", "গেমের সম্পদ লোড হচ্ছে ..."),
-                new ("de", "Ladespiel -Vermögenswerte..."),
-                new ("fr", "Chargement des actifs de jeu..."),
             }),
 	        #endregion
 
