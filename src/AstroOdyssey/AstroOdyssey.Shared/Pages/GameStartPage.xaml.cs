@@ -280,10 +280,9 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
-            _localizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);            
             _localizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
+
             _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_BrandProfileButton);
