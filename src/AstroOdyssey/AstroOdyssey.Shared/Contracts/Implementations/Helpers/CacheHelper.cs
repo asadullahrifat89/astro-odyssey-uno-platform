@@ -47,8 +47,7 @@ namespace AstroOdyssey
 
         public Session GetCachedSession()
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
+            var localValue = GetCachedValue(Constants.CACHE_SESSION_KEY);
 
             if (!localValue.IsNullOrBlank())
             {
@@ -69,14 +68,10 @@ namespace AstroOdyssey
 
         public bool WillSessionExpireSoon()
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
-
-            if (localValue.IsNullOrBlank())
+            if (App.Session is null)
                 return true;
 
-            var session = JsonConvert.DeserializeObject<Session>(localValue);
-            if (DateTime.UtcNow.AddMinutes(1) > session.ExpiresOn)
+            if (DateTime.UtcNow.AddMinutes(1) > App.Session.ExpiresOn)
                 return true;
 
             return false;
@@ -84,14 +79,10 @@ namespace AstroOdyssey
 
         public bool HasSessionExpired()
         {
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            var localValue = localSettings.Values[Constants.CACHE_SESSION_KEY] as string;
-
-            if (localValue.IsNullOrBlank())
+            if (App.Session is null)
                 return true;
 
-            var session = JsonConvert.DeserializeObject<Session>(localValue);
-            if (DateTime.UtcNow > session.ExpiresOn)
+            if (DateTime.UtcNow > App.Session.ExpiresOn)
                 return true;
 
             return false;
@@ -99,9 +90,7 @@ namespace AstroOdyssey
 
         public void SetCachedSession(Session session)
         {
-            // save in browser cache
-            ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values[Constants.CACHE_SESSION_KEY] = JsonConvert.SerializeObject(session);
+            SetCachedValue(Constants.CACHE_SESSION_KEY, JsonConvert.SerializeObject(session));
         }
     }
 }

@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\EntityBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\GameProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\GameScore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\LeaderboardPlacement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\Session.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GameObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\HttpServiceExtensions.cs" />

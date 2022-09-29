@@ -10,17 +10,19 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!--  Add resource dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
-            <!--  Add resources here  -->
+
+            <Style x:Key="DefaultButton" TargetType="Button" />
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Goldenrod" />
                 <Setter Property="Foreground" Value="#ffffff" />
                 <Setter Property="BorderBrush" Value="#ffffff" />
             </Style>
+
             <Style x:Key="GameUIContainer" TargetType="Border">
                 <Setter Property="Background" Value="#27223f" />
                 <Setter Property="BorderBrush" Value="#4d437d" />
             </Style>
-            <Style x:Key="DefaultButton" TargetType="Button" />
+
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="#27223f" />
             <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
             <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />

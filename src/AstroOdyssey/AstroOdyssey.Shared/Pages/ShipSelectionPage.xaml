@@ -81,15 +81,21 @@
                     <ToggleButton
                         x:Name="Antimony"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False" />
                     <ToggleButton
                         x:Name="Bismuth"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False" />
                     <ToggleButton
                         x:Name="Curium"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        IsFocusEngagementEnabled="False"
+                        IsTabStop="False" />
                 </StackPanel>
 
                 <!--  Message  -->
@@ -119,7 +125,9 @@
                     CornerRadius="50"
                     FontSize="24"
                     FontWeight="SemiBold"
-                    Foreground="White" />
+                    Foreground="White"
+                    IsFocusEngagementEnabled="False"
+                    IsTabStop="False" />
 
             </StackPanel>
 

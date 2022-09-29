@@ -161,11 +161,16 @@ namespace AstroOdyssey
 
         private async Task CheckLoginSession()
         {
+            if (App.Session is null)
+                App.Session = _cacheHelper.GetCachedSession();
+
             if (App.HasUserLoggedIn)
             {
                 if (_cacheHelper.HasSessionExpired())
                 {
                     _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    App.Session = null;
+
                     MakeLoginControlsVisible();
                 }
                 else
@@ -178,6 +183,8 @@ namespace AstroOdyssey
                 if (_cacheHelper.HasSessionExpired())
                 {
                     _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
+                    App.Session = null;
+
                     MakeLoginControlsVisible();
                 }
                 else // if a non expired session exists then validate it, get a new auth token, and get game profile
@@ -281,9 +288,8 @@ namespace AstroOdyssey
         private void SetLocalization()
         {
             _localizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_FrenchButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_DeutschButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
+
             _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
             _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_BrandProfileButton);

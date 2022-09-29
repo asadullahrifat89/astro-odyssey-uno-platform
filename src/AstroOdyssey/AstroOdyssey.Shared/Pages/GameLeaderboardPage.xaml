@@ -11,18 +11,15 @@
 
     <Page.Resources>
         <DataTemplate x:Key="GameLeaderboardPage_GameProfiles_DataTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <PersonPicture
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock
                     Grid.Column="0"
-                    Width="45"
-                    Height="45"
                     Margin="2,0"
-                    Initials="{Binding Path=Initials, Mode=OneWay}" />
+                    VerticalAlignment="Center"
+                    FontSize="35"
+                    FontWeight="SemiBold"
+                    Text="{Binding Path=MedalEmoji, Mode=OneWay}"
+                    TextAlignment="Left" />
                 <TextBlock
                     Grid.Column="1"
                     Margin="2,0"
@@ -41,18 +38,15 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="GameLeaderboardPage_GameScores_DataTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <PersonPicture
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <TextBlock
                     Grid.Column="0"
-                    Width="50"
-                    Height="50"
                     Margin="2,0"
-                    Initials="{Binding Path=Initials, Mode=OneWay}" />
+                    VerticalAlignment="Center"
+                    FontSize="35"
+                    FontWeight="SemiBold"
+                    Text="{Binding Path=MedalEmoji, Mode=OneWay}"
+                    TextAlignment="Left" />
                 <TextBlock
                     Grid.Column="1"
                     Margin="2,0"

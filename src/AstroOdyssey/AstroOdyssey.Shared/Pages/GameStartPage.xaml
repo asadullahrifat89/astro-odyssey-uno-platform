@@ -33,28 +33,6 @@
                 Style="{StaticResource DefaultButton}"
                 Tag="en" />
             <Button
-                x:Name="GameStartPage_FrenchButton"
-                x:Uid="GameStartPage_FrenchButton"
-                Margin="2"
-                Click="LanguageButton_Click"
-                Content="French"
-                CornerRadius="50"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
-                Style="{StaticResource DefaultButton}"
-                Tag="fr" />
-            <Button
-                x:Name="GameStartPage_DeutschButton"
-                x:Uid="GameStartPage_DeutschButton"
-                Margin="2"
-                Click="LanguageButton_Click"
-                Content="Deutsch"
-                CornerRadius="50"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
-                Style="{StaticResource DefaultButton}"
-                Tag="de" />
-            <Button
                 x:Name="GameStartPage_BanglaButton"
                 x:Uid="GameStartPage_BanglaButton"
                 Margin="2"
