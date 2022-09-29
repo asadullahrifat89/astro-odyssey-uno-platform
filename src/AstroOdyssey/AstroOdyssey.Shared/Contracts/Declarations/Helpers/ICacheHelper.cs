@@ -12,14 +12,14 @@
 
         void RemoveCachedValue(string key);
 
+        bool WillAuthTokenExpireSoon();
+
         Session GetCachedSession();
 
-        bool WillAuthTokenExpireSoon();
+        void SetCachedSession(Session session);
 
         bool WillSessionExpireSoon();
 
         bool HasSessionExpired();
-
-        void SetCachedSession(Session session);
     }
 }

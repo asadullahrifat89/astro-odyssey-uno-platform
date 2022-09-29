@@ -79,6 +79,8 @@ namespace AstroOdyssey
 
         public static PlayerShip Ship { get; set; }
 
+        public static Session Session { get; set; }
+
         public static string CurrentCulture { get; set; }
 
         public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank() && !GameProfile.User.UserName.IsNullOrBlank();

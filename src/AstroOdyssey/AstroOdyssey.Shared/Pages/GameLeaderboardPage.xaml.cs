@@ -19,7 +19,6 @@ namespace AstroOdyssey
         private readonly IGameApiHelper _gameApiHelper;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
-        //private readonly IPaginationHelper _paginationHelper;
 
         private readonly ProgressBar _progressBar;
         private readonly TextBlock _errorContainer;
@@ -37,7 +36,6 @@ namespace AstroOdyssey
             _gameApiHelper = App.Container.GetService<IGameApiHelper>();
             _audioHelper = App.Container.GetService<IAudioHelper>();
             _localizationHelper = App.Container.GetService<ILocalizationHelper>();
-            //_paginationHelper = App.Container.GetService<IPaginationHelper>();
 
             GameLeaderboardPage_GameProfiles.ItemsSource = GameProfiles;
             GameLeaderboardPage_GameScores.ItemsSource = GameScores;
@@ -152,7 +150,7 @@ namespace AstroOdyssey
             GameProfiles.Clear();
             SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
-            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 15);
+            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 10);
 
             if (!recordsResponse.IsSuccess)
             {
@@ -182,13 +180,12 @@ namespace AstroOdyssey
                     GameProfiles.Add(record);
                 }
 
-                // king of the ring
-                GameProfiles[0].Emoji = "👑";
+                SetLeaderboardPlacements(GameProfiles);
 
                 // indicate current player
-                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameProfile gameProfile)
+                if (GameProfiles.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is LeaderboardPlacement placement)
                 {
-                    gameProfile.Emoji = "👨‍🚀";
+                    placement.Emoji = "👨‍🚀";
                 }
             }
             else
@@ -204,7 +201,7 @@ namespace AstroOdyssey
             GameScores.Clear();
             SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
-            var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 15);
+            var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 10);
 
             if (!recordsResponse.IsSuccess)
             {
@@ -234,13 +231,12 @@ namespace AstroOdyssey
                     GameScores.Add(record);
                 }
 
-                // king of the ring
-                GameScores[0].Emoji = "👑";
+                SetLeaderboardPlacements(GameScores);
 
                 // indicate current player
-                if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is GameScore gameScore)
+                if (GameScores.FirstOrDefault(x => x.User.UserName == App.GameProfile.User.UserName || x.User.UserEmail == App.GameProfile.User.UserEmail) is LeaderboardPlacement placement)
                 {
-                    gameScore.Emoji = "👨‍🚀";
+                    placement.Emoji = "👨‍🚀";
                 }
             }
             else
@@ -249,6 +245,26 @@ namespace AstroOdyssey
             }
 
             return true;
+        }
+
+        private void SetLeaderboardPlacements(dynamic leaderboardPlacements)
+        {
+            // king of the ring
+            if (leaderboardPlacements[0] is LeaderboardPlacement firstPlacement)
+            {
+                firstPlacement.MedalEmoji = "🥇";
+                firstPlacement.Emoji = "🏆";
+            }
+
+            if (leaderboardPlacements[1] is LeaderboardPlacement secondPlacement)
+            {
+                secondPlacement.MedalEmoji = "🥈";
+            }
+
+            if (leaderboardPlacements[2] is LeaderboardPlacement thirdPlacement)
+            {
+                thirdPlacement.MedalEmoji = "🥉";
+            }
         }
 
         private void ShowUserName()
