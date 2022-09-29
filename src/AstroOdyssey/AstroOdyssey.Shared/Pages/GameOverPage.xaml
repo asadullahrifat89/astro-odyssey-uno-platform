@@ -47,7 +47,7 @@
                             VerticalAlignment="Center"
                             FontSize="15"
                             FontWeight="SemiBold"
-                            Text="You could win an exciting prize if you login."
+                            Text="You could earn your place on the leaderboard if you login."
                             TextWrapping="WrapWholeWords" />
 
                     </Grid>
@@ -134,71 +134,88 @@
 
                     </StackPanel>
 
-                    <StackPanel x:Name="ScoreDetailsStack" HorizontalAlignment="Left">
+                    <WrapPanel x:Name="ScoreDetailsStack" HorizontalAlignment="Center">
+
                         <!--  Enemies  -->
-                        <StackPanel Margin="2" Orientation="Horizontal">
+                        <StackPanel
+                            Margin="2,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
-                                Margin="5"
+                                Margin="4"
                                 Source="ms-appx:///Assets/Images/Enemy/enemy_3.png" />
                             <TextBlock
                                 x:Name="EnemiesDestroyedText"
                                 Margin="5"
-                                FontSize="18"
+                                VerticalAlignment="Center"
+                                FontSize="15"
                                 FontWeight="Bold"
                                 TextAlignment="Center"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
 
                         <!--  Meteors  -->
-                        <StackPanel Margin="2" Orientation="Horizontal">
+                        <StackPanel
+                            Margin="2,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
-                                Margin="5"
+                                Margin="4"
                                 Source="ms-appx:///Assets/Images/Meteor/rock1.png" />
                             <TextBlock
                                 x:Name="MeteorsDestroyedText"
                                 Margin="5"
-                                FontSize="18"
+                                VerticalAlignment="Center"
+                                FontSize="15"
                                 FontWeight="Bold"
                                 TextAlignment="Center"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
 
                         <!--  Bosses  -->
-                        <StackPanel Margin="2" Orientation="Horizontal">
+                        <StackPanel
+                            Margin="2,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
-                                Margin="5"
+                                Margin="4"
                                 Source="ms-appx:///Assets/Images/boss_appeared.png" />
                             <TextBlock
                                 x:Name="BossesDestroyedText"
                                 Margin="5"
-                                FontSize="18"
+                                VerticalAlignment="Center"
+                                FontSize="15"
                                 FontWeight="Bold"
                                 TextAlignment="Center"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
 
                         <!--  Collectibles  -->
-                        <StackPanel Margin="2" Orientation="Horizontal">
+                        <StackPanel
+                            Margin="2,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                             <Image
                                 Width="35"
                                 Height="35"
-                                Margin="5"
+                                Margin="4"
                                 Source="ms-appx:///Assets/Images/Collectible/collectible3.png" />
                             <TextBlock
                                 x:Name="CollectiblesCollectedText"
                                 Margin="5"
-                                FontSize="18"
+                                VerticalAlignment="Center"
+                                FontSize="15"
                                 FontWeight="Bold"
                                 TextAlignment="Center"
                                 TextWrapping="WrapWholeWords" />
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
 
                     <StackPanel Margin="10,0,10,10">
 
