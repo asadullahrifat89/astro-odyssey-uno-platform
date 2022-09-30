@@ -1522,16 +1522,14 @@ namespace AstroOdyssey
 
                 PlayerRageBar.Value = coolDown.RageRemaining;
 
-                // slowly fade away rage
-                if (coolDown.RageRemaining < 10)
-                {
-                    RageGradientBorder.Opacity -= 0.1d;
-                }
+                // slowly fade away rage                
+                RageGradientBorder.Opacity = PlayerRageBar.Value / PlayerRageBar.Maximum;
 
                 if (coolDown.RageDown)
                 {
                     _playerProjectileFactory.RageDown(Player);
 
+                    RageGradientBorder.Opacity = 0;
                     PlayerRageBar.Value = Player.Rage;
                     PlayerRageIcon.Text = "😡";
 
