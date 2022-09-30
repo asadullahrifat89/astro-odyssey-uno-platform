@@ -109,7 +109,6 @@ namespace AstroOdyssey
                 if (_spaceWarpDurationCounter <= 0)
                 {
                     StopSpaceWarp();
-                    //return;
                 }
 
                 // slowing down effect
