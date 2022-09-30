@@ -12,7 +12,7 @@ namespace AstroOdyssey
         private readonly Random _random = new Random();
 
         private double _starSpawnCounter;
-        private double _starSpawnAfter = 250;
+        private double _starSpawnAfter = 260;
         private double _starSpeed = 0.2d;
 
         private int _spaceWarpDurationCounter;
@@ -22,7 +22,7 @@ namespace AstroOdyssey
         private int _planetSpawnAfter = 2500;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
-        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
+        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 258;
         private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
 
         private double _lastStarSpeed;
@@ -44,7 +44,7 @@ namespace AstroOdyssey
 
         public void Reset()
         {
-            _starSpawnAfter = 250;
+            _starSpawnAfter = 260;
             _starSpeed = 0.2d;
             _spaceWarpDurationAfter = 100;
             _planetSpawnAfter = 2500;
