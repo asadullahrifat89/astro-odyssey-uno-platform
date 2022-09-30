@@ -125,11 +125,6 @@ namespace AstroOdyssey
             return Children.OfType<T>();
         }
 
-        public List<GameObject> GetDestroyableGameObjects()
-        {
-            return destroyableGameObjects;
-        }
-
         public void AddGameObject(GameObject gameObject)
         {
             Children.Add(gameObject);
