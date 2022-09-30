@@ -149,6 +149,19 @@ namespace AstroOdyssey
             }
         }
 
+        private void GameStartPage_CookieAcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            _cacheHelper.SetCookieAccepted();
+            CookieToast.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void GameStartPage_CookieDeclineButton_Click(object sender, RoutedEventArgs e)
+        {
+            _cacheHelper.RemoveCachedValue(Constants.COOKIE_KEY);
+            CookieToast.Visibility = Visibility.Collapsed;
+        }
+
         #endregion
 
         #region Methods
@@ -186,23 +199,29 @@ namespace AstroOdyssey
                     App.Session = null;
 
                     MakeLoginControlsVisible();
+
+                    if (!_cacheHelper.IsCookieAccepted())
+                        MakeCookieToastVisible();
                 }
                 else // if a non expired session exists then validate it, get a new auth token, and get game profile
                 {
                     if (_cacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
                     {
                         MakeLogoutControlsVisible();
-                        ShowWelcomeBackToast();
+                        MakeWelcomeBackToastVisible();
                     }
                     else
                     {
                         MakeLoginControlsVisible();
+
+                        if (!_cacheHelper.IsCookieAccepted())
+                            MakeCookieToastVisible();
                     }
                 }
             }
         }
 
-        private async void ShowWelcomeBackToast()
+        private async void MakeWelcomeBackToastVisible()
         {
             _audioHelper.PlaySound(SoundType.POWER_UP);
 
@@ -213,6 +232,11 @@ namespace AstroOdyssey
             await Task.Delay(TimeSpan.FromSeconds(5));
 
             await WelcomeBackToast.PlayUnLoadedTransition();
+        }
+
+        private void MakeCookieToastVisible()
+        {
+            CookieToast.Visibility = Visibility.Visible;
         }
 
         private void MakeLogoutControlsVisible()
@@ -299,6 +323,10 @@ namespace AstroOdyssey
             _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
             _localizationHelper.SetLocalizedResource(GameStartPage_WelcomeBackText);
             _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
+
+            _localizationHelper.SetLocalizedResource(GameStartPage_CookieText);
+            _localizationHelper.SetLocalizedResource(GameStartPage_CookieDeclineButton);
+            _localizationHelper.SetLocalizedResource(GameStartPage_CookieAcceptButton);
         }
 
         #endregion

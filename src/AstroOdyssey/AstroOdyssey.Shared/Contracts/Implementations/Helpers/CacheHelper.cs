@@ -92,5 +92,15 @@ namespace AstroOdyssey
         {
             SetCachedValue(Constants.CACHE_SESSION_KEY, JsonConvert.SerializeObject(session));
         }
+
+        public bool IsCookieAccepted()
+        {
+            return GetCachedValue(Constants.COOKIE_KEY) is string cookie && cookie == Constants.COOKIE_ACCEPTED_KEY;
+        }
+
+        public void SetCookieAccepted()
+        {
+            SetCachedValue(Constants.COOKIE_KEY, Constants.COOKIE_ACCEPTED_KEY);
+        }
     }
 }

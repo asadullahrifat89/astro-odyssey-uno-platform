@@ -225,7 +225,8 @@ namespace AstroOdyssey
             var session = _gameApiHelper.ParseResult<Session>(response.Result);
             App.Session = session;
 
-            _cacheHelper.SetCachedSession(session);
+            if (_cacheHelper.IsCookieAccepted())
+                _cacheHelper.SetCachedSession(session);
 
             return true;
         }

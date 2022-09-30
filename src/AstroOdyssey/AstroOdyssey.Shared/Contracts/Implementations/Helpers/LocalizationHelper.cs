@@ -74,6 +74,22 @@ namespace AstroOdyssey
                 new ("en", "Loading game assets..."),
                 new ("bn", "গেমের সম্পদ লোড হচ্ছে ..."),
             }),
+
+            new LocalizationKey(key: "GameStartPage_CookieText", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "We use cookies to provide the best gaming experience!"),
+                new ("bn", "আমরা সেরা গেমিংয়ের অভিজ্ঞতা সরবরাহ করতে কুকি ব্যবহার করি!"),                
+            }),
+            new LocalizationKey(key: "GameStartPage_CookieDeclineButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "👎"),
+                new ("bn", "👎"),
+            }),
+            new LocalizationKey(key: "GameStartPage_CookieAcceptButton", cultureValues: new (string Culture, string Value)[]
+            {
+                new ("en", "👍"),
+                new ("bn", "👍"),
+            }),
 	        #endregion
 
             #region Ship Selection Page            

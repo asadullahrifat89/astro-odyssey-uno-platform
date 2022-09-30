@@ -242,7 +242,8 @@ namespace AstroOdyssey
             var session = ParseResult<Session>(response.Result);
             App.Session = session;
 
-            _cacheHelper.SetCachedSession(session);
+            if (_cacheHelper.IsCookieAccepted())
+                _cacheHelper.SetCachedSession(session);
 
             return await ValidateSession(session.SessionId);
         }

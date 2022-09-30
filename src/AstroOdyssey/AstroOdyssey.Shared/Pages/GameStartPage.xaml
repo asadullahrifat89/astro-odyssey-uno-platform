@@ -211,31 +211,88 @@
 
         </Border>
 
-        <!--  Welcome back toast  -->
-        <Border
-            x:Name="WelcomeBackToast"
+        <StackPanel
             Margin="10,50"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            BorderThickness="3"
-            CornerRadius="10"
-            Opacity="0"
-            Style="{StaticResource GameUIContainer}">
+            VerticalAlignment="Bottom">
 
-            <StackPanel Margin="10" Orientation="Horizontal">
-                <TextBlock
-                    x:Name="GameStartPage_WelcomeBackText"
-                    Margin="5,0"
-                    FontWeight="SemiBold"
-                    Text="Welcome back!"
-                    TextWrapping="Wrap" />
-                <TextBlock
-                    x:Name="GameStartPage_UserName"
-                    FontWeight="SemiBold"
-                    TextWrapping="Wrap" />
-            </StackPanel>
+            <!--  Welcome back toast  -->
+            <Border
+                x:Name="WelcomeBackToast"
+                BorderThickness="3"
+                CornerRadius="10"
+                Opacity="0"
+                Style="{StaticResource GameUIContainer}">
 
-        </Border>
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <TextBlock
+                        x:Name="GameStartPage_WelcomeBackText"
+                        Margin="5,0"
+                        FontWeight="SemiBold"
+                        Text="Welcome back!"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        x:Name="GameStartPage_UserName"
+                        FontWeight="SemiBold"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+
+            </Border>
+
+            <!--  Cookie toast  -->
+            <Border
+                x:Name="CookieToast"
+                BorderThickness="3"
+                CornerRadius="10"
+                Style="{StaticResource GameUIContainer}"
+                Visibility="Collapsed">
+
+                <Grid Margin="10" ColumnDefinitions="Auto,*,Auto">
+                    <TextBlock
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        FontSize="45"
+                        Text="🍪" />
+                    <TextBlock
+                        x:Name="GameStartPage_CookieText"
+                        Grid.Column="1"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        FontWeight="SemiBold"
+                        Text="We use cookies to personalize your game experience!"
+                        TextWrapping="Wrap" />
+                    <WrapPanel
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="GameStartPage_CookieDeclineButton"
+                            Height="35"
+                            BorderThickness="2"
+                            Click="GameStartPage_CookieDeclineButton_Click"
+                            Content="Decline"
+                            CornerRadius="50"
+                            FontWeight="SemiBold"
+                            IsFocusEngagementEnabled="False"
+                            IsTabStop="False"
+                            Style="{StaticResource DefaultButton}" />
+                        <Button
+                            x:Name="GameStartPage_CookieAcceptButton"
+                            Height="35"
+                            BorderThickness="2"
+                            Click="GameStartPage_CookieAcceptButton_Click"
+                            Content="Accept"
+                            CornerRadius="50"
+                            FontWeight="SemiBold"
+                            IsFocusEngagementEnabled="False"
+                            IsTabStop="False"
+                            Style="{StaticResource DefaultButton}" />
+                    </WrapPanel>
+                </Grid>
+
+            </Border>
+
+        </StackPanel>
 
         <!--  Asset credits  -->
         <HyperlinkButton
