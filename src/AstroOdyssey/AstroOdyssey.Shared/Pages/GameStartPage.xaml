@@ -67,7 +67,7 @@
                 <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,15,0,20"
+                    Margin="0,15"
                     FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"

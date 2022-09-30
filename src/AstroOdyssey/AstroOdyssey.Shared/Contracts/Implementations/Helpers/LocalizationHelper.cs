@@ -20,8 +20,8 @@ namespace AstroOdyssey
             }),
             new LocalizationKey(key: "GameStartPage_Tagline", cultureValues: new (string Culture, string Value)[]
             {
-                new ("en", "A classic rock metal ⚡ space shooter on WebAssembly."),
-                new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল ⚡ স্পেস শ্যুটার।"),
+                new ("en", "A classic rock metal 🎸 space shooter on WebAssembly."),
+                new ("bn", "WebAssembly-এ একটি ক্লাসিক রক মেটাল 🎸 স্পেস শ্যুটার।"),
             }),
 
             new LocalizationKey(key: "GameStartPage_BanglaButton", cultureValues: new (string Culture, string Value)[]
