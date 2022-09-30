@@ -22,7 +22,7 @@ namespace AstroOdyssey
         private int _planetSpawnAfter = 2500;
 
         private readonly double SPACE_WARP_STAR_SPEED_INCREASE = 60;
-        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 249;
+        private readonly int SPACE_WARP_STAR_SPAWN_DELAY_DECREASE = 258;
         private readonly int SPACE_WARP_PLANET_SPAWN_DELAY_DECREASE = 1998;
 
         private double _lastStarSpeed;
