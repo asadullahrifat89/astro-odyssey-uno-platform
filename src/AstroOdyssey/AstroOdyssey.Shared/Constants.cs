@@ -54,6 +54,9 @@
         public const string CACHE_SESSION_KEY = "Session";
         public const string CACHE_LANGUAGE_KEY = "Language";
 
+        public const string COOKIE_KEY = "Cookie";
+        public const string COOKIE_ACCEPTED_KEY = "Accepted";
+
         #endregion
     }
 }

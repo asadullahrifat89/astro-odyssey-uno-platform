@@ -21,5 +21,9 @@
         bool WillSessionExpireSoon();
 
         bool HasSessionExpired();
+
+        bool IsCookieAccepted();
+
+        void SetCookieAccepted();
     }
 }
