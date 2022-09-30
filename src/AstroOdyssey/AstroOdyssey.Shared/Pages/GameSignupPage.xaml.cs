@@ -273,6 +273,7 @@ namespace AstroOdyssey
 
         private void SetLocalization()
         {
+            _localizationHelper.SetLocalizedResource(GameSignupPage_Header);
             _localizationHelper.SetLocalizedResource(ApplicationName_Header);
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserFullNameBox);
             _localizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
