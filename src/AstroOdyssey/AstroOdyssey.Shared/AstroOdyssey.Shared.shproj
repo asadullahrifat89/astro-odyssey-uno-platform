@@ -22,5 +22,5 @@
     <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\de\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
-  </ItemGroup>  
+  </ItemGroup>
 </Project>
