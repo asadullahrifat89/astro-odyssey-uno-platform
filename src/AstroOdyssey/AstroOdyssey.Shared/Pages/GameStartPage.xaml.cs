@@ -199,7 +199,9 @@ namespace AstroOdyssey
                     App.Session = null;
 
                     MakeLoginControlsVisible();
-                    MakeCookieToastVisible();
+
+                    if (!_cacheHelper.IsCookieAccepted())
+                        MakeCookieToastVisible();
                 }
                 else // if a non expired session exists then validate it, get a new auth token, and get game profile
                 {
@@ -211,7 +213,9 @@ namespace AstroOdyssey
                     else
                     {
                         MakeLoginControlsVisible();
-                        MakeCookieToastVisible();
+
+                        if (!_cacheHelper.IsCookieAccepted())
+                            MakeCookieToastVisible();
                     }
                 }
             }
