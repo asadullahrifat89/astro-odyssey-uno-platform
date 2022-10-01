@@ -9,7 +9,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
         private readonly Random random = new Random();
 
         #endregion
@@ -21,7 +21,7 @@ namespace AstroOdyssey
             Tag = Constants.COLLECTIBLE_TAG;
             Height = Constants.COLLECTIBLE_OBJECT_SIZE;
             Width = Constants.COLLECTIBLE_OBJECT_SIZE;
-            Child = content;
+            Child = _content;
             YDirection = YDirection.DOWN;
 
             IsCollectible = true;
@@ -38,11 +38,14 @@ namespace AstroOdyssey
             var collectibleType = random.Next(0, GameObjectTemplates.COLLECTIBLE_TEMPLATES.Length);
             var uri = GameObjectTemplates.COLLECTIBLE_TEMPLATES[collectibleType];
 
-            content.Source = new BitmapImage(uri);
+            _content.Source = new BitmapImage(uri);
 
             var scaledSize = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
             Height = scaledSize;
             Width = scaledSize;
+
+            _content.Height = this.Height;
+            _content.Width = this.Width;
 
             HalfWidth = Width / 2;
         }

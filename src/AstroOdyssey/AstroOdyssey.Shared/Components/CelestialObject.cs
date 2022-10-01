@@ -9,7 +9,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
 
@@ -20,7 +20,7 @@ namespace AstroOdyssey
         public CelestialObject()
         {
             Tag = Constants.STAR_TAG;
-            Child = content;
+            Child = _content;
             YDirection = YDirection.DOWN;
         }
 
@@ -79,11 +79,14 @@ namespace AstroOdyssey
             Rotation = random.Next(0, 360);
             Rotate();
 
-            content.Source = new BitmapImage(uri);
+            _content.Source = new BitmapImage(uri);
 
             var scaledSize = size * scale;
             Height = scaledSize;
             Width = scaledSize;
+
+            _content.Height = this.Height;
+            _content.Width = this.Width;
 
             HalfWidth = Width / 2;
         }
