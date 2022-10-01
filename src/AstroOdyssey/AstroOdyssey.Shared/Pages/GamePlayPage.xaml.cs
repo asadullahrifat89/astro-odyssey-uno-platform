@@ -442,8 +442,6 @@ namespace AstroOdyssey
             ScoreBarPanel.Visibility = Visibility.Visible;
             ScoreMultiplierPanel.Visibility = Visibility.Visible;
 
-            SetStars();
-
             WarpThroughSpace(); // at the starting of the game
             _audioHelper.PlaySound(SoundType.BACKGROUND_MUSIC);
 
@@ -840,27 +838,6 @@ namespace AstroOdyssey
                         GameView.AddDestroyableGameObject(gameObject);
                 }
                 //);
-            }
-
-        }
-
-        /// <summary>
-        /// Add stars to game environemnt randomly.
-        /// </summary>
-        private void SetStars()
-        {
-            Random random = new Random();
-
-            for (int i = 0; i < 20; i++)
-            {
-                var star = new CelestialObject();
-
-                star.SetAttributes(speed: 0.1d, scale: StarView.GetGameObjectScale());
-
-                var top = random.Next(10, (int)StarView.Height - 10);
-                var left = random.Next(10, (int)StarView.Width - 10);
-
-                star.AddToGameEnvironment(top: top, left: left, gameEnvironment: StarView);
             }
         }
 
