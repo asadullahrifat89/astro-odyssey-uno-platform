@@ -109,7 +109,6 @@ namespace AstroOdyssey
                 if (_spaceWarpDurationCounter <= 0)
                 {
                     StopSpaceWarp();
-                    //return;
                 }
 
                 // slowing down effect
@@ -120,14 +119,18 @@ namespace AstroOdyssey
                 }
             }
 
-            // each frame progress decreases this counter
-            _starSpawnCounter--;
-
-            // when counter reaches zero, create an star
-            if (_starSpawnCounter < 0)
+            // star can not have more than 25 stars 
+            if (_starView.Children.Count < 25)
             {
-                GenerateStar();
-                _starSpawnCounter = _starSpawnAfter;
+                // each frame progress decreases this counter
+                _starSpawnCounter--;
+
+                // when counter reaches zero, create an star
+                if (_starSpawnCounter < 0)
+                {
+                    GenerateStar();
+                    _starSpawnCounter = _starSpawnAfter;
+                }
             }
 
             _planetSpawnCounter--;
@@ -149,7 +152,6 @@ namespace AstroOdyssey
             var star = new CelestialObject();
 
             star.SetAttributes(
-                speed: _starSpeed,
                 scale: _starView.GetGameObjectScale(),
                 celestialObjectType: CelestialObjectType.Star);
 
@@ -167,7 +169,6 @@ namespace AstroOdyssey
             var planet = new CelestialObject();
 
             planet.SetAttributes(
-                speed: _starSpeed * 2,
                 scale: _planetView.GetGameObjectScale(),
                 celestialObjectType: CelestialObjectType.Planet);
 
@@ -194,7 +195,11 @@ namespace AstroOdyssey
 
                         if (celestialObject.GetY() > _starView.Height)
                         {
-                            _starView.AddDestroyableGameObject(celestialObject);
+                            // _starView.AddDestroyableGameObject(celestialObject);
+
+                            // send the start on top again
+                            ReuseStar(celestialObject);
+
                             destroyed = true;
                         }
                     }
@@ -226,6 +231,18 @@ namespace AstroOdyssey
             var scale = _starView.GetGameObjectScale();
             _starSpawnAfter -= (10 * scale);
             _starSpeed += (0.1d * scale);
+        }
+
+        #endregion
+
+        #region Private
+
+        private void ReuseStar(CelestialObject celestialObject)
+        {
+            var top = 0 - celestialObject.Height;
+            var left = _random.Next(10, (int)_starView.Width - 10);
+
+            celestialObject.SetPosition(top, left);
         }
 
         #endregion

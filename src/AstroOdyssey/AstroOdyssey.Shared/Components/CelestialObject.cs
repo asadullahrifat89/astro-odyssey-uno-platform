@@ -34,10 +34,8 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetAttributes(double speed, double scale = 1, CelestialObjectType celestialObjectType = CelestialObjectType.Star)
+        public void SetAttributes(double scale = 1, CelestialObjectType celestialObjectType = CelestialObjectType.Star)
         {
-            Speed = speed;
-
             Uri uri = null;
 
             double size = 0;
