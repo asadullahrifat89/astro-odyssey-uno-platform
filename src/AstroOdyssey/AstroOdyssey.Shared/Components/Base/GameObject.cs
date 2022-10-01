@@ -57,7 +57,29 @@ namespace AstroOdyssey
 
         public bool IsOverPowered { get; set; } = false;
 
-        public bool IsDestructible { get; set; }
+        private bool _isDestructible;
+
+        public bool IsDestructible
+        {
+            get { return _isDestructible; }
+            set
+            {
+                _isDestructible = value;
+
+                if (_isDestructible)
+                {
+                    DestructionLayer = new Border()
+                    {
+                        Height = this.Height,
+                        Width = this.Width,
+                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
+                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100),
+                        BorderBrush = new SolidColorBrush(Colors.OrangeRed),
+                        Background = new SolidColorBrush(Colors.Orange),
+                    };
+                }
+            }
+        }
 
         public bool IsProjectile { get; set; }
 
@@ -69,8 +91,9 @@ namespace AstroOdyssey
 
         public double HalfWidth { get; set; }
 
-        private bool _isMarkedForFadedDestruction;
+        public Border DestructionLayer { get; set; }
 
+        private bool _isMarkedForFadedDestruction;
         public bool IsMarkedForFadedDestruction
         {
             get { return _isMarkedForFadedDestruction; }
@@ -78,18 +101,12 @@ namespace AstroOdyssey
             {
                 _isMarkedForFadedDestruction = value;
 
-                //change the content to explosion
                 if (_isMarkedForFadedDestruction)
                 {
+                    // set exploding effect
                     if (IsDestructible)
                     {
-                        Child = new Border()
-                        {
-                            BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod),
-                            Background = new SolidColorBrush(Colors.Goldenrod),
-                            BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
-                            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100)
-                        };
+                        Child = DestructionLayer;
                     }
 
                     if (IsProjectile)
