@@ -89,6 +89,7 @@
         </Grid.Background>
 
         <Border
+            MaxWidth="650"
             Margin="20,55,20,10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
