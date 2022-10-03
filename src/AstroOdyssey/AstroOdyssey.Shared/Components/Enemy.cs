@@ -10,11 +10,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        //private readonly Grid _body = new Grid();
-
-        private readonly Image _ship = new Image() { Stretch = Stretch.Uniform };
-
-        //private readonly Image _engineThrust = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
 
@@ -25,16 +21,10 @@ namespace AstroOdyssey
         public Enemy()
         {
             Tag = Constants.ENEMY_TAG;
-            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             IsDestructible = true;
 
-            //_body = new Grid();
-            //_body.Children.Add(_engineThrust);
-            //_body.Children.Add(_ship);
-
-            Child = _ship;
+            Child = _content;
             YDirection = YDirection.DOWN;
 
             Background = new SolidColorBrush(Colors.Transparent);
@@ -131,7 +121,10 @@ namespace AstroOdyssey
                 Health = Constants.BOSS_BASE_HEALTH * (double)gameLevel;
 
                 Uri uri = bossTemplate.AssetUri;
-                _ship.Source = new BitmapImage(uri);
+                _content.Source = new BitmapImage(uri);
+
+                _content.Height = this.Height;
+                _content.Width = this.Width;
             }
             else
             {
@@ -150,7 +143,10 @@ namespace AstroOdyssey
 
                 ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
 
-                _ship.Source = new BitmapImage(uri);
+                _content.Source = new BitmapImage(uri);
+
+                _content.Height = this.Height;
+                _content.Width = this.Width;
             }
 
             HalfWidth = Width / 2;

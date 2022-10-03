@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.Foundation;
@@ -10,7 +11,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly CompositeTransform compositeTransform = new CompositeTransform()
+        private readonly CompositeTransform _compositeTransform = new CompositeTransform()
         {
             CenterX = 0.5,
             CenterY = 0.5,
@@ -26,7 +27,7 @@ namespace AstroOdyssey
         public GameObject()
         {
             RenderTransformOrigin = new Point(0.5, 0.5);
-            RenderTransform = compositeTransform;
+            RenderTransform = _compositeTransform;
 
             CanDrag = false;
         }
@@ -57,29 +58,7 @@ namespace AstroOdyssey
 
         public bool IsOverPowered { get; set; } = false;
 
-        private bool _isDestructible;
-
-        public bool IsDestructible
-        {
-            get { return _isDestructible; }
-            set
-            {
-                _isDestructible = value;
-
-                if (_isDestructible)
-                {
-                    DestructionLayer = new Border()
-                    {
-                        Height = this.Height,
-                        Width = this.Width,
-                        BorderThickness = new Microsoft.UI.Xaml.Thickness(3),
-                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100),
-                        BorderBrush = new SolidColorBrush(Colors.OrangeRed),
-                        Background = new SolidColorBrush(Colors.Orange),
-                    };
-                }
-            }
-        }
+        public bool IsDestructible { get; set; }       
 
         public bool IsProjectile { get; set; }
 
@@ -105,8 +84,15 @@ namespace AstroOdyssey
                 {
                     // set exploding effect
                     if (IsDestructible)
-                    {
-                        Child = DestructionLayer;
+                    {                        
+                        Height = 50;
+                        Width = 50;
+                        BorderThickness = new Thickness(5);
+                        CornerRadius = new CornerRadius(100);
+                        Background = new SolidColorBrush(Colors.Orange);
+                        BorderBrush = new SolidColorBrush(Colors.OrangeRed);
+                        
+                        Child.Opacity = 0;
                     }
 
                     if (IsProjectile)
@@ -114,7 +100,7 @@ namespace AstroOdyssey
                         Height = 15;
                         Width = 15;
                         YDirection = YDirection.NONE;
-                        CornerRadius = new Microsoft.UI.Xaml.CornerRadius(50);
+                        CornerRadius = new CornerRadius(50);
                     }
                 }
             }
@@ -132,7 +118,7 @@ namespace AstroOdyssey
 
         public void Rotate()
         {
-            compositeTransform.Rotation += Rotation;
+            _compositeTransform.Rotation += Rotation;
         }
 
         public void GainHealth()
@@ -282,8 +268,8 @@ namespace AstroOdyssey
 
         public void ScaleUp()
         {
-            compositeTransform.ScaleX += 0.3d;
-            compositeTransform.ScaleY += 0.3d;
+            _compositeTransform.ScaleX += 0.3d;
+            _compositeTransform.ScaleY += 0.3d;
         }
 
         public void Widen()

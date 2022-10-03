@@ -469,6 +469,8 @@ namespace AstroOdyssey
         private void PlanetViewFrameAction()
         {
             UpdatePlanetViewObjects();
+
+            PlanetView.RemoveDestroyableGameObjects();
         }
 
         private void StarViewFrameAction()
@@ -476,6 +478,8 @@ namespace AstroOdyssey
             UpdateStarViewObjects();
 
             _celestialObjectFactory.SpawnCelestialObject();
+
+            StarView.RemoveDestroyableGameObjects();
         }
 
         private void GameViewFrameAction()
@@ -494,6 +498,9 @@ namespace AstroOdyssey
             DamageRecoveryCoolDown();
 
             ScoreMultiplierCoolDown();
+
+            // clean removable objects from game view
+            GameView.RemoveDestroyableGameObjects();
 #if DEBUG
             CalculateFPS();
 
@@ -604,33 +611,18 @@ namespace AstroOdyssey
 
         #region Game Objects
 
-
         /// <summary>
         /// Updates objects in the planet view.
         /// </summary>
         private void UpdatePlanetViewObjects()
         {
-            var planetObjects = PlanetView.GetGameObjects<GameObject>();
-
-            //// update game view objects
-            //if (Parallel.ForEach(planetObjects, gameObject =>
-            //{
-            //    UpdateCelestialObject(gameObject);
-
-            //}).IsCompleted)
-            //{
-            //    // clean removable objects from game view
-            //    PlanetView.RemoveDestroyableGameObjects();
-            //}
+            var planetObjects = PlanetView.GetGameObjects<GameObject>();          
 
             // update game view objects
             foreach (var gameObject in planetObjects)
             {
                 UpdateCelestialObject(gameObject);
             }
-
-            // clean removable objects from game view
-            PlanetView.RemoveDestroyableGameObjects();
         }
 
         /// <summary>
@@ -644,21 +636,7 @@ namespace AstroOdyssey
             foreach (var gameObject in starObjects)
             {
                 UpdateCelestialObject(gameObject);
-            }
-
-            // clean removable objects from game view
-            StarView.RemoveDestroyableGameObjects();
-
-            //// update game view objects
-            //if (Parallel.ForEach(starObjects, gameObject =>
-            //{
-            //    UpdateCelestialObject(gameObject);
-
-            //}).IsCompleted)
-            //{
-            //    // clean removable objects from game view
-            //    StarView.RemoveDestroyableGameObjects();
-            //}
+            }                     
         }
 
         /// <summary>
@@ -668,8 +646,7 @@ namespace AstroOdyssey
         {
             var gameObjects = GameView.GetGameObjects<GameObject>();
 
-            // update game view objects
-            //if (Parallel.ForEach(gameObjects, gameObject =>
+            // update game view objects           
             foreach (var gameObject in gameObjects)
             {
                 // fade away objects marked to be destroyed
@@ -731,11 +708,6 @@ namespace AstroOdyssey
                 }
 
             }
-            //).IsCompleted)
-            //{
-            // clean removable objects from game view
-            GameView.RemoveDestroyableGameObjects();
-            //}
         }
 
         /// <summary>

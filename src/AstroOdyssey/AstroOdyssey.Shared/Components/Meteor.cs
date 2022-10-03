@@ -9,7 +9,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
 
         private readonly Random random = new Random();
 
@@ -20,11 +20,9 @@ namespace AstroOdyssey
         public Meteor()
         {
             Tag = Constants.METEOR_TAG;
-            Height = Constants.DESTRUCTIBLE_OBJECT_SIZE;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
 
             IsDestructible = true;
-            Child = content;
+            Child = _content;
             YDirection = YDirection.DOWN;
         }
 
@@ -59,7 +57,10 @@ namespace AstroOdyssey
             Height = scaledSize;
             Width = scaledSize;
 
-            content.Source = new BitmapImage(uri);
+            _content.Source = new BitmapImage(uri);
+
+            _content.Height = this.Height;
+            _content.Width = this.Width;
 
             HalfWidth = Width / 2;
         }
