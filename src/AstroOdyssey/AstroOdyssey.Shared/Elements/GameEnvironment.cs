@@ -13,13 +13,7 @@ namespace AstroOdyssey
     {
         #region Fields
 
-        private readonly List<GameObject> destroyableGameObjects = new List<GameObject>();
-
-        private event Action frameAction;
-
-        private double frameTime;
-
-        private PeriodicTimer _frameTimer;
+        private readonly List<GameObject> _destroyableGameObjects = new List<GameObject>();
 
         #endregion
 
@@ -44,27 +38,6 @@ namespace AstroOdyssey
 
         #region Methods
 
-        public void SetFrameAction(double frameTime, Action frameAction)
-        {
-            this.frameTime = frameTime;
-            this.frameAction = frameAction;         
-        }
-
-        public async void Start()
-        {
-            var interval = TimeSpan.FromMilliseconds(frameTime);
-            _frameTimer = new PeriodicTimer(interval);
-
-            while (await _frameTimer.WaitForNextTickAsync())
-            {
-                frameAction();
-            }
-        }
-
-        public void Stop()
-        {
-            _frameTimer?.Dispose();
-        }
 
         /// <summary>
         /// Gets scaling factor for a game object according to game view width.
@@ -132,7 +105,7 @@ namespace AstroOdyssey
 
         public void AddDestroyableGameObject(GameObject destroyable)
         {
-            destroyableGameObjects.Add(destroyable);
+            _destroyableGameObjects.Add(destroyable);
         }
 
         public void RemoveDestroyableGameObjects()
@@ -146,7 +119,7 @@ namespace AstroOdyssey
             //    ClearDestroyableGameObjects();
             //}
 
-            foreach (var destroyable in destroyableGameObjects)
+            foreach (var destroyable in _destroyableGameObjects)
             {
                 RemoveGameObject(destroyable);
             }
@@ -164,7 +137,7 @@ namespace AstroOdyssey
         /// </summary>
         public void ClearDestroyableGameObjects()
         {
-            destroyableGameObjects.Clear();
+            _destroyableGameObjects.Clear();
         }
 
         /// <summary>

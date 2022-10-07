@@ -43,6 +43,7 @@ namespace AstroOdyssey
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
 
         private double _frameTime;
+        private PeriodicTimer _frameTimer;
 
         private double _windowWidth, _windowHeight;
 
@@ -452,18 +453,21 @@ namespace AstroOdyssey
         /// Runs the game.
         /// </summary>
         /// <returns></returns>
-        private void RunGame()
+        private async void RunGame()
         {
 #if DEBUG
             Stopwatch = Stopwatch.StartNew();
-#endif
-            GameView.SetFrameAction(frameTime: _frameTime, frameAction: GameViewFrameAction);
-            StarView.SetFrameAction(frameTime: _frameTime, frameAction: StarViewFrameAction);
-            PlanetView.SetFrameAction(frameTime: _frameTime, frameAction: PlanetViewFrameAction);
+#endif          
 
-            GameView.Start();
-            StarView.Start();
-            PlanetView.Start();
+            var interval = TimeSpan.FromMilliseconds(_frameTime);
+            _frameTimer = new PeriodicTimer(interval);
+
+            while (await _frameTimer.WaitForNextTickAsync())
+            {
+                GameViewFrameAction();
+                PlanetViewFrameAction();
+                StarViewFrameAction();
+            }
         }
 
         private void PlanetViewFrameAction()
@@ -520,9 +524,7 @@ namespace AstroOdyssey
             HideInGameContent();
             InputView.Focus(FocusState.Programmatic);
 
-            GameView.Stop();
-            StarView.Stop();
-            PlanetView.Stop();
+            _frameTimer?.Dispose();
 
             ShowInGameText($"👨‍🚀\n{_localizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{_localizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
@@ -571,9 +573,7 @@ namespace AstroOdyssey
             if (StarView.IsWarpingThroughSpace)
                 _celestialObjectFactory.StopSpaceWarp();
 
-            GameView.Stop();
-            StarView.Stop();
-            PlanetView.Stop();
+            _frameTimer.Dispose();
 
             _audioHelper.StopSound();
         }
@@ -616,7 +616,7 @@ namespace AstroOdyssey
         /// </summary>
         private void UpdatePlanetViewObjects()
         {
-            var planetObjects = PlanetView.GetGameObjects<GameObject>();          
+            var planetObjects = PlanetView.GetGameObjects<GameObject>();
 
             // update game view objects
             foreach (var gameObject in planetObjects)
@@ -636,7 +636,7 @@ namespace AstroOdyssey
             foreach (var gameObject in starObjects)
             {
                 UpdateCelestialObject(gameObject);
-            }                     
+            }
         }
 
         /// <summary>
