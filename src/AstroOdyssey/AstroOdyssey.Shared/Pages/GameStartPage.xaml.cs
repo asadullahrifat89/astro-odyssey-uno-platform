@@ -29,11 +29,11 @@ namespace AstroOdyssey
             InitializeComponent();
             Loaded += StartPage_Loaded;
 
-            _audioHelper = App.Container.GetService<IAudioHelper>();
-            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
-            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
-            _cacheHelper = App.Container.GetService<ICacheHelper>();
-            _assetHelper = App.Container.GetService<IAssetHelper>();
+            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
+            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
+            _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
+            _assetHelper = (Application.Current as App).Host.Services.GetRequiredService<IAssetHelper>();
 
             _progressBar = GameStartPage_ProgressBar;
             _errorContainer = GameStartPage_ErrorText;
@@ -52,6 +52,9 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             CheckLocalizationCache();
+
+            await _localizationHelper.LoadLocalizationKeys();
+
             SetLocalization();
 
             await this.PlayLoadedTransition();

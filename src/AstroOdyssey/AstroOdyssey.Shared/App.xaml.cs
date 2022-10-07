@@ -10,6 +10,9 @@ using Windows.UI.Core;
 using Frame = Microsoft.UI.Xaml.Controls.Frame;
 using Microsoft.UI.Xaml.Media;
 using Windows.UI.ViewManagement;
+using Microsoft.Extensions.Hosting;
+using Uno.Extensions.Hosting;
+using System.Diagnostics;
 #if DEBUG
 using Microsoft.Extensions.Logging;
 #endif
@@ -39,10 +42,21 @@ namespace AstroOdyssey
         /// </summary>
         public App()
         {
-            InitializeLogging();
+            Host = UnoHost
+           .CreateDefaultBuilder()
+#if DEBUG
+           .UseEnvironment(Environments.Development)
+#endif
+           .ConfigureServices(serviceCollection =>
+           {
+               serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
+               serviceCollection.AddFactories();
+               serviceCollection.AddHelpers();
+           })
+           .Build();
 
+            InitializeLogging();
             InitializeComponent();
-            Container = ConfigureDependencyInjection();
 
             Uno.UI.ApplicationHelper.RequestedCustomTheme = "Dark";
 
@@ -65,7 +79,7 @@ namespace AstroOdyssey
 
         #region Properties
 
-        public static IServiceProvider Container { get; set; }
+        public IHost Host { get; }
 
         public static PlayerCredentials AuthCredentials { get; set; }
 
@@ -103,7 +117,7 @@ namespace AstroOdyssey
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
-        {
+        {  
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -158,6 +172,9 @@ namespace AstroOdyssey
 
             _systemNavigationManager.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             _systemNavigationManager.BackRequested += OnBackRequested;
+
+            var hostEnvironment = Host.Services.GetRequiredService<IHostEnvironment>();
+            Console.WriteLine($"Env: {hostEnvironment.EnvironmentName}");
         }
 
         /// <summary>
@@ -353,9 +370,7 @@ namespace AstroOdyssey
             var serviceCollection = new ServiceCollection();
 
             // Register the MessageService with the container
-            serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
-            serviceCollection.AddFactories();
-            serviceCollection.AddHelpers();
+
 
             // Build the IServiceProvider and return it
             return serviceCollection.BuildServiceProvider();

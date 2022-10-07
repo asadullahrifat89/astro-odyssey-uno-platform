@@ -24,8 +24,8 @@ namespace AstroOdyssey
             InitializeComponent();
             Loaded += ShipSelectionPage_Loaded;
 
-            _audioHelper = App.Container.GetService<IAudioHelper>();
-            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
+            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
         }
 
         #endregion

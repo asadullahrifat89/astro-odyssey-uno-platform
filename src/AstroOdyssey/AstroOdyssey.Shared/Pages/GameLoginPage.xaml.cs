@@ -30,10 +30,10 @@ namespace AstroOdyssey
             InitializeComponent();
             Loaded += GameLoginPage_Loaded;
 
-            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
-            _audioHelper = App.Container.GetService<IAudioHelper>();
-            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
-            _cacheHelper = App.Container.GetService<ICacheHelper>();
+            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
+            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
+            _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
 
             _progressBar = GameLoginPage_ProgressBar;
             _errorContainer = GameLoginPage_ErrorText;
