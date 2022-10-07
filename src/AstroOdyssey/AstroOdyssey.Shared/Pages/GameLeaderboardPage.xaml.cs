@@ -28,9 +28,9 @@ namespace AstroOdyssey
             this.InitializeComponent();
             Loaded += GameLeaderboardPage_Loaded;
 
-            _gameApiHelper = App.Container.GetService<IGameApiHelper>();
-            _audioHelper = App.Container.GetService<IAudioHelper>();
-            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
+            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
 
             GameLeaderboardPage_GameProfiles.ItemsSource = GameProfiles;
             GameLeaderboardPage_GameScores.ItemsSource = GameScores;

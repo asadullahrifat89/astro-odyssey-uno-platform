@@ -78,35 +78,35 @@ namespace AstroOdyssey
 
             AdjustView(); // at constructor
 
-            _celestialObjectFactory = App.Container.GetService<ICelestialObjectFactory>();
+            _celestialObjectFactory = (Application.Current as App).Host.Services.GetRequiredService<ICelestialObjectFactory>();
             _celestialObjectFactory.SetGameEnvironments(StarView, PlanetView);
 
-            _meteorFactory = App.Container.GetService<IMeteorFactory>();
+            _meteorFactory = (Application.Current as App).Host.Services.GetRequiredService<IMeteorFactory>();
             _meteorFactory.SetGameEnvironment(GameView);
 
-            _enemyFactory = App.Container.GetService<IEnemyFactory>();
+            _enemyFactory = (Application.Current as App).Host.Services.GetRequiredService<IEnemyFactory>();
             _enemyFactory.SetGameEnvironment(GameView);
 
-            _healthFactory = App.Container.GetService<IHealthFactory>();
+            _healthFactory = (Application.Current as App).Host.Services.GetRequiredService<IHealthFactory>();
             _healthFactory.SetGameEnvironment(GameView);
 
-            _powerUpFactory = App.Container.GetService<IPowerUpFactory>();
+            _powerUpFactory = (Application.Current as App).Host.Services.GetRequiredService<IPowerUpFactory>();
             _powerUpFactory.SetGameEnvironment(GameView);
 
-            _collectibleFactory = App.Container.GetService<ICollectibleFactory>();
+            _collectibleFactory = (Application.Current as App).Host.Services.GetRequiredService<ICollectibleFactory>();
             _collectibleFactory.SetGameEnvironment(GameView);
 
-            _playerFactory = App.Container.GetService<IPlayerFactory>();
+            _playerFactory = (Application.Current as App).Host.Services.GetRequiredService<IPlayerFactory>();
             _playerFactory.SetGameEnvironment(GameView);
 
-            _playerProjectileFactory = App.Container.GetService<IPlayerProjectileFactory>();
+            _playerProjectileFactory = (Application.Current as App).Host.Services.GetRequiredService<IPlayerProjectileFactory>();
             _playerProjectileFactory.SetGameEnvironment(GameView);
 
-            _enemyProjectileFactory = App.Container.GetService<IEnemyProjectileFactory>();
+            _enemyProjectileFactory = (Application.Current as App).Host.Services.GetRequiredService<IEnemyProjectileFactory>();
             _enemyProjectileFactory.SetGameEnvironment(GameView);
 
-            _audioHelper = App.Container.GetService<IAudioHelper>();
-            _localizationHelper = App.Container.GetService<ILocalizationHelper>();
+            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
+            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
         }
 
         #endregion
