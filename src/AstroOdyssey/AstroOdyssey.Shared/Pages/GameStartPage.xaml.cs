@@ -52,6 +52,9 @@ namespace AstroOdyssey
             _audioHelper.PlaySound(SoundType.GAME_INTRO);
 
             CheckLocalizationCache();
+
+            await _localizationHelper.LoadLocalizationKeys();
+
             SetLocalization();
 
             await this.PlayLoadedTransition();

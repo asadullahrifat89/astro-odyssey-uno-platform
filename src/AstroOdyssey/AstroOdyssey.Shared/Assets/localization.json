@@ -1,0 +1,1367 @@
+﻿[
+  {
+    "Key": "ApplicationName_Header",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Astro Odyssey"
+      },
+      {
+        "Culture": "bn",
+        "Value": "অ্যাস্ট্রো ওডিসি"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "A classic rock metal 🎸 space shooter on WebAssembly."
+      },
+      {
+        "Culture": "bn",
+        "Value": "WebAssembly-এ একটি ক্লাসিক রক মেটাল 🎸 স্পেস শ্যুটার।"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_BanglaButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bangla"
+      },
+      {
+        "Culture": "bn",
+        "Value": "বাংলা"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_DeutschButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Deutsch"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ডয়েচ"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_EnglishButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "English"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ইংরেজি"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_FrenchButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "French"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ফরাসি"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_PlayButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Start Game"
+      },
+      {
+        "Culture": "bn",
+        "Value": "খেলা শুরু করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_LogoutButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Logout"
+      },
+      {
+        "Culture": "bn",
+        "Value": "প্রস্থান"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_BrandProfileButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Made with ❤️ by Asadullah Rifat"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_WelcomeBackText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👋 Welcome Back!"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👋 স্বাগতম!"
+      }
+    ]
+  },
+  {
+    "Key": "LOADING_GAME_ASSETS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Loading game assets..."
+      },
+      {
+        "Culture": "bn",
+        "Value": "গেমের সম্পদ লোড হচ্ছে ..."
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "We use cookies to provide the best gaming experience!"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আমরা সেরা গেমিংয়ের অভিজ্ঞতা সরবরাহ করতে কুকি ব্যবহার করি!"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieDeclineButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👎"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👎"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieAcceptButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👍"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👍"
+      }
+    ]
+  },
+  {
+    "Key": "Antimony",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Antimony"
+      },
+      {
+        "Culture": "bn",
+        "Value": "অ্যান্টিমনি"
+      }
+    ]
+  },
+  {
+    "Key": "Bismuth",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bismuth"
+      },
+      {
+        "Culture": "bn",
+        "Value": "বিসমাথ"
+      }
+    ]
+  },
+  {
+    "Key": "Curium",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Curium"
+      },
+      {
+        "Culture": "bn",
+        "Value": "কিউরিয়াম"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_Header",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Welcome to"
+      },
+      {
+        "Culture": "bn",
+        "Value": "স্বাগতম"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Choose a spaceship"
+      },
+      {
+        "Culture": "bn",
+        "Value": "একটি স্পেসশিপ চয়ন করুন"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_ControlInstructions",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Each spaceship offers a different gaming experience."
+      },
+      {
+        "Culture": "bn",
+        "Value": "প্রতিটি স্পেসশিপ একটি আলাদা গেমিং অভিজ্ঞতা সরবরাহ করে।"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_ChooseButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Select"
+      },
+      {
+        "Culture": "bn",
+        "Value": "নির্বাচন করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "How To Play"
+      },
+      {
+        "Culture": "bn",
+        "Value": "কিভাবে খেলতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_ControlsText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Controls"
+      },
+      {
+        "Culture": "bn",
+        "Value": "নিয়ন্ত্রণ"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_ControlsText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Move to ⬅️ or ➡️ with the arrow keys on your ⌨️ or use the touch screen of your 📱."
+      },
+      {
+        "Culture": "bn",
+        "Value": "আপনার ⌨ এ তীর কীগুলি দিয়ে ⬅ বা ➡ এ যান বা আপনার 📱 এর টাচ স্ক্রিনটি ব্যবহার করুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_EnemiesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enemies & Meteors"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শত্রু ও উল্কা"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_EnemiesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Shoot them and avoid collision."
+      },
+      {
+        "Culture": "bn",
+        "Value": "তাদের গুলি করুন এবং সংঘর্ষ এড়িয়ে চলুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_BossesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bosses"
+      },
+      {
+        "Culture": "bn",
+        "Value": "বস"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_BossesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Defeat them to get to the next level."
+      },
+      {
+        "Culture": "bn",
+        "Value": "পরবর্তী স্তরে পৌঁছানোর জন্য তাদের পরাজিত করুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Healths"
+      },
+      {
+        "Culture": "bn",
+        "Value": "স্বাস্থ্য"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to repair your spaceship."
+      },
+      {
+        "Culture": "bn",
+        "Value": "আপনার স্পেসশিপটি মেরামত করতে এগুলি সংগ্রহ করুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PowerupText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Power-ups"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শক্তি বৃদ্ধি"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PowerupText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to get more powerful weapons."
+      },
+      {
+        "Culture": "bn",
+        "Value": "আরও শক্তিশালী অস্ত্র পেতে তাদের সংগ্রহ করুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_CollectiblesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collectibles"
+      },
+      {
+        "Culture": "bn",
+        "Value": "সংগ্রহযোগ্য"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_CollectiblesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to increase your firepower and activate 2x score."
+      },
+      {
+        "Culture": "bn",
+        "Value": "আপনার ফায়ারপাওয়ার বাড়াতে এবং 2x স্কোর সক্রিয় করতে এগুলি সংগ্রহ করুন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PlayButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👍 Okay"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👍 ঠিক আছে"
+      }
+    ]
+  },
+  {
+    "Key": "BEAM_CANNON",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "BEAM CANNON"
+      },
+      {
+        "Culture": "bn",
+        "Value": "রশ্মি কামান"
+      }
+    ]
+  },
+  {
+    "Key": "BLAZE_BLITZ",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "BLAZE BLITZ"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ব্লেজ ব্লিটজ"
+      }
+    ]
+  },
+  {
+    "Key": "PLASMA_BOMB",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "PLASMA BOMB"
+      },
+      {
+        "Culture": "bn",
+        "Value": "প্লাজমা বোমা"
+      }
+    ]
+  },
+  {
+    "Key": "BOSS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "BOSS"
+      },
+      {
+        "Culture": "bn",
+        "Value": "বস"
+      }
+    ]
+  },
+  {
+    "Key": "CLOAK_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "CLOAK DOWN"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ক্লোক ডাউন"
+      }
+    ]
+  },
+  {
+    "Key": "CLOAK_UP",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "CLOAK UP"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ক্লোক আপ"
+      }
+    ]
+  },
+  {
+    "Key": "FIRING_RATE_DECREASED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "FIRING RATE DECREASED"
+      },
+      {
+        "Culture": "bn",
+        "Value": "গুলিবর্ষণের হার কমেছে"
+      }
+    ]
+  },
+  {
+    "Key": "FIRING_RATE_INCREASED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "FIRING RATE INCREASED"
+      },
+      {
+        "Culture": "bn",
+        "Value": "গুলিবর্ষণের হার বেড়েছে"
+      }
+    ]
+  },
+  {
+    "Key": "SHIELD_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "SHIELD DOWN"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শিল্ড ডাউন"
+      }
+    ]
+  },
+  {
+    "Key": "SHIELD_UP",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "SHIELD UP"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শিল্ড আপ"
+      }
+    ]
+  },
+  {
+    "Key": "COMPLETE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "COMPLETE"
+      },
+      {
+        "Culture": "bn",
+        "Value": "সম্পূর্ণ"
+      }
+    ]
+  },
+  {
+    "Key": "ENEMY_APPROACHES",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "ENEMY APPROACHES"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শত্রু কাছে পৌঁছেছে"
+      }
+    ]
+  },
+  {
+    "Key": "FANTASTIC_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Fantastic game"
+      },
+      {
+        "Culture": "bn",
+        "Value": "চমত্কার খেলা"
+      }
+    ]
+  },
+  {
+    "Key": "GAME_PAUSED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "GAME PAUSED"
+      },
+      {
+        "Culture": "bn",
+        "Value": "খেলা থামানো হয়েছে"
+      }
+    ]
+  },
+  {
+    "Key": "GOOD_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Good game"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ভাল খেলা"
+      }
+    ]
+  },
+  {
+    "Key": "GREAT_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Great game"
+      },
+      {
+        "Culture": "bn",
+        "Value": "অসাধারন খেলা"
+      }
+    ]
+  },
+  {
+    "Key": "LEVEL",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "LEVEL"
+      },
+      {
+        "Culture": "bn",
+        "Value": "স্তর"
+      }
+    ]
+  },
+  {
+    "Key": "NO_LUCK",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No luck"
+      },
+      {
+        "Culture": "bn",
+        "Value": "দুর্ভাগ্য"
+      }
+    ]
+  },
+  {
+    "Key": "POWER_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "POWER DOWN"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ক্ষমতা হ্রাস"
+      }
+    ]
+  },
+  {
+    "Key": "QUIT_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "QUIT GAME?"
+      },
+      {
+        "Culture": "bn",
+        "Value": "খেলা বন্ধ?"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Score"
+      },
+      {
+        "Culture": "bn",
+        "Value": "স্কোর"
+      }
+    ]
+  },
+  {
+    "Key": "YOUR_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Your Score"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আপনার ফলাফল"
+      }
+    ]
+  },
+  {
+    "Key": "PERSONAL_BEST_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🤘 Personal Best Score"
+      },
+      {
+        "Culture": "bn",
+        "Value": "🤘 ব্যক্তিগত সেরা স্কোর"
+      }
+    ]
+  },
+  {
+    "Key": "LAST_GAME_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🕹️ Last Game Score"
+      },
+      {
+        "Culture": "bn",
+        "Value": "🕹️ শেষ গেম স্কোর"
+      }
+    ]
+  },
+  {
+    "Key": "DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Destroyed"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ধ্বংস"
+      }
+    ]
+  },
+  {
+    "Key": "ENEMIES_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enemies"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শত্রু"
+      }
+    ]
+  },
+  {
+    "Key": "METEORS_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Meteors"
+      },
+      {
+        "Culture": "bn",
+        "Value": "উল্কা"
+      }
+    ]
+  },
+  {
+    "Key": "BOSSES_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bosses"
+      },
+      {
+        "Culture": "bn",
+        "Value": "বস"
+      }
+    ]
+  },
+  {
+    "Key": "COLLECTIBLES_COLLECTED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collectibles"
+      },
+      {
+        "Culture": "bn",
+        "Value": "সংগ্রহযোগ্য"
+      }
+    ]
+  },
+  {
+    "Key": "SHIP_REPAIRED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "SHIP REPAIRED"
+      },
+      {
+        "Culture": "bn",
+        "Value": "জাহাজ মেরামত"
+      }
+    ]
+  },
+  {
+    "Key": "SONIC_BLAST",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "SONIC BLAST"
+      },
+      {
+        "Culture": "bn",
+        "Value": "সোনিক বিস্ফোরণ"
+      }
+    ]
+  },
+  {
+    "Key": "SUPREME_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Supreme game"
+      },
+      {
+        "Culture": "bn",
+        "Value": "সর্বোচ্চ খেলা"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_ON_SCREEN_TO_BEGIN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "TAP ON THE SCREEN TO BEGIN"
+      },
+      {
+        "Culture": "bn",
+        "Value": "শুরু করতে স্ক্রিনে ট্যাপ করুন"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_TO_QUIT",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "TAP TO QUIT"
+      },
+      {
+        "Culture": "bn",
+        "Value": "প্রস্থান করতে ট্যাপ করুন"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_TO_RESUME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "TAP TO RESUME"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আবার শুরু করতে ট্যাপ করুন"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE_MULTIPLIER_ON",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "2x SCORE ON"
+      },
+      {
+        "Culture": "bn",
+        "Value": "2x স্কোর চালু"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE_MULTIPLIER_OFF",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "COLLECT MORE GUITARS"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আরও গিটার সংগ্রহ করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_SignupPromptText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "You could earn your place on the leaderboard if you login."
+      },
+      {
+        "Culture": "bn",
+        "Value": "লগইন করলে আপনি লিডারবোর্ডে আপনার জায়গা অর্জন করতে পারেন।"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Game Over"
+      },
+      {
+        "Culture": "bn",
+        "Value": "খেলা শেষ"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_PlayAgainButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Play Again"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আবার খেলুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_LeaderboardButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Leaderboard"
+      },
+      {
+        "Culture": "bn",
+        "Value": "লিডারবোর্ড"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_UserNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Username or Email"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ব্যবহারকারী নাম বা ইমেল"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_PasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_LoginButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Login"
+      },
+      {
+        "Culture": "bn",
+        "Value": "প্রবেশ করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_RegisterButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No account yet?"
+      },
+      {
+        "Culture": "bn",
+        "Value": "এখনও কোন অ্যাকাউন্ট নেই?"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_Header",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👋 Hello and welcome!"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👋 হ্যালো এবং স্বাগতম!"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserFullNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enter full name"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পুরো নাম লিখুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserEmailBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enter email"
+      },
+      {
+        "Culture": "bn",
+        "Value": "ইমেইল প্রদান করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Set a username"
+      },
+      {
+        "Culture": "bn",
+        "Value": "একটি ব্যবহারকারীর নাম সেট করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_PasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Set a password"
+      },
+      {
+        "Culture": "bn",
+        "Value": "একটি পাসওয়ার্ড সেট করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmPasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Confirm password"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড নিশ্চিত করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_SignupButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Signup"
+      },
+      {
+        "Culture": "bn",
+        "Value": "নিবন্ধন করুন"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_LoginButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "You already have an account?"
+      },
+      {
+        "Culture": "bn",
+        "Value": "আপনার ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmCheckBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Yes, I agree to the conditions of participation."
+      },
+      {
+        "Culture": "bn",
+        "Value": "হ্যাঁ, আমি অংশগ্রহণের শর্তে সম্মত।"
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORDS_DIDNT_MATCH",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Passwords didn't match"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড মেলে না"
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORDS_MATCHED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Passwords matched"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড মিলেছে"
+      }
+    ]
+  },
+  {
+    "Key": "LENGTH_MUST_BE_GREATER_THAN_8_CHARS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must be at least eight characters"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড অবশ্যই কমপক্ষে আটটি অক্ষর হতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "LENGTH_MUST_BE_LESS_THAN_14_CHARS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must be less than fourteen characters"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড অবশ্যই চৌদ্দ অক্ষরের চেয়ে কম হতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_UPPERCASE_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one uppercase character"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ডে অবশ্যই একটি বড় হাতের অক্ষর থাকতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_LOWERCASE_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one lowercase character"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ডে অবশ্যই একটি ছোট হাতের অক্ষর থাকতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_NOT_CONTAIN_SPACE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password cannot contain spaces"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ডে স্পেস থাকতে পারবে না"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_SPECIAL_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one special character"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ডে অবশ্যই একটি বিশেষ অক্ষর থাকতে হবে"
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORD_IS_STRONG",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password is strong"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পাসওয়ার্ড শক্তিশালী"
+      }
+    ]
+  },
+  {
+    "Key": "INVALID_CHARACTERS_IN_FULLNAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Invalid characters in full name"
+      },
+      {
+        "Culture": "bn",
+        "Value": "পুরো নামে অবৈধ অক্ষর"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Leaderboard"
+      },
+      {
+        "Culture": "bn",
+        "Value": "লিডারবোর্ড"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_DailyScoreboardToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "📅 Daily"
+      },
+      {
+        "Culture": "bn",
+        "Value": "📅 দৈনিক"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_AllTimeScoreboardToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👑 All time"
+      },
+      {
+        "Culture": "bn",
+        "Value": "👑 সর্বকালে"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_PlayNowButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Play now"
+      },
+      {
+        "Culture": "bn",
+        "Value": "এখনই খেলুন"
+      }
+    ]
+  },
+  {
+    "Key": "LOADING_DATA",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Loading data..."
+      },
+      {
+        "Culture": "bn",
+        "Value": "তথ্য প্রস্তুত হচ্ছে..."
+      }
+    ]
+  },
+  {
+    "Key": "NO_DATA_AVAILABLE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No data available."
+      },
+      {
+        "Culture": "bn",
+        "Value": "কোন তথ্য নেই।"
+      }
+    ]
+  }
+]

@@ -19,6 +19,9 @@
     <UpToDateCheckInput Remove="Pages\LanguageSelectionPage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <_Globbed_Content Remove="Assets\localization.json" />
+  </ItemGroup>
+  <ItemGroup>
     <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\de\Resources.resw" />
     <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
