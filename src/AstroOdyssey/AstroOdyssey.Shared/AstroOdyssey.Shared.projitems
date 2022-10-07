@@ -18,10 +18,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\CelestialObjectTemplate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\DestructibleObjectTemplate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\LocalizationKey.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\PlayerShipTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Peripherals\CelestialObjectTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Peripherals\DestructibleObjectTemplate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Peripherals\LocalizationKey.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Peripherals\PlayerShipTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IAssetHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ICacheHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\ILocalizationHelper.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\GameApiHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\HttpRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\PaginationHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\InGameMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\InGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameInstructionsPage.xaml.cs">
       <DependentUpon>GameInstructionsPage.xaml</DependentUpon>
@@ -75,7 +75,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Responses\QueryRecordsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\IHttpService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\HttpService.cs" />
-    <Compile Include="..\AstroOdyssey.Shared\Components\Collectible.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\Collectible.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\CollectibleFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\AudioHelper.cs" />
@@ -87,24 +87,24 @@
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\MeteorFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\PlayerFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\PowerUpFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\AudioPlayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\EnemyProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Peripherals\AudioPlayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\EnemyProjectile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerShip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ShipSelectionPage.xaml.cs">
       <DependentUpon>ShipSelectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\PlayerProjectileFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\CelestialObjectFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Health.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\Health.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerScore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\PlayerProjectile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Meteor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\PowerUp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\CelestialObject.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameEnvironment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Components\Base\GameObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\PlayerProjectile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\Meteor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\PowerUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\CelestialObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\GameEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Elements\GameObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\GameOverPage.xaml.cs">
       <DependentUpon>GameOverPage.xaml</DependentUpon>
     </Compile>
@@ -279,6 +279,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Factories\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Peripherals\" />
     <Folder Include="$(MSBuildThisFileDirectory)Strings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Style\Application\" />
   </ItemGroup>
