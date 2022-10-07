@@ -117,18 +117,14 @@
                     Height="50"
                     Margin="30,10,30,15"
                     HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
                     BorderThickness="3"
                     Click="ChooseButton_Click"
                     Content="SELECT"
                     CornerRadius="50"
                     FontSize="24"
                     FontWeight="SemiBold"
-                    Foreground="White"
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
-
             </StackPanel>
 
         </Border>
