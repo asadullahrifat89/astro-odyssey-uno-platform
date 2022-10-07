@@ -31,12 +31,12 @@
                 Orientation="Vertical">
 
                 <!--  Game logo  -->
-                <Image Height="100" Source="ms-appx:///Assets/Images/logo_brand.png" />
+                <Image Height="100" Source="ms-appx:///Assets/Images/logo_game.png" />
 
                 <!--  Game name  -->
                 <TextBlock
                     x:Name="ApplicationName_Header"
-                    Margin="0,15,0,20"
+                    Margin="0,2,0,15"
                     FontSize="30"
                     FontWeight="Bold"
                     TextAlignment="Center"
@@ -67,15 +67,12 @@
                     Height="50"
                     Margin="30,25,30,5"
                     HorizontalAlignment="Stretch"
-                    Background="Goldenrod"
-                    BorderBrush="White"
                     BorderThickness="3"
                     Click="LoginButton_Click"
                     Content="Login"
                     CornerRadius="50"
                     FontSize="24"
                     FontWeight="SemiBold"
-                    Foreground="White"
                     IsEnabled="False"
                     IsFocusEngagementEnabled="False"
                     IsTabStop="False" />
@@ -89,7 +86,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"
-                    BorderBrush="White"
                     BorderThickness="0"
                     Click="RegisterButton_Click"
                     Content="No account yet?"

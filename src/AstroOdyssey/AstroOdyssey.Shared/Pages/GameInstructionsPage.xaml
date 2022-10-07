@@ -243,15 +243,12 @@
                         Margin="10,10,10,20"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Background="Goldenrod"
-                        BorderBrush="White"
                         BorderThickness="3"
                         Click="GameInstructionsPage_PlayButton_Click"
                         Content="Got it"
                         CornerRadius="50"
                         FontSize="24"
                         FontWeight="SemiBold"
-                        Foreground="White"
                         IsFocusEngagementEnabled="False"
                         IsTabStop="False" />
 

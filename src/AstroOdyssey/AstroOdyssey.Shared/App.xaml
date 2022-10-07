@@ -6,6 +6,7 @@
 
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!--  Add resource dictionaries here  -->
@@ -16,21 +17,31 @@
 
             <Style x:Key="DefaultButton" TargetType="Button" />
             <Style TargetType="Button">
+                <!--<Setter Property="Background" Value="Goldenrod" />-->
                 <Setter Property="Background" Value="Goldenrod" />
-                <Setter Property="Foreground" Value="#ffffff" />
-                <Setter Property="BorderBrush" Value="#ffffff" />
+                <!--<Setter Property="Foreground" Value="#ffffff" />-->
+                <Setter Property="Foreground" Value="White" />
+                <!--<Setter Property="BorderBrush" Value="#ffffff" />-->
+                <Setter Property="BorderBrush" Value="White" />
             </Style>
 
             <Style x:Key="GameUIContainer" TargetType="Border">
-                <Setter Property="Background" Value="#27223f" />
-                <Setter Property="BorderBrush" Value="#4d437d" />
+                <Setter Property="Background" Value="#9d2235" />
+                <Setter Property="BorderBrush" Value="Goldenrod" />
             </Style>
 
-            <SolidColorBrush x:Key="FrameBackgroundColor" Color="#27223f" />
+            <Style x:Key="LeaderboardRecordContainer" TargetType="Border">
+                <Setter Property="Background" Value="Goldenrod" />
+                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+
+            <SolidColorBrush x:Key="FrameBackgroundColor" Color="#9d2235" />
             <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
             <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
             <SolidColorBrush x:Key="ProgressBarOkColor" Color="LightGreen" />
         </ResourceDictionary>
+
     </Application.Resources>
 
 </Application>
