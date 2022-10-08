@@ -211,6 +211,7 @@
 
         </Border>
 
+        <!--  Welcome back and cookie message  -->
         <StackPanel
             Margin="10,50"
             HorizontalAlignment="Center"
