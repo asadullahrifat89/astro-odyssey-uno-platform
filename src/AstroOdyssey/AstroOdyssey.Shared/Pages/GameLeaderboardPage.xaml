@@ -6,7 +6,6 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    IsTabStop="False"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -103,8 +102,6 @@
             Margin="20,55,20,10"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            BorderThickness="0,3,0,3"
-            CornerRadius="10"
             Style="{StaticResource GameUIContainer}">
 
             <Grid>
@@ -162,9 +159,7 @@
                         CornerRadius="50"
                         FontSize="15"
                         FontWeight="SemiBold"
-                        Foreground="White"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False" />
+                        Foreground="White" />
 
                     <!--  All time high score  -->
                     <ToggleButton
@@ -175,9 +170,7 @@
                         CornerRadius="50"
                         FontSize="15"
                         FontWeight="SemiBold"
-                        Foreground="White"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False" />
+                        Foreground="White" />
 
                 </StackPanel>
 
@@ -238,14 +231,8 @@
                         Height="50"
                         Margin="30,10,30,15"
                         HorizontalAlignment="Center"
-                        BorderThickness="3"
                         Click="PlayAgainButton_Click"
                         Content="PLAY NOW"
-                        CornerRadius="50"
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False"
                         Tag="GameOverPage_PlayAgainButton.Content" />
 
                     <!--  Error text  -->
@@ -263,9 +250,7 @@
                         Height="5"
                         Margin="5,0"
                         Foreground="{StaticResource ProgressBarForegroundColor}"
-                        IsFocusEngagementEnabled="False"
                         IsIndeterminate="True"
-                        IsTabStop="False"
                         ShowError="False"
                         ShowPaused="True" />
 
@@ -314,8 +299,6 @@
             VerticalAlignment="Top"
             Click="GoBackButton_Click"
             CornerRadius="100"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False"
             Style="{StaticResource DefaultButton}">
             <SymbolIcon Symbol="Back" />
         </Button>

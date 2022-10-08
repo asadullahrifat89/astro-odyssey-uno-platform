@@ -16,10 +16,7 @@
 
         <Border
             Margin="20"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             BorderThickness="0,3,0,3"
-            CornerRadius="10"
             Style="{StaticResource GameUIContainer}">
 
             <Grid
@@ -243,14 +240,8 @@
                         Margin="10,10,10,20"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        BorderThickness="3"
                         Click="GameInstructionsPage_PlayButton_Click"
-                        Content="Got it"
-                        CornerRadius="50"
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False" />
+                        Content="Got it" />
 
                     <!--  Error text  -->
                     <TextBlock
@@ -266,9 +257,7 @@
                         x:Name="GameInstructionsPage_ProgressBar"
                         Height="5"
                         Foreground="{StaticResource ProgressBarForegroundColor}"
-                        IsFocusEngagementEnabled="False"
                         IsIndeterminate="True"
-                        IsTabStop="False"
                         ShowError="False"
                         ShowPaused="True" />
                 </StackPanel>
@@ -316,8 +305,6 @@
             VerticalAlignment="Top"
             Click="GoBackButton_Click"
             CornerRadius="100"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False"
             Style="{StaticResource DefaultButton}">
             <SymbolIcon Symbol="Back" />
         </Button>

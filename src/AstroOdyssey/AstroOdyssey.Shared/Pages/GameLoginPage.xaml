@@ -6,7 +6,6 @@
     xmlns:local="using:AstroOdyssey.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    IsTabStop="False"
     mc:Ignorable="d">
 
     <Grid>
@@ -16,8 +15,6 @@
         </Grid.Background>
 
         <Border
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             BorderThickness="0,3,0,3"
             CornerRadius="10"
             Style="{StaticResource GameUIContainer}">
@@ -67,30 +64,24 @@
                     Height="50"
                     Margin="30,25,30,5"
                     HorizontalAlignment="Stretch"
-                    BorderThickness="3"
                     Click="LoginButton_Click"
                     Content="Login"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    IsEnabled="False"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False" />
+                    IsEnabled="False" />
 
                 <!--  Register Button  -->
                 <Button
                     x:Name="GameLoginPage_RegisterButton"
                     x:Uid="GameLoginPage_RegisterButton"
                     Height="40"
-                    Margin="5,10,5,10"
+                    Margin="5,0,5,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"
                     BorderThickness="0"
                     Click="RegisterButton_Click"
                     Content="No account yet?"
-                    CornerRadius="50"
-                    FontWeight="SemiBold" />
+                    FontSize="15"
+                    Foreground="White" />
 
                 <!--  Error text  -->
                 <TextBlock
@@ -106,9 +97,7 @@
                     x:Name="GameLoginPage_ProgressBar"
                     Height="5"
                     Foreground="{StaticResource ProgressBarForegroundColor}"
-                    IsFocusEngagementEnabled="False"
                     IsIndeterminate="True"
-                    IsTabStop="False"
                     ShowError="False"
                     ShowPaused="True" />
 
@@ -126,8 +115,6 @@
             VerticalAlignment="Top"
             Click="GoBackButton_Click"
             CornerRadius="100"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False"
             Style="{StaticResource DefaultButton}">
             <SymbolIcon Symbol="Back" />
         </Button>
