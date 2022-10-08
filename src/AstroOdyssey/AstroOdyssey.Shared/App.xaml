@@ -15,7 +15,12 @@
             <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
             <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
 
-            <Style x:Key="DefaultButton" TargetType="Button" />
+            <Style x:Key="DefaultButton" TargetType="Button">
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="IsFocusEngagementEnabled" Value="False" />
+            </Style>
+
             <Style TargetType="Button">
                 <!--<Setter Property="Background" Value="Goldenrod" />-->
                 <Setter Property="Background" Value="Goldenrod" />
@@ -23,11 +28,21 @@
                 <Setter Property="Foreground" Value="White" />
                 <!--<Setter Property="BorderBrush" Value="#ffffff" />-->
                 <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="BorderThickness" Value="3" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
 
             <Style x:Key="GameUIContainer" TargetType="Border">
                 <Setter Property="Background" Value="#9d2235" />
                 <Setter Property="BorderBrush" Value="Goldenrod" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BorderThickness" Value="0,3,0,3" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
 
             <Style x:Key="LeaderboardRecordContainer" TargetType="Border">
