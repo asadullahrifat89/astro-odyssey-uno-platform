@@ -66,7 +66,6 @@
                     HorizontalAlignment="Stretch"
                     Click="LoginButton_Click"
                     Content="Login"
-                    CornerRadius="50"
                     IsEnabled="False" />
 
                 <!--  Register Button  -->
