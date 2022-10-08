@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
     Background="#070a25"
-    IsTabStop="False"
+    
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
@@ -355,8 +355,8 @@
                 Margin="5"
                 Click="PauseGameButton_Click"
                 CornerRadius="100"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
+                
+                
                 Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Pause" />
             </Button>
@@ -369,8 +369,8 @@
                 Margin="5"
                 Click="QuitGameButton_Click"
                 CornerRadius="100"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
+                
+                
                 Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Undo" />
             </Button>

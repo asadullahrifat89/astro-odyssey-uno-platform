@@ -6,7 +6,6 @@
     xmlns:local="using:AstroOdyssey"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    IsTabStop="False"
     mc:Ignorable="d">
 
     <Grid>
@@ -27,9 +26,6 @@
                 Margin="2"
                 Click="LanguageButton_Click"
                 Content="English"
-                CornerRadius="50"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
                 Style="{StaticResource DefaultButton}"
                 Tag="en" />
             <Button
@@ -38,20 +34,12 @@
                 Margin="2"
                 Click="LanguageButton_Click"
                 Content="Bangla"
-                CornerRadius="50"
-                IsFocusEngagementEnabled="False"
-                IsTabStop="False"
                 Style="{StaticResource DefaultButton}"
                 Tag="bn" />
         </StackPanel>
 
         <!--  UI controls  -->
-        <Border
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            BorderThickness="0,3,0,3"
-            CornerRadius="10"
-            Style="{StaticResource GameUIContainer}">
+        <Border Margin="5" Style="{StaticResource GameUIContainer}">
 
             <StackPanel
                 x:Name="ActionStack"
@@ -92,14 +80,8 @@
                     Height="50"
                     Margin="30,10,30,5"
                     HorizontalAlignment="Stretch"
-                    BorderThickness="3"
                     Click="PlayButton_Click"
-                    Content="START GAME"
-                    CornerRadius="50"
-                    FontSize="24"
-                    FontWeight="SemiBold"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False" />
+                    Content="START GAME" />
 
                 <StackPanel Margin="30,5,30,5">
 
@@ -109,14 +91,8 @@
                         x:Uid="GameOverPage_LeaderboardButton"
                         Height="50"
                         HorizontalAlignment="Stretch"
-                        BorderThickness="3"
                         Click="GameOverPage_LeaderboardButton_Click"
                         Content="Leaderboard"
-                        CornerRadius="50"
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False"
                         Visibility="Collapsed" />
 
                     <!--  Login Button  -->
@@ -125,14 +101,8 @@
                         x:Uid="GameLoginPage_LoginButton"
                         Height="50"
                         HorizontalAlignment="Stretch"
-                        BorderThickness="3"
                         Click="LoginButton_Click"
                         Content="Login"
-                        CornerRadius="50"
-                        FontSize="24"
-                        FontWeight="SemiBold"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False"
                         Visibility="Collapsed" />
 
                     <!--  Logout Button  -->
@@ -146,10 +116,8 @@
                         BorderThickness="0"
                         Click="LogoutButton_Click"
                         Content="Logout"
-                        CornerRadius="50"
-                        FontWeight="SemiBold"
-                        IsFocusEngagementEnabled="False"
-                        IsTabStop="False"
+                        FontSize="15"
+                        Foreground="White"
                         Visibility="Collapsed" />
 
                 </StackPanel>
@@ -163,14 +131,11 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"
-                    BorderBrush="White"
                     BorderThickness="0"
                     Click="RegisterButton_Click"
                     Content="No account yet?"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
+                    FontSize="15"
+                    Foreground="White"
                     Visibility="Collapsed" />
 
                 <!--  Brand Tag line  -->
@@ -183,8 +148,6 @@
                     Content="Made with ❤️ by Asadullah Rifat"
                     FontSize="17"
                     Foreground="White"
-                    IsFocusEngagementEnabled="False"
-                    IsTabStop="False"
                     NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
                 <!--  Error text  -->
@@ -201,9 +164,7 @@
                     x:Name="GameStartPage_ProgressBar"
                     Height="5"
                     Foreground="{StaticResource ProgressBarForegroundColor}"
-                    IsFocusEngagementEnabled="False"
                     IsIndeterminate="True"
-                    IsTabStop="False"
                     ShowError="False"
                     ShowPaused="True" />
 
@@ -272,10 +233,6 @@
                             BorderThickness="2"
                             Click="GameStartPage_CookieDeclineButton_Click"
                             Content="Decline"
-                            CornerRadius="50"
-                            FontWeight="SemiBold"
-                            IsFocusEngagementEnabled="False"
-                            IsTabStop="False"
                             Style="{StaticResource DefaultButton}" />
                         <Button
                             x:Name="GameStartPage_CookieAcceptButton"
@@ -283,10 +240,6 @@
                             BorderThickness="2"
                             Click="GameStartPage_CookieAcceptButton_Click"
                             Content="Accept"
-                            CornerRadius="50"
-                            FontWeight="SemiBold"
-                            IsFocusEngagementEnabled="False"
-                            IsTabStop="False"
                             Style="{StaticResource DefaultButton}" />
                     </WrapPanel>
                 </Grid>
@@ -305,8 +258,6 @@
             Content="Assets by redfoc.com 😘"
             FontSize="20"
             Foreground="White"
-            IsFocusEngagementEnabled="False"
-            IsTabStop="False"
             NavigateUri="http://www.redfoc.com" />
 
     </Grid>
