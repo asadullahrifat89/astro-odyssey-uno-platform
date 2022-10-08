@@ -74,7 +74,7 @@
                     x:Name="GameLoginPage_RegisterButton"
                     x:Uid="GameLoginPage_RegisterButton"
                     Height="40"
-                    Margin="5,10,5,10"
+                    Margin="5,0,5,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Background="Transparent"
