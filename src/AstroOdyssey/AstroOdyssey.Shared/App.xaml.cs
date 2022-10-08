@@ -34,6 +34,30 @@ namespace AstroOdyssey
 
         #endregion
 
+        #region Properties
+
+        public IHost Host { get; }
+
+        public static PlayerCredentials AuthCredentials { get; set; }
+
+        public static GameProfile GameProfile { get; set; }
+
+        public static AuthToken AuthToken { get; set; }
+
+        public static PlayerScore PlayerScore { get; set; }
+
+        public static bool GameScoreSubmissionPending { get; set; }
+
+        public static PlayerShip Ship { get; set; }
+
+        public static Session Session { get; set; }
+
+        public static string CurrentCulture { get; set; }
+
+        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank() && !GameProfile.User.UserName.IsNullOrBlank();
+
+        #endregion
+
         #region Ctor
 
         /// <summary>
@@ -75,31 +99,7 @@ namespace AstroOdyssey
             CurrentCulture = "en";
         }
 
-        #endregion
-
-        #region Properties
-
-        public IHost Host { get; }
-
-        public static PlayerCredentials AuthCredentials { get; set; }
-
-        public static GameProfile GameProfile { get; set; }
-
-        public static AuthToken AuthToken { get; set; }
-
-        public static PlayerScore PlayerScore { get; set; }
-
-        public static bool GameScoreSubmissionPending { get; set; }
-
-        public static PlayerShip Ship { get; set; }
-
-        public static Session Session { get; set; }
-
-        public static string CurrentCulture { get; set; }
-
-        public static bool HasUserLoggedIn => GameProfile is not null && GameProfile.User is not null && !GameProfile.User.UserId.IsNullOrBlank() && !GameProfile.User.UserName.IsNullOrBlank();
-
-        #endregion
+        #endregion        
 
         #region Events
 
