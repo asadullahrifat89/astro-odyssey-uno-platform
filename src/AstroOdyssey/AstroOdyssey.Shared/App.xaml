@@ -12,16 +12,17 @@
                 <!--  Add resource dictionaries here  -->
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
-            <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
-
-            <Style x:Key="DefaultButton" TargetType="Button">
+            <!--#region Buttons-->
+            <Style
+                x:Key="DefaultButton"
+                BasedOn="{StaticResource DefaultButtonStyle}"
+                TargetType="Button">
                 <Setter Property="CornerRadius" Value="50" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
 
-            <Style TargetType="Button">
+            <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
                 <!--<Setter Property="Background" Value="Goldenrod" />-->
                 <Setter Property="Background" Value="Goldenrod" />
                 <!--<Setter Property="Foreground" Value="#ffffff" />-->
@@ -36,6 +37,24 @@
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
 
+            <Style BasedOn="{StaticResource DefaultToggleButtonStyle}" TargetType="ToggleButton">
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+            <!--#endregion-->
+
+            <!--#region Input Fields-->
+            <Style BasedOn="{StaticResource DefaultTextBoxStyle}" TargetType="TextBox">
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+
+            <Style BasedOn="{StaticResource DefaultPasswordBoxStyle}" TargetType="PasswordBox">
+                <Setter Property="CornerRadius" Value="50" />
+            </Style>
+            <!--#endregion-->
+
+            <!--#region Game UI Container Style-->
             <Style x:Key="GameUIContainer" TargetType="Border">
                 <Setter Property="Background" Value="#9d2235" />
                 <Setter Property="BorderBrush" Value="Goldenrod" />
@@ -44,17 +63,26 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
             </Style>
+            <!--#endregion-->
 
+            <!--#region Leaderboard Style-->
             <Style x:Key="LeaderboardRecordContainer" TargetType="Border">
                 <Setter Property="Background" Value="Goldenrod" />
                 <Setter Property="BorderBrush" Value="White" />
                 <Setter Property="CornerRadius" Value="10" />
             </Style>
+            <!--#endregion-->
+
+            <!--#region Colors-->
+            <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
+            <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
 
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="#9d2235" />
             <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
             <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
             <SolidColorBrush x:Key="ProgressBarOkColor" Color="LightGreen" />
+            <!--#endregion-->
+
         </ResourceDictionary>
 
     </Application.Resources>

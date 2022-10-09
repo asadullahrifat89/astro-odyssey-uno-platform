@@ -43,8 +43,6 @@
                     x:Name="GameLoginPage_UserNameBox"
                     x:Uid="GameLoginPage_UserNameBox"
                     Margin="5"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
                     Header="Username or Email"
                     TextChanged="UserNameBox_TextChanged" />
 
@@ -52,7 +50,6 @@
                     x:Name="GameLoginPage_PasswordBox"
                     x:Uid="GameLoginPage_PasswordBox"
                     Margin="5"
-                    CornerRadius="50"
                     Header="Password"
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="PasswordBox_TextChanged" />

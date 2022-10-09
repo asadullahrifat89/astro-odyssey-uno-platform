@@ -156,9 +156,7 @@
                         x:Name="GameLeaderboardPage_DailyScoreboardToggle"
                         Checked="GameLeaderboardPage_DailyScoreboardToggle_Click"
                         Content="Daily"
-                        CornerRadius="50"
                         FontSize="15"
-                        FontWeight="SemiBold"
                         Foreground="White" />
 
                     <!--  All time high score  -->
@@ -167,9 +165,7 @@
                         Margin="5,0"
                         Checked="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
                         Content="All Time"
-                        CornerRadius="50"
                         FontSize="15"
-                        FontWeight="SemiBold"
                         Foreground="White" />
 
                 </StackPanel>
