@@ -15,13 +15,16 @@
             <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
             <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
 
-            <Style x:Key="DefaultButton" TargetType="Button">
+            <Style
+                x:Key="DefaultButton"
+                BasedOn="{StaticResource DefaultButtonStyle}"
+                TargetType="Button">
                 <Setter Property="CornerRadius" Value="50" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
 
-            <Style TargetType="Button">
+            <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
                 <!--<Setter Property="Background" Value="Goldenrod" />-->
                 <Setter Property="Background" Value="Goldenrod" />
                 <!--<Setter Property="Foreground" Value="#ffffff" />-->
