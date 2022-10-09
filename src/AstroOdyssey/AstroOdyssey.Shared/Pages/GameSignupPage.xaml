@@ -47,8 +47,8 @@
                     x:Name="GameSignupPage_UserFullNameBox"
                     x:Uid="GameSignupPage_UserFullNameBox"
                     Margin="5"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
+                   
+                   
                     Header="Enter your full name"
                     TextChanged="UserFullNameBox_TextChanged" />
 
@@ -57,8 +57,7 @@
                     x:Name="GameSignupPage_UserEmailBox"
                     x:Uid="GameSignupPage_UserEmailBox"
                     Margin="5"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
+                  
                     Header="Enter email"
                     TextChanged="UserEmailBox_TextChanged" />
 
@@ -67,8 +66,7 @@
                     x:Name="GameSignupPage_UserNameBox"
                     x:Uid="GameSignupPage_UserNameBox"
                     Margin="5"
-                    CornerRadius="50"
-                    FontWeight="SemiBold"
+                   
                     Header="Set a username"
                     TextChanged="UserNameBox_TextChanged" />
 
@@ -77,7 +75,7 @@
                     x:Name="GameSignupPage_PasswordBox"
                     x:Uid="GameSignupPage_PasswordBox"
                     Margin="5"
-                    CornerRadius="50"
+                   
                     Header="Set a password"
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="PasswordBox_TextChanged" />
@@ -87,7 +85,7 @@
                     x:Name="GameSignupPage_ConfirmPasswordBox"
                     x:Uid="GameSignupPage_ConfirmPasswordBox"
                     Margin="5"
-                    CornerRadius="50"
+                  
                     Header="Confirm password"
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="ConfirmPasswordBox_TextChanged" />
