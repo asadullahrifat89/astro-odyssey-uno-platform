@@ -75,15 +75,18 @@
                     <ToggleButton
                         x:Name="Antimony"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        CornerRadius="10" />
                     <ToggleButton
                         x:Name="Bismuth"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        CornerRadius="10" />
                     <ToggleButton
                         x:Name="Curium"
                         Checked="Ship_Selected"
-                        ContentTemplate="{StaticResource ShipsListDataTemplate}" />
+                        ContentTemplate="{StaticResource ShipsListDataTemplate}"
+                        CornerRadius="10" />
                 </StackPanel>
 
                 <!--  Message  -->
