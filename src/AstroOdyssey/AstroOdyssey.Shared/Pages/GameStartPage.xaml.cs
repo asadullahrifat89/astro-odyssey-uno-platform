@@ -146,6 +146,8 @@ namespace AstroOdyssey
         {
             if ((sender as Button)?.Tag is string tag)
             {
+                _audioHelper.PlaySound(SoundType.MENU_SELECT);
+
                 App.CurrentCulture = tag;
                 SetLocalization();
                 _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
