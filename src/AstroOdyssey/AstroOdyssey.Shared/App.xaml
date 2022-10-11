@@ -40,6 +40,8 @@
             <Style BasedOn="{StaticResource DefaultToggleButtonStyle}" TargetType="ToggleButton">
                 <Setter Property="CornerRadius" Value="50" />
                 <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
             <!--#endregion-->
 
