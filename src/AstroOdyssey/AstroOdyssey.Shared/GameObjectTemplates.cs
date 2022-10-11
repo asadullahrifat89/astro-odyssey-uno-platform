@@ -138,9 +138,6 @@ namespace AstroOdyssey
             "Assets/Sounds/Music/music3.mp3",
             "Assets/Sounds/Music/music4.mp3",
             "Assets/Sounds/Music/music5.mp3",
-            "Assets/Sounds/Music/music6.mp3",
-            "Assets/Sounds/Music/music7.mp3",
-            "Assets/Sounds/Music/music8.mp3",
         };
 
         public static string PLAYER_ROUNDS_FIRE_MUSIC_URL = "Assets/Sounds/player_rounds_fire.mp3";
