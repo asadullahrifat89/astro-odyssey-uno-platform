@@ -228,9 +228,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Intro\intro2.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music4.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music5.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music6.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music7.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Music\music8.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\player_sonic_blast.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\rage_down.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Rage\rage_up.mp3" />
