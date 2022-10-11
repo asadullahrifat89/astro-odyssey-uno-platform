@@ -41,7 +41,6 @@
                     <!--  Tagline  -->
                     <TextBlock
                         x:Name="GameInstructionsPage_Tagline"
-                        x:Uid="GameInstructionsPage_Tagline"
                         FontSize="35"
                         FontWeight="Bold"
                         Text="How to play"
@@ -235,7 +234,6 @@
                     <!--  Play button  -->
                     <Button
                         x:Name="GameInstructionsPage_PlayButton"
-                        x:Uid="GameInstructionsPage_PlayButton"
                         Height="50"
                         Margin="10,10,10,20"
                         HorizontalAlignment="Center"
@@ -246,7 +244,6 @@
                     <!--  Error text  -->
                     <TextBlock
                         x:Name="GameInstructionsPage_ErrorText"
-                        x:Uid="GameInstructionsPage_ErrorText"
                         Margin="5"
                         FontWeight="SemiBold"
                         Foreground="Crimson"

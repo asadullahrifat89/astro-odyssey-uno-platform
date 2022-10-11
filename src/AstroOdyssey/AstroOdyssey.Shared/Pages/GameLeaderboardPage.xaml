@@ -119,7 +119,6 @@
                     <!--  Tagline  -->
                     <TextBlock
                         x:Name="GameLeaderboardPage_Tagline"
-                        x:Uid="GameLeaderboardPage_Tagline"
                         Margin="5"
                         FontSize="35"
                         FontWeight="Bold"
@@ -222,7 +221,6 @@
                     <!--  Play now button  -->
                     <Button
                         x:Name="GameLeaderboardPage_PlayNowButton"
-                        x:Uid="GameLeaderboardPage_PlayNowButton"
                         Width="180"
                         Height="50"
                         Margin="30,10,30,15"
@@ -234,7 +232,6 @@
                     <!--  Error text  -->
                     <TextBlock
                         x:Name="GameLeaderboardPage_ErrorText"
-                        x:Uid="GameLeaderboardPage_ErrorText"
                         Margin="5"
                         FontWeight="SemiBold"
                         Foreground="Crimson"
