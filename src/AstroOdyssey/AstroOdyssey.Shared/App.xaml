@@ -43,6 +43,11 @@
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
             </Style>
+
+            <Style BasedOn="{StaticResource DefaultHyperlinkButtonStyle}" TargetType="HyperlinkButton">
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="IsFocusEngagementEnabled" Value="False" />
+            </Style>
             <!--#endregion-->
 
             <!--#region Input Fields-->
