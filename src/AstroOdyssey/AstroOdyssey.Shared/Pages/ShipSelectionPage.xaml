@@ -61,7 +61,6 @@
                 <!--  Tagline  -->
                 <TextBlock
                     x:Name="ShipSelectionPage_Tagline"
-                    x:Uid="ShipSelectionPage_Tagline"
                     Margin="0,20,0,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -92,7 +91,6 @@
                 <!--  Message  -->
                 <TextBlock
                     x:Name="ShipSelectionPage_ControlInstructions"
-                    x:Uid="ShipSelectionPage_ControlInstructions"
                     Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -104,12 +102,11 @@
                 <!--  Choose button  -->
                 <Button
                     x:Name="ShipSelectionPage_ChooseButton"
-                    x:Uid="ShipSelectionPage_ChooseButton"
                     Height="50"
                     Margin="30,10,30,15"
                     HorizontalAlignment="Stretch"
                     Click="ChooseButton_Click"
-                    Content="SELECT" />
+                    Content="Select" />
             </StackPanel>
 
         </Border>

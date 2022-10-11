@@ -22,7 +22,6 @@
             Orientation="Horizontal">
             <Button
                 x:Name="GameStartPage_EnglishButton"
-                x:Uid="GameStartPage_EnglishButton"
                 Margin="2"
                 Click="LanguageButton_Click"
                 Content="English"
@@ -30,7 +29,6 @@
                 Tag="en" />
             <Button
                 x:Name="GameStartPage_BanglaButton"
-                x:Uid="GameStartPage_BanglaButton"
                 Margin="2"
                 Click="LanguageButton_Click"
                 Content="Bangla"
@@ -64,7 +62,6 @@
                 <!--  Tag line  -->
                 <TextBlock
                     x:Name="GameStartPage_Tagline"
-                    x:Uid="GameStartPage_Tagline"
                     Margin="10,0,10,10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -76,19 +73,17 @@
                 <!--  Start game button  -->
                 <Button
                     x:Name="GameStartPage_PlayButton"
-                    x:Uid="GameStartPage_PlayButton"
                     Height="50"
                     Margin="30,10,30,5"
                     HorizontalAlignment="Stretch"
                     Click="PlayButton_Click"
-                    Content="START GAME" />
+                    Content="Start Game" />
 
                 <StackPanel Margin="30,5,30,5">
 
                     <!--  Leaderboard button  -->
                     <Button
                         x:Name="GameOverPage_LeaderboardButton"
-                        x:Uid="GameOverPage_LeaderboardButton"
                         Height="50"
                         HorizontalAlignment="Stretch"
                         Click="GameOverPage_LeaderboardButton_Click"
@@ -98,7 +93,6 @@
                     <!--  Login Button  -->
                     <Button
                         x:Name="GameLoginPage_LoginButton"
-                        x:Uid="GameLoginPage_LoginButton"
                         Height="50"
                         HorizontalAlignment="Stretch"
                         Click="LoginButton_Click"
@@ -108,7 +102,6 @@
                     <!--  Logout Button  -->
                     <Button
                         x:Name="GameStartPage_LogoutButton"
-                        x:Uid="GameStartPage_LogoutButton"
                         Height="40"
                         HorizontalAlignment="Center"
                         Background="Transparent"
@@ -125,7 +118,6 @@
                 <!--  Register Button  -->
                 <Button
                     x:Name="GameLoginPage_RegisterButton"
-                    x:Uid="GameLoginPage_RegisterButton"
                     Height="40"
                     Margin="5,5,5,5"
                     HorizontalAlignment="Center"
@@ -141,7 +133,6 @@
                 <!--  Brand Tag line  -->
                 <HyperlinkButton
                     x:Name="GameStartPage_BrandProfileButton"
-                    x:Uid="GameStartPage_BrandProfileButton"
                     Margin="0,5,0,5"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
@@ -153,7 +144,6 @@
                 <!--  Error text  -->
                 <TextBlock
                     x:Name="GameStartPage_ErrorText"
-                    x:Uid="GameStartPage_ErrorText"
                     Margin="5"
                     FontWeight="SemiBold"
                     Foreground="Crimson"
@@ -251,7 +241,6 @@
         <!--  Asset credits  -->
         <HyperlinkButton
             x:Name="GameStartPage_AssetsCreditButton"
-            x:Uid="GameStartPage_AssetsCreditButton"
             Margin="10"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"

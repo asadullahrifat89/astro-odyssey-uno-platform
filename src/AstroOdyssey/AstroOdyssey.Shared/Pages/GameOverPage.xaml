@@ -54,7 +54,6 @@
                     <!--  Login button  -->
                     <Button
                         x:Name="GameLoginPage_LoginButton"
-                        x:Uid="GameLoginPage_LoginButton"
                         Height="50"
                         Margin="10,0,10,5"
                         HorizontalAlignment="Stretch"
@@ -89,7 +88,6 @@
                     <!--  Tagline  -->
                     <TextBlock
                         x:Name="GameOverPage_Tagline"
-                        x:Uid="GameOverPage_Tagline"
                         FontSize="35"
                         FontWeight="Bold"
                         Text="GAME OVER"
@@ -214,7 +212,6 @@
                         <!--  Play again button  -->
                         <Button
                             x:Name="GameOverPage_PlayAgainButton"
-                            x:Uid="GameOverPage_PlayAgainButton"
                             Height="50"
                             Margin="0,5"
                             HorizontalAlignment="Stretch"
@@ -225,7 +222,6 @@
                         <!--  Leaderboard button  -->
                         <Button
                             x:Name="GameOverPage_LeaderboardButton"
-                            x:Uid="GameOverPage_LeaderboardButton"
                             Height="50"
                             Margin="0,5"
                             HorizontalAlignment="Stretch"
@@ -238,7 +234,6 @@
                     <!--  Error text  -->
                     <TextBlock
                         x:Name="GameOverPage_ErrorText"
-                        x:Uid="GameOverPage_ErrorText"
                         Margin="5"
                         FontWeight="SemiBold"
                         Foreground="Crimson"

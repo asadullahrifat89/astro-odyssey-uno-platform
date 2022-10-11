@@ -45,37 +45,28 @@
                 <!--  Fullname  -->
                 <TextBox
                     x:Name="GameSignupPage_UserFullNameBox"
-                    x:Uid="GameSignupPage_UserFullNameBox"
                     Margin="5"
-                   
-                   
                     Header="Enter your full name"
                     TextChanged="UserFullNameBox_TextChanged" />
 
                 <!--  Email  -->
                 <TextBox
                     x:Name="GameSignupPage_UserEmailBox"
-                    x:Uid="GameSignupPage_UserEmailBox"
                     Margin="5"
-                  
                     Header="Enter email"
                     TextChanged="UserEmailBox_TextChanged" />
 
                 <!--  Username  -->
                 <TextBox
                     x:Name="GameSignupPage_UserNameBox"
-                    x:Uid="GameSignupPage_UserNameBox"
                     Margin="5"
-                   
                     Header="Set a username"
                     TextChanged="UserNameBox_TextChanged" />
 
                 <!--  Password  -->
                 <PasswordBox
                     x:Name="GameSignupPage_PasswordBox"
-                    x:Uid="GameSignupPage_PasswordBox"
                     Margin="5"
-                   
                     Header="Set a password"
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="PasswordBox_TextChanged" />
@@ -83,9 +74,7 @@
                 <!--  Confirm password  -->
                 <PasswordBox
                     x:Name="GameSignupPage_ConfirmPasswordBox"
-                    x:Uid="GameSignupPage_ConfirmPasswordBox"
                     Margin="5"
-                  
                     Header="Confirm password"
                     KeyDown="PasswordBox_KeyDown"
                     TextChanged="ConfirmPasswordBox_TextChanged" />
@@ -93,7 +82,6 @@
                 <!--  I agree  -->
                 <CheckBox
                     x:Name="GameSignupPage_ConfirmCheckBox"
-                    x:Uid="GameSignupPage_ConfirmCheckBox"
                     Margin="5"
                     Checked="GameSignupPage_ConfirmCheckBox_Checked"
                     Content="Yes, I agree to the conditions of participation."
@@ -103,7 +91,6 @@
                 <!--  Signup button  -->
                 <Button
                     x:Name="GameSignupPage_SignupButton"
-                    x:Uid="GameSignupPage_SignupButton"
                     Height="50"
                     Margin="30,15,30,5"
                     HorizontalAlignment="Stretch"
@@ -114,7 +101,6 @@
                 <!--  Login Button  -->
                 <Button
                     x:Name="GameSignupPage_LoginButton"
-                    x:Uid="GameSignupPage_LoginButton"
                     Height="40"
                     Margin="5,0,5,5"
                     HorizontalAlignment="Center"
@@ -129,7 +115,6 @@
                 <!--  Error text  -->
                 <TextBlock
                     x:Name="GameSignupPage_ErrorText"
-                    x:Uid="GameSignupPage_ErrorText"
                     Margin="5"
                     FontWeight="SemiBold"
                     Foreground="Crimson"
