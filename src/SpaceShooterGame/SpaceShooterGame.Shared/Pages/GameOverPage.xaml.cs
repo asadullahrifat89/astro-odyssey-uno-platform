@@ -11,7 +11,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IGameApiHelper _gameApiHelper;
+        private readonly IBackendService _backendService;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
         private readonly ICacheHelper _cacheHelper;
@@ -29,7 +29,7 @@ namespace SpaceShooterGame
             InitializeComponent();
             Loaded += GameOverPage_Loaded;
 
-            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
             _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
             _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
@@ -138,7 +138,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> SubmitScore()
         {
-            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
+            ServiceResponse response = await _backendService.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {

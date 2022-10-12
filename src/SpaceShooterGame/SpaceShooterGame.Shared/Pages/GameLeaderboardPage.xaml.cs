@@ -11,7 +11,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IGameApiHelper _gameApiHelper;
+        private readonly IBackendService _backendService;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
 
@@ -28,7 +28,7 @@ namespace SpaceShooterGame
             this.InitializeComponent();
             Loaded += GameLeaderboardPage_Loaded;
 
-            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
             _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
 
@@ -115,7 +115,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> GetGameProfile()
         {
-            var recordResponse = await _gameApiHelper.GetGameProfile();
+            var recordResponse = await _backendService.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
             {
@@ -145,7 +145,7 @@ namespace SpaceShooterGame
             GameProfiles.Clear();
             SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
-            var recordsResponse = await _gameApiHelper.GetGameProfiles(pageIndex: 0, pageSize: 10);
+            var recordsResponse = await _backendService.GetGameProfiles(pageIndex: 0, pageSize: 10);
 
             if (!recordsResponse.IsSuccess)
             {
@@ -196,7 +196,7 @@ namespace SpaceShooterGame
             GameScores.Clear();
             SetListViewMessage(_localizationHelper.GetLocalizedResource("LOADING_DATA"));
 
-            var recordsResponse = await _gameApiHelper.GetGameScores(pageIndex: 0, pageSize: 10);
+            var recordsResponse = await _backendService.GetGameScores(pageIndex: 0, pageSize: 10);
 
             if (!recordsResponse.IsSuccess)
             {

@@ -12,7 +12,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IGameApiHelper _gameApiHelper;
+        private readonly IBackendService _backendService;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
         private readonly ICacheHelper _cacheHelper;
@@ -30,7 +30,7 @@ namespace SpaceShooterGame
             InitializeComponent();
             Loaded += GameLoginPage_Loaded;
 
-            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
             _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
             _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
@@ -133,7 +133,7 @@ namespace SpaceShooterGame
         private async Task<bool> Authenticate()
         {
             // authenticate
-            ServiceResponse response = await _gameApiHelper.Authenticate(
+            ServiceResponse response = await _backendService.Authenticate(
                 userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
@@ -150,7 +150,7 @@ namespace SpaceShooterGame
             }
 
             // store auth token
-            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
             _cacheHelper.SetCachedPlayerCredentials(
@@ -163,7 +163,7 @@ namespace SpaceShooterGame
         private async Task<bool> GetGameProfile()
         {
             // get game profile
-            var recordResponse = await _gameApiHelper.GetGameProfile();
+            var recordResponse = await _backendService.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
             {
@@ -186,7 +186,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> SubmitScore()
         {
-            ServiceResponse response = await _gameApiHelper.SubmitGameScore(App.PlayerScore.Score);
+            ServiceResponse response = await _backendService.SubmitGameScore(App.PlayerScore.Score);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -205,7 +205,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> GenerateSession()
         {
-            ServiceResponse response = await _gameApiHelper.GenerateSession(
+            ServiceResponse response = await _backendService.GenerateSession(
                 gameId: Constants.GAME_ID,
                 userId: App.GameProfile.User.UserId);
 
@@ -222,7 +222,7 @@ namespace SpaceShooterGame
             }
 
             // store session
-            var session = _gameApiHelper.ParseResult<Session>(response.Result);
+            var session = _backendService.ParseResult<Session>(response.Result);
             App.Session = session;
 
             if (_cacheHelper.IsCookieAccepted())

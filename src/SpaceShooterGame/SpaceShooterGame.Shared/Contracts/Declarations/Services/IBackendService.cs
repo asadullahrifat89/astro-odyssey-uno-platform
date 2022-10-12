@@ -2,7 +2,7 @@
 
 namespace SpaceShooterGame
 {
-    public interface IGameApiHelper
+    public interface IBackendService
     {
         T ParseResult<T>(object obj);
 

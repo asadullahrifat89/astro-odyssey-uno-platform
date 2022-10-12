@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SpaceShooterGame
 {
-    public interface IHttpRequestHelper
+    public interface IHttpRequestService
     {
         Task<(TResponse SuccessResponse, TErrorResponse ErrorResponse, HttpStatusCode StatusCode)> SendRequest<TResponse, TErrorResponse>(
             string baseUrl,
