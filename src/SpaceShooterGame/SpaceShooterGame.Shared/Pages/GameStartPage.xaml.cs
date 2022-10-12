@@ -11,7 +11,7 @@ namespace SpaceShooterGame
         #region Fields
 
         private readonly IAudioHelper _audioHelper;
-        private readonly IGameApiHelper _gameApiHelper;
+        private readonly IBackendService _backendService;
         private readonly ILocalizationHelper _localizationHelper;
         private readonly ICacheHelper _cacheHelper;
         private readonly IAssetHelper _assetHelper;
@@ -30,7 +30,7 @@ namespace SpaceShooterGame
             Loaded += StartPage_Loaded;
 
             _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
-            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
             _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
             _assetHelper = (Application.Current as App).Host.Services.GetRequiredService<IAssetHelper>();
@@ -264,13 +264,13 @@ namespace SpaceShooterGame
 
         private async Task<bool> ValidateSession(Session session)
         {
-            ServiceResponse response = await _gameApiHelper.ValidateSession(Constants.GAME_ID, session.SessionId);
+            ServiceResponse response = await _backendService.ValidateSession(Constants.GAME_ID, session.SessionId);
 
             if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
                 return false;
 
             // store auth token
-            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
             return true;
@@ -278,7 +278,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> GetGameProfile()
         {
-            var recordResponse = await _gameApiHelper.GetGameProfile();
+            var recordResponse = await _backendService.GetGameProfile();
 
             if (!recordResponse.IsSuccess)
             {

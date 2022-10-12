@@ -50,10 +50,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameObjectTemplates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\CacheHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IAudioHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IGameApiHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Helpers\IHttpRequestHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\GameApiHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\HttpRequestHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\IBackendService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Declarations\Services\IHttpRequestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\BackendService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Services\HttpRequestService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contracts\Implementations\Helpers\PaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Elements\InGameMessage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Global\PlayerCredentials.cs" />

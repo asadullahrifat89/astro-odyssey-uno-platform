@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace SpaceShooterGame
 {
-    public class HttpRequestHelper : IHttpRequestHelper
+    public class HttpRequestService : IHttpRequestService
     {
         private readonly IHttpService _httpService;
 
-        public HttpRequestHelper(IHttpService httpService)
+        public HttpRequestService(IHttpService httpService)
         {
             _httpService = httpService;
         }

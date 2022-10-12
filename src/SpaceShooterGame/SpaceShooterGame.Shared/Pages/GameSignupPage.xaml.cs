@@ -12,7 +12,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IGameApiHelper _gameApiHelper;
+        private readonly IBackendService _backendService;
         private readonly IAudioHelper _audioHelper;
         private readonly ILocalizationHelper _localizationHelper;
         private readonly ICacheHelper _cacheHelper;
@@ -30,7 +30,7 @@ namespace SpaceShooterGame
             this.InitializeComponent();
             Loaded += GameSignupPage_Loaded;
 
-            _gameApiHelper = (Application.Current as App).Host.Services.GetRequiredService<IGameApiHelper>();
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
             _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
             _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
@@ -136,7 +136,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> Signup()
         {
-            ServiceResponse response = await _gameApiHelper.Signup(
+            ServiceResponse response = await _backendService.Signup(
                 fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
                 userName: GameSignupPage_UserNameBox.Text.Trim(),
                 email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
@@ -155,7 +155,7 @@ namespace SpaceShooterGame
             }
 
             // store game profile
-            var gameProfile = _gameApiHelper.ParseResult<GameProfile>(response.Result);
+            var gameProfile = _backendService.ParseResult<GameProfile>(response.Result);
             App.GameProfile = gameProfile;
 
             return true;
@@ -164,7 +164,7 @@ namespace SpaceShooterGame
         private async Task<bool> Authenticate()
         {
             // authenticate
-            ServiceResponse response = await _gameApiHelper.Authenticate(
+            ServiceResponse response = await _backendService.Authenticate(
                 userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
                 password: GameSignupPage_PasswordBox.Text.Trim());
 
@@ -181,7 +181,7 @@ namespace SpaceShooterGame
             }
 
             // store auth token
-            var authToken = _gameApiHelper.ParseResult<AuthToken>(response.Result);
+            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
             App.AuthToken = authToken;
 
             _cacheHelper.SetCachedPlayerCredentials(

@@ -74,6 +74,8 @@ namespace SpaceShooterGame
            .ConfigureServices(serviceCollection =>
            {
                serviceCollection.AddHttpService(lifeTime: 300, retryCount: 3, retryWait: 1);
+               serviceCollection.AddSingleton<IHttpRequestService, HttpRequestService>();
+               serviceCollection.AddSingleton<IBackendService, BackendService>();
                serviceCollection.AddFactories();
                serviceCollection.AddHelpers();
            })
