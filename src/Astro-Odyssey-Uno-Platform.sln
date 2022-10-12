@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AstroOdyssey.Shared", "AstroOdyssey\AstroOdyssey.Shared\AstroOdyssey.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SpaceShooterGame.Shared", "SpaceShooterGame\SpaceShooterGame.Shared\SpaceShooterGame.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroOdyssey.Wasm", "AstroOdyssey\AstroOdyssey.Wasm\AstroOdyssey.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceShooterGame.Wasm", "SpaceShooterGame\SpaceShooterGame.Wasm\SpaceShooterGame.Wasm.csproj", "{AB4C7926-73BC-4ABA-A3C3-1704069CBBAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{6F90D4A1-76C8-4892-B84F-A2E12483515C}"
 EndProject
@@ -30,7 +30,7 @@ Global
 		SolutionGuid = {633360BA-A180-42B0-8CAD-A99A4CB7FF2A}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		AstroOdyssey\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
-		AstroOdyssey\AstroOdyssey.Shared\AstroOdyssey.Shared.projitems*{ab4c7926-73bc-4aba-a3c3-1704069cbbac}*SharedItemsImports = 5
+		SpaceShooterGame\SpaceShooterGame.Shared\SpaceShooterGame.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		SpaceShooterGame\SpaceShooterGame.Shared\SpaceShooterGame.Shared.projitems*{ab4c7926-73bc-4aba-a3c3-1704069cbbac}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

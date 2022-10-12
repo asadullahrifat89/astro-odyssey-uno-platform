@@ -1,0 +1,382 @@
+﻿<Page
+    x:Class="SpaceShooterGame.GamePlayPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SpaceShooterGame"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="using:System"
+    Background="#070a25"
+    
+    mc:Ignorable="d">
+
+    <Grid x:Name="RootGrid">
+
+        <!--  Stars  -->
+        <GameEnvironment x:Name="StarView" Background="Transparent" />
+
+        <!--  Planets  -->
+        <GameEnvironment x:Name="PlanetView" Background="Transparent" />
+
+        <!--  Gradient  -->
+        <Border
+            x:Name="GradientBorder"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Visibility="{x:Bind Path=PlayerHealthBarPanel.Visibility, Mode=OneWay}">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.15" StartPoint="1,0.5" EndPoint="0,0.5">
+                    <GradientStop Offset="0.00" Color="SkyBlue" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <!--  Rage gradient  -->
+        <Border
+            x:Name="RageGradientBorder"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Visibility="Collapsed">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.25" StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Offset="0.00" Color="Red" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <!--  In game message content  -->
+        <StackPanel
+            x:Name="InGameContentPanel"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+
+        <!--  Player, enemies, meteors, healths, and projectiles  -->
+        <GameEnvironment x:Name="GameView" Background="Transparent" />
+
+        <!--  Score, level bar, boss health  -->
+        <StackPanel
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Orientation="Vertical">
+
+            <!--  Level + score text, level bar  -->
+            <StackPanel
+                x:Name="ScoreBarPanel"
+                Margin="5"
+                HorizontalAlignment="Right"
+                Orientation="Vertical"
+                Visibility="Collapsed">
+
+                <!--  Level + score text  -->
+                <Border
+                    HorizontalAlignment="Right"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    CornerRadius="50,0,0,50">
+
+                    <StackPanel Orientation="Horizontal">
+                        <!--  Game level  -->
+                        <TextBlock
+                            x:Name="GameLevelText"
+                            Margin="15,3,0,3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            TextAlignment="Left"
+                            TextWrapping="WrapWholeWords" />
+                        <!--  Score  -->
+                        <TextBlock
+                            x:Name="ScoreBarCount"
+                            Margin="15,3,10,3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            TextAlignment="Right"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                </Border>
+
+                <!--  Level bar  -->
+                <ProgressBar
+                    x:Name="ScoreBar"
+                    Width="200"
+                    Height="5"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Foreground="Goldenrod"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="100" />
+
+            </StackPanel>
+
+            <!--  Boss health bar  -->
+            <StackPanel
+                x:Name="BossHealthBarPanel"
+                Margin="5"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal"
+                Visibility="Collapsed">
+
+                <Border
+                    HorizontalAlignment="Right"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    CornerRadius="50,0,0,50">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock
+                            x:Name="BossHealthBarText"
+                            Margin="15,3,5,3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="💀"
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+
+                        <ProgressBar
+                            x:Name="BossHealthBar"
+                            Width="100"
+                            Height="5"
+                            Margin="0,3,5,3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="Purple"
+                            Maximum="100"
+                            Minimum="0"
+                            Value="100" />
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+            <!--  Score multiplier  -->
+            <StackPanel
+                x:Name="ScoreMultiplierPanel"
+                Margin="5"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Visibility="Collapsed">
+
+                <!--  Collectible icon + count  -->
+                <Border
+                    HorizontalAlignment="Right"
+                    Background="Goldenrod"
+                    BorderBrush="White"
+                    BorderThickness="3"
+                    CornerRadius="50,0,0,50">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <!--  Collectible image  -->
+                        <TextBlock
+                            Margin="15,3,0,3"
+                            FontSize="20"
+                            Text="🎸"
+                            TextAlignment="Left" />
+
+                        <!--  Collectible count  -->
+                        <TextBlock
+                            x:Name="ScoreMultiplierCountText"
+                            Margin="0,3,10,3"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            TextAlignment="Right" />
+
+                    </StackPanel>
+
+                </Border>
+
+                <!--  Multiplier bar  -->
+                <ProgressBar
+                    x:Name="ScoreMultiplierBar"
+                    Width="45"
+                    Height="5"
+                    Margin="5,5,0,5"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Foreground="Goldenrod"
+                    Maximum="8"
+                    Minimum="0"
+                    Value="0" />
+
+            </StackPanel>
+
+            <!--  Fps, frame time, object counts  -->
+            <StackPanel
+                x:Name="GameAnalyticsPanel"
+                HorizontalAlignment="Right"
+                Visibility="Collapsed">
+
+                <!--  This shows fps  -->
+                <TextBlock
+                    x:Name="FPSText"
+                    Margin="5"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    TextAlignment="Right"
+                    TextWrapping="WrapWholeWords" />
+
+                <!--  This shows current objects count in game canvas  -->
+                <TextBlock
+                    x:Name="ObjectsCountText"
+                    Margin="5"
+                    FontWeight="SemiBold"
+                    Foreground="White"
+                    TextAlignment="Right"
+                    TextWrapping="WrapWholeWords" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <!--  Player health, rage, power bar  -->
+        <Border
+            x:Name="PlayerHealthBarPanel"
+            Margin="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Background="Goldenrod"
+            BorderBrush="White"
+            BorderThickness="3"
+            CornerRadius="0,50,50,0"
+            Visibility="Collapsed">
+            <StackPanel
+                Margin="10,3"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+
+                <!--  Health  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="❤️"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <!--  Health bar  -->
+                <ProgressBar
+                    x:Name="PlayerHealthBar"
+                    Width="50"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="Crimson"
+                    Maximum="100"
+                    Minimum="0"
+                    Value="100" />
+
+                <!--  Rage  -->
+                <TextBlock
+                    x:Name="PlayerRageIcon"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="😡"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords" />
+
+                <!--  Rage bar  -->
+                <ProgressBar
+                    x:Name="PlayerRageBar"
+                    Width="50"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="Red"
+                    Minimum="0"
+                    Value="0" />
+
+                <!--  Power up  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Text="⚡"
+                    TextAlignment="Center"
+                    TextWrapping="WrapWholeWords"
+                    Visibility="{x:Bind Path=PlayerPowerBar.Visibility, Mode=OneWay}" />
+
+                <!--  Power up bar  -->
+                <ProgressBar
+                    x:Name="PlayerPowerBar"
+                    Width="50"
+                    Height="5"
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Foreground="OrangeRed"
+                    Minimum="0"
+                    Visibility="Collapsed" />
+
+            </StackPanel>
+        </Border>
+
+        <!--  Pointer + keyboard input capture  -->
+        <Border
+            x:Name="InputView"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Transparent"
+            KeyDown="InputView_KeyDown"
+            KeyUp="InputView_KeyUp"
+            PointerMoved="InputView_PointerMoved"
+            PointerPressed="InputView_PointerPressed"
+            PointerReleased="InputView_PointerReleased" />
+
+        <!--  Pause and quit game  -->
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+
+            <!--  Pause game  -->
+            <Button
+                x:Name="PauseGameButton"
+                Width="50"
+                Height="50"
+                Margin="5"
+                Click="PauseGameButton_Click"
+                CornerRadius="100"
+                
+                
+                Style="{StaticResource DefaultButton}">
+                <SymbolIcon Symbol="Pause" />
+            </Button>
+
+            <!--  Quits game  -->
+            <Button
+                x:Name="QuitGameButton"
+                Width="50"
+                Height="50"
+                Margin="5"
+                Click="QuitGameButton_Click"
+                CornerRadius="100"
+                
+                
+                Style="{StaticResource DefaultButton}">
+                <SymbolIcon Symbol="Undo" />
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+
+</Page>
