@@ -1,0 +1,105 @@
+﻿using System;
+
+namespace SpaceShooterGame
+{
+    public class PowerUpFactory : IPowerUpFactory
+    {
+        #region Fields
+
+        private GameEnvironment _gameEnvironment;
+        private readonly Random _random = new Random();
+
+        private int _powerUpSpawnCounter = 1500;
+        private int _powerUpSpawnAfter = 1500;
+        private double _powerUpSpeed = 2;
+
+        #endregion
+
+        #region Ctor
+
+        public PowerUpFactory()
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
+        #region Public
+
+        public void Reset()
+        {
+            _powerUpSpawnCounter = 1500;
+            _powerUpSpawnAfter = 1500;
+            _powerUpSpeed = 2;
+        }
+
+        /// <summary>
+        /// Sets the game environment.
+        /// </summary>
+        /// <param name="gameEnvironment"></param>
+        public void SetGameEnvironment(GameEnvironment gameEnvironment)
+        {
+            _gameEnvironment = gameEnvironment;
+        }
+
+        /// <summary>
+        /// Spawns a PowerUp.
+        /// </summary>
+        public void SpawnPowerUp()
+        {
+            // each frame progress decreases this counter
+            _powerUpSpawnCounter -= 1;
+
+            // when counter reaches zero, create a PowerUp
+            if (_powerUpSpawnCounter < 0)
+            {
+                GeneratePowerUp();
+                _powerUpSpawnCounter = _powerUpSpawnAfter;
+            }
+        }
+
+        /// <summary>
+        /// Generates a random PowerUp.
+        /// </summary>
+        public void GeneratePowerUp()
+        {
+            var powerUp = new PowerUp();
+
+            powerUp.SetAttributes(speed: _powerUpSpeed + _random.NextDouble(), scale: _gameEnvironment.GetGameObjectScale());
+            powerUp.AddToGameEnvironment(top: 0 - powerUp.Height, left: _random.Next(10, (int)_gameEnvironment.Width - 100), gameEnvironment: _gameEnvironment);
+        }
+
+        /// <summary>
+        /// Updates an powerUp. Moves the powerUp inside game environment and removes from it when applicable.
+        /// </summary>
+        /// <param name="powerUp"></param>
+        /// <param name="destroyed"></param>
+        public bool UpdatePowerUp(PowerUp powerUp)
+        {
+            bool destroyed = false;
+
+            // move PowerUp down
+            powerUp.MoveY();
+
+            // if powerUp or meteor object has gone beyond game view
+            destroyed = _gameEnvironment.CheckAndAddDestroyableGameObject(powerUp);
+
+            return destroyed;
+        }
+
+        /// <summary>
+        /// Levels up power ups.
+        /// </summary>
+        public void LevelUp()
+        {
+            _powerUpSpawnAfter -= 50;
+            var scale = _gameEnvironment.GetGameObjectScale();
+            _powerUpSpeed += (1 * scale);
+        }
+
+        #endregion
+
+        #endregion
+    }
+}

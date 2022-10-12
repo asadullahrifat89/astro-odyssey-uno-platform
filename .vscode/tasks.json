@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj",
+                "${workspaceFolder}/src/SpaceShooterGame/SpaceShooterGame.Wasm/SpaceShooterGame.Wasm.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj",
+                "${workspaceFolder}/src/SpaceShooterGame/SpaceShooterGame.Wasm/SpaceShooterGame.Wasm.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/src/AstroOdyssey/AstroOdyssey.Wasm/AstroOdyssey.Wasm.csproj"
+                "${workspaceFolder}/src/SpaceShooterGame/SpaceShooterGame.Wasm/SpaceShooterGame.Wasm.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
