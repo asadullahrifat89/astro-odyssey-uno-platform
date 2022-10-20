@@ -10,15 +10,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IAudioHelper _audioHelper;
         private readonly IBackendService _backendService;
-        private readonly ILocalizationHelper _localizationHelper;
-        private readonly ICacheHelper _cacheHelper;
-        private readonly IAssetHelper _assetHelper;
-
-        private readonly ProgressBar _progressBar;
-        private readonly TextBlock _errorContainer;
-        private readonly Button[] _actionButtons;
 
         #endregion
 
@@ -27,17 +19,10 @@ namespace SpaceShooterGame
         public GameStartPage()
         {
             InitializeComponent();
-            Loaded += StartPage_Loaded;
 
-            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
             _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
-            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
-            _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
-            _assetHelper = (Application.Current as App).Host.Services.GetRequiredService<IAssetHelper>();
 
-            _progressBar = GameStartPage_ProgressBar;
-            _errorContainer = GameStartPage_ErrorText;
-            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton, GameStartPage_LogoutButton, GameStartPage_PlayButton };
+            Loaded += StartPage_Loaded;
         }
 
         #endregion
@@ -46,124 +31,90 @@ namespace SpaceShooterGame
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            RunProgressBar();
+            LocalizationHelper.CheckLocalizationCache();
+            await LocalizationHelper.LoadLocalizationKeys(() =>
+            {
+                this.SetLocalization();
+            });
 
-            _audioHelper.StopSound();
-            _audioHelper.PlaySound(SoundType.GAME_INTRO);
+            //await this.PlayLoadedTransition();
 
-            CheckLocalizationCache();
+            AudioHelper.LoadGameSounds(() =>
+            {
+                AudioHelper.StopSound();
+                AudioHelper.PlaySound(SoundType.INTRO);
+                AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock);
+            });
 
-            await _localizationHelper.LoadLocalizationKeys();
-
-            SetLocalization();
-
-            await this.PlayLoadedTransition();
-
-            await CheckLoginSession();
-
-            StopProgressBar();
-
-            await Task.Delay(500);
-
-            _assetHelper.PreloadAssets(progressBar: _progressBar, messageBlock: _errorContainer);
+            await CheckUserSession();
         }
 
-        private async void PlayButton_Click(object sender, RoutedEventArgs e)
+        private void HowToPlayButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(ShipSelectionPage));
-
-            await Task.Delay(1000);
-
-            App.EnterFullScreen(true);
+            NavigateToPage(typeof(GameInstructionsPage));
         }
 
-        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameSignupPage));
-
-            await Task.Delay(1000);
-
-            App.EnterFullScreen(true);
+            NavigateToPage(typeof(ShipSelectionPage));
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameLoginPage));
-
-            await Task.Delay(1000);
-
-            App.EnterFullScreen(true);
+            NavigateToPage(typeof(GameSignupPage));
         }
 
-        private async void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
+            NavigateToPage(typeof(GameLoginPage));
+        }
 
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameLeaderboardPage));
-
-            await Task.Delay(1000);
-
-            App.EnterFullScreen(true);
+        private void GameOverPage_LeaderboardButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
             PerformLogout();
-
-            GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
-            GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
-            GameLoginPage_LoginButton.Visibility = Visibility.Visible;
-            GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
         }
 
         private void PerformLogout()
         {
-            _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
-
-            App.AuthToken = null;
-            App.GameProfile = null;
-            App.PlayerScore = null;
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            SessionHelper.RemoveCachedSession();
+            AuthTokenHelper.AuthToken = null;
+            GameProfileHelper.GameProfile = null;
+            PlayerScoreHelper.PlayerScore = null;
             App.Ship = null;
+
+            SetLoginContext();
         }
 
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as Button)?.Tag is string tag)
             {
-                _audioHelper.PlaySound(SoundType.MENU_SELECT);
+                AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
-                App.CurrentCulture = tag;
-                SetLocalization();
-                _cacheHelper.SetCachedValue(Constants.CACHE_LANGUAGE_KEY, tag);
+                LocalizationHelper.CurrentCulture = tag;
+
+                if (CookieHelper.IsCookieAccepted())
+                    LocalizationHelper.SaveLocalizationCache(tag);
+
+                this.SetLocalization();
             }
         }
 
         private void GameStartPage_CookieAcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            _cacheHelper.SetCookieAccepted();
+            CookieHelper.SetCookieAccepted();
             CookieToast.Visibility = Visibility.Collapsed;
-
         }
 
         private void GameStartPage_CookieDeclineButton_Click(object sender, RoutedEventArgs e)
         {
-            _cacheHelper.RemoveCachedValue(Constants.COOKIE_KEY);
+            CookieHelper.SetCookieDeclined();
             CookieToast.Visibility = Visibility.Collapsed;
         }
 
@@ -171,91 +122,81 @@ namespace SpaceShooterGame
 
         #region Methods
 
-        private void CheckLocalizationCache()
+        private void NavigateToPage(Type pageType)
         {
-            if (_cacheHelper.GetCachedValue(Constants.CACHE_LANGUAGE_KEY) is string language)
-                App.CurrentCulture = language;
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+            App.EnterFullScreen(true);
         }
 
-        private async Task CheckLoginSession()
+        private async Task CheckUserSession()
         {
-            if (App.Session is null)
-                App.Session = _cacheHelper.GetCachedSession();
+            SessionHelper.TryLoadSession();
 
-            if (App.HasUserLoggedIn)
+            if (GameProfileHelper.HasUserLoggedIn())
             {
-                if (_cacheHelper.HasSessionExpired())
+                if (SessionHelper.HasSessionExpired())
                 {
-                    _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
-                    App.Session = null;
-
-                    MakeLoginControlsVisible();
+                    SessionHelper.RemoveCachedSession();
+                    SetLoginContext();
                 }
                 else
                 {
-                    MakeLogoutControlsVisible();
+                    SetLogoutContext();
                 }
             }
             else
             {
-                if (_cacheHelper.HasSessionExpired())
+                if (SessionHelper.HasSessionExpired())
                 {
-                    _cacheHelper.RemoveCachedValue(Constants.CACHE_SESSION_KEY);
-                    App.Session = null;
-
-                    MakeLoginControlsVisible();
-
-                    if (!_cacheHelper.IsCookieAccepted())
-                        MakeCookieToastVisible();
+                    SessionHelper.RemoveCachedSession();
+                    SetLoginContext();
+                    ShowCookieToast();
                 }
-                else // if a non expired session exists then validate it, get a new auth token, and get game profile
+                else
                 {
-                    if (_cacheHelper.GetCachedSession() is Session session && await ValidateSession(session) && await GetGameProfile())
+                    if (SessionHelper.GetCachedSession() is Session session
+                        && await ValidateSession(session)
+                        && await GetGameProfile())
                     {
-                        MakeLogoutControlsVisible();
-                        MakeWelcomeBackToastVisible();
+                        SetLogoutContext();
+                        ShowWelcomeBackToast();
                     }
                     else
                     {
-                        MakeLoginControlsVisible();
-
-                        if (!_cacheHelper.IsCookieAccepted())
-                            MakeCookieToastVisible();
+                        SetLoginContext();
+                        ShowCookieToast();
                     }
                 }
             }
         }
 
-        private async void MakeWelcomeBackToastVisible()
+        private async void ShowWelcomeBackToast()
         {
-            _audioHelper.PlaySound(SoundType.POWER_UP);
+            AudioHelper.PlaySound(SoundType.POWER_UP);
+            GameStartPage_UserName.Text = GameProfileHelper.GameProfile.User.UserName;
 
-            GameStartPage_UserName.Text = App.GameProfile.User.UserName;
-
-            await WelcomeBackToast.PlayLoadedTransition();
-
+            WelcomeBackToast.Opacity = 1;
             await Task.Delay(TimeSpan.FromSeconds(5));
-
-            await WelcomeBackToast.PlayUnLoadedTransition();
+            WelcomeBackToast.Opacity = 0;
         }
 
-        private void MakeCookieToastVisible()
+        private void ShowCookieToast()
         {
-            CookieToast.Visibility = Visibility.Visible;
+            if (!CookieHelper.IsCookieAccepted())
+                CookieToast.Visibility = Visibility.Visible;
         }
 
-        private void MakeLogoutControlsVisible()
+        private void SetLogoutContext()
         {
-            // make logout button visible
             GameStartPage_LogoutButton.Visibility = Visibility.Visible;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
             GameLoginPage_LoginButton.Visibility = Visibility.Collapsed;
             GameLoginPage_RegisterButton.Visibility = Visibility.Collapsed;
         }
 
-        private void MakeLoginControlsVisible()
+        private void SetLoginContext()
         {
-            // make login button visible
             GameStartPage_LogoutButton.Visibility = Visibility.Collapsed;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
@@ -264,74 +205,22 @@ namespace SpaceShooterGame
 
         private async Task<bool> ValidateSession(Session session)
         {
-            ServiceResponse response = await _backendService.ValidateSession(Constants.GAME_ID, session.SessionId);
-
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
-                return false;
-
-            // store auth token
-            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
-            App.AuthToken = authToken;
-
-            return true;
+            var (IsSuccess, _) = await _backendService.ValidateUserSession(session);
+            return IsSuccess;
         }
 
         private async Task<bool> GetGameProfile()
         {
-            var recordResponse = await _backendService.GetGameProfile();
+            (bool IsSuccess, string Message, _) = await _backendService.GetUserGameProfile();
 
-            if (!recordResponse.IsSuccess)
+            if (!IsSuccess)
             {
-                var error = recordResponse.Errors.Errors;
-                this.ShowError(
-                    progressBar: _progressBar,
-                    messageBlock: _errorContainer,
-                    message: string.Join("\n", error),
-                    actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
 
-            // store game profile
-            var gameProfile = recordResponse.Result;
-            App.GameProfile = gameProfile;
-
             return true;
-        }
-
-        private void RunProgressBar()
-        {
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-        }
-
-        private void StopProgressBar()
-        {
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
-        }
-
-        private void SetLocalization()
-        {
-            _localizationHelper.SetLocalizedResource(GameStartPage_EnglishButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_BanglaButton);
-
-            _localizationHelper.SetLocalizedResource(GameStartPage_Tagline);
-            _localizationHelper.SetLocalizedResource(GameStartPage_PlayButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_BrandProfileButton);
-            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_LogoutButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_WelcomeBackText);
-            _localizationHelper.SetLocalizedResource(GameOverPage_LeaderboardButton);
-
-            _localizationHelper.SetLocalizedResource(GameStartPage_CookieText);
-            _localizationHelper.SetLocalizedResource(GameStartPage_CookieDeclineButton);
-            _localizationHelper.SetLocalizedResource(GameStartPage_CookieAcceptButton);
         }
 
         #endregion

@@ -2,10 +2,9 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Page = Microsoft.UI.Xaml.Controls.Page;
+using Uno.Extensions;
 
 namespace SpaceShooterGame
 {
@@ -15,134 +14,91 @@ namespace SpaceShooterGame
 
         #region Public
 
-        public async static Task PlayLoadedTransition(this UIElement uiElement)
+        public static void SetLocalization(this Page page)
         {
-            if (uiElement is not null)
+            if (FindVisualChildren<UIElement>(page).Where(s => LocalizationHelper.HasLocalizationKey(s.Name)) is IEnumerable<UIElement> uiElements)
             {
-                var timeSpan = TimeSpan.FromMilliseconds(18);
-                uiElement.Opacity = 0;
-                var skipAnimation = 100;
-
-                while (skipAnimation > 0)
+                foreach (var uiElement in uiElements)
                 {
-                    skipAnimation--;
-                    uiElement.Opacity += 0.1d;
-                    await Task.Delay(timeSpan);
-
-                    if (uiElement.Opacity >= 1)
-                        break;
+                    LocalizationHelper.SetLocalizedResource(uiElement);
                 }
             }
         }
 
-        public async static Task PlayUnLoadedTransition(this UIElement uiElement)
+        public static void RunProgressBar(this Page page, string progressBarMessage = null)
         {
-            if (uiElement is not null)
+            if (FindChild<ProgressBar>(parent: page, childName: "ProgressBar") is ProgressBar progressBar)
             {
-                var timeSpan = TimeSpan.FromMilliseconds(18);
-                uiElement.Opacity = 1;
-                var skipAnimation = 100;
+                if (progressBar.Tag is bool flag && flag)
+                    return;
 
-                while (skipAnimation > 0)
-                {
-                    skipAnimation--;
-                    uiElement.Opacity -= 0.1d;
-                    await Task.Delay(timeSpan);
+                progressBar.Tag = true;
 
-                    if (uiElement.Opacity <= 0)
-                        break;
-                }
+                progressBar.IsIndeterminate = true;
+                progressBar.ShowError = false;
+                progressBar.ShowPaused = false;
+            }
+
+            if (FindChild<TextBlock>(parent: page, childName: "ProgressBarMessageBlock") is TextBlock messageBlock)
+            {
+                messageBlock.Foreground = new SolidColorBrush(Colors.White);
+                messageBlock.Text = "👍 " + progressBarMessage;
+                messageBlock.Visibility = progressBarMessage.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
+            }
+
+            if (FindVisualChildren<Button>(page).Where(s => (string)s.Tag == "ActionButton") is IEnumerable<Button> buttons)
+            {
+                DisableActionButtons(buttons);
             }
         }
 
-        public async static void AnimateChildElements(this StackPanel stackPanel)
+        public static void StopProgressBar(this Page page)
         {
-            foreach (var childElement in stackPanel.Children.OfType<StackPanel>())
+            if (FindChild<ProgressBar>(parent: page, childName: "ProgressBar") is ProgressBar progressBar)
             {
-                childElement.Opacity = 0;
+                progressBar.Tag = false;
+                progressBar.ShowError = false;
+                progressBar.ShowPaused = true;
             }
 
-            foreach (var childElement in stackPanel.Children.OfType<StackPanel>())
+            if (FindVisualChildren<Button>(page).Where(s => (string)s.Tag == "ActionButton") is IEnumerable<Button> buttons)
             {
-                childElement.Opacity = 1;
-                await Task.Delay(75);
+                EnableActionButtons(buttons);
             }
-
         }
 
-        public static void ShowError(
-            this Page page,
-            ProgressBar progressBar,
-            TextBlock messageBlock,
-            string message,
-            params Button[] actionButtons)
+        public static void ShowError(this Page page, string progressBarMessage = null)
         {
-            progressBar.Tag = false;
-            progressBar.ShowPaused = true;
-            progressBar.ShowError = true;
-
-            messageBlock.Foreground = App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush;
-            messageBlock.Text = "⚠️ " + message;
-            messageBlock.Visibility = Visibility.Visible;
-
-            foreach (var actionButton in actionButtons)
+            if (FindChild<ProgressBar>(parent: page, childName: "ProgressBar") is ProgressBar progressBar)
             {
-                EnableActionButton(actionButton);
+                progressBar.Tag = false;
+                progressBar.ShowPaused = true;
+                progressBar.ShowError = true;
+            }
+
+            if (FindChild<TextBlock>(parent: page, childName: "ProgressBarMessageBlock") is TextBlock messageBlock)
+            {
+                messageBlock.Foreground = App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush;
+                messageBlock.Text = "⚠️ " + progressBarMessage;
+                messageBlock.Visibility = progressBarMessage.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
+            }
+
+            if (FindVisualChildren<Button>(page).Where(s => (string)s.Tag == "ActionButton") is IEnumerable<Button> buttons)
+            {
+                EnableActionButtons(buttons);
             }
         }
 
         public static void SetProgressBarMessage(
             this Page page,
             string message,
-            bool isError,
-            TextBlock messageBlock)
+            bool isError)
         {
-            messageBlock.Foreground = isError ? App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush : App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
-            messageBlock.Text = (isError ? "⚠️ " : "👍 ") + message;
-            messageBlock.Visibility = Visibility.Visible;
-        }
-
-        public static void RunProgressBar(
-            this Page page,
-            ProgressBar progressBar,
-            TextBlock messageBlock,
-            string message = null,
-            params Button[] actionButtons)
-        {
-            if (progressBar.Tag is bool flag && flag)
-                return;
-
-            progressBar.Tag = true;
-
-            progressBar.IsIndeterminate = true;
-            progressBar.ShowError = false;
-            progressBar.ShowPaused = false;
-
-            messageBlock.Foreground = new SolidColorBrush(Colors.White);
-            messageBlock.Text = "👍 " + message;
-            messageBlock.Visibility = message.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
-
-            if (actionButtons.Any(x => x.IsEnabled))
+            if (FindChild<TextBlock>(parent: page, childName: "ProgressBarMessageBlock") is TextBlock messageBlock)
             {
-                foreach (var actionButton in actionButtons)
-                {
-                    DisableActionButton(actionButton);
-                }
-            }
-        }
-
-        public static void StopProgressBar(
-            this Page page,
-            ProgressBar progressBar,
-            params Button[] actionButtons)
-        {
-            progressBar.Tag = false;
-            progressBar.ShowError = false;
-            progressBar.ShowPaused = true;
-
-            foreach (var actionButton in actionButtons)
-            {
-                EnableActionButton(actionButton);
+                messageBlock.Foreground = isError ? App.Current.Resources["ProgressBarErrorColor"] as SolidColorBrush : App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
+                messageBlock.Text = (isError ? "⚠️ " : "👍 ") + message;
+                messageBlock.Visibility = Visibility.Visible;
             }
         }
 
@@ -150,14 +106,93 @@ namespace SpaceShooterGame
 
         #region Private
 
-        private static void EnableActionButton(Button button)
+        private static IEnumerable<T> FindVisualChildren<T>(DependencyObject parent) where T : DependencyObject
         {
-            button.IsEnabled = true;
+            if (parent is not null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                    if (child is not null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
 
-        private static void DisableActionButton(Button button)
+        private static T FindChild<T>(DependencyObject parent, string childName) where T : DependencyObject
         {
-            button.IsEnabled = false;
+            // Confirm parent and childName are valid.
+            if (parent is not null && !childName.IsNullOrBlank())
+            {
+                DependencyObject foundChild = null;
+
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+                    // If the child is not of the request child type child
+                    if (child is not T)
+                    {
+                        // recursively drill down the tree
+                        foundChild = FindChild<T>(child, childName);
+
+                        // If the child is found, break so we do not overwrite the found child. 
+                        if (foundChild != null)
+                        {
+                            break;
+                        }
+                    }
+                    else if (!childName.IsNullOrEmpty())
+                    {
+                        // If the child's name is set for search
+                        if (child is FrameworkElement frameworkElement && frameworkElement.Name == childName)
+                        {
+                            // if the child's name is of the request name
+                            foundChild = (T)child;
+                            break;
+                        }
+
+                        // Need this in case the element we want is nested
+                        // in another element of the same type
+                        foundChild = FindChild<T>(child, childName);
+                    }
+                    else
+                    {
+                        // child element found.
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+
+                return (T)foundChild;
+            }
+            else
+            {
+                return default;
+            }
+        }
+
+        private static void EnableActionButtons(IEnumerable<Button> buttons)
+        {
+            foreach (var button in buttons)
+            {
+                button.IsEnabled = true;
+            }
+        }
+
+        private static void DisableActionButtons(IEnumerable<Button> buttons)
+        {
+            foreach (var button in buttons)
+            {
+                button.IsEnabled = false;
+            }
         }
 
         #endregion

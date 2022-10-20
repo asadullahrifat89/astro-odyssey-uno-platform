@@ -4,22 +4,20 @@ namespace SpaceShooterGame
 {
     public interface IBackendService
     {
-        T ParseResult<T>(object obj);
+        Task<(bool IsSuccess, string Message)> AuthenticateUser(string userNameOrEmail, string password);
 
-        Task<ServiceResponse> Authenticate(string userNameOrEmail, string password);
+        Task<(bool IsSuccess, string Message)> SignupUser(string fullName, string userName, string email, string password, bool subscribedNewsletters);
 
-        Task<ServiceResponse> Signup(string fullName, string userName, string email, string password);
+        Task<(bool IsSuccess, string Message)> SubmitUserGameScore(double score);
 
-        Task<ServiceResponse> SubmitGameScore(double score);
+        Task<(bool IsSuccess, string Message)> GenerateUserSession();
 
-        Task<QueryRecordResponse<GameProfile>> GetGameProfile();
+        Task<(bool IsSuccess, string Message)> ValidateUserSession(Session session);
 
-        Task<QueryRecordsResponse<GameScore>> GetGameScores(int pageIndex, int pageSize);
+        Task<(bool IsSuccess, string Message, GameProfile GameProfile)> GetUserGameProfile();
 
-        Task<QueryRecordsResponse<GameProfile>> GetGameProfiles(int pageIndex, int pageSize);
+        Task<(bool IsSuccess, string Message, GameScore[] GameScores)> GetUserGameScores(int pageIndex, int pageSize);
 
-        Task<ServiceResponse> GenerateSession(string gameId, string userId);
-
-        Task<ServiceResponse> ValidateSession(string gameId, string sessionId);
+        Task<(bool IsSuccess, string Message, GameProfile[] GameProfiles)> GetUserGameProfiles(int pageIndex, int pageSize);
     }
 }

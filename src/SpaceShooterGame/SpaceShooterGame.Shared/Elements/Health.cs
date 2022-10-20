@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System;
+using System.Linq;
 
 namespace SpaceShooterGame
 {
@@ -9,7 +10,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly Image content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image content = new() { Stretch = Stretch.Uniform };
 
         #endregion
 
@@ -17,18 +18,13 @@ namespace SpaceShooterGame
 
         public Health()
         {
-            Tag = Constants.HEALTH_TAG;
-            Height = Constants.PICKUP_OBJECT_SIZE;
-            Width = Constants.PICKUP_OBJECT_SIZE;
+            Tag = ElementType.HEALTH;
+            Height = Constants.POWERUP_OBJECT_SIZE;
+            Width = Constants.POWERUP_OBJECT_SIZE;
             Child = content;
             YDirection = YDirection.DOWN;
 
             IsPickup = true;
-
-            //CornerRadius = new Microsoft.UI.Xaml.CornerRadius(100);
-            //BorderBrush = new SolidColorBrush(Colors.Crimson);
-            //BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 0, 3, 3);
-            //Padding = new Microsoft.UI.Xaml.Thickness(5);
         }
 
         #endregion
@@ -39,11 +35,11 @@ namespace SpaceShooterGame
         {
             Speed = speed;
 
-            var uri = new Uri("ms-appx:///Assets/Images/health.png", UriKind.RelativeOrAbsolute);
+            var uri = Constants.IMAGE_TEMPLATES.FirstOrDefault(x => x.ImageType == ImageType.HEALTH).AssetUri;
 
             content.Source = new BitmapImage(uri);
 
-            var scaledSize = Constants.PICKUP_OBJECT_SIZE * scale;
+            var scaledSize = Constants.POWERUP_OBJECT_SIZE * scale;
             Height = scaledSize;
             Width = scaledSize;
 

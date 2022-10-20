@@ -1,12 +1,12 @@
-﻿namespace SpaceShooterGame
+﻿using System;
+
+namespace SpaceShooterGame
 {
     public class PlayerShip
     {
-        public string Id { get; set; }
-
         public string Name { get; set; }
 
-        public string ImageUrl { get; set; }
+        public Uri ImageUrl { get; set; }
 
         public ShipClass ShipClass { get; set; }
     }

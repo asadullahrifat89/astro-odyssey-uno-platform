@@ -1,7 +1,6 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
-using static SpaceShooterGame.Constants;
 
 namespace SpaceShooterGame
 {
@@ -11,10 +10,7 @@ namespace SpaceShooterGame
 
         public EnemyProjectile()
         {
-            Tag = ENEMY_PROJECTILE_TAG;
-
-            Height = 10;
-            Width = 5;
+            Tag = ElementType.ENEMY_PROJECTILE;
 
             CornerRadius = new CornerRadius(50);
             YDirection = YDirection.DOWN;
@@ -26,14 +22,17 @@ namespace SpaceShooterGame
 
         #region Methods
 
-        public void SetAttributes(Enemy enemy, double scale = 1, bool isOverPowered = false)
+        public void SetAttributes(
+            Enemy enemy,
+            double scale = 1,
+            bool isOverPowered = false)
         {
             Speed = enemy.IsBoss
                 ? enemy.Speed * 1.50
                 : enemy.Speed * 1.65;
 
-            double height = 12;
-            double width = 12;
+            double height = 20;
+            double width = 20;
 
             if (enemy.IsBoss)
             {

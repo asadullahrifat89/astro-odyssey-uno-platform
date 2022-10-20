@@ -9,9 +9,15 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new() { Stretch = Stretch.Uniform };
 
-        private readonly Random random = new Random();
+        private readonly Random random = new();
+
+        #endregion
+
+        #region Properties
+
+        public CelestialObjectType CelestialObjectType { get; set; } = CelestialObjectType.Star;
 
         #endregion
 
@@ -19,16 +25,10 @@ namespace SpaceShooterGame
 
         public CelestialObject()
         {
-            Tag = Constants.STAR_TAG;
+            Tag = ElementType.CELESTIAL_OBJECT;
             Child = _content;
             YDirection = YDirection.DOWN;
         }
-
-        #endregion
-
-        #region Properties
-
-        public CelestialObjectType CelestialObjectType { get; set; } = CelestialObjectType.Star;
 
         #endregion
 
@@ -46,8 +46,9 @@ namespace SpaceShooterGame
             {
                 case CelestialObjectType.Star:
                     {
-                        var starType = random.Next(0, GameObjectTemplates.STAR_TEMPLATES.Length);
-                        var starTemplate = GameObjectTemplates.STAR_TEMPLATES[starType];
+                        var stars = AssetHelper.STAR_TEMPLATES;
+                        var starType = random.Next(0, stars.Length);
+                        var starTemplate = stars[starType];
 
                         uri = starTemplate.AssetUri;
 
@@ -61,8 +62,9 @@ namespace SpaceShooterGame
                     break;
                 case CelestialObjectType.Planet:
                     {
-                        var planetType = random.Next(0, GameObjectTemplates.PLANET_TEMPLATES.Length);
-                        var planetTemplate = GameObjectTemplates.PLANET_TEMPLATES[planetType];
+                        var planets = AssetHelper.PLANET_TEMPLATES;
+                        var planetType = random.Next(0, planets.Length);
+                        var planetTemplate = planets[planetType];
 
                         uri = planetTemplate.AssetUri;
 

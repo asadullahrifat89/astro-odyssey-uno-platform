@@ -11,7 +11,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_intro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
         <Border Style="{StaticResource GameUIContainer}">
@@ -23,15 +23,6 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Vertical">
-
-                <!--  Header  -->
-                <TextBlock
-                    x:Name="GameSignupPage_Header"
-                    Margin="0,10,0,0"
-                    FontSize="15"
-                    FontWeight="Bold"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
 
                 <!--  Game name  -->
                 <TextBlock
@@ -83,10 +74,17 @@
                 <CheckBox
                     x:Name="GameSignupPage_ConfirmCheckBox"
                     Margin="5"
-                    Checked="GameSignupPage_ConfirmCheckBox_Checked"
+                    Checked="ConfirmCheckBox_Checked"
                     Content="Yes, I agree to the conditions of participation."
                     FontSize="14"
-                    Unchecked="GameSignupPage_ConfirmCheckBox_Unchecked" />
+                    Unchecked="ConfirmCheckBox_Unchecked" />
+
+                <!--  Subscribe to newsletters  -->
+                <CheckBox
+                    x:Name="GameSignupPage_ConfirmNewsLettersCheckBox"
+                    Margin="5"
+                    Content="Yes, I would like to subscribe to newsletters."
+                    FontSize="14" />
 
                 <!--  Signup button  -->
                 <Button
@@ -96,7 +94,8 @@
                     HorizontalAlignment="Stretch"
                     Click="SignupButton_Click"
                     Content="Signup"
-                    IsEnabled="False" />
+                    IsEnabled="False"
+                    Tag="ActionButton" />
 
                 <!--  Login Button  -->
                 <Button
@@ -110,11 +109,12 @@
                     Click="LoginButton_Click"
                     Content="Already have an account?"
                     FontSize="15"
-                    Foreground="White" />
+                    Foreground="White"
+                    Tag="ActionButton" />                
 
                 <!--  Error text  -->
                 <TextBlock
-                    x:Name="GameSignupPage_ErrorText"
+                    x:Name="ProgressBarMessageBlock"
                     Margin="5"
                     FontWeight="SemiBold"
                     Foreground="Crimson"
@@ -122,7 +122,7 @@
 
                 <!--  Progress bar  -->
                 <ProgressBar
-                    x:Name="GameSignupPage_ProgressBar"
+                    x:Name="ProgressBar"
                     Height="5"
                     Foreground="{StaticResource ProgressBarForegroundColor}"
                     IsIndeterminate="True"

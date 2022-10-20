@@ -7,9 +7,7 @@ namespace SpaceShooterGame
     [HtmlElement("audio")]
     public sealed class AudioPlayer : FrameworkElement
     {
-        //public event EventHandler OnCompleted;
-
-        public AudioPlayer(string source, double volume, bool loop = false)
+        public AudioPlayer(string source, double volume = 1.0, bool loop = false)
         {
             var audio = "element.style.display = \"none\"; " +
                 "element.controls = false; " +
@@ -18,7 +16,6 @@ namespace SpaceShooterGame
                 $"element.loop = {loop.ToString().ToLower()}; ";
 
             this.ExecuteJavascript(audio);
-            //this.RegisterHtmlEventHandler("onended", OnCompleted);
 #if DEBUG
             Console.WriteLine("source: " + source + " volume: " + volume.ToString() + " loop: " + loop.ToString().ToLower());
 #endif

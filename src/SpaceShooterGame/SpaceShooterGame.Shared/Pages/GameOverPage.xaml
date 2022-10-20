@@ -11,7 +11,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameOver.png" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_over.png" Stretch="UniformToFill" />
         </Grid.Background>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -46,7 +46,7 @@
                             VerticalAlignment="Center"
                             FontSize="15"
                             FontWeight="SemiBold"
-                            Text="You could earn your place on the leaderboard if you login."
+                            Text="You could win an exciting prize if you login."
                             TextWrapping="WrapWholeWords" />
 
                     </Grid>
@@ -58,18 +58,15 @@
                         Margin="10,0,10,5"
                         HorizontalAlignment="Stretch"
                         Click="GameLoginPage_LoginButton_Click"
-                        Content="Login" />
+                        Content="Login"
+                        Tag="ActionButton" />
 
                 </StackPanel>
 
             </Border>
 
             <!--  Scores, leaderboard, play again  -->
-            <Border
-                Margin="5"
-                BorderThickness="0,3,0,3"
-                CornerRadius="10"
-                Style="{StaticResource GameUIContainer}">
+            <Border Margin="5" Style="{StaticResource GameUIContainer}">
 
                 <StackPanel
                     x:Name="ActionStack"
@@ -134,7 +131,7 @@
                                 Width="35"
                                 Height="35"
                                 Margin="4"
-                                Source="ms-appx:///Assets/Images/Enemy/enemy_3.png" />
+                                Source="ms-appx:///Assets/Images/Enemy/enemy3.png" />
                             <TextBlock
                                 x:Name="EnemiesDestroyedText"
                                 Margin="5"
@@ -154,7 +151,7 @@
                                 Width="35"
                                 Height="35"
                                 Margin="4"
-                                Source="ms-appx:///Assets/Images/Meteor/rock1.png" />
+                                Source="ms-appx:///Assets/Images/Meteor/meteor1.png" />
                             <TextBlock
                                 x:Name="MeteorsDestroyedText"
                                 Margin="5"
@@ -174,7 +171,7 @@
                                 Width="35"
                                 Height="35"
                                 Margin="4"
-                                Source="ms-appx:///Assets/Images/boss_appeared.png" />
+                                Source="ms-appx:///Assets/Images/Boss/boss_appeared.png" />
                             <TextBlock
                                 x:Name="BossesDestroyedText"
                                 Margin="5"
@@ -216,8 +213,8 @@
                             Margin="0,5"
                             HorizontalAlignment="Stretch"
                             Click="PlayAgainButton_Click"
-                            Content="PLAY AGAIN"
-                            Tag="GameOverPage_PlayAgainButton.Content" />
+                            Content="Play Again"
+                            Tag="ActionButton" />
 
                         <!--  Leaderboard button  -->
                         <Button
@@ -227,13 +224,14 @@
                             HorizontalAlignment="Stretch"
                             Click="GameOverPage_LeaderboardButton_Click"
                             Content="Leaderboard"
+                            Tag="ActionButton"
                             Visibility="Collapsed" />
 
-                    </StackPanel>
+                    </StackPanel>                
 
                     <!--  Error text  -->
                     <TextBlock
-                        x:Name="GameOverPage_ErrorText"
+                        x:Name="ProgressBarMessageBlock"
                         Margin="5"
                         FontWeight="SemiBold"
                         Foreground="Crimson"
@@ -241,7 +239,7 @@
 
                     <!--  Progress bar  -->
                     <ProgressBar
-                        x:Name="GameOverPage_ProgressBar"
+                        x:Name="ProgressBar"
                         Height="5"
                         Foreground="{StaticResource ProgressBarForegroundColor}"
                         IsIndeterminate="True"
@@ -254,14 +252,14 @@
 
         </StackPanel>
 
-        <!--  This shows the player's name  -->
+        <!--#region  User Picture & Name-->
         <Border
             x:Name="PlayerNameHolder"
             Margin="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             BorderThickness="3"
-            CornerRadius="25"
+            CornerRadius="25,15,15,25"
             Style="{StaticResource GameUIContainer}"
             Visibility="Collapsed">
 
@@ -271,10 +269,10 @@
                     Grid.Column="0"
                     Width="35"
                     Height="35"
-                    Margin="2,2,2,2" />
+                    Margin="2" />
                 <TextBlock
                     x:Name="Page_UserName"
-                    Margin="5,0"
+                    Margin="2,0,5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
@@ -282,6 +280,7 @@
             </StackPanel>
 
         </Border>
+        <!--#endregion-->
 
     </Grid>
 

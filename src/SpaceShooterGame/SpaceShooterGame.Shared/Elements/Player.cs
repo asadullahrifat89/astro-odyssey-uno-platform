@@ -12,46 +12,14 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly Grid _body = new Grid();
+        private readonly Grid _body = new();
 
-        private readonly Image _ship = new Image() { Stretch = Stretch.Uniform, };
+        private readonly Image _ship = new() { Stretch = Stretch.Uniform, };
 
-        private readonly Image _engineThrust = new Image() { Stretch = Stretch.Uniform };
-
-        #endregion
-
-        #region Ctor
-
-        public Player()
-        {
-            Tag = Constants.PLAYER_TAG;
-
-            Height = Constants.PLAYER_HEIGHT;
-            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
-
-            IsPlayer = true;
-
-            Health = 100;
-            HitPoint = 10;
-
-            // combine power gauge, ship, and blaze
-            _body = new Grid();
-            _body.Children.Add(_engineThrust);
-            _body.Children.Add(_ship);
-
-            Child = _body;
-
-            Background = new SolidColorBrush(Colors.Transparent);
-            BorderBrush = new SolidColorBrush(Colors.Transparent);
-            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
-#if DEBUG
-            //Background = new SolidColorBrush(Colors.White);
-#endif
-            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
-        }
+        private readonly Image _engineThrust = new() { Stretch = Stretch.Uniform };
 
         #endregion
-
+                
         #region Properties
 
         public ShipClass ShipClass { get; set; }
@@ -72,8 +40,8 @@ namespace SpaceShooterGame
 
         public double ProjectilePower { get; set; } = 0;
 
-
         private bool _isRecoveringFromDamage;
+
         public bool IsRecoveringFromDamage
         {
             get { return _isRecoveringFromDamage; }
@@ -88,8 +56,8 @@ namespace SpaceShooterGame
             }
         }
 
-
         private bool _isShieldUp;
+
         public bool IsShieldUp
         {
             get { return _isShieldUp; }
@@ -112,8 +80,8 @@ namespace SpaceShooterGame
             }
         }
 
-
         private bool _isFirePowerUp;
+
         public bool IsFirePowerUp
         {
             get { return _isFirePowerUp; }
@@ -123,8 +91,8 @@ namespace SpaceShooterGame
             }
         }
 
-
         private bool _isCloakUp;
+
         public bool IsCloakUp
         {
             get { return _isCloakUp; }
@@ -141,6 +109,35 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #region Ctor
+
+        public Player()
+        {
+            Tag = ElementType.PLAYER;
+
+            Height = Constants.PLAYER_HEIGHT;
+            Width = Constants.DESTRUCTIBLE_OBJECT_SIZE;
+
+            IsPlayer = true;
+
+            Health = 100;
+
+            // combine power gauge, ship, and blaze
+            _body = new Grid();
+            _body.Children.Add(_engineThrust);
+            _body.Children.Add(_ship);
+
+            Child = _body;
+
+            Background = new SolidColorBrush(Colors.Transparent);
+            BorderBrush = new SolidColorBrush(Colors.Transparent);
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+
+            CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
+        }
+
+        #endregion
+
         #region Methods
 
         public void SetAttributes(
@@ -150,30 +147,31 @@ namespace SpaceShooterGame
         {
             Speed = speed;
 
-            _ship.Source = new BitmapImage(new Uri(ship.ImageUrl, UriKind.RelativeOrAbsolute));
+            _ship.Source = new BitmapImage(ship.ImageUrl);
             ShipClass = ship.ShipClass;
 
             IsRageUp = false;
 
-            Uri engineThrustUri = GameObjectTemplates.PLAYER_SHIP_THRUST_TEMPLATES.FirstOrDefault(x => x.ShipClass == ShipClass).AssetUri;
+            var playerShipThrusts = AssetHelper.PLAYER_SHIP_THRUST_TEMPLATES;
+            Uri engineThrustUri = playerShipThrusts.FirstOrDefault(x => (int)x.Size == (int)ShipClass).AssetUri;
 
             switch (ShipClass)
             {
                 case ShipClass.DEFENDER:
                     {
-                        HitPoint = 100 / 6;
+                        HitPoint = 100 / 5;
                         RageThreashold = 25;
                     }
                     break;
                 case ShipClass.BERSERKER:
                     {
-                        HitPoint = 100 / 4;
+                        HitPoint = 100 / 3;
                         RageThreashold = 15;
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
-                        HitPoint = 100 / 5;
+                        HitPoint = 100 / 4;
                         RageThreashold = 20;
                     }
                     break;
@@ -197,12 +195,12 @@ namespace SpaceShooterGame
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
         }
 
-        public void TriggerPowerUp(PowerUpType powerUpType)
+        public void PowerUpOn()
         {
             IsPoweredUp = true;
         }
 
-        public void PowerUpCoolDown()
+        public void PowerUpOff()
         {
             IsPoweredUp = false;
         }
@@ -236,20 +234,7 @@ namespace SpaceShooterGame
         public new Rect GetRect()
         {
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
-        }
-
-        //public void SetRecoilEffect()
-        //{
-        //    BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 4, right: 0, bottom: 0);
-        //}
-
-        //public void CoolDownRecoilEffect() 
-        //{
-        //    if (BorderThickness.Top != 0)
-        //    {
-        //        BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: BorderThickness.Top - 1, right: 0, bottom: 0);
-        //    }
-        //}
+        }      
 
         #endregion
     }

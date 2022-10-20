@@ -10,33 +10,15 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
+        private readonly Image _content = new() { Stretch = Stretch.Uniform };
 
-        private readonly Random random = new Random();
-
-        #endregion
-
-        #region Ctor
-
-        public Enemy()
-        {
-            Tag = Constants.ENEMY_TAG;
-
-            IsDestructible = true;
-
-            Child = _content;
-            YDirection = YDirection.DOWN;
-
-            Background = new SolidColorBrush(Colors.Transparent);
-            BorderBrush = new SolidColorBrush(Colors.Transparent);
-            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
-        }
+        private readonly Random random = new();
 
         #endregion
 
         #region Properties
 
-        public double ProjectileSpawnCounter { get; set; }
+        public double ProjectileSpawnCounter { get; set; } = 0;
 
         public double ProjectileSpawnAfter { get; set; } = 60;
 
@@ -62,50 +44,84 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #region Ctor
+
+        public Enemy()
+        {
+            Tag = ElementType.ENEMY;
+
+            IsDestructible = true;
+
+            Child = _content;
+            YDirection = YDirection.DOWN;
+
+            Background = new SolidColorBrush(Colors.Transparent);
+            BorderBrush = new SolidColorBrush(Colors.Transparent);
+            BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+        }
+
+        #endregion
+
         #region Methods
 
         public void SetAttributes(
             double speed,
             GameLevel gameLevel,
             double scale = 1,
-            bool isBoss = false)
+            bool isBoss = false,
+            bool recycle = false)
         {
-            Speed = speed;
-            XDirection = XDirection.NONE;
-            IsMarkedForFadedDestruction = false;
             Opacity = 1;
+            Speed = speed;
+
+            XDirection = XDirection.NONE;
+            YDirection = YDirection.DOWN;
+
+            IsDestroyedByCollision = false;
+            IsEvadingTriggered = false;
+
+            ProjectileSpawnCounter = 0;
+            ProjectileSpawnAfter = 60;
+            OverPoweredProjectileSpawnAfter = 5;
+
+            SetRotation(0);
 
             if (isBoss)
             {
                 IsBoss = true;
                 IsOverPowered = true;
 
-                var bossType = random.Next(0, GameObjectTemplates.BOSS_TEMPLATES.Length);
-                var bossTemplate = GameObjectTemplates.BOSS_TEMPLATES[bossType]; // TODO: SET TO BOSS TYPE
+                var bosses = AssetHelper.BOSS_TEMPLATES;
+                var bossType = random.Next(0, bosses.Length);
+                var bossTemplate = bosses[bossType]; // TODO: SET TO BOSS TYPE
 
-                BossClass = bossTemplate.BossClass;
+                BossClass = (BossClass)bossType;
+                Speed--;
+                ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
 
-                var height = 0;
-                var width = 0;
+                Health = Constants.BOSS_BASE_HEALTH * (double)gameLevel;
+
+                double height = 0;
+                double width = 0;
 
                 switch (BossClass)
                 {
                     case BossClass.GREEN:
                         {
-                            width = 360;
-                            height = 289;
+                            width = 360 * 1.5;
+                            height = 289 * 1.5;
                         }
                         break;
                     case BossClass.CRIMSON:
                         {
-                            width = 403;
-                            height = 279;
+                            width = 403 * 1.5;
+                            height = 279 * 1.5;
                         }
                         break;
                     case BossClass.BLUE:
                         {
-                            width = 316;
-                            height = 285;
+                            width = 316 * 1.5;
+                            height = 285 * 1.5;
                         }
                         break;
                     default:
@@ -115,41 +131,34 @@ namespace SpaceShooterGame
                 Height = (height / 2.5) * scale;
                 Width = (width / 2.5) * scale;
 
-                Speed--;
-                ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
-
-                Health = Constants.BOSS_BASE_HEALTH * (double)gameLevel;
+                HalfWidth = Width / 2;
 
                 Uri uri = bossTemplate.AssetUri;
                 _content.Source = new BitmapImage(uri);
-
-                _content.Height = this.Height;
-                _content.Width = this.Width;
             }
             else
             {
-                var enemyType = random.Next(0, GameObjectTemplates.ENEMY_TEMPLATES.Length);
-                var enemyTemplate = GameObjectTemplates.ENEMY_TEMPLATES[enemyType];
-
-                EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
-
-                Uri uri = enemyTemplate.AssetUri;
-                Health = enemyTemplate.Health;
-
-                var scaledSize = scale * enemyTemplate.Size;
-
-                Height = scaledSize;
-                Width = scaledSize;
-
+                Health = random.Next(1, 4);
                 ProjectileSpawnAfter -= 5 * scale * ((double)gameLevel / 2);
 
-                _content.Source = new BitmapImage(uri);
+                if (!recycle)
+                {
+                    var enemies = AssetHelper.ENEMY_TEMPLATES;
+                    var enemyType = random.Next(0, enemies.Length);
+                    var enemyTemplate = enemies[enemyType];
+                    var scaledSize = scale * enemyTemplate.Size;
 
-                _content.Height = this.Height;
-                _content.Width = this.Width;
+                    EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
+
+                    Height = scaledSize;
+                    Width = scaledSize;
+
+                    HalfWidth = Width / 2;
+
+                    Uri uri = enemyTemplate.AssetUri;
+                    _content.Source = new BitmapImage(uri);
+                }
             }
-
-            HalfWidth = Width / 2;
         }
 
         public void Evade()
@@ -157,13 +166,13 @@ namespace SpaceShooterGame
             if (XDirection == XDirection.NONE)
             {
                 XDirection = (XDirection)random.Next(1, Enum.GetNames<XDirection>().Length);
-                Speed = Speed / 1.85; // decrease speed
+                Speed /= 1.85; // decrease speed
 
                 IsEvadingTriggered = true;
             }
         }
 
-        public void SetProjectileImpactEffect()
+        public void SetProjectileHitEffect()
         {
             var effect = random.Next(0, 2);
 
@@ -179,14 +188,10 @@ namespace SpaceShooterGame
         public void CoolDownProjectileImpactEffect()
         {
             if (BorderThickness.Left != 0)
-            {
                 BorderThickness = new Microsoft.UI.Xaml.Thickness(left: BorderThickness.Left - 1, top: 0, right: 0, bottom: 0);
-            }
 
             if (BorderThickness.Right != 0)
-            {
                 BorderThickness = new Microsoft.UI.Xaml.Thickness(left: 0, top: 0, right: BorderThickness.Right - 1, bottom: 0);
-            }
         }
 
         #endregion

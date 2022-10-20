@@ -11,7 +11,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly CompositeTransform _compositeTransform = new CompositeTransform()
+        private readonly CompositeTransform _compositeTransform = new()
         {
             CenterX = 0.5,
             CenterY = 0.5,
@@ -19,18 +19,6 @@ namespace SpaceShooterGame
             ScaleX = 1,
             ScaleY = 1,
         };
-
-        #endregion
-
-        #region Ctor
-
-        public GameObject()
-        {
-            RenderTransformOrigin = new Point(0.5, 0.5);
-            RenderTransform = _compositeTransform;
-
-            CanDrag = false;
-        }
 
         #endregion
 
@@ -58,7 +46,7 @@ namespace SpaceShooterGame
 
         public bool IsOverPowered { get; set; } = false;
 
-        public bool IsDestructible { get; set; }       
+        public bool IsDestructible { get; set; }
 
         public bool IsProjectile { get; set; }
 
@@ -70,40 +58,84 @@ namespace SpaceShooterGame
 
         public double HalfWidth { get; set; }
 
-        public Border DestructionLayer { get; set; }
+        private bool _IsDestroyedByCollision;
 
-        private bool _isMarkedForFadedDestruction;
-        public bool IsMarkedForFadedDestruction
+        public bool IsDestroyedByCollision
         {
-            get { return _isMarkedForFadedDestruction; }
+            get { return _IsDestroyedByCollision; }
             set
             {
-                _isMarkedForFadedDestruction = value;
+                _IsDestroyedByCollision = value;
 
-                if (_isMarkedForFadedDestruction)
+                if (_IsDestroyedByCollision)
                 {
-                    // set exploding effect
-                    if (IsDestructible)
-                    {                        
-                        Height = 50;
-                        Width = 50;
-                        BorderThickness = new Thickness(5);
-                        CornerRadius = new CornerRadius(100);
-                        Background = new SolidColorBrush(Colors.Orange);
-                        BorderBrush = new SolidColorBrush(Colors.OrangeRed);
-                        
-                        Child.Opacity = 0;
-                    }
+                    var tag = (ElementType)Tag;
 
-                    if (IsProjectile)
+                    switch (tag)
                     {
-                        Height = 15;
-                        Width = 15;
-                        YDirection = YDirection.NONE;
-                        CornerRadius = new CornerRadius(50);
+                        case ElementType.ENEMY:
+                            {
+                                Background = new SolidColorBrush(Colors.Goldenrod);
+                                BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
+
+                                Height = 50 * 1.5;
+                                Width = 50 * 1.5;
+
+                                BorderThickness = new Thickness(5);
+                                CornerRadius = new CornerRadius(100);
+
+                                Child.Opacity = 0;
+                            }
+                            break;
+                        case ElementType.METEOR:
+                            {
+                                Background = new SolidColorBrush(Colors.Crimson);
+                                BorderBrush = new SolidColorBrush(Colors.DarkRed);
+
+                                Height = 50 * 1.5;
+                                Width = 50 * 1.5;
+
+                                BorderThickness = new Thickness(5);
+                                CornerRadius = new CornerRadius(100);
+
+                                Child.Opacity = 0;
+                            }
+                            break;
+                        case ElementType.PLAYER_PROJECTILE:
+                            {
+                                Height = 15 * 1.5;
+                                Width = 15 * 1.5;
+
+                                YDirection = YDirection.NONE;
+                                CornerRadius = new CornerRadius(50);
+                            }
+                            break;
+                        case ElementType.ENEMY_PROJECTILE:
+                            {
+                                Height = 15 * 1.5;
+                                Width = 15 * 1.5;
+
+                                YDirection = YDirection.NONE;
+                                CornerRadius = new CornerRadius(50);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
+        }
+
+        #endregion
+
+        #region Ctor
+
+        public GameObject()
+        {
+            RenderTransformOrigin = new Point(0.5, 0.5);
+            RenderTransform = _compositeTransform;
+
+            CanDrag = false;
         }
 
         #endregion
@@ -114,6 +146,12 @@ namespace SpaceShooterGame
         {
             Height = size;
             Width = size;
+        }
+
+        public void SetRotation(double rotation)
+        {
+            Rotation = rotation;
+            _compositeTransform.Rotation = Rotation;
         }
 
         public void Rotate()
@@ -260,7 +298,7 @@ namespace SpaceShooterGame
         {
             ExplosionCounter -= 0.1d;
 
-            if (ExplosionCounter <= 0.3d)
+            if (ExplosionCounter <= 0.5d)
                 Opacity -= 0.1d;
 
             ScaleUp();
@@ -309,5 +347,39 @@ namespace SpaceShooterGame
         NONE,
         LEFT,
         RIGHT,
+    }
+
+    public enum ElementType
+    {
+        NONE,
+        PLAYER,
+        ENEMY,
+        METEOR,
+        HEALTH,
+        POWERUP,
+        COLLECTIBLE,
+        PLAYER_PROJECTILE,
+        ENEMY_PROJECTILE,
+        CELESTIAL_OBJECT,
+    }
+
+    public enum ImageType
+    {
+        STAR,
+        PLANET,
+        COLLECTIBLE,
+        BOSS_APPEARED,
+        BOSS_CLEARED,
+        GAME_OVER,
+        HEALTH,
+        POWERUP,
+        GAME_INTRO,
+        SCORE_MULTIPLIER,
+        BOSS,
+        ENEMY,
+        METEOR,
+        PLAYER_SHIP,
+        PLAYER_SHIP_THRUST,
+        PLAYER_RAGE
     }
 }

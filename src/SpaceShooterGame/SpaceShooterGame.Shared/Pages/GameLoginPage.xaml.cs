@@ -2,9 +2,8 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using System;
 using System.Threading.Tasks;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SpaceShooterGame
 {
@@ -13,13 +12,6 @@ namespace SpaceShooterGame
         #region Fields
 
         private readonly IBackendService _backendService;
-        private readonly IAudioHelper _audioHelper;
-        private readonly ILocalizationHelper _localizationHelper;
-        private readonly ICacheHelper _cacheHelper;
-
-        private readonly ProgressBar _progressBar;
-        private readonly TextBlock _errorContainer;
-        private readonly Button[] _actionButtons;
 
         #endregion
 
@@ -31,25 +23,18 @@ namespace SpaceShooterGame
             Loaded += GameLoginPage_Loaded;
 
             _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
-            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
-            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
-            _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
-
-            _progressBar = GameLoginPage_ProgressBar;
-            _errorContainer = GameLoginPage_ErrorText;
-            _actionButtons = new[] { GameLoginPage_LoginButton, GameLoginPage_RegisterButton };
         }
 
         #endregion
 
         #region Events
 
-        private async void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
+        private void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
-            SetLocalization();
+            this.SetLocalization();
 
             // if user was already logged in or came here after sign up
-            if (_cacheHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            if (PlayerCredentialsHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
@@ -59,8 +44,6 @@ namespace SpaceShooterGame
                 GameLoginPage_UserNameBox.Text = null;
                 GameLoginPage_PasswordBox.Text = null;
             }
-
-            await this.PlayLoadedTransition();
         }
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -85,118 +68,67 @@ namespace SpaceShooterGame
                 await PerformLogin();
         }
 
-        private async void RegisterButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayUnLoadedTransition();
-            App.NavigateToPage(typeof(GameSignupPage));
+            NavigateToPage(typeof(GameSignupPage));
         }
 
-        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameStartPage));
+            NavigateToPage(typeof(GameStartPage));
         }
-
 
         #endregion
 
         #region Methods
 
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+        }
+
         private async Task PerformLogin()
         {
-            RunProgressBar();
+            this.RunProgressBar();
 
-            if (!await Authenticate())
-                return;
-
-            if (!await GetGameProfile())
-                return;
-
-            if (!await GenerateSession())
-                return;
-
-            if (App.GameScoreSubmissionPending)
+            if (await Authenticate() && await GetGameProfile() && await GenerateSession())
             {
-                if (await SubmitScore())
-                    App.GameScoreSubmissionPending = false;
+                if (PlayerScoreHelper.GameScoreSubmissionPending)
+                {
+                    if (await SubmitScore())
+                        PlayerScoreHelper.GameScoreSubmissionPending = false;
+                }
+
+                this.StopProgressBar();
+                NavigateToPage(typeof(GameLeaderboardPage));
             }
-
-            StopProgressBar();
-
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayUnLoadedTransition();
-            App.NavigateToPage(typeof(GameLeaderboardPage));
         }
 
         private async Task<bool> Authenticate()
         {
-            // authenticate
-            ServiceResponse response = await _backendService.Authenticate(
+            (bool IsSuccess, string Message) = await _backendService.AuthenticateUser(
                 userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (!IsSuccess)
             {
-                var error = response?.ExternalError;
-                this.ShowError(
-                     progressBar: _progressBar,
-                     messageBlock: _errorContainer,
-                     message: error,
-                     actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
-
-            // store auth token
-            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
-            App.AuthToken = authToken;
-
-            _cacheHelper.SetCachedPlayerCredentials(
-                userName: GameLoginPage_UserNameBox.Text.Trim(),
-                password: GameLoginPage_PasswordBox.Text.Trim());
 
             return true;
         }
 
         private async Task<bool> GetGameProfile()
         {
-            // get game profile
-            var recordResponse = await _backendService.GetGameProfile();
+            (bool IsSuccess, string Message, _) = await _backendService.GetUserGameProfile();
 
-            if (!recordResponse.IsSuccess)
+            if (!IsSuccess)
             {
-                var error = recordResponse.Errors.Errors;
-                this.ShowError(
-                   progressBar: _progressBar,
-                   messageBlock: _errorContainer,
-                   message: string.Join("\n", error),
-                   actionButtons: _actionButtons);
-
-                return false;
-            }
-
-            // store game profile
-            var gameProfile = recordResponse.Result;
-            App.GameProfile = gameProfile;
-
-            return true;
-        }
-
-        private async Task<bool> SubmitScore()
-        {
-            ServiceResponse response = await _backendService.SubmitGameScore(App.PlayerScore.Score);
-
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
-            {
-                var error = response?.ExternalError;
-                this.ShowError(
-                     progressBar: _progressBar,
-                     messageBlock: _errorContainer,
-                     message: error,
-                     actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
 
@@ -205,28 +137,28 @@ namespace SpaceShooterGame
 
         private async Task<bool> GenerateSession()
         {
-            ServiceResponse response = await _backendService.GenerateSession(
-                gameId: Constants.GAME_ID,
-                userId: App.GameProfile.User.UserId);
+            (bool IsSuccess, string Message) = await _backendService.GenerateUserSession();
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (!IsSuccess)
             {
-                var error = response?.ExternalError;
-                this.ShowError(
-                    progressBar: _progressBar,
-                    messageBlock: _errorContainer,
-                    message: error,
-                    actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
 
-            // store session
-            var session = _backendService.ParseResult<Session>(response.Result);
-            App.Session = session;
+            return true;
+        }
 
-            if (_cacheHelper.IsCookieAccepted())
-                _cacheHelper.SetCachedSession(session);
+        private async Task<bool> SubmitScore()
+        {
+            (bool IsSuccess, string Message) = await _backendService.SubmitUserGameScore(PlayerScoreHelper.PlayerScore.Score);
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
 
             return true;
         }
@@ -234,30 +166,6 @@ namespace SpaceShooterGame
         private void EnableLoginButton()
         {
             GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
-        }
-
-        private void RunProgressBar()
-        {
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-        }
-
-        private void StopProgressBar()
-        {
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
-        }
-
-        private void SetLocalization()
-        {
-            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_UserNameBox);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_PasswordBox);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_RegisterButton);
-            _localizationHelper.SetLocalizedResource(GameLoginPage_LoginButton);
         }
 
         #endregion
