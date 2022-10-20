@@ -179,7 +179,7 @@
                         <TextBlock
                             Margin="10,3,0,3"
                             FontSize="20"
-                            Text="🍕"
+                            Text="🎸"
                             TextAlignment="Left" />
 
                         <!--  Multiplier bar  -->

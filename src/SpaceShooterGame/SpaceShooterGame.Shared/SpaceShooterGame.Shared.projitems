@@ -167,7 +167,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible5.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible6.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\star5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage2.png" />

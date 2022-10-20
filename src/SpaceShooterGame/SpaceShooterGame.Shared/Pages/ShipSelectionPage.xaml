@@ -107,16 +107,7 @@
                     Margin="30,10,30,15"
                     HorizontalAlignment="Stretch"
                     Click="ChooseButton_Click"
-                    Content="SELECT" />
-
-                <!--  Brand logo  -->
-                <HyperlinkButton
-                    Height="80"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    NavigateUri="https://www.spiga-ristorante.ch/">
-                    <Image Source="ms-appx:///Assets/Images/logo_brand.png" />
-                </HyperlinkButton>
+                    Content="Select" />
 
             </StackPanel>
 

@@ -52,42 +52,6 @@
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <!--  Prize panel  -->
-            <Border
-                x:Name="GameStartPage_PrizePanel"
-                Margin="5"
-                BorderThickness="3"
-                Style="{StaticResource GameUIContainer}">
-
-                <!--  Prize image and text  -->
-                <Grid Margin="5">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <!--  Trophy image  -->
-                    <TextBlock
-                        Grid.Column="0"
-                        FontSize="45"
-                        Text="🎁" />
-
-                    <!--  Prize message  -->
-                    <TextBlock
-                        x:Name="GameStartPage_Tagline"
-                        Grid.Column="1"
-                        MaxWidth="315"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        FontWeight="SemiBold"
-                        Text="Today's winner will receive an exciting gift."
-                        TextWrapping="WrapWholeWords" />
-
-                </Grid>
-
-            </Border>
-
             <!--  Game logo, start game, leaderboard, login  -->
             <Border Margin="5" Style="{StaticResource GameUIContainer}">
 
@@ -108,6 +72,17 @@
                         Margin="5,15,5,5"
                         FontSize="30"
                         FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
+
+                    <!--  Tag line  -->
+                    <TextBlock
+                        x:Name="GameStartPage_Tagline"
+                        Margin="10,0,10,10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="A rock metal ⚡ sky racer on WebAssembly."
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
 
