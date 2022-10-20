@@ -154,7 +154,7 @@ namespace SpaceShooterGame
 #if DEBUG
         public const string GAME_API_BASEURL = "https://localhost:7238";
 #else
-        public const string GAME_API_BASEURL = "https://selise-space-shooter-backend.seliselocal.com";
+        public const string GAME_API_BASEURL = "https://astro-odyssey-web-api.herokuapp.com";
 #endif
         #endregion
 

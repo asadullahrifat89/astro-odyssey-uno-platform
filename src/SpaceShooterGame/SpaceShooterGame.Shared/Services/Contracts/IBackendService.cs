@@ -6,7 +6,7 @@ namespace SpaceShooterGame
     {
         Task<(bool IsSuccess, string Message)> AuthenticateUser(string userNameOrEmail, string password);
 
-        Task<(bool IsSuccess, string Message)> SignupUser(string fullName, string userName, string email, string password, bool subscribedNewsletters);
+        Task<(bool IsSuccess, string Message)> SignupUser(string fullName, string userName, string email, string password);
 
         Task<(bool IsSuccess, string Message)> SubmitUserGameScore(double score);
 

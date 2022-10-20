@@ -118,8 +118,7 @@ namespace SpaceShooterGame
                fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
                userName: GameSignupPage_UserNameBox.Text.Trim(),
                email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
-               password: GameSignupPage_PasswordBox.Text.Trim(),
-               subscribedNewsletters: GameSignupPage_ConfirmNewsLettersCheckBox.IsChecked.Value);
+               password: GameSignupPage_PasswordBox.Text.Trim());
 
             if (!IsSuccess)
             {

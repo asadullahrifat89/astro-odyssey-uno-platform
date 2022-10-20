@@ -32,15 +32,13 @@ namespace SpaceShooterGame
             string fullName,
             string userName,
             string email,
-            string password,
-            bool subscribedNewsletters)
+            string password)
         {
             ServiceResponse response = await Signup(
                    fullName: fullName,
                    userName: userName,
                    email: email,
-                   password: password,
-                   subscribedNewsletters: subscribedNewsletters);
+                   password: password);
 
             if (response is null || response.HttpStatusCode != HttpStatusCode.OK)
             {
@@ -311,8 +309,7 @@ namespace SpaceShooterGame
             string fullName,
             string userName,
             string email,
-            string password,
-            bool subscribedNewsletters)
+            string password)
         {
             var response = await _httpRequestService.SendRequest<ServiceResponse, ServiceResponse>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -325,11 +322,7 @@ namespace SpaceShooterGame
                      FullName = fullName,
                      UserName = userName,
                      Password = password,
-                     GameId = Constants.GAME_ID,
-                     MetaData = new Dictionary<string, string>()
-                     {
-                         { "SubscribedNewsletters", subscribedNewsletters.ToString() }
-                     },
+                     GameId = Constants.GAME_ID
                  });
 
             return response.StatusCode == HttpStatusCode.OK

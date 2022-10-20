@@ -77,14 +77,7 @@
                     Checked="ConfirmCheckBox_Checked"
                     Content="Yes, I agree to the conditions of participation."
                     FontSize="14"
-                    Unchecked="ConfirmCheckBox_Unchecked" />
-
-                <!--  Subscribe to newsletters  -->
-                <CheckBox
-                    x:Name="GameSignupPage_ConfirmNewsLettersCheckBox"
-                    Margin="5"
-                    Content="Yes, I would like to subscribe to newsletters."
-                    FontSize="14" />
+                    Unchecked="ConfirmCheckBox_Unchecked" />               
 
                 <!--  Signup button  -->
                 <Button
