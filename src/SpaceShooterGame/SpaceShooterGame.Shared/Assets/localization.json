@@ -7,8 +7,12 @@
         "Value": "Astro Odyssey"
       },
       {
-        "Culture": "bn",
-        "Value": "অ্যাস্ট্রো ওডিসি"
+        "Culture": "de",
+        "Value": "Astro Odyssey"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Astro Odyssey"
       }
     ]
   },
@@ -20,21 +24,29 @@
         "Value": "A classic rock metal 🎸 space shooter on WebAssembly."
       },
       {
-        "Culture": "bn",
-        "Value": "WebAssembly-এ একটি ক্লাসিক রক মেটাল 🎸 স্পেস শ্যুটার।"
+        "Culture": "de",
+        "Value": "Ein klassischer Rock-Metal 🎸-Weltraum-Shooter auf WebAssembly."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Un classique rock métal 🎸 space shooter sur WebAssembly."
       }
     ]
   },
   {
-    "Key": "GameStartPage_BanglaButton",
+    "Key": "GameStartPage_HowToPlayButton",
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Bangla"
+        "Value": "How To Play"
       },
       {
-        "Culture": "bn",
-        "Value": "বাংলা"
+        "Culture": "de",
+        "Value": "Wie man spielt"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Comment jouer"
       }
     ]
   },
@@ -46,8 +58,12 @@
         "Value": "Deutsch"
       },
       {
-        "Culture": "bn",
-        "Value": "ডয়েচ"
+        "Culture": "de",
+        "Value": "Deutsch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Deutsch"
       }
     ]
   },
@@ -59,8 +75,12 @@
         "Value": "English"
       },
       {
-        "Culture": "bn",
-        "Value": "ইংরেজি"
+        "Culture": "de",
+        "Value": "Englisch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Anglais"
       }
     ]
   },
@@ -72,8 +92,12 @@
         "Value": "French"
       },
       {
-        "Culture": "bn",
-        "Value": "ফরাসি"
+        "Culture": "de",
+        "Value": "Französisch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Français"
       }
     ]
   },
@@ -85,8 +109,12 @@
         "Value": "Start Game"
       },
       {
-        "Culture": "bn",
-        "Value": "খেলা শুরু করুন"
+        "Culture": "de",
+        "Value": "Spiel starten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Commencer le jeu"
       }
     ]
   },
@@ -98,8 +126,12 @@
         "Value": "Logout"
       },
       {
-        "Culture": "bn",
-        "Value": "প্রস্থান"
+        "Culture": "de",
+        "Value": "Ausloggen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Se Déconnecter"
       }
     ]
   },
@@ -111,8 +143,12 @@
         "Value": "Made with ❤️ by Asadullah Rifat"
       },
       {
-        "Culture": "bn",
-        "Value": "আসাদুল্লাহ রিফাত দ্বারা ❤️ দিয়ে তৈরি"
+        "Culture": "de",
+        "Value": "Erstellt mit ❤️ von Asadullah Rifat"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Fait avec ❤️ par Asadullah Rifat"
       }
     ]
   },
@@ -124,8 +160,12 @@
         "Value": "👋 Welcome Back!"
       },
       {
-        "Culture": "bn",
-        "Value": "👋 স্বাগতম!"
+        "Culture": "de",
+        "Value": "👋 Willkommen Zurück!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👋 Bienvenue à nouveau!"
       }
     ]
   },
@@ -137,8 +177,12 @@
         "Value": "Loading game assets..."
       },
       {
-        "Culture": "bn",
-        "Value": "গেমের সম্পদ লোড হচ্ছে ..."
+        "Culture": "de",
+        "Value": "Laden von Spiel-Assets..."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chargement des actifs de jeu..."
       }
     ]
   },
@@ -150,8 +194,12 @@
         "Value": "We use cookies to provide the best gaming experience!"
       },
       {
-        "Culture": "bn",
-        "Value": "আমরা সেরা গেমিংয়ের অভিজ্ঞতা সরবরাহ করতে কুকি ব্যবহার করি!"
+        "Culture": "de",
+        "Value": "Wir verwenden Cookies, um Ihnen das beste Spielerlebnis zu bieten!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nous utilisons des cookies pour vous offrir la meilleure expérience de jeu possible !"
       }
     ]
   },
@@ -163,7 +211,11 @@
         "Value": "👎"
       },
       {
-        "Culture": "bn",
+        "Culture": "de",
+        "Value": "👎"
+      },
+      {
+        "Culture": "fr",
         "Value": "👎"
       }
     ]
@@ -176,47 +228,63 @@
         "Value": "👍"
       },
       {
-        "Culture": "bn",
+        "Culture": "de",
+        "Value": "👍"
+      },
+      {
+        "Culture": "fr",
         "Value": "👍"
       }
     ]
   },
   {
-    "Key": "Antimony",
+    "Key": "DEFENDER",
     "CultureValues": [
       {
         "Culture": "en",
         "Value": "Antimony"
       },
       {
-        "Culture": "bn",
-        "Value": "অ্যান্টিমনি"
+        "Culture": "de",
+        "Value": "Antimony"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Antimony"
       }
     ]
   },
   {
-    "Key": "Bismuth",
+    "Key": "BERSERKER",
     "CultureValues": [
       {
         "Culture": "en",
         "Value": "Bismuth"
       },
       {
-        "Culture": "bn",
-        "Value": "বিসমাথ"
+        "Culture": "de",
+        "Value": "Bismuth"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bismuth"
       }
     ]
   },
   {
-    "Key": "Curium",
+    "Key": "SPECTRE",
     "CultureValues": [
       {
         "Culture": "en",
         "Value": "Curium"
       },
       {
-        "Culture": "bn",
-        "Value": "কিউরিয়াম"
+        "Culture": "de",
+        "Value": "Curium"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Curium"
       }
     ]
   },
@@ -228,8 +296,12 @@
         "Value": "Welcome to"
       },
       {
-        "Culture": "bn",
-        "Value": "স্বাগতম"
+        "Culture": "de",
+        "Value": "Willkommen bei"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bienvenue à"
       }
     ]
   },
@@ -241,8 +313,12 @@
         "Value": "Choose a spaceship"
       },
       {
-        "Culture": "bn",
-        "Value": "একটি স্পেসশিপ চয়ন করুন"
+        "Culture": "de",
+        "Value": "Wähle ein Raumschiff"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Choisis un vaisseau"
       }
     ]
   },
@@ -254,8 +330,12 @@
         "Value": "Each spaceship offers a different gaming experience."
       },
       {
-        "Culture": "bn",
-        "Value": "প্রতিটি স্পেসশিপ একটি আলাদা গেমিং অভিজ্ঞতা সরবরাহ করে।"
+        "Culture": "de",
+        "Value": "Jedes Raumschiff bietet ein anderes Spielerlebnis."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chaque vaisseau spatial offre une expérience de jeu différente."
       }
     ]
   },
@@ -267,8 +347,12 @@
         "Value": "Select"
       },
       {
-        "Culture": "bn",
-        "Value": "নির্বাচন করুন"
+        "Culture": "de",
+        "Value": "Auswählen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Sélectionner"
       }
     ]
   },
@@ -280,8 +364,12 @@
         "Value": "How To Play"
       },
       {
-        "Culture": "bn",
-        "Value": "কিভাবে খেলতে হবে"
+        "Culture": "de",
+        "Value": "Wie man spielt"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Comment Jouer"
       }
     ]
   },
@@ -293,8 +381,12 @@
         "Value": "Controls"
       },
       {
-        "Culture": "bn",
-        "Value": "নিয়ন্ত্রণ"
+        "Culture": "de",
+        "Value": "Steuerung"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Contrôle"
       }
     ]
   },
@@ -306,8 +398,12 @@
         "Value": "Move to ⬅️ or ➡️ with the arrow keys on your ⌨️ or use the touch screen of your 📱."
       },
       {
-        "Culture": "bn",
-        "Value": "আপনার ⌨ এ তীর কীগুলি দিয়ে ⬅ বা ➡ এ যান বা আপনার 📱 এর টাচ স্ক্রিনটি ব্যবহার করুন।"
+        "Culture": "de",
+        "Value": "Bewege dich nach ⬅️ oder ➡️ mit den Pfeiltasten auf deiner ⌨️ oder benutze den Touch Screen deines 📱."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Déplace-toi vers ⬅️ ou ➡️ avec les touches fléchées de ton ⌨️ ou utilise l'écran tactile de ton 📱."
       }
     ]
   },
@@ -319,8 +415,12 @@
         "Value": "Enemies & Meteors"
       },
       {
-        "Culture": "bn",
-        "Value": "শত্রু ও উল্কা"
+        "Culture": "de",
+        "Value": "Gegner & Meteoriten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Adversaires & Météorites"
       }
     ]
   },
@@ -332,8 +432,12 @@
         "Value": "Shoot them and avoid collision."
       },
       {
-        "Culture": "bn",
-        "Value": "তাদের গুলি করুন এবং সংঘর্ষ এড়িয়ে চলুন।"
+        "Culture": "de",
+        "Value": "Auf sie schießen und Kollisionen vermeiden."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rencontre-les et évite les collisions."
       }
     ]
   },
@@ -345,8 +449,12 @@
         "Value": "Bosses"
       },
       {
-        "Culture": "bn",
-        "Value": "বস"
+        "Culture": "de",
+        "Value": "Bosse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Patrons"
       }
     ]
   },
@@ -358,8 +466,12 @@
         "Value": "Defeat them to get to the next level."
       },
       {
-        "Culture": "bn",
-        "Value": "পরবর্তী স্তরে পৌঁছানোর জন্য তাদের পরাজিত করুন।"
+        "Culture": "de",
+        "Value": "Besige sie um ins nächste Level zu kommen."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Battez-les pour passer au niveau suivant."
       }
     ]
   },
@@ -371,8 +483,12 @@
         "Value": "Healths"
       },
       {
-        "Culture": "bn",
-        "Value": "স্বাস্থ্য"
+        "Culture": "de",
+        "Value": "Leben"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Vies"
       }
     ]
   },
@@ -384,8 +500,12 @@
         "Value": "Collect them to repair your spaceship."
       },
       {
-        "Culture": "bn",
-        "Value": "আপনার স্পেসশিপটি মেরামত করতে এগুলি সংগ্রহ করুন।"
+        "Culture": "de",
+        "Value": "Sammle sie um dein Raumschiff zu reparieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rassemble-les pour réparer ton vaisseau spatial."
       }
     ]
   },
@@ -397,8 +517,12 @@
         "Value": "Power-ups"
       },
       {
-        "Culture": "bn",
-        "Value": "শক্তি বৃদ্ধি"
+        "Culture": "de",
+        "Value": "Einschalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Powerups"
       }
     ]
   },
@@ -410,8 +534,12 @@
         "Value": "Collect them to get more powerful weapons."
       },
       {
-        "Culture": "bn",
-        "Value": "আরও শক্তিশালী অস্ত্র পেতে তাদের সংগ্রহ করুন।"
+        "Culture": "de",
+        "Value": "Sammle sie um mächtigere Waffen zu erhalten."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Collectez-les pour obtenir des armes plus puissantes."
       }
     ]
   },
@@ -423,8 +551,12 @@
         "Value": "Collectibles"
       },
       {
-        "Culture": "bn",
-        "Value": "সংগ্রহযোগ্য"
+        "Culture": "de",
+        "Value": "Sammlerobjekte"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Objets de collection"
       }
     ]
   },
@@ -436,8 +568,29 @@
         "Value": "Collect them to increase your firepower and activate 2x score."
       },
       {
-        "Culture": "bn",
-        "Value": "আপনার ফায়ারপাওয়ার বাড়াতে এবং 2x স্কোর সক্রিয় করতে এগুলি সংগ্রহ করুন।"
+        "Culture": "de",
+        "Value": "Sammle sie ein, um deine Feuerkraft zu erhöhen und 2-fache Punkte zu aktivieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Récolte-les pour augmenter ta puissance de feu et activer des points 2X."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_NextButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Next"
+      },
+      {
+        "Culture": "de",
+        "Value": "Weiter"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Suivant"
       }
     ]
   },
@@ -446,11 +599,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "👍 Okay"
+        "Value": "👍 Start Game"
       },
       {
-        "Culture": "bn",
-        "Value": "👍 ঠিক আছে"
+        "Culture": "de",
+        "Value": "👍 Spiel starten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👍 Commencer le jeu"
       }
     ]
   },
@@ -459,11 +616,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "BEAM CANNON"
+        "Value": "Beam cannon"
       },
       {
-        "Culture": "bn",
-        "Value": "রশ্মি কামান"
+        "Culture": "de",
+        "Value": "Strahlkanone"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Canon à faisceau"
       }
     ]
   },
@@ -472,11 +633,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "BLAZE BLITZ"
+        "Value": "Blaze blitz"
       },
       {
-        "Culture": "bn",
-        "Value": "ব্লেজ ব্লিটজ"
+        "Culture": "de",
+        "Value": "Blaze blitz"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Blaze blitz"
       }
     ]
   },
@@ -485,11 +650,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "PLASMA BOMB"
+        "Value": "Plasma bomb"
       },
       {
-        "Culture": "bn",
-        "Value": "প্লাজমা বোমা"
+        "Culture": "de",
+        "Value": "Plasmabombe"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bombe à plasma"
       }
     ]
   },
@@ -498,11 +667,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "BOSS"
+        "Value": "Boss"
       },
       {
-        "Culture": "bn",
-        "Value": "বস"
+        "Culture": "de",
+        "Value": "Boss"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chef"
       }
     ]
   },
@@ -511,11 +684,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "CLOAK DOWN"
+        "Value": "Cloak down"
       },
       {
-        "Culture": "bn",
-        "Value": "ক্লোক ডাউন"
+        "Culture": "de",
+        "Value": "Klappen sie sich"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Clochez-vous"
       }
     ]
   },
@@ -524,11 +701,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "CLOAK UP"
+        "Value": "Cloak up"
       },
       {
-        "Culture": "bn",
-        "Value": "ক্লোক আপ"
+        "Culture": "de",
+        "Value": "Sich tarnen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Couvrez-vous"
       }
     ]
   },
@@ -537,11 +718,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "FIRING RATE DECREASED"
+        "Value": "Firing rate decreased"
       },
       {
-        "Culture": "bn",
-        "Value": "গুলিবর্ষণের হার কমেছে"
+        "Culture": "de",
+        "Value": "Feuerrate verringert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "La cadence de tir a diminué"
       }
     ]
   },
@@ -550,11 +735,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "FIRING RATE INCREASED"
+        "Value": "Firing rate increased"
       },
       {
-        "Culture": "bn",
-        "Value": "গুলিবর্ষণের হার বেড়েছে"
+        "Culture": "de",
+        "Value": "Feuerrate erhöht"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Cadence de tir augmentée"
       }
     ]
   },
@@ -563,11 +752,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "SHIELD DOWN"
+        "Value": "Shield down"
       },
       {
-        "Culture": "bn",
-        "Value": "শিল্ড ডাউন"
+        "Culture": "de",
+        "Value": "Schild nach unten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Abaisser le bouclier"
       }
     ]
   },
@@ -576,11 +769,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "SHIELD UP"
+        "Value": "Shield up"
       },
       {
-        "Culture": "bn",
-        "Value": "শিল্ড আপ"
+        "Culture": "de",
+        "Value": "Schild auf"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Augmentation du bouclier"
       }
     ]
   },
@@ -589,11 +786,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "COMPLETE"
+        "Value": "Complete"
       },
       {
-        "Culture": "bn",
-        "Value": "সম্পূর্ণ"
+        "Culture": "de",
+        "Value": "Komplett"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Complète"
       }
     ]
   },
@@ -602,11 +803,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "ENEMY APPROACHES"
+        "Value": "Enemy approaches"
       },
       {
-        "Culture": "bn",
-        "Value": "শত্রু কাছে পৌঁছেছে"
+        "Culture": "de",
+        "Value": "Feindliche annäherungen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "L'ennemi s'approche"
       }
     ]
   },
@@ -618,8 +823,12 @@
         "Value": "Fantastic game"
       },
       {
-        "Culture": "bn",
-        "Value": "চমত্কার খেলা"
+        "Culture": "de",
+        "Value": "Fantastisches Spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu fantastique"
       }
     ]
   },
@@ -628,11 +837,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "GAME PAUSED"
+        "Value": "Game paused"
       },
       {
-        "Culture": "bn",
-        "Value": "খেলা থামানো হয়েছে"
+        "Culture": "de",
+        "Value": "Spiel pausiert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu pausé"
       }
     ]
   },
@@ -644,8 +857,12 @@
         "Value": "Good game"
       },
       {
-        "Culture": "bn",
-        "Value": "ভাল খেলা"
+        "Culture": "de",
+        "Value": "Gutes spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bon jeu"
       }
     ]
   },
@@ -657,8 +874,12 @@
         "Value": "Great game"
       },
       {
-        "Culture": "bn",
-        "Value": "অসাধারন খেলা"
+        "Culture": "de",
+        "Value": "Tolles spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bon jeu"
       }
     ]
   },
@@ -667,11 +888,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "LEVEL"
+        "Value": "Level"
       },
       {
-        "Culture": "bn",
-        "Value": "স্তর"
+        "Culture": "de",
+        "Value": "Ebene"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Niveau"
       }
     ]
   },
@@ -683,8 +908,12 @@
         "Value": "No luck"
       },
       {
-        "Culture": "bn",
-        "Value": "দুর্ভাগ্য"
+        "Culture": "de",
+        "Value": "Kein glück"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Pas de chance"
       }
     ]
   },
@@ -693,11 +922,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "POWER DOWN"
+        "Value": "Power down"
       },
       {
-        "Culture": "bn",
-        "Value": "ক্ষমতা হ্রাস"
+        "Culture": "de",
+        "Value": "Leistungsverringerung"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Diminution de la puissance"
       }
     ]
   },
@@ -706,11 +939,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "QUIT GAME?"
+        "Value": "Quit game?"
       },
       {
-        "Culture": "bn",
-        "Value": "খেলা বন্ধ?"
+        "Culture": "de",
+        "Value": "Spiel verlassen?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Quitter le jeu?"
       }
     ]
   },
@@ -722,8 +959,12 @@
         "Value": "Score"
       },
       {
-        "Culture": "bn",
-        "Value": "স্কোর"
+        "Culture": "de",
+        "Value": "Punktzahl"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Score"
       }
     ]
   },
@@ -732,11 +973,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Your Score"
+        "Value": "Your score"
       },
       {
-        "Culture": "bn",
-        "Value": "আপনার ফলাফল"
+        "Culture": "de",
+        "Value": "Ihr spielstand"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Votre score"
       }
     ]
   },
@@ -745,11 +990,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "🤘 Personal Best Score"
+        "Value": "Personal best score"
       },
       {
-        "Culture": "bn",
-        "Value": "🤘 ব্যক্তিগত সেরা স্কোর"
+        "Culture": "de",
+        "Value": "Persönliche beste punktzahl"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Meilleur score personnel"
       }
     ]
   },
@@ -758,11 +1007,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "🕹️ Last Game Score"
+        "Value": "🕹️ Last game score"
       },
       {
-        "Culture": "bn",
-        "Value": "🕹️ শেষ গেম স্কোর"
+        "Culture": "de",
+        "Value": "🕹️ Letzter spielpunkt"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🕹️ Score du dernier match"
       }
     ]
   },
@@ -774,8 +1027,12 @@
         "Value": "Destroyed"
       },
       {
-        "Culture": "bn",
-        "Value": "ধ্বংস"
+        "Culture": "de",
+        "Value": "Zerstörte"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Détruits"
       }
     ]
   },
@@ -787,8 +1044,12 @@
         "Value": "Enemies"
       },
       {
-        "Culture": "bn",
-        "Value": "শত্রু"
+        "Culture": "de",
+        "Value": "Feinde"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Ennemis"
       }
     ]
   },
@@ -800,8 +1061,12 @@
         "Value": "Meteors"
       },
       {
-        "Culture": "bn",
-        "Value": "উল্কা"
+        "Culture": "de",
+        "Value": "Meteoriten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Météores"
       }
     ]
   },
@@ -813,8 +1078,12 @@
         "Value": "Bosses"
       },
       {
-        "Culture": "bn",
-        "Value": "বস"
+        "Culture": "de",
+        "Value": "Bosse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bosses"
       }
     ]
   },
@@ -826,8 +1095,12 @@
         "Value": "Collectibles"
       },
       {
-        "Culture": "bn",
-        "Value": "সংগ্রহযোগ্য"
+        "Culture": "de",
+        "Value": "Sammlerstücke"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Pièces de collection"
       }
     ]
   },
@@ -836,11 +1109,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "SHIP REPAIRED"
+        "Value": "Ship repaired"
       },
       {
-        "Culture": "bn",
-        "Value": "জাহাজ মেরামত"
+        "Culture": "de",
+        "Value": "Schiff repariert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Navire réparé"
       }
     ]
   },
@@ -849,11 +1126,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "SONIC BLAST"
+        "Value": "Sonic blast"
       },
       {
-        "Culture": "bn",
-        "Value": "সোনিক বিস্ফোরণ"
+        "Culture": "de",
+        "Value": "Sonic blast"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Sonic blast"
       }
     ]
   },
@@ -865,8 +1146,12 @@
         "Value": "Supreme game"
       },
       {
-        "Culture": "bn",
-        "Value": "সর্বোচ্চ খেলা"
+        "Culture": "de",
+        "Value": "Höchstes spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu suprême"
       }
     ]
   },
@@ -875,11 +1160,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "TAP ON THE SCREEN TO BEGIN"
+        "Value": "Tap on the screen to begin"
       },
       {
-        "Culture": "bn",
-        "Value": "শুরু করতে স্ক্রিনে ট্যাপ করুন"
+        "Culture": "de",
+        "Value": "Tippen sie auf den bildschirm, um zu beginnen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Appuyez sur l'écran pour commencer"
       }
     ]
   },
@@ -888,11 +1177,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "TAP TO QUIT"
+        "Value": "Tap to quit"
       },
       {
-        "Culture": "bn",
-        "Value": "প্রস্থান করতে ট্যাপ করুন"
+        "Culture": "de",
+        "Value": "Tippen sie zum beenden"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tap pour quitter"
       }
     ]
   },
@@ -901,11 +1194,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "TAP TO RESUME"
+        "Value": "Tap to resume"
       },
       {
-        "Culture": "bn",
-        "Value": "আবার শুরু করতে ট্যাপ করুন"
+        "Culture": "de",
+        "Value": "Tippen, um weiterzufahren"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Appuyer pour reprendre"
       }
     ]
   },
@@ -914,11 +1211,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "2x SCORE ON"
+        "Value": "2X score on"
       },
       {
-        "Culture": "bn",
-        "Value": "2x স্কোর চালু"
+        "Culture": "de",
+        "Value": "2X punktzahl auf"
+      },
+      {
+        "Culture": "fr",
+        "Value": "2X score sur"
       }
     ]
   },
@@ -927,11 +1228,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "COLLECT MORE GUITARS"
+        "Value": "Collect more pizza slices"
       },
       {
-        "Culture": "bn",
-        "Value": "আরও গিটার সংগ্রহ করুন"
+        "Culture": "de",
+        "Value": "Sammeln sie mehr pizzascheiben"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Recueillir plus de tranches de pizza"
       }
     ]
   },
@@ -940,11 +1245,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "You could earn your place on the leaderboard if you login."
+        "Value": "You could win an exciting prize if you login."
       },
       {
-        "Culture": "bn",
-        "Value": "লগইন করলে আপনি লিডারবোর্ডে আপনার জায়গা অর্জন করতে পারেন।"
+        "Culture": "de",
+        "Value": "Sie können einen aufregenden Preis gewinnen, wenn Sie sich anmelden."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Vous pourriez gagner un prix passionnant si vous vous connectez."
       }
     ]
   },
@@ -956,8 +1265,12 @@
         "Value": "Game Over"
       },
       {
-        "Culture": "bn",
-        "Value": "খেলা শেষ"
+        "Culture": "de",
+        "Value": "Das Spiel ist vorbei"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu Terminé"
       }
     ]
   },
@@ -966,11 +1279,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Play Again"
+        "Value": "Play again"
       },
       {
-        "Culture": "bn",
-        "Value": "আবার খেলুন"
+        "Culture": "de",
+        "Value": "Erneut spielen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rejouer"
       }
     ]
   },
@@ -982,8 +1299,12 @@
         "Value": "Leaderboard"
       },
       {
-        "Culture": "bn",
-        "Value": "লিডারবোর্ড"
+        "Culture": "de",
+        "Value": "Bestenliste"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tableau des leaders"
       }
     ]
   },
@@ -995,8 +1316,12 @@
         "Value": "Username or Email"
       },
       {
-        "Culture": "bn",
-        "Value": "ব্যবহারকারী নাম বা ইমেল"
+        "Culture": "de",
+        "Value": "Benutzername oder E-Mail-Adresse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom d'utilisateur ou e-mail"
       }
     ]
   },
@@ -1008,8 +1333,12 @@
         "Value": "Password"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড"
+        "Culture": "de",
+        "Value": "Passwort"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mot de passe"
       }
     ]
   },
@@ -1021,8 +1350,12 @@
         "Value": "Login"
       },
       {
-        "Culture": "bn",
-        "Value": "প্রবেশ করুন"
+        "Culture": "de",
+        "Value": "Login"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Connexion"
       }
     ]
   },
@@ -1034,21 +1367,12 @@
         "Value": "No account yet?"
       },
       {
-        "Culture": "bn",
-        "Value": "এখনও কোন অ্যাকাউন্ট নেই?"
-      }
-    ]
-  },
-  {
-    "Key": "GameSignupPage_Header",
-    "CultureValues": [
-      {
-        "Culture": "en",
-        "Value": "👋 Hello and welcome!"
+        "Culture": "de",
+        "Value": "Du hast noch keinen Account?"
       },
       {
-        "Culture": "bn",
-        "Value": "👋 হ্যালো এবং স্বাগতম!"
+        "Culture": "fr",
+        "Value": "Tu n'as pas encore de compte?"
       }
     ]
   },
@@ -1057,11 +1381,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Enter full name"
+        "Value": "Full name"
       },
       {
-        "Culture": "bn",
-        "Value": "পুরো নাম লিখুন"
+        "Culture": "de",
+        "Value": "Vollständiger Name"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom complet"
       }
     ]
   },
@@ -1070,11 +1398,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Enter email"
+        "Value": "Email address"
       },
       {
-        "Culture": "bn",
-        "Value": "ইমেইল প্রদান করুন"
+        "Culture": "de",
+        "Value": "Email-Adresse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Adresse e-mail"
       }
     ]
   },
@@ -1083,11 +1415,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Set a username"
+        "Value": "User name"
       },
       {
-        "Culture": "bn",
-        "Value": "একটি ব্যবহারকারীর নাম সেট করুন"
+        "Culture": "de",
+        "Value": "Benutzer Name"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom de l'utilisateur"
       }
     ]
   },
@@ -1096,11 +1432,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Set a password"
+        "Value": "Password"
       },
       {
-        "Culture": "bn",
-        "Value": "একটি পাসওয়ার্ড সেট করুন"
+        "Culture": "de",
+        "Value": "Passwort"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mot de passe"
       }
     ]
   },
@@ -1112,8 +1452,12 @@
         "Value": "Confirm password"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড নিশ্চিত করুন"
+        "Culture": "de",
+        "Value": "Passwort bestätigen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Confirmez le mot de passe"
       }
     ]
   },
@@ -1125,8 +1469,12 @@
         "Value": "Signup"
       },
       {
-        "Culture": "bn",
-        "Value": "নিবন্ধন করুন"
+        "Culture": "de",
+        "Value": "Anmelden"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Inscription"
       }
     ]
   },
@@ -1138,8 +1486,12 @@
         "Value": "You already have an account?"
       },
       {
-        "Culture": "bn",
-        "Value": "আপনার ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?"
+        "Culture": "de",
+        "Value": "Du hast bereits einen Account?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tu as déjà un compte ??"
       }
     ]
   },
@@ -1151,8 +1503,29 @@
         "Value": "Yes, I agree to the conditions of participation."
       },
       {
-        "Culture": "bn",
-        "Value": "হ্যাঁ, আমি অংশগ্রহণের শর্তে সম্মত।"
+        "Culture": "de",
+        "Value": "Ja, ich stimme den Teilnahmebedingungen zu."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Oui, j'accepte les conditions de participation."
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmNewsLettersCheckBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Yes, I would like to subscribe to newsletters."
+      },
+      {
+        "Culture": "de",
+        "Value": "Ja, ich möchte Newsletter abonnieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Oui, je voudrais souscrire aux newsletters."
       }
     ]
   },
@@ -1164,8 +1537,12 @@
         "Value": "Passwords didn't match"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড মেলে না"
+        "Culture": "de",
+        "Value": "Passwörter stimmten nicht überein"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Les mots de passe ne correspondent pas"
       }
     ]
   },
@@ -1177,8 +1554,12 @@
         "Value": "Passwords matched"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড মিলেছে"
+        "Culture": "de",
+        "Value": "Matchierte Passwörter"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mots de passe correspondants"
       }
     ]
   },
@@ -1190,8 +1571,12 @@
         "Value": "Password must be at least eight characters"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড অবশ্যই কমপক্ষে আটটি অক্ষর হতে হবে"
+        "Culture": "de",
+        "Value": "Das Passwort muss mindestens acht Zeichen betragen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit comporter au moins huit caractères"
       }
     ]
   },
@@ -1203,8 +1588,12 @@
         "Value": "Password must be less than fourteen characters"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড অবশ্যই চৌদ্দ অক্ষরের চেয়ে কম হতে হবে"
+        "Culture": "de",
+        "Value": "Das Passwort muss weniger als vierzehn Zeichen betragen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit être inférieur à quatorze caractères"
       }
     ]
   },
@@ -1216,8 +1605,12 @@
         "Value": "Password must contain one uppercase character"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ডে অবশ্যই একটি বড় হাতের অক্ষর থাকতে হবে"
+        "Culture": "de",
+        "Value": "Passwort muss einen Großbuchstaben enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir un caractère majuscule"
       }
     ]
   },
@@ -1229,8 +1622,12 @@
         "Value": "Password must contain one lowercase character"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ডে অবশ্যই একটি ছোট হাতের অক্ষর থাকতে হবে"
+        "Culture": "de",
+        "Value": "Das Passwort muss einen Kleinbuchstabencharakter enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir un caractère minuscule"
       }
     ]
   },
@@ -1242,8 +1639,12 @@
         "Value": "Password cannot contain spaces"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ডে স্পেস থাকতে পারবে না"
+        "Culture": "de",
+        "Value": "Kennwort darf keine Leerzeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe ne peut pas contenir d'espaces"
       }
     ]
   },
@@ -1255,8 +1656,12 @@
         "Value": "Password must contain one special character"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ডে অবশ্যই একটি বিশেষ অক্ষর থাকতে হবে"
+        "Culture": "de",
+        "Value": "Das Passwort muss ein Sonderzeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir un caractère spécial"
       }
     ]
   },
@@ -1268,8 +1673,12 @@
         "Value": "Password is strong"
       },
       {
-        "Culture": "bn",
-        "Value": "পাসওয়ার্ড শক্তিশালী"
+        "Culture": "de",
+        "Value": "Das Passwort ist sicher"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe est fort"
       }
     ]
   },
@@ -1281,8 +1690,12 @@
         "Value": "Invalid characters in full name"
       },
       {
-        "Culture": "bn",
-        "Value": "পুরো নামে অবৈধ অক্ষর"
+        "Culture": "de",
+        "Value": "Ungültige Zeichen im vollständigen Namen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Caractères non valides dans le nom complet"
       }
     ]
   },
@@ -1291,11 +1704,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Leaderboard"
+        "Value": "🏆 Leaderboard"
       },
       {
-        "Culture": "bn",
-        "Value": "লিডারবোর্ড"
+        "Culture": "de",
+        "Value": "🏆 Bestenliste"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🏆 Tableau des leaders"
       }
     ]
   },
@@ -1307,8 +1724,12 @@
         "Value": "📅 Daily"
       },
       {
-        "Culture": "bn",
-        "Value": "📅 দৈনিক"
+        "Culture": "de",
+        "Value": "📅 Täglich"
+      },
+      {
+        "Culture": "fr",
+        "Value": "📅 Quotidiennement"
       }
     ]
   },
@@ -1320,8 +1741,12 @@
         "Value": "👑 All time"
       },
       {
-        "Culture": "bn",
-        "Value": "👑 সর্বকালে"
+        "Culture": "de",
+        "Value": "👑 Alle Zeiten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👑 Tout le temps"
       }
     ]
   },
@@ -1333,8 +1758,12 @@
         "Value": "Play now"
       },
       {
-        "Culture": "bn",
-        "Value": "এখনই খেলুন"
+        "Culture": "de",
+        "Value": "Jetzt spielen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jouer maintenant"
       }
     ]
   },
@@ -1346,8 +1775,12 @@
         "Value": "Loading data..."
       },
       {
-        "Culture": "bn",
-        "Value": "তথ্য প্রস্তুত হচ্ছে..."
+        "Culture": "de",
+        "Value": "Laden von Daten..."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chargement des données..."
       }
     ]
   },
@@ -1359,8 +1792,12 @@
         "Value": "No data available."
       },
       {
-        "Culture": "bn",
-        "Value": "কোন তথ্য নেই।"
+        "Culture": "de",
+        "Value": "Keine Daten verfügbar."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Pas de données disponibles."
       }
     ]
   }

@@ -2,10 +2,6 @@
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Media.Imaging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SpaceShooterGame
 {
@@ -46,7 +42,6 @@ namespace SpaceShooterGame
                 };
 
                 border.Child = textBlock;
-
                 this.Children.Add(border);
             }
         }

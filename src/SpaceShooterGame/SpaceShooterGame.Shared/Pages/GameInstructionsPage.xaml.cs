@@ -1,94 +1,93 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using System;
 
 namespace SpaceShooterGame
 {
     public sealed partial class GameInstructionsPage : Page
     {
-        #region Fields
-
-        private readonly IAudioHelper _audioHelper;
-        private readonly ILocalizationHelper _localizationHelper;
-
-        #endregion
-
         #region Ctor
 
         public GameInstructionsPage()
         {
             this.InitializeComponent();
             Loaded += GameInstructionsPage_Loaded;
-            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
-            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
         }
 
         #endregion
 
         #region Events
 
-        private async void GameInstructionsPage_Loaded(object sender, RoutedEventArgs e)
+        private void GameInstructionsPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
-            await this.PlayLoadedTransition();
         }
 
-        public async void GameInstructionsPage_PlayButton_Click(object sender, RoutedEventArgs e)
+        private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayUnLoadedTransition();
+            var itemsCount = InstructionsContainer.Items.Count - 1;
 
-            App.NavigateToPage(typeof(GamePlayPage));
-        }
-
-        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
-        {
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(ShipSelectionPage));
-        }
-
-
-        #endregion
-
-        #region Methods      
-
-        private void ShowUserName()
-        {
-            if (App.HasUserLoggedIn)
+            // once the last instruction is reached, make the start game button visible and hide the next button
+            if (InstructionsContainer.SelectedIndex == itemsCount)
             {
-                Page_UserName.Text = App.GameProfile.User.UserName;
-                Page_UserPicture.Initials = App.GameProfile.Initials;
-                PlayerNameHolder.Visibility = Visibility.Visible;
+                // traverse back to first instruction
+                for (int i = 0; i < itemsCount; i++)
+                {
+                    InstructionsContainer.SelectedIndex--;
+                }
+
+                GameInstructionsPage_NextButton.Visibility = Visibility.Collapsed;
+                GameInstructionsPage_PlayButton.Visibility = Visibility.Visible;
             }
             else
             {
-                PlayerNameHolder.Visibility = Visibility.Collapsed;
+                InstructionsContainer.SelectedIndex++;
             }
+
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+        }
+
+        public void GameInstructionsPage_PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(typeof(ShipSelectionPage));
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToPage(typeof(GameStartPage));
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
         }
 
         private void SetLocalization()
         {
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_Tagline);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_PlayButton);
+            PageExtensions.SetLocalization(this);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_ControlsText2);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_EnemiesText2);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_BossesText2);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_HealthText2);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_PowerupText2);
 
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
-            _localizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
         }
 
         #endregion

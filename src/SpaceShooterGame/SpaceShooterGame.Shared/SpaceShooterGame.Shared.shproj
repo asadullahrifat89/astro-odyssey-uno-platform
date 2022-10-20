@@ -11,19 +11,13 @@
   <Import Project="SpaceShooterGame.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\GameInstructionsPage.xaml" />
-    <UpToDateCheckInput Remove="Pages\GameLeaderboardPage.xaml" />
-    <UpToDateCheckInput Remove="Pages\GameOverPage - Copy.xaml" />
-    <UpToDateCheckInput Remove="Pages\GameOverPage.xaml" />
-    <UpToDateCheckInput Remove="Pages\GameSignupPage.xaml" />
-    <UpToDateCheckInput Remove="Pages\LanguageSelectionPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <_Globbed_Content Remove="Assets\localization.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <_Globbed_PRIResource Remove="Strings\bn\Resources.resw" />
-    <_Globbed_PRIResource Remove="Strings\de\Resources.resw" />
-    <_Globbed_PRIResource Remove="Strings\fr\Resources.resw" />
+    <_Globbed_Compile Remove="Helpers\AuthTokenHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\CookieHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\GameProfileHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\PlayerCredentialsHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\PlayerScoreHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\ScalingHelper.cs" />
+    <_Globbed_Compile Remove="Helpers\SessionHelper.cs" />
+    <_Globbed_Compile Remove="Models\SpaceShooterGameScore.cs" />
   </ItemGroup>
 </Project>

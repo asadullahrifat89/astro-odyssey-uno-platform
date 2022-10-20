@@ -9,8 +9,8 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly Image _content = new Image() { Stretch = Stretch.Uniform };
-        private readonly Random random = new Random();
+        private readonly Image _content = new() { Stretch = Stretch.Uniform };
+        private readonly Random random = new();
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace SpaceShooterGame
 
         public Collectible()
         {
-            Tag = Constants.COLLECTIBLE_TAG;
+            Tag = ElementType.COLLECTIBLE;
             Height = Constants.COLLECTIBLE_OBJECT_SIZE;
             Width = Constants.COLLECTIBLE_OBJECT_SIZE;
             Child = _content;
@@ -35,12 +35,13 @@ namespace SpaceShooterGame
         {
             Speed = speed;
 
-            var collectibleType = random.Next(0, GameObjectTemplates.COLLECTIBLE_TEMPLATES.Length);
-            var uri = GameObjectTemplates.COLLECTIBLE_TEMPLATES[collectibleType];
+            var collectibles = AssetHelper.COLLECTIBLE_TEMPLATES;
+            var collectibleType = random.Next(0, collectibles.Length);
+            var collectibleTemplate = collectibles[collectibleType];
 
-            _content.Source = new BitmapImage(uri);
+            _content.Source = new BitmapImage(collectibleTemplate.AssetUri);
 
-            var scaledSize = Constants.COLLECTIBLE_OBJECT_SIZE * scale;
+            var scaledSize = collectibleTemplate.Size * scale;
             Height = scaledSize;
             Width = scaledSize;
 

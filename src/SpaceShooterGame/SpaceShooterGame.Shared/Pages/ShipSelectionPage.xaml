@@ -14,10 +14,11 @@
                 <Image
                     Width="80"
                     Height="80"
-                    Source="{Binding Path=ImageUrl, Mode=OneWay}" />
+                    Source="{Binding Path=ImageUrl.OriginalString, Mode=OneWay}" />
                 <TextBlock
                     Margin="0,0,0,2"
                     FontWeight="SemiBold"
+                    Foreground="White"
                     Text="{Binding Path=Name, Mode=OneWay}"
                     TextAlignment="Center" />
             </StackPanel>
@@ -27,7 +28,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_intro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
         <Border Style="{StaticResource GameUIContainer}">
@@ -72,20 +73,20 @@
                 <!--  Ships  -->
                 <StackPanel x:Name="ShipsPanel" Orientation="Horizontal">
                     <ToggleButton
-                        x:Name="Antimony"
                         Checked="Ship_Selected"
                         ContentTemplate="{StaticResource ShipsListDataTemplate}"
-                        CornerRadius="10" />
+                        CornerRadius="10"
+                        Tag="DEFENDER" />
                     <ToggleButton
-                        x:Name="Bismuth"
                         Checked="Ship_Selected"
                         ContentTemplate="{StaticResource ShipsListDataTemplate}"
-                        CornerRadius="10" />
+                        CornerRadius="10"
+                        Tag="BERSERKER" />
                     <ToggleButton
-                        x:Name="Curium"
                         Checked="Ship_Selected"
                         ContentTemplate="{StaticResource ShipsListDataTemplate}"
-                        CornerRadius="10" />
+                        CornerRadius="10"
+                        Tag="SPECTRE" />
                 </StackPanel>
 
                 <!--  Message  -->
@@ -107,18 +108,19 @@
                     HorizontalAlignment="Stretch"
                     Click="ChooseButton_Click"
                     Content="Select" />
+
             </StackPanel>
 
         </Border>
 
-        <!--  This shows the player's name  -->
+        <!--#region  User Picture & Name-->
         <Border
             x:Name="PlayerNameHolder"
             Margin="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             BorderThickness="3"
-            CornerRadius="25"
+            CornerRadius="25,15,15,25"
             Style="{StaticResource GameUIContainer}"
             Visibility="Collapsed">
 
@@ -128,10 +130,10 @@
                     Grid.Column="0"
                     Width="35"
                     Height="35"
-                    Margin="2,2,2,2" />
+                    Margin="2" />
                 <TextBlock
                     x:Name="Page_UserName"
-                    Margin="5,0"
+                    Margin="2,0,5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontWeight="SemiBold"
@@ -139,6 +141,7 @@
             </StackPanel>
 
         </Border>
+        <!--#endregion-->
 
         <!--  Take to previous page  -->
         <Button

@@ -11,7 +11,7 @@
     <Grid>
 
         <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/gameIntro.gif" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_intro.gif" Stretch="UniformToFill" />
         </Grid.Background>
 
         <!--  Language selection buttons  -->
@@ -20,6 +20,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Orientation="Horizontal">
+
+            <!--  English  -->
             <Button
                 x:Name="GameStartPage_EnglishButton"
                 Margin="2"
@@ -27,142 +29,170 @@
                 Content="English"
                 Style="{StaticResource DefaultButton}"
                 Tag="en" />
+
+            <!--  French  -->
             <Button
-                x:Name="GameStartPage_BanglaButton"
+                x:Name="GameStartPage_FrenchButton"
                 Margin="2"
                 Click="LanguageButton_Click"
-                Content="Bangla"
+                Content="French"
                 Style="{StaticResource DefaultButton}"
-                Tag="bn" />
+                Tag="fr" />
+
+            <!--  German  -->
+            <Button
+                x:Name="GameStartPage_DeutschButton"
+                Margin="2"
+                Click="LanguageButton_Click"
+                Content="Deutsch"
+                Style="{StaticResource DefaultButton}"
+                Tag="de" />
+
         </StackPanel>
 
-        <!--  UI controls  -->
-        <Border Margin="5" Style="{StaticResource GameUIContainer}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <StackPanel
-                x:Name="ActionStack"
-                Width="315"
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Orientation="Vertical">
+            <!--  Game logo, start game, leaderboard, login  -->
+            <Border Margin="5" Style="{StaticResource GameUIContainer}">
 
-                <!--  Game logo  -->
-                <Image Height="100" Source="ms-appx:///Assets/Images/logo_game.png" />
-
-                <!--  Game name  -->
-                <TextBlock
-                    x:Name="ApplicationName_Header"
-                    Margin="0,15"
-                    FontSize="30"
-                    FontWeight="Bold"
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
-
-                <!--  Tag line  -->
-                <TextBlock
-                    x:Name="GameStartPage_Tagline"
-                    Margin="10,0,10,10"
+                <StackPanel
+                    x:Name="ActionStack"
+                    Width="315"
+                    Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="20"
-                    Text="A classic rock metal ⚡ space shooter on WebAssembly."
-                    TextAlignment="Center"
-                    TextWrapping="WrapWholeWords" />
+                    Orientation="Vertical">
 
-                <!--  Start game button  -->
-                <Button
-                    x:Name="GameStartPage_PlayButton"
-                    Height="50"
-                    Margin="30,10,30,5"
-                    HorizontalAlignment="Stretch"
-                    Click="PlayButton_Click"
-                    Content="Start Game" />
+                    <!--  Game logo  -->
+                    <Image Height="100" Source="ms-appx:///Assets/Images/logo_game.png" />
 
-                <StackPanel Margin="30,5,30,5">
+                    <!--  Game name  -->
+                    <TextBlock
+                        x:Name="ApplicationName_Header"
+                        Margin="5,15,5,5"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
 
-                    <!--  Leaderboard button  -->
-                    <Button
-                        x:Name="GameOverPage_LeaderboardButton"
-                        Height="50"
-                        HorizontalAlignment="Stretch"
-                        Click="GameOverPage_LeaderboardButton_Click"
-                        Content="Leaderboard"
-                        Visibility="Collapsed" />
-
-                    <!--  Login Button  -->
-                    <Button
-                        x:Name="GameLoginPage_LoginButton"
-                        Height="50"
-                        HorizontalAlignment="Stretch"
-                        Click="LoginButton_Click"
-                        Content="Login"
-                        Visibility="Collapsed" />
-
-                    <!--  Logout Button  -->
-                    <Button
-                        x:Name="GameStartPage_LogoutButton"
-                        Height="40"
+                    <!--  Tag line  -->
+                    <TextBlock
+                        x:Name="GameStartPage_Tagline"
+                        Margin="10,0,10,10"
                         HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        Text="A rock metal ⚡ sky racer on WebAssembly."
+                        TextAlignment="Center"
+                        TextWrapping="WrapWholeWords" />
+
+                    <!--  How to play button  -->
+                    <Button
+                        x:Name="GameStartPage_HowToPlayButton"
+                        Height="50"
+                        Margin="30,5,30,5"
+                        HorizontalAlignment="Stretch"
+                        Click="HowToPlayButton_Click"
+                        Content="How To Play"
+                        Tag="ActionButton" />
+
+                    <!--  Start game button  -->
+                    <Button
+                        x:Name="GameStartPage_PlayButton"
+                        Height="50"
+                        Margin="30,5,30,5"
+                        HorizontalAlignment="Stretch"
+                        Click="PlayButton_Click"
+                        Content="Start Game"
+                        Tag="ActionButton" />
+
+                    <StackPanel Margin="30,5,30,5">
+
+                        <!--  Leaderboard button  -->
+                        <Button
+                            x:Name="GameOverPage_LeaderboardButton"
+                            Height="50"
+                            HorizontalAlignment="Stretch"
+                            Click="GameOverPage_LeaderboardButton_Click"
+                            Content="Leaderboard"
+                            Visibility="Collapsed" />
+
+                        <!--  Login Button  -->
+                        <Button
+                            x:Name="GameLoginPage_LoginButton"
+                            Height="50"
+                            HorizontalAlignment="Stretch"
+                            Click="LoginButton_Click"
+                            Content="Login"
+                            Tag="ActionButton"
+                            Visibility="Collapsed" />
+
+                        <!--  Logout Button  -->
+                        <Button
+                            x:Name="GameStartPage_LogoutButton"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="LogoutButton_Click"
+                            Content="Logout"
+                            FontSize="15"
+                            Foreground="White"
+                            Tag="ActionButton"
+                            Visibility="Collapsed" />
+
+                    </StackPanel>
+
+                    <!--  Register Button  -->
+                    <Button
+                        x:Name="GameLoginPage_RegisterButton"
+                        Height="40"
+                        Margin="5,5,5,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
                         Background="Transparent"
-                        BorderBrush="White"
                         BorderThickness="0"
-                        Click="LogoutButton_Click"
-                        Content="Logout"
+                        Click="RegisterButton_Click"
+                        Content="No account yet?"
                         FontSize="15"
                         Foreground="White"
+                        Tag="ActionButton"
                         Visibility="Collapsed" />
+
+                    <!--  Brand Tag line  -->
+                    <HyperlinkButton
+                        x:Name="GameStartPage_BrandProfileButton"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Content="Made with ❤️ by Asadullah Rifat"
+                        FontSize="17"
+                        Foreground="White"
+                        NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
+
+                    <!--  Error text  -->
+                    <TextBlock
+                        x:Name="ProgressBarMessageBlock"
+                        Margin="5"
+                        FontWeight="SemiBold"
+                        Foreground="Crimson"
+                        Visibility="Collapsed" />
+
+                    <!--  Progress bar  -->
+                    <ProgressBar
+                        x:Name="ProgressBar"
+                        Height="5"
+                        Foreground="{StaticResource ProgressBarForegroundColor}"
+                        IsIndeterminate="True"
+                        ShowError="False"
+                        ShowPaused="True" />
 
                 </StackPanel>
 
-                <!--  Register Button  -->
-                <Button
-                    x:Name="GameLoginPage_RegisterButton"
-                    Height="40"
-                    Margin="5,5,5,5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Click="RegisterButton_Click"
-                    Content="No account yet?"
-                    FontSize="15"
-                    Foreground="White"
-                    Visibility="Collapsed" />
+            </Border>
 
-                <!--  Brand Tag line  -->
-                <HyperlinkButton
-                    x:Name="GameStartPage_BrandProfileButton"
-                    Margin="0,5,0,5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    Content="Made with ❤️ by Asadullah Rifat"
-                    FontSize="17"
-                    Foreground="White"
-                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
+        </StackPanel>
 
-                <!--  Error text  -->
-                <TextBlock
-                    x:Name="GameStartPage_ErrorText"
-                    Margin="5"
-                    FontWeight="SemiBold"
-                    Foreground="Crimson"
-                    Visibility="Collapsed" />
-
-                <!--  Progress bar  -->
-                <ProgressBar
-                    x:Name="GameStartPage_ProgressBar"
-                    Height="5"
-                    Foreground="{StaticResource ProgressBarForegroundColor}"
-                    IsIndeterminate="True"
-                    ShowError="False"
-                    ShowPaused="True" />
-
-            </StackPanel>
-
-        </Border>
-
-        <!--  Welcome back and cookie message  -->
         <StackPanel
             Margin="10,50"
             HorizontalAlignment="Center"
@@ -223,6 +253,7 @@
                             BorderThickness="2"
                             Click="GameStartPage_CookieDeclineButton_Click"
                             Content="Decline"
+                            FontWeight="SemiBold"
                             Style="{StaticResource DefaultButton}" />
                         <Button
                             x:Name="GameStartPage_CookieAcceptButton"
@@ -230,6 +261,7 @@
                             BorderThickness="2"
                             Click="GameStartPage_CookieAcceptButton_Click"
                             Content="Accept"
+                            FontWeight="SemiBold"
                             Style="{StaticResource DefaultButton}" />
                     </WrapPanel>
                 </Grid>
@@ -237,17 +269,6 @@
             </Border>
 
         </StackPanel>
-
-        <!--  Asset credits  -->
-        <HyperlinkButton
-            x:Name="GameStartPage_AssetsCreditButton"
-            Margin="10"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Content="Assets by redfoc.com 😘"
-            FontSize="20"
-            Foreground="White"
-            NavigateUri="http://www.redfoc.com" />
 
     </Grid>
 

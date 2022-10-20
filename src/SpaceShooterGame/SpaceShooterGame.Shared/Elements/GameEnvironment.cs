@@ -1,10 +1,6 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using System;
+﻿using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Windows.Foundation;
 
 namespace SpaceShooterGame
@@ -13,16 +9,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly List<GameObject> _destroyableGameObjects = new List<GameObject>();
-
-        #endregion
-
-        #region Ctor
-
-        public GameEnvironment()
-        {
-            CanDrag = false;
-        }
+        private readonly List<GameObject> _destroyableGameObjects = new();
 
         #endregion
 
@@ -34,37 +21,22 @@ namespace SpaceShooterGame
 
         public double HalfWidth => Width > 0 && double.IsFinite(Width) ? Width / 2 : 0;
 
+        public double GameObjectScale { get; set; }
+
         #endregion
+
+        #region Ctor
+
+        public GameEnvironment()
+        {
+            CanDrag = false;
+        }
+
+        #endregion        
 
         #region Methods
 
-
-        /// <summary>
-        /// Gets scaling factor for a game object according to game view width.
-        /// </summary>
-        /// <returns></returns>
-        public double GetGameObjectScale()
-        {
-            switch (Width)
-            {
-                case <= 300:
-                    return 0.70;
-                case <= 500:
-                    return 0.75;
-                case <= 700:
-                    return 0.85;
-                case <= 900:
-                    return 0.90;
-                case <= 1000:
-                    return 1;
-                case <= 1400:
-                    return 1.1;
-                case <= 2000:
-                    return 1.2;
-                default:
-                    return 1;
-            }
-        }
+        #region Public
 
         /// <summary>
         /// Get frame time buffer according to game view width.
@@ -72,25 +44,28 @@ namespace SpaceShooterGame
         /// <returns></returns>
         public double GetFrameTimeBuffer()
         {
-            switch (Width)
-            {
-                case <= 400:
-                    return 3.5;
-                case <= 500:
-                    return 2.5;
-                case <= 700:
-                    return 2;
-                case <= 900:
-                    return 1;
-                default:
-                    return 0;
-            }
+            return 0;
+            //switch (Width)
+            //{
+            //    case <= 400:
+            //        return 3.5;
+            //    case <= 500:
+            //        return 2.5;
+            //    case <= 700:
+            //        return 2;
+            //    case <= 900:
+            //        return 1;
+            //    default:
+            //        return 0;
+            //}
         }
 
         public void SetSize(double height, double width)
         {
             Height = height;
             Width = width;
+
+            SetGameObjectScale();
         }
 
         public IEnumerable<T> GetGameObjects<T>()
@@ -110,15 +85,6 @@ namespace SpaceShooterGame
 
         public void RemoveDestroyableGameObjects()
         {
-            //if (Parallel.ForEach(destroyableGameObjects, destroyable =>
-            //{
-            //    RemoveGameObject(destroyable);
-
-            //}).IsCompleted)
-            //{
-            //    ClearDestroyableGameObjects();
-            //}
-
             foreach (var destroyable in _destroyableGameObjects)
             {
                 RemoveGameObject(destroyable);
@@ -148,14 +114,18 @@ namespace SpaceShooterGame
         public bool CheckAndAddDestroyableGameObject(GameObject gameObject)
         {
             // if game object is out of bounds of game view
-            if (gameObject.GetY() > Height || gameObject.GetX() > Width || gameObject.GetX() + gameObject.Width < 0)
+            if (IsRecyclable(gameObject))
             {
                 AddDestroyableGameObject(gameObject);
-
                 return true;
             }
 
             return false;
+        }
+
+        public bool IsRecyclable(GameObject gameObject)
+        {
+            return gameObject.GetY() > Height || gameObject.GetX() > Width || gameObject.GetX() + gameObject.Width < 0;
         }
 
         /// <summary>
@@ -165,8 +135,19 @@ namespace SpaceShooterGame
         /// <returns></returns>
         public IEnumerable<GameObject> GetDestructibles(Rect projectileBounds)
         {
-            return GetGameObjects<GameObject>().Where(x => x.IsDestructible && x.HasHealth && !x.IsMarkedForFadedDestruction && x.GetRect().Intersects(projectileBounds));
+            return GetGameObjects<GameObject>().Where(x => x.IsDestructible && x.GetY() > 0 && x.GetRect().Intersects(projectileBounds));
         }
+
+        #endregion
+
+        #region Private
+
+        private void SetGameObjectScale()
+        {
+            GameObjectScale = ScalingHelper.GetGameObjectScale(Width);
+        }
+
+        #endregion
 
         #endregion
     }
@@ -183,8 +164,5 @@ namespace SpaceShooterGame
         Level_8,
         Level_9,
         Level_10,
-        Level_11,
-        Level_12,
-        Level_13,
     }
 }

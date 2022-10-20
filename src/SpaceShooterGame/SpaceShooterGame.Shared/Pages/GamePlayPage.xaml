@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
     Background="#070a25"
-    
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
@@ -73,16 +72,15 @@
                 <!--  Level + score text  -->
                 <Border
                     HorizontalAlignment="Right"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    CornerRadius="50,0,0,50">
+                    BorderThickness="0"
+                    CornerRadius="50,10,10,50">
 
                     <StackPanel Orientation="Horizontal">
+
                         <!--  Game level  -->
                         <TextBlock
                             x:Name="GameLevelText"
-                            Margin="15,3,0,3"
+                            Margin="10,3,0,3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -90,10 +88,11 @@
                             Foreground="White"
                             TextAlignment="Left"
                             TextWrapping="WrapWholeWords" />
+
                         <!--  Score  -->
                         <TextBlock
                             x:Name="ScoreBarCount"
-                            Margin="15,3,10,3"
+                            Margin="10,3,10,3"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -103,43 +102,32 @@
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>
 
-                </Border>
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.5" Color="White" />
+                    </Border.Background>
 
-                <!--  Level bar  -->
-                <ProgressBar
-                    x:Name="ScoreBar"
-                    Width="200"
-                    Height="5"
-                    Margin="5,5,0,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Foreground="Goldenrod"
-                    Maximum="100"
-                    Minimum="0"
-                    Value="100" />
+                </Border>
 
             </StackPanel>
 
             <!--  Boss health bar  -->
             <StackPanel
                 x:Name="BossHealthBarPanel"
-                Margin="5"
+                Margin="5,0,5,5"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal"
                 Visibility="Collapsed">
 
                 <Border
                     HorizontalAlignment="Right"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    CornerRadius="50,0,0,50">
+                    BorderThickness="0"
+                    CornerRadius="50,10,10,50">
 
                     <StackPanel Orientation="Horizontal">
 
                         <TextBlock
                             x:Name="BossHealthBarText"
-                            Margin="15,3,5,3"
+                            Margin="10,3,5,3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             FontSize="20"
@@ -163,6 +151,10 @@
 
                     </StackPanel>
 
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.5" Color="White" />
+                    </Border.Background>
+
                 </Border>
 
             </StackPanel>
@@ -170,7 +162,7 @@
             <!--  Score multiplier  -->
             <StackPanel
                 x:Name="ScoreMultiplierPanel"
-                Margin="5"
+                Margin="5,0,5,5"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Visibility="Collapsed">
@@ -178,19 +170,30 @@
                 <!--  Collectible icon + count  -->
                 <Border
                     HorizontalAlignment="Right"
-                    Background="Goldenrod"
-                    BorderBrush="White"
-                    BorderThickness="3"
-                    CornerRadius="50,0,0,50">
+                    BorderThickness="0"
+                    CornerRadius="50,10,10,50">
 
                     <StackPanel Orientation="Horizontal">
 
                         <!--  Collectible image  -->
                         <TextBlock
-                            Margin="15,3,0,3"
+                            Margin="10,3,0,3"
                             FontSize="20"
                             Text="🎸"
                             TextAlignment="Left" />
+
+                        <!--  Multiplier bar  -->
+                        <ProgressBar
+                            x:Name="ScoreMultiplierBar"
+                            Width="45"
+                            Height="5"
+                            Margin="5"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="Goldenrod"
+                            Maximum="8"
+                            Minimum="0"
+                            Value="0" />
 
                         <!--  Collectible count  -->
                         <TextBlock
@@ -204,20 +207,11 @@
 
                     </StackPanel>
 
-                </Border>
+                    <Border.Background>
+                        <SolidColorBrush Opacity="0.5" Color="White" />
+                    </Border.Background>
 
-                <!--  Multiplier bar  -->
-                <ProgressBar
-                    x:Name="ScoreMultiplierBar"
-                    Width="45"
-                    Height="5"
-                    Margin="5,5,0,5"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Foreground="Goldenrod"
-                    Maximum="8"
-                    Minimum="0"
-                    Value="0" />
+                </Border>
 
             </StackPanel>
 
@@ -254,11 +248,10 @@
             Margin="5"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Background="Goldenrod"
-            BorderBrush="White"
-            BorderThickness="3"
-            CornerRadius="0,50,50,0"
+            BorderThickness="0"
+            CornerRadius="10,50,50,10"
             Visibility="Collapsed">
+
             <StackPanel
                 Margin="10,3"
                 HorizontalAlignment="Center"
@@ -329,6 +322,11 @@
                     Visibility="Collapsed" />
 
             </StackPanel>
+
+            <Border.Background>
+                <SolidColorBrush Opacity="0.5" Color="White" />
+            </Border.Background>
+
         </Border>
 
         <!--  Pointer + keyboard input capture  -->
@@ -355,8 +353,6 @@
                 Margin="5"
                 Click="PauseGameButton_Click"
                 CornerRadius="100"
-                
-                
                 Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Pause" />
             </Button>
@@ -369,8 +365,6 @@
                 Margin="5"
                 Click="QuitGameButton_Click"
                 CornerRadius="100"
-                
-                
                 Style="{StaticResource DefaultButton}">
                 <SymbolIcon Symbol="Undo" />
             </Button>

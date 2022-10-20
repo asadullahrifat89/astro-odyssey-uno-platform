@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
@@ -11,9 +10,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private PlayerShip selectedShip;
-        private readonly IAudioHelper _audioHelper;
-        private readonly ILocalizationHelper _localizationHelper;
+        private PlayerShip _selectedShip;
 
         #endregion
 
@@ -23,71 +20,63 @@ namespace SpaceShooterGame
         {
             InitializeComponent();
             Loaded += ShipSelectionPage_Loaded;
-
-            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
-            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
         }
 
         #endregion
 
         #region Events
 
-        private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
+        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
-            SetLocalization();
+            this.SetLocalization();
 
-            selectedShip = null;
+            _selectedShip = null;
+
             App.Ship = null;
 
             ShipSelectionPage_ChooseButton.IsEnabled = false;
 
             var shipButtons = ShipsPanel.Children.OfType<ToggleButton>();
 
-            foreach (var playerShipTemplate in GameObjectTemplates.PLAYER_SHIP_TEMPLATES)
+            var playerShipTemplates = AssetHelper.PLAYER_SHIP_TEMPLATES;
+
+            foreach (var shipButton in shipButtons)
             {
+                var playerShipTemplate = playerShipTemplates.FirstOrDefault(x => ((ShipClass)x.Size).ToString() == (string)shipButton.Tag);
+
                 var playerShip = new PlayerShip()
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = _localizationHelper.GetLocalizedResource(playerShipTemplate.Name),
+                    Name = LocalizationHelper.GetLocalizedResource(((ShipClass)playerShipTemplate.Size).ToString()),
                     ImageUrl = playerShipTemplate.AssetUri,
-                    ShipClass = playerShipTemplate.ShipClass,
+                    ShipClass = (ShipClass)playerShipTemplate.Size,
                 };
 
-                if (shipButtons.FirstOrDefault(x => x.Name == playerShipTemplate.Name) is ToggleButton shipButton)
-                    shipButton.DataContext = playerShip;
+                shipButton.DataContext = playerShip;
             }
-
-            await this.PlayLoadedTransition();
+            
             ShowUserName();
         }
 
-        private async void ChooseButton_Click(object sender, RoutedEventArgs e)
+        private void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedShip is not null)
+            if (_selectedShip is not null)
             {
-                _audioHelper.PlaySound(SoundType.MENU_SELECT);
-
-                App.Ship = selectedShip;
-
-                await this.PlayUnLoadedTransition();
-
-                App.NavigateToPage(typeof(GameInstructionsPage));
+                App.Ship = _selectedShip;
+                NavigateToPage(typeof(GamePlayPage));
             }
         }
 
-        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameStartPage));
+            NavigateToPage(typeof(GameStartPage));
         }
 
         private void Ship_Selected(object sender, RoutedEventArgs e)
         {
             var playerShipButton = sender as ToggleButton;
-            selectedShip = playerShipButton.DataContext as PlayerShip;
+            _selectedShip = playerShipButton.DataContext as PlayerShip;
 
-            foreach (var item in ShipsPanel.Children.OfType<ToggleButton>().Where(x => x.Name != playerShipButton.Name))
+            foreach (var item in ShipsPanel.Children.OfType<ToggleButton>().Where(x => x.Tag != playerShipButton.Tag))
             {
                 item.IsChecked = false;
             }
@@ -99,12 +88,18 @@ namespace SpaceShooterGame
 
         #region Methods
 
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+        }
+
         private void ShowUserName()
         {
-            if (App.HasUserLoggedIn)
+            if (GameProfileHelper.HasUserLoggedIn())
             {
-                Page_UserName.Text = App.GameProfile.User.UserName;
-                Page_UserPicture.Initials = App.GameProfile.Initials;
+                Page_UserName.Text = GameProfileHelper.GameProfile.User.UserName;
+                Page_UserPicture.Initials = GameProfileHelper.GameProfile.Initials;
                 PlayerNameHolder.Visibility = Visibility.Visible;
             }
             else
@@ -113,18 +108,9 @@ namespace SpaceShooterGame
             }
         }
 
-        private void SetLocalization()
-        {
-            _localizationHelper.SetLocalizedResource(ShipSelectionPage_Header);
-            _localizationHelper.SetLocalizedResource(ShipSelectionPage_Tagline);
-            _localizationHelper.SetLocalizedResource(ShipSelectionPage_ControlInstructions);
-            _localizationHelper.SetLocalizedResource(ShipSelectionPage_ChooseButton);
-            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
-        }
-
         private void EnableChooseButton()
         {
-            ShipSelectionPage_ChooseButton.IsEnabled = selectedShip is not null;
+            ShipSelectionPage_ChooseButton.IsEnabled = _selectedShip is not null;
         }
 
         #endregion

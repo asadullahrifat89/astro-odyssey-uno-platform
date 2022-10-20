@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
+using System;
 using System.Threading.Tasks;
 
 namespace SpaceShooterGame
@@ -12,14 +11,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IBackendService _backendService;
-        private readonly IAudioHelper _audioHelper;
-        private readonly ILocalizationHelper _localizationHelper;
-        private readonly ICacheHelper _cacheHelper;
-
-        private readonly ProgressBar _progressBar;
-        private readonly TextBlock _errorContainer;
-        private readonly Button[] _actionButtons;
+        private readonly IBackendService _backendService;      
 
         #endregion
 
@@ -31,28 +23,15 @@ namespace SpaceShooterGame
             Loaded += GameSignupPage_Loaded;
 
             _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
-            _audioHelper = (Application.Current as App).Host.Services.GetRequiredService<IAudioHelper>();
-            _localizationHelper = (Application.Current as App).Host.Services.GetRequiredService<ILocalizationHelper>();
-            _cacheHelper = (Application.Current as App).Host.Services.GetRequiredService<ICacheHelper>();
-
-            _progressBar = GameSignupPage_ProgressBar;
-            _errorContainer = GameSignupPage_ErrorText;
-            _actionButtons = new[] { GameSignupPage_SignupButton, GameSignupPage_LoginButton };
         }
 
         #endregion
 
         #region Events
 
-        private async void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
+        private void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
         {
-            SetLocalization();
-
-            GameSignupPage_UserEmailBox.Text = " ";
-            GameSignupPage_UserNameBox.Text = " ";
-            GameSignupPage_PasswordBox.Text = "";
-
-            await this.PlayLoadedTransition();
+            this.SetLocalization();
         }
 
         private void UserFullNameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,12 +65,12 @@ namespace SpaceShooterGame
                 await PerformSignup();
         }
 
-        private void GameSignupPage_ConfirmCheckBox_Checked(object sender, RoutedEventArgs e)
+        private void ConfirmCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             EnableSignupButton();
         }
 
-        private void GameSignupPage_ConfirmCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void ConfirmCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             EnableSignupButton();
         }
@@ -102,91 +81,67 @@ namespace SpaceShooterGame
                 await PerformSignup();
         }
 
-        private async void GoBackButton_Click(object sender, RoutedEventArgs e)
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-            _audioHelper.PlaySound(SoundType.MENU_SELECT);
-            await this.PlayUnLoadedTransition();
-            App.NavigateToPage(typeof(GameStartPage));
+            NavigateToPage(typeof(GameStartPage));
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.PlayUnLoadedTransition();
-
-            App.NavigateToPage(typeof(GameLoginPage));
+            NavigateToPage(typeof(GameLoginPage));
         }
 
         #endregion
 
         #region Methods
 
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+        }
+
         private async Task PerformSignup()
         {
-            RunProgressBar();
+            this.RunProgressBar();
 
             if (await Signup() && await Authenticate())
             {
-                StopProgressBar();
-
-                _audioHelper.PlaySound(SoundType.MENU_SELECT);
-                await this.PlayUnLoadedTransition();
-                App.NavigateToPage(typeof(GameLoginPage));
+                this.StopProgressBar();
+                NavigateToPage(typeof(GameLoginPage));
             }
         }
 
         private async Task<bool> Signup()
         {
-            ServiceResponse response = await _backendService.Signup(
-                fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
-                userName: GameSignupPage_UserNameBox.Text.Trim(),
-                email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
-                password: GameSignupPage_PasswordBox.Text.Trim());
+            (bool IsSuccess, string Message) = await _backendService.SignupUser(
+               fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
+               userName: GameSignupPage_UserNameBox.Text.Trim(),
+               email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
+               password: GameSignupPage_PasswordBox.Text.Trim());
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (!IsSuccess)
             {
-                var error = response?.ExternalError;
-                this.ShowError(
-                     progressBar: _progressBar,
-                     messageBlock: _errorContainer,
-                     message: error,
-                     actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
-
-            // store game profile
-            var gameProfile = _backendService.ParseResult<GameProfile>(response.Result);
-            App.GameProfile = gameProfile;
 
             return true;
         }
 
         private async Task<bool> Authenticate()
         {
-            // authenticate
-            ServiceResponse response = await _backendService.Authenticate(
-                userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
-                password: GameSignupPage_PasswordBox.Text.Trim());
+            (bool IsSuccess, string Message) = await _backendService.AuthenticateUser(
+              userNameOrEmail: GameSignupPage_UserNameBox.Text.Trim(),
+              password: GameSignupPage_PasswordBox.Text.Trim());
 
-            if (response is null || response.HttpStatusCode != System.Net.HttpStatusCode.OK)
+            if (!IsSuccess)
             {
-                var error = response?.ExternalError;
-                this.ShowError(
-                    progressBar: _progressBar,
-                    messageBlock: _errorContainer,
-                    message: error,
-                    actionButtons: _actionButtons);
-
+                var error = Message;
+                this.ShowError(error);
                 return false;
             }
-
-            // store auth token
-            var authToken = _backendService.ParseResult<AuthToken>(response.Result);
-            App.AuthToken = authToken;
-
-            _cacheHelper.SetCachedPlayerCredentials(
-                userName: GameSignupPage_UserNameBox.Text.Trim(),
-                password: GameSignupPage_PasswordBox.Text.Trim());
 
             return true;
         }
@@ -209,9 +164,9 @@ namespace SpaceShooterGame
             var result = StringExtensions.IsValidFullName(GameSignupPage_UserFullNameBox.Text);
 
             if (!result.IsValid)
-                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource(result.Message), isError: true);
+                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(result.Message), isError: true);
             else
-                _errorContainer.Visibility = Visibility.Collapsed;
+                ProgressBarMessageBlock.Visibility = Visibility.Collapsed;
 
             return result.IsValid;
         }
@@ -219,7 +174,7 @@ namespace SpaceShooterGame
         private bool IsStrongPassword()
         {
             var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
-            SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource(result.Message), isError: !result.IsStrong);
+            SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(result.Message), isError: !result.IsStrong);
 
             return result.IsStrong;
         }
@@ -231,13 +186,13 @@ namespace SpaceShooterGame
 
             if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
             {
-                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
+                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
 
                 return false;
             }
             else
             {
-                SetProgressBarMessage(message: _localizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
+                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
             }
 
             return true;
@@ -246,44 +201,14 @@ namespace SpaceShooterGame
         private bool IsValidEmail()
         {
             return StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
-        }
-
-        private void RunProgressBar()
-        {
-            this.RunProgressBar(
-                progressBar: _progressBar,
-                messageBlock: _errorContainer,
-                actionButtons: _actionButtons);
-        }
-
-        private void StopProgressBar()
-        {
-            this.StopProgressBar(
-                progressBar: _progressBar,
-                actionButtons: _actionButtons);
-        }
+        }     
 
         private void SetProgressBarMessage(string message, bool isError)
         {
             this.SetProgressBarMessage(
                 message: message,
-                isError: isError,
-                messageBlock: _errorContainer);
-        }
-
-        private void SetLocalization()
-        {
-            _localizationHelper.SetLocalizedResource(GameSignupPage_Header);
-            _localizationHelper.SetLocalizedResource(ApplicationName_Header);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_UserFullNameBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_UserEmailBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_UserNameBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_PasswordBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_ConfirmPasswordBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_ConfirmCheckBox);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_SignupButton);
-            _localizationHelper.SetLocalizedResource(GameSignupPage_LoginButton);
-        }
+                isError: isError);
+        }      
 
         #endregion
     }
