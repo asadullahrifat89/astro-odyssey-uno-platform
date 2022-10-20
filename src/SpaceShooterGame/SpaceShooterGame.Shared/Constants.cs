@@ -51,7 +51,6 @@ namespace SpaceShooterGame
             new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible3.png"), COLLECTIBLE_OBJECT_SIZE),
             new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible4.png"), COLLECTIBLE_OBJECT_SIZE),
             new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible5.png"), COLLECTIBLE_OBJECT_SIZE),
-            new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible6.png"), COLLECTIBLE_OBJECT_SIZE),
 
             new(ImageType.BOSS, new Uri("ms-appx:///Assets/Images/Boss/boss1.png"), 1),
             new(ImageType.BOSS, new Uri("ms-appx:///Assets/Images/Boss/boss2.png"), 1),
