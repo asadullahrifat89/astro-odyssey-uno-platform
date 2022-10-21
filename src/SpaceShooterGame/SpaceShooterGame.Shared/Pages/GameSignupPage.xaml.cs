@@ -11,7 +11,7 @@ namespace SpaceShooterGame
     {
         #region Fields
 
-        private readonly IBackendService _backendService;      
+        private readonly IBackendService _backendService;
 
         #endregion
 
@@ -161,22 +161,22 @@ namespace SpaceShooterGame
 
         private bool IsValidFullName()
         {
-            var result = StringExtensions.IsValidFullName(GameSignupPage_UserFullNameBox.Text);
+            var (IsValid, Message) = StringExtensions.IsValidFullName(GameSignupPage_UserFullNameBox.Text);
 
-            if (!result.IsValid)
-                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(result.Message), isError: true);
+            if (!IsValid)
+                this.SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(Message), isError: true);
             else
                 ProgressBarMessageBlock.Visibility = Visibility.Collapsed;
 
-            return result.IsValid;
+            return IsValid;
         }
 
         private bool IsStrongPassword()
         {
-            var result = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
-            SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(result.Message), isError: !result.IsStrong);
+            var (IsStrong, Message) = StringExtensions.IsStrongPassword(GameSignupPage_PasswordBox.Text);
+            this.SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource(Message), isError: !IsStrong);
 
-            return result.IsStrong;
+            return IsStrong;
         }
 
         private bool DoPasswordsMatch()
@@ -186,13 +186,13 @@ namespace SpaceShooterGame
 
             if (GameSignupPage_PasswordBox.Text != GameSignupPage_ConfirmPasswordBox.Text)
             {
-                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
+                this.SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_DIDNT_MATCH"), isError: true);
 
                 return false;
             }
             else
             {
-                SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
+                this.SetProgressBarMessage(message: LocalizationHelper.GetLocalizedResource("PASSWORDS_MATCHED"), isError: false);
             }
 
             return true;
@@ -201,14 +201,7 @@ namespace SpaceShooterGame
         private bool IsValidEmail()
         {
             return StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
-        }     
-
-        private void SetProgressBarMessage(string message, bool isError)
-        {
-            this.SetProgressBarMessage(
-                message: message,
-                isError: isError);
-        }      
+        }
 
         #endregion
     }
