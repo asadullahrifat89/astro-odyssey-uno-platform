@@ -10,10 +10,7 @@
 
     <Grid>
 
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_intro.gif" Stretch="UniformToFill" />
-        </Grid.Background>-->
-
+        <!--#region Animation-->
         <!--  Stars  -->
         <GameEnvironment x:Name="UnderView" Background="Transparent" />
 
@@ -29,6 +26,7 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
+        <!--#endregion-->
 
         <!--  Language selection buttons  -->
         <StackPanel

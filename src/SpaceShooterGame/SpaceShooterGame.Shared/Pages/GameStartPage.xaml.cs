@@ -22,8 +22,6 @@ namespace SpaceShooterGame
 
         private readonly int _gameSpeed = 5;
 
-        private int _markNum;
-
         private readonly IBackendService _backendService;
 
         #endregion
@@ -304,6 +302,11 @@ namespace SpaceShooterGame
             {
                 SpawnStar();
             }
+
+            for (int i = 0; i < 1; i++)
+            {
+                SpawnStar(CelestialObjectType.Planet);
+            }
         }
 
         private void StartAnimation()
@@ -317,7 +320,7 @@ namespace SpaceShooterGame
 
         private void RecycleGameObjects()
         {
-            foreach (GameObject x in UnderView.Children.OfType<GameObject>())
+            foreach (CelestialObject x in UnderView.Children.OfType<CelestialObject>())
             {
                 switch ((ElementType)x.Tag)
                 {
@@ -349,7 +352,7 @@ namespace SpaceShooterGame
 
         private void UpdateGameObjects()
         {
-            foreach (GameObject x in UnderView.Children.OfType<GameObject>())
+            foreach (CelestialObject x in UnderView.Children.OfType<CelestialObject>())
             {
                 switch ((ElementType)x.Tag)
                 {
@@ -373,36 +376,38 @@ namespace SpaceShooterGame
 
         #region Star
 
-        private void SpawnStar()
+        private void SpawnStar(CelestialObjectType celestialObjectType = CelestialObjectType.Star)
         {
             CelestialObject star = new();
-            star.SetAttributes(scale: _scale);
+            star.SetAttributes(scale: _scale, celestialObjectType: celestialObjectType);
 
             RandomizeStarPosition(star);
 
             UnderView.Children.Add(star);
         }
 
-        private void UpdateStar(GameObject Star)
+        private void UpdateStar(CelestialObject star)
         {
-            Star.SetY(Star.GetY() + _gameSpeed);
+            star.SetY(star.GetY() + (star.CelestialObjectType == CelestialObjectType.Planet ? _gameSpeed / 1.5 : _gameSpeed));
 
-            if (Star.GetY() > UnderView.Height)
+            if (star.GetY() > UnderView.Height)
             {
-                RecyleStar(Star);
+                RecyleStar(star);
             }
         }
 
-        private void RecyleStar(GameObject Star)
+        private void RecyleStar(CelestialObject star)
         {
-            RandomizeStarPosition(Star);
+            if (star.CelestialObjectType == CelestialObjectType.Planet)
+                star.SetAttributes(scale: _scale, celestialObjectType: star.CelestialObjectType);
+            RandomizeStarPosition(star);
         }
 
-        private void RandomizeStarPosition(GameObject Star)
+        private void RandomizeStarPosition(CelestialObject star)
         {
-            Star.SetPosition(
+            star.SetPosition(
                 left: _random.Next(0, (int)UnderView.Width) - (100 * _scale),
-                top: _random.Next(100 * (int)_scale, (int)UnderView.Height) * -1);
+                top: _random.Next((int)star.Height, (int)UnderView.Height) * -1);
         }
 
         #endregion
