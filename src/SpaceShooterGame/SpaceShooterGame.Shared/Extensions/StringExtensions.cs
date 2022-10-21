@@ -44,6 +44,9 @@ namespace SpaceShooterGame
 
         public static (bool IsStrong, string Message) IsStrongPassword(string passwd)
         {
+            if (passwd.IsNullOrBlank())
+                return (false, "LENGTH_MUST_BE_GREATER_THAN_8_CHARS");
+
             if (passwd.Length < 8)
                 return (false, "LENGTH_MUST_BE_GREATER_THAN_8_CHARS");
 

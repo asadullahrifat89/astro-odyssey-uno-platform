@@ -5,14 +5,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:SpaceShooterGame"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource GameBackgroundColor}"
     mc:Ignorable="d">
 
     <Grid>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_intro.gif" Stretch="UniformToFill" />
-        </Grid.Background>
+        <!--#region Animation-->
+        <!--  Stars  -->
+        <GameEnvironment x:Name="UnderView" Background="Transparent" />
+
+        <!--  Gradient  -->
+        <Border
+            x:Name="GradientBorder"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.15" StartPoint="1,0.5" EndPoint="0,0.5">
+                    <GradientStop Offset="0.00" Color="SkyBlue" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <!--#endregion-->
 
         <!--  Language selection buttons  -->
         <StackPanel

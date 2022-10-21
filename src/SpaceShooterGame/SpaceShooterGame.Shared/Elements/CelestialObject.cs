@@ -75,11 +75,7 @@ namespace SpaceShooterGame
                     break;
                 default:
                     break;
-            }
-
-            // add a random rotation
-            Rotation = random.Next(0, 360);
-            Rotate();
+            }          
 
             _content.Source = new BitmapImage(uri);
 
@@ -91,6 +87,10 @@ namespace SpaceShooterGame
             _content.Width = this.Width;
 
             HalfWidth = Width / 2;
+
+            // add a random rotation
+            Rotation = random.Next(0, 360);
+            Rotate();
         }
 
         #endregion      
