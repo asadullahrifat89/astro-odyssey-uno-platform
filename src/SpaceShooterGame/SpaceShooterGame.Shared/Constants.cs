@@ -88,7 +88,6 @@ namespace SpaceShooterGame
 
             new(ImageType.SCORE_MULTIPLIER, new Uri("ms-appx:///Assets/Images/score_multiplier.png"), 1),
 
-            new(ImageType.GAME_INTRO, new Uri("ms-appx:///Assets/Images/game_intro.gif"), 1),
             new(ImageType.GAME_OVER, new Uri("ms-appx:///Assets/Images/game_over.png"), 1),
         };
 

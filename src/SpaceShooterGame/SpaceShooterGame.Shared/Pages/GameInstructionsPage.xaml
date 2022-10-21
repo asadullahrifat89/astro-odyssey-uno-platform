@@ -10,9 +10,18 @@
 
     <Grid>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="ms-appx:///Assets/Images/game_over.png" Stretch="UniformToFill" />
-        </Grid.Background>
+        <!--  Gradient  -->
+        <Border
+            x:Name="GradientBorder"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Border.Background>
+                <LinearGradientBrush Opacity="0.15" StartPoint="1,0.5" EndPoint="0,0.5">
+                    <GradientStop Offset="0.00" Color="SkyBlue" />
+                    <GradientStop Offset="1.00" Color="Transparent" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
 
         <Border Margin="20" Style="{StaticResource GameUIContainer}">
 
