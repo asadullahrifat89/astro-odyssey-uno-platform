@@ -23,11 +23,8 @@
             </Style>
 
             <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
-                <!--<Setter Property="Background" Value="Goldenrod" />-->
                 <Setter Property="Background" Value="#b5bd00" />
-                <!--<Setter Property="Foreground" Value="#ffffff" />-->
                 <Setter Property="Foreground" Value="#27281e" />
-                <!--<Setter Property="BorderBrush" Value="#ffffff" />-->
                 <Setter Property="BorderBrush" Value="#27281e" />
                 <Setter Property="BorderThickness" Value="3" />
                 <Setter Property="FontWeight" Value="SemiBold" />
@@ -83,6 +80,8 @@
             <!--#region Colors-->
             <SolidColorBrush x:Key="SystemAccentColorLight2" Color="#b5bd00" />
             <SolidColorBrush x:Key="SystemAccentColorDark1" Color="#b5bd00" />
+
+            <SolidColorBrush x:Key="GameBackgroundColor" Color="#070a25" />
 
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="#9d2235" />
             <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />

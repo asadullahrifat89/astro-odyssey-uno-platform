@@ -18,10 +18,16 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private void GameInstructionsPage_Loaded(object sender, RoutedEventArgs e)
         {
             SetLocalization();
         }
+
+        #endregion
+
+        #region Button
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -59,13 +65,21 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
+
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
         }
+
+        #endregion
+
+        #region Logic
 
         private void SetLocalization()
         {
@@ -89,6 +103,8 @@ namespace SpaceShooterGame
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
         }
+
+        #endregion
 
         #endregion
     }

@@ -2,6 +2,8 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SpaceShooterGame
@@ -9,6 +11,18 @@ namespace SpaceShooterGame
     public sealed partial class GameStartPage : Page
     {
         #region Fields
+
+        private PeriodicTimer _gameViewTimer;
+        private readonly TimeSpan _frameTime = TimeSpan.FromMilliseconds(Constants.DEFAULT_FRAME_TIME);
+
+        private readonly Random _random = new();
+
+        private double _windowHeight, _windowWidth;
+        private double _scale;
+
+        private readonly int _gameSpeed = 5;
+
+        private int _markNum;
 
         private readonly IBackendService _backendService;
 
@@ -19,35 +33,65 @@ namespace SpaceShooterGame
         public GameStartPage()
         {
             InitializeComponent();
-
             _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
 
-            Loaded += StartPage_Loaded;
-        }
-
-        #endregion
-
-        #region Events
-
-        private async void StartPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LocalizationHelper.CheckLocalizationCache();
-            await LocalizationHelper.LoadLocalizationKeys(() =>
-            {
-                this.SetLocalization();
-            });
-
-            //await this.PlayLoadedTransition();
+            _windowHeight = Window.Current.Bounds.Height;
+            _windowWidth = Window.Current.Bounds.Width;
 
             AudioHelper.LoadGameSounds(() =>
             {
                 AudioHelper.StopSound();
                 AudioHelper.PlaySound(SoundType.INTRO);
                 AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock);
+
+                PopulateGameViews();
+            });
+
+            Loaded += GameStartPage_Loaded;
+            Unloaded += GameStartPage_Unloaded;
+        }
+
+        #endregion
+
+        #region Events
+
+        #region Page
+
+        private async void GameStartPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SizeChanged += GamePage_SizeChanged;
+            StartAnimation();
+
+            LocalizationHelper.CheckLocalizationCache();
+            await LocalizationHelper.LoadLocalizationKeys(() =>
+            {
+                this.SetLocalization();
             });
 
             await CheckUserSession();
         }
+
+        private void GameStartPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SizeChanged -= GamePage_SizeChanged;
+            StopAnimation();
+        }
+
+        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
+        {
+            _windowWidth = args.NewSize.Width;
+            _windowHeight = args.NewSize.Height;
+
+            SetViewSize();
+
+#if DEBUG
+            Console.WriteLine($"WINDOWS SIZE: {_windowWidth}x{_windowHeight}");
+#endif
+        }
+
+        #endregion
+
+        #region Button
 
         private void HowToPlayButton_Click(object sender, RoutedEventArgs e)
         {
@@ -79,18 +123,6 @@ namespace SpaceShooterGame
             PerformLogout();
         }
 
-        private void PerformLogout()
-        {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            SessionHelper.RemoveCachedSession();
-            AuthTokenHelper.AuthToken = null;
-            GameProfileHelper.GameProfile = null;
-            PlayerScoreHelper.PlayerScore = null;
-            App.Ship = null;
-
-            SetLoginContext();
-        }
-
         private void LanguageButton_Click(object sender, RoutedEventArgs e)
         {
             if ((sender as Button)?.Tag is string tag)
@@ -120,13 +152,22 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
 
-        private void NavigateToPage(Type pageType)
+        #region Logic
+
+        private void PerformLogout()
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            App.NavigateToPage(pageType);
-            App.EnterFullScreen(true);
+            SessionHelper.RemoveCachedSession();
+            AuthTokenHelper.AuthToken = null;
+            GameProfileHelper.GameProfile = null;
+            PlayerScoreHelper.PlayerScore = null;
+            App.Ship = null;
+
+            SetLoginContext();
         }
 
         private async Task CheckUserSession()
@@ -222,6 +263,151 @@ namespace SpaceShooterGame
 
             return true;
         }
+
+        #endregion
+
+        #region Page
+
+        private void SetViewSize()
+        {
+            _scale = ScalingHelper.GetGameObjectScale(_windowWidth);
+
+            UnderView.SetSize(_windowHeight, _windowWidth);
+        }
+
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+            App.EnterFullScreen(true);
+        }
+
+        #endregion
+
+        #region Animation
+
+        #region Game
+
+        private void PopulateGameViews()
+        {
+#if DEBUG
+            Console.WriteLine("INITIALIZING GAME");
+#endif
+            SetViewSize();
+            PopulateUnderView();
+        }
+
+        private void PopulateUnderView()
+        {
+            // add some clouds underneath
+            for (int i = 0; i < 15; i++)
+            {
+                SpawnStar();
+            }
+        }
+
+        private void StartAnimation()
+        {
+#if DEBUG
+            Console.WriteLine("GAME STARTED");
+#endif      
+            RecycleGameObjects();
+            RunGame();
+        }
+
+        private void RecycleGameObjects()
+        {
+            foreach (GameObject x in UnderView.Children.OfType<GameObject>())
+            {
+                switch ((ElementType)x.Tag)
+                {
+                    case ElementType.CELESTIAL_OBJECT:
+                        {
+                            RecyleStar(x);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private async void RunGame()
+        {
+            _gameViewTimer = new PeriodicTimer(_frameTime);
+
+            while (await _gameViewTimer.WaitForNextTickAsync())
+            {
+                GameViewLoop();
+            }
+        }
+
+        private void GameViewLoop()
+        {
+            UpdateGameObjects();
+        }
+
+        private void UpdateGameObjects()
+        {
+            foreach (GameObject x in UnderView.Children.OfType<GameObject>())
+            {
+                switch ((ElementType)x.Tag)
+                {
+                    case ElementType.CELESTIAL_OBJECT:
+                        {
+                            UpdateStar(x);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void StopAnimation()
+        {
+            _gameViewTimer?.Dispose();
+        }
+
+        #endregion
+
+        #region Star
+
+        private void SpawnStar()
+        {
+            CelestialObject star = new();
+            star.SetAttributes(scale: _scale);
+
+            RandomizeStarPosition(star);
+
+            UnderView.Children.Add(star);
+        }
+
+        private void UpdateStar(GameObject Star)
+        {
+            Star.SetY(Star.GetY() + _gameSpeed);
+
+            if (Star.GetY() > UnderView.Height)
+            {
+                RecyleStar(Star);
+            }
+        }
+
+        private void RecyleStar(GameObject Star)
+        {
+            RandomizeStarPosition(Star);
+        }
+
+        private void RandomizeStarPosition(GameObject Star)
+        {
+            Star.SetPosition(
+                left: _random.Next(0, (int)UnderView.Width) - (100 * _scale),
+                top: _random.Next(100 * (int)_scale, (int)UnderView.Height) * -1);
+        }
+
+        #endregion
+
+        #endregion
 
         #endregion
     }

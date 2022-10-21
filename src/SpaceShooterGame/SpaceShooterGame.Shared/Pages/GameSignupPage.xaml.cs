@@ -29,10 +29,16 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
         }
+
+        #endregion
+
+        #region Input Fields
 
         private void UserFullNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -75,6 +81,10 @@ namespace SpaceShooterGame
             EnableSignupButton();
         }
 
+        #endregion
+
+        #region Button
+
         private async void SignupButton_Click(object sender, RoutedEventArgs e)
         {
             if (GameSignupPage_SignupButton.IsEnabled)
@@ -93,13 +103,11 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
 
-        private void NavigateToPage(Type pageType)
-        {
-            AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            App.NavigateToPage(pageType);
-        }
+        #region Logic
 
         private async Task PerformSignup()
         {
@@ -202,6 +210,18 @@ namespace SpaceShooterGame
         {
             return StringExtensions.IsValidEmail(GameSignupPage_UserEmailBox.Text);
         }
+
+        #endregion
+
+        #region Page
+
+        private void NavigateToPage(Type pageType)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+            App.NavigateToPage(pageType);
+        }
+
+        #endregion
 
         #endregion
     }

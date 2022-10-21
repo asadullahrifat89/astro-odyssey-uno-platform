@@ -29,6 +29,8 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
@@ -46,6 +48,10 @@ namespace SpaceShooterGame
             }
         }
 
+        #endregion
+
+        #region Input Fields
+
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableLoginButton();
@@ -61,6 +67,10 @@ namespace SpaceShooterGame
             if (e.Key == Windows.System.VirtualKey.Enter && GameLoginPage_LoginButton.IsEnabled)
                 await PerformLogin();
         }
+
+        #endregion
+
+        #region Button
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
@@ -80,13 +90,21 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
+
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
         }
+
+        #endregion
+
+        #region Logic
 
         private async Task PerformLogin()
         {
@@ -167,6 +185,8 @@ namespace SpaceShooterGame
         {
             GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
         }
+
+        #endregion
 
         #endregion
     }

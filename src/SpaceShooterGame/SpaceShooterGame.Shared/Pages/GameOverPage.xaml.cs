@@ -28,6 +28,8 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private async void GameOverPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
@@ -57,6 +59,10 @@ namespace SpaceShooterGame
             }
         }
 
+        #endregion
+
+        #region Button
+
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
             NavigateToPage(typeof(ShipSelectionPage));
@@ -74,13 +80,22 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
+
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
+
         }
+
+        #endregion
+
+        #region Logic
 
         private void MakeLeaderboardControlsVisible()
         {
@@ -137,6 +152,8 @@ namespace SpaceShooterGame
                 PlayerNameHolder.Visibility = Visibility.Collapsed;
             }
         }
+
+        #endregion
 
         #endregion
     }

@@ -42,6 +42,8 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private async void GameLeaderboardPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
@@ -54,6 +56,10 @@ namespace SpaceShooterGame
 
             this.StopProgressBar();
         }
+
+        #endregion
+
+        #region Button
 
         private void PlayAgainButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,13 +93,21 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
+
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
         }
+
+        #endregion
+
+        #region Logic
 
         private async Task<bool> GetGameProfile()
         {
@@ -236,6 +250,8 @@ namespace SpaceShooterGame
             GameLeaderboardPage_ListViewMessage.Text = message;
             GameLeaderboardPage_ListViewMessage.Visibility = message.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
         }
+
+        #endregion
 
         #endregion
     }

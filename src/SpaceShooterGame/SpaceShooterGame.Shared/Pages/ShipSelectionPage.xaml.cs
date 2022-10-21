@@ -26,6 +26,8 @@ namespace SpaceShooterGame
 
         #region Events
 
+        #region Page
+
         private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
@@ -53,9 +55,13 @@ namespace SpaceShooterGame
 
                 shipButton.DataContext = playerShip;
             }
-            
+
             ShowUserName();
         }
+
+        #endregion
+
+        #region Button
 
         private void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
@@ -86,13 +92,21 @@ namespace SpaceShooterGame
 
         #endregion
 
+        #endregion
+
         #region Methods
+
+        #region page
 
         private void NavigateToPage(Type pageType)
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
         }
+
+        #endregion
+
+        #region Logic
 
         private void ShowUserName()
         {
@@ -112,6 +126,8 @@ namespace SpaceShooterGame
         {
             ShipSelectionPage_ChooseButton.IsEnabled = _selectedShip is not null;
         }
+
+        #endregion
 
         #endregion
     }
