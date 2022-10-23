@@ -51,8 +51,8 @@
 
                     <Border
                         Margin="10,10,10,5"
-                        Background="Goldenrod"
-                        BorderBrush="DarkGoldenrod"
+                        Background="{StaticResource FrameBackgroundColor}"
+                        BorderBrush="{StaticResource FrameBackgroundColor}"
                         BorderThickness="3"
                         CornerRadius="50" />
 

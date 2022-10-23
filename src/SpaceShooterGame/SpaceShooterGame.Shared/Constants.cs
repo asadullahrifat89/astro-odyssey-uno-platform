@@ -36,7 +36,7 @@ namespace SpaceShooterGame
             new(ImageType.STAR, new Uri("ms-appx:///Assets/Images/Star/star4.png"), 130),
             new(ImageType.STAR, new Uri("ms-appx:///Assets/Images/Star/star5.png"), 30),
 
-            new(ImageType.PLANET, new Uri("ms-appx:///Assets/Images/Planet/planet1.png"), 1500),
+            new(ImageType.PLANET, new Uri("ms-appx:///Assets/Images/Planet/planet1.png"), 800),
             new(ImageType.PLANET, new Uri("ms-appx:///Assets/Images/Planet/planet2.png"), 800),
             new(ImageType.PLANET, new Uri("ms-appx:///Assets/Images/Planet/planet3.png"), 800),
             new(ImageType.PLANET, new Uri("ms-appx:///Assets/Images/Planet/planet4.png"), 800),

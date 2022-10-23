@@ -149,8 +149,8 @@
                             TextWrapping="WrapWholeWords" />
                         <Border
                             Margin="10"
-                            Background="Goldenrod"
-                            BorderBrush="DarkGoldenrod"
+                            Background="{StaticResource FrameBackgroundColor}"
+                            BorderBrush="{StaticResource FrameBackgroundColor}"
                             BorderThickness="3"
                             CornerRadius="50" />
                     </StackPanel>
@@ -219,8 +219,8 @@
                     <!--  Border before for personal best score  -->
                     <Border
                         Margin="10"
-                        Background="Goldenrod"
-                        BorderBrush="DarkGoldenrod"
+                        Background="{StaticResource FrameBackgroundColor}"
+                        BorderBrush="{StaticResource FrameBackgroundColor}"
                         BorderThickness="3"
                         CornerRadius="50" />
 

@@ -23,9 +23,9 @@
             </Style>
 
             <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
-                <Setter Property="Background" Value="#b5bd00" />
-                <Setter Property="Foreground" Value="#27281e" />
-                <Setter Property="BorderBrush" Value="Goldenrod" />
+                <Setter Property="Background" Value="Goldenrod" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="White" />
                 <Setter Property="BorderThickness" Value="3" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="FontSize" Value="24" />
@@ -78,15 +78,15 @@
             <!--#endregion-->
 
             <!--#region Colors-->
-            <SolidColorBrush x:Key="SystemAccentColorLight2" Color="#b5bd00" />
-            <SolidColorBrush x:Key="SystemAccentColorDark1" Color="#b5bd00" />
+            <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
+            <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
 
             <SolidColorBrush x:Key="GameBackgroundColor" Color="#070a25" />
 
-            <SolidColorBrush x:Key="FrameBackgroundColor" Color="#9d2235" />
-            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
-            <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="#b5bd00" />
-            <SolidColorBrush x:Key="ProgressBarOkColor" Color="LightGreen" />
+            <SolidColorBrush x:Key="FrameBackgroundColor" Color="Goldenrod" />
+            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Red" />
+            <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
+            <SolidColorBrush x:Key="ProgressBarOkColor" Color="Green" />
             <!--#endregion-->
 
         </ResourceDictionary>
