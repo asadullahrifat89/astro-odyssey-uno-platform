@@ -67,7 +67,7 @@
         public static void SpawnProjectile(
             bool isPoweredUp,
             Player player,
-            GameLevel gameLevel,
+            int gameLevel,
             PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
@@ -100,7 +100,7 @@
         public static void GenerateProjectile(
             bool isPoweredUp,
             Player player,
-            GameLevel gameLevel,
+            int gameLevel,
             PowerUpType powerUpType)
         {
             var projectile = new PlayerProjectile();
@@ -109,7 +109,6 @@
 
             projectile.SetAttributes(
                 speed: player.ProjectileSpeed,
-                gameLevel: gameLevel,
                 shipClass: player.ShipClass,
                 projectilePower: player.ProjectilePower,
                 isPoweredUp: isPoweredUp,

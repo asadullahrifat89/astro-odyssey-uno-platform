@@ -76,7 +76,7 @@ namespace SpaceShooterGame
         /// <summary>
         /// Spawns an enemy.
         /// </summary>
-        public static void SpawnEnemy(GameLevel gameLevel)
+        public static void SpawnEnemy(int gameLevel)
         {
             if (_gameView.GetGameObjects<Enemy>().Count() < (_gameView.IsBossEngaged ? _maxEnemyCount - 2 : _maxEnemyCount))
             {
@@ -93,7 +93,7 @@ namespace SpaceShooterGame
         /// <summary>
         /// Generates a random Enemy.
         /// </summary>
-        public static void GenerateEnemy(GameLevel gameLevel)
+        public static void GenerateEnemy(int gameLevel)
         {
             _xFlyingEnemySpawnCounter--;
             _overPoweredEnemySpawnCounter--;
@@ -113,27 +113,27 @@ namespace SpaceShooterGame
             double top;
 
             // spawn evading enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && _evadingEnemySpawnCounter <= 0)
+            if (gameLevel > 3 && _evadingEnemySpawnCounter <= 0)
                 SetEvadingEnemy(enemy);
 
             // spawn following enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && _targetingEnemySpawnCounter <= 0)
+            if (gameLevel >3 && _targetingEnemySpawnCounter <= 0)
                 SetPlayerTargetingEnemy(enemy);
 
             // spawn following enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && _hoveringEnemySpawnCounter <= 0)
+            if (gameLevel > 3 && _hoveringEnemySpawnCounter <= 0)
                 SetHoveringEnemy(enemy);
 
             // generate large but slower and stronger enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && _overPoweredEnemySpawnCounter <= 0)
+            if (gameLevel > 3 && _overPoweredEnemySpawnCounter <= 0)
                 SetOverPoweredEnemy(enemy);
 
             // spawn blaster shooting enemies after level 2
-            if (gameLevel > GameLevel.Level_2 && _firingEnemySpawnCounter <= 0)
+            if (gameLevel > 2 && _firingEnemySpawnCounter <= 0)
                 SetProjectileFiringEnemy(enemy);
 
             // generate side ways flying enemies after level 2
-            if (gameLevel > GameLevel.Level_2 && _xFlyingEnemySpawnCounter <= 0)
+            if (gameLevel > 2 && _xFlyingEnemySpawnCounter <= 0)
             {
                 enemy.XDirection = (XDirection)_random.Next(1, Enum.GetNames<XDirection>().Length);
                 _xFlyingEnemySpawnCounter = _xFlyingEnemySpawnAfter;
@@ -208,7 +208,7 @@ namespace SpaceShooterGame
         /// <param name="destroyed"></param>
         public static bool UpdateEnemy(
             Enemy enemy,
-            GameLevel gameLevel,
+            int gameLevel,
             double pointerX)
         {
             bool destroyed = false;
@@ -285,7 +285,7 @@ namespace SpaceShooterGame
         /// Engages a boss.
         /// </summary>
         /// <param name="gameLevel"></param>
-        public static Enemy EngageBoss(GameLevel gameLevel)
+        public static Enemy EngageBoss(int gameLevel)
         {
             var boss = new Enemy();
 
@@ -430,7 +430,7 @@ namespace SpaceShooterGame
 
         private static void RecycleEnemy(
             Enemy enemy,
-            GameLevel gameLevel)
+            int gameLevel)
         {
             enemy.SetAttributes(
                  speed: _enemySpeed + _random.Next(0, 3),

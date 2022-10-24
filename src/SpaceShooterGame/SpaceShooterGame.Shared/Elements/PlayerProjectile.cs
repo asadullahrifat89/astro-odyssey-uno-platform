@@ -32,7 +32,6 @@ namespace SpaceShooterGame
 
         public void SetAttributes(
             double speed,
-            GameLevel gameLevel,
             ShipClass shipClass,
             bool isPoweredUp = false,
             double projectilePower = 0,
