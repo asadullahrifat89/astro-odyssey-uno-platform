@@ -25,7 +25,7 @@ namespace SpaceShooterGame
         private Image _bossAppearedImage;
         private Image _bossClearedImage;
         private Image _scoreMultiplierImage;
-#if DEBUG
+
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
         private float _lastFpsTime = 0;
@@ -38,7 +38,7 @@ namespace SpaceShooterGame
         private long _frameEndTime;
         private double _frameDuration;
         private double _maxFrameDuration = 0;
-#endif
+
         private double _scoreMultiplierCoolDownCounter;
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
 
@@ -47,9 +47,8 @@ namespace SpaceShooterGame
 
         private double _windowWidth, _windowHeight;
 
-#if DEBUG
         private Stopwatch _stopwatch;
-#endif
+
         private Player _player;
         private SpaceShooterGameScore _playerScore = new SpaceShooterGameScore();
         private int _scoreCap;

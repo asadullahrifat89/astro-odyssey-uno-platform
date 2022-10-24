@@ -368,7 +368,7 @@
             if (player.ProjectileSpawnAfter > 14 / 3)
             {
                 var scale = _gameView.GameObjectScale;
-                player.ProjectileSpawnAfter -= (1.3 * scale);
+                player.ProjectileSpawnAfter -= (1.1 * scale);
             }
         }
 
