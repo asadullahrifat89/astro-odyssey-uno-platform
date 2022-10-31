@@ -28,7 +28,7 @@
         </Border>
         <!--#endregion-->
 
-        <!--  Language selection buttons  -->
+        <!--#region Language selection buttons-->
         <StackPanel
             Margin="0,10"
             HorizontalAlignment="Center"
@@ -63,6 +63,7 @@
                 Tag="de" />
 
         </StackPanel>
+        <!--#endregion-->
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
@@ -78,12 +79,12 @@
                     Orientation="Vertical">
 
                     <!--  Game logo  -->
-                    <Image Height="100" Source="ms-appx:///Assets/Images/logo_game.png" />
+                    <Image Height="80" Source="ms-appx:///Assets/Images/logo_game.png" />
 
                     <!--  Game name  -->
                     <TextBlock
                         x:Name="ApplicationName_Header"
-                        Margin="5,15,5,5"
+                        Margin="0,0,0,15"
                         FontSize="30"
                         FontWeight="Bold"
                         TextAlignment="Center"
@@ -92,19 +93,19 @@
                     <!--  Tag line  -->
                     <TextBlock
                         x:Name="GameStartPage_Tagline"
-                        Margin="10,0,10,10"
+                        Margin="10,0,10,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        FontSize="20"
-                        Text="A rock metal ⚡ sky racer on WebAssembly."
+                        FontSize="18"
+                        Text="Beat the high score and win great prizes!"
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
 
                     <!--  How to play button  -->
                     <Button
                         x:Name="GameStartPage_HowToPlayButton"
-                        Height="50"
-                        Margin="30,5,30,5"
+                        Height="45"
+                        Margin="30,10,30,5"
                         HorizontalAlignment="Stretch"
                         Click="HowToPlayButton_Click"
                         Content="How To Play"
@@ -113,7 +114,7 @@
                     <!--  Start game button  -->
                     <Button
                         x:Name="GameStartPage_PlayButton"
-                        Height="50"
+                        Height="45"
                         Margin="30,5,30,5"
                         HorizontalAlignment="Stretch"
                         Click="PlayButton_Click"
@@ -125,7 +126,7 @@
                         <!--  Leaderboard button  -->
                         <Button
                             x:Name="GameOverPage_LeaderboardButton"
-                            Height="50"
+                            Height="45"
                             HorizontalAlignment="Stretch"
                             Click="GameOverPage_LeaderboardButton_Click"
                             Content="Leaderboard"
@@ -134,7 +135,7 @@
                         <!--  Login Button  -->
                         <Button
                             x:Name="GameLoginPage_LoginButton"
-                            Height="50"
+                            Height="45"
                             HorizontalAlignment="Stretch"
                             Click="LoginButton_Click"
                             Content="Login"
@@ -151,7 +152,7 @@
                             Click="LogoutButton_Click"
                             Content="Logout"
                             FontSize="15"
-                            Foreground="White"
+                            Foreground="{StaticResource ProgressBarForegroundColor}"
                             Tag="ActionButton"
                             Visibility="Collapsed" />
 
@@ -161,7 +162,7 @@
                     <Button
                         x:Name="GameLoginPage_RegisterButton"
                         Height="40"
-                        Margin="5,5,5,5"
+                        Margin="5,0,5,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Background="Transparent"
@@ -169,19 +170,25 @@
                         Click="RegisterButton_Click"
                         Content="No account yet?"
                         FontSize="15"
-                        Foreground="White"
+                        Foreground="{StaticResource ProgressBarForegroundColor}"
                         Tag="ActionButton"
                         Visibility="Collapsed" />
 
                     <!--  Brand Tag line  -->
-                    <HyperlinkButton
+                    <TextBlock
                         x:Name="GameStartPage_BrandProfileButton"
                         Margin="0,5,0,5"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
-                        Content="Made with ❤️ by Asadullah Rifat"
                         FontSize="17"
-                        Foreground="White"
+                        Text="Brought to you with ❤ by" />
+
+                    <!--  Brand logo  -->
+                    <HyperlinkButton
+                        Height="45"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Asadullah Rifat"
                         NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
                     <!--  Error text  -->
@@ -189,7 +196,6 @@
                         x:Name="ProgressBarMessageBlock"
                         Margin="5"
                         FontWeight="SemiBold"
-                        Foreground="Crimson"
                         Visibility="Collapsed" />
 
                     <!--  Progress bar  -->

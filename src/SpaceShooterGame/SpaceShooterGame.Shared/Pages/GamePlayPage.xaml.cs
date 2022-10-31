@@ -25,7 +25,7 @@ namespace SpaceShooterGame
         private Image _bossAppearedImage;
         private Image _bossClearedImage;
         private Image _scoreMultiplierImage;
-#if DEBUG
+
         private int _fpsSpawnCounter = 0;
         private int _fpsCount = 0;
         private float _lastFpsTime = 0;
@@ -38,7 +38,7 @@ namespace SpaceShooterGame
         private long _frameEndTime;
         private double _frameDuration;
         private double _maxFrameDuration = 0;
-#endif
+
         private double _scoreMultiplierCoolDownCounter;
         private readonly double _scoreMultiplierCoolDownAfter = 1000;
 
@@ -47,47 +47,35 @@ namespace SpaceShooterGame
 
         private double _windowWidth, _windowHeight;
 
-        #endregion
+        private Stopwatch _stopwatch;
 
-        #region Properties
-#if DEBUG
-        public Stopwatch Stopwatch { get; set; }
-#endif
-        public Player Player { get; set; }
+        private Player _player;
+        private SpaceShooterGameScore _playerScore = new SpaceShooterGameScore();
+        private int _scoreCap;
 
-        public SpaceShooterGameScore PlayerScore { get; set; } = new SpaceShooterGameScore();
+        private int _gameLevel;
 
-        public GameLevel GameLevel { get; set; }
+        private PowerUpType _powerUpType;
 
-        public PowerUpType PowerUpType { get; set; }
+        private bool _isGameRunning;
+        private bool _isGamePaused;
+        private bool _isGameQuitting;
 
-        public bool IsGameRunning { get; set; }
+        private List<Enemy> _bosses;
 
-        public bool IsGamePaused { get; set; }
+        private double _bossTotalHealth;
 
-        public bool IsGameQuitting { get; set; }
+        private bool _isPointerActivated;
+        private Point _pointerPosition;
 
-        public List<Enemy> Bosses { get; set; }
+        private double _pointerX;
+        private double _pointerY;
 
-        private double BossTotalHealth { get; set; }
+        private bool _moveLeft;
+        private bool _moveRight;
 
-        public bool IsPointerActivated { get; set; }
-
-        private Point PointerPosition { get; set; }
-
-        public double PointerX { get; set; }
-
-        public double PointerY { get; set; }
-
-        public bool MoveLeft { get; set; }
-
-        public bool MoveRight { get; set; }
-
-        public bool IsScoreMultiplierActivated { get; set; }
-
-        public int ScoreMultiplierCount { get; set; }
-
-        public double GameObjectScale { get; set; }
+        private bool _isScoreMultiplierActivated;
+        private int _scoreMultiplierCount;
 
         #endregion
 
@@ -103,7 +91,7 @@ namespace SpaceShooterGame
             _windowWidth = Window.Current.Bounds.Width - 10;
             _windowHeight = Window.Current.Bounds.Height - 10;
 
-            PointerX = _windowWidth / 2;
+            _pointerX = _windowWidth / 2;
 
             SetViewSize(); // at constructor
 
@@ -130,14 +118,14 @@ namespace SpaceShooterGame
             {
                 case Windows.System.VirtualKey.Left:
                     {
-                        MoveLeft = true;
-                        MoveRight = false;
+                        _moveLeft = true;
+                        _moveRight = false;
                     }
                     break;
                 case Windows.System.VirtualKey.Right:
                     {
-                        MoveRight = true;
-                        MoveLeft = false;
+                        _moveRight = true;
+                        _moveLeft = false;
                     }
                     break;
                 default:
@@ -151,20 +139,20 @@ namespace SpaceShooterGame
             {
                 case Windows.System.VirtualKey.Left:
                     {
-                        MoveLeft = false;
+                        _moveLeft = false;
                     }
                     break;
                 case Windows.System.VirtualKey.Right:
                     {
-                        MoveRight = false;
+                        _moveRight = false;
                     }
                     break;
                 case Windows.System.VirtualKey.Escape:
                     {
-                        if (IsGamePaused)
-                            ResumeGame();
+                        if (_isGamePaused)
+                            QuitGameButton.IsChecked = false;
                         else
-                            PauseGame();
+                            QuitGameButton.IsChecked = true;
                     }
                     break;
                 default:
@@ -174,38 +162,38 @@ namespace SpaceShooterGame
 
         private void InputView_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (IsGameRunning)
+            if (_isGameRunning)
             {
-                IsPointerActivated = true;
+                _isPointerActivated = true;
                 PointerPoint point = e.GetCurrentPoint(GameView);
-                PointerPosition = point.Position;
+                _pointerPosition = point.Position;
             }
         }
 
         private void InputView_PointerMoved(object sender, PointerRoutedEventArgs e)
         {
-            if (IsGameRunning && IsPointerActivated)
+            if (_isGameRunning && _isPointerActivated)
             {
                 PointerPoint point = e.GetCurrentPoint(GameView);
-                PointerPosition = point.Position;
+                _pointerPosition = point.Position;
             }
         }
 
         private void InputView_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            if (IsGameQuitting)
+            if (_isGameQuitting)
             {
                 QuitGame();
                 return;
             }
 
-            if (IsGameRunning)
+            if (_isGameRunning)
             {
-                if (IsGamePaused)
-                    ResumeGame();
+                if (_isGamePaused)                    
+                    QuitGameButton.IsChecked = false;
 
-                IsPointerActivated = false;
-                PointerPosition = null;
+                _isPointerActivated = false;
+                _pointerPosition = null;
             }
             else
             {
@@ -214,30 +202,37 @@ namespace SpaceShooterGame
             }
         }
 
-        #endregion        
+        #endregion
 
         #region Buttons
 
-        private void PauseGameButton_Click(object sender, RoutedEventArgs e)
+        private void QuitGameButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (IsGamePaused)
-                ResumeGame();
-            else
-                PauseGame();
+            PauseGame();
+        }
+
+        private void QuitGameButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ResumeGame();
+        }
+
+        private void ConfirmQuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            QuitGame();
         }
 
         private void QuitGameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsGameQuitting)
+            if (_isGameQuitting)
             {
-                IsGameQuitting = false;
+                _isGameQuitting = false;
                 PauseGame();
             }
             else
             {
                 HideInGameContent();
                 AudioHelper.PlaySound(SoundType.MENU_SELECT);
-                IsGameQuitting = true;
+                _isGameQuitting = true;
                 ShowInGameText($"🛸\n{LocalizationHelper.GetLocalizedResource("QUIT_GAME")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_QUIT")}");
 
                 InputView.Focus(FocusState.Programmatic);
@@ -256,7 +251,47 @@ namespace SpaceShooterGame
         public void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
             SizeChanged += GamePage_SizeChanged;
+            SetDefaultGameState();
+        }
 
+        /// <summary>
+        /// Invoked when the page is unloaded.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void GamePage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            SizeChanged -= GamePage_SizeChanged;
+            StopGame();
+        }
+
+        /// <summary>
+        /// Invoked when the size of the page changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
+        {
+            _windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
+            _windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
+
+            SetViewSize(); // at view size change
+#if DEBUG
+            Console.WriteLine($"View Size: {_windowWidth} x {_windowHeight}");
+            Console.WriteLine($"View Scale: {GameView.GameObjectScale}");
+#endif
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Methods
+
+        #region Game
+
+        private void SetDefaultGameState()
+        {
             GameView.Children.Clear();
             StarView.Children.Clear();
             PlanetView.Children.Clear();
@@ -266,32 +301,32 @@ namespace SpaceShooterGame
             FPSText.Text = "";
             ObjectsCountText.Text = "";
 
-            Bosses = new List<Enemy>();
+            _bosses = new List<Enemy>();
             BossHealthBarPanel.Visibility = Visibility.Collapsed;
 
-            Player = null;
+            _player = null;
             PlayerHealthBarPanel.Visibility = Visibility.Collapsed;
 
-            GameLevel = GameLevel.Level_1;
+            _gameLevel = 1;
             SetGameLevelText();
 
-            PowerUpType = PowerUpType.NONE;
+            _powerUpType = PowerUpType.NONE;
             PlayerPowerBar.Maximum = POWER_UP_METER;
             PlayerPowerBar.Value = POWER_UP_METER;
 
-            PlayerScore = new SpaceShooterGameScore();
-            SetScoreBarCountText(25);
+            _playerScore = new SpaceShooterGameScore();
+            _scoreCap = 15;
+            SetScoreBarCountText(_scoreCap);
 
-            PointerX = _windowWidth / 2;
-            IsPointerActivated = false;
-            MoveLeft = false;
-            MoveRight = false;
+            _pointerX = _windowWidth / 2;
+            _isPointerActivated = false;
+            _moveLeft = false;
+            _moveRight = false;
 
-            PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
-            ScoreMultiplierCount = 0;
-            IsScoreMultiplierActivated = false;
+            _scoreMultiplierCount = 0;
+            _isScoreMultiplierActivated = false;
             SetScoreMultiplierCountText();
             ScoreMultiplierPanel.Visibility = Visibility.Collapsed;
             ScoreMultiplierBar.Maximum = SCORE_MULTIPLIER_THREASHOLD;
@@ -337,42 +372,6 @@ namespace SpaceShooterGame
         }
 
         /// <summary>
-        /// Invoked when the page is unloaded.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void GamePage_Unloaded(object sender, RoutedEventArgs e)
-        {
-            SizeChanged -= GamePage_SizeChanged;
-            StopGame();
-        }
-
-        /// <summary>
-        /// Invoked when the size of the page changes.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void GamePage_SizeChanged(object sender, SizeChangedEventArgs args)
-        {
-            _windowWidth = args.NewSize.Width - 10; //Window.Current.Bounds.Width;
-            _windowHeight = args.NewSize.Height - 10; //Window.Current.Bounds.Height;
-
-            SetViewSize(); // at view size change
-#if DEBUG
-            Console.WriteLine($"View Size: {_windowWidth} x {_windowHeight}");
-            Console.WriteLine($"View Scale: {GameView.GameObjectScale}");
-#endif
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Methods
-
-        #region Game Start, Run, Stop, Pause, Resume, Over, & Quit
-
-        /// <summary>
         /// Starts the game.
         /// </summary>
         private void StartGame()
@@ -390,10 +389,9 @@ namespace SpaceShooterGame
             HideInGameContent();
             ResetFactories();
 
-            IsGameRunning = true;
+            _isGameRunning = true;
 
-            PauseGameButton.Visibility = Visibility.Visible;
-            QuitGameButton.Visibility = Visibility.Collapsed;
+            QuitGameButton.Visibility = Visibility.Visible;
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
 
@@ -413,7 +411,7 @@ namespace SpaceShooterGame
         private async void RunGame()
         {
 #if DEBUG
-            Stopwatch = Stopwatch.StartNew();
+            _stopwatch = Stopwatch.StartNew();
 #endif          
 
             var interval = TimeSpan.FromMilliseconds(_frameTime);
@@ -443,7 +441,7 @@ namespace SpaceShooterGame
         private void GameViewFrameAction()
         {
 #if DEBUG
-            _frameStartTime = Stopwatch.ElapsedMilliseconds;
+            _frameStartTime = _stopwatch.ElapsedMilliseconds;
 #endif
             CheckGameOver();
             UpdateGameViewObjects();
@@ -452,13 +450,11 @@ namespace SpaceShooterGame
             DamageRecoveryCoolDown();
             ScoreMultiplierCoolDown();
             GameView.RemoveDestroyableGameObjects();
+
 #if DEBUG
+            _frameEndTime = _stopwatch.ElapsedMilliseconds;
             CalculateFPS();
-
-            _frameEndTime = Stopwatch.ElapsedMilliseconds;
-
             GetFrameDuration();
-
             SetAnalytics();
 #endif
         }
@@ -475,12 +471,9 @@ namespace SpaceShooterGame
 
             ShowInGameText($"👨‍🚀\n{LocalizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
-            IsGamePaused = true;
-            PauseGameButton.Visibility = Visibility.Collapsed;
-            QuitGameButton.Visibility = Visibility.Visible;
+            _isGamePaused = true;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
-
             AudioHelper.PauseSound(SoundType.BACKGROUND);
 
             if (GameView.IsBossEngaged)
@@ -496,9 +489,7 @@ namespace SpaceShooterGame
 
             HideInGameContent();
 
-            IsGamePaused = false;
-            PauseGameButton.Visibility = Visibility.Visible;
-            QuitGameButton.Visibility = Visibility.Collapsed;
+            _isGamePaused = false;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 
@@ -515,7 +506,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void StopGame()
         {
-            IsGameRunning = false;
+            _isGameRunning = false;
 
             if (StarView.IsWarpingThroughSpace)
                 CelestialObjectFactory.StopSpaceWarp();
@@ -529,7 +520,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void CheckGameOver()
         {
-            if (Player.HasNoHealth)
+            if (_player.HasNoHealth)
             {
                 PlayerHealthBar.Width = 0;
                 QuitGame();
@@ -542,14 +533,122 @@ namespace SpaceShooterGame
         private void QuitGame()
         {
             StopGame();
-            PlayerScoreHelper.PlayerScore = PlayerScore;
+            PlayerScoreHelper.PlayerScore = _playerScore;
             AudioHelper.PlaySound(SoundType.GAME_OVER);
             NavigateToPage(typeof(GameOverPage));
         }
 
+        /// <summary>
+        /// Warps the player through space.
+        /// </summary>
+        private void WarpThroughSpace()
+        {
+            CelestialObjectFactory.StartSpaceWarp();
+
+            //TODO: increase everythings speed and not remove them
+
+            if (GameView.GetGameObjects<GameObject>().Where(x => !x.IsPlayer) is IEnumerable<GameObject> gameObjects)
+            {
+                foreach (var gameObject in gameObjects)
+                {
+                    GameView.AddDestroyableGameObject(gameObject);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reset all factories to default value.
+        /// </summary>
+        private void ResetFactories()
+        {
+            CelestialObjectFactory.Reset();
+            MeteorFactory.Reset();
+            EnemyFactory.Reset();
+            HealthFactory.Reset();
+            PowerUpFactory.Reset();
+            CollectibleFactory.Reset();
+        }
+
+        /// <summary>
+        /// Sets analytics of fps, frame time and objects currently in view.
+        /// </summary>
+        private void SetAnalytics()
+        {
+            _frameStatUpdateSpawnCounter -= 1;
+
+            if (_frameStatUpdateSpawnCounter < 0)
+            {
+                var gameObjects = GameView.Children.OfType<GameObject>();
+                var starObjects = StarView.Children.OfType<GameObject>();
+                var planetObjects = PlanetView.Children.OfType<GameObject>();
+
+                var fpsText = $"FPS: {_fpsCount}" +
+                    "\n----" +
+                    $"\nframe time: {_frameTime:0.00}" +
+                    $"\nframe dur: {_frameDuration:0.00}" +
+                    $"\navg. frame dur: {_framesCount.Sum() / _framesCount.Count:0.00}" +
+                    $"\nmax frame dur: {_maxFrameDuration:0.00}" +
+                    "\n----";
+
+                FPSText.Text = fpsText;
+
+                var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
+
+                var objectsCountText =
+                    $"enemy: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.ENEMY)} " +
+                    $"\nmeteor: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.METEOR)} " +
+                    $"\npowerup: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.POWERUP)} " +
+                    $"\nhealth: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.HEALTH)} " +
+                    $"\nenemy projectile: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.ENEMY_PROJECTILE)} " +
+                    $"\nplayer projectile: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.PLAYER_PROJECTILE)} " +
+                    $"\nstar: {starObjects.Count(x => (ElementType)x.Tag == ElementType.CELESTIAL_OBJECT)} " +
+                    $"\nplanet: {planetObjects.Count(x => (ElementType)x.Tag == ElementType.CELESTIAL_OBJECT)} " +
+                    "\n----" +
+                    $"\nTOTAL: {total}";
+
+                ObjectsCountText.Text = objectsCountText;
+
+                _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
+
+                if (_framesCount.Count > 5000)
+                {
+                    _framesCount.Clear();
+                    Console.WriteLine("AVG. FRAME DUR COUNTER RESET.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the frame time.
+        /// </summary>
+        private void GetFrameDuration()
+        {
+            _framesCount.Add(_frameDuration);
+            _frameDuration = _frameEndTime - _frameStartTime;
+
+            if (_frameDuration > _maxFrameDuration)
+                _maxFrameDuration = _frameDuration;
+        }
+
+        /// <summary>
+        /// Calculates the frames per second.
+        /// </summary>
+        private void CalculateFPS()
+        {
+            // calculate FPS
+            if (_lastFpsTime + 1000 < _frameStartTime)
+            {
+                _fpsCount = _fpsSpawnCounter;
+                _fpsSpawnCounter = 0;
+                _lastFpsTime = _frameStartTime;
+            }
+
+            _fpsSpawnCounter++;
+        }
+
         #endregion
 
-        #region Game Objects
+        #region GameObjects
 
         /// <summary>
         /// Updates objects in the planet view.
@@ -645,23 +744,25 @@ namespace SpaceShooterGame
             // only generate game objects if not warping thorugh space
             if (!StarView.IsWarpingThroughSpace)
             {
-                MeteorFactory.SpawnMeteor(gameLevel: GameLevel);
-                EnemyFactory.SpawnEnemy(gameLevel: GameLevel);
-                HealthFactory.SpawnHealth(player: Player);
+                if (_gameLevel > 1)
+                    EnemyFactory.SpawnEnemy(gameLevel: _gameLevel);
+
+                MeteorFactory.SpawnMeteor(gameLevel: _gameLevel);
+                HealthFactory.SpawnHealth(player: _player);
                 PowerUpFactory.SpawnPowerUp();
-                CollectibleFactory.SpawnCollectible(gameLevel: GameLevel);
+                CollectibleFactory.SpawnCollectible(gameLevel: _gameLevel);
 
                 PlayerProjectileFactory.SpawnProjectile(
-                    isPoweredUp: Player.IsPoweredUp,
-                    player: Player,
-                    gameLevel: GameLevel,
-                    powerUpType: PowerUpType);
+                    isPoweredUp: _player.IsPoweredUp,
+                    player: _player,
+                    gameLevel: _gameLevel,
+                    powerUpType: _powerUpType);
             }
         }
 
         #endregion
 
-        #region In Game Text & Image
+        #region InGameMessage
 
         /// <summary>
         /// Shows in game content.
@@ -712,29 +813,11 @@ namespace SpaceShooterGame
 
         #endregion
 
-        #region Misc View Functionality
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
             App.NavigateToPage(pageType);
-        }
-
-        /// <summary>
-        /// Warps the player through space.
-        /// </summary>
-        private void WarpThroughSpace()
-        {
-            CelestialObjectFactory.StartSpaceWarp();
-
-            //TODO: increase everythings speed and not remove them
-
-            if (GameView.GetGameObjects<GameObject>().Where(x => !x.IsPlayer) is IEnumerable<GameObject> gameObjects)
-            {
-                foreach (var gameObject in gameObjects)
-                {
-                    GameView.AddDestroyableGameObject(gameObject);
-                }
-            }
         }
 
         /// <summary>
@@ -750,123 +833,23 @@ namespace SpaceShooterGame
 #if DEBUG
             Console.WriteLine($"Frame Time : {_frameTime}");
 #endif
-            if (IsGameRunning)
+            if (_isGameRunning)
             {
                 PauseGame();
 
-                PointerX = _windowWidth / 2;
-                Player.SetX(PointerX - Player.HalfWidth);
+                _pointerX = _windowWidth / 2;
+                _player.SetX(_pointerX - _player.HalfWidth);
 
                 SetPlayerY(); // windows size changed so reset y position
 
                 // resize player size
                 var scale = GameView.GameObjectScale;
-                Player.ReAdjustScale(scale: scale);
+                _player.ReAdjustScale(scale: scale);
 #if DEBUG
                 Console.WriteLine($"View Scale: {scale}");
 #endif
                 return;
             }
-        }
-
-        #endregion
-
-        #region Misc Game Functionality
-
-        /// <summary>
-        /// Reset all factories to default value.
-        /// </summary>
-        private void ResetFactories()
-        {
-            CelestialObjectFactory.Reset();
-            MeteorFactory.Reset();
-            EnemyFactory.Reset();
-            HealthFactory.Reset();
-            PowerUpFactory.Reset();
-            CollectibleFactory.Reset();
-        }
-
-        /// <summary>
-        /// Sets analytics of fps, frame time and objects currently in view.
-        /// </summary>
-        private void SetAnalytics()
-        {
-#if DEBUG
-            _frameStatUpdateSpawnCounter -= 1;
-
-            if (_frameStatUpdateSpawnCounter < 0)
-            {
-                var gameObjects = GameView.Children.OfType<GameObject>();
-                var starObjects = StarView.Children.OfType<GameObject>();
-                var planetObjects = PlanetView.Children.OfType<GameObject>();
-
-                var fpsText = $"FPS: {_fpsCount}" +
-                    "\n----" +
-                    $"\nframe time: {_frameTime:0.00}" +
-                    $"\nframe dur: {_frameDuration:0.00}" +
-                    $"\navg. frame dur: {_framesCount.Sum() / _framesCount.Count:0.00}" +
-                    $"\nmax frame dur: {_maxFrameDuration:0.00}" +
-                    "\n----";
-
-                FPSText.Text = fpsText;
-
-                var total = gameObjects.Count() + starObjects.Count() + planetObjects.Count();
-
-                var objectsCountText =
-                    $"enemy: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.ENEMY)} " +
-                    $"\nmeteor: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.METEOR)} " +
-                    $"\npowerup: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.POWERUP)} " +
-                    $"\nhealth: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.HEALTH)} " +
-                    $"\nenemy projectile: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.ENEMY_PROJECTILE)} " +
-                    $"\nplayer projectile: {gameObjects.Count(x => (ElementType)x.Tag == ElementType.PLAYER_PROJECTILE)} " +
-                    $"\nstar: {starObjects.Count(x => (ElementType)x.Tag == ElementType.CELESTIAL_OBJECT)} " +
-                    $"\nplanet: {planetObjects.Count(x => (ElementType)x.Tag == ElementType.CELESTIAL_OBJECT)} " +
-                    "\n----" +
-                    $"\nTOTAL: {total}";
-
-                ObjectsCountText.Text = objectsCountText;
-
-                _frameStatUpdateSpawnCounter = _frameStatUpdateAfter;
-
-                if (_framesCount.Count > 5000)
-                {
-                    _framesCount.Clear();
-                    Console.WriteLine("AVG. FRAME DUR COUNTER RESET.");
-                }
-            }
-#endif
-        }
-
-        /// <summary>
-        /// Sets the frame time.
-        /// </summary>
-        private void GetFrameDuration()
-        {
-#if DEBUG            
-            _framesCount.Add(_frameDuration);
-            _frameDuration = _frameEndTime - _frameStartTime;
-
-            if (_frameDuration > _maxFrameDuration)
-                _maxFrameDuration = _frameDuration;
-#endif
-        }
-
-        /// <summary>
-        /// Calculates the frames per second.
-        /// </summary>
-        private void CalculateFPS()
-        {
-#if DEBUG
-            // calculate FPS
-            if (_lastFpsTime + 1000 < _frameStartTime)
-            {
-                _fpsCount = _fpsSpawnCounter;
-                _fpsSpawnCounter = 0;
-                _lastFpsTime = _frameStartTime;
-            }
-
-            _fpsSpawnCounter++;
-#endif
         }
 
         #endregion
@@ -879,17 +862,17 @@ namespace SpaceShooterGame
         private void SpawnPlayer()
         {
             var scale = GameView.GameObjectScale;
-            Player = PlayerFactory.SpawnPlayer(pointerX: PointerX, ship: App.Ship);
+            _player = PlayerFactory.SpawnPlayer(pointerX: _pointerX, ship: App.Ship);
 
             var playerRages = AssetHelper.PLAYER_RAGE_TEMPLATES;
 
             _rageImage = new Image()
             {
                 Stretch = Stretch.Uniform,
-                Source = new BitmapImage(playerRages.FirstOrDefault(x => (int)x.Size == (int)Player.ShipClass).AssetUri)
+                Source = new BitmapImage(playerRages.FirstOrDefault(x => (int)x.Size == (int)_player.ShipClass).AssetUri)
             };
 
-            PlayerRageBar.Maximum = Player.RageThreashold;
+            PlayerRageBar.Maximum = _player.RageThreashold;
         }
 
         /// <summary>
@@ -897,8 +880,8 @@ namespace SpaceShooterGame
         /// </summary>
         private void SetPlayerY()
         {
-            PointerY = PlayerFactory.GetOptimalPlayerY(Player);
-            Player.SetY(PointerY);
+            _pointerY = PlayerFactory.GetOptimalPlayerY(_player);
+            _player.SetY(_pointerY);
         }
 
         /// <summary>
@@ -906,7 +889,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void SetPlayerHealthBar()
         {
-            PlayerHealthBar.Value = Player.Health;
+            PlayerHealthBar.Value = _player.Health;
         }
 
         /// <summary>
@@ -914,7 +897,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void DamageRecoveryCoolDown()
         {
-            PlayerFactory.DamageRecoveryCoolDown(Player);
+            PlayerFactory.DamageRecoveryCoolDown(_player);
         }
 
         /// <summary>
@@ -922,14 +905,14 @@ namespace SpaceShooterGame
         /// </summary>
         private void UpdatePlayer()
         {
-            if (MoveLeft || MoveRight || IsPointerActivated)
+            if (_moveLeft || _moveRight || _isPointerActivated)
             {
                 PlayerFactory.UpdatePlayer(
-                    player: Player,
-                    pointerPosition: PointerPosition,
-                    moveLeft: MoveLeft,
-                    moveRight: MoveRight,
-                    isPointerActivated: IsPointerActivated);
+                    player: _player,
+                    pointerPosition: _pointerPosition,
+                    moveLeft: _moveLeft,
+                    moveRight: _moveRight,
+                    isPointerActivated: _isPointerActivated);
             }
             else
             {
@@ -969,12 +952,12 @@ namespace SpaceShooterGame
                     case ElementType.ENEMY:
                         {
                             var enemy = DestroyedObject as Enemy;
-                            PlayerScore.EnemiesDestroyed++;
+                            _playerScore.EnemiesDestroyed++;
 
                             if (enemy.IsBoss)
                             {
                                 DisengageBoss(enemy);
-                                PlayerScore.BossesDestroyed++;
+                                _playerScore.BossesDestroyed++;
                                 EnemyFactory.DestroyByPlayerProjectle(enemy);
                             }
                             else
@@ -985,7 +968,7 @@ namespace SpaceShooterGame
                         break;
                     case ElementType.METEOR:
                         {
-                            PlayerScore.MeteorsDestroyed++;
+                            _playerScore.MeteorsDestroyed++;
                             MeteorFactory.DestroyByPlayerProjectle(DestroyedObject as Meteor);
                         }
                         break;
@@ -999,15 +982,14 @@ namespace SpaceShooterGame
 
             if (Score > 0)
             {
-                if (!Player.IsRageUp)
+                if (!_player.IsRageUp)
                     AddRage();
 
                 // trigger rage after rage threashold kills
-                if (!Player.IsRageUp && Player.Rage >= Player.RageThreashold)
+                if (!_player.IsRageUp && _player.Rage >= _player.RageThreashold)
                     ActivateRage();
 
                 AddScore(Score);
-                SetGameLevel(); // check game level on score change
             }
         }
 
@@ -1025,8 +1007,8 @@ namespace SpaceShooterGame
 
             bool destroyed = EnemyFactory.UpdateEnemy(
                 enemy: enemy,
-                gameLevel: GameLevel,
-                pointerX: PointerX);
+                gameLevel: _gameLevel,
+                pointerX: _pointerX);
 
             if (destroyed)
                 return;
@@ -1038,18 +1020,17 @@ namespace SpaceShooterGame
                 return;
 
             // check if enemy collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: enemy))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: enemy))
             {
-                PlayerProjectileFactory.DecreaseProjectilePower(player: Player);
+                PlayerProjectileFactory.DecreaseProjectilePower(player: _player);
                 SetPlayerHealthBar();
                 return;
             }
 
             // fire projectiles if at a legitimate distance from player and in canvas view
-            if (enemy.IsProjectileFiring && enemy.GetY() > 0 && Math.Abs(Player.GetY() - enemy.GetY()) > 100)
+            if (enemy.IsProjectileFiring && enemy.GetY() > 0 && Math.Abs(_player.GetY() - enemy.GetY()) > 100)
                 EnemyProjectileFactory.SpawnProjectile(
-                    enemy: enemy,
-                    gameLevel: GameLevel);
+                    enemy: enemy);
         }
 
         /// <summary>
@@ -1072,9 +1053,9 @@ namespace SpaceShooterGame
                 return;
 
             // check if enemy projectile collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: projectile))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: projectile))
             {
-                PlayerProjectileFactory.DecreaseProjectilePower(player: Player);
+                PlayerProjectileFactory.DecreaseProjectilePower(player: _player);
                 SetPlayerHealthBar();
             }
         }
@@ -1088,10 +1069,10 @@ namespace SpaceShooterGame
         /// </summary>
         private void EngageBoss()
         {
-            ShowInGameContent(image: _bossAppearedImage, text: $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("BOSS")}");
+            ShowInGameContent(image: _bossAppearedImage, text: $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)_gameLevel - 1} {LocalizationHelper.GetLocalizedResource("BOSS")}");
 
-            var boss = EnemyFactory.EngageBoss(GameLevel);
-            Bosses.Add(boss);
+            var boss = EnemyFactory.EngageBoss(_gameLevel);
+            _bosses.Add(boss);
 
             switch (boss.BossClass)
             {
@@ -1109,7 +1090,7 @@ namespace SpaceShooterGame
             }
 
             BossHealthBarPanel.Visibility = Visibility.Visible;
-            BossTotalHealth = Bosses.Sum(x => x.Health);
+            _bossTotalHealth = _bosses.Sum(x => x.Health);
 
             SetBossHealthBar(); // set boss health on boss appearance            
         }
@@ -1119,7 +1100,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void SetBossHealthBar()
         {
-            BossHealthBar.Value = Bosses.Sum(x => x.Health) / BossTotalHealth * 100;
+            BossHealthBar.Value = _bosses.Sum(x => x.Health) / _bossTotalHealth * 100;
         }
 
         /// <summary>
@@ -1128,16 +1109,16 @@ namespace SpaceShooterGame
         /// <param name="boss"></param>
         private void DisengageBoss(Enemy boss)
         {
-            Bosses.Remove(boss);
+            _bosses.Remove(boss);
 
-            if (Bosses.Count == 0)
+            if (_bosses.Count == 0)
             {
                 EnemyFactory.DisengageBoss();
 
-                ShowInGameContent(_bossClearedImage, $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)GameLevel} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
+                ShowInGameContent(_bossClearedImage, $"{LocalizationHelper.GetLocalizedResource("LEVEL")} {(int)_gameLevel - 1} {LocalizationHelper.GetLocalizedResource("COMPLETE")}");
 
                 BossHealthBarPanel.Visibility = Visibility.Collapsed;
-                BossTotalHealth = 0;
+                _bossTotalHealth = 0;
 
                 SetGameLevelText();
                 WarpThroughSpace(); // after defeating a boss
@@ -1168,9 +1149,9 @@ namespace SpaceShooterGame
                 return;
 
             // check if meteor collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: meteor))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: meteor))
             {
-                PlayerProjectileFactory.DecreaseProjectilePower(player: Player);
+                PlayerProjectileFactory.DecreaseProjectilePower(player: _player);
                 SetPlayerHealthBar();
             }
         }
@@ -1197,7 +1178,7 @@ namespace SpaceShooterGame
                 return;
 
             // check if health collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: health))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: health))
             {
                 SetPlayerHealthBar();
                 ShowInGameContent(_healthImage, $"‍{LocalizationHelper.GetLocalizedResource("SHIP_REPAIRED")}");
@@ -1225,18 +1206,16 @@ namespace SpaceShooterGame
                 return;
 
             // check if collectible collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: collectible))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: collectible))
             {
-                PlayerProjectileFactory.IncreaseProjectilePower(player: Player);
-                PlayerScore.CollectiblesCollected++;
+                PlayerProjectileFactory.IncreaseProjectilePower(player: _player);
+                _playerScore.CollectiblesCollected++;
 
                 AddScore(1);
                 AddScoreMultiplier();
 
-                if (ScoreMultiplierCount >= SCORE_MULTIPLIER_THREASHOLD)
+                if (_scoreMultiplierCount >= SCORE_MULTIPLIER_THREASHOLD)
                     ActivateScoreMultiplier();
-
-                SetGameLevel(); // check game level on score change                                
             }
         }
 
@@ -1249,8 +1228,8 @@ namespace SpaceShooterGame
         /// </summary>
         private void AddRage()
         {
-            Player.Rage++;
-            PlayerRageBar.Value = Player.Rage;
+            _player.Rage++;
+            PlayerRageBar.Value = _player.Rage;
         }
 
         /// <summary>
@@ -1259,10 +1238,10 @@ namespace SpaceShooterGame
         private void ActivateRage()
         {
             PlayerRageIcon.Text = "😤";
-            PlayerFactory.RageUp(Player);
-            PlayerProjectileFactory.RageUp(Player);
+            PlayerFactory.RageUp(_player);
+            PlayerProjectileFactory.RageUp(_player);
 
-            switch (Player.ShipClass)
+            switch (_player.ShipClass)
             {
                 case ShipClass.DEFENDER:
                     ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("SHIELD_UP")}");
@@ -1286,9 +1265,9 @@ namespace SpaceShooterGame
         /// </summary>
         private void RageCoolDown()
         {
-            if (Player.IsRageUp && !StarView.IsWarpingThroughSpace)
+            if (_player.IsRageUp && !StarView.IsWarpingThroughSpace)
             {
-                var (RageDown, RageRemaining) = PlayerFactory.RageUpCoolDown(Player);
+                var (RageDown, RageRemaining) = PlayerFactory.RageUpCoolDown(_player);
 
                 PlayerRageBar.Value = RageRemaining;
 
@@ -1297,13 +1276,13 @@ namespace SpaceShooterGame
 
                 if (RageDown)
                 {
-                    PlayerProjectileFactory.RageDown(Player);
+                    PlayerProjectileFactory.RageDown(_player);
 
                     RageGradientBorder.Opacity = 0;
-                    PlayerRageBar.Value = Player.Rage;
+                    PlayerRageBar.Value = _player.Rage;
                     PlayerRageIcon.Text = "😡";
 
-                    switch (Player.ShipClass)
+                    switch (_player.ShipClass)
                     {
                         case ShipClass.DEFENDER:
                             ShowInGameContent(_rageImage, $"{LocalizationHelper.GetLocalizedResource("SHIELD_DOWN")}");
@@ -1344,7 +1323,7 @@ namespace SpaceShooterGame
                 return;
 
             // check if power up collides with player
-            if (PlayerFactory.CheckCollision(player: Player, gameObject: powerUp))
+            if (PlayerFactory.CheckCollision(player: _player, gameObject: powerUp))
                 ActivatePowerUp(powerUp);
         }
 
@@ -1358,13 +1337,13 @@ namespace SpaceShooterGame
             PlayerPowerBar.Visibility = Visibility.Visible;
 
             // do not trigger same power up twice
-            if (powerUp.PowerUpType != PowerUpType)
+            if (powerUp.PowerUpType != _powerUpType)
             {
-                PowerUpType = powerUp.PowerUpType;
-                PlayerProjectileFactory.PowerUp(powerUpType: PowerUpType, player: Player);
+                _powerUpType = powerUp.PowerUpType;
+                PlayerProjectileFactory.PowerUp(powerUpType: _powerUpType, player: _player);
             }
 
-            ShowInGameContent(_powerUpImage, $"‍{LocalizationHelper.GetLocalizedResource(PowerUpType.ToString())}"); // show power up text
+            ShowInGameContent(_powerUpImage, $"‍{LocalizationHelper.GetLocalizedResource(_powerUpType.ToString())}"); // show power up text
         }
 
         /// <summary>
@@ -1372,18 +1351,18 @@ namespace SpaceShooterGame
         /// </summary>
         private void PowerUpCoolDown()
         {
-            if (Player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
+            if (_player.IsPoweredUp && !StarView.IsWarpingThroughSpace)
             {
-                var (PowerDown, PowerRemaining) = PlayerFactory.PowerUpCoolDown(Player);
+                var (PowerDown, PowerRemaining) = PlayerFactory.PowerUpCoolDown(_player);
 
                 PlayerPowerBar.Value = PowerRemaining;
 
                 if (PowerDown)
                 {
-                    PlayerProjectileFactory.PowerDown(PowerUpType, player: Player);
+                    PlayerProjectileFactory.PowerDown(_powerUpType, player: _player);
                     PlayerPowerBar.Visibility = Visibility.Collapsed;
 
-                    PowerUpType = PowerUpType.NONE;
+                    _powerUpType = PowerUpType.NONE;
                     ShowInGameContent(_powerUpImage, $"{LocalizationHelper.GetLocalizedResource("POWER_DOWN")}");
                 }
             }
@@ -1391,7 +1370,7 @@ namespace SpaceShooterGame
 
         #endregion
 
-        #region Star & Planet
+        #region CelestialObject
 
         /// <summary>
         /// Update a star in the game view.
@@ -1410,73 +1389,24 @@ namespace SpaceShooterGame
         /// <summary>
         /// Sets the game level according to score; 
         /// </summary>
-        private void SetGameLevel()
+        private void ScaleDifficulty()
         {
-            var lastGameLevel = GameLevel;
+            var lastGameLevel = _gameLevel;
 
-            if (PlayerScore.Score >= 0)
+            if (_playerScore.Score > _scoreCap)
             {
-                GameLevel = GameLevel.Level_1;
-                SetScoreBarCountText(25);
+                _gameLevel++;
+                _scoreCap += 50 * _gameLevel / 2;
+                SetScoreBarCountText(_scoreCap);
             }
-            if (PlayerScore.Score > 25)
-            {
-                GameLevel = GameLevel.Level_2;
-                SetScoreBarCountText(100);
-            }
-            if (PlayerScore.Score > 100)
-            {
-                GameLevel = GameLevel.Level_3;
-                SetScoreBarCountText(200);
-            }
-            if (PlayerScore.Score > 200)
-            {
-                GameLevel = GameLevel.Level_4;
-                SetScoreBarCountText(400);
-            }
-            if (PlayerScore.Score > 400)
-            {
-                GameLevel = GameLevel.Level_5;
-                SetScoreBarCountText(600);
-            }
-            if (PlayerScore.Score > 600)
-            {
-                GameLevel = GameLevel.Level_6;
-                SetScoreBarCountText(800);
-            }
-            if (PlayerScore.Score > 800)
-            {
-                GameLevel = GameLevel.Level_7;
-                SetScoreBarCountText(1000);
-            }
-            if (PlayerScore.Score > 1000)
-            {
-                GameLevel = GameLevel.Level_8;
-                SetScoreBarCountText(1200);
-            }
-            if (PlayerScore.Score > 1200)
-            {
-                GameLevel = GameLevel.Level_9;
-                SetScoreBarCountText(1400);
-            }
-            if (PlayerScore.Score > 1400)
-            {
-                GameLevel = GameLevel.Level_10;
-                SetScoreBarCountText(1600);
-            }
-            if (PlayerScore.Score > 1600)
-            {
-                ScoreBarCount.Text = $"🏆{PlayerScore.Score}";
-            }
-
 
             // when difficulty changes show level up
-            if (lastGameLevel != GameLevel)
+            if (lastGameLevel != _gameLevel)
             {
                 LevelUpObjects();
 
                 // bosses apprear after level 2
-                if (GameLevel > GameLevel.Level_2) //TODO: SET TO LEVEL 2
+                if (_gameLevel > 2) //TODO: SET TO LEVEL 2
                 {
                     EngageBoss();
                 }
@@ -1499,7 +1429,7 @@ namespace SpaceShooterGame
         /// <param name="capacity"></param>
         private void SetScoreBarCountText(int capacity)
         {
-            ScoreBarCount.Text = $"🏆{PlayerScore.Score}/{capacity}";
+            ScoreBarCount.Text = $"🏆{_playerScore.Score}/{capacity}";
         }
 
         /// <summary>
@@ -1507,7 +1437,7 @@ namespace SpaceShooterGame
         /// </summary>
         private void SetGameLevelText()
         {
-            GameLevelText.Text = $"🔥 {(int)GameLevel + 1}";
+            GameLevelText.Text = $"🔥 {(int)_gameLevel}";
         }
 
         /// <summary>
@@ -1515,21 +1445,15 @@ namespace SpaceShooterGame
         /// </summary>
         private void LevelUpObjects()
         {
-            switch (GameLevel)
+            if (_gameLevel > 1)
             {
-                case GameLevel.Level_1:
-                    break;
-                default:
-                    {
-                        EnemyFactory.LevelUp();
-                        MeteorFactory.LevelUp();
-                        HealthFactory.LevelUp();
-                        PowerUpFactory.LevelUp();
-                        CollectibleFactory.LevelUp();
-                        CelestialObjectFactory.LevelUp();
-                        PlayerProjectileFactory.LevelUp(player: Player);
-                    }
-                    break;
+                EnemyFactory.LevelUp();
+                MeteorFactory.LevelUp();
+                HealthFactory.LevelUp();
+                PowerUpFactory.LevelUp();
+                CollectibleFactory.LevelUp();
+                CelestialObjectFactory.LevelUp();
+                PlayerProjectileFactory.LevelUp(player: _player);
             }
         }
 
@@ -1539,24 +1463,24 @@ namespace SpaceShooterGame
 
         private void AddScoreMultiplier()
         {
-            ScoreMultiplierCount++;
+            _scoreMultiplierCount++;
             SetScoreMultiplierCountText();
         }
 
         private void ActivateScoreMultiplier()
         {
-            ScoreMultiplierCount = 0;
+            _scoreMultiplierCount = 0;
             SetScoreMultiplierCountText();
 
             _scoreMultiplierCoolDownCounter = _scoreMultiplierCoolDownAfter;
-            IsScoreMultiplierActivated = true;
+            _isScoreMultiplierActivated = true;
             AudioHelper.PlaySound(SoundType.SCORE_MULTIPLIER_ON);
             ShowInGameContent(_scoreMultiplierImage, LocalizationHelper.GetLocalizedResource("SCORE_MULTIPLIER_ON"));
         }
 
         private void ScoreMultiplierCoolDown()
         {
-            if (IsScoreMultiplierActivated && !StarView.IsWarpingThroughSpace)
+            if (_isScoreMultiplierActivated && !StarView.IsWarpingThroughSpace)
             {
                 _scoreMultiplierCoolDownCounter--;
 
@@ -1565,7 +1489,7 @@ namespace SpaceShooterGame
 
                 if (_scoreMultiplierCoolDownCounter <= 0)
                 {
-                    IsScoreMultiplierActivated = false;
+                    _isScoreMultiplierActivated = false;
                     AudioHelper.PlaySound(SoundType.SCORE_MULTIPLIER_OFF);
                     ShowInGameContent(_scoreMultiplierImage, LocalizationHelper.GetLocalizedResource("SCORE_MULTIPLIER_OFF"));
                 }
@@ -1574,8 +1498,8 @@ namespace SpaceShooterGame
 
         private void SetScoreMultiplierCountText()
         {
-            ScoreMultiplierCountText.Text = $"x{ScoreMultiplierCount}";
-            ScoreMultiplierBar.Value = ScoreMultiplierCount;
+            ScoreMultiplierCountText.Text = $"x{_scoreMultiplierCount}";
+            ScoreMultiplierBar.Value = _scoreMultiplierCount;
         }
 
         /// <summary>
@@ -1584,7 +1508,10 @@ namespace SpaceShooterGame
         /// <param name="score"></param>
         private void AddScore(double score)
         {
-            PlayerScore.Score += IsScoreMultiplierActivated ? score * 2 : score;
+            _playerScore.Score += _isScoreMultiplierActivated ? score * 2 : score;
+            SetScoreBarCountText(_scoreCap);
+
+            ScaleDifficulty(); // check game level on score change
         }
 
         #endregion

@@ -14,8 +14,8 @@ namespace SpaceShooterGame
         public const double DEFAULT_FRAME_TIME = 18;
 
         public const double DESTRUCTIBLE_OBJECT_SIZE = 60 * 1.5;
-        public const double COLLECTIBLE_OBJECT_SIZE = 80 * 1.5;
-        public const double POWERUP_OBJECT_SIZE = 70 * 1.5;
+        public const double COLLECTIBLE_OBJECT_SIZE = 70 * 1.5;
+        public const double POWERUP_OBJECT_SIZE = 50 * 1.5;
         public const double PLAYER_HEIGHT = 70 * 1.5;
 
         public const double PLAYER_SPEED = 11;
@@ -75,10 +75,6 @@ namespace SpaceShooterGame
             new(ImageType.PLAYER_SHIP, new Uri("ms-appx:///Assets/Images/Player/player_ship2.png"), (int)ShipClass.BERSERKER),
             new(ImageType.PLAYER_SHIP, new Uri("ms-appx:///Assets/Images/Player/player_ship3.png"), (int)ShipClass.SPECTRE),
 
-            new(ImageType.PLAYER_SHIP_THRUST, new Uri("ms-appx:///Assets/Images/Player/space_thrust1.png"), (int)ShipClass.DEFENDER),
-            new(ImageType.PLAYER_SHIP_THRUST, new Uri("ms-appx:///Assets/Images/Player/space_thrust2.png"), (int)ShipClass.BERSERKER),
-            new(ImageType.PLAYER_SHIP_THRUST, new Uri("ms-appx:///Assets/Images/Player/space_thrust3.png"), (int)ShipClass.SPECTRE),
-
             new(ImageType.PLAYER_RAGE, new Uri("ms-appx:///Assets/Images/Rage/rage1.png"), (int)ShipClass.DEFENDER),
             new(ImageType.PLAYER_RAGE, new Uri("ms-appx:///Assets/Images/Rage/rage2.png"), (int)ShipClass.BERSERKER),
             new(ImageType.PLAYER_RAGE, new Uri("ms-appx:///Assets/Images/Rage/rage3.png"), (int)ShipClass.SPECTRE),
@@ -87,8 +83,6 @@ namespace SpaceShooterGame
             new(ImageType.POWERUP, new Uri("ms-appx:///Assets/Images/Powerup/powerup.png"), 1),
 
             new(ImageType.SCORE_MULTIPLIER, new Uri("ms-appx:///Assets/Images/score_multiplier.png"), 1),
-
-            new(ImageType.GAME_OVER, new Uri("ms-appx:///Assets/Images/game_over.png"), 1),
         };
 
         #endregion
@@ -101,12 +95,12 @@ namespace SpaceShooterGame
 
             new KeyValuePair<SoundType, string>(SoundType.INTRO, "Assets/Sounds/Intro/intro1.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.INTRO, "Assets/Sounds/Intro/intro2.mp3"),
+            new KeyValuePair<SoundType, string>(SoundType.INTRO, "Assets/Sounds/Intro/intro3.mp3"),
 
             new KeyValuePair<SoundType, string>(SoundType.BACKGROUND, "Assets/Sounds/Music/music1.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.BACKGROUND, "Assets/Sounds/Music/music2.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.BACKGROUND, "Assets/Sounds/Music/music3.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.BACKGROUND, "Assets/Sounds/Music/music4.mp3"),
-            new KeyValuePair<SoundType, string>(SoundType.BACKGROUND, "Assets/Sounds/Music/music5.mp3"),
 
             new KeyValuePair<SoundType, string>(SoundType.GAME_START, "Assets/Sounds/Game/game_start.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.GAME_OVER, "Assets/Sounds/Game/game_over.mp3"),
@@ -122,7 +116,6 @@ namespace SpaceShooterGame
             new KeyValuePair<SoundType, string>(SoundType.BOSS_APPEARANCE, "Assets/Sounds/Boss/boss1.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.BOSS_APPEARANCE, "Assets/Sounds/Boss/boss2.mp3"),
             new KeyValuePair<SoundType, string>(SoundType.BOSS_APPEARANCE, "Assets/Sounds/Boss/boss3.mp3"),
-
             new KeyValuePair<SoundType, string>(SoundType.BOSS_DESTRUCTION, "Assets/Sounds/Boss/boss-destruction.mp3"),
 
             new KeyValuePair<SoundType, string>(SoundType.PLAYER_ROUNDS_FIRE, "Assets/Sounds/Player/player_rounds_fire.mp3"),
@@ -170,6 +163,7 @@ namespace SpaceShooterGame
         public const string Action_GetGameProfiles = "/api/Query/GetGameProfiles";
         public const string Action_GetGameScores = "/api/Query/GetGameScores";
         public const string Action_GetUser = "/api/Query/GetUser";
+        public const string Action_CheckIdentityAvailability = "/api/Query/CheckIdentityAvailability";
 
         #endregion
 

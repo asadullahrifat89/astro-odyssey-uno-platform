@@ -16,10 +16,13 @@ namespace SpaceShooterGame
 
         private readonly Image _ship = new() { Stretch = Stretch.Uniform, };
 
-        private readonly Image _engineThrust = new() { Stretch = Stretch.Uniform };
+        private readonly Border _engineThrust = new()
+        {
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
+        };
 
         #endregion
-                
+
         #region Properties
 
         public ShipClass ShipClass { get; set; }
@@ -152,36 +155,45 @@ namespace SpaceShooterGame
 
             IsRageUp = false;
 
-            var playerShipThrusts = AssetHelper.PLAYER_SHIP_THRUST_TEMPLATES;
-            Uri engineThrustUri = playerShipThrusts.FirstOrDefault(x => (int)x.Size == (int)ShipClass).AssetUri;
-
             switch (ShipClass)
             {
                 case ShipClass.DEFENDER:
                     {
                         HitPoint = 100 / 5;
                         RageThreashold = 25;
+
+                        _engineThrust.Background = new SolidColorBrush(Colors.SkyBlue);
+                        _engineThrust.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
                     }
                     break;
                 case ShipClass.BERSERKER:
                     {
                         HitPoint = 100 / 3;
                         RageThreashold = 15;
+
+                        _engineThrust.Background = new SolidColorBrush(Colors.Red);
+                        _engineThrust.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                     }
                     break;
                 case ShipClass.SPECTRE:
                     {
                         HitPoint = 100 / 4;
                         RageThreashold = 20;
+
+                        _engineThrust.Background = new SolidColorBrush(Colors.Violet);
+                        _engineThrust.BorderBrush = new SolidColorBrush(Colors.DarkViolet);
                     }
                     break;
                 default:
                     break;
             }
 
-            _engineThrust.Source = new BitmapImage(engineThrustUri);
-            _engineThrust.Width = _body.Width;
-            _engineThrust.Height = _body.Height;
+            _engineThrust.Width = 25 * scale;
+            _engineThrust.Height = 12 * scale;
+
+            _engineThrust.CornerRadius = new Microsoft.UI.Xaml.CornerRadius(10 * scale);
+            _engineThrust.Margin = new Microsoft.UI.Xaml.Thickness(0, 10 * scale, 0, 0);
+            _engineThrust.BorderThickness = new Microsoft.UI.Xaml.Thickness(0, 4 * scale, 0, 0);
 
             Height = Constants.PLAYER_HEIGHT * scale;
             Width = Constants.DESTRUCTIBLE_OBJECT_SIZE * scale;
@@ -234,7 +246,7 @@ namespace SpaceShooterGame
         public new Rect GetRect()
         {
             return new Rect(x: Canvas.GetLeft(this) + 5, y: Canvas.GetTop(this) + 25, width: Width - 5, height: Height - Height / 2);
-        }      
+        }
 
         #endregion
     }

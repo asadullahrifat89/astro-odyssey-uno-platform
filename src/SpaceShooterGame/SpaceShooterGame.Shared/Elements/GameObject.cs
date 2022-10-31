@@ -379,7 +379,6 @@ namespace SpaceShooterGame
         ENEMY,
         METEOR,
         PLAYER_SHIP,
-        PLAYER_SHIP_THRUST,
         PLAYER_RAGE
     }
 }

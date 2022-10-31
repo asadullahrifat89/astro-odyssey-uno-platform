@@ -41,7 +41,7 @@ namespace SpaceShooterGame
 
             if (FindChild<TextBlock>(parent: page, childName: "ProgressBarMessageBlock") is TextBlock messageBlock)
             {
-                messageBlock.Foreground = new SolidColorBrush(Colors.White);
+                messageBlock.Foreground = App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
                 messageBlock.Text = "👍 " + progressBarMessage;
                 messageBlock.Visibility = progressBarMessage.IsNullOrBlank() ? Visibility.Collapsed : Visibility.Visible;
             }

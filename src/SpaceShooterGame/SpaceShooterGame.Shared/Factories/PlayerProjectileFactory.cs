@@ -67,7 +67,7 @@
         public static void SpawnProjectile(
             bool isPoweredUp,
             Player player,
-            GameLevel gameLevel,
+            int gameLevel,
             PowerUpType powerUpType)
         {
             // each frame progress decreases this counter
@@ -100,7 +100,7 @@
         public static void GenerateProjectile(
             bool isPoweredUp,
             Player player,
-            GameLevel gameLevel,
+            int gameLevel,
             PowerUpType powerUpType)
         {
             var projectile = new PlayerProjectile();
@@ -109,7 +109,6 @@
 
             projectile.SetAttributes(
                 speed: player.ProjectileSpeed,
-                gameLevel: gameLevel,
                 shipClass: player.ShipClass,
                 projectilePower: player.ProjectilePower,
                 isPoweredUp: isPoweredUp,
@@ -369,7 +368,7 @@
             if (player.ProjectileSpawnAfter > 14 / 3)
             {
                 var scale = _gameView.GameObjectScale;
-                player.ProjectileSpawnAfter -= (1.3 * scale);
+                player.ProjectileSpawnAfter -= (1.1 * scale);
             }
         }
 

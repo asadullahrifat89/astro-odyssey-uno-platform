@@ -55,7 +55,7 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Deutsch"
+        "Value": "German"
       },
       {
         "Culture": "de",
@@ -63,7 +63,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Deutsch"
+        "Value": "Allemand"
       }
     ]
   },
@@ -131,7 +131,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Se Déconnecter"
+        "Value": "Se déconnecter"
       }
     ]
   },
@@ -140,15 +140,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Made with ❤️ by Asadullah Rifat"
+        "Value": "Brought to you with❤️ by"
       },
       {
         "Culture": "de",
-        "Value": "Erstellt mit ❤️ von Asadullah Rifat"
+        "Value": "Kreiert mit ❤️ von"
       },
       {
         "Culture": "fr",
-        "Value": "Fait avec ❤️ par Asadullah Rifat"
+        "Value": "Créé avec ❤️ par"
       }
     ]
   },
@@ -161,7 +161,7 @@
       },
       {
         "Culture": "de",
-        "Value": "👋 Willkommen Zurück!"
+        "Value": "👋 Willkommen zurück!"
       },
       {
         "Culture": "fr",
@@ -178,11 +178,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Laden von Spiel-Assets..."
+        "Value": "Spiel ladet..."
       },
       {
         "Culture": "fr",
-        "Value": "Chargement des actifs de jeu..."
+        "Value": "Chargement du jeu..."
       }
     ]
   },
@@ -195,7 +195,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Wir verwenden Cookies, um Ihnen das beste Spielerlebnis zu bieten!"
+        "Value": "Wir verwenden Cookies, um dir das beste Spielerlebnis zu bieten!"
       },
       {
         "Culture": "fr",
@@ -318,7 +318,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Choisis un vaisseau"
+        "Value": "Choisis un vaisseau spatial"
       }
     ]
   },
@@ -437,7 +437,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Rencontre-les et évite les collisions."
+        "Value": "Tires sur les adversaires et évite les collisions."
       }
     ]
   },
@@ -454,7 +454,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Patrons"
+        "Value": "Boss"
       }
     ]
   },
@@ -480,7 +480,7 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Healths"
+        "Value": "Lives"
       },
       {
         "Culture": "de",
@@ -518,7 +518,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Einschalten"
+        "Value": "Power-ups"
       },
       {
         "Culture": "fr",
@@ -535,11 +535,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammle sie um mächtigere Waffen zu erhalten."
+        "Value": "Sammle sie um stärkere Waffen zu erhalten."
       },
       {
         "Culture": "fr",
-        "Value": "Collectez-les pour obtenir des armes plus puissantes."
+        "Value": "Collecte-les pour obtenir des armes plus puissantes."
       }
     ]
   },
@@ -552,7 +552,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammlerobjekte"
+        "Value": "Sammelobjekte"
       },
       {
         "Culture": "fr",
@@ -620,7 +620,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Strahlkanone"
+        "Value": "Strahlenkanone"
       },
       {
         "Culture": "fr",
@@ -705,7 +705,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Sich tarnen"
+        "Value": "Tarne dich"
       },
       {
         "Culture": "fr",
@@ -748,23 +748,6 @@
     ]
   },
   {
-    "Key": "SHIELD_DOWN",
-    "CultureValues": [
-      {
-        "Culture": "en",
-        "Value": "Shield down"
-      },
-      {
-        "Culture": "de",
-        "Value": "Schild nach unten"
-      },
-      {
-        "Culture": "fr",
-        "Value": "Abaisser le bouclier"
-      }
-    ]
-  },
-  {
     "Key": "SHIELD_UP",
     "CultureValues": [
       {
@@ -773,11 +756,28 @@
       },
       {
         "Culture": "de",
-        "Value": "Schild auf"
+        "Value": "Schild aktiviert"
       },
       {
         "Culture": "fr",
-        "Value": "Augmentation du bouclier"
+        "Value": "Bouclier activé"
+      }
+    ]
+  },
+  {
+    "Key": "SHIELD_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Shield down"
+      },
+      {
+        "Culture": "de",
+        "Value": "Schild deaktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bouclier déactivé"
       }
     ]
   },
@@ -892,7 +892,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Ebene"
+        "Value": "Level"
       },
       {
         "Culture": "fr",
@@ -930,7 +930,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Diminution de la puissance"
+        "Value": "Puissance réduite"
       }
     ]
   },
@@ -977,11 +977,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Ihr spielstand"
+        "Value": "Dein Spielstand"
       },
       {
         "Culture": "fr",
-        "Value": "Votre score"
+        "Value": "Ton score"
       }
     ]
   },
@@ -994,7 +994,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Persönliche beste punktzahl"
+        "Value": "Persönliche Bestpunktzahl"
       },
       {
         "Culture": "fr",
@@ -1011,7 +1011,7 @@
       },
       {
         "Culture": "de",
-        "Value": "🕹️ Letzter spielpunkt"
+        "Value": "🕹️ Letzter Spielstand"
       },
       {
         "Culture": "fr",
@@ -1028,7 +1028,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Zerstörte"
+        "Value": "Zerstört"
       },
       {
         "Culture": "fr",
@@ -1058,7 +1058,7 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Meteors"
+        "Value": "Météorites"
       },
       {
         "Culture": "de",
@@ -1096,11 +1096,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammlerstücke"
+        "Value": "Sammelobjekte"
       },
       {
         "Culture": "fr",
-        "Value": "Pièces de collection"
+        "Value": "Objets collectés"
       }
     ]
   },
@@ -1164,7 +1164,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Tippen sie auf den bildschirm, um zu beginnen"
+        "Value": "Tippe auf den Bildschirm, um zu beginnen"
       },
       {
         "Culture": "fr",
@@ -1185,7 +1185,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Tap pour quitter"
+        "Value": "Appuie pour quitter"
       }
     ]
   },
@@ -1202,7 +1202,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Appuyer pour reprendre"
+        "Value": "Appuie pour reprendre"
       }
     ]
   },
@@ -1215,7 +1215,7 @@
       },
       {
         "Culture": "de",
-        "Value": "2X punktzahl auf"
+        "Value": "2x Punktzahl aktiviert"
       },
       {
         "Culture": "fr",
@@ -1232,11 +1232,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammeln sie mehr pizzascheiben"
+        "Value": "Sammle mehr Pizzascheiben"
       },
       {
         "Culture": "fr",
-        "Value": "Recueillir plus de tranches de pizza"
+        "Value": "Collectionne plus de tranches de pizza"
       }
     ]
   },
@@ -1245,15 +1245,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "You could win an exciting prize if you login."
+        "Value": "Log in, to have a chance to be at the top of the leaderboard."
       },
       {
         "Culture": "de",
-        "Value": "Sie können einen aufregenden Preis gewinnen, wenn Sie sich anmelden."
+        "Value": "Melden Sie sich an, um die Chance zu haben, an der Spitze der Rangliste zu stehen."
       },
       {
         "Culture": "fr",
-        "Value": "Vous pourriez gagner un prix passionnant si vous vous connectez."
+        "Value": "Connectez-vous, pour avoir une chance d'être en tête du classement."
       }
     ]
   },
@@ -1304,7 +1304,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Tableau des leaders"
+        "Value": "Classement"
       }
     ]
   },
@@ -1355,7 +1355,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Connexion"
+        "Value": "Login"
       }
     ]
   },
@@ -1521,7 +1521,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Ja, ich möchte Newsletter abonnieren."
+        "Value": "Ja, ich möchte den Newsletter abonnieren."
       },
       {
         "Culture": "fr",
@@ -1538,7 +1538,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Passwörter stimmten nicht überein"
+        "Value": "Passwörter stimmen nicht überein"
       },
       {
         "Culture": "fr",
@@ -1555,11 +1555,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Matchierte Passwörter"
+        "Value": "Passwörter stimmen überein"
       },
       {
         "Culture": "fr",
-        "Value": "Mots de passe correspondants"
+        "Value": "Mots de passe correspondent"
       }
     ]
   },
@@ -1572,7 +1572,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Das Passwort muss mindestens acht Zeichen betragen"
+        "Value": "Das Passwort muss mindestens acht Zeichen enthalten"
       },
       {
         "Culture": "fr",
@@ -1589,7 +1589,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Das Passwort muss weniger als vierzehn Zeichen betragen"
+        "Value": "Das Passwort darf höchstens vierzehl Zeichen enthalten"
       },
       {
         "Culture": "fr",
@@ -1606,11 +1606,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Passwort muss einen Großbuchstaben enthalten"
+        "Value": "Passwort muss einen Grossbuchstaben enthalten"
       },
       {
         "Culture": "fr",
-        "Value": "Le mot de passe doit contenir un caractère majuscule"
+        "Value": "Le mot de passe doit contenir une majuscule"
       }
     ]
   },
@@ -1623,11 +1623,11 @@
       },
       {
         "Culture": "de",
-        "Value": "Das Passwort muss einen Kleinbuchstabencharakter enthalten"
+        "Value": "Das Passwort muss einen Kleinbuchstaben enthalten"
       },
       {
         "Culture": "fr",
-        "Value": "Le mot de passe doit contenir un caractère minuscule"
+        "Value": "Le mot de passe doit contenir une minuscule"
       }
     ]
   },
@@ -1640,7 +1640,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Kennwort darf keine Leerzeichen enthalten"
+        "Value": "Das Passwort darf keine Leerzeichen enthalten"
       },
       {
         "Culture": "fr",
@@ -1742,7 +1742,7 @@
       },
       {
         "Culture": "de",
-        "Value": "👑 Alle Zeiten"
+        "Value": "👑 Allzeit"
       },
       {
         "Culture": "fr",
@@ -1768,6 +1768,24 @@
     ]
   },
   {
+    "Key": "ConfirmQuitGameButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Quit Game?"
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel Verlassen?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Quitter Le Jeu?"
+      }
+    ]
+  },
+
+  {
     "Key": "LOADING_DATA",
     "CultureValues": [
       {
@@ -1776,7 +1794,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Laden von Daten..."
+        "Value": "Daten laden..."
       },
       {
         "Culture": "fr",

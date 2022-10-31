@@ -23,6 +23,8 @@ namespace SpaceShooterGame
 
         private readonly int _gameSpeed = 5;
 
+        private SignUpState _signUpState;
+
         private readonly IBackendService _backendService;
 
         #endregion
@@ -53,6 +55,9 @@ namespace SpaceShooterGame
         {
             this.SetLocalization();
 
+            _signUpState = SignUpState.FullNameContainer;
+            SetSignupState();
+
             SizeChanged += GamePage_SizeChanged;
             StartAnimation();
         }
@@ -81,27 +86,27 @@ namespace SpaceShooterGame
 
         private void UserFullNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private void UserEmailBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private void ConfirmPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
@@ -112,17 +117,41 @@ namespace SpaceShooterGame
 
         private void ConfirmCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         private void ConfirmCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            EnableSignupButton();
+            EnableNextButton();
         }
 
         #endregion
 
         #region Button
+
+        private async void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (_signUpState)
+            {
+                case SignUpState.UserNameContainer:
+                    {
+                        this.RunProgressBar();
+                        if (await IsValidUserName())
+                        {
+                            GoToSextSignupState();
+                            this.StopProgressBar();
+                        }
+                        else
+                            this.StopProgressBar();
+                    }
+                    break;
+                default:
+                    {
+                        GoToSextSignupState();
+                    }
+                    break;
+            }
+        }
 
         private async void SignupButton_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +177,80 @@ namespace SpaceShooterGame
 
         #region Logic
 
+        private void GoToSextSignupState()
+        {
+            _signUpState++;
+            SetSignupState();
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+        }
+
+        private void SetSignupState()
+        {
+            foreach (var item in SignupContainer.Children)
+            {
+                if (item.Name != _signUpState.ToString())
+                    item.Visibility = Visibility.Collapsed;
+                else
+                    item.Visibility = Visibility.Visible;
+            }
+
+            EnableNextButton();
+        }
+
+        private void EnableNextButton()
+        {
+            switch (_signUpState)
+            {
+                case SignUpState.FullNameContainer:
+                    {
+                        GameInstructionsPage_NextButton.IsEnabled =
+                        !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
+                        && IsValidFullName();
+                    }
+                    break;
+                case SignUpState.UserNameContainer:
+                    {
+                        GameInstructionsPage_NextButton.IsEnabled =
+                        !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
+                        && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
+                        && IsValidEmail();
+                    }
+                    break;
+                case SignUpState.PasswordContainer:
+                    {
+                        GameInstructionsPage_NextButton.IsEnabled =
+                        IsStrongPassword()
+                        && DoPasswordsMatch();
+                    }
+                    break;
+                case SignUpState.AcceptanceContainer:
+                    {
+                        GameInstructionsPage_NextButton.Visibility = Visibility.Collapsed;
+                        GameSignupPage_SignupButton.IsEnabled = GameSignupPage_ConfirmCheckBox.IsChecked == true;
+                        GameSignupPage_SignupButton.Visibility = Visibility.Visible;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async Task<bool> IsValidUserName()
+        {
+            (bool IsSuccess, string Message) = await _backendService.CheckUserIdentityAvailability(
+                  userName: GameSignupPage_UserNameBox.Text.Trim(),
+                  email: GameSignupPage_UserEmailBox.Text.ToLower().Trim());
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            return true;
+        }
+
         private async Task PerformSignup()
         {
             this.RunProgressBar();
@@ -165,7 +268,8 @@ namespace SpaceShooterGame
                fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
                userName: GameSignupPage_UserNameBox.Text.Trim(),
                email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
-               password: GameSignupPage_PasswordBox.Text.Trim());
+               password: GameSignupPage_PasswordBox.Text.Trim(),
+               subscribedNewsletters: GameSignupPage_ConfirmNewsLettersCheckBox.IsChecked.Value);
 
             if (!IsSuccess)
             {
@@ -191,19 +295,6 @@ namespace SpaceShooterGame
             }
 
             return true;
-        }
-
-        private void EnableSignupButton()
-        {
-            GameSignupPage_SignupButton.IsEnabled =
-                !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
-                && IsValidFullName()
-                && IsStrongPassword()
-                && DoPasswordsMatch()
-                && !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
-                && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
-                && IsValidEmail()
-                && GameSignupPage_ConfirmCheckBox.IsChecked == true;
         }
 
         private bool IsValidFullName()
@@ -394,7 +485,7 @@ namespace SpaceShooterGame
         {
             star.SetPosition(
                 left: _random.Next(0, (int)UnderView.Width) - (100 * _scale),
-                 top: _random.Next(800, 1400) * -1);
+                top: _random.Next(800, 1400) * -1);
         }
 
         #endregion
@@ -402,5 +493,13 @@ namespace SpaceShooterGame
         #endregion
 
         #endregion
+    }
+
+    internal enum SignUpState
+    {
+        FullNameContainer,
+        UserNameContainer,
+        PasswordContainer,
+        AcceptanceContainer
     }
 }

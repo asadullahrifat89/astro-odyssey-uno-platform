@@ -21,27 +21,27 @@
                 x:Key="DefaultButton"
                 BasedOn="{StaticResource DefaultButtonStyle}"
                 TargetType="Button">
-                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
                 <Setter Property="FontFamily" Value="Frutiger" />
             </Style>
 
             <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
-                <Setter Property="Background" Value="Goldenrod" />
+                <Setter Property="Background" Value="#9d2235" />
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="BorderBrush" Value="Goldenrod" />
                 <Setter Property="BorderThickness" Value="3" />
                 <Setter Property="FontWeight" Value="SemiBold" />
-                <Setter Property="FontSize" Value="24" />
-                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
                 <Setter Property="FontFamily" Value="Frutiger" />
             </Style>
 
             <Style BasedOn="{StaticResource DefaultToggleButtonStyle}" TargetType="ToggleButton">
-                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
@@ -57,20 +57,20 @@
 
             <!--#region Input Fields-->
             <Style BasedOn="{StaticResource DefaultTextBoxStyle}" TargetType="TextBox">
-                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="FontFamily" Value="Frutiger" />
             </Style>
 
             <Style BasedOn="{StaticResource DefaultPasswordBoxStyle}" TargetType="PasswordBox">
-                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontFamily" Value="Frutiger" />
             </Style>
             <!--#endregion-->
 
             <!--#region Game UI Container Style-->
             <Style x:Key="GameUIContainer" TargetType="Border">
-                <Setter Property="Background" Value="#9d2235" />
+                <Setter Property="Background" Value="White" />
                 <Setter Property="BorderBrush" Value="Goldenrod" />
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="BorderThickness" Value="0,3,0,3" />
@@ -81,8 +81,8 @@
 
             <!--#region Leaderboard Style-->
             <Style x:Key="LeaderboardRecordContainer" TargetType="Border">
-                <Setter Property="Background" Value="Goldenrod" />
-                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="Background" Value="#9d2235" />
+                <Setter Property="BorderBrush" Value="Goldenrod" />
                 <Setter Property="CornerRadius" Value="10" />
             </Style>
             <!--#endregion-->
@@ -94,9 +94,9 @@
             <SolidColorBrush x:Key="GameBackgroundColor" Color="#070a25" />
 
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="Goldenrod" />
-            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Red" />
+            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
             <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
-            <SolidColorBrush x:Key="ProgressBarOkColor" Color="Green" />
+            <SolidColorBrush x:Key="ProgressBarOkColor" Color="White" />
             <!--#endregion-->
 
         </ResourceDictionary>

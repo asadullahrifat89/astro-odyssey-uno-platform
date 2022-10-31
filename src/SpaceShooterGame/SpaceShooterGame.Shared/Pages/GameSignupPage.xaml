@@ -47,62 +47,109 @@
                     TextAlignment="Center"
                     TextWrapping="WrapWholeWords" />
 
-                <!--  Fullname  -->
-                <TextBox
-                    x:Name="GameSignupPage_UserFullNameBox"
-                    Margin="5"
-                    Header="Enter your full name"
-                    TextChanged="UserFullNameBox_TextChanged" />
+                <!--#region Signup container-->
+                <Grid
+                    x:Name="SignupContainer"
+                    MinHeight="200"
+                    VerticalAlignment="Center">
 
-                <!--  Email  -->
-                <TextBox
-                    x:Name="GameSignupPage_UserEmailBox"
-                    Margin="5"
-                    Header="Enter email"
-                    TextChanged="UserEmailBox_TextChanged" />
+                    <StackPanel
+                        x:Name="FullNameContainer"
+                        Margin="10"
+                        VerticalAlignment="Center">
+                        <!--  Fullname  -->
+                        <TextBox
+                            x:Name="GameSignupPage_UserFullNameBox"
+                            Margin="5"
+                            Header="Enter your full name"
+                            TextChanged="UserFullNameBox_TextChanged" />
+                    </StackPanel>
 
-                <!--  Username  -->
-                <TextBox
-                    x:Name="GameSignupPage_UserNameBox"
-                    Margin="5"
-                    Header="Set a username"
-                    TextChanged="UserNameBox_TextChanged" />
+                    <StackPanel
+                        x:Name="UserNameContainer"
+                        Margin="10"
+                        VerticalAlignment="Center">
+                        <!--  Email  -->
+                        <TextBox
+                            x:Name="GameSignupPage_UserEmailBox"
+                            Margin="5"
+                            Header="Enter email"
+                            TextChanged="UserEmailBox_TextChanged" />
 
-                <!--  Password  -->
-                <PasswordBox
-                    x:Name="GameSignupPage_PasswordBox"
-                    Margin="5"
-                    Header="Set a password"
-                    KeyDown="PasswordBox_KeyDown"
-                    TextChanged="PasswordBox_TextChanged" />
+                        <!--  Username  -->
+                        <TextBox
+                            x:Name="GameSignupPage_UserNameBox"
+                            Margin="5"
+                            Header="Set a username"
+                            TextChanged="UserNameBox_TextChanged" />
+                    </StackPanel>
 
-                <!--  Confirm password  -->
-                <PasswordBox
-                    x:Name="GameSignupPage_ConfirmPasswordBox"
-                    Margin="5"
-                    Header="Confirm password"
-                    KeyDown="PasswordBox_KeyDown"
-                    TextChanged="ConfirmPasswordBox_TextChanged" />
+                    <StackPanel
+                        x:Name="PasswordContainer"
+                        Margin="10"
+                        VerticalAlignment="Center">
+                        <!--  Password  -->
+                        <PasswordBox
+                            x:Name="GameSignupPage_PasswordBox"
+                            Margin="5"
+                            Header="Set a password"
+                            KeyDown="PasswordBox_KeyDown"
+                            TextChanged="PasswordBox_TextChanged" />
 
-                <!--  I agree  -->
-                <CheckBox
-                    x:Name="GameSignupPage_ConfirmCheckBox"
-                    Margin="5"
-                    Checked="ConfirmCheckBox_Checked"
-                    Content="Yes, I agree to the conditions of participation."
-                    FontSize="14"
-                    Unchecked="ConfirmCheckBox_Unchecked" />
+                        <!--  Confirm password  -->
+                        <PasswordBox
+                            x:Name="GameSignupPage_ConfirmPasswordBox"
+                            Margin="5"
+                            Header="Confirm password"
+                            KeyDown="PasswordBox_KeyDown"
+                            TextChanged="ConfirmPasswordBox_TextChanged" />
+                    </StackPanel>
+
+                    <StackPanel
+                        x:Name="AcceptanceContainer"
+                        Margin="10"
+                        VerticalAlignment="Center">
+                        <!--  I agree  -->
+                        <CheckBox
+                            x:Name="GameSignupPage_ConfirmCheckBox"
+                            Margin="5"
+                            Checked="ConfirmCheckBox_Checked"
+                            Content="Yes, I agree to the conditions of participation."
+                            FontSize="14"
+                            Unchecked="ConfirmCheckBox_Unchecked" />
+
+                        <!--  Subscribe to newsletters  -->
+                        <CheckBox
+                            x:Name="GameSignupPage_ConfirmNewsLettersCheckBox"
+                            Margin="5"
+                            Content="Yes, I would like to subscribe to newsletters."
+                            FontSize="14" />
+                    </StackPanel>
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--  Next button  -->
+                <Button
+                    x:Name="GameInstructionsPage_NextButton"
+                    Height="45"
+                    Margin="30,15,30,5"
+                    HorizontalAlignment="Stretch"
+                    Click="NextButton_Click"
+                    Content="Next"
+                    Tag="ActionButton" />
 
                 <!--  Signup button  -->
                 <Button
                     x:Name="GameSignupPage_SignupButton"
-                    Height="50"
+                    Height="45"
                     Margin="30,15,30,5"
                     HorizontalAlignment="Stretch"
                     Click="SignupButton_Click"
                     Content="Signup"
                     IsEnabled="False"
-                    Tag="ActionButton" />
+                    Tag="ActionButton"
+                    Visibility="Collapsed" />
 
                 <!--  Login Button  -->
                 <Button
@@ -116,7 +163,7 @@
                     Click="LoginButton_Click"
                     Content="Already have an account?"
                     FontSize="15"
-                    Foreground="White"
+                    Foreground="{StaticResource ProgressBarForegroundColor}"
                     Tag="ActionButton" />
 
                 <!--  Error text  -->

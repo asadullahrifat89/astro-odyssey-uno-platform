@@ -66,7 +66,7 @@ namespace SpaceShooterGame
 
         public void SetAttributes(
             double speed,
-            GameLevel gameLevel,
+            int gameLevel,
             double scale = 1,
             bool isBoss = false,
             bool recycle = false)
@@ -104,29 +104,8 @@ namespace SpaceShooterGame
                 double height = 0;
                 double width = 0;
 
-                switch (BossClass)
-                {
-                    case BossClass.GREEN:
-                        {
-                            width = 360 * 1.5;
-                            height = 289 * 1.5;
-                        }
-                        break;
-                    case BossClass.CRIMSON:
-                        {
-                            width = 403 * 1.5;
-                            height = 279 * 1.5;
-                        }
-                        break;
-                    case BossClass.BLUE:
-                        {
-                            width = 316 * 1.5;
-                            height = 285 * 1.5;
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                width = 512;
+                height = 512;
 
                 Height = (height / 2.5) * scale;
                 Width = (width / 2.5) * scale;
@@ -148,7 +127,7 @@ namespace SpaceShooterGame
                     var enemyTemplate = enemies[enemyType];
                     var scaledSize = scale * enemyTemplate.Size;
 
-                    EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
+                    EnemyClass = enemyType <= 3 ? EnemyClass.RED : EnemyClass.GREEN;
 
                     Height = scaledSize;
                     Width = scaledSize;

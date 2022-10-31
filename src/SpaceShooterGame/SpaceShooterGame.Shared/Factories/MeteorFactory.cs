@@ -53,7 +53,7 @@ namespace SpaceShooterGame
         /// <summary>
         /// Spawns a meteor.
         /// </summary>
-        public static void SpawnMeteor(GameLevel gameLevel)
+        public static void SpawnMeteor(int gameLevel)
         {
             if (_gameView.GetGameObjects<Meteor>().Count() < (_gameView.IsBossEngaged ? _maxMeteorCount - 2 : _maxMeteorCount))
             {
@@ -70,7 +70,7 @@ namespace SpaceShooterGame
         /// <summary>
         /// Generates a random meteor.
         /// </summary>
-        public static void GenerateMeteor(GameLevel gameLevel)
+        public static void GenerateMeteor(int gameLevel)
         {
             _rotatedMeteorSpawnCounter--;
             _overPoweredMeteorSpawnCounter--;
@@ -85,11 +85,11 @@ namespace SpaceShooterGame
             double top;
 
             // generate large but slower and stronger enemies after level 3
-            if (gameLevel > GameLevel.Level_3 && _overPoweredMeteorSpawnCounter <= 0)
+            if (gameLevel > 3 && _overPoweredMeteorSpawnCounter <= 0)
                 SetOverPoweredMeteor(meteor);
 
             // generate side ways flying meteors after level 2
-            if (gameLevel > GameLevel.Level_2 && _rotatedMeteorSpawnCounter <= 0)
+            if (gameLevel > 2 && _rotatedMeteorSpawnCounter <= 0)
             {
                 meteor.XDirection = (XDirection)_random.Next(1, Enum.GetNames<XDirection>().Length);
                 _rotatedMeteorSpawnCounter = _rotatedMeteorSpawnAfter;

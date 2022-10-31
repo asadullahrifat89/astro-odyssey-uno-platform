@@ -38,7 +38,7 @@ namespace SpaceShooterGame
         /// <summary>
         /// Spawns a Collectible.
         /// </summary>
-        public static void SpawnCollectible(GameLevel gameLevel)
+        public static void SpawnCollectible(int gameLevel)
         {
             // each frame progress decreases this counter
             _collectibleSpawnCounter -= 1;

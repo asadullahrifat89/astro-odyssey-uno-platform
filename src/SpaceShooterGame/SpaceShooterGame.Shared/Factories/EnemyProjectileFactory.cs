@@ -28,8 +28,8 @@ namespace SpaceShooterGame
         /// Spawns a projectile.
         /// </summary>
         /// <param name="enemy"></param>
-        /// <param name="gameLevel"></param>
-        public static void SpawnProjectile(Enemy enemy, GameLevel gameLevel)
+        /// 
+        public static void SpawnProjectile(Enemy enemy)
         {
             // each frame progress decreases this counter
             enemy.ProjectileSpawnCounter -= 1;
