@@ -37,9 +37,6 @@
 		<UpToDateCheckInput Include="..\SpaceShooterGame.Shared\**\*.xaml" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Remove="manifest.json" />
-	</ItemGroup>
-	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
 		<EmbeddedResource Include="WasmScripts\AppManifest.js" />
 	</ItemGroup>
