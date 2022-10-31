@@ -57,7 +57,7 @@ namespace SpaceShooterGame
             InitializeLogging();
             InitializeComponent();
 
-            Uno.UI.ApplicationHelper.RequestedCustomTheme = "Dark";
+            Uno.UI.ApplicationHelper.RequestedCustomTheme = "Light";
 
 #if HAS_UNO || NETFX_CORE
             Suspending += OnSuspending;
@@ -110,7 +110,7 @@ namespace SpaceShooterGame
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                rootFrame.Background = App.Current.Resources["FrameBackgroundColor"] as SolidColorBrush;//SolidColorBrushHelper.FromARGB(255, 7, 10, 37); 
+                rootFrame.Background = App.Current.Resources["FrameBackgroundColor"] as SolidColorBrush;
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.IsNavigationStackEnabled = true;

@@ -58,7 +58,7 @@ namespace SpaceShooterGame
             {
                 GameLoginPage_UserNameBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
-            }
+            }          
 
             SizeChanged += GamePage_SizeChanged;
             StartAnimation();
@@ -354,7 +354,7 @@ namespace SpaceShooterGame
         {
             star.SetPosition(
                 left: _random.Next(0, (int)UnderView.Width) - (100 * _scale),
-                 top: _random.Next(800, 1400) * -1);
+                top: _random.Next(800, 1400) * -1);
         }
 
         #endregion

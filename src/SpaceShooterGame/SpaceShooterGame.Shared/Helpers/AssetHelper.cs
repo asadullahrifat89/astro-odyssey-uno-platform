@@ -32,7 +32,7 @@ namespace SpaceShooterGame
 
         public static (ImageType ImageType, Uri AssetUri, double Size)[] COLLECTIBLE_TEMPLATES { get; set; }
 
-        public static (ImageType ImageType, Uri AssetUri, double Size)[] PLAYER_SHIP_TEMPLATES { get; set; }        
+        public static (ImageType ImageType, Uri AssetUri, double Size)[] PLAYER_SHIP_TEMPLATES { get; set; }
 
         public static (ImageType ImageType, Uri AssetUri, double Size)[] PLAYER_RAGE_TEMPLATES { get; set; }
 
@@ -68,7 +68,7 @@ namespace SpaceShooterGame
                 progressBar.Minimum = 0;
 
                 messageBlock.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                messageBlock.Foreground = new SolidColorBrush(Colors.White);
+                messageBlock.Foreground = App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
                 messageBlock.Text = LocalizationHelper.GetLocalizedResource("LOADING_GAME_ASSETS");
 
                 var maximum = 0;
@@ -102,9 +102,8 @@ namespace SpaceShooterGame
 
                 COLLECTIBLE_TEMPLATES = Constants.IMAGE_TEMPLATES.Where(x => x.ImageType == ImageType.COLLECTIBLE).ToArray();
 
-                PLAYER_SHIP_TEMPLATES = Constants.IMAGE_TEMPLATES.Where(x => x.ImageType == ImageType.PLAYER_SHIP).ToArray();                
+                PLAYER_SHIP_TEMPLATES = Constants.IMAGE_TEMPLATES.Where(x => x.ImageType == ImageType.PLAYER_SHIP).ToArray();
                 PLAYER_RAGE_TEMPLATES = Constants.IMAGE_TEMPLATES.Where(x => x.ImageType == ImageType.PLAYER_RAGE).ToArray();
-                PLAYER_SHIP_THRUST_TEMPLATES = Constants.IMAGE_TEMPLATES.Where(x => x.ImageType == ImageType.PLAYER_SHIP_THRUST).ToArray();
 
                 foreach (var asset in Constants.IMAGE_TEMPLATES)
                 {

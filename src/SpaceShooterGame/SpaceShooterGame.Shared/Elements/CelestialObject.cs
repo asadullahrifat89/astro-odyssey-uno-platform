@@ -75,7 +75,7 @@ namespace SpaceShooterGame
                     break;
                 default:
                     break;
-            }          
+            }
 
             _content.Source = new BitmapImage(uri);
 

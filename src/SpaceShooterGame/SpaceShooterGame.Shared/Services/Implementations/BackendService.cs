@@ -32,13 +32,15 @@ namespace SpaceShooterGame
             string fullName,
             string userName,
             string email,
-            string password)
+            string password,
+            bool subscribedNewsletters)
         {
             ServiceResponse response = await Signup(
                    fullName: fullName,
                    userName: userName,
                    email: email,
-                   password: password);
+                   password: password,
+                   subscribedNewsletters: subscribedNewsletters);
 
             if (response is null || response.HttpStatusCode != HttpStatusCode.OK)
             {
@@ -125,6 +127,8 @@ namespace SpaceShooterGame
                 return (false, error);
             }
 
+            //TODO: store game score to check if this score has crossed high score goal or not
+
             return (true, "OK");
         }
 
@@ -179,6 +183,23 @@ namespace SpaceShooterGame
             var count = recordsResponse.Result.Count;
 
             return count > 0 ? (true, "OK", result.Records) : (true, "OK", Array.Empty<GameScore>());
+        }
+
+        public async Task<(bool IsSuccess, string Message)> CheckUserIdentityAvailability(
+            string userName,
+            string email)
+        {
+            var recordResponse = await CheckIdentityAvailability(
+                userName: userName,
+                email: email);
+
+            if (!recordResponse.IsSuccess)
+            {
+                var error = recordResponse.Errors.Errors;
+                return (false, string.Join("\n", error));
+            }
+
+            return (true, "OK");
         }
 
         #endregion
@@ -309,7 +330,8 @@ namespace SpaceShooterGame
             string fullName,
             string userName,
             string email,
-            string password)
+            string password,
+            bool subscribedNewsletters)
         {
             var response = await _httpRequestService.SendRequest<ServiceResponse, ServiceResponse>(
                  baseUrl: Constants.GAME_API_BASEURL,
@@ -322,7 +344,11 @@ namespace SpaceShooterGame
                      FullName = fullName,
                      UserName = userName,
                      Password = password,
-                     GameId = Constants.GAME_ID
+                     GameId = Constants.GAME_ID,
+                     MetaData = new Dictionary<string, string>()
+                     {
+                         { "SubscribedNewsletters", subscribedNewsletters.ToString() }
+                     },
                  });
 
             return response.StatusCode == HttpStatusCode.OK
@@ -426,7 +452,28 @@ namespace SpaceShooterGame
                 : response.ErrorResponse ?? new QueryRecordsResponse<GameScore>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
         }
 
-        #endregion      
+        private async Task<QueryRecordResponse<bool>> CheckIdentityAvailability(
+            string userName,
+            string email)
+        {
+            var response = await _httpRequestService.SendRequest<QueryRecordResponse<bool>, QueryRecordResponse<bool>>(
+                 baseUrl: Constants.GAME_API_BASEURL,
+                 path: Constants.Action_CheckIdentityAvailability,
+                 httpHeaders: new Dictionary<string, string>(),
+                 httpMethod: HttpMethod.Get,
+                 payload: new
+                 {
+                     Email = email,
+                     UserName = userName,
+                     GameId = Constants.GAME_ID,
+                 });
+
+            return response.StatusCode == HttpStatusCode.OK
+                ? response.SuccessResponse ?? new QueryRecordResponse<bool>()
+                : response.ErrorResponse ?? new QueryRecordResponse<bool>().BuildErrorResponse(new ErrorResponse() { Errors = new string[] { "No data found." } });
+        }
+
+        #endregion
 
         #endregion
     }

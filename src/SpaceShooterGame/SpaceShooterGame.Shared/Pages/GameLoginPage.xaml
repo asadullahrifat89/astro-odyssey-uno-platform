@@ -66,7 +66,7 @@
                 <!--  Login button  -->
                 <Button
                     x:Name="GameLoginPage_LoginButton"
-                    Height="50"
+                    Height="45"
                     Margin="30,25,30,5"
                     HorizontalAlignment="Stretch"
                     Click="LoginButton_Click"
@@ -86,8 +86,16 @@
                     Click="RegisterButton_Click"
                     Content="No account yet?"
                     FontSize="15"
-                    Foreground="White"
+                    Foreground="{StaticResource ProgressBarForegroundColor}"
                     Tag="ActionButton" />
+
+                <!--  Brand logo  -->
+                <HyperlinkButton
+                    Height="45"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Asadullah Rifat"
+                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
 
                 <!--  Error text  -->
                 <TextBlock

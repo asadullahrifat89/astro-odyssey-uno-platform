@@ -20,4 +20,7 @@
     <_Globbed_Compile Remove="Helpers\SessionHelper.cs" />
     <_Globbed_Compile Remove="Models\SpaceShooterGameScore.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <_Globbed_Content Remove="Assets\Fonts\brand_font.ttf" />
+  </ItemGroup>
 </Project>

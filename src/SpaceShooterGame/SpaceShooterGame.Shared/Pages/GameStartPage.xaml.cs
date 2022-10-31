@@ -36,15 +36,6 @@ namespace SpaceShooterGame
             _windowHeight = Window.Current.Bounds.Height;
             _windowWidth = Window.Current.Bounds.Width;
 
-            AudioHelper.LoadGameSounds(() =>
-            {
-                AudioHelper.StopSound();
-                AudioHelper.PlaySound(SoundType.INTRO);
-                AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock);
-
-                PopulateGameViews();
-            });
-
             Loaded += GameStartPage_Loaded;
             Unloaded += GameStartPage_Unloaded;
         }
@@ -64,6 +55,15 @@ namespace SpaceShooterGame
             await LocalizationHelper.LoadLocalizationKeys(() =>
             {
                 this.SetLocalization();
+
+                AudioHelper.LoadGameSounds(() =>
+                {
+                    AudioHelper.StopSound();
+                    AudioHelper.PlaySound(SoundType.INTRO);
+                    AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock);
+
+                    PopulateGameViews();
+                });
             });
 
             await CheckUserSession();
@@ -382,7 +382,6 @@ namespace SpaceShooterGame
             star.SetAttributes(scale: _scale, celestialObjectType: celestialObjectType);
 
             RandomizeStarPosition(star);
-
             UnderView.Children.Add(star);
         }
 
@@ -391,15 +390,14 @@ namespace SpaceShooterGame
             star.SetY(star.GetY() + (star.CelestialObjectType == CelestialObjectType.Planet ? _gameSpeed / 1.5 : _gameSpeed));
 
             if (star.GetY() > UnderView.Height)
-            {
                 RecyleStar(star);
-            }
         }
 
         private void RecyleStar(CelestialObject star)
         {
             if (star.CelestialObjectType == CelestialObjectType.Planet)
                 star.SetAttributes(scale: _scale, celestialObjectType: star.CelestialObjectType);
+
             RandomizeStarPosition(star);
         }
 

@@ -27,7 +27,7 @@ namespace SpaceShooterGame
         #region Events
 
         #region Page
-
+        
         private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
@@ -88,7 +88,7 @@ namespace SpaceShooterGame
             }
 
             EnableChooseButton();
-        }
+        } 
 
         #endregion
 
@@ -125,7 +125,7 @@ namespace SpaceShooterGame
         private void EnableChooseButton()
         {
             ShipSelectionPage_ChooseButton.IsEnabled = _selectedShip is not null;
-        }
+        } 
 
         #endregion
 

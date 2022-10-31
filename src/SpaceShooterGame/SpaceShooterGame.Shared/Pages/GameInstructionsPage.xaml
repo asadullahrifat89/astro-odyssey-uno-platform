@@ -215,7 +215,7 @@
                                 Width="80"
                                 Height="150"
                                 Margin="5"
-                                Source="ms-appx:///Assets/Images/Collectible/collectible3.png" />
+                                Source="ms-appx:///Assets/Images/Collectible/collectible1.png" />
                             <TextBlock
                                 x:Name="GameInstructionsPage_CollectiblesText"
                                 Margin="5"
@@ -242,7 +242,7 @@
                     <!--  Next button  -->
                     <Button
                         x:Name="GameInstructionsPage_NextButton"
-                        Height="50"
+                        Height="45"
                         Margin="10,10,10,20"
                         HorizontalAlignment="Stretch"
                         Click="NextButton_Click"
@@ -251,7 +251,7 @@
                     <!--  Play button  -->
                     <Button
                         x:Name="GameInstructionsPage_PlayButton"
-                        Height="50"
+                        Height="45"
                         Margin="10,10,10,20"
                         HorizontalAlignment="Stretch"
                         Click="GameInstructionsPage_PlayButton_Click"

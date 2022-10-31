@@ -6,7 +6,7 @@ namespace SpaceShooterGame
     {
         Task<(bool IsSuccess, string Message)> AuthenticateUser(string userNameOrEmail, string password);
 
-        Task<(bool IsSuccess, string Message)> SignupUser(string fullName, string userName, string email, string password);
+        Task<(bool IsSuccess, string Message)> SignupUser(string fullName, string userName, string email, string password, bool subscribedNewsletters);
 
         Task<(bool IsSuccess, string Message)> SubmitUserGameScore(double score);
 
@@ -19,5 +19,7 @@ namespace SpaceShooterGame
         Task<(bool IsSuccess, string Message, GameScore[] GameScores)> GetUserGameScores(int pageIndex, int pageSize);
 
         Task<(bool IsSuccess, string Message, GameProfile[] GameProfiles)> GetUserGameProfiles(int pageIndex, int pageSize);
+
+        Task<(bool IsSuccess, string Message)> CheckUserIdentityAvailability(string userName, string email);
     }
 }

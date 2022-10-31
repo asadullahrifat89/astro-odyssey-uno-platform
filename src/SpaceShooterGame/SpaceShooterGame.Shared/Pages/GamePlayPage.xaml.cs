@@ -150,9 +150,9 @@ namespace SpaceShooterGame
                 case Windows.System.VirtualKey.Escape:
                     {
                         if (_isGamePaused)
-                            ResumeGame();
+                            QuitGameButton.IsChecked = false;
                         else
-                            PauseGame();
+                            QuitGameButton.IsChecked = true;
                     }
                     break;
                 default:
@@ -189,8 +189,8 @@ namespace SpaceShooterGame
 
             if (_isGameRunning)
             {
-                if (_isGamePaused)
-                    ResumeGame();
+                if (_isGamePaused)                    
+                    QuitGameButton.IsChecked = false;
 
                 _isPointerActivated = false;
                 _pointerPosition = null;
@@ -202,16 +202,23 @@ namespace SpaceShooterGame
             }
         }
 
-        #endregion        
+        #endregion
 
         #region Buttons
 
-        private void PauseGameButton_Click(object sender, RoutedEventArgs e)
+        private void QuitGameButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (_isGamePaused)
-                ResumeGame();
-            else
-                PauseGame();
+            PauseGame();
+        }
+
+        private void QuitGameButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ResumeGame();
+        }
+
+        private void ConfirmQuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            QuitGame();
         }
 
         private void QuitGameButton_Click(object sender, RoutedEventArgs e)
@@ -316,7 +323,6 @@ namespace SpaceShooterGame
             _moveLeft = false;
             _moveRight = false;
 
-            PauseGameButton.Visibility = Visibility.Collapsed;
             QuitGameButton.Visibility = Visibility.Collapsed;
 
             _scoreMultiplierCount = 0;
@@ -385,8 +391,7 @@ namespace SpaceShooterGame
 
             _isGameRunning = true;
 
-            PauseGameButton.Visibility = Visibility.Visible;
-            QuitGameButton.Visibility = Visibility.Collapsed;
+            QuitGameButton.Visibility = Visibility.Visible;
 
             PlayerHealthBarPanel.Visibility = Visibility.Visible;
 
@@ -467,11 +472,8 @@ namespace SpaceShooterGame
             ShowInGameText($"👨‍🚀\n{LocalizationHelper.GetLocalizedResource("GAME_PAUSED")}\n{LocalizationHelper.GetLocalizedResource("TAP_TO_RESUME")}");
 
             _isGamePaused = true;
-            PauseGameButton.Visibility = Visibility.Collapsed;
-            QuitGameButton.Visibility = Visibility.Visible;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
-
             AudioHelper.PauseSound(SoundType.BACKGROUND);
 
             if (GameView.IsBossEngaged)
@@ -488,8 +490,6 @@ namespace SpaceShooterGame
             HideInGameContent();
 
             _isGamePaused = false;
-            PauseGameButton.Visibility = Visibility.Visible;
-            QuitGameButton.Visibility = Visibility.Collapsed;
 
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
 

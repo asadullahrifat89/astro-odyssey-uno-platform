@@ -127,7 +127,7 @@ namespace SpaceShooterGame
                     var enemyTemplate = enemies[enemyType];
                     var scaledSize = scale * enemyTemplate.Size;
 
-                    EnemyClass = enemyType < 3 ? EnemyClass.RED : EnemyClass.GREEN;
+                    EnemyClass = enemyType <= 3 ? EnemyClass.RED : EnemyClass.GREEN;
 
                     Height = scaledSize;
                     Width = scaledSize;

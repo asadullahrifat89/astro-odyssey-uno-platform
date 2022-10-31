@@ -61,7 +61,7 @@ namespace SpaceShooterGame
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigateToPage(typeof(GameStartPage));
-        }
+        } 
 
         #endregion
 
@@ -102,7 +102,7 @@ namespace SpaceShooterGame
 
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
-        }
+        } 
 
         #endregion
 
