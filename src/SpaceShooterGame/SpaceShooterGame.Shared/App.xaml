@@ -94,9 +94,9 @@
             <SolidColorBrush x:Key="GameBackgroundColor" Color="#070a25" />
 
             <SolidColorBrush x:Key="FrameBackgroundColor" Color="Goldenrod" />
-            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Yellow" />
+            <SolidColorBrush x:Key="ProgressBarErrorColor" Color="Red" />
             <SolidColorBrush x:Key="ProgressBarForegroundColor" Color="Goldenrod" />
-            <SolidColorBrush x:Key="ProgressBarOkColor" Color="White" />
+            <SolidColorBrush x:Key="ProgressBarOkColor" Color="Black" />
             <!--#endregion-->
 
         </ResourceDictionary>
