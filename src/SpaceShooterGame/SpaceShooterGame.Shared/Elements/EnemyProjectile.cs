@@ -68,7 +68,9 @@ namespace SpaceShooterGame
                 }
 
                 if (isOverPowered)
-                    CornerRadius = new CornerRadius(15);
+                    CornerRadius = new CornerRadius(15 * scale);
+                else
+                    CornerRadius = new CornerRadius(25 * scale);
             }
             else
             {
@@ -77,6 +79,7 @@ namespace SpaceShooterGame
                     Background = new SolidColorBrush(Colors.Violet);
                     BorderBrush = new SolidColorBrush(Colors.DarkViolet);
                     BorderThickness = new Thickness(3 * scale);
+                    CornerRadius = new CornerRadius(15 * scale);
                 }
                 else
                 {
@@ -99,6 +102,8 @@ namespace SpaceShooterGame
                         default:
                             break;
                     }
+
+                    CornerRadius = new CornerRadius(25 * scale);
                 }
             }
 
