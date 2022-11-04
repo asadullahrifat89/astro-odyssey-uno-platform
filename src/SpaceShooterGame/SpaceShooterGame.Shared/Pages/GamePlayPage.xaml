@@ -75,7 +75,7 @@
                 <Border
                     HorizontalAlignment="Right"
                     BorderThickness="0"
-                    CornerRadius="50,10,10,50">
+                    CornerRadius="15,10,10,15">
 
                     <StackPanel Orientation="Horizontal">
 
@@ -122,7 +122,7 @@
                 <Border
                     HorizontalAlignment="Right"
                     BorderThickness="0"
-                    CornerRadius="50,10,10,50">
+                    CornerRadius="15,10,10,15">
 
                     <StackPanel Margin="10,3" Orientation="Horizontal">
 
@@ -195,7 +195,7 @@
                 Margin="0,0,0,5"
                 HorizontalAlignment="Left"
                 BorderThickness="0"
-                CornerRadius="10,50,50,10">
+                CornerRadius="10,15,15,10">
 
                 <StackPanel Margin="10,3" Orientation="Horizontal">
 
@@ -242,7 +242,7 @@
             <Border
                 x:Name="PlayerHealthBarPanel"
                 BorderThickness="0"
-                CornerRadius="10,50,50,10"
+                CornerRadius="10,15,15,10"
                 Visibility="Collapsed">
 
                 <StackPanel Margin="10,3" Orientation="Horizontal">
@@ -343,7 +343,7 @@
             <ToggleButton
                 x:Name="QuitGameButton"
                 Width="50"
-                Height="45"
+                Height="50"
                 Margin="5"
                 Checked="QuitGameButton_Checked"
                 CornerRadius="100"

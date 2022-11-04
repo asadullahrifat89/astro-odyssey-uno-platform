@@ -130,7 +130,7 @@
                             Background="{StaticResource FrameBackgroundColor}"
                             BorderBrush="{StaticResource FrameBackgroundColor}"
                             BorderThickness="3"
-                            CornerRadius="50" />
+                            CornerRadius="3" />
 
                     </StackPanel>
 
