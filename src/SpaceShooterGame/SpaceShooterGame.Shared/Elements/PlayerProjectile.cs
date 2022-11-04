@@ -51,7 +51,7 @@ namespace SpaceShooterGame
                 {
                     case PowerUpType.BLAZE_BLITZ:
                         {
-                            height = 40 + projectilePower; 
+                            height = 40 + projectilePower;
                             width = 15; // medium and faster rounds
 
                             Background = new SolidColorBrush(Colors.Goldenrod);
@@ -59,7 +59,7 @@ namespace SpaceShooterGame
 
                             BorderThickness = new Thickness(2, 3, 2, 1);
 
-                            CornerRadius = new CornerRadius(5);
+                            CornerRadius = new CornerRadius(5 * scale);
                         }
                         break;
                     case PowerUpType.PLASMA_BOMB:
@@ -72,12 +72,12 @@ namespace SpaceShooterGame
 
                             BorderThickness = new Thickness(3);
 
-                            CornerRadius = new CornerRadius(15);
+                            CornerRadius = new CornerRadius(15 * scale);
                         }
                         break;
                     case PowerUpType.BEAM_CANNON:
                         {
-                            height = 305; 
+                            height = 305;
                             width = 25 + projectilePower; // larger and longer and faster piercing rounds
 
                             Background = new SolidColorBrush(Colors.SlateBlue);
@@ -85,12 +85,12 @@ namespace SpaceShooterGame
 
                             BorderThickness = new Thickness(3, 2);
 
-                            CornerRadius = new CornerRadius(10);
+                            CornerRadius = new CornerRadius(10 * scale);
                         }
                         break;
                     case PowerUpType.SONIC_BLAST:
                         {
-                            height = 5; 
+                            height = 5;
                             width = 85 + projectilePower; // wider and thiner and slower piercing rounds
 
                             Background = new SolidColorBrush(Colors.SkyBlue);
@@ -98,7 +98,7 @@ namespace SpaceShooterGame
 
                             BorderThickness = new Thickness(1);
 
-                            CornerRadius = new CornerRadius(3);
+                            CornerRadius = new CornerRadius(3 * scale);
                         }
                         break;
                     default:
@@ -117,6 +117,7 @@ namespace SpaceShooterGame
                             height = 25 + projectilePower;
                             width = 10 + projectilePower / 2;
                             BorderThickness = new Thickness(2, 3, 2, 1);
+                            CornerRadius = new CornerRadius(5 * scale);
                         }
                         break;
                     case ShipClass.BERSERKER:
@@ -124,7 +125,7 @@ namespace SpaceShooterGame
                             height = 20 + projectilePower;
                             width = 20;
                             BorderThickness = new Thickness(1);
-                            CornerRadius = new CornerRadius(5);
+                            CornerRadius = new CornerRadius(5 * scale);
                         }
                         break;
                     case ShipClass.SPECTRE:
@@ -132,7 +133,7 @@ namespace SpaceShooterGame
                             height = 10;
                             width = 25 + projectilePower;
                             BorderThickness = new Thickness(1);
-                            CornerRadius = new CornerRadius(5);
+                            CornerRadius = new CornerRadius(5 * scale);
                         }
                         break;
                     default:
