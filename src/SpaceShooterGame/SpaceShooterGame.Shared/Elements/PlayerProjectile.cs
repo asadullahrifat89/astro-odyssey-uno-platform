@@ -20,7 +20,7 @@ namespace SpaceShooterGame
         {
             Tag = ElementType.PLAYER_PROJECTILE;
 
-            CornerRadius = new CornerRadius(50);
+            CornerRadius = new CornerRadius(5);
             YDirection = YDirection.UP;
 
             IsProjectile = true;
@@ -58,6 +58,8 @@ namespace SpaceShooterGame
                             BorderBrush = new SolidColorBrush(Colors.DarkGoldenrod);
 
                             BorderThickness = new Thickness(2, 3, 2, 1);
+
+                            CornerRadius = new CornerRadius(5);
                         }
                         break;
                     case PowerUpType.PLASMA_BOMB:
@@ -69,6 +71,8 @@ namespace SpaceShooterGame
                             BorderBrush = new SolidColorBrush(Colors.DarkCyan);
 
                             BorderThickness = new Thickness(3);
+
+                            CornerRadius = new CornerRadius(15);
                         }
                         break;
                     case PowerUpType.BEAM_CANNON:
@@ -81,7 +85,7 @@ namespace SpaceShooterGame
 
                             BorderThickness = new Thickness(3, 2);
 
-                            CornerRadius = new CornerRadius(20);
+                            CornerRadius = new CornerRadius(10);
                         }
                         break;
                     case PowerUpType.SONIC_BLAST:
@@ -93,6 +97,8 @@ namespace SpaceShooterGame
                             BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
 
                             BorderThickness = new Thickness(1);
+
+                            CornerRadius = new CornerRadius(3);
                         }
                         break;
                     default:

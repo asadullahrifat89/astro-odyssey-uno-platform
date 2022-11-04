@@ -21,7 +21,7 @@
                 x:Key="DefaultButton"
                 BasedOn="{StaticResource DefaultButtonStyle}"
                 TargetType="Button">
-                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
                 <Setter Property="FontFamily" Value="Frutiger" />

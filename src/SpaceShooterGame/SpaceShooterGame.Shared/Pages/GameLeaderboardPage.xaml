@@ -21,7 +21,7 @@
                         VerticalAlignment="Center"
                         FontSize="35"
                         FontWeight="SemiBold"
-                        Foreground="#27281e"
+                        Foreground="White"
                         Text="{Binding Path=MedalEmoji, Mode=OneWay}"
                         TextAlignment="Left" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -29,7 +29,7 @@
                             Margin="2,0"
                             VerticalAlignment="Center"
                             FontWeight="SemiBold"
-                            Foreground="#27281e"
+                            Foreground="White"
                             Text="{Binding Path=DisplayName, Mode=OneWay}"
                             TextAlignment="Left" />
                         <TextBlock
@@ -37,7 +37,7 @@
                             VerticalAlignment="Center"
                             FontSize="12"
                             FontWeight="SemiLight"
-                            Foreground="#27281e"
+                            Foreground="White"
                             Text="{Binding Path=LastPlayTime, Mode=OneWay}"
                             TextAlignment="Left" />
                     </StackPanel>
@@ -47,7 +47,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontWeight="SemiBold"
-                        Foreground="#27281e"
+                        Foreground="White"
                         Text="{Binding Path=PersonalBestScore, Mode=OneWay}"
                         TextAlignment="Right" />
                 </Grid>
@@ -65,7 +65,7 @@
                         VerticalAlignment="Center"
                         FontSize="35"
                         FontWeight="SemiBold"
-                        Foreground="#27281e"
+                        Foreground="White"
                         Text="{Binding Path=MedalEmoji, Mode=OneWay}"
                         TextAlignment="Left" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -73,7 +73,7 @@
                             Margin="2,0"
                             VerticalAlignment="Center"
                             FontWeight="SemiBold"
-                            Foreground="#27281e"
+                            Foreground="White"
                             Text="{Binding Path=DisplayName, Mode=OneWay}"
                             TextAlignment="Left" />
                         <TextBlock
@@ -81,7 +81,7 @@
                             VerticalAlignment="Center"
                             FontSize="12"
                             FontWeight="SemiLight"
-                            Foreground="#27281e"
+                            Foreground="White"
                             Text="{Binding Path=LastPlayTime, Mode=OneWay}"
                             TextAlignment="Left" />
                     </StackPanel>
@@ -91,7 +91,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontWeight="SemiBold"
-                        Foreground="#27281e"
+                        Foreground="White"
                         Text="{Binding Path=Score, Mode=OneWay}"
                         TextAlignment="Right" />
                 </Grid>
@@ -155,12 +155,14 @@
                             FontWeight="Bold"
                             TextAlignment="Center"
                             TextWrapping="WrapWholeWords" />
+
+                        <!--  Border  -->
                         <Border
                             Margin="10"
                             Background="{StaticResource FrameBackgroundColor}"
                             BorderBrush="{StaticResource FrameBackgroundColor}"
                             BorderThickness="3"
-                            CornerRadius="50" />
+                            CornerRadius="3" />
                     </StackPanel>
 
                 </StackPanel>
@@ -227,7 +229,7 @@
                         Background="{StaticResource FrameBackgroundColor}"
                         BorderBrush="{StaticResource FrameBackgroundColor}"
                         BorderThickness="3"
-                        CornerRadius="50" />
+                        CornerRadius="3" />
 
                     <!--  Personal best score  -->
                     <TextBlock

@@ -133,7 +133,6 @@ namespace SpaceShooterGame
                                     left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
                                     gameEnvironment: _gameView);
 
-
                                 enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;
                             }
                         }
@@ -228,13 +227,12 @@ namespace SpaceShooterGame
                                     isOverPowered: enemy.IsOverPowered);
 
                                 projectile2.Height += 45;
-                                projectile2.Speed *= 1.5;
+                                projectile2.Speed *= 1.5;                                
 
                                 projectile2.AddToGameEnvironment(
                                     top: enemy.GetY() + enemy.Height - (10 * scale) + projectile2.Height / 2,
                                     left: enemy.GetX() + enemy.HalfWidth - projectile2.HalfWidth,
                                     gameEnvironment: _gameView);
-
 
                                 enemy.OverPoweredProjectileSpawnCounter = enemy.OverPoweredProjectileSpawnAfter * scale;
                             }

@@ -34,6 +34,8 @@
                 Orientation="Vertical">
 
                 <StackPanel>
+
+                    <!--  Icon  -->
                     <TextBlock
                         FontSize="45"
                         FontWeight="Bold"
@@ -49,12 +51,13 @@
                         TextAlignment="Center"
                         TextWrapping="WrapWholeWords" />
 
+                    <!--  Border  -->
                     <Border
                         Margin="10,10,10,5"
                         Background="{StaticResource FrameBackgroundColor}"
                         BorderBrush="{StaticResource FrameBackgroundColor}"
                         BorderThickness="3"
-                        CornerRadius="50" />
+                        CornerRadius="3" />
 
                 </StackPanel>
 
