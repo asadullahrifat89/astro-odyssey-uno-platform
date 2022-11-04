@@ -12,7 +12,7 @@ namespace SpaceShooterGame
         {
             Tag = ElementType.ENEMY_PROJECTILE;
 
-            CornerRadius = new CornerRadius(50);
+            CornerRadius = new CornerRadius(25);
             YDirection = YDirection.DOWN;
 
             IsProjectile = true;
@@ -66,6 +66,9 @@ namespace SpaceShooterGame
                     default:
                         break;
                 }
+
+                if (isOverPowered)
+                    CornerRadius = new CornerRadius(15);
             }
             else
             {
