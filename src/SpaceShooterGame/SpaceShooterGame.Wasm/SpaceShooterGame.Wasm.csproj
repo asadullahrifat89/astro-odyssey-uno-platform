@@ -17,7 +17,7 @@
 	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<UnoXamlResourcesTrimming>true</UnoXamlResourcesTrimming>
 		<!-- AOT -->
-		<!--<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>-->
+		<WasmShellMonoRuntimeExecutionMode>InterpreterAndAOT</WasmShellMonoRuntimeExecutionMode>
 		
 		<!-- Disable performance optimizations for faster builds -->
 		<!--<WasmShellEmccLinkOptimization>false</WasmShellEmccLinkOptimization>-->
