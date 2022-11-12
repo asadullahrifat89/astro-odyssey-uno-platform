@@ -45,5 +45,5 @@ Have a go at it here: https://asadullahrifat89.github.io/astro-odyssey-uno-platf
 #### Pickups:
 * Health pickups, if picked up restores 10 health points.
 
-## Screenshots
+## Screenshot
 ![asadullahrifat89 github io_astro-odyssey-uno-platform_(iPad Mini)](https://user-images.githubusercontent.com/25480176/201468727-000868b4-2c1c-4015-bdaa-431699d999e5.png)
