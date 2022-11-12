@@ -151,6 +151,7 @@
 		 without manipulating the projitem file.
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icon192x192.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible5.png" />
@@ -170,7 +171,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss_appeared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss_cleared.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Health\health.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible2.png" />
