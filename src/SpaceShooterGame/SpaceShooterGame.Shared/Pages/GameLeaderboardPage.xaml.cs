@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -69,7 +70,7 @@ namespace SpaceShooterGame
             if (await GetGameProfile())
                 ShowUserName();
 
-            GameLeaderboardPage_DailyScoreboardToggle.IsChecked = true;
+            GameLeaderboardPage_SeasonToggle.IsChecked = true;
 
             this.StopProgressBar();
 
@@ -109,11 +110,27 @@ namespace SpaceShooterGame
             NavigateToPage(typeof(GameStartPage));
         }
 
-        private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        private async void GameLeaderboardPage_SeasonToggle_Click(object sender, RoutedEventArgs e)
         {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
             this.RunProgressBar();
 
-            GameLeaderboardPage_DailyScoreboardToggle.IsChecked = false;
+            UncheckScoreboardChoiceToggles(sender);
+
+            await GetGameSeason();
+
+            this.StopProgressBar();
+        }
+
+        private async void GameLeaderboardPage_AllTimeScoreboardToggle_Click(object sender, RoutedEventArgs e)
+        {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
+            this.RunProgressBar();
+
+            UncheckScoreboardChoiceToggles(sender);
+
             await GetGameProfiles();
 
             this.StopProgressBar();
@@ -121,9 +138,12 @@ namespace SpaceShooterGame
 
         private async void GameLeaderboardPage_DailyScoreboardToggle_Click(object sender, RoutedEventArgs e)
         {
+            AudioHelper.PlaySound(SoundType.MENU_SELECT);
+
             this.RunProgressBar();
 
-            GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked = false;
+            UncheckScoreboardChoiceToggles(sender);
+
             await GetGameScores();
 
             this.StopProgressBar();
@@ -148,6 +168,14 @@ namespace SpaceShooterGame
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
             App.NavigateToPage(pageType);
+        }
+
+        private void UncheckScoreboardChoiceToggles(object sender)
+        {
+            foreach (var toggleButton in ScoreboardChoice.Children.OfType<ToggleButton>().Where(x => x.Name != ((ToggleButton)sender).Name))
+            {
+                toggleButton.IsChecked = false;
+            }
         }
 
         #endregion
@@ -181,6 +209,7 @@ namespace SpaceShooterGame
 
             if (!IsSuccess)
             {
+                SetListViewMessage();
                 var error = Message;
                 this.ShowError(error);
                 return false;
@@ -210,6 +239,7 @@ namespace SpaceShooterGame
 
             if (!IsSuccess)
             {
+                SetListViewMessage();
                 var error = Message;
                 this.ShowError(error);
                 return false;
@@ -225,6 +255,65 @@ namespace SpaceShooterGame
             else
             {
                 SetListViewMessage(LocalizationHelper.GetLocalizedResource("NO_DATA_AVAILABLE"));
+            }
+
+            return true;
+        }
+
+        private async Task<bool> GetGameSeason()
+        {
+            SetListViewMessage(LocalizationHelper.GetLocalizedResource("LOADING_DATA"));
+
+            (bool IsSuccess, string Message, Season Season) = await _backendService.GetGameSeason();
+
+            if (!IsSuccess)
+            {
+                SetListViewMessage();
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            if (Season is not null && Season.PrizeDescriptions is not null && Season.PrizeDescriptions.Length > 0)
+            {
+                SetListViewMessage();
+                SeasonPrizeDescriptionText.Text = Season.PrizeDescriptions.FirstOrDefault(x => x.Culture == LocalizationHelper.CurrentCulture).Value;
+                await GetGamePrize();
+            }
+            else
+            {
+                SeasonPrizeContainer.Visibility = Visibility.Collapsed;
+                SetListViewMessage(LocalizationHelper.GetLocalizedResource("NO_DATA_AVAILABLE"));
+            }
+
+            return true;
+        }
+
+        private async Task<bool> GetGamePrize()
+        {
+            (bool IsSuccess, string Message, GamePrizeOfTheDay GamePrize) = await _backendService.GetGameDailyPrize();
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            if (GamePrize is not null
+                && GamePrize.WinningCriteria is not null
+                && GamePrize.WinningCriteria.CriteriaDescriptions is not null
+                && GamePrize.PrizeDescriptions is not null
+                && GamePrize.WinningCriteria.CriteriaDescriptions.Length > 0
+                && GamePrize.PrizeDescriptions.Length > 0)
+            {
+                SetListViewMessage();
+                WinningCriteriaDescriptionText.Text = GamePrize.WinningCriteria.CriteriaDescriptions.FirstOrDefault(x => x.Culture == LocalizationHelper.CurrentCulture).Value;
+                GamePrizeDescriptionText.Text = GamePrize.PrizeDescriptions.FirstOrDefault(x => x.Culture == LocalizationHelper.CurrentCulture).Value;
+            }
+            else
+            {
+                DailyPrizeContainer.Visibility = Visibility.Collapsed;
             }
 
             return true;
@@ -263,7 +352,7 @@ namespace SpaceShooterGame
         {
             if (leaderboardPlacements is not null)
             {
-                if (leaderboardPlacements.FirstOrDefault(x => x.User.UserName == GameProfileHelper.GameProfile.User.UserName || x.User.UserEmail == GameProfileHelper.GameProfile.User.UserEmail) is LeaderboardPlacement placement)
+                if (leaderboardPlacements.FirstOrDefault(x => x.User.UserId == GameProfileHelper.GameProfile.User.UserId) is LeaderboardPlacement placement)
                 {
                     placement.Emoji = "👨‍🚀";
                 }

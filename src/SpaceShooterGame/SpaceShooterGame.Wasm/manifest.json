@@ -1,6 +1,6 @@
 {
   "background_color": "#070a25",
-  "description": "A classic rock metal ⚡ space shooter on WebAssembly.",
+  "description": "A classic space shooter for pizza lovers.",
   "display": "standalone",
   "icons": [
     {
@@ -9,9 +9,9 @@
       "type": "image/png"
     }
   ],
-  "name": "Astro Odyssey",
-  "short_name": "Astro Odyssey",
-  "start_url": "/astro-odyssey-uno-platform/",
-  "theme_color": "#070a25",
-  "scope": "/astro-odyssey-uno-platform/"
+  "name": "Spiga Xmas Challange",
+  "short_name": "Spiga Xmas Challange",
+  "start_url": "/",
+  "theme_color": "#daa520",
+  "scope": "/"
 }

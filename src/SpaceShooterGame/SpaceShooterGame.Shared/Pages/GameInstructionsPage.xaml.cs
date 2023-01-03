@@ -102,6 +102,15 @@ namespace SpaceShooterGame
 
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText);
             LocalizationHelper.SetLocalizedResource(GameInstructionsPage_CollectiblesText2);
+
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_RageBarText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_RageBarText2);
+
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_LevelnScoreBarText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_LevelnScoreBarText2);
+
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_HealthBarText);
+            LocalizationHelper.SetLocalizedResource(GameInstructionsPage_HealthBarText2);
         } 
 
         #endregion

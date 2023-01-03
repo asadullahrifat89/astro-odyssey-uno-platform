@@ -55,10 +55,11 @@ namespace SpaceShooterGame
             SetGameResults();
             ShowUserName();
 
-            // if user has not logged in or session has expired
-            if (!GameProfileHelper.HasUserLoggedIn() || SessionHelper.HasSessionExpired())
+            // if user has not logged in
+            if (!GameProfileHelper.HasUserLoggedIn())
             {
-                MakeLoginControlsVisible();
+                SetLoginContext();
+                await ShowGamePrize();
             }
             else
             {
@@ -66,11 +67,11 @@ namespace SpaceShooterGame
 
                 if (await SubmitScore())
                 {
-                    MakeLeaderboardControlsVisible(); // if score submission was successful make leaderboard button visible
+                    SetLeaderboardContext(); // if score submission was successful make leaderboard button visible
                 }
                 else
                 {
-                    MakeLoginControlsVisible();
+                    SetLoginContext();
                 }
 
                 this.StopProgressBar();
@@ -78,6 +79,8 @@ namespace SpaceShooterGame
 
             SizeChanged += GamePage_SizeChanged;
             StartAnimation();
+
+            await GetCompanyBrand();
         }
 
         private void GamePage_Unloaded(object sender, RoutedEventArgs e)
@@ -143,13 +146,69 @@ namespace SpaceShooterGame
 
         #region Logic
 
-        private void MakeLeaderboardControlsVisible()
+        private async Task<bool> GetCompanyBrand()
+        {
+            // if company is not already fetched, fetch it
+            if (CompanyHelper.Company is null)
+            {
+                (bool IsSuccess, string Message, Company Company) = await _backendService.GetCompanyBrand();
+
+                if (!IsSuccess)
+                {
+                    var error = Message;
+                    this.ShowError(error);
+                    return false;
+                }
+
+                if (Company is not null && !Company.WebSiteUrl.IsNullOrBlank())
+                {
+                    CompanyHelper.Company = Company;
+                }
+            }
+
+            if (CompanyHelper.Company is not null)
+                BrandButton.NavigateUri = new Uri(CompanyHelper.Company.WebSiteUrl);
+
+            return true;
+        }
+
+        private async Task<bool> ShowGamePrize()
+        {
+            (bool IsSuccess, string Message, GamePrizeOfTheDay GamePrize) = await _backendService.GetGameDailyPrize();
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            if (GamePrize is not null
+                && GamePrize.WinningCriteria is not null
+                && GamePrize.WinningCriteria.CriteriaDescriptions is not null
+                && GamePrize.PrizeDescriptions is not null
+                && GamePrize.WinningCriteria.CriteriaDescriptions.Length > 0
+                && GamePrize.PrizeDescriptions.Length > 0)
+            {
+                ShowGamePlayResult(new GamePlayResult()
+                {
+                    GameId = GamePrize.GameId,
+                    PrizeDescriptions = GamePrize.PrizeDescriptions,
+                    PrizeName = GamePrize.Name,
+                    WinningDescriptions = GamePrize.WinningCriteria.CriteriaDescriptions,
+                });
+            }
+
+            return true;
+        }
+
+        private void SetLeaderboardContext()
         {
             GameOverPage_SignupPromptPanel.Visibility = Visibility.Collapsed;
             GameOverPage_LeaderboardButton.Visibility = Visibility.Visible;
         }
 
-        private void MakeLoginControlsVisible()
+        private void SetLoginContext()
         {
             // submit score on user login, or signup then login
             PlayerScoreHelper.GameScoreSubmissionPending = true;
@@ -171,9 +230,7 @@ namespace SpaceShooterGame
 
         private async Task<bool> SubmitScore()
         {
-            //TODO: HIGH SCORE GOAL-> check if player has reached high score goal after this game and show a congratulations dialog
-
-            (bool IsSuccess, string Message) = await _backendService.SubmitUserGameScore(PlayerScoreHelper.PlayerScore.Score);
+            (bool IsSuccess, string Message, GamePlayResult GamePlayResult) = await _backendService.SubmitUserGameScore(PlayerScoreHelper.PlayerScore.Score);
 
             if (!IsSuccess)
             {
@@ -182,7 +239,15 @@ namespace SpaceShooterGame
                 return false;
             }
 
+            ShowGamePlayResult(GamePlayResult);
+
             return true;
+        }
+
+        private void ShowGamePlayResult(GamePlayResult GamePlayResult)
+        {
+            if (GamePlayResult is not null && !GamePlayResult.PrizeName.IsNullOrBlank())
+                PopUpHelper.ShowGamePlayResultPopUp(GamePlayResult);
         }
 
         private void ShowUserName()

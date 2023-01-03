@@ -28,14 +28,17 @@
 		<!-- PWA -->
 		<!--<WasmPWAManifestFile>manifest.json</WasmPWAManifestFile>-->
 	</PropertyGroup>
-	<!-- <ItemGroup>
+	<ItemGroup>
 		<WasmShellExtraEmccFlags Include="-s MAXIMUM_MEMORY=4GB" />
-	</ItemGroup> -->
+	</ItemGroup>
 	<ItemGroup>
 		<Content Include="Assets\Icon192x192.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<UpToDateCheckInput Include="..\SpaceShooterGame.Shared\**\*.xaml" />
+	</ItemGroup>	
+	<ItemGroup>
+	  <Content Remove="manifest.json" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="WasmCSS\Fonts.css" />
@@ -57,7 +60,7 @@
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />		
 		<PackageReference Include="Uno.Extensions.Hosting.WinUI" Version="2.2.0" />
 		<PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.WinUI.WebAssembly" Version="4.6.19" />
@@ -67,4 +70,7 @@
 		<PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="7.0.7" />
 	</ItemGroup>
 	<Import Project="..\SpaceShooterGame.Shared\SpaceShooterGame.Shared.projitems" Label="Shared" Condition="Exists('..\SpaceShooterGame.Shared\SpaceShooterGame.Shared.projitems')" />
+	<ItemGroup>
+	  <_Globbed_Compile Remove="..\SpaceShooterGame.Shared\Models\Entities\GamePrizeOfTheDay.cs" />
+	</ItemGroup>
 </Project>

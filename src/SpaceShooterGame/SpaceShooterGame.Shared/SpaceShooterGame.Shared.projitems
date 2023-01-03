@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GameContentDialog.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\CelestialObjectFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\CollectibleFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\EnemyFactory.cs" />
@@ -27,19 +29,26 @@
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PlayerProjectileFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Factories\PowerUpFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\AppSettingsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AssetHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AudioHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\AuthTokenHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CacheHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CompanyHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\CookieHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\GameProfileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\LocalizationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PaginationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerCredentialsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PlayerScoreHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\PopUpHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ScalingHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\SessionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Contextual\SpaceShooterGameScore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\Company.cs" />
+    <Compile Include="..\SpaceShooterGame.Shared\Models\Entities\GamePrizeOfTheDay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Entities\Season.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Responses\GamePlayResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Peripherals\CelestialObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Peripherals\DestructibleObjectTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Peripherals\LocalizationKey.cs" />
@@ -108,6 +117,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Implementations\HttpService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\GameContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\GameInstructionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,13 +164,12 @@
 		 without manipulating the projitem file.
 	-->
     <Content Include="$(MSBuildThisFileDirectory)Assets\Icon192x192.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\splash_screen.gif" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible3.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible4.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible5.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy6.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\meteor3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\meteor4.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Player\player_ship1.png" />
@@ -165,15 +177,13 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Player\player_ship3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_game.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Powerup\powerup.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\score_multiplier.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss_appeared.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Boss\boss_cleared.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\logo_brand.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Health\health.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible1.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Collectible\collectible2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Star\star5.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Rage\rage2.png" />
@@ -196,6 +206,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Enemy\enemy3.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\meteor1.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Meteor\meteor2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)appsettings.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\localization.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Boss\boss3.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Sounds\Collectible\score_multiplier_on.mp3" />

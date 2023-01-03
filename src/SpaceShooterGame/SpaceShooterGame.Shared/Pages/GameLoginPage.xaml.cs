@@ -49,19 +49,23 @@ namespace SpaceShooterGame
 
         #region Page
 
-        private void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
+        private async void GameLoginPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
 
+            SizeChanged += GamePage_SizeChanged;
+            StartAnimation();
+
             // if user was already logged in or came here after sign up
-            if (PlayerCredentialsHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials && !authCredentials.UserName.IsNullOrBlank() && !authCredentials.Password.IsNullOrBlank())
+            if (PlayerCredentialsHelper.GetCachedPlayerCredentials() is PlayerCredentials authCredentials
+                && !authCredentials.UserName.IsNullOrBlank()
+                && !authCredentials.Password.IsNullOrBlank())
             {
-                GameLoginPage_UserNameBox.Text = authCredentials.UserName;
+                GameLoginPage_UserNameEmailBox.Text = authCredentials.UserName;
                 GameLoginPage_PasswordBox.Text = authCredentials.Password;
             }          
 
-            SizeChanged += GamePage_SizeChanged;
-            StartAnimation();
+            await GetCompanyBrand();
         }
 
         private void GamePage_Unloaded(object sender, RoutedEventArgs e)
@@ -147,15 +151,56 @@ namespace SpaceShooterGame
 
         #region Logic
 
+        private async Task<bool> GetCompanyBrand()
+        {
+            // if company is not already fetched, fetch it
+            if (CompanyHelper.Company is null)
+            {
+                (bool IsSuccess, string Message, Company Company) = await _backendService.GetCompanyBrand();
+
+                if (!IsSuccess)
+                {
+                    var error = Message;
+                    this.ShowError(error);
+                    return false;
+                }
+
+                if (Company is not null && !Company.WebSiteUrl.IsNullOrBlank())
+                {
+                    CompanyHelper.Company = Company;
+                }
+            }
+
+            if (CompanyHelper.Company is not null)
+                BrandButton.NavigateUri = new Uri(CompanyHelper.Company.WebSiteUrl);
+
+            return true;
+        }
+
+        private async Task<bool> GenerateSession()
+        {
+            (bool IsSuccess, string Message) = await _backendService.GenerateUserSession();
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            return true;
+        }
+
         private async Task PerformLogin()
         {
             this.RunProgressBar();
 
-            if (await Authenticate() && await GetGameProfile() && await GenerateSession())
+            if (await Authenticate() && await GetGameProfile())
             {
                 if (PlayerScoreHelper.GameScoreSubmissionPending)
                 {
-                    if (await SubmitScore())
+                    //TODO: show pop up
+                    if (await GenerateSession() && await SubmitScore())
                         PlayerScoreHelper.GameScoreSubmissionPending = false;
                 }
 
@@ -167,7 +212,7 @@ namespace SpaceShooterGame
         private async Task<bool> Authenticate()
         {
             (bool IsSuccess, string Message) = await _backendService.AuthenticateUser(
-                userNameOrEmail: GameLoginPage_UserNameBox.Text.Trim(),
+                userNameOrEmail: GameLoginPage_UserNameEmailBox.Text.Trim(),
                 password: GameLoginPage_PasswordBox.Text.Trim());
 
             if (!IsSuccess)
@@ -194,9 +239,9 @@ namespace SpaceShooterGame
             return true;
         }
 
-        private async Task<bool> GenerateSession()
+        private async Task<bool> SubmitScore()
         {
-            (bool IsSuccess, string Message) = await _backendService.GenerateUserSession();
+            (bool IsSuccess, string Message, GamePlayResult GamePlayResult) = await _backendService.SubmitUserGameScore(PlayerScoreHelper.PlayerScore.Score);
 
             if (!IsSuccess)
             {
@@ -204,27 +249,21 @@ namespace SpaceShooterGame
                 this.ShowError(error);
                 return false;
             }
+
+            ShowGamePlayResult(GamePlayResult);
 
             return true;
         }
 
-        private async Task<bool> SubmitScore()
+        private void ShowGamePlayResult(GamePlayResult GamePlayResult)
         {
-            (bool IsSuccess, string Message) = await _backendService.SubmitUserGameScore(PlayerScoreHelper.PlayerScore.Score);
-
-            if (!IsSuccess)
-            {
-                var error = Message;
-                this.ShowError(error);
-                return false;
-            }
-
-            return true;
+            if (GamePlayResult is not null && !GamePlayResult.PrizeName.IsNullOrBlank())
+                PopUpHelper.ShowGamePlayResultPopUp(GamePlayResult);
         }
 
         private void EnableLoginButton()
         {
-            GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
+            GameLoginPage_LoginButton.IsEnabled = !GameLoginPage_UserNameEmailBox.Text.IsNullOrBlank() && !GameLoginPage_PasswordBox.Text.IsNullOrBlank();
         }
 
         #endregion

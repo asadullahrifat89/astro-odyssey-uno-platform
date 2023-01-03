@@ -10,17 +10,4 @@
   <PropertyGroup />
   <Import Project="SpaceShooterGame.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
-  <ItemGroup>
-    <_Globbed_Compile Remove="Helpers\AuthTokenHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\CookieHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\GameProfileHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\PlayerCredentialsHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\PlayerScoreHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\ScalingHelper.cs" />
-    <_Globbed_Compile Remove="Helpers\SessionHelper.cs" />
-    <_Globbed_Compile Remove="Models\SpaceShooterGameScore.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <_Globbed_Content Remove="Assets\Fonts\brand_font.ttf" />
-  </ItemGroup>
 </Project>

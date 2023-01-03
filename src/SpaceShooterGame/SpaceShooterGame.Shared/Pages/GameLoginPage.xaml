@@ -51,7 +51,7 @@
                     TextWrapping="WrapWholeWords" />
 
                 <TextBox
-                    x:Name="GameLoginPage_UserNameBox"
+                    x:Name="GameLoginPage_UserNameEmailBox"
                     Margin="5"
                     Header="Username or Email"
                     TextChanged="UserNameBox_TextChanged" />
@@ -91,11 +91,12 @@
 
                 <!--  Brand logo  -->
                 <HyperlinkButton
-                    Height="45"
+                    x:Name="BrandButton"
+                    Height="80"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Content="Asadullah Rifat"
-                    NavigateUri="https://www.linkedin.com/in/asadullah-rifat/" />
+                    VerticalAlignment="Center">
+                    <Image Source="ms-appx:///Assets/Images/logo_brand.png" />
+                </HyperlinkButton>
 
                 <!--  Error text  -->
                 <TextBlock

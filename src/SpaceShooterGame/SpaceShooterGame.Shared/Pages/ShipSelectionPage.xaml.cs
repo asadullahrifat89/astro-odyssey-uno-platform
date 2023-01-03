@@ -1,8 +1,10 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SpaceShooterGame
 {
@@ -11,6 +13,7 @@ namespace SpaceShooterGame
         #region Fields
 
         private PlayerShip _selectedShip;
+        private readonly IBackendService _backendService;
 
         #endregion
 
@@ -19,6 +22,8 @@ namespace SpaceShooterGame
         public ShipSelectionPage()
         {
             InitializeComponent();
+
+            _backendService = (Application.Current as App).Host.Services.GetRequiredService<IBackendService>();
             Loaded += ShipSelectionPage_Loaded;
         }
 
@@ -27,8 +32,8 @@ namespace SpaceShooterGame
         #region Events
 
         #region Page
-        
-        private void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
+
+        private async void ShipSelectionPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
 
@@ -57,18 +62,21 @@ namespace SpaceShooterGame
             }
 
             ShowUserName();
+            await GetCompanyBrand();
         }
 
         #endregion
 
         #region Button
 
-        private void ChooseButton_Click(object sender, RoutedEventArgs e)
+        private async void ChooseButton_Click(object sender, RoutedEventArgs e)
         {
             if (_selectedShip is not null)
             {
                 App.Ship = _selectedShip;
-                NavigateToPage(typeof(GamePlayPage));
+
+                if (GameProfileHelper.HasUserLoggedIn() ? await GenerateSession() : true)
+                    NavigateToPage(typeof(GamePlayPage));
             }
         }
 
@@ -87,8 +95,10 @@ namespace SpaceShooterGame
                 item.IsChecked = false;
             }
 
+            ShipSelectionPage_ControlInstructions.Text = LocalizationHelper.GetLocalizedResource($"{_selectedShip.ShipClass}_DESCRIPTION");
+
             EnableChooseButton();
-        } 
+        }
 
         #endregion
 
@@ -96,7 +106,7 @@ namespace SpaceShooterGame
 
         #region Methods
 
-        #region page
+        #region Page
 
         private void NavigateToPage(Type pageType)
         {
@@ -107,6 +117,46 @@ namespace SpaceShooterGame
         #endregion
 
         #region Logic
+
+        private async Task<bool> GetCompanyBrand()
+        {
+            // if company is not already fetched, fetch it
+            if (CompanyHelper.Company is null)
+            {
+                (bool IsSuccess, string Message, Company Company) = await _backendService.GetCompanyBrand();
+
+                if (!IsSuccess)
+                {
+                    var error = Message;
+                    this.ShowError(error);
+                    return false;
+                }
+
+                if (Company is not null && !Company.WebSiteUrl.IsNullOrBlank())
+                {
+                    CompanyHelper.Company = Company;
+                }
+            }
+
+            if (CompanyHelper.Company is not null)
+                BrandButton.NavigateUri = new Uri(CompanyHelper.Company.WebSiteUrl);
+
+            return true;
+        }
+
+        private async Task<bool> GenerateSession()
+        {
+            (bool IsSuccess, string Message) = await _backendService.GenerateUserSession();
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            return true;
+        }
 
         private void ShowUserName()
         {
@@ -125,7 +175,7 @@ namespace SpaceShooterGame
         private void EnableChooseButton()
         {
             ShipSelectionPage_ChooseButton.IsEnabled = _selectedShip is not null;
-        } 
+        }
 
         #endregion
 

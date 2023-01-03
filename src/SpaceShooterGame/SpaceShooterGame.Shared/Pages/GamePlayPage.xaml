@@ -47,6 +47,14 @@
             </Border.Background>
         </Border>
 
+        <!--  Brand logo  -->
+        <Image
+            Height="50"
+            Margin="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="ms-appx:///Assets/Images/logo_brand.png" />
+
         <!--  In game message content  -->
         <StackPanel
             x:Name="InGameContentPanel"
@@ -57,59 +65,11 @@
         <!--  Player, enemies, meteors, healths, and projectiles  -->
         <GameEnvironment x:Name="GameView" Background="Transparent" />
 
-        <!--  Score, level bar, boss health  -->
+        <!--  Boss health  -->
         <StackPanel
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Orientation="Vertical">
-
-            <!--  Level + score text, level bar  -->
-            <StackPanel
-                x:Name="ScoreBarPanel"
-                Margin="5"
-                HorizontalAlignment="Right"
-                Orientation="Vertical"
-                Visibility="Collapsed">
-
-                <!--  Level + score text  -->
-                <Border
-                    HorizontalAlignment="Right"
-                    BorderThickness="0"
-                    CornerRadius="15,10,10,15">
-
-                    <StackPanel Orientation="Horizontal">
-
-                        <!--  Game level  -->
-                        <TextBlock
-                            x:Name="GameLevelText"
-                            Margin="0,3,0,3"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontSize="20"
-                            FontWeight="Bold"
-                            TextAlignment="Left"
-                            TextWrapping="WrapWholeWords" />
-
-                        <!--  Score  -->
-                        <TextBlock
-                            x:Name="ScoreBarCount"
-                            Margin="10,3,10,3"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            FontSize="20"
-                            FontWeight="Bold"
-                            TextAlignment="Right"
-                            TextWrapping="WrapWholeWords" />
-
-                    </StackPanel>
-
-                    <Border.Background>
-                        <SolidColorBrush Opacity="0.5" Color="White" />
-                    </Border.Background>
-
-                </Border>
-
-            </StackPanel>
 
             <!--  Boss health bar  -->
             <StackPanel
@@ -183,52 +143,83 @@
 
         </StackPanel>
 
-        <!--  Player health, rage, power bar, score multiplier  -->
+        <!--  Score multiplier, level + score, payer health, rage, power bar  -->
         <StackPanel
             Margin="5"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
 
-            <!--  Score multiplier  -->
             <Border
-                x:Name="ScoreMultiplierPanel"
                 Margin="0,0,0,5"
-                HorizontalAlignment="Left"
+                HorizontalAlignment="Center"
                 BorderThickness="0"
-                CornerRadius="10,15,15,10">
+                CornerRadius="15">
 
                 <StackPanel Margin="10,3" Orientation="Horizontal">
 
-                    <!--  Collectible image  -->
-                    <Image
-                        Width="25"
-                        Height="25"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Source="ms-appx:///Assets/Images/Collectible/collectible2.png" />
+                    <!--  Score multiplier  -->
+                    <StackPanel x:Name="ScoreMultiplierPanel" Orientation="Horizontal">
 
-                    <!--  Multiplier bar  -->
-                    <ProgressBar
-                        x:Name="ScoreMultiplierBar"
-                        Width="45"
-                        Height="5"
-                        Margin="5"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Foreground="Goldenrod"
-                        Maximum="8"
-                        Minimum="0"
-                        Value="0" />
+                        <!--  Collectible image  -->
+                        <Image
+                            Width="20"
+                            Height="20"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Source="ms-appx:///Assets/Images/Collectible/collectible2.png" />
 
-                    <!--  Collectible count  -->
-                    <TextBlock
-                        x:Name="ScoreMultiplierCountText"
-                        Margin="0,3,10,3"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        FontSize="20"
-                        FontWeight="SemiBold"
-                        TextAlignment="Right" />
+                        <!--  Multiplier bar  -->
+                        <ProgressBar
+                            x:Name="ScoreMultiplierBar"
+                            Width="45"
+                            Height="5"
+                            Margin="5,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Foreground="Goldenrod"
+                            Maximum="8"
+                            Minimum="0"
+                            Value="0" />
+
+                        <!--  Collectible count  -->
+                        <TextBlock
+                            x:Name="ScoreMultiplierCountText"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            TextAlignment="Right" />
+
+                    </StackPanel>
+
+                    <!--  Level + score text, level bar  -->
+                    <StackPanel
+                        x:Name="ScoreBarPanel"
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+
+                        <!--  Game level  -->
+                        <TextBlock
+                            x:Name="GameLevelText"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Left"
+                            TextWrapping="WrapWholeWords" />
+
+                        <!--  Score  -->
+                        <TextBlock
+                            x:Name="ScoreBarCount"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            TextAlignment="Right"
+                            TextWrapping="WrapWholeWords" />
+
+                    </StackPanel>
 
                 </StackPanel>
 
@@ -241,11 +232,15 @@
             <!--  Health, rage, power up  -->
             <Border
                 x:Name="PlayerHealthBarPanel"
+                HorizontalAlignment="Center"
                 BorderThickness="0"
-                CornerRadius="10,15,15,10"
+                CornerRadius="15"
                 Visibility="Collapsed">
 
-                <StackPanel Margin="10,3" Orientation="Horizontal">
+                <StackPanel
+                    Margin="10,3"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
 
                     <!--  Health  -->
                     <Image
