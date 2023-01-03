@@ -232,7 +232,7 @@
             }
 
             return (score, destroyedObject);
-        }      
+        }
 
         /// <summary>
         /// Triggers the powered up state.
@@ -365,10 +365,10 @@
         /// </summary>
         public static void LevelUp(Player player)
         {
-            if (player.ProjectileSpawnAfter > 14 / 3)
+            if (player.ProjectileSpawnAfter > Constants.PLAYER_PROJECTILE_SPAWN_DELAY / 2)
             {
                 var scale = _gameView.GameObjectScale;
-                player.ProjectileSpawnAfter -= (1.1 * scale);
+                player.ProjectileSpawnAfter -= (0.7 * scale);
             }
         }
 

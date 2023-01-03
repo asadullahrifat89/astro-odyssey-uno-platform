@@ -2,8 +2,6 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using System;
-using System.Linq;
 using Windows.Foundation;
 
 namespace SpaceShooterGame
@@ -37,7 +35,7 @@ namespace SpaceShooterGame
 
         public double ProjectileSpawnCounter { get; set; } = 0;
 
-        public double ProjectileSpawnAfter { get; set; } = 14;
+        public double ProjectileSpawnAfter { get; set; } = Constants.PLAYER_PROJECTILE_SPAWN_DELAY;
 
         public double ProjectileSpeed { get; set; } = 18;
 

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Uno.Extensions;
 
 namespace SpaceShooterGame
 {
@@ -51,6 +52,8 @@ namespace SpaceShooterGame
             SizeChanged += GamePage_SizeChanged;
             StartAnimation();
 
+            await AppSettingsHelper.LoadAppSettings();
+
             LocalizationHelper.CheckLocalizationCache();
             await LocalizationHelper.LoadLocalizationKeys(() =>
             {
@@ -60,13 +63,17 @@ namespace SpaceShooterGame
                 {
                     AudioHelper.StopSound();
                     AudioHelper.PlaySound(SoundType.INTRO);
-                    AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock);
+                    AssetHelper.PreloadAssets(progressBar: ProgressBar, messageBlock: ProgressBarMessageBlock, completed: () =>
+                    {
+                        GameStartPage_PlayButton.IsEnabled = true;
+                    });
 
                     PopulateGameViews();
                 });
             });
 
-            await CheckUserSession();
+            if (await GetCompanyBrand())
+                await CheckUserSession();
         }
 
         private void GameStartPage_Unloaded(object sender, RoutedEventArgs e)
@@ -140,6 +147,7 @@ namespace SpaceShooterGame
         {
             CookieHelper.SetCookieAccepted();
             CookieToast.Visibility = Visibility.Collapsed;
+            LocalizationHelper.SaveLocalizationCache(LocalizationHelper.CurrentCulture);
         }
 
         private void GameStartPage_CookieDeclineButton_Click(object sender, RoutedEventArgs e)
@@ -156,11 +164,48 @@ namespace SpaceShooterGame
 
         #region Logic
 
+        private async Task<bool> GetCompanyBrand()
+        {
+            // if company is not already fetched, fetch it
+            if (CompanyHelper.Company is null)
+            {
+                (bool IsSuccess, string Message, Company Company) = await _backendService.GetCompanyBrand();
+
+                if (!IsSuccess)
+                {
+                    var error = Message;
+                    this.ShowError(error);
+                    return false;
+                }
+
+                if (Company is not null)
+                    CompanyHelper.Company = Company;
+            }
+
+            if (CompanyHelper.Company is not null)
+            {
+                if (!CompanyHelper.Company.WebSiteUrl.IsNullOrBlank())
+                    BrandButton.NavigateUri = new Uri(CompanyHelper.Company.WebSiteUrl);
+
+                if (!CookieHelper.IsCookieAccepted() && !CompanyHelper.Company.DefaultLanguage.IsNullOrBlank())
+                {
+                    LocalizationHelper.CurrentCulture = CompanyHelper.Company.DefaultLanguage;
+                    this.SetLocalization();
+                }
+            }
+
+            return true;
+        }
+
         private void PerformLogout()
         {
             AudioHelper.PlaySound(SoundType.MENU_SELECT);
-            SessionHelper.RemoveCachedSession();
+
+            AuthTokenHelper.RemoveCachedRefreshToken();
+
             AuthTokenHelper.AuthToken = null;
+            AuthTokenHelper.RefreshToken = null;
+
             GameProfileHelper.GameProfile = null;
             PlayerScoreHelper.PlayerScore = null;
             App.Ship = null;
@@ -170,42 +215,23 @@ namespace SpaceShooterGame
 
         private async Task CheckUserSession()
         {
-            SessionHelper.TryLoadSession();
+            AuthTokenHelper.TryLoadRefreshToken();
 
             if (GameProfileHelper.HasUserLoggedIn())
             {
-                if (SessionHelper.HasSessionExpired())
-                {
-                    SessionHelper.RemoveCachedSession();
-                    SetLoginContext();
-                }
-                else
-                {
-                    SetLogoutContext();
-                }
+                SetLogoutContext();
             }
             else
             {
-                if (SessionHelper.HasSessionExpired())
+                if (!AuthTokenHelper.RefreshToken.IsNullOrEmpty() && await GetGameProfile())
                 {
-                    SessionHelper.RemoveCachedSession();
-                    SetLoginContext();
-                    ShowCookieToast();
+                    SetLogoutContext();
+                    ShowWelcomeBackToast();
                 }
                 else
                 {
-                    if (SessionHelper.GetCachedSession() is Session session
-                        && await ValidateSession(session)
-                        && await GetGameProfile())
-                    {
-                        SetLogoutContext();
-                        ShowWelcomeBackToast();
-                    }
-                    else
-                    {
-                        SetLoginContext();
-                        ShowCookieToast();
-                    }
+                    SetLoginContext();
+                    ShowCookieToast();
                 }
             }
         }
@@ -240,12 +266,6 @@ namespace SpaceShooterGame
             GameOverPage_LeaderboardButton.Visibility = Visibility.Collapsed;
             GameLoginPage_LoginButton.Visibility = Visibility.Visible;
             GameLoginPage_RegisterButton.Visibility = Visibility.Visible;
-        }
-
-        private async Task<bool> ValidateSession(Session session)
-        {
-            var (IsSuccess, _) = await _backendService.ValidateUserSession(session);
-            return IsSuccess;
         }
 
         private async Task<bool> GetGameProfile()

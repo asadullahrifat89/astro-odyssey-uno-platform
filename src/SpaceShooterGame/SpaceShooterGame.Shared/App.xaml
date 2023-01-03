@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Style BasedOn="{StaticResource DefaultTextBlockStyle}" TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
 
             <!--#region Buttons-->
@@ -24,12 +24,15 @@
                 <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
 
-            <Style BasedOn="{StaticResource DefaultButtonStyle}" TargetType="Button">
+            <Style
+                x:Key="GameButtonStyle"
+                BasedOn="{StaticResource DefaultButtonStyle}"
+                TargetType="Button">
                 <Setter Property="Background" Value="#9d2235" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="#ffffff" />
                 <Setter Property="BorderBrush" Value="Goldenrod" />
                 <Setter Property="BorderThickness" Value="3" />
                 <Setter Property="FontWeight" Value="SemiBold" />
@@ -37,21 +40,24 @@
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
+
+            <!--  Applying game button style globally  -->
+            <Style BasedOn="{StaticResource GameButtonStyle}" TargetType="Button" />
 
             <Style BasedOn="{StaticResource DefaultToggleButtonStyle}" TargetType="ToggleButton">
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
 
             <Style BasedOn="{StaticResource DefaultHyperlinkButtonStyle}" TargetType="HyperlinkButton">
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="IsFocusEngagementEnabled" Value="False" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
             <!--#endregion-->
 
@@ -59,12 +65,12 @@
             <Style BasedOn="{StaticResource DefaultTextBoxStyle}" TargetType="TextBox">
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="FontWeight" Value="SemiBold" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
 
             <Style BasedOn="{StaticResource DefaultPasswordBoxStyle}" TargetType="PasswordBox">
                 <Setter Property="CornerRadius" Value="10" />
-                <Setter Property="FontFamily" Value="Frutiger" />
+                <Setter Property="FontFamily" Value="Univers" />
             </Style>
             <!--#endregion-->
 
@@ -88,6 +94,8 @@
             <!--#endregion-->
 
             <!--#region Colors-->
+            <SolidColorBrush x:Key="LeaderboardRecordForegroundColor" Color="#ffffff" />
+
             <SolidColorBrush x:Key="SystemAccentColorLight2" Color="Goldenrod" />
             <SolidColorBrush x:Key="SystemAccentColorDark1" Color="Goldenrod" />
 

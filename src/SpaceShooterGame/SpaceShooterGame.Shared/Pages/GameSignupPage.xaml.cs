@@ -51,7 +51,7 @@ namespace SpaceShooterGame
 
         #region Page
 
-        private void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
+        private async void GameSignupPage_Loaded(object sender, RoutedEventArgs e)
         {
             this.SetLocalization();
 
@@ -59,6 +59,9 @@ namespace SpaceShooterGame
             SetSignupState();
 
             SizeChanged += GamePage_SizeChanged;
+
+            await GetGameSeason();
+
             StartAnimation();
         }
 
@@ -84,30 +87,10 @@ namespace SpaceShooterGame
 
         #region Input Fields
 
-        private void UserFullNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SignupField_TextChanged(object sender, TextChangedEventArgs e)
         {
             EnableNextButton();
-        }
-
-        private void UserEmailBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableNextButton();
-        }
-
-        private void UserNameBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableNextButton();
-        }
-
-        private void PasswordBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableNextButton();
-        }
-
-        private void ConfirmPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            EnableNextButton();
-        }
+        }     
 
         private async void PasswordBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
@@ -177,6 +160,25 @@ namespace SpaceShooterGame
 
         #region Logic
 
+        private async Task<bool> GetGameSeason()
+        {
+            (bool IsSuccess, string Message, Season Season) = await _backendService.GetGameSeason();
+
+            if (!IsSuccess)
+            {
+                var error = Message;
+                this.ShowError(error);
+                return false;
+            }
+
+            if (Season is not null && Season.TermsAndConditionsUrls is not null && Season.TermsAndConditionsUrls.Length > 0)
+                TermsAndConditionsButton.NavigateUri = new Uri(Season.TermsAndConditionsUrls.FirstOrDefault(x => x.Culture == LocalizationHelper.CurrentCulture).Value);
+            else
+                TermsAndConditionsButton.Visibility = Visibility.Collapsed;
+
+            return true;
+        }
+
         private void GoToSextSignupState()
         {
             _signUpState++;
@@ -203,24 +205,20 @@ namespace SpaceShooterGame
             {
                 case SignUpState.FullNameContainer:
                     {
-                        GameInstructionsPage_NextButton.IsEnabled =
-                        !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank()
-                        && IsValidFullName();
+                        var isEnabled = !GameSignupPage_UserFullNameBox.Text.IsNullOrBlank() && IsValidFullName() && (GameSignupPage_UserCityBox.Visibility != Visibility.Visible || !GameSignupPage_UserCityBox.Text.IsNullOrBlank());
+                        GameInstructionsPage_NextButton.Visibility = isEnabled ? Visibility.Visible : Visibility.Collapsed;
                     }
                     break;
                 case SignUpState.UserNameContainer:
                     {
-                        GameInstructionsPage_NextButton.IsEnabled =
-                        !GameSignupPage_UserNameBox.Text.IsNullOrBlank()
-                        && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank()
-                        && IsValidEmail();
+                        var isEnabled = !GameSignupPage_UserNameBox.Text.IsNullOrBlank() && !GameSignupPage_UserEmailBox.Text.IsNullOrBlank() && IsValidEmail();
+                        GameInstructionsPage_NextButton.Visibility = isEnabled ? Visibility.Visible : Visibility.Collapsed;
                     }
                     break;
                 case SignUpState.PasswordContainer:
                     {
-                        GameInstructionsPage_NextButton.IsEnabled =
-                        IsStrongPassword()
-                        && DoPasswordsMatch();
+                        var isEnabled = IsStrongPassword() && DoPasswordsMatch();
+                        GameInstructionsPage_NextButton.Visibility = isEnabled ? Visibility.Visible : Visibility.Collapsed;
                     }
                     break;
                 case SignUpState.AcceptanceContainer:
@@ -266,6 +264,7 @@ namespace SpaceShooterGame
         {
             (bool IsSuccess, string Message) = await _backendService.SignupUser(
                fullName: GameSignupPage_UserFullNameBox.Text.Trim(),
+               city: GameSignupPage_UserCityBox.Text,
                userName: GameSignupPage_UserNameBox.Text.Trim(),
                email: GameSignupPage_UserEmailBox.Text.ToLower().Trim(),
                password: GameSignupPage_PasswordBox.Text.Trim(),

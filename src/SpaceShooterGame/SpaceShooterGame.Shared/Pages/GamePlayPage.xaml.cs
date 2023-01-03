@@ -189,7 +189,7 @@ namespace SpaceShooterGame
 
             if (_isGameRunning)
             {
-                if (_isGamePaused)                    
+                if (_isGamePaused)
                     QuitGameButton.IsChecked = false;
 
                 _isPointerActivated = false;
@@ -216,11 +216,6 @@ namespace SpaceShooterGame
             ResumeGame();
         }
 
-        private void ConfirmQuitGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            QuitGame();
-        }
-
         private void QuitGameButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isGameQuitting)
@@ -237,6 +232,11 @@ namespace SpaceShooterGame
 
                 InputView.Focus(FocusState.Programmatic);
             }
+        }
+
+        private void ConfirmQuitGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            QuitGame();
         }
 
         #endregion        
@@ -544,8 +544,6 @@ namespace SpaceShooterGame
         private void WarpThroughSpace()
         {
             CelestialObjectFactory.StartSpaceWarp();
-
-            //TODO: increase everythings speed and not remove them
 
             if (GameView.GetGameObjects<GameObject>().Where(x => !x.IsPlayer) is IEnumerable<GameObject> gameObjects)
             {

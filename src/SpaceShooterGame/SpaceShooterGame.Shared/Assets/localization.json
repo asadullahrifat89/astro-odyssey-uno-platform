@@ -4,15 +4,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Astro Odyssey"
+        "Value": "SELISE Space Shooter"
       },
       {
         "Culture": "de",
-        "Value": "Astro Odyssey"
+        "Value": "SELISE Space Shooter"
       },
       {
         "Culture": "fr",
-        "Value": "Astro Odyssey"
+        "Value": "SELISE Space Shooter"
       }
     ]
   },
@@ -21,15 +21,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "A classic rock metal 🎸 space shooter on WebAssembly."
+        "Value": "Beat the high score and stay on top of the leaderboard!"
       },
       {
         "Culture": "de",
-        "Value": "Ein klassischer Rock-Metal 🎸-Weltraum-Shooter auf WebAssembly."
+        "Value": "Schlage den Highscore und bleibe an der Spitze der Rangliste!"
       },
       {
         "Culture": "fr",
-        "Value": "Un classique rock métal 🎸 space shooter sur WebAssembly."
+        "Value": "Battez le meilleur score et restez en tête du classement !"
       }
     ]
   },
@@ -42,7 +42,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Wie man spielt"
+        "Value": "So geht’s!"
       },
       {
         "Culture": "fr",
@@ -242,15 +242,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Antimony"
+        "Value": "Piero"
       },
       {
         "Culture": "de",
-        "Value": "Antimony"
+        "Value": "Piero"
       },
       {
         "Culture": "fr",
-        "Value": "Antimony"
+        "Value": "Piero"
       }
     ]
   },
@@ -259,15 +259,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Bismuth"
+        "Value": "Maria"
       },
       {
         "Culture": "de",
-        "Value": "Bismuth"
+        "Value": "Maria"
       },
       {
         "Culture": "fr",
-        "Value": "Bismuth"
+        "Value": "Maria"
       }
     ]
   },
@@ -276,15 +276,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Curium"
+        "Value": "Giulia"
       },
       {
         "Culture": "de",
-        "Value": "Curium"
+        "Value": "Giulia"
       },
       {
         "Culture": "fr",
-        "Value": "Curium"
+        "Value": "Giulia"
       }
     ]
   },
@@ -365,7 +365,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Wie man spielt"
+        "Value": "So geht's"
       },
       {
         "Culture": "fr",
@@ -386,7 +386,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Contrôle"
+        "Value": "Commandes"
       }
     ]
   },
@@ -399,7 +399,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Bewege dich nach ⬅️ oder ➡️ mit den Pfeiltasten auf deiner ⌨️ oder benutze den Touch Screen deines 📱."
+        "Value": "Bewege dich nach ⬅️ oder ➡️ mit den Pfeiltasten deiner ⌨️ oder benutze den Touch Screen deines 📱."
       },
       {
         "Culture": "fr",
@@ -467,7 +467,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Besige sie um ins nächste Level zu kommen."
+        "Value": "Besiege sie um ins nächste Level zu kommen."
       },
       {
         "Culture": "fr",
@@ -535,7 +535,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammle sie um stärkere Waffen zu erhalten."
+        "Value": "Einsammeln um stärkere Waffen zu erhalten."
       },
       {
         "Culture": "fr",
@@ -569,7 +569,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Sammle sie ein, um deine Feuerkraft zu erhöhen und 2-fache Punkte zu aktivieren."
+        "Value": "Einsammeln um die Feuerkraft zu erhöhen und 2-fach Punkte zu aktivieren."
       },
       {
         "Culture": "fr",
@@ -637,7 +637,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Blaze blitz"
+        "Value": "Blaze Blitz"
       },
       {
         "Culture": "fr",
@@ -688,7 +688,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Klappen sie sich"
+        "Value": "Tarnung deaktiviert"
       },
       {
         "Culture": "fr",
@@ -705,7 +705,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Tarne dich"
+        "Value": "Tarnung aktiviert"
       },
       {
         "Culture": "fr",
@@ -807,7 +807,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Feindliche annäherungen"
+        "Value": "Feindliche Annäherung"
       },
       {
         "Culture": "fr",
@@ -1181,7 +1181,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Tippen sie zum beenden"
+        "Value": "Tippe zum beenden"
       },
       {
         "Culture": "fr",
@@ -1198,7 +1198,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Tippen, um weiterzufahren"
+        "Value": "Tippe, um weiterzufahren"
       },
       {
         "Culture": "fr",
@@ -1245,15 +1245,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Log in, to have a chance to be at the top of the leaderboard."
+        "Value": "Log in, to have a chance to win the main prize."
       },
       {
         "Culture": "de",
-        "Value": "Melden Sie sich an, um die Chance zu haben, an der Spitze der Rangliste zu stehen."
+        "Value": "Logge dich ein, um an der Verlosung des Hauptpreises teilnehmen zu können."
       },
       {
         "Culture": "fr",
-        "Value": "Connectez-vous, pour avoir une chance d'être en tête du classement."
+        "Value": "Connecte-toi pour avoir une chance de gagner le premier prix."
       }
     ]
   },
@@ -1309,7 +1309,24 @@
     ]
   },
   {
-    "Key": "GameLoginPage_UserNameBox",
+    "Key": "GameSignupPage_UserNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Username"
+      },
+      {
+        "Culture": "de",
+        "Value": "Benutzername"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom d'utilisateur"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_UserNameEmailBox",
     "CultureValues": [
       {
         "Culture": "en",
@@ -1390,6 +1407,23 @@
       {
         "Culture": "fr",
         "Value": "Nom complet"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserCityBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "City"
+      },
+      {
+        "Culture": "de",
+        "Value": "Stadt"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Ville"
       }
     ]
   },
@@ -1491,7 +1525,7 @@
       },
       {
         "Culture": "fr",
-        "Value": "Tu as déjà un compte ??"
+        "Value": "Tu as déjà un compte?"
       }
     ]
   },
@@ -1517,15 +1551,15 @@
     "CultureValues": [
       {
         "Culture": "en",
-        "Value": "Yes, I would like to subscribe to newsletters."
+        "Value": "Yes, I would like to subscribe to the newsletter and benefit from regular product promotions."
       },
       {
         "Culture": "de",
-        "Value": "Ja, ich möchte den Newsletter abonnieren."
+        "Value": "Ja, ich möchte den Newsletter abonnieren und von regelmässigen Produktaktionen profitieren."
       },
       {
         "Culture": "fr",
-        "Value": "Oui, je voudrais souscrire aux newsletters."
+        "Value": "Oui, je souhaite m'abonner à la newsletter et profiter de promotions régulières sur les produits."
       }
     ]
   },
@@ -1589,7 +1623,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Das Passwort darf höchstens vierzehl Zeichen enthalten"
+        "Value": "Das Passwort darf höchstens 14 Zeichen enthalten"
       },
       {
         "Culture": "fr",
@@ -1776,7 +1810,7 @@
       },
       {
         "Culture": "de",
-        "Value": "Spiel Verlassen?"
+        "Value": "Spiel verlassen?"
       },
       {
         "Culture": "fr",
@@ -1816,6 +1850,244 @@
       {
         "Culture": "fr",
         "Value": "Pas de données disponibles."
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_SeasonToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "💫 Season"
+      },
+      {
+        "Culture": "de",
+        "Value": "💫 Saison"
+      },
+      {
+        "Culture": "fr",
+        "Value": "💫 Saison"
+      }
+    ]
+  },
+  {
+    "Key": "DailyPrize_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🎁 Daily prize 🎁"
+      },
+      {
+        "Culture": "de",
+        "Value": "🎁 Täglicher Preis 🎁"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🎁 Prix du jour 🎁"
+      }
+    ]
+  },
+  {
+    "Key": "ViewPrizeButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🎁 View Prize 🎁"
+      },
+      {
+        "Culture": "de",
+        "Value": "🎁 Preis ansehen 🎁"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🎁 Voir le prix 🎁"
+      }
+    ]
+  },
+  {
+    "Key": "TermsAndConditionsButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Conditions of participation"
+      },
+      {
+        "Culture": "de",
+        "Value": "Teilnahmebedingungen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Conditions de participation"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_RageBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Rage Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Wut-Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rage Bar"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_RageBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Fill it up by destroying enemies 'n meteors. Once filled it will activate your ship's special ability for a short time."
+      },
+      {
+        "Culture": "de",
+        "Value": "Füllen Sie ihn auf, indem Sie Feinde und Meteore zerstören. Sobald sie gefüllt ist, wird die Spezialfähigkeit deines Schiffes für kurze Zeit aktiviert."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Remplissez-la en détruisant des ennemis et des météores. Une fois remplie, elle activera la capacité spéciale de ton vaisseau pendant un court moment."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_LevelnScoreBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Level 'n Score Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Level 'n Score Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Barre Level 'n Score"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_LevelnScoreBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "The game level 🔥 increases with your score. Your current score and how much you need to score to get to the next level is displayed on the right 🏆."
+      },
+      {
+        "Culture": "de",
+        "Value": "Die Spielstufe 🔥 steigt mit deiner Punktzahl. Dein aktueller Punktestand und wie viel du noch erreichen musst, um das nächste Level zu erreichen, wird auf der rechten Seite angezeigt 🏆."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le niveau du jeu 🔥 augmente avec votre score. Votre score actuel et celui que vous devez obtenir pour passer au niveau suivant sont affichés à droite 🏆."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Health Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Gesundheit Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Barre de santé"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "You loose your health if you get hit by meteors, enemies or their projectiles."
+      },
+      {
+        "Culture": "de",
+        "Value": "Du verlierst deine Gesundheit, wenn du von Meteoriten, Feinden oder deren Geschossen getroffen wirst."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Vous perdez votre santé si vous êtes touché par des météores, des ennemis ou leurs projectiles."
+      }
+    ]
+  },
+  {
+    "Key": "LOGIN_PROMPT",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Sign up for a chance to win."
+      },
+      {
+        "Culture": "de",
+        "Value": "Melde dich an, um eine Chance auf den Gewinn zu haben."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Inscris-toi pour avoir une chance de gagner."
+      }
+    ]
+  },
+  {
+    "Key": "DEFENDER_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Defender class. Can withstand more damage. Medium firing rate. Pops up a force shield on rage bar fill up. Shoots laser blasters."
+      },
+      {
+        "Culture": "de",
+        "Value": "Verteidigerklasse. Kann mehr Schaden verkraften. Mittlere Feuerrate. Lässt einen Kraftschild auftauchen, wenn die Wutleiste voll ist. Schießt mit Laser-Blastern."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe de défenseur. Peut résister à plus de dégâts. Vitesse de tir moyenne. Fait apparaître un bouclier de force lorsque la barre de rage est remplie. Tire des blasters laser."
+      }
+    ]
+  },
+  {
+    "Key": "BERSERKER_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Berserker class. Can withstand less damage. High firing rate. Reaches extreme firepower on rage bar fill up. Shoots energy cubes."
+      },
+      {
+        "Culture": "de",
+        "Value": "Berserker-Klasse. Kann weniger Schaden aushalten. Hohe Feuerrate. Erreicht extreme Feuerkraft, wenn der Wutbalken voll ist. Verschießt Energiewürfel."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe berserker. Peut supporter moins de dégâts. Haute cadence de tir. Atteint une puissance de feu extrême lorsque la barre de rage est remplie. Tire des cubes d'énergie."
+      }
+    ]
+  },
+  {
+    "Key": "SPECTRE_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Spectre class. Can withstand moderate damage. Medium firing rate. Becomes invisible on rage bar fill up. Shoots sonic waves."
+      },
+      {
+        "Culture": "de",
+        "Value": "Gespenst-Klasse. Kann mäßigem Schaden widerstehen. Mittlere Feuerrate. Wird unsichtbar, wenn die Wutleiste voll ist. Schießt Schallwellen."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe Spectre. Peut supporter des dommages modérés. Vitesse de tir moyenne. Devient invisible lorsque la barre de rage est remplie. Projette des ondes soniques."
       }
     ]
   }

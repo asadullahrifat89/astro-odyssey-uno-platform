@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="GameLeaderboardPage_GameProfiles_DataTemplate">
+        <DataTemplate x:Key="GameProfiles_DataTemplate">
             <Border
                 Margin="0,2"
                 BorderThickness="3"
@@ -21,7 +21,7 @@
                         VerticalAlignment="Center"
                         FontSize="35"
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                         Text="{Binding Path=MedalEmoji, Mode=OneWay}"
                         TextAlignment="Left" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -29,7 +29,7 @@
                             Margin="2,0"
                             VerticalAlignment="Center"
                             FontWeight="SemiBold"
-                            Foreground="White"
+                            Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                             Text="{Binding Path=DisplayName, Mode=OneWay}"
                             TextAlignment="Left" />
                         <TextBlock
@@ -37,7 +37,7 @@
                             VerticalAlignment="Center"
                             FontSize="12"
                             FontWeight="SemiLight"
-                            Foreground="White"
+                            Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                             Text="{Binding Path=LastPlayTime, Mode=OneWay}"
                             TextAlignment="Left" />
                     </StackPanel>
@@ -47,13 +47,13 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                         Text="{Binding Path=PersonalBestScore, Mode=OneWay}"
                         TextAlignment="Right" />
                 </Grid>
             </Border>
         </DataTemplate>
-        <DataTemplate x:Key="GameLeaderboardPage_GameScores_DataTemplate">
+        <DataTemplate x:Key="GameScores_DataTemplate">
             <Border
                 Margin="0,2"
                 BorderThickness="3"
@@ -65,7 +65,7 @@
                         VerticalAlignment="Center"
                         FontSize="35"
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                         Text="{Binding Path=MedalEmoji, Mode=OneWay}"
                         TextAlignment="Left" />
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
@@ -73,7 +73,7 @@
                             Margin="2,0"
                             VerticalAlignment="Center"
                             FontWeight="SemiBold"
-                            Foreground="White"
+                            Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                             Text="{Binding Path=DisplayName, Mode=OneWay}"
                             TextAlignment="Left" />
                         <TextBlock
@@ -81,7 +81,7 @@
                             VerticalAlignment="Center"
                             FontSize="12"
                             FontWeight="SemiLight"
-                            Foreground="White"
+                            Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                             Text="{Binding Path=LastPlayTime, Mode=OneWay}"
                             TextAlignment="Left" />
                     </StackPanel>
@@ -91,7 +91,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{StaticResource LeaderboardRecordForegroundColor}"
                         Text="{Binding Path=Score, Mode=OneWay}"
                         TextAlignment="Right" />
                 </Grid>
@@ -174,19 +174,26 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
 
+                    <!--  Season  -->
+                    <ToggleButton
+                        x:Name="GameLeaderboardPage_SeasonToggle"
+                        Checked="GameLeaderboardPage_SeasonToggle_Click"
+                        Content="💫 Season"
+                        FontSize="15" />
+
                     <!--  Daily high score  -->
                     <ToggleButton
                         x:Name="GameLeaderboardPage_DailyScoreboardToggle"
+                        Margin="5,0"
                         Checked="GameLeaderboardPage_DailyScoreboardToggle_Click"
-                        Content="Daily"
+                        Content="📅 Daily"
                         FontSize="15" />
 
                     <!--  All time high score  -->
                     <ToggleButton
                         x:Name="GameLeaderboardPage_AllTimeScoreboardToggle"
-                        Margin="5,0"
                         Checked="GameLeaderboardPage_AllTimeScoreboardToggle_Click"
-                        Content="All Time"
+                        Content="👑 All Time"
                         FontSize="15" />
 
                 </StackPanel>
@@ -203,16 +210,80 @@
                         FontWeight="SemiBold"
                         Visibility="Collapsed" />
 
+                    <!--  Season  -->
+                    <ScrollViewer Visibility="{x:Bind Path=GameLeaderboardPage_SeasonToggle.IsChecked, Mode=OneWay}">
+
+                        <StackPanel>
+
+                            <!--  Daily prize  -->
+                            <StackPanel
+                                x:Name="DailyPrizeContainer"
+                                Margin="5"
+                                Orientation="Vertical">
+
+                                <TextBlock
+                                    x:Name="DailyPrize_Tagline"
+                                    Margin="5"
+                                    FontSize="25"
+                                    FontWeight="Bold"
+                                    Text="🎁"
+                                    TextAlignment="Center" />
+
+                                <TextBlock
+                                    x:Name="WinningCriteriaDescriptionText"
+                                    Margin="5"
+                                    FontSize="17"
+                                    FontWeight="SemiBold"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWholeWords" />
+
+                                <TextBlock
+                                    x:Name="GamePrizeDescriptionText"
+                                    Margin="5"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWholeWords" />
+
+                            </StackPanel>
+
+                            <!--  Season prize  -->
+                            <StackPanel
+                                x:Name="SeasonPrizeContainer"
+                                Margin="5"
+                                Orientation="Vertical">
+
+                                <TextBlock
+                                    x:Name="SeasonPrize_Tagline"
+                                    Margin="5"
+                                    FontSize="35"
+                                    FontWeight="Bold"
+                                    Text="🥳"
+                                    TextAlignment="Center" />
+
+                                <TextBlock
+                                    x:Name="SeasonPrizeDescriptionText"
+                                    Margin="10"
+                                    FontSize="18"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWholeWords" />
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </ScrollViewer>
+
                     <!--  Daily  -->
                     <ListView
                         x:Name="GameLeaderboardPage_GameScores"
-                        ItemTemplate="{StaticResource GameLeaderboardPage_GameScores_DataTemplate}"
+                        ItemTemplate="{StaticResource GameScores_DataTemplate}"
                         Visibility="{x:Bind Path=GameLeaderboardPage_DailyScoreboardToggle.IsChecked, Mode=OneWay}" />
 
                     <!--  All time  -->
                     <ListView
                         x:Name="GameLeaderboardPage_GameProfiles"
-                        ItemTemplate="{StaticResource GameLeaderboardPage_GameProfiles_DataTemplate}"
+                        ItemTemplate="{StaticResource GameProfiles_DataTemplate}"
                         Visibility="{x:Bind Path=GameLeaderboardPage_AllTimeScoreboardToggle.IsChecked, Mode=OneWay}" />
 
                 </Grid>

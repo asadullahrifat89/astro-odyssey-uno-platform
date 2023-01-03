@@ -8,8 +8,8 @@ namespace SpaceShooterGame
 
         public string UserId { get; set; } = string.Empty;
 
-        public DateTime ExpiresOn { get; set; }
-
         public string GameId { get; set; } = string.Empty;
+
+        public string CompanyId { get; set; } = string.Empty;
     }
 }

@@ -95,6 +95,158 @@
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>
 
+                    <!--  Health bar  -->
+                    <StackPanel Margin="5">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <StackPanel
+                                Height="150"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <!--  Health  -->
+                                <Image
+                                    Width="25"
+                                    Height="25"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Source="ms-appx:///Assets/Images/Health/health.png" />
+
+                                <!--  Health bar  -->
+                                <ProgressBar
+                                    x:Name="PlayerHealthBar"
+                                    Width="50"
+                                    Height="5"
+                                    Margin="5,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="Crimson"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Value="80" />
+
+                            </StackPanel>
+
+                            <TextBlock
+                                x:Name="GameInstructionsPage_HealthBarText"
+                                Margin="5"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                Text="Health Bar"
+                                TextAlignment="Center"
+                                TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="GameInstructionsPage_HealthBarText2"
+                            Margin="5"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Text="You loose your health if you get hit by meteors, enemies or their projectiles."
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <!--  Rage Bar  -->
+                    <StackPanel Margin="5">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel Height="150" Orientation="Horizontal">
+                                <!--  Rage  -->
+                                <TextBlock
+                                    x:Name="PlayerRageIcon"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Text="😡"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWholeWords" />
+
+                                <!--  Rage bar  -->
+                                <ProgressBar
+                                    x:Name="PlayerRageBar"
+                                    Width="50"
+                                    Height="5"
+                                    Margin="5,0"
+                                    VerticalAlignment="Center"
+                                    Foreground="Red"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Value="60" />
+                            </StackPanel>
+
+                            <TextBlock
+                                x:Name="GameInstructionsPage_RageBarText"
+                                Margin="5"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                Text="Rage Bar"
+                                TextAlignment="Center"
+                                TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="GameInstructionsPage_RageBarText2"
+                            Margin="5"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Text="This is your rage bar. Fill it up by destroying enemies 'n meteors. Once filled it will activate your ship's special ability for a short time."
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
+                    <!--  level and score bar  -->
+                    <StackPanel Margin="5">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <StackPanel
+                                Height="150"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <!--  Game level  -->
+                                <TextBlock
+                                    x:Name="GameLevelText"
+                                    Margin="0,3,0,3"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Text="🔥 1"
+                                    TextAlignment="Left"
+                                    TextWrapping="WrapWholeWords" />
+
+                                <!--  Score  -->
+                                <TextBlock
+                                    x:Name="ScoreBarCount"
+                                    Margin="10,3,10,3"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Text="🏆 100/200"
+                                    TextAlignment="Right"
+                                    TextWrapping="WrapWholeWords" />
+
+                            </StackPanel>
+
+                            <TextBlock
+                                x:Name="GameInstructionsPage_LevelnScoreBarText"
+                                Margin="5"
+                                FontSize="25"
+                                FontWeight="Bold"
+                                Text="Level 'n Score Bar"
+                                TextAlignment="Center"
+                                TextWrapping="WrapWholeWords" />
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="GameInstructionsPage_LevelnScoreBarText2"
+                            Margin="5"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Text="As you progress thru the game your level increases. Your score and how much you need to score to get to the next level is displayed on the right."
+                            TextAlignment="Center"
+                            TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+
                     <!--  Enemy ships 'n meteors  -->
                     <StackPanel Margin="5">
                         <StackPanel
@@ -233,7 +385,7 @@
                             Margin="5"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Text="Collect them to slightly increase your firepower."
+                            Text="Collect them to increase your firepower and activate 2x score."
                             TextAlignment="Center"
                             TextWrapping="WrapWholeWords" />
                     </StackPanel>

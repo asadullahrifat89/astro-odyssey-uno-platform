@@ -1,5 +1,4 @@
-﻿using Microsoft.UI;
-using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Linq;
@@ -58,7 +57,7 @@ namespace SpaceShooterGame
             return _baseUrl;
         }
 
-        public static async void PreloadAssets(ProgressBar progressBar, TextBlock messageBlock)
+        public static async void PreloadAssets(ProgressBar progressBar, TextBlock messageBlock, Action completed = null)
         {
             if (!_assetsPreloaded)
             {
@@ -71,24 +70,26 @@ namespace SpaceShooterGame
                 messageBlock.Foreground = App.Current.Resources["ProgressBarOkColor"] as SolidColorBrush;
                 messageBlock.Text = LocalizationHelper.GetLocalizedResource("LOADING_GAME_ASSETS");
 
-                var maximum = 0;
+                //var maximum = 0;
 
-                foreach (var fieldInfo in typeof(Constants).GetFields().Where(x => x.Name.EndsWith("TEMPLATES")))
-                {
-                    if (fieldInfo.FieldType.IsArray)
-                    {
-                        var value = fieldInfo.GetValue(fieldInfo);
-                        var array = value as dynamic;
+                //foreach (var fieldInfo in typeof(Constants).GetFields().Where(x => x.Name.EndsWith("TEMPLATES")))
+                //{
+                //    if (fieldInfo.FieldType.IsArray)
+                //    {
+                //        var value = fieldInfo.GetValue(fieldInfo);
+                //        var array = value as dynamic;
 
-                        maximum += array.Length;
-                    }
-                    else
-                    {
-                        maximum++;
-                    }
-                }
+                //        maximum += array.Length;
+                //    }
+                //    else
+                //    {
+                //        maximum++;
+                //    }
+                //}
 
-                progressBar.Maximum = maximum;
+                //progressBar.Maximum = maximum;
+
+                progressBar.Maximum = Constants.IMAGE_TEMPLATES.Length;
 
                 #region Images
 
@@ -112,19 +113,27 @@ namespace SpaceShooterGame
 
                 #endregion
 
-                #region Sounds
+                completed?.Invoke();
 
-                foreach (var uri in Constants.SOUND_TEMPLATES.Select(x => x.Value).ToArray())
-                {
-                    await GetFileAsync(new Uri($"ms-appx:///{uri}"), progressBar);
-                }
+                //#region Sounds
+
+                //foreach (var uri in Constants.SOUND_TEMPLATES.Select(x => x.Value).ToArray())
+                //{
+                //    await GetFileAsync(new Uri($"ms-appx:///{uri}"), progressBar);
+                //}              
+
+                //#endregion
+
+                _assetsPreloaded = true;
 
                 messageBlock.Text = string.Empty;
                 messageBlock.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
-                #endregion
-
-                _assetsPreloaded = true;
+                completed?.Invoke();
+            }
+            else
+            {
+                completed?.Invoke();
             }
         }
 

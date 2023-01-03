@@ -8,6 +8,7 @@ namespace SpaceShooterGame
         #region Fields
 
         public const string GAME_ID = "space-shooter";
+        public const string COMPANY_ID = "selise";
 
         #region Measurements
 
@@ -23,6 +24,7 @@ namespace SpaceShooterGame
         public const double SCORE_MULTIPLIER_THREASHOLD = 8;
 
         public const double POWER_UP_METER = 100;
+        public const double PLAYER_PROJECTILE_SPAWN_DELAY = 15;
 
         #endregion
 
@@ -48,9 +50,6 @@ namespace SpaceShooterGame
 
             new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible1.png"), COLLECTIBLE_OBJECT_SIZE),
             new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible2.png"), COLLECTIBLE_OBJECT_SIZE),
-            new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible3.png"), COLLECTIBLE_OBJECT_SIZE),
-            new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible4.png"), COLLECTIBLE_OBJECT_SIZE),
-            new(ImageType.COLLECTIBLE, new Uri("ms-appx:///Assets/Images/Collectible/collectible5.png"), COLLECTIBLE_OBJECT_SIZE),
 
             new(ImageType.BOSS, new Uri("ms-appx:///Assets/Images/Boss/boss1.png"), 1),
             new(ImageType.BOSS, new Uri("ms-appx:///Assets/Images/Boss/boss2.png"), 1),
@@ -139,15 +138,7 @@ namespace SpaceShooterGame
             new KeyValuePair<SoundType, string>(SoundType.SCORE_MULTIPLIER_OFF, "Assets/Sounds/Collectible/score_multiplier_off.mp3"),
         };
 
-        #endregion
-
-        #region Web Api Base Urls
-#if DEBUG
-        public const string GAME_API_BASEURL = "https://localhost:7238";
-#else
-        public const string GAME_API_BASEURL = "https://astro-odyssey-web-api.herokuapp.com";
-#endif
-        #endregion
+        #endregion      
 
         #region Web Api Endpoints
 
@@ -157,20 +148,22 @@ namespace SpaceShooterGame
         public const string Action_SignUp = "/api/Command/SignUp";
         public const string Action_SubmitGameScore = "/api/Command/SubmitGameScore";
         public const string Action_GenerateSession = "/api/Command/GenerateSession";
-        public const string Action_ValidateSession = "/api/Command/ValidateSession";
+        public const string Action_ValidateToken = "/api/Command/ValidateToken";
 
         public const string Action_GetGameProfile = "/api/Query/GetGameProfile";
         public const string Action_GetGameProfiles = "/api/Query/GetGameProfiles";
-        public const string Action_GetGameScores = "/api/Query/GetGameScores";
-        public const string Action_GetUser = "/api/Query/GetUser";
+        public const string Action_GetGameScoresOfTheDay = "/api/Query/GetGameScoresOfTheDay";
         public const string Action_CheckIdentityAvailability = "/api/Query/CheckIdentityAvailability";
+        public const string Action_GetSeason = "/api/Query/GetSeason";
+        public const string Action_GetGamePrizeOfTheDay = "/api/Query/GetGamePrizeOfTheDay";
+        public const string Action_GetCompany = "/api/Query/GetCompany";
 
         #endregion
 
         #region Session Keys
 
-        public const string CACHE_SESSION_KEY = "Session";
-        public const string CACHE_LANGUAGE_KEY = "Language";
+        public const string CACHE_REFRESH_TOKEN_KEY = "RT";
+        public const string CACHE_LANGUAGE_KEY = "Lang";
 
         #endregion
 
