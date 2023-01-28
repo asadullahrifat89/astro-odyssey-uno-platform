@@ -11,7 +11,8 @@
   ],
   "name": "Spiga Xmas Challange",
   "short_name": "Spiga Xmas Challange",
-  "start_url": "/",
+  "start_url": "/astro-odyssey-uno-platform/",
   "theme_color": "#daa520",
-  "scope": "/"
+  "scope": "/astro-odyssey-uno-platform/",
+  "id": "/astro-odyssey-uno-platform/"
 }
