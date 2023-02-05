@@ -1,0 +1,12 @@
+{
+  "items": {
+    "EmccProperties": [
+      { "identity": "RuntimeEmccVersion",     "value": "3.1.12" },
+      { "identity": "RuntimeEmccVersionRaw",  "value": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.12 (38d1292ba2f5b4a7c8518931f5ae6f97ef0f6827)" },
+      { "identity": "RuntimeEmccVersionHash", "value": "38d1292ba2f5b4a7c8518931f5ae6f97ef0f6827" }
+    ],
+    "WasmOptConfigurationFlags": [
+      { "identity": "WasmOptConfigurationFlags", "value": " " }
+    ]
+  }
+}

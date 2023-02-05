@@ -1,0 +1,2094 @@
+﻿[
+  {
+    "Key": "ApplicationName_Header",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "SELISE Space Shooter"
+      },
+      {
+        "Culture": "de",
+        "Value": "SELISE Space Shooter"
+      },
+      {
+        "Culture": "fr",
+        "Value": "SELISE Space Shooter"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Beat the high score and stay on top of the leaderboard!"
+      },
+      {
+        "Culture": "de",
+        "Value": "Schlage den Highscore und bleibe an der Spitze der Rangliste!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Battez le meilleur score et restez en tête du classement !"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_HowToPlayButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "How To Play"
+      },
+      {
+        "Culture": "de",
+        "Value": "So geht’s!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Comment jouer"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_DeutschButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "German"
+      },
+      {
+        "Culture": "de",
+        "Value": "Deutsch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Allemand"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_EnglishButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "English"
+      },
+      {
+        "Culture": "de",
+        "Value": "Englisch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Anglais"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_FrenchButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "French"
+      },
+      {
+        "Culture": "de",
+        "Value": "Französisch"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Français"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_PlayButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Start Game"
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel starten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Commencer le jeu"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_LogoutButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Logout"
+      },
+      {
+        "Culture": "de",
+        "Value": "Ausloggen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Se déconnecter"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_BrandProfileButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Brought to you with❤️ by"
+      },
+      {
+        "Culture": "de",
+        "Value": "Kreiert mit ❤️ von"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Créé avec ❤️ par"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_WelcomeBackText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👋 Welcome Back!"
+      },
+      {
+        "Culture": "de",
+        "Value": "👋 Willkommen zurück!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👋 Bienvenue à nouveau!"
+      }
+    ]
+  },
+  {
+    "Key": "LOADING_GAME_ASSETS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Loading game assets..."
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel ladet..."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chargement du jeu..."
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "We use cookies to provide the best gaming experience!"
+      },
+      {
+        "Culture": "de",
+        "Value": "Wir verwenden Cookies, um dir das beste Spielerlebnis zu bieten!"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nous utilisons des cookies pour vous offrir la meilleure expérience de jeu possible !"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieDeclineButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👎"
+      },
+      {
+        "Culture": "de",
+        "Value": "👎"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👎"
+      }
+    ]
+  },
+  {
+    "Key": "GameStartPage_CookieAcceptButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👍"
+      },
+      {
+        "Culture": "de",
+        "Value": "👍"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👍"
+      }
+    ]
+  },
+  {
+    "Key": "DEFENDER",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Piero"
+      },
+      {
+        "Culture": "de",
+        "Value": "Piero"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Piero"
+      }
+    ]
+  },
+  {
+    "Key": "BERSERKER",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Maria"
+      },
+      {
+        "Culture": "de",
+        "Value": "Maria"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Maria"
+      }
+    ]
+  },
+  {
+    "Key": "SPECTRE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Giulia"
+      },
+      {
+        "Culture": "de",
+        "Value": "Giulia"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Giulia"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_Header",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Welcome to"
+      },
+      {
+        "Culture": "de",
+        "Value": "Willkommen bei"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bienvenue à"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Choose a spaceship"
+      },
+      {
+        "Culture": "de",
+        "Value": "Wähle ein Raumschiff"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Choisis un vaisseau spatial"
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_ControlInstructions",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Each spaceship offers a different gaming experience."
+      },
+      {
+        "Culture": "de",
+        "Value": "Jedes Raumschiff bietet ein anderes Spielerlebnis."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chaque vaisseau spatial offre une expérience de jeu différente."
+      }
+    ]
+  },
+  {
+    "Key": "ShipSelectionPage_ChooseButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Select"
+      },
+      {
+        "Culture": "de",
+        "Value": "Auswählen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Sélectionner"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "How To Play"
+      },
+      {
+        "Culture": "de",
+        "Value": "So geht's"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Comment Jouer"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_ControlsText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Controls"
+      },
+      {
+        "Culture": "de",
+        "Value": "Steuerung"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Commandes"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_ControlsText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Move to ⬅️ or ➡️ with the arrow keys on your ⌨️ or use the touch screen of your 📱."
+      },
+      {
+        "Culture": "de",
+        "Value": "Bewege dich nach ⬅️ oder ➡️ mit den Pfeiltasten deiner ⌨️ oder benutze den Touch Screen deines 📱."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Déplace-toi vers ⬅️ ou ➡️ avec les touches fléchées de ton ⌨️ ou utilise l'écran tactile de ton 📱."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_EnemiesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enemies & Meteors"
+      },
+      {
+        "Culture": "de",
+        "Value": "Gegner & Meteoriten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Adversaires & Météorites"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_EnemiesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Shoot them and avoid collision."
+      },
+      {
+        "Culture": "de",
+        "Value": "Auf sie schießen und Kollisionen vermeiden."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tires sur les adversaires et évite les collisions."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_BossesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bosses"
+      },
+      {
+        "Culture": "de",
+        "Value": "Bosse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Boss"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_BossesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Defeat them to get to the next level."
+      },
+      {
+        "Culture": "de",
+        "Value": "Besiege sie um ins nächste Level zu kommen."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Battez-les pour passer au niveau suivant."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Lives"
+      },
+      {
+        "Culture": "de",
+        "Value": "Leben"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Vies"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to repair your spaceship."
+      },
+      {
+        "Culture": "de",
+        "Value": "Sammle sie um dein Raumschiff zu reparieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rassemble-les pour réparer ton vaisseau spatial."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PowerupText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Power-ups"
+      },
+      {
+        "Culture": "de",
+        "Value": "Power-ups"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Powerups"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PowerupText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to get more powerful weapons."
+      },
+      {
+        "Culture": "de",
+        "Value": "Einsammeln um stärkere Waffen zu erhalten."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Collecte-les pour obtenir des armes plus puissantes."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_CollectiblesText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collectibles"
+      },
+      {
+        "Culture": "de",
+        "Value": "Sammelobjekte"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Objets de collection"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_CollectiblesText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect them to increase your firepower and activate 2x score."
+      },
+      {
+        "Culture": "de",
+        "Value": "Einsammeln um die Feuerkraft zu erhöhen und 2-fach Punkte zu aktivieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Récolte-les pour augmenter ta puissance de feu et activer des points 2X."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_NextButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Next"
+      },
+      {
+        "Culture": "de",
+        "Value": "Weiter"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Suivant"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_PlayButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👍 Start Game"
+      },
+      {
+        "Culture": "de",
+        "Value": "👍 Spiel starten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👍 Commencer le jeu"
+      }
+    ]
+  },
+  {
+    "Key": "BEAM_CANNON",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Beam cannon"
+      },
+      {
+        "Culture": "de",
+        "Value": "Strahlenkanone"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Canon à faisceau"
+      }
+    ]
+  },
+  {
+    "Key": "BLAZE_BLITZ",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Blaze blitz"
+      },
+      {
+        "Culture": "de",
+        "Value": "Blaze Blitz"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Blaze blitz"
+      }
+    ]
+  },
+  {
+    "Key": "PLASMA_BOMB",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Plasma bomb"
+      },
+      {
+        "Culture": "de",
+        "Value": "Plasmabombe"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bombe à plasma"
+      }
+    ]
+  },
+  {
+    "Key": "BOSS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Boss"
+      },
+      {
+        "Culture": "de",
+        "Value": "Boss"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chef"
+      }
+    ]
+  },
+  {
+    "Key": "CLOAK_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Cloak down"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tarnung deaktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Clochez-vous"
+      }
+    ]
+  },
+  {
+    "Key": "CLOAK_UP",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Cloak up"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tarnung aktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Couvrez-vous"
+      }
+    ]
+  },
+  {
+    "Key": "FIRING_RATE_DECREASED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Firing rate decreased"
+      },
+      {
+        "Culture": "de",
+        "Value": "Feuerrate verringert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "La cadence de tir a diminué"
+      }
+    ]
+  },
+  {
+    "Key": "FIRING_RATE_INCREASED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Firing rate increased"
+      },
+      {
+        "Culture": "de",
+        "Value": "Feuerrate erhöht"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Cadence de tir augmentée"
+      }
+    ]
+  },
+  {
+    "Key": "SHIELD_UP",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Shield up"
+      },
+      {
+        "Culture": "de",
+        "Value": "Schild aktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bouclier activé"
+      }
+    ]
+  },
+  {
+    "Key": "SHIELD_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Shield down"
+      },
+      {
+        "Culture": "de",
+        "Value": "Schild deaktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bouclier déactivé"
+      }
+    ]
+  },
+  {
+    "Key": "COMPLETE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Complete"
+      },
+      {
+        "Culture": "de",
+        "Value": "Komplett"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Complète"
+      }
+    ]
+  },
+  {
+    "Key": "ENEMY_APPROACHES",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enemy approaches"
+      },
+      {
+        "Culture": "de",
+        "Value": "Feindliche Annäherung"
+      },
+      {
+        "Culture": "fr",
+        "Value": "L'ennemi s'approche"
+      }
+    ]
+  },
+  {
+    "Key": "FANTASTIC_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Fantastic game"
+      },
+      {
+        "Culture": "de",
+        "Value": "Fantastisches Spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu fantastique"
+      }
+    ]
+  },
+  {
+    "Key": "GAME_PAUSED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Game paused"
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel pausiert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu pausé"
+      }
+    ]
+  },
+  {
+    "Key": "GOOD_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Good game"
+      },
+      {
+        "Culture": "de",
+        "Value": "Gutes spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bon jeu"
+      }
+    ]
+  },
+  {
+    "Key": "GREAT_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Great game"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tolles spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bon jeu"
+      }
+    ]
+  },
+  {
+    "Key": "LEVEL",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Level"
+      },
+      {
+        "Culture": "de",
+        "Value": "Level"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Niveau"
+      }
+    ]
+  },
+  {
+    "Key": "NO_LUCK",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No luck"
+      },
+      {
+        "Culture": "de",
+        "Value": "Kein glück"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Pas de chance"
+      }
+    ]
+  },
+  {
+    "Key": "POWER_DOWN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Power down"
+      },
+      {
+        "Culture": "de",
+        "Value": "Leistungsverringerung"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Puissance réduite"
+      }
+    ]
+  },
+  {
+    "Key": "QUIT_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Quit game?"
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel verlassen?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Quitter le jeu?"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Score"
+      },
+      {
+        "Culture": "de",
+        "Value": "Punktzahl"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Score"
+      }
+    ]
+  },
+  {
+    "Key": "YOUR_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Your score"
+      },
+      {
+        "Culture": "de",
+        "Value": "Dein Spielstand"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Ton score"
+      }
+    ]
+  },
+  {
+    "Key": "PERSONAL_BEST_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Personal best score"
+      },
+      {
+        "Culture": "de",
+        "Value": "Persönliche Bestpunktzahl"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Meilleur score personnel"
+      }
+    ]
+  },
+  {
+    "Key": "LAST_GAME_SCORE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🕹️ Last game score"
+      },
+      {
+        "Culture": "de",
+        "Value": "🕹️ Letzter Spielstand"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🕹️ Score du dernier match"
+      }
+    ]
+  },
+  {
+    "Key": "DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Destroyed"
+      },
+      {
+        "Culture": "de",
+        "Value": "Zerstört"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Détruits"
+      }
+    ]
+  },
+  {
+    "Key": "ENEMIES_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Enemies"
+      },
+      {
+        "Culture": "de",
+        "Value": "Feinde"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Ennemis"
+      }
+    ]
+  },
+  {
+    "Key": "METEORS_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Météorites"
+      },
+      {
+        "Culture": "de",
+        "Value": "Meteoriten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Météores"
+      }
+    ]
+  },
+  {
+    "Key": "BOSSES_DESTROYED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Bosses"
+      },
+      {
+        "Culture": "de",
+        "Value": "Bosse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Bosses"
+      }
+    ]
+  },
+  {
+    "Key": "COLLECTIBLES_COLLECTED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collectibles"
+      },
+      {
+        "Culture": "de",
+        "Value": "Sammelobjekte"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Objets collectés"
+      }
+    ]
+  },
+  {
+    "Key": "SHIP_REPAIRED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Ship repaired"
+      },
+      {
+        "Culture": "de",
+        "Value": "Schiff repariert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Navire réparé"
+      }
+    ]
+  },
+  {
+    "Key": "SONIC_BLAST",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Sonic blast"
+      },
+      {
+        "Culture": "de",
+        "Value": "Sonic blast"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Sonic blast"
+      }
+    ]
+  },
+  {
+    "Key": "SUPREME_GAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Supreme game"
+      },
+      {
+        "Culture": "de",
+        "Value": "Höchstes spiel"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu suprême"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_ON_SCREEN_TO_BEGIN",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Tap on the screen to begin"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tippe auf den Bildschirm, um zu beginnen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Appuyez sur l'écran pour commencer"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_TO_QUIT",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Tap to quit"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tippe zum beenden"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Appuie pour quitter"
+      }
+    ]
+  },
+  {
+    "Key": "TAP_TO_RESUME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Tap to resume"
+      },
+      {
+        "Culture": "de",
+        "Value": "Tippe, um weiterzufahren"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Appuie pour reprendre"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE_MULTIPLIER_ON",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "2X score on"
+      },
+      {
+        "Culture": "de",
+        "Value": "2x Punktzahl aktiviert"
+      },
+      {
+        "Culture": "fr",
+        "Value": "2X score sur"
+      }
+    ]
+  },
+  {
+    "Key": "SCORE_MULTIPLIER_OFF",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Collect more pizza slices"
+      },
+      {
+        "Culture": "de",
+        "Value": "Sammle mehr Pizzascheiben"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Collectionne plus de tranches de pizza"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_SignupPromptText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Log in, to have a chance to win the main prize."
+      },
+      {
+        "Culture": "de",
+        "Value": "Logge dich ein, um an der Verlosung des Hauptpreises teilnehmen zu können."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Connecte-toi pour avoir une chance de gagner le premier prix."
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Game Over"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Spiel ist vorbei"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jeu Terminé"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_PlayAgainButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Play again"
+      },
+      {
+        "Culture": "de",
+        "Value": "Erneut spielen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rejouer"
+      }
+    ]
+  },
+  {
+    "Key": "GameOverPage_LeaderboardButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Leaderboard"
+      },
+      {
+        "Culture": "de",
+        "Value": "Bestenliste"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classement"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Username"
+      },
+      {
+        "Culture": "de",
+        "Value": "Benutzername"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom d'utilisateur"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_UserNameEmailBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Username or Email"
+      },
+      {
+        "Culture": "de",
+        "Value": "Benutzername oder E-Mail-Adresse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom d'utilisateur ou e-mail"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_PasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwort"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mot de passe"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_LoginButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Login"
+      },
+      {
+        "Culture": "de",
+        "Value": "Login"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Login"
+      }
+    ]
+  },
+  {
+    "Key": "GameLoginPage_RegisterButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No account yet?"
+      },
+      {
+        "Culture": "de",
+        "Value": "Du hast noch keinen Account?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tu n'as pas encore de compte?"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserFullNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Full name"
+      },
+      {
+        "Culture": "de",
+        "Value": "Vollständiger Name"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom complet"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserCityBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "City"
+      },
+      {
+        "Culture": "de",
+        "Value": "Stadt"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Ville"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserEmailBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Email address"
+      },
+      {
+        "Culture": "de",
+        "Value": "Email-Adresse"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Adresse e-mail"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_UserNameBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "User name"
+      },
+      {
+        "Culture": "de",
+        "Value": "Benutzer Name"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Nom de l'utilisateur"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_PasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwort"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mot de passe"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmPasswordBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Confirm password"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwort bestätigen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Confirmez le mot de passe"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_SignupButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Signup"
+      },
+      {
+        "Culture": "de",
+        "Value": "Anmelden"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Inscription"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_LoginButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "You already have an account?"
+      },
+      {
+        "Culture": "de",
+        "Value": "Du hast bereits einen Account?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Tu as déjà un compte?"
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmCheckBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Yes, I agree to the conditions of participation."
+      },
+      {
+        "Culture": "de",
+        "Value": "Ja, ich stimme den Teilnahmebedingungen zu."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Oui, j'accepte les conditions de participation."
+      }
+    ]
+  },
+  {
+    "Key": "GameSignupPage_ConfirmNewsLettersCheckBox",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Yes, I would like to subscribe to the newsletter and benefit from regular product promotions."
+      },
+      {
+        "Culture": "de",
+        "Value": "Ja, ich möchte den Newsletter abonnieren und von regelmässigen Produktaktionen profitieren."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Oui, je souhaite m'abonner à la newsletter et profiter de promotions régulières sur les produits."
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORDS_DIDNT_MATCH",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Passwords didn't match"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwörter stimmen nicht überein"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Les mots de passe ne correspondent pas"
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORDS_MATCHED",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Passwords matched"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwörter stimmen überein"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Mots de passe correspondent"
+      }
+    ]
+  },
+  {
+    "Key": "LENGTH_MUST_BE_GREATER_THAN_8_CHARS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must be at least eight characters"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort muss mindestens acht Zeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit comporter au moins huit caractères"
+      }
+    ]
+  },
+  {
+    "Key": "LENGTH_MUST_BE_LESS_THAN_14_CHARS",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must be less than fourteen characters"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort darf höchstens 14 Zeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit être inférieur à quatorze caractères"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_UPPERCASE_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one uppercase character"
+      },
+      {
+        "Culture": "de",
+        "Value": "Passwort muss einen Grossbuchstaben enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir une majuscule"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_LOWERCASE_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one lowercase character"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort muss einen Kleinbuchstaben enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir une minuscule"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_NOT_CONTAIN_SPACE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password cannot contain spaces"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort darf keine Leerzeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe ne peut pas contenir d'espaces"
+      }
+    ]
+  },
+  {
+    "Key": "MUST_CONTAIN_ONE_SPECIAL_CHAR",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password must contain one special character"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort muss ein Sonderzeichen enthalten"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe doit contenir un caractère spécial"
+      }
+    ]
+  },
+  {
+    "Key": "PASSWORD_IS_STRONG",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Password is strong"
+      },
+      {
+        "Culture": "de",
+        "Value": "Das Passwort ist sicher"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le mot de passe est fort"
+      }
+    ]
+  },
+  {
+    "Key": "INVALID_CHARACTERS_IN_FULLNAME",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Invalid characters in full name"
+      },
+      {
+        "Culture": "de",
+        "Value": "Ungültige Zeichen im vollständigen Namen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Caractères non valides dans le nom complet"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🏆 Leaderboard"
+      },
+      {
+        "Culture": "de",
+        "Value": "🏆 Bestenliste"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🏆 Tableau des leaders"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_DailyScoreboardToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "📅 Daily"
+      },
+      {
+        "Culture": "de",
+        "Value": "📅 Täglich"
+      },
+      {
+        "Culture": "fr",
+        "Value": "📅 Quotidiennement"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_AllTimeScoreboardToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "👑 All time"
+      },
+      {
+        "Culture": "de",
+        "Value": "👑 Allzeit"
+      },
+      {
+        "Culture": "fr",
+        "Value": "👑 Tout le temps"
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_PlayNowButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Play now"
+      },
+      {
+        "Culture": "de",
+        "Value": "Jetzt spielen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Jouer maintenant"
+      }
+    ]
+  },
+  {
+    "Key": "ConfirmQuitGameButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Quit Game?"
+      },
+      {
+        "Culture": "de",
+        "Value": "Spiel verlassen?"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Quitter Le Jeu?"
+      }
+    ]
+  },
+
+  {
+    "Key": "LOADING_DATA",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Loading data..."
+      },
+      {
+        "Culture": "de",
+        "Value": "Daten laden..."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Chargement des données..."
+      }
+    ]
+  },
+  {
+    "Key": "NO_DATA_AVAILABLE",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "No data available."
+      },
+      {
+        "Culture": "de",
+        "Value": "Keine Daten verfügbar."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Pas de données disponibles."
+      }
+    ]
+  },
+  {
+    "Key": "GameLeaderboardPage_SeasonToggle",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "💫 Season"
+      },
+      {
+        "Culture": "de",
+        "Value": "💫 Saison"
+      },
+      {
+        "Culture": "fr",
+        "Value": "💫 Saison"
+      }
+    ]
+  },
+  {
+    "Key": "DailyPrize_Tagline",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🎁 Daily prize 🎁"
+      },
+      {
+        "Culture": "de",
+        "Value": "🎁 Täglicher Preis 🎁"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🎁 Prix du jour 🎁"
+      }
+    ]
+  },
+  {
+    "Key": "ViewPrizeButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "🎁 View Prize 🎁"
+      },
+      {
+        "Culture": "de",
+        "Value": "🎁 Preis ansehen 🎁"
+      },
+      {
+        "Culture": "fr",
+        "Value": "🎁 Voir le prix 🎁"
+      }
+    ]
+  },
+  {
+    "Key": "TermsAndConditionsButton",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Conditions of participation"
+      },
+      {
+        "Culture": "de",
+        "Value": "Teilnahmebedingungen"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Conditions de participation"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_RageBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Rage Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Wut-Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Rage Bar"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_RageBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Fill it up by destroying enemies 'n meteors. Once filled it will activate your ship's special ability for a short time."
+      },
+      {
+        "Culture": "de",
+        "Value": "Füllen Sie ihn auf, indem Sie Feinde und Meteore zerstören. Sobald sie gefüllt ist, wird die Spezialfähigkeit deines Schiffes für kurze Zeit aktiviert."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Remplissez-la en détruisant des ennemis et des météores. Une fois remplie, elle activera la capacité spéciale de ton vaisseau pendant un court moment."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_LevelnScoreBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Level 'n Score Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Level 'n Score Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Barre Level 'n Score"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_LevelnScoreBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "The game level 🔥 increases with your score. Your current score and how much you need to score to get to the next level is displayed on the right 🏆."
+      },
+      {
+        "Culture": "de",
+        "Value": "Die Spielstufe 🔥 steigt mit deiner Punktzahl. Dein aktueller Punktestand und wie viel du noch erreichen musst, um das nächste Level zu erreichen, wird auf der rechten Seite angezeigt 🏆."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Le niveau du jeu 🔥 augmente avec votre score. Votre score actuel et celui que vous devez obtenir pour passer au niveau suivant sont affichés à droite 🏆."
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthBarText",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Health Bar"
+      },
+      {
+        "Culture": "de",
+        "Value": "Gesundheit Bar"
+      },
+      {
+        "Culture": "fr",
+        "Value": "Barre de santé"
+      }
+    ]
+  },
+  {
+    "Key": "GameInstructionsPage_HealthBarText2",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "You loose your health if you get hit by meteors, enemies or their projectiles."
+      },
+      {
+        "Culture": "de",
+        "Value": "Du verlierst deine Gesundheit, wenn du von Meteoriten, Feinden oder deren Geschossen getroffen wirst."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Vous perdez votre santé si vous êtes touché par des météores, des ennemis ou leurs projectiles."
+      }
+    ]
+  },
+  {
+    "Key": "LOGIN_PROMPT",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Sign up for a chance to win."
+      },
+      {
+        "Culture": "de",
+        "Value": "Melde dich an, um eine Chance auf den Gewinn zu haben."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Inscris-toi pour avoir une chance de gagner."
+      }
+    ]
+  },
+  {
+    "Key": "DEFENDER_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Defender class. Can withstand more damage. Medium firing rate. Pops up a force shield on rage bar fill up. Shoots laser blasters."
+      },
+      {
+        "Culture": "de",
+        "Value": "Verteidigerklasse. Kann mehr Schaden verkraften. Mittlere Feuerrate. Lässt einen Kraftschild auftauchen, wenn die Wutleiste voll ist. Schießt mit Laser-Blastern."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe de défenseur. Peut résister à plus de dégâts. Vitesse de tir moyenne. Fait apparaître un bouclier de force lorsque la barre de rage est remplie. Tire des blasters laser."
+      }
+    ]
+  },
+  {
+    "Key": "BERSERKER_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Berserker class. Can withstand less damage. High firing rate. Reaches extreme firepower on rage bar fill up. Shoots energy cubes."
+      },
+      {
+        "Culture": "de",
+        "Value": "Berserker-Klasse. Kann weniger Schaden aushalten. Hohe Feuerrate. Erreicht extreme Feuerkraft, wenn der Wutbalken voll ist. Verschießt Energiewürfel."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe berserker. Peut supporter moins de dégâts. Haute cadence de tir. Atteint une puissance de feu extrême lorsque la barre de rage est remplie. Tire des cubes d'énergie."
+      }
+    ]
+  },
+  {
+    "Key": "SPECTRE_DESCRIPTION",
+    "CultureValues": [
+      {
+        "Culture": "en",
+        "Value": "Spectre class. Can withstand moderate damage. Medium firing rate. Becomes invisible on rage bar fill up. Shoots sonic waves."
+      },
+      {
+        "Culture": "de",
+        "Value": "Gespenst-Klasse. Kann mäßigem Schaden widerstehen. Mittlere Feuerrate. Wird unsichtbar, wenn die Wutleiste voll ist. Schießt Schallwellen."
+      },
+      {
+        "Culture": "fr",
+        "Value": "Classe Spectre. Peut supporter des dommages modérés. Vitesse de tir moyenne. Devient invisible lorsque la barre de rage est remplie. Projette des ondes soniques."
+      }
+    ]
+  }
+]

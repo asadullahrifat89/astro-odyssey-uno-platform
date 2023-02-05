@@ -1,0 +1,21 @@
+{
+  "runtimeOptions": {
+    "tfm": "net7.0",
+    "framework": {
+      "name": "Microsoft.NETCore.App",
+      "version": "7.0.0"
+    },
+    "configProperties": {
+      "Windows.ApplicationModel.DataTransfer.DragDrop.ExternalSupport": true,
+      "System.Diagnostics.Debugger.IsSupported": false,
+      "System.Diagnostics.Tracing.EventSource.IsSupported": false,
+      "System.GC.Server": true,
+      "System.Globalization.Invariant": false,
+      "System.Net.Http.EnableActivityPropagation": false,
+      "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+      "System.Resources.UseSystemResourceKeys": true,
+      "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
+      "System.Text.Encoding.EnableUnsafeUTF7Encoding": false
+    }
+  }
+}
